@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: "Noto Sans Display", sans-serif;
+  font-size: 13px;
+ 
+  
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 15px;
+}
+
+.text-1xl {
+  font-size: 15px !important;
+}
+
+.no-scroll {
+  overflow: hidden;
+  /* Ensures the viewport height remains constant */
+}
+
+#mobile-menu {
+  transition: all 0.3s ease-in-out;
+  height: 100vh;
+}
+
+
+
+/* slider */
+
+
+#slider {
+  width: 964px;
+  gap: 1px;
+}
+
+.dot {
+
+  background-color: #d1d5db;
+
+}
+
+.dot.active {
+  background-color: #0F55A5;
+}
+
+
+
+.blinking {
+  -webkit-animation: blink 1s ease infinite;
+  -moz-animation: blink 1s ease infinite;
+  -ms-animation: blink 1s ease infinite;
+  -o-animation: blink 1s ease infinite;
+  animation: blink 1s ease infinite;
+}
+
+/* #drop-slider {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+} */
+
+@keyframes blink {
+
+  from,
+  to {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes blink {
+
+  from,
+  to {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes blink {
+
+  from,
+  to {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes blink {
+
+  from,
+  to {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes blink {
+
+  from,
+  to {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+
+
+
+
+
+
+
+
+@media screen and (min-device-width: 320px) and (max-device-width: 768px) {
+  #slider {
+    width: 1082px;
+    gap: 1px;
+  }
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 820px) {
+
+  #slider {
+    width: 913px;
+    gap: 1px;
+  }
+
+}
+
+@media screen and (min-device-width: 820px) and (max-device-width: 992px) {
+  #slider {
+    width: 954px;
+    gap: 1px;
+  }
+
+}
