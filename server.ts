@@ -2,6 +2,10 @@ const WebSocket = require("ws");
 import db from "./src/config/db";
 import fs from "fs";
 import path from "path";
+import s3 from '@/lib/aws';
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+
+const BUCKET_NAME = 'uc-application';
 
 class WebSocketService {
   private socket: WebSocket | null = null;
@@ -57,18 +61,22 @@ class WebSocketService {
       const matches = data;
       const matchId = data.match_id;
 
-      // Define absolute file path on Windows
-      const storageDir = "/var/tmp/ucc/MatchData";
-      if (!fs.existsSync(storageDir))
-        fs.mkdirSync(storageDir, { recursive: true });
+      const fileData = JSON.stringify(matches, null, 2);
+                const s3Key = `MatchData/match_${matchId}.json`;
+                const params:any = {
+                  Bucket: BUCKET_NAME,
+                  Key: s3Key,
+                  Body: fileData, 
+                  ContentType: 'application/json', 
+                };
+      
+                const command = new PutObjectCommand(params);
+                const s3Upload = await s3.send(command);
 
-      const filePath = path.join(storageDir, `match_${matchId}.json`);
-      fs.writeFileSync(filePath, JSON.stringify(matches, null, 2));
-
-      const formattedFilePath = filePath.replace(/\\/g, "\\\\"); // Escape backslashes
+     
       const query = `
                      INSERT INTO match_info (match_id, fileName, updated_date) 
-                      VALUES (${matchId}, '${formattedFilePath}', NOW()) 
+                      VALUES (${matchId}, '${s3Key}', NOW()) 
                       ON DUPLICATE KEY UPDATE 
                       fileName = VALUES(fileName),
                       updated_date = NOW()`;

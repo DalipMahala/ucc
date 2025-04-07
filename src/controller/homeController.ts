@@ -3,6 +3,10 @@ import { httpGet } from "@/lib/http";
 import redis from "../config/redis";
 import db from "../config/db";
 import fs from "fs";
+import s3 from '@/lib/aws';
+import { GetObjectCommand } from '@aws-sdk/client-s3';
+
+const BUCKET_NAME = 'uc-application';
 
 export async function PopularSeries() {
   const CACHE_KEY = "popularSeriesCache";
@@ -259,14 +263,30 @@ export async function seriesById(cid: number) {
   if (!rows || rows.length === 0) {
     return null;
   }
-  const filePath = rows[0].fileName;
+  const fileName = rows[0].fileName;
   try {
-    if (!fs.existsSync(filePath)) {
-      console.log(`File not found: ${filePath}`);
-      return null;
-    }
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: fileName,  // S3 file path
+    };
 
-    const competition = fs.readFileSync(filePath, "utf8");
+    // Get object from S3
+    const command = new GetObjectCommand(params);
+    const data = await s3.send(command);
+
+    // Convert the stream to a buffer
+    const streamToBuffer = (stream: any) =>
+      new Promise<Buffer>((resolve, reject) => {
+        const chunks: any[] = [];
+        stream.on('data', (chunk: any) => chunks.push(chunk));
+        stream.on('end', () => resolve(Buffer.concat(chunks)));
+        stream.on('error', reject);
+      });
+
+    const fileData = await streamToBuffer(data.Body);
+
+    // Parse JSON content
+    const competition = JSON.parse(fileData.toString('utf-8'));
 
     if (competition.length > 0) {
       await redis.setex(CACHE_KEY, CACHE_TTL, competition);

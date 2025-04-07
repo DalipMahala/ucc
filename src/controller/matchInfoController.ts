@@ -3,6 +3,10 @@ import { httpGet } from "@/lib/http";
 import redis from "../config/redis";
 import db from "../config/db";
 import fs from 'fs';
+import s3 from '@/lib/aws';
+import { GetObjectCommand } from '@aws-sdk/client-s3';
+
+const BUCKET_NAME = 'uc-application';
 
 export async function MatcheInfo_old(matchid: number) {
   if (!matchid) {
@@ -48,14 +52,30 @@ export async function MatcheInfo(matchid: number) {
     return null;
   }
 
-  const filePath =   rows[0].fileName;
+  const fileName =   rows[0].fileName;
   try {
-      if (!fs.existsSync(filePath)) {
-          console.log(`File not found: ${filePath}`);
-          return null;
-      }
-
-      const matches = fs.readFileSync(filePath, 'utf8');
+      const params = {
+            Bucket: BUCKET_NAME,
+            Key: fileName,  // S3 file path
+          };
+      
+          // Get object from S3
+          const command = new GetObjectCommand(params);
+          const data = await s3.send(command);
+      
+          // Convert the stream to a buffer
+          const streamToBuffer = (stream: any) =>
+            new Promise<Buffer>((resolve, reject) => {
+              const chunks: any[] = [];
+              stream.on('data', (chunk: any) => chunks.push(chunk));
+              stream.on('end', () => resolve(Buffer.concat(chunks)));
+              stream.on('error', reject);
+            });
+      
+          const fileData = await streamToBuffer(data.Body);
+      
+          // Parse JSON content
+          const matches = JSON.parse(fileData.toString('utf-8'));
 
       
       if (matches.length > 0) {
@@ -116,14 +136,30 @@ export async function Last10Match(matchid: number) {
   if (!rows || rows.length === 0) {
     return null;
   }
-  const filePath =   rows[0].fileName;
+  const fileName =   rows[0].fileName;
   try {
-      if (!fs.existsSync(filePath)) {
-          console.log(`File not found: ${filePath}`);
-          return null;
-      }
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: fileName,  // S3 file path
+    };
 
-      const matches = fs.readFileSync(filePath, 'utf8');
+    // Get object from S3
+    const command = new GetObjectCommand(params);
+    const data = await s3.send(command);
+
+    // Convert the stream to a buffer
+    const streamToBuffer = (stream: any) =>
+      new Promise<Buffer>((resolve, reject) => {
+        const chunks: any[] = [];
+        stream.on('data', (chunk: any) => chunks.push(chunk));
+        stream.on('end', () => resolve(Buffer.concat(chunks)));
+        stream.on('error', reject);
+      });
+
+    const fileData = await streamToBuffer(data.Body);
+
+    // Parse JSON content
+    const matches = JSON.parse(fileData.toString('utf-8'));
 
       
       if (matches.length > 0) {
@@ -156,14 +192,30 @@ export async function MatchStatistics(matchid: number) {
   if (!rows || rows.length === 0) {
     return null;
   }
-  const filePath =   rows[0].fileName;
+  const fileName =   rows[0].fileName;
   try {
-      if (!fs.existsSync(filePath)) {
-          console.log(`File not found: ${filePath}`);
-          return null;
-      }
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: fileName,  // S3 file path
+    };
 
-      const matches = fs.readFileSync(filePath, 'utf8');
+    // Get object from S3
+    const command = new GetObjectCommand(params);
+    const data = await s3.send(command);
+
+    // Convert the stream to a buffer
+    const streamToBuffer = (stream: any) =>
+      new Promise<Buffer>((resolve, reject) => {
+        const chunks: any[] = [];
+        stream.on('data', (chunk: any) => chunks.push(chunk));
+        stream.on('end', () => resolve(Buffer.concat(chunks)));
+        stream.on('error', reject);
+      });
+
+    const fileData = await streamToBuffer(data.Body);
+
+    // Parse JSON content
+    const matches = JSON.parse(fileData.toString('utf-8'));
 
       
       if (matches.length > 0) {
@@ -225,14 +277,30 @@ export async function MatchCommentary(matchid: number, inningNumer: number) {
   if (!rows || rows.length === 0) {
     return null;
   }
-  const filePath =   rows[0].fileName;
+  const fileName =   rows[0].fileName;
   try {
-      if (!fs.existsSync(filePath)) {
-          console.log(`File not found: ${filePath}`);
-          return null;
-      }
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: fileName,  // S3 file path
+    };
 
-      const matchInningCommentaries = fs.readFileSync(filePath, 'utf8');
+    // Get object from S3
+    const command = new GetObjectCommand(params);
+    const data = await s3.send(command);
+
+    // Convert the stream to a buffer
+    const streamToBuffer = (stream: any) =>
+      new Promise<Buffer>((resolve, reject) => {
+        const chunks: any[] = [];
+        stream.on('data', (chunk: any) => chunks.push(chunk));
+        stream.on('end', () => resolve(Buffer.concat(chunks)));
+        stream.on('error', reject);
+      });
+
+    const fileData = await streamToBuffer(data.Body);
+
+    // Parse JSON content
+    const matchInningCommentaries = JSON.parse(fileData.toString('utf-8'));
 
       
       if (matchInningCommentaries.length > 0) {
@@ -300,14 +368,30 @@ export async function MatcheStats(cid: number, statType: string) {
   if (!rows || rows.length === 0) {
     return null;
   }
-  const filePath =   rows[0].fileName;
+  const fileName =   rows[0].fileName;
   try {
-      if (!fs.existsSync(filePath)) {
-          console.log(`File not found: ${filePath}`);
-          return null;
-      }
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: fileName,  // S3 file path
+    };
 
-      const matches = fs.readFileSync(filePath, 'utf8');
+    // Get object from S3
+    const command = new GetObjectCommand(params);
+    const data = await s3.send(command);
+
+    // Convert the stream to a buffer
+    const streamToBuffer = (stream: any) =>
+      new Promise<Buffer>((resolve, reject) => {
+        const chunks: any[] = [];
+        stream.on('data', (chunk: any) => chunks.push(chunk));
+        stream.on('end', () => resolve(Buffer.concat(chunks)));
+        stream.on('error', reject);
+      });
+
+    const fileData = await streamToBuffer(data.Body);
+
+    // Parse JSON content
+    const matches = JSON.parse(fileData.toString('utf-8'));
 
       
       if (matches.length > 0) {
@@ -371,14 +455,30 @@ export async function SeriesPointsTable(cid: number) {
   if (!rows || rows.length === 0) {
     return null;
   }
-  const filePath =   rows[0].fileName;
+  const fileName =   rows[0].fileName;
   try {
-      if (!fs.existsSync(filePath)) {
-          console.log(`File not found: ${filePath}`);
-          return null;
-      }
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: fileName,  // S3 file path
+    };
 
-      const competition = fs.readFileSync(filePath, 'utf8');
+    // Get object from S3
+    const command = new GetObjectCommand(params);
+    const data = await s3.send(command);
+
+    // Convert the stream to a buffer
+    const streamToBuffer = (stream: any) =>
+      new Promise<Buffer>((resolve, reject) => {
+        const chunks: any[] = [];
+        stream.on('data', (chunk: any) => chunks.push(chunk));
+        stream.on('end', () => resolve(Buffer.concat(chunks)));
+        stream.on('error', reject);
+      });
+
+    const fileData = await streamToBuffer(data.Body);
+
+    // Parse JSON content
+    const competition = JSON.parse(fileData.toString('utf-8'));
 
       
       if (competition.length > 0) {
@@ -440,14 +540,30 @@ export async function SeriesPointsTableMatches(cid: number) {
   if (!rows || rows.length === 0) {
     return null;
   }
-  const filePath =   rows[0].fileName;
+  const fileName =   rows[0].fileName;
   try {
-      if (!fs.existsSync(filePath)) {
-          console.log(`File not found: ${filePath}`);
-          return null;
-      }
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: fileName,  // S3 file path
+    };
 
-      const competition = fs.readFileSync(filePath, 'utf8');
+    // Get object from S3
+    const command = new GetObjectCommand(params);
+    const data = await s3.send(command);
+
+    // Convert the stream to a buffer
+    const streamToBuffer = (stream: any) =>
+      new Promise<Buffer>((resolve, reject) => {
+        const chunks: any[] = [];
+        stream.on('data', (chunk: any) => chunks.push(chunk));
+        stream.on('end', () => resolve(Buffer.concat(chunks)));
+        stream.on('error', reject);
+      });
+
+    const fileData = await streamToBuffer(data.Body);
+
+    // Parse JSON content
+    const competition = JSON.parse(fileData.toString('utf-8'));
 
       
       if (competition.length > 0) {
@@ -515,7 +631,7 @@ export async function SeriesKeyStats(cid: number) {
 
   // Function to read files safely
   const readJsonFile = (filePath: string | undefined) => {
-    if (!filePath || !fs.existsSync(filePath)) {
+    if (!filePath) {
       console.log(`File not found: ${filePath}`);
       return [];
     }
@@ -593,19 +709,35 @@ export async function SeriesMatches(cid: number) {
     return null;
   }
   
-  const filePath =   rows[0].fileName;
+  const fileName =   rows[0].fileName;
 
 
     try {
-      if (!fs.existsSync(filePath)) {
-          console.log(`File not found: ${filePath}`);
-          return null;
-      }
-
-      const competition = fs.readFileSync(filePath, 'utf8');
+      const params = {
+        Bucket: BUCKET_NAME,
+        Key: fileName,  // S3 file path
+      };
+  
+      // Get object from S3
+      const command = new GetObjectCommand(params);
+      const data = await s3.send(command);
+  
+      // Convert the stream to a buffer
+      const streamToBuffer = (stream: any) =>
+        new Promise<Buffer>((resolve, reject) => {
+          const chunks: any[] = [];
+          stream.on('data', (chunk: any) => chunks.push(chunk));
+          stream.on('end', () => resolve(Buffer.concat(chunks)));
+          stream.on('error', reject);
+        });
+  
+      const fileData = await streamToBuffer(data.Body);
+  
+      // Parse JSON content
+      const competition = JSON.parse(fileData.toString('utf-8'));
       
       // const allMatches =  JSON.parse(competition);
-      const allMatches: { items: Match[] } = JSON.parse(competition);
+      const allMatches: { items: Match[] } = competition;
 
       const categorizedMatches: {
         scheduledMatch: Match[];
