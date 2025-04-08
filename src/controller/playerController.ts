@@ -2,10 +2,7 @@ import { httpGet } from "@/lib/http";
 import redis from "../config/redis";
 import db from "../config/db";
 import fs from "fs";
-import s3 from '@/lib/aws';
-import { GetObjectCommand } from '@aws-sdk/client-s3';
-
-const BUCKET_NAME = 'uc-application';
+import getJsonFromS3 from '@/lib/s3-utils';
 
 export async function PlayerStatsOld(pid: number) {
   if (!pid) {
@@ -56,33 +53,12 @@ export async function PlayerStats(pid: number) {
     const fileName =   rows[0].fileName;
     
     try {
-      const params = {
-        Bucket: BUCKET_NAME,
-        Key: fileName,  // S3 file path
-      };
-  
-      // Get object from S3
-      const command = new GetObjectCommand(params);
-      const data = await s3.send(command);
-  
-      // Convert the stream to a buffer
-      const streamToBuffer = (stream: any) =>
-        new Promise<Buffer>((resolve, reject) => {
-          const chunks: any[] = [];
-          stream.on('data', (chunk: any) => chunks.push(chunk));
-          stream.on('end', () => resolve(Buffer.concat(chunks)));
-          stream.on('error', reject);
-        });
-  
-      const fileData = await streamToBuffer(data.Body);
-  
-      // Parse JSON content
-      const playerStats = JSON.parse(fileData.toString('utf-8'));
-  
-       
-        if (playerStats.length > 0) {
-          await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(playerStats));
-        }
+      const playerStats = await getJsonFromS3( fileName as string);
+
+      // Store in Redis cache
+      if (playerStats && (Array.isArray(playerStats) && playerStats.length > 0)) {
+        await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(playerStats));
+      }
         return playerStats;
         
         
@@ -114,36 +90,14 @@ export async function PlayerStats(pid: number) {
     }
     const fileName =   rows[0].fileName;
     try {
-      const params = {
-        Bucket: BUCKET_NAME,
-        Key: fileName,  // S3 file path
-      };
-  
-      // Get object from S3
-      const command = new GetObjectCommand(params);
-      const data = await s3.send(command);
-  
-      // Convert the stream to a buffer
-      const streamToBuffer = (stream: any) =>
-        new Promise<Buffer>((resolve, reject) => {
-          const chunks: any[] = [];
-          stream.on('data', (chunk: any) => chunks.push(chunk));
-          stream.on('end', () => resolve(Buffer.concat(chunks)));
-          stream.on('error', reject);
-        });
-  
-      const fileData = await streamToBuffer(data.Body);
-  
-      // Parse JSON content
-      const playerAdvStats = JSON.parse(fileData.toString('utf-8'));
-  
-       
-        if (playerAdvStats.length > 0) {
-          await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(playerAdvStats));
-        }
+      const playerAdvStats = await getJsonFromS3( fileName as string);
+
+      // Store in Redis cache
+      if (playerAdvStats && (Array.isArray(playerAdvStats) && playerAdvStats.length > 0)) {
+        await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(playerAdvStats));
+      }
         return playerAdvStats;
-        
-        
+      
     } catch (error) {
         console.error(`Error reading player data:`, error);
         return null;

@@ -4,9 +4,7 @@ import redis from "../config/redis";
 import db from "../config/db";
 import fs from 'fs';
 import s3 from '@/lib/aws';
-import { GetObjectCommand } from '@aws-sdk/client-s3';
-
-const BUCKET_NAME = 'uc-application';
+import getJsonFromS3 from '@/lib/s3-utils';
 
 export async function TeamDetailsOld(
     tid: number
@@ -114,28 +112,8 @@ export async function TeamDetailsOld(
             }
 
             try {
-               const params = {
-                      Bucket: BUCKET_NAME,
-                      Key: fileName,  // S3 file path
-                    };
-                
-                    // Get object from S3
-                    const command = new GetObjectCommand(params);
-                    const data = await s3.send(command);
-                
-                    // Convert the stream to a buffer
-                    const streamToBuffer = (stream: any) =>
-                      new Promise<Buffer>((resolve, reject) => {
-                        const chunks: any[] = [];
-                        stream.on('data', (chunk: any) => chunks.push(chunk));
-                        stream.on('end', () => resolve(Buffer.concat(chunks)));
-                        stream.on('error', reject);
-                      });
-                
-                    const fileData = await streamToBuffer(data.Body);
-                
-                    // Parse JSON content
-                    const parsedData = JSON.parse(fileData.toString('utf-8'));
+              const parsedData = await getJsonFromS3( fileName as string);
+
 
                 // ✅ Extract team info & players
                 const teamInfo = parsedData?.items?.team || {};
@@ -240,29 +218,8 @@ export async function TeamDetailsOld(
             }
 
             try {
-              const params = {
-                Bucket: BUCKET_NAME,
-                Key: fileName,  // S3 file path
-              };
-          
-              // Get object from S3
-              const command = new GetObjectCommand(params);
-              const data = await s3.send(command);
-          
-              // Convert the stream to a buffer
-              const streamToBuffer = (stream: any) =>
-                new Promise<Buffer>((resolve, reject) => {
-                  const chunks: any[] = [];
-                  stream.on('data', (chunk: any) => chunks.push(chunk));
-                  stream.on('end', () => resolve(Buffer.concat(chunks)));
-                  stream.on('error', reject);
-                });
-          
-              const fileData = await streamToBuffer(data.Body);
-          
-              // Parse JSON content
-              const parsedData = JSON.parse(fileData.toString('utf-8'));
-           
+              const parsedData = await getJsonFromS3( fileName as string);
+
 
                 // ✅ Extract team info & players
                 const teamInfo = parsedData?.items?.team || {};
@@ -332,28 +289,7 @@ export async function TeamDetailsOld(
     const filePath =   rows[0].fileName;
   
       try {
-        const params = {
-          Bucket: BUCKET_NAME,
-          Key: filePath,  // S3 file path
-        };
-    
-        // Get object from S3
-        const command = new GetObjectCommand(params);
-        const data = await s3.send(command);
-    
-        // Convert the stream to a buffer
-        const streamToBuffer = (stream: any) =>
-          new Promise<Buffer>((resolve, reject) => {
-            const chunks: any[] = [];
-            stream.on('data', (chunk: any) => chunks.push(chunk));
-            stream.on('end', () => resolve(Buffer.concat(chunks)));
-            stream.on('error', reject);
-          });
-    
-        const fileData = await streamToBuffer(data.Body);
-    
-        // Parse JSON content
-        const team = JSON.parse(fileData.toString('utf-8'));
+        const team = await getJsonFromS3( filePath as string);
   
         
         // const allMatches =  JSON.parse(team);
@@ -402,28 +338,8 @@ export async function TeamDetailsOld(
     }
     const filePath = rows[0].fileName;
     try {
-      const params = {
-        Bucket: BUCKET_NAME,
-        Key: filePath,  // S3 file path
-      };
+      const competition = await getJsonFromS3( filePath as string);
   
-      // Get object from S3
-      const command = new GetObjectCommand(params);
-      const data = await s3.send(command);
-  
-      // Convert the stream to a buffer
-      const streamToBuffer = (stream: any) =>
-        new Promise<Buffer>((resolve, reject) => {
-          const chunks: any[] = [];
-          stream.on('data', (chunk: any) => chunks.push(chunk));
-          stream.on('end', () => resolve(Buffer.concat(chunks)));
-          stream.on('error', reject);
-        });
-  
-      const fileData = await streamToBuffer(data.Body);
-  
-      // Parse JSON content
-      const competition = JSON.parse(fileData.toString('utf-8'));
       
       const teamExists = competition?.teams?.some((item: { tid: number }) => Number(item.tid) === Number(tid)) || false;
       if(teamExists){

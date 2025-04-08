@@ -3,10 +3,8 @@ import { httpGet } from "@/lib/http";
 import redis from "../config/redis";
 import db from "../config/db";
 import fs from 'fs';
-import s3 from '@/lib/aws';
-import { GetObjectCommand } from '@aws-sdk/client-s3';
+import getJsonFromS3 from '@/lib/s3-utils';
 
-const BUCKET_NAME = 'uc-application';
 
 export async function MatcheInfo_old(matchid: number) {
   if (!matchid) {
@@ -54,34 +52,14 @@ export async function MatcheInfo(matchid: number) {
 
   const fileName =   rows[0].fileName;
   try {
-      const params = {
-            Bucket: BUCKET_NAME,
-            Key: fileName,  // S3 file path
-          };
-      
-          // Get object from S3
-          const command = new GetObjectCommand(params);
-          const data = await s3.send(command);
-      
-          // Convert the stream to a buffer
-          const streamToBuffer = (stream: any) =>
-            new Promise<Buffer>((resolve, reject) => {
-              const chunks: any[] = [];
-              stream.on('data', (chunk: any) => chunks.push(chunk));
-              stream.on('end', () => resolve(Buffer.concat(chunks)));
-              stream.on('error', reject);
-            });
-      
-          const fileData = await streamToBuffer(data.Body);
-      
-          // Parse JSON content
-          const matches = JSON.parse(fileData.toString('utf-8'));
+    const matches = await getJsonFromS3( fileName as string);
 
-      
-      if (matches.length > 0) {
-        await redis.setex(CACHE_KEY, CACHE_TTL, matches);
-      }
-      return JSON.parse(matches);
+    // Store in Redis cache
+    if (matches && (Array.isArray(matches) && matches.length > 0)) {
+      await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(matches));
+    }
+
+      return matches;
       
       
   } catch (error) {
@@ -138,34 +116,14 @@ export async function Last10Match(matchid: number) {
   }
   const fileName =   rows[0].fileName;
   try {
-    const params = {
-      Bucket: BUCKET_NAME,
-      Key: fileName,  // S3 file path
-    };
+    const matches = await getJsonFromS3( fileName as string);
 
-    // Get object from S3
-    const command = new GetObjectCommand(params);
-    const data = await s3.send(command);
+    // Store in Redis cache
+    if (matches && (Array.isArray(matches) && matches.length > 0)) {
+      await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(matches));
+    }
 
-    // Convert the stream to a buffer
-    const streamToBuffer = (stream: any) =>
-      new Promise<Buffer>((resolve, reject) => {
-        const chunks: any[] = [];
-        stream.on('data', (chunk: any) => chunks.push(chunk));
-        stream.on('end', () => resolve(Buffer.concat(chunks)));
-        stream.on('error', reject);
-      });
-
-    const fileData = await streamToBuffer(data.Body);
-
-    // Parse JSON content
-    const matches = JSON.parse(fileData.toString('utf-8'));
-
-      
-      if (matches.length > 0) {
-        await redis.setex(CACHE_KEY, CACHE_TTL, matches);
-      }
-      return JSON.parse(matches);
+      return matches;
       
       
   } catch (error) {
@@ -194,35 +152,14 @@ export async function MatchStatistics(matchid: number) {
   }
   const fileName =   rows[0].fileName;
   try {
-    const params = {
-      Bucket: BUCKET_NAME,
-      Key: fileName,  // S3 file path
-    };
+    const matches = await getJsonFromS3( fileName as string);
 
-    // Get object from S3
-    const command = new GetObjectCommand(params);
-    const data = await s3.send(command);
+    // Store in Redis cache
+    if (matches && (Array.isArray(matches) && matches.length > 0)) {
+      await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(matches));
+    }
 
-    // Convert the stream to a buffer
-    const streamToBuffer = (stream: any) =>
-      new Promise<Buffer>((resolve, reject) => {
-        const chunks: any[] = [];
-        stream.on('data', (chunk: any) => chunks.push(chunk));
-        stream.on('end', () => resolve(Buffer.concat(chunks)));
-        stream.on('error', reject);
-      });
-
-    const fileData = await streamToBuffer(data.Body);
-
-    // Parse JSON content
-    const matches = JSON.parse(fileData.toString('utf-8'));
-
-      
-      if (matches.length > 0) {
-        await redis.setex(CACHE_KEY, CACHE_TTL, matches);
-      }
-      return JSON.parse(matches);
-      
+      return matches;
       
   } catch (error) {
       console.error(`Error reading match data:`, error);
@@ -279,34 +216,14 @@ export async function MatchCommentary(matchid: number, inningNumer: number) {
   }
   const fileName =   rows[0].fileName;
   try {
-    const params = {
-      Bucket: BUCKET_NAME,
-      Key: fileName,  // S3 file path
-    };
+    const matchInningCommentaries = await getJsonFromS3( fileName as string);
 
-    // Get object from S3
-    const command = new GetObjectCommand(params);
-    const data = await s3.send(command);
+    // Store in Redis cache
+    if (matchInningCommentaries && (Array.isArray(matchInningCommentaries) && matchInningCommentaries.length > 0)) {
+      await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(matchInningCommentaries));
+    }
 
-    // Convert the stream to a buffer
-    const streamToBuffer = (stream: any) =>
-      new Promise<Buffer>((resolve, reject) => {
-        const chunks: any[] = [];
-        stream.on('data', (chunk: any) => chunks.push(chunk));
-        stream.on('end', () => resolve(Buffer.concat(chunks)));
-        stream.on('error', reject);
-      });
-
-    const fileData = await streamToBuffer(data.Body);
-
-    // Parse JSON content
-    const matchInningCommentaries = JSON.parse(fileData.toString('utf-8'));
-
-      
-      if (matchInningCommentaries.length > 0) {
-        await redis.setex(CACHE_KEY, CACHE_TTL, matchInningCommentaries);
-      }
-      return JSON.parse(matchInningCommentaries);
+      return matchInningCommentaries;
       
       
   } catch (error) {
@@ -370,35 +287,14 @@ export async function MatcheStats(cid: number, statType: string) {
   }
   const fileName =   rows[0].fileName;
   try {
-    const params = {
-      Bucket: BUCKET_NAME,
-      Key: fileName,  // S3 file path
-    };
+    const matches = await getJsonFromS3( fileName as string);
 
-    // Get object from S3
-    const command = new GetObjectCommand(params);
-    const data = await s3.send(command);
+    // Store in Redis cache
+    if (matches && (Array.isArray(matches) && matches.length > 0)) {
+      await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(matches));
+    }
 
-    // Convert the stream to a buffer
-    const streamToBuffer = (stream: any) =>
-      new Promise<Buffer>((resolve, reject) => {
-        const chunks: any[] = [];
-        stream.on('data', (chunk: any) => chunks.push(chunk));
-        stream.on('end', () => resolve(Buffer.concat(chunks)));
-        stream.on('error', reject);
-      });
-
-    const fileData = await streamToBuffer(data.Body);
-
-    // Parse JSON content
-    const matches = JSON.parse(fileData.toString('utf-8'));
-
-      
-      if (matches.length > 0) {
-        await redis.setex(CACHE_KEY, CACHE_TTL, matches);
-      }
-      return JSON.parse(matches);
-      
+      return matches;
       
   } catch (error) {
       console.error(`Error reading match data:`, error);
@@ -457,34 +353,14 @@ export async function SeriesPointsTable(cid: number) {
   }
   const fileName =   rows[0].fileName;
   try {
-    const params = {
-      Bucket: BUCKET_NAME,
-      Key: fileName,  // S3 file path
-    };
+    const competition = await getJsonFromS3( fileName as string);
 
-    // Get object from S3
-    const command = new GetObjectCommand(params);
-    const data = await s3.send(command);
+    // Store in Redis cache
+    if (competition && (Array.isArray(competition) && competition.length > 0)) {
+      await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(competition));
+    }
 
-    // Convert the stream to a buffer
-    const streamToBuffer = (stream: any) =>
-      new Promise<Buffer>((resolve, reject) => {
-        const chunks: any[] = [];
-        stream.on('data', (chunk: any) => chunks.push(chunk));
-        stream.on('end', () => resolve(Buffer.concat(chunks)));
-        stream.on('error', reject);
-      });
-
-    const fileData = await streamToBuffer(data.Body);
-
-    // Parse JSON content
-    const competition = JSON.parse(fileData.toString('utf-8'));
-
-      
-      if (competition.length > 0) {
-        await redis.setex(CACHE_KEY, CACHE_TTL, competition);
-      }
-      return JSON.parse(competition);
+      return competition;
       
       
   } catch (error) {
@@ -542,34 +418,14 @@ export async function SeriesPointsTableMatches(cid: number) {
   }
   const fileName =   rows[0].fileName;
   try {
-    const params = {
-      Bucket: BUCKET_NAME,
-      Key: fileName,  // S3 file path
-    };
+    const competition = await getJsonFromS3( fileName as string);
 
-    // Get object from S3
-    const command = new GetObjectCommand(params);
-    const data = await s3.send(command);
+    // Store in Redis cache
+    if (competition && (Array.isArray(competition) && competition.length > 0)) {
+      await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(competition));
+    }
 
-    // Convert the stream to a buffer
-    const streamToBuffer = (stream: any) =>
-      new Promise<Buffer>((resolve, reject) => {
-        const chunks: any[] = [];
-        stream.on('data', (chunk: any) => chunks.push(chunk));
-        stream.on('end', () => resolve(Buffer.concat(chunks)));
-        stream.on('error', reject);
-      });
-
-    const fileData = await streamToBuffer(data.Body);
-
-    // Parse JSON content
-    const competition = JSON.parse(fileData.toString('utf-8'));
-
-      
-      if (competition.length > 0) {
-        await redis.setex(CACHE_KEY, CACHE_TTL, competition);
-      }
-      return JSON.parse(competition);
+      return competition;
       
       
   } catch (error) {
@@ -630,25 +486,25 @@ export async function SeriesKeyStats(cid: number) {
   rows.forEach(row => fileMap[row.statsName] = row.fileName);
 
   // Function to read files safely
-  const readJsonFile = (filePath: string | undefined) => {
-    if (!filePath) {
-      console.log(`File not found: ${filePath}`);
-      return [];
-    }
-    try {
-      return JSON.parse(fs.readFileSync(filePath, 'utf8'))?.stats?.[0] || [];
-    } catch (error) {
-      console.error(`Error reading match data from ${filePath}:`, error);
-      return [];
-    }
-  };
-
+  // const readJsonFile = (filePath: string | undefined) => {
+  //   if (!filePath) {
+  //     console.log(`File not found: ${filePath}`);
+  //     return [];
+  //   }
+  //   try {
+  //     return JSON.parse(fs.readFileSync(filePath, 'utf8'))?.stats?.[0] || [];
+  //   } catch (error) {
+  //     console.error(`Error reading match data from ${filePath}:`, error);
+  //     return [];
+  //   }
+  // };
+  
   // Read all required files
   return {
-    mostRuns: readJsonFile(fileMap["batting_most_runs"]),
-    highStrike: readJsonFile(fileMap["batting_highest_strikerate"]),
-    topWickets: readJsonFile(fileMap["bowling_top_wicket_takers"]),
-    bestBowling: readJsonFile(fileMap["bowling_best_bowling_figures"]),
+    mostRuns: getJsonFromS3(fileMap["batting_most_runs"]),
+    highStrike: getJsonFromS3(fileMap["batting_highest_strikerate"]),
+    topWickets: getJsonFromS3(fileMap["bowling_top_wicket_takers"]),
+    bestBowling: getJsonFromS3(fileMap["bowling_best_bowling_figures"]),
   };
 }
 
@@ -713,28 +569,7 @@ export async function SeriesMatches(cid: number) {
 
 
     try {
-      const params = {
-        Bucket: BUCKET_NAME,
-        Key: fileName,  // S3 file path
-      };
-  
-      // Get object from S3
-      const command = new GetObjectCommand(params);
-      const data = await s3.send(command);
-  
-      // Convert the stream to a buffer
-      const streamToBuffer = (stream: any) =>
-        new Promise<Buffer>((resolve, reject) => {
-          const chunks: any[] = [];
-          stream.on('data', (chunk: any) => chunks.push(chunk));
-          stream.on('end', () => resolve(Buffer.concat(chunks)));
-          stream.on('error', reject);
-        });
-  
-      const fileData = await streamToBuffer(data.Body);
-  
-      // Parse JSON content
-      const competition = JSON.parse(fileData.toString('utf-8'));
+      const competition = await getJsonFromS3( fileName as string);
       
       // const allMatches =  JSON.parse(competition);
       const allMatches: { items: Match[] } = competition;
@@ -751,9 +586,10 @@ export async function SeriesMatches(cid: number) {
         else if (match.status === 3) categorizedMatches.liveMatch.push(match);
       });
 
-      if (competition.length > 0) {
-        await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(categorizedMatches));
-      }
+        // Store in Redis cache
+  if (competition && (Array.isArray(competition) && competition.length > 0)) {
+    await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(competition));
+  }
 
       return categorizedMatches;
       

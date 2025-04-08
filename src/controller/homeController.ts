@@ -3,8 +3,7 @@ import { httpGet } from "@/lib/http";
 import redis from "../config/redis";
 import db from "../config/db";
 import fs from "fs";
-import s3 from '@/lib/aws';
-import { GetObjectCommand } from '@aws-sdk/client-s3';
+import getJsonFromS3 from '@/lib/s3-utils';
 
 const BUCKET_NAME = 'uc-application';
 
@@ -265,33 +264,15 @@ export async function seriesById(cid: number) {
   }
   const fileName = rows[0].fileName;
   try {
-    const params = {
-      Bucket: BUCKET_NAME,
-      Key: fileName,  // S3 file path
-    };
+    const competition = await getJsonFromS3( fileName as string);
 
-    // Get object from S3
-    const command = new GetObjectCommand(params);
-    const data = await s3.send(command);
-
-    // Convert the stream to a buffer
-    const streamToBuffer = (stream: any) =>
-      new Promise<Buffer>((resolve, reject) => {
-        const chunks: any[] = [];
-        stream.on('data', (chunk: any) => chunks.push(chunk));
-        stream.on('end', () => resolve(Buffer.concat(chunks)));
-        stream.on('error', reject);
-      });
-
-    const fileData = await streamToBuffer(data.Body);
-
-    // Parse JSON content
-    const competition = JSON.parse(fileData.toString('utf-8'));
-
-    if (competition.length > 0) {
-      await redis.setex(CACHE_KEY, CACHE_TTL, competition);
+    // Store in Redis cache
+    if (competition && (Array.isArray(competition) && competition.length > 0)) {
+      await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(competition));
     }
-    return JSON.parse(competition);
+
+    
+    return competition;
   } catch (error) {
     console.error(`Error reading match data:`, error);
     return null;
