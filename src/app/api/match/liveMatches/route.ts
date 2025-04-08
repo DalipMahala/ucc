@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import db from "@/config/db"; // Ensure correct import path for DB
 import redis from "@/config/redis"; // Ensure correct import path for
 import fs from "fs";
-import s3 from '@/lib/aws';
-import { GetObjectCommand } from '@aws-sdk/client-s3';
+import getJsonFromS3 from '@/lib/s3-utils';
 
 const BUCKET_NAME = 'uc-application';
 
@@ -37,28 +36,7 @@ export async function GET(req: NextRequest) {
 
       try {
 
-        const params = {
-          Bucket: BUCKET_NAME,
-          Key: fileName,  // S3 file path
-        };
-    
-        // Get object from S3
-        const command = new GetObjectCommand(params);
-        const data = await s3.send(command);
-    
-        // Convert the stream to a buffer
-        const streamToBuffer = (stream: any) =>
-          new Promise<Buffer>((resolve, reject) => {
-            const chunks: any[] = [];
-            stream.on('data', (chunk: any) => chunks.push(chunk));
-            stream.on('end', () => resolve(Buffer.concat(chunks)));
-            stream.on('error', reject);
-          });
-    
-        const fileData = await streamToBuffer(data.Body);
-    
-        // Parse JSON content
-        const parsedData = JSON.parse(fileData.toString('utf-8'));
+        const parsedData = await getJsonFromS3( fileName as string);
 
        
 

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import db from "@/config/db"; // Ensure correct import path for DB
 import redis from "@/config/redis"; // Ensure correct import path for
 import fs from "fs";
+import getJsonFromS3 from '@/lib/s3-utils';
 
 export async function POST(req: NextRequest) {
   try {
@@ -46,25 +47,25 @@ export async function POST(req: NextRequest) {
     rows.forEach((row) => (fileMap[row.statsName] = row.fileName));
 
     // Function to read files safely
-    const readJsonFile = (filePath: string | undefined) => {
-      if (!filePath || !fs.existsSync(filePath)) {
-        return NextResponse.json({ error: "File not found" }, { status: 404 });
-      }
-      try {
-        return JSON.parse(fs.readFileSync(filePath, "utf8"))?.stats?.[0] || [];
-      } catch (error) {
-        return NextResponse.json(
-          { error: "Error reading match data from" },
-          { status: 404 }
-        );
-      }
-    };
+    // const readJsonFile = (filePath: string | undefined) => {
+    //   if (!filePath || !fs.existsSync(filePath)) {
+    //     return NextResponse.json({ error: "File not found" }, { status: 404 });
+    //   }
+    //   try {
+    //     return JSON.parse(fs.readFileSync(filePath, "utf8"))?.stats?.[0] || [];
+    //   } catch (error) {
+    //     return NextResponse.json(
+    //       { error: "Error reading match data from" },
+    //       { status: 404 }
+    //     );
+    //   }
+    // };
 
     const data = {
-        mostRuns: readJsonFile(fileMap["batting_most_runs"]),
-        highStrike: readJsonFile(fileMap["batting_highest_strikerate"]),
-        topWickets: readJsonFile(fileMap["bowling_top_wicket_takers"]),
-        bestBowling: readJsonFile(fileMap["bowling_best_bowling_figures"]),
+        mostRuns: getJsonFromS3(fileMap["batting_most_runs"]),
+        highStrike: getJsonFromS3(fileMap["batting_highest_strikerate"]),
+        topWickets: getJsonFromS3(fileMap["bowling_top_wicket_takers"]),
+        bestBowling: getJsonFromS3(fileMap["bowling_best_bowling_figures"]),
       };
       
       return NextResponse.json({ success: true, data: data });

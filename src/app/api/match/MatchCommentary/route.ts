@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import db from "@/config/db"; // Ensure correct import path for DB
 import redis from "@/config/redis"; // Ensure correct import path for
 import fs from "fs";
+import getJsonFromS3 from '@/lib/s3-utils';
 
 export async function POST(req: NextRequest) {
   try {
@@ -36,19 +37,15 @@ export async function POST(req: NextRequest) {
 
     const filePath = rows[0].fileName;
 
-    if (!fs.existsSync(filePath)) {
-      console.log(`File not found: ${filePath}`);
-      return NextResponse.json({ error: "File not found" }, { status: 404 });
-    }
-
-    const commentary = fs.readFileSync(filePath, "utf8");
+    const commentary = await getJsonFromS3( filePath as string);
 
     // Store in Redis cache
-    if (commentary.length > 0) {
-      await redis.setex(CACHE_KEY, CACHE_TTL, commentary);
+    if (commentary && (Array.isArray(commentary) && commentary.length > 0)) {
+      await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(commentary));
     }
 
-    return NextResponse.json({ success: true, data: JSON.parse(commentary) });
+
+    return NextResponse.json({ success: true, data: commentary });
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json(

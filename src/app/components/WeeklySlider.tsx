@@ -14,8 +14,8 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
   if (featuredMatch) {
     slides = featuredMatch.map((match: any) => ({
       teams: [
-        { country: match.teama.name, flag: match.teama.logo_url },
-        { country: match.teamb.name, flag: match.teamb.logo_url },
+        { country: match.teama.short_name, flag: match.teama.logo_url },
+        { country: match.teamb.short_name, flag: match.teamb.logo_url },
       ],
       countdown: match.date_start_ist, // Replace with dynamic countdown logic
       match: match.title,

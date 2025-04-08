@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import db from "@/config/db"; // Ensure correct import path for DB
 import redis from "@/config/redis"; // Ensure correct import path for
 import fs from "fs";
+import getJsonFromS3 from '@/lib/s3-utils';
 
 export async function POST(req: NextRequest) {
   try {
@@ -28,14 +29,8 @@ export async function POST(req: NextRequest) {
 
     const filePath = rows[0].fileName;
 
-    if (!fs.existsSync(filePath)) {
-      console.log(`File not found: ${filePath}`);
-      return NextResponse.json({ error: "File not found" }, { status: 404 });
-    }
-    
-    const competition = fs.readFileSync(filePath, "utf8");
-    let jsonArray = JSON.parse(`[${competition}]`)
-      // Now parse it
+    const jsonArray = await getJsonFromS3( filePath as string);
+
       if (Array.isArray(jsonArray.live_odds) && jsonArray.live_odds.length === 0) {
         jsonArray.live_odds = {};
       }
