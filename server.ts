@@ -2,7 +2,7 @@ const WebSocket = require("ws");
 import db from "./src/config/db";
 import fs from "fs";
 import path from "path";
-import s3 from '@/lib/aws';
+import s3 from './src/lib/aws'
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
 const BUCKET_NAME = 'uc-application';

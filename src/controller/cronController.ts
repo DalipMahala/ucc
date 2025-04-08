@@ -351,6 +351,8 @@ export async function InsertOrUpdateMatches() {
 export async function MatchInfo() {
   try {
     const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_info) or (status !=4 and DATE(date_start_ist) BETWEEN DATE(NOW() - INTERVAL 1 DAY) AND DATE(NOW())  and commentary = 1)`;
+    // const matchQuery = `SELECT match_id FROM matches `;
+
     // const matchQuery = `SELECT match_id FROM matches where status in (1,3)`;
     
     const [matchResults]: any = await db.query(matchQuery);
@@ -428,11 +430,11 @@ export async function MatchInfo() {
 
 export async function MatchCommentary() {
   const API_TOKEN = "7b58d13da34a07b0a047e129874fdbf4";
-  const STORAGE_DIR = "/var/tmp/ucc/MatchCommentaryData";
   const CONCURRENT_LIMIT = 5;
   try {
     // const matchQuery = `SELECT match_id, latest_inning_number FROM matches WHERE commentary = 1 and match_id not in (SELECT match_id FROM match_commentary) and status in (2,3) and latest_inning_number > 0 `;
-    const matchQuery = `SELECT match_id, latest_inning_number FROM matches WHERE commentary = 1 and status = 3 and latest_inning_number > 0 `;
+    // const matchQuery = `SELECT match_id, latest_inning_number FROM matches WHERE commentary = 1 and status = 3 and latest_inning_number > 0 `;
+    const matchQuery = `SELECT match_id, latest_inning_number FROM matches WHERE commentary = 1 and latest_inning_number > 0 `;
     
     const [matchResults]: any = await db.query(matchQuery);
 
@@ -441,10 +443,6 @@ export async function MatchCommentary() {
       return;
     }
 
-    // Ensure storage directory exists
-    if (!fs.existsSync(STORAGE_DIR)) {
-      fs.mkdirSync(STORAGE_DIR, { recursive: true });
-    }
 
     const limit = pLimit(CONCURRENT_LIMIT);
     const apiCalls = matchResults.flatMap(
@@ -470,7 +468,7 @@ export async function MatchCommentary() {
               }
 
               const fileData = JSON.stringify(commentaryData, null, 2);
-              const s3Key = `match_commentary_${inningNumber}inning_${match_id}.json`;
+              const s3Key = `MatchCommentaryData/match_commentary_${inningNumber}inning_${match_id}.json`;
               const params:any = {
                 Bucket: BUCKET_NAME,
                 Key: s3Key,
@@ -516,7 +514,6 @@ export async function MatchCommentary() {
 
 export async function MatchCommentaryCompleted() {
   const API_TOKEN = "7b58d13da34a07b0a047e129874fdbf4";
-  const STORAGE_DIR = "/var/tmp/ucc/MatchCommentaryData";
   const CONCURRENT_LIMIT = 5;
   try {
     const matchQuery = `SELECT * FROM matches WHERE status = 2 and commentary = 1 and DATE(date_end_ist) BETWEEN DATE(NOW() - INTERVAL 15 DAY) AND DATE(NOW()) and latest_inning_number > 0 `;

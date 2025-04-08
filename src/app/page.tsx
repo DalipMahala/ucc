@@ -150,9 +150,9 @@ export default async function Home(props: { params: Params }) {
   let liveMatch: MatchItem[] = filteredMatches;
   let featuredMatch: MatchItem[] = await FeaturedMatch();
 // console.log("liveMatch",completedMatch);
-  completedMatch = completedMatch.filter((item: { commentary: number}) => Number(item.commentary) === 1);
-  upcomingMatch = upcomingMatch.filter((item: { commentary: number}) => Number(item.commentary) === 1);
-  liveMatch = liveMatch.filter((item: { commentary: number}) => Number(item.commentary) === 1);
+  completedMatch = completedMatch?.filter((item: { commentary: number}) => Number(item.commentary) === 1);
+  upcomingMatch = upcomingMatch?.filter((item: { commentary: number}) => Number(item.commentary) === 1);
+  liveMatch = liveMatch?.filter((item: { commentary: number}) => Number(item.commentary) === 1);
   // liveMatch = [...liveMatch].sort((a, b) => ({'Toss':1,'Play Ongoing':2}[a.game_state_str]||3 - ({'Toss':1,'Play Ongoing':2}[b.game_state_str]||3));
   liveMatch = liveMatch.sort((a,b) => ({Toss:1,'Play Ongoing':2}[a.game_state_str]||3) - ({Toss:1,'Play Ongoing':2}[b.game_state_str]||3));
 

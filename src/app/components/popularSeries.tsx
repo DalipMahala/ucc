@@ -49,11 +49,12 @@ export default function PLSeries() {
             <div className="bg-[#ffffff] text-[14px] rounded-lg px-4 flex items-center space-x-3 py-3 mb-2">
               <div>
                 <Image
-                  src={series?.logo ? series?.logo : "/assets/img/series/ipl.webp"}
+                  src={series?.logo ? series?.logo : "/assets/img/series/series.svg"}
                   width={20}
                   height={20}
                   alt=""
                   loading="lazy"
+                  className="rounded-full"
                 />
               </div>
               <div className="font-medium text-[#394351]">{series?.title}</div>

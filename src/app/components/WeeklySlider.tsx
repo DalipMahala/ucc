@@ -18,7 +18,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
         { country: match.teamb.short_name, flag: match.teamb.logo_url },
       ],
       countdown: match.date_start_ist, // Replace with dynamic countdown logic
-      match: match.title,
+      match: match.short_title,
       match_number: match.match_number,
       title: match.competition?.title,
       season: match.competition?.season,

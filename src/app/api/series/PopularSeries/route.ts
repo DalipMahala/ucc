@@ -5,7 +5,7 @@ import redis from "@/config/redis"; // Ensure correct import path for
 export async function GET(req: NextRequest) {
     try {
         const CACHE_KEY = "populer_series";
-        const CACHE_TTL = 600;
+        const CACHE_TTL = 1;
         
         const cachedData = await redis.get(CACHE_KEY);
         if (cachedData) {
