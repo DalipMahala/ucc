@@ -368,13 +368,13 @@ export default async function Home(props: { params: Params }) {
                                         alt={items.teama.short_name}
                                         loading="lazy"
                                       />
-                                      <span className="text-[#363e49] font-semibold">
+                                      <span className="text-[#586577] font-medium text-[14px]">
                                         {items.teama.short_name} -{" "}
                                       </span>
                                     </div>
                                     <p
                                       className={
-                                        "flex items-end text-[16px] gap-[4px] match" +
+                                        "flex items-end gap-[4px] match" +
                                         items.match_id +
                                         "-" +
                                         items.teama.team_id
@@ -383,16 +383,16 @@ export default async function Home(props: { params: Params }) {
                                       {items.teama.scores === undefined ||
                                         items.teama.scores === null ||
                                         items.teama.scores === "" ? (
-                                        <span className="font-semibold">
+                                        <span className="text-[14px] font-medium text-[#586577]">
                                           {" "}
                                           (Yet to bat){" "}
                                         </span>
                                       ) : (
                                         <>
-                                          <span className="font-semibold">
+                                          <span className="font-medium text-[#586577]">
                                             {items.teama.scores}
                                           </span>
-                                          <span className="text-[#586577] text-[13px]">
+                                          <span className="text-[#586577] text-[12px]">
                                             {" "}
                                             ({items.teama.overs}){" "}
                                           </span>
@@ -412,13 +412,13 @@ export default async function Home(props: { params: Params }) {
                                           alt={items.teamb.short_name}
                                           loading="lazy"
                                         />
-                                        <span className="text-[#363e49] font-semibold">
+                                        <span className="text-[#586577] font-medium text-[14px]">
                                           {items.teamb.short_name} -
                                         </span>
                                       </div>
                                       <p
                                         className={
-                                          "flex items-end text-[16px] gap-[4px] match" +
+                                          "flex items-end  gap-[4px] match" +
                                           items.match_id +
                                           "-" +
                                           items.teamb.team_id
@@ -427,16 +427,16 @@ export default async function Home(props: { params: Params }) {
                                         {items.teamb.scores === undefined ||
                                           items.teamb.scores === null ||
                                           items.teamb.scores === "" ? (
-                                          <span className="font-semibold">
+                                          <span className="font-medium text-[14px] text-[#586577]">
                                             {" "}
                                             (Yet to bat){" "}
                                           </span>
                                         ) : (
                                           <>
-                                            <span className="font-semibold">
+                                            <span className="font-medium text-[14px] text-[#586577]">
                                               {items.teamb.scores}
                                             </span>
-                                            <span className="text-[#586577] text-[13px]">
+                                            <span className="text-[#586577] text-[12px]">
                                               {" "}
                                               ({items.teamb.overs}){" "}
                                             </span>
@@ -829,12 +829,12 @@ export default async function Home(props: { params: Params }) {
                                         alt={cmatch.teama.short_name}
                                         loading="lazy"
                                       />
-                                      <span className="text-[#363e49] font-semibold">
+                                      <span className="text-[#586577] font-medium text-[14px]">
                                         {cmatch.teama.short_name} -{" "}
                                       </span>
                                     </div>
-                                    <p className="text-[16px] flex gap-[4px] items-end">
-                                      <span className=" font-semibold">
+                                    <p className="text-[14px] flex gap-[4px] items-end">
+                                      <span className=" font-medium text-[#586577] ">
                                         {cmatch.teama.scores}
                                       </span>
                                       <span className="text-[#586577] text-[13px]">
@@ -855,15 +855,15 @@ export default async function Home(props: { params: Params }) {
                                           alt={cmatch.teamb.short_name}
                                           loading="lazy"
                                         />
-                                        <span className="text-[#363e49] font-semibold">
+                                        <span className="text-[#586577] font-medium text-[14px]">
                                           {cmatch.teamb.short_name} -{" "}
                                         </span>
                                       </div>
-                                      <p className="text-[16px] flex gap-[4px] items-end">
-                                        <span className=" font-semibold">
+                                      <p className="text-[14px] flex gap-[4px] items-end">
+                                        <span className=" font-medium text-[#586577]">
                                           {cmatch.teamb.scores}
                                         </span>
-                                        <span className="text-[#586577] text-[13px]">
+                                        <span className="font-medium text-[#586577]">
                                           ({cmatch.teamb.overs})
                                         </span>
                                       </p>
@@ -883,7 +883,7 @@ export default async function Home(props: { params: Params }) {
                                     alt=""
                                     loading="lazy"
                                   />
-                                  <p className="text-[#0B773C] text-1xl w-[75%] text-center">
+                                  <p className="text-[#0B773C] text-[14px] w-[75%] text-center">
                                     {cmatch.result}
                                   </p>
                                 </div>
@@ -891,7 +891,7 @@ export default async function Home(props: { params: Params }) {
                               {(cmatch.man_of_the_match && !Array.isArray(cmatch.man_of_the_match)) &&
                                 <>
                                   <div className="h-[100px] border-l-[1px] border-[#e7f2f4]"></div>
-                                  <Link
+                                  <Link className="w-[45%]"
                                     href={
                                       "/player/" +
                                       urlStringEncode(cmatch?.man_of_the_match?.name) +
@@ -1214,7 +1214,7 @@ export default async function Home(props: { params: Params }) {
                                         alt={ucmatch.teama.short_name}
                                         loading="lazy"
                                       />
-                                      <span className="text-[#363e49] font-semibold">
+                                      <span className="text-[#586577] font-medium text-[14px]">
                                         {ucmatch.teama.short_name}
                                       </span>
                                     </div>
@@ -1231,7 +1231,7 @@ export default async function Home(props: { params: Params }) {
                                           alt={ucmatch.teamb.short_name}
                                           loading="lazy"
                                         />
-                                        <span className="text-[#363e49] font-semibold">
+                                        <span className="text-[#586577] font-medium text-[14px]">
                                           {ucmatch.teamb.short_name}
                                         </span>
                                       </div>

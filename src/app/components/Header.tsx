@@ -68,7 +68,7 @@ if(data){
 
       </div>
 {/* fixed top-0 left-0 w-full shadow-md z-50 */}
-      <header className="bg-[#081736] lg:px-0 px-3">
+      <header className="bg-[#081736] lg:px-0 px-3 sticky top-0 z-10">
         <div className="lg:w-[1000px] w-full mx-auto text-white py-5 flex items-center justify-between">
           <div>
             <Link href="/">

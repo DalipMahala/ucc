@@ -37,12 +37,12 @@ const CountdownTimer = ({ targetTime }: { targetTime: string }) => {
   if (!timeLeft) return null;
 
   return (
-    <div className="text-[18px] text-[#144280] font-semibold">
+    <div className="text-[16px] text-[#144280] font-semibold">
       {timeLeft.isFinished ? (
         "Time's up!"
       ) : (
         <span>
-           {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+           {timeLeft.hours}h : {timeLeft.minutes}m : {timeLeft.seconds}s
         </span>
       )}
     </div>

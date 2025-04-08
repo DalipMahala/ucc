@@ -131,11 +131,11 @@ class MatchWebSocket extends Component<object, MatchData> { // Changed from {} t
     ); // Select elements with class `match-info`
     elements.forEach((element) => {
       element.innerHTML = `
-              <span className="font-semibold" style="font-weight: 600;">${this.state.matchRuns}/${this.state.matchWikets}</span>
-              <span className="text-[#909090] text-[13px]">
+              <span className="font-semibold text-[15px] text-[black]" style="font-weight: 600; font-size: 15px;">${this.state.matchRuns}/${this.state.matchWikets}</span>
+              <span className="text-[12px] font-semibold text-[black]" style="font-size: 12px;">
                 (${this.state.matchOvers})
               </span>
-              <Image  loading="lazy"  src="/assets/img/home/bat.png" style="height:13px;" className="h-[13px]" alt="" />
+              <Image  loading="lazy"  src="/assets/img/home/bat.png" style="height:12px; margin-bottom: 3px;" className="h-[12px] mb-[3px]" alt="" />
       `;
     });
 
