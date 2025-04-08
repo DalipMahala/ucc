@@ -174,9 +174,7 @@ export async function InsertAllMatches() {
         `;
       // console.log("SQL Query:", query);
       // console.log("Values:", matches);
-      const connection = await db.getConnection();
-      await connection.query(query, [values]);
-      connection.release();
+      await db.query(query, [values]);
     } catch (error) {
       console.error("Error in batch upsert:", error);
     }
@@ -343,9 +341,7 @@ export async function InsertOrUpdateMatches() {
         `;
       // console.log("SQL Query:", query);
       // console.log("Values:", matches);
-      const connection = await db.getConnection();
-      await connection.query(query, [values]);
-      connection.release();
+      await db.query(query, [values]);
     } catch (error) {
       console.error("Error in batch upsert:", error);
     }
@@ -356,8 +352,8 @@ export async function MatchInfo() {
   try {
     const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_info) or (status !=4 and DATE(date_start_ist) BETWEEN DATE(NOW() - INTERVAL 1 DAY) AND DATE(NOW())  and commentary = 1)`;
     // const matchQuery = `SELECT match_id FROM matches where status in (1,3)`;
-    const connection = await db.getConnection();
-    const [matchResults]: any = await connection.query(matchQuery);
+    
+    const [matchResults]: any = await db.query(matchQuery);
 
     if (!matchResults.length) {
       console.log("No match IDs found.");
@@ -411,8 +407,7 @@ export async function MatchInfo() {
                         fileName = '${s3Key}';`;
 
           //  const values =  [matchId, filePath ] ;
-          await connection.query(query);
-          connection.release();
+          await db.query(query);
         } catch (error) {
           console.error(`Failed to fetch match_id ${row.match_id}:`, error);
           return null;
@@ -438,8 +433,8 @@ export async function MatchCommentary() {
   try {
     // const matchQuery = `SELECT match_id, latest_inning_number FROM matches WHERE commentary = 1 and match_id not in (SELECT match_id FROM match_commentary) and status in (2,3) and latest_inning_number > 0 `;
     const matchQuery = `SELECT match_id, latest_inning_number FROM matches WHERE commentary = 1 and status = 3 and latest_inning_number > 0 `;
-    const connection = await db.getConnection();
-    const [matchResults]: any = await connection.query(matchQuery);
+    
+    const [matchResults]: any = await db.query(matchQuery);
 
     if (!matchResults.length) {
       console.log("No match IDs found.");
@@ -492,15 +487,14 @@ export async function MatchCommentary() {
                 VALUES (?, ?, ?) 
                 ON DUPLICATE KEY UPDATE fileName = ?;
               `;
-              await connection.query(insertQuery, [
+              await db.query(insertQuery, [
                 match_id,
                 inningNumber,
                 s3Key,
                 s3Key,
               ]);
 
-              // console.log(`Commentary saved for match ${match_id}, inning ${inningNumber}`);
-              connection.release();
+             
             } catch (error) {
               console.error(
                 `Failed to fetch commentary for match_id ${match_id}, inning ${inningNumber}:`,
@@ -607,8 +601,8 @@ export async function MatchStatistics() {
   try {
     // const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_statistics) or (status !=4 and date(date_start_ist) = date(now()))`;
     const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_statistics) or (status = 3 and DATE(date_start_ist) BETWEEN DATE(NOW() - INTERVAL 1 DAY) AND DATE(NOW()))`;
-    const connection = await db.getConnection();
-    const [matchResults]: any = await connection.query(matchQuery);
+    
+    const [matchResults]: any = await db.query(matchQuery);
 
     if (!matchResults.length) {
       console.log("No match IDs found.");
@@ -649,8 +643,7 @@ export async function MatchStatistics() {
                         fileName = '${s3Key}';`;
           // console.log(`Data saved to`, query);
           //  const values =  [matchId, filePath ] ;
-          await connection.query(query);
-          connection.release();
+          await db.query(query);
         } catch (error) {
           console.error(`Failed to fetch match_id ${row.match_id}:`, error);
           return null;
@@ -723,8 +716,8 @@ export async function MatchStatisticsCompleted() {
 export async function Last10MatchData() {
   try {
     const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_advance)`;
-    const connection = await db.getConnection();
-    const [matchResults]: any = await connection.query(matchQuery);
+    
+    const [matchResults]: any = await db.query(matchQuery);
 
     if (!matchResults.length) {
       console.log("No match IDs found.");
@@ -764,8 +757,7 @@ export async function Last10MatchData() {
                         fileName = '${s3Key}';`;
           // console.log(`Data saved to`, query);
           //  const values =  [matchId, filePath ] ;
-          await connection.query(query);
-          connection.release();
+          await db.query(query);
         } catch (error) {
           console.error(`Failed to fetch match_id ${row.match_id}:`, error);
           return null;
@@ -868,9 +860,7 @@ export async function InsertOrUpdateLiveCompetitions() {
           `;
       // console.log("SQL Query:", query);
       // console.log("Values:", matches);
-      const connection = await db.getConnection();
-      await connection.query(query, [values]);
-      connection.release();
+      await db.query(query, [values]);
     } catch (error) {
       console.error("Error in competitions upsert:", error);
     }
@@ -967,9 +957,7 @@ export async function InsertOrUpdateUpcomingCompetitions() {
           `;
       // console.log("SQL Query:", query);
       // console.log("Values:", matches);
-      const connection = await db.getConnection();
-      await connection.query(query, [values]);
-      connection.release();
+      await db.query(query, [values]);
     } catch (error) {
       console.error("Error in competitions upsert:", error);
     }
@@ -979,8 +967,8 @@ export async function InsertOrUpdateUpcomingCompetitions() {
 export async function CompetitionInfo() {
   try {
     const competitionsQuery = `SELECT cid FROM competitions WHERE cid not in (SELECT cid FROM competition_info) or (date(dateend) >= date(now()) and status = 'result') or status = 'live'`;
-    const connection = await db.getConnection();
-    const [competitionsResults]: any = await connection.query(
+   
+    const [competitionsResults]: any = await db.query(
       competitionsQuery
     );
 
@@ -1022,8 +1010,7 @@ export async function CompetitionInfo() {
                         fileName = '${s3Key}';`;
           // console.log(`Data saved to`, query);
           //  const values =  [matchId, filePath ] ;
-          await connection.query(query);
-          connection.release();
+          await db.query(query);
         } catch (error) {
           console.error(`Failed to fetch cid ${row.cid}:`, error);
           return null;
@@ -1038,8 +1025,8 @@ export async function CompetitionInfo() {
 export async function CompetitionMatches() {
   try {
     const competitionsQuery = `SELECT cid FROM competitions WHERE cid not in (SELECT cid FROM competition_matches) or (date(dateend) >= date(now()) and status = 'result') or status = 'live'`;
-    const connection = await db.getConnection();
-    const [competitionsResults]: any = await connection.query(
+   
+    const [competitionsResults]: any = await db.query(
       competitionsQuery
     );
 
@@ -1102,8 +1089,7 @@ export async function CompetitionMatches() {
                         fileName = '${s3Key}';`;
           // console.log(`Data saved to`, query);
           //  const values =  [matchId, filePath ] ;
-          await connection.query(query);
-          connection.release();
+          await db.query(query);
         } catch (error) {
           console.error(`Failed to fetch cid ${row.cid}:`, error);
           return null;
@@ -1118,8 +1104,8 @@ export async function CompetitionMatches() {
 export async function CompetitionsStats() {
   try {
     const competitionsQuery = `SELECT cid FROM competitions WHERE date(dateend) >= date(now()) and status = 'result' or status = 'live'`;
-    const connection = await db.getConnection();
-    const [competitionsResults]: any = await connection.query(
+    
+    const [competitionsResults]: any = await db.query(
       competitionsQuery
     );
 
@@ -1176,8 +1162,7 @@ export async function CompetitionsStats() {
                         VALUES (${cid}, '${statType}', '${s3Key}') 
                         ON DUPLICATE KEY UPDATE 
                         statsName = VALUES(statsName);`;
-            await connection.query(query);
-            connection.release();
+            await db.query(query);
           }
         } catch (error) {
           console.error(`Failed to fetch match_id ${row.cid}:`, error);
