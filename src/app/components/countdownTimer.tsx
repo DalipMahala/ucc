@@ -37,7 +37,7 @@ const CountdownTimer = ({ targetTime }: { targetTime: string }) => {
   if (!timeLeft) return null;
 
   return (
-    <div className="text-xl font-bold text-blue-600">
+    <div className="text-[18px] text-[#144280] font-semibold">
       {timeLeft.isFinished ? (
         "Time's up!"
       ) : (

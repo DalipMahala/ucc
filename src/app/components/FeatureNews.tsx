@@ -109,10 +109,10 @@ const FeatureNews = ({newsUrl}:url) => {
                         >
                             
                         </h3>
-                        <h4 className="text-[12px] font-semibold mb-2"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered,20))}} >
+                        <h4 className="text-[12px] font-semibold mb-2"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered,10))}} >
                               
                               </h4>
-                        <p className="text-gray-500 font-normal"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post?.uagb_excerpt)}} >
+                        <p className="text-gray-500 font-normal"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.uagb_excerpt,30))}} >
                        
                         </p>
                         <Link href={post?.link}>
@@ -156,10 +156,10 @@ const FeatureNews = ({newsUrl}:url) => {
                               className="rounded-lg h-[90px]" />
                             )}
                             <div>
-                              <h4 className="text-[12px] font-semibold mb-2"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered,20))}} >
+                              <h4 className="text-[12px] font-semibold mb-2"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered,15))}} >
                               
                               </h4>
-                              <p className="text-gray-500 font-normal"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post?.uagb_excerpt)}} >
+                              <p className="text-gray-500 font-normal"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.uagb_excerpt, 25))}} >
                        
                         </p>
                               <p className="text-[11px] text-gray-500 flex items-center">

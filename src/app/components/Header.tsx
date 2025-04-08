@@ -72,7 +72,7 @@ if(data){
         <div className="lg:w-[1000px] w-full mx-auto text-white py-5 flex items-center justify-between">
           <div>
             <Link href="/">
-              <Image priority  className="h-[2.375rem]" src="/assets/img/logo.png" alt="" width={150} height={50} />
+              <Image priority  className="h-[39px] w-[173px]" src="/assets/img/logo.png" alt="" width={150} height={50} />
             </Link>
           </div>
           {/* Toggle Button for Mobile */}

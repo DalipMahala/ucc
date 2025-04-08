@@ -58,7 +58,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                       <span className="text-[13px] font-medium">
                         {slide?.teams?.[0].country}
                       </span>
-                      <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] md:rounded-full rounded-md text-[#0B773C] pr-2">
+                      <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] md:rounded-full rounded-md text-[#0B773C] pr-2">
                         <span>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +77,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                         </span>
                         0
                       </span>
-                      <span className="flex items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  md:rounded-full rounded-md text-[#A70B0B] pr-2">
+                      <span className="flex font-semibold items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  md:rounded-full rounded-md text-[#A70B0B] pr-2">
                         <span>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +118,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                                 width={25}
                                 height={25}
                               />
-                              <span className="text-[#5e5e5e] font-medium">
+                              <span className=" font-semibold">
                                 {team.country}
                               </span>
                             </div>
@@ -128,10 +128,10 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                       </div>
                       <div className="md:block hidden h-[70px] border-l-[1px] border-[#d0d3d7]"></div>
                       <div className="font-semibold text-center">
-                        <p className="text-[#586577] text-[12px] mb:mb-4 mb-1 font-medium">
-                          {format(new Date(slide.countdown), "dd MMMM - EEEE")},{" "}
+                        <p className="text-[#586577] text-[13px] mb:mb-4 mb-1 font-medium">
+                          {format(new Date(slide.countdown), "dd MMMM - EEEE")}{" "}
                           <br />
-                          {format(new Date(slide.countdown), "hh:mm:aa")}
+                         <span className="text-[#144280] text-[14px] font-semibold"> {format(new Date(slide.countdown), "hh:mm:aa")} </span>
                         </p>
                       </div>
                     </div>
@@ -146,10 +146,10 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
             ))}
           </div>
           {slides.length > 1 && (
-            <div className="cust-slider-nav flex justify-between items-center">
+            <div className="cust-slider-nav flex justify-between items-center mt-[-17px] relative py-[5px] px-[4px]">
               <button
                 onClick={handlePrevClick}
-                className="cust-prev-btn bg-[#ffffff] p-[7px] rounded-full border-2"
+                className="cust-prev-btn bg-[#ffffff] p-[7px] rounded-full border-2 hover:[box-shadow:3px_5px_4px_0px_#bdbdbd]"
               >
                 <span className="text-[20px] font-bold">
                   <svg
@@ -182,7 +182,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
               </div>
               <button
                 onClick={handleNextClick}
-                className="cust-next-btn bg-[#ffffff] p-[7px] rounded-full border-2"
+                className="cust-next-btn bg-[#ffffff] p-[7px] rounded-full border-2 hover:[box-shadow:3px_5px_4px_0px_#bdbdbd]"
               >
                 <span className="text-[20px] font-bold">
                   <svg

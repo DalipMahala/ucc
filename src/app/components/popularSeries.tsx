@@ -50,13 +50,14 @@ export default function PLSeries() {
               <div>
                 <Image
                   src={series?.logo ? series?.logo : "/assets/img/series/ipl.webp"}
-                  width={20}
-                  height={20}
+                  width={25}
+                  height={25}
                   alt=""
                   loading="lazy"
+                  className="rounded-full"
                 />
               </div>
-              <div className="font-medium text-[#394351]">{series?.title}</div>
+              <div className="font-medium text-[14px] text-[#363e49]">{series?.title}</div>
             </div>
           </Link>
         ))}
