@@ -350,7 +350,7 @@ export default async function Home(props: { params: Params }) {
 
                           <div className="border-t-[1px] border-[#E7F2F4]"></div>
 
-                          <div className="py-4 px-3">
+                          <div className="py-3 px-3">
                             <Link href={"/live-score/" + urlStringEncode(items?.teama?.short_name + "-vs-" + items?.teamb?.short_name + "-match-" + items?.match_number + "-" + items?.competition?.title + "-" + items?.competition?.season) + "/" + items.match_id}>
                               <div className="flex justify-between items-center text-[14px]">
                                 <div className="">
@@ -812,7 +812,7 @@ export default async function Home(props: { params: Params }) {
 
                           <div className="border-t-[1px] border-[#E7F2F4]"></div>
 
-                          <div className="py-4 px-3">
+                          <div className="py-3 px-3">
                             <div className="flex justify-between items-center text-[14px]">
                               <Link className="w-[61%]" href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-match-" + cmatch?.match_number + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
                                 <div className="">
@@ -1198,7 +1198,7 @@ export default async function Home(props: { params: Params }) {
 
                           <div className="border-t-[1px] border-[#E7F2F4]"></div>
                           <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-match-" + ucmatch?.match_number + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
-                            <div className="py-4 px-3">
+                            <div className="py-3 px-3">
                               <div className="flex justify-between items-center text-[14px]">
                                 <div className="">
                                   <p className="text-[#586577] text-[13px] mb-4 font-medium">

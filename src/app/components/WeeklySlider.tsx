@@ -1,30 +1,37 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
 import Link from "next/link";
 import { urlStringEncode } from "../../utils/utility";
+
 interface featuredMatch {
   featuredMatch: any; // Adjust type based on your data
 }
+
 const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  let slides: any = "";
+  const [slides, setSlides] = useState<any[]>([]); // Use state to store the slides
 
-  if (featuredMatch) {
-    slides = featuredMatch.map((match: any) => ({
-      teams: [
-        { country: match.teama.short_name, flag: match.teama.logo_url },
-        { country: match.teamb.short_name, flag: match.teamb.logo_url },
-      ],
-      countdown: match.date_start_ist, // Replace with dynamic countdown logic
-      match: match.title,
-      match_number: match.match_number,
-      title: match.competition?.title,
-      season: match.competition?.season,
-      match_id: match.match_id,
-    }));
-  }
+  useEffect(() => {
+    if (featuredMatch && featuredMatch.length > 0) {
+      // Transform the data only once after the component mounts
+      const transformedSlides = featuredMatch.map((match: any) => ({
+        teams: [
+          { country: match.teama.short_name, flag: match.teama.logo_url },
+          { country: match.teamb.short_name, flag: match.teamb.logo_url },
+        ],
+        countdown: match.date_start_ist,
+        match: match.short_title,
+        match_number: match.match_number,
+        title: match.competition?.title,
+        season: match.competition?.season,
+        match_id: match.match_id,
+      }));
+      setSlides(transformedSlides); // Store the transformed data
+    }
+  }, [featuredMatch]); // Re-run when featuredMatch changes
+
   const handlePrevClick = () => {
     setActiveIndex(activeIndex === 0 ? slides.length - 1 : activeIndex - 1);
   };
@@ -35,13 +42,12 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
 
   return (
     <div className="cust-slider-container w-full overflow-hidden my-4 ">
-      {slides.length > 0 && (
-        <>
+      
           <div
             className="cust-slider w-full flex transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${activeIndex * 100}%)` }}
           >
-            {slides?.map((slide: any, index: number) => (
+            {slides.map((slide: any, index: number) => (
               <div key={index} className="cust-slide w-full flex-shrink-0">
                 <div className="rounded-lg p-4 mb-2 bg-[#ffffff]">
                   <div className="flex items-center justify-between md:mb-4 mb-2">
@@ -55,14 +61,14 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                     </div>
                     <div className="h-[20px] border-l-[1px] border-[#d0d3d7]" />
                     <div className="flex items-center space-x-2">
-                      <span className="text-[13px] font-medium">
+                      <span className="text-[11px] font-medium">
                         {slide?.teams?.[0].country}
                       </span>
                       <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] md:rounded-full rounded-md text-[#0B773C] pr-2">
                         <span>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
+                            fill="none" 
                             viewBox="0 0 24 24"
                             strokeWidth="1.5"
                             stroke="currentColor"
@@ -100,41 +106,59 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                   </div>
                   <div className="border-t-[1px] border-[#E7F2F4]" />
                   <div className="md:py-4 py-2 md:px-3 md:mb-0 mb-2">
-                  <Link href={"/matchinfo/"+urlStringEncode(slide?.teams?.[0].country+"-vs-"+slide?.teams?.[1].country+"-match-"+slide?.match_number+"-"+slide?.title+"-"+slide?.season)+"/" + slide.match_id}>
-                    <div className="flex justify-between items-center text-[14px]">
-                      <div>
-                        {slide.teams?.map((team: any, idx: number) => (
-                          <div
-                            key={idx}
-                            className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4"
-                          >
-                            
-                            <div className="flex items-center space-x-2">
-                              <Image
-                                loading="lazy"
-                                src={team.flag}
-                                alt={team.country}
-                                className="h-[25px] rounded-full"
-                                width={25}
-                                height={25}
-                              />
-                              <span className=" font-semibold">
-                                {team.country}
-                              </span>
+                    <Link
+                      href={
+                        "/matchinfo/" +
+                        urlStringEncode(
+                          slide?.teams?.[0].country +
+                            "-vs-" +
+                            slide?.teams?.[1].country +
+                            "-match-" +
+                            slide?.match_number +
+                            "-" +
+                            slide?.title +
+                            "-" +
+                            slide?.season
+                        ) +
+                        "/" +
+                        slide.match_id
+                      }
+                    >
+                      <div className="flex justify-between items-center text-[14px]">
+                        <div>
+                          {slide.teams?.map((team: any, idx: number) => (
+                            <div
+                              key={idx}
+                              className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4"
+                            >
+                              <div className="flex items-center space-x-2">
+                                <Image
+                                  loading="lazy"
+                                  src={team.flag}
+                                  alt={team.country}
+                                  className="h-[25px] rounded-full"
+                                  width={25}
+                                  height={25}
+                                />
+                                <span className=" font-semibold">
+                                  {team.country}
+                                </span>
+                              </div>
                             </div>
-                            
-                          </div>
-                        ))}
+                          ))}
+                        </div>
+                        <div className="md:block hidden h-[70px] border-l-[1px] border-[#d0d3d7]"></div>
+                        <div className="font-semibold text-center">
+                          <p className="text-[#586577] text-[13px] mb:mb-4 mb-1 font-medium">
+                            {format(new Date(slide.countdown), "dd MMMM - EEEE")}
+                            <br />
+                            <span className="text-[#144280] text-[14px] font-semibold">
+                              {" "}
+                              {format(new Date(slide.countdown), "hh:mm:aa")}{" "}
+                            </span>
+                          </p>
+                        </div>
                       </div>
-                      <div className="md:block hidden h-[70px] border-l-[1px] border-[#d0d3d7]"></div>
-                      <div className="font-semibold text-center">
-                        <p className="text-[#586577] text-[13px] mb:mb-4 mb-1 font-medium">
-                          {format(new Date(slide.countdown), "dd MMMM - EEEE")}{" "}
-                          <br />
-                         <span className="text-[#144280] text-[14px] font-semibold"> {format(new Date(slide.countdown), "hh:mm:aa")} </span>
-                        </p>
-                      </div>
-                    </div>
                     </Link>
                   </div>
                   <div className="border-t-[1px] border-[#E7F2F4]" />
@@ -145,8 +169,9 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
               </div>
             ))}
           </div>
+
           {slides.length > 1 && (
-            <div className="cust-slider-nav flex justify-between items-center mt-[-17px] relative py-[5px] px-[4px]">
+            <div className="cust-slider-nav flex justify-between items-center  relative py-[5px] px-[4px]">
               <button
                 onClick={handlePrevClick}
                 className="cust-prev-btn bg-[#ffffff] p-[7px] rounded-full border-2 hover:[box-shadow:3px_5px_4px_0px_#bdbdbd]"
@@ -168,18 +193,42 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                   </svg>
                 </span>
               </button>
+
+              {/* Dot Navigation */}
               <div className="flex justify-center space-x-2">
-                {slides &&
-                  slides?.map((_: any, index: number) => (
+                {slides.length > 0 && (
+                  <>
+                    {/* Dot 1: First slide */}
                     <span
-                      key={index}
                       className={`dot w-[13px] h-[4px] rounded-full cursor-pointer ${
-                        activeIndex === index ? "bg-blue-500" : "bg-gray-400"
+                        activeIndex === 0 ? "bg-blue-500" : "bg-gray-400"
                       }`}
-                      onClick={() => setActiveIndex(index)}
+                      onClick={() => setActiveIndex(0)}
                     />
-                  ))}
+                    {/* Dot 2: Middle slide */}
+                    <span
+                      className={`dot w-[13px] h-[4px] rounded-full cursor-pointer ${
+                        activeIndex === Math.floor(slides.length / 2)
+                          ? "bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                      onClick={() =>
+                        setActiveIndex(Math.floor(slides.length / 2))
+                      }
+                    />
+                    {/* Dot 3: Last slide */}
+                    <span
+                      className={`dot w-[13px] h-[4px] rounded-full cursor-pointer ${
+                        activeIndex === slides.length - 1
+                          ? "bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                      onClick={() => setActiveIndex(slides.length - 1)}
+                    />
+                  </>
+                )}
               </div>
+
               <button
                 onClick={handleNextClick}
                 className="cust-next-btn bg-[#ffffff] p-[7px] rounded-full border-2 hover:[box-shadow:3px_5px_4px_0px_#bdbdbd]"
@@ -203,8 +252,8 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
               </button>
             </div>
           )}
-        </>
-      )}
+       
+      
     </div>
   );
 };

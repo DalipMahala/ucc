@@ -115,7 +115,7 @@ export default function CountriesList({ countries }: countries) {
             {expanded === country.country_name && (
               country?.competitions?.map((compt: any, index: number) => (
                 <div className="pl-8 py-2 space-y-2 font-normal text-[13px] text-[#51555E]" key={index}>
-                  <div className="flex items-center gap-[4px]">
+                  <div className="flex items-center gap-[2px]">
                     <span>
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-3 text-[#1A80F8]">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
