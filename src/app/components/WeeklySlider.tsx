@@ -168,14 +168,24 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                         </div>
                         <div className="md:block hidden h-[70px] border-l-[1px] border-[#d0d3d7]"></div>
                         <div className="font-semibold text-center">
-                          <p className="text-[#586577] text-[13px] mb:mb-4 mb-1 font-medium">
+                        {isSameDay(new Date(), new Date(slide.countdown)) ? (
+
+                          <CountdownTimer targetTime={slide.countdown} />
+
+                          ) : (
+                            <p className="text-[#586577] text-[13px] mb:mb-4 mb-1 font-medium">
+
                             {format(new Date(slide.countdown), "dd MMMM - EEEE")}
                             <br />
                             <span className="text-[#144280] text-[14px] font-semibold">
                               {" "}
                               {format(new Date(slide.countdown), "hh:mm:aa")}{" "}
                             </span>
+
+
                           </p>
+                          )}
+                          
                         </div>
                       </div>
                     </Link>
