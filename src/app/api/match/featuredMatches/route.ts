@@ -7,7 +7,7 @@ import getJsonFromS3 from '@/lib/s3-utils';
 
 export async function GET(req: NextRequest) {
   try {
-    const CACHE_KEY = "upcoming_matches";
+    const CACHE_KEY = "featured_matches";
     const CACHE_TTL = 60;
 
     const cachedData = await redis.get(CACHE_KEY);

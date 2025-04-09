@@ -501,10 +501,10 @@ export async function SeriesKeyStats(cid: number) {
   
   // Read all required files
   return {
-    mostRuns: getJsonFromS3(fileMap["batting_most_runs"]),
-    highStrike: getJsonFromS3(fileMap["batting_highest_strikerate"]),
-    topWickets: getJsonFromS3(fileMap["bowling_top_wicket_takers"]),
-    bestBowling: getJsonFromS3(fileMap["bowling_best_bowling_figures"]),
+    mostRuns: await getJsonFromS3(fileMap["batting_most_runs"]),
+    highStrike: await getJsonFromS3(fileMap["batting_highest_strikerate"]),
+    topWickets: await getJsonFromS3(fileMap["bowling_top_wicket_takers"]),
+    bestBowling: await getJsonFromS3(fileMap["bowling_best_bowling_figures"]),
   };
 }
 
