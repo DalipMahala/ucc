@@ -192,8 +192,8 @@ export default async function Home(props: { params: Params }) {
 
                   <button id="all-tab"
                     className={`font-medium py-2 px-5 whitespace-nowrap ${activeMainTab === "info1"
-                        ? "bg-[#1A80F8] text-white"
-                        : ""
+                      ? "bg-[#1A80F8] text-white"
+                      : ""
                       } rounded-md`}
                   >
                     All
@@ -201,8 +201,8 @@ export default async function Home(props: { params: Params }) {
 
                   <button id="live-tab"
                     className={`font-medium py-2 px-5 whitespace-nowrap ${activeMainTab === "live1"
-                        ? "bg-[#1A80F8] text-white"
-                        : ""
+                      ? "bg-[#1A80F8] text-white"
+                      : ""
                       } rounded-md`}
                   >
                     Live
@@ -210,8 +210,8 @@ export default async function Home(props: { params: Params }) {
 
                   <button id="completed-tab"
                     className={`font-medium py-2 px-5 whitespace-nowrap ${activeMainTab === "finished1"
-                        ? "bg-[#1A80F8] text-white"
-                        : ""
+                      ? "bg-[#1A80F8] text-white"
+                      : ""
                       } rounded-md`}
                   >
                     Finished
@@ -219,8 +219,8 @@ export default async function Home(props: { params: Params }) {
 
                   <button id="upcoming-tab"
                     className={`font-medium py-2 px-5 whitespace-nowrap ${activeMainTab === "scorecard1"
-                        ? "bg-[#1A80F8] text-white"
-                        : ""
+                      ? "bg-[#1A80F8] text-white"
+                      : ""
                       } rounded-md`}
                   >
                     Scheduled
@@ -1541,8 +1541,10 @@ export default async function Home(props: { params: Params }) {
                 </div>
               </div>
             </div>
+            <div className="md:h-[260px]">
+              <WeeklySlider featuredMatch={featuredMatch} />
+            </div>
 
-            <WeeklySlider featuredMatch={featuredMatch} />
             <PLSeries />
             <div>
               <CountriesList countries={countryCompitition}></CountriesList>

@@ -30,7 +30,7 @@ export default function PLSeries() {
   // console.log("Popular", popularSeries);
   return (
     <div className=" pb-2 my-4">
-      <div className="py-2">
+      <div className="py-2 ">
         <h3 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8]">
           POPULAR SERIES
         </h3>

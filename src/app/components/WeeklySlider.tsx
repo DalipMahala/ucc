@@ -136,7 +136,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                                   loading="lazy"
                                   src={team.flag}
                                   alt={team.country}
-                                  className="h-[25px] rounded-full"
+                                  className=" h-[25px] rounded-full"
                                   width={25}
                                   height={25}
                                 />

@@ -166,7 +166,7 @@ const News = () => {
                         
                          
                         <Link href={post?.link}>
-                          <div className="flex gap-3 my-5">
+                          <div className="flex gap-3 my-5 ">
                           {post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.thumbnail.source_url && (
                             <Image  loading="lazy" 
                               src={post._embedded["wp:featuredmedia"]?.[0].media_details.sizes.thumbnail.source_url}

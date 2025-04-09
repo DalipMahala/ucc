@@ -112,7 +112,7 @@ const FeatureNews = ({newsUrl}:url) => {
                         <h4 className="text-[12px] font-semibold mb-2"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered,10))}} >
                               
                               </h4>
-                        <p className="text-gray-500 font-normal"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.uagb_excerpt,30))}} >
+                        <p className="text-gray-500 font-normal "  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.uagb_excerpt,30))}} >
                        
                         </p>
                         <Link href={post?.link}>
