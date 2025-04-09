@@ -102,7 +102,7 @@ export default function Overview({
     fetchMatch();
   }, []);
 
-  let completedMatch = featureSeries.filter(
+  let completedMatch = featureSeries?.filter(
     (item: { status: number }) => Number(item.status) === 2
   );  
   completedMatch = [...completedMatch]?.reverse();

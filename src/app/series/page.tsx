@@ -16,7 +16,10 @@ import { SeriesKeyStats, SeriesMatches } from "@/controller/matchInfoController"
 import { TeamPlayers } from "@/controller/teamController";
 
 type Params = Promise<{ seriesName: string; seriesId: number; seriesTap: string; seriesStatsType: string }>
-
+interface FrMatch {
+  match_info: any;
+  // Other properties you expect in each match object
+}
 export default async function page(props: { params: Params }) {
 
   const params = await props.params;
@@ -35,7 +38,22 @@ export default async function page(props: { params: Params }) {
    
   const teamPlayers =  await TeamPlayers(teamIds);
   const tournamentsList = await AllSeriesList();
-  const featuredMatch = await FeaturedMatch();
+  // const featuredMatch = await FeaturedMatch();
+  let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/featuredMatches`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+    },
+    cache: "no-store",
+  });
+  let featuredmatchArray = await response.json();
+  
+  const filteredMatches = featuredmatchArray?.data?.map(({ match_info, ...rest }:FrMatch) => ({
+    ...match_info,
+    ...rest
+  }));
+  const featuredMatch = filteredMatches;
 
   const standings = SeriesDetails?.standing?.standings;
   const isPointTable = Array.isArray(standings) && standings.length > 0;

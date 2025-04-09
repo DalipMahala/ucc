@@ -72,7 +72,10 @@ type Params = Promise<{
   matchId: number;
   matchTitle: string;
 }>;
-
+interface FrMatch {
+  match_info: any;
+  // Other properties you expect in each match object
+}
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const matchType = params;
   const  matchId = params;
@@ -100,7 +103,22 @@ export default async function page(props: { params: Params }) {
   const cid = liveMatch?.match_info?.competition?.cid;
   const seriesPointsTable = await SeriesPointsTable(cid);
   const seriesPointsTableMatches = await SeriesPointsTableMatches(Number(cid));
-  let featuredMatch = await FeaturedMatch();
+  // let featuredMatch = await FeaturedMatch();
+  let frresponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/featuredMatches`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+    },
+    cache: "no-store",
+  });
+  let featuredmatchArray = await frresponse.json();
+  
+  const futuredMatches = featuredmatchArray?.data?.map(({ match_info, ...rest }:FrMatch) => ({
+    ...match_info,
+    ...rest
+  }));
+  const featuredMatch = futuredMatches;
   const SeriesDetails = await seriesById(cid);
   const standings = SeriesDetails?.standing?.standings;
   const isPointTable = Array.isArray(standings) && standings.length > 0;

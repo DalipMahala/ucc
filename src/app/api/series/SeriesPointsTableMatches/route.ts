@@ -34,10 +34,6 @@ export async function POST(req: NextRequest) {
 
     const filePath = rows[0].fileName;
 
-    if (!fs.existsSync(filePath)) {
-      console.log(`File not found: ${filePath}`);
-      return NextResponse.json({ error: "File not found" }, { status: 404 });
-    }
 
     const competition = await getJsonFromS3( filePath as string);
 

@@ -149,7 +149,22 @@ export default async function Home(props: { params: Params }) {
     ...rest
   }));
   let liveMatch: MatchItem[] = filteredMatches;
-  let featuredMatch: MatchItem[] = await FeaturedMatch();
+  // let featuredMatch: MatchItem[] = await FeaturedMatch();
+  let frresponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/featuredMatches`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+    },
+    cache: "no-store",
+  });
+  let featuredmatchArray = await frresponse.json();
+  
+  const futuredMatches = featuredmatchArray?.data?.map(({ match_info, ...rest }:MatchItem) => ({
+    ...match_info,
+    ...rest
+  }));
+  const featuredMatch = futuredMatches;
   // console.log("liveMatch",completedMatch);
   completedMatch = completedMatch.filter((item: { commentary: number }) => Number(item.commentary) === 1);
   upcomingMatch = upcomingMatch.filter((item: { commentary: number }) => Number(item.commentary) === 1);

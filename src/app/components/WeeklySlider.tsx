@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import { format } from "date-fns";
+import { format, isSameDay } from "date-fns";
 import Link from "next/link";
 import { urlStringEncode } from "../../utils/utility";
+import CountdownTimer from "./../components/countdownTimer";
 
 interface featuredMatch {
   featuredMatch: any; // Adjust type based on your data
@@ -22,11 +23,13 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
           { country: match.teamb.short_name, flag: match.teamb.logo_url },
         ],
         countdown: match.date_start_ist,
-        match: match.short_title,
+        match: match.competition.title+" "+match.competition.season,
         match_number: match.match_number,
         title: match.competition?.title,
         season: match.competition?.season,
         match_id: match.match_id,
+        odds: match.live_odds,
+        teamList: match
       }));
       setSlides(transformedSlides); // Store the transformed data
     }
@@ -62,7 +65,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                     <div className="h-[20px] border-l-[1px] border-[#d0d3d7]" />
                     <div className="flex items-center space-x-2">
                       <span className="text-[11px] font-medium">
-                        {slide?.teams?.[0].country}
+                      {slide?.teamList?.[parseFloat(slide?.odds?.matchodds?.teama?.back) < parseFloat(slide?.odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
                       </span>
                       <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] md:rounded-full rounded-md text-[#0B773C] pr-2">
                         <span>
@@ -81,7 +84,15 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                             />
                           </svg>
                         </span>
-                        0
+                        {
+                                    (parseFloat(slide.odds?.matchodds?.teama?.back) < parseFloat(slide.odds?.matchodds?.teamb?.back)
+                                      ? slide.odds?.matchodds?.teama?.back
+                                      : slide.odds?.matchodds?.teamb?.back) > 0
+                                      ? Math.round((parseFloat(slide.odds?.matchodds?.teama?.back) < parseFloat(slide.odds?.matchodds?.teamb?.back)
+                                        ? slide.odds?.matchodds?.teama?.back
+                                        : slide.odds?.matchodds?.teamb?.back) * 100 - 100)
+                                      : 0
+                                  }
                       </span>
                       <span className="flex font-semibold items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  md:rounded-full rounded-md text-[#A70B0B] pr-2">
                         <span>
@@ -100,7 +111,15 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                             />
                           </svg>
                         </span>
-                        0
+                        {
+                                    (parseFloat(slide.odds?.matchodds?.teama?.lay) < parseFloat(slide.odds?.matchodds?.teamb?.lay)
+                                      ? slide.odds?.matchodds?.teama?.lay
+                                      : slide.odds?.matchodds?.teamb?.lay) > 0
+                                      ? Math.round((parseFloat(slide.odds?.matchodds?.teama?.lay) < parseFloat(slide.odds?.matchodds?.teamb?.lay)
+                                        ? slide.odds?.matchodds?.teama?.lay
+                                        : slide.odds?.matchodds?.teamb?.lay) * 100 - 100)
+                                      : 0
+                                  }
                       </span>
                     </div>
                   </div>
