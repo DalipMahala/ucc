@@ -17,11 +17,11 @@ export default function TabButtons() {
 
       // Remove active styles from all tabs
       document.querySelectorAll("#all-tab, #live-tab, #completed-tab, #upcoming-tab").forEach((el) => {
-        el.classList.remove("bg-[#1A80F8]", "text-white");
+        el.classList.remove("md:bg-[#1A80F8]", "bg-[#081736]", "md:bottom-0", "border-b-[2px]", "border-[#ffffff]", "text-white");
       });
 
       // Add active style to clicked tab
-      target.classList.add("bg-[#1A80F8]", "text-white");
+      target.classList.add("md:bg-[#1A80F8]", "bg-[#081736]", "md:bottom-0", "border-b-[2px]", "border-[#ffffff]", "text-white");
 
       // Hide all sections initially
       document.querySelectorAll(".liveMatch, .completedMatch, .upcomingMatch").forEach((el) => {

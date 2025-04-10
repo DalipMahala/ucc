@@ -76,7 +76,7 @@ export default function CountriesList({ countries }: countries) {
                 className="h-[14px]"
                 width={15}
                 height={15}
-                style={{ width: "auto", height: "auto" }}
+                style={{ width: "15px", height: "15px" }}
                 alt=""
               />
             </div>
