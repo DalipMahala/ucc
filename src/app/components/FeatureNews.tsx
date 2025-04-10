@@ -147,6 +147,8 @@ const FeatureNews = ({newsUrl}:url) => {
                          
                         <Link href={post?.link}>
                           <div className="flex gap-3 my-5">
+
+                            
                           {post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.thumbnail.source_url && (
                             <Image  loading="lazy" 
                               src={post._embedded["wp:featuredmedia"]?.[0].media_details.sizes.thumbnail.source_url}
@@ -155,6 +157,8 @@ const FeatureNews = ({newsUrl}:url) => {
                               alt={post?.title.rendered}
                               className="rounded-lg h-[90px]" />
                             )}
+
+
                             <div>
                               <h4 className="text-[12px] font-semibold mb-2"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered,15))}} >
                               

@@ -20,6 +20,7 @@ import type { Metadata } from "next";
 import CountriesList from "./components/CountriesList";
 import PLSeries from "./components/popularSeries";
 import PlayerImage from "@/app/components/PlayerImage";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "UC Cricket - Live Scores, IPL 2025, T20, ODI, Test News &amp; Stats",
@@ -176,7 +177,7 @@ export default async function Home(props: { params: Params }) {
   const ranking = await Ranking();
   const featuredSeries = await FeaturedSeries();
   // const  matchData = ChatComponent();
-  const countryCompitition = await GetCountryCompitition();
+   const countryCompitition = await GetCountryCompitition();
   return (
     <Layout headerData={liveSeriesData}>
       <ChatComponent></ChatComponent>
@@ -192,13 +193,14 @@ export default async function Home(props: { params: Params }) {
             loading="lazy"
           />
         </div>
+        
 
         <div className="md:grid grid-cols-12 gap-4">
           <div className="lg:col-span-8 md:col-span-7">
             <div className="tab-section">
-              <div className="tabs my-3 md:my-4">
+              <div className="md:relative sticky md:top-0 top-[62px] z-[9] tabs ml-[-8px] w-[105%] md:ml-[0] md:w-auto mb-3 md:my-4">
                 <div
-                  className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
+                  className="flex text-[13px] md:space-x-8 space-x-4 p-2 md:bg-[#ffffff] md:text-[#000000] text-[#ffffff] bg-[#081736] md:rounded-lg overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
                               [&::-webkit-scrollbar-track]:bg-gray-100 
                               [&::-webkit-scrollbar-thumb]:bg-[#DFE9F6] 
                                dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
@@ -206,37 +208,37 @@ export default async function Home(props: { params: Params }) {
                 >
 
                   <button id="all-tab"
-                    className={`font-medium py-2 px-5 whitespace-nowrap ${activeMainTab === "info1"
-                      ? "bg-[#1A80F8] text-white"
+                    className={`font-semibold py-2 md:px-5 px-4 whitespace-nowrap uppercase ${activeMainTab === "info1"
+                      ? "md:bg-[#1A80F8] bg-[#081736] md:bottom-0 border-b-[2px] border-[#ffffff] text-white"
                       : ""
-                      } rounded-md`}
+                      } md:rounded-md`}
                   >
                     All
                   </button>
 
                   <button id="live-tab"
-                    className={`font-medium py-2 px-5 whitespace-nowrap ${activeMainTab === "live1"
-                      ? "bg-[#1A80F8] text-white"
+                    className={`font-semibold py-2 md:px-5 px-4  whitespace-nowrap uppercase ${activeMainTab === "live1"
+                      ? "md:bg-[#1A80F8] bg-[#081736] md:bottom-0 border-b-[2px] border-[#ffffff] text-white"
                       : ""
-                      } rounded-md`}
+                      } md:rounded-md`}
                   >
                     Live
                   </button>
 
                   <button id="completed-tab"
-                    className={`font-medium py-2 px-5 whitespace-nowrap ${activeMainTab === "finished1"
-                      ? "bg-[#1A80F8] text-white"
+                    className={`font-semibold py-2 md:px-5 px-4 whitespace-nowrap uppercase ${activeMainTab === "finished1"
+                      ? "md:bg-[#1A80F8] bg-[#081736] md:bottom-0 border-b-[2px] border-[#ffffff] text-white"
                       : ""
-                      } rounded-md`}
+                      } md:rounded-md`}
                   >
                     Finished
                   </button>
 
                   <button id="upcoming-tab"
-                    className={`font-medium py-2 px-5 whitespace-nowrap ${activeMainTab === "scorecard1"
-                      ? "bg-[#1A80F8] text-white"
+                    className={`font-semibold py-2 md:px-5 px-4 whitespace-nowrap uppercase ${activeMainTab === "scorecard1"
+                      ? "md:bg-[#1A80F8] bg-[#081736] md:bottom-0 border-b-[2px] border-[#ffffff] text-white"
                       : ""
-                      } rounded-md`}
+                      } md:rounded-md`}
                   >
                     Scheduled
                   </button>
@@ -263,17 +265,17 @@ export default async function Home(props: { params: Params }) {
                           <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center space-x-2 w-[75%]">
                               <div
-                                className="flex items-center text-[#A70B0B] rounded-full pr-3  font-semibold"
+                                className="flex items-center text-[12px] text-[#A70B0B] rounded-full pr-3 uppercase font-semibold"
                                 style={{ gap: "3px" }}
                               >
                                 <span className="rounded-full">
-                                  <svg className="h-[10px] w-[11px]">
+                                  <svg className="h-[9px] w-[9px]">
                                     <circle
-                                      fill="#ff0000"
+                                      fill="#a70b0b"
                                       stroke="none"
-                                      cx="5"
-                                      cy="5"
-                                      r="5"
+                                      cx="4"
+                                      cy="4"
+                                      r="4"
                                     >
                                       {items.game_state_str === 'Play Ongoing' &&
                                         <animate
@@ -290,7 +292,7 @@ export default async function Home(props: { params: Params }) {
                                 {items?.game_state_str === 'Play Ongoing' ? items?.status_str : items?.game_state_str}
                               </div>
                               <div>
-                                <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                                <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                                   {items.competition.title} -{" "}
                                   {items.competition.season}
                                 </h4>
@@ -300,7 +302,7 @@ export default async function Home(props: { params: Params }) {
                               <span className={"text-[11px] font-medium oddsTeam" + items.match_id}>
                                 {items?.[parseFloat(items?.live_odds?.matchodds?.teama?.back) < parseFloat(items?.live_odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
                               </span>
-                              <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-full text-[#0B773C] pr-2">
+                              <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
                                 <span className="">
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -506,7 +508,7 @@ export default async function Home(props: { params: Params }) {
                               <div className="flex justify-end items-center space-x-2">
                                 <Image
                                   src="/assets/img/home/handshake.png"
-                                  style={{ width: "auto", height: "auto" }}
+                                  style={{ width: "25px", height: "25px" }}
                                   width={25}
                                   height={25}
                                   alt=""
@@ -527,13 +529,13 @@ export default async function Home(props: { params: Params }) {
                             <div className="flex items-center space-x-2">
                               <div className="flex items-center text-[#a70b0b] rounded-full font-semibold">
                                 <span className="rounded-full">
-                                  <svg className="h-[8px] w-[10px]">
+                                  <svg className="h-[9px] w-[9px]">
                                     <circle
-                                      fill="#ff0000"
+                                      fill="#a70b0b"
                                       stroke="none"
-                                      cx="3"
-                                      cy="3"
-                                      r="3"
+                                      cx="4"
+                                      cy="4"
+                                      r="4"
                                     >
                                       {items.game_state_str === 'Play Ongoing' &&
                                         <animate
@@ -726,7 +728,7 @@ export default async function Home(props: { params: Params }) {
                                 <span className={"text-[#586577] font-medium oddsTeam" + items.match_id}>
                                   {items?.[parseFloat(items?.live_odds?.matchodds?.teama?.back) < parseFloat(items?.live_odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
                                 </span>
-                                <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-md text-[#0B773C] pr-2">
+                                <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-md text-[#00a632] pr-2">
                                   <span className="">
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
@@ -809,14 +811,14 @@ export default async function Home(props: { params: Params }) {
                           <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center space-x-2">
                               <div
-                                className="flex items-center text-[#0B773C] rounded-full pr-3  font-semibold"
+                                className="flex items-center text-[12px] text-[#00a632] rounded-full pr-3 uppercase  font-semibold"
                                 style={{ gap: "3px" }}
                               >
-                                <span className="rounded-full">●</span>{" "}
+                                <div className="w-[8px] h-[8px] bg-[#00a632] rounded-full"></div>{" "}
                                 {cmatch.status_str}
                               </div>
                               <div>
-                                <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                                <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                                   {cmatch.competition.title} -{" "}
                                   {cmatch.competition.season}
                                 </h4>
@@ -894,11 +896,11 @@ export default async function Home(props: { params: Params }) {
                                     src="/assets/img/home/win.png"
                                     width={30}
                                     height={30}
-                                    style={{ width: "auto", height: "auto" }}
+                                    style={{ width: "30px", height: "30px" }}
                                     alt=""
                                     loading="lazy"
                                   />
-                                  <p className="text-[#0B773C] text-[14px] w-[75%] text-center">
+                                  <p className="text-[#00a632] text-[14px] w-[75%] text-center">
                                     {cmatch.result}
                                   </p>
                                 </div>
@@ -915,9 +917,9 @@ export default async function Home(props: { params: Params }) {
                                     }>
                                     <div className="flex flex-col items-center">
 
-                                      <PlayerImage key={cmatch?.man_of_the_match?.pid} player_id={cmatch?.man_of_the_match?.pid} height={40} width={40} className="rounded-full" />
-                                      <p className=" font-semibold">{cmatch?.man_of_the_match?.name}</p>
-                                      <p>Man of the match</p>
+                                      <PlayerImage key={cmatch?.man_of_the_match?.pid} player_id={cmatch?.man_of_the_match?.pid} height={38} width={30} className="rounded-full" />
+                                      <p className="text-[13px] font-semibold">{cmatch?.man_of_the_match?.name}</p>
+                                      <p className="text-[11px]">Man of the match</p>
                                     </div>
                                   </Link>
                                 </>
@@ -950,7 +952,7 @@ export default async function Home(props: { params: Params }) {
                               <div className="flex justify-end items-center space-x-2">
                                 <Image
                                   src="/assets/img/home/handshake.png"
-                                  style={{ width: "auto", height: "auto" }}
+                                  style={{ width: "25px", height: "25px" }}
                                   width={25}
                                   height={25}
                                   alt=""
@@ -969,7 +971,7 @@ export default async function Home(props: { params: Params }) {
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center space-x-2">
                               <div
-                                className="flex items-center text-[#0B773C] rounded-full  font-semibold"
+                                className="flex items-center text-[#00a632] rounded-full  font-semibold"
                                 style={{ gap: "3px" }}
                               >
                                 <span className="rounded-full">●</span> {cmatch.status_str}
@@ -1073,11 +1075,11 @@ export default async function Home(props: { params: Params }) {
                                       src="/assets/img/home/win.png"
                                       width={30}
                                       height={30}
-                                      style={{ width: "auto", height: "auto" }}
+                                      style={{ width: "30px", height: "30px" }}
                                       alt=""
                                       loading="lazy"
                                     />
-                                    <p className="text-[#0B773C] font-semibold mt-1 text-[13px] w-[75%] text-center">
+                                    <p className="text-[#00a632] font-semibold mt-1 text-[13px] w-[75%] text-center">
                                       {cmatch.result}
                                     </p>
                                   </div>
@@ -1128,7 +1130,7 @@ export default async function Home(props: { params: Params }) {
                                     }>
                                     <div className="flex items-center justify-between">
                                       <div className="flex items-center gap-1">
-                                        <PlayerImage key={cmatch?.man_of_the_match?.pid} player_id={cmatch?.man_of_the_match?.pid} height={30} width={30} className="rounded-full" />
+                                        <PlayerImage  key={cmatch?.man_of_the_match?.pid} player_id={cmatch?.man_of_the_match?.pid} height={38} width={30} className="rounded-full" />
                                         <div>
                                           <p className=" font-semibold">{cmatch?.man_of_the_match?.name}</p>
                                           <p className="text-[11px]">Man of the match</p>
@@ -1155,14 +1157,14 @@ export default async function Home(props: { params: Params }) {
                           <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center space-x-2">
                               <div
-                                className="flex items-center text-[#A45B09] rounded-full pr-3  font-semibold"
+                                className="flex items-center text-[12px] text-[#A45B09] rounded-full pr-3 uppercase font-semibold"
                                 style={{ gap: "3px" }}
                               >
-                                <span className="rounded-full">●</span>{" "}
+                                <div className="w-[8px] h-[8px] bg-[#A45B09] rounded-full animate-blink"></div>{" "}
                                 {ucmatch.status_str}
                               </div>
                               <div>
-                                <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                                <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                                   {ucmatch.competition.title} -{" "}
                                   {ucmatch.competition.season}
                                 </h4>
@@ -1170,7 +1172,7 @@ export default async function Home(props: { params: Params }) {
                             </div>
                             <div className="flex items-center space-x-2">
                               <span className="text-[11px] font-medium">{ucmatch.teama.short_name}</span>
-                              <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-full text-[#0B773C] pr-2">
+                              <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
                                 <span className="">
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -1257,9 +1259,13 @@ export default async function Home(props: { params: Params }) {
                                 <div className="font-semibold text-center">
                                   <div className="text-[#144280]">
                                     <div className=" font-medium text-center">
+                                      
                                       {isSameDay(new Date(), new Date(ucmatch.date_start_ist)) ? (
+                                       <>
+                                       <span className="text-[13px] font-normal text-[#a45b09]">Start in</span> 
 
                                         <CountdownTimer targetTime={ucmatch.date_start_ist} />
+                                        </> 
 
                                       ) : (
                                         <p className="text-[#2F335C] text-[14px]">
@@ -1303,7 +1309,7 @@ export default async function Home(props: { params: Params }) {
                                   src="/assets/img/home/handshake.png"
                                   width={25}
                                   height={25}
-                                  style={{ width: "auto", height: "auto" }}
+                                  style={{ width: "25px", height: "25px" }}
                                   alt=""
                                   loading="lazy"
                                 />
@@ -1447,7 +1453,7 @@ export default async function Home(props: { params: Params }) {
                                     className="h-[15px]"
                                     width={25}
                                     height={25}
-                                    style={{ width: "auto", height: "auto" }}
+                                    style={{ width: "25px", height: "25px" }}
                                     alt=""
                                     loading="lazy"
                                   />
@@ -1460,7 +1466,7 @@ export default async function Home(props: { params: Params }) {
 
                             <div className="flex items-center space-x-2 text-[11px]">
                               <span className="text-[#586577] font-medium">{ucmatch.teama.short_name}</span>
-                              <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-md text-[#0B773C] pr-2">
+                              <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-md text-[#00a632] pr-2">
                                 <span>
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"

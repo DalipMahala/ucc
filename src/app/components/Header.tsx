@@ -69,7 +69,7 @@ if(data){
       </div>
 {/* fixed top-0 left-0 w-full shadow-md z-50 */}
       <header className="bg-[#081736] lg:px-0  px-3 sticky top-0 z-10">
-        <div className="lg:w-[1000px] w-full mx-auto text-white py-5 flex items-center justify-between">
+        <div className="lg:w-[1000px] w-full mx-auto text-white md:py-5 py-3 flex items-center md:justify-between justify-center">
           <div>
             <Link href="/">
               <Image priority  className="h-[39px] w-[173px]" src="/assets/img/logo.png" alt="" width={150} height={50} />
