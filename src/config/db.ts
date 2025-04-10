@@ -1,7 +1,11 @@
 import * as mysql from 'mysql2/promise';
 
+declare global {
+    // Allow reuse of the global object
+    var db: mysql.Pool | undefined;
+  }
 
-const db = mysql.createPool({
+  const db = global.db || mysql.createPool({
     host: 'localhost', // Your MySQL host
     user: 'root', // Your MySQL username
     password:'', // Your MySQL password
@@ -13,5 +17,7 @@ const db = mysql.createPool({
     enableKeepAlive: true,
     keepAliveInitialDelay: 10000,
 });
+
+if (process.env.NODE_ENV !== 'production') global.db = db;
 
 export default db;

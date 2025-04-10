@@ -3,12 +3,12 @@ import { httpGet } from "@/lib/http";
 import redis from "../config/redis";
 import db from "../config/db";
 
-export async function H2hDetails(tableName: string,teamaName:string,teambName:string) {
+export async function H2hDetails(tableName: string,teama:number,teamb:number) {
     if (!tableName) {
       return { notFound: true }; // Handle undefined ID gracefully
     }
 
-    const CACHE_KEY = "h2hDetails_" + teamaName+"vs"+teamaName+"in"+tableName;
+    const CACHE_KEY = "h2hDetails_" + teama+"vs"+teamb+"in"+tableName;
     const CACHE_TTL = 600;
 
     try {
@@ -18,8 +18,6 @@ export async function H2hDetails(tableName: string,teamaName:string,teambName:st
             console.log("coming from cache team");
             return JSON.parse(cachedData);
         }
-        const teama = await getTeamId(teamaName);
-        const teamb = await getTeamId(teambName);
        
         // Fetch Data
         const [rows]: any = await db.execute('SELECT * FROM '+tableName+' WHERE (teama_id = ? AND teamb_id = ?) OR (teama_id = ? AND teamb_id = ?)', [teama,teamb,teamb,teama]);

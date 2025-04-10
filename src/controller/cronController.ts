@@ -432,9 +432,9 @@ export async function MatchCommentary() {
   const API_TOKEN = "7b58d13da34a07b0a047e129874fdbf4";
   const CONCURRENT_LIMIT = 5;
   try {
-    // const matchQuery = `SELECT match_id, latest_inning_number FROM matches WHERE commentary = 1 and match_id not in (SELECT match_id FROM match_commentary) and status in (2,3) and latest_inning_number > 0 `;
+    const matchQuery = `SELECT match_id, latest_inning_number FROM matches WHERE commentary = 1 and match_id not in (SELECT match_id FROM match_commentary) and status in (2,3) and latest_inning_number > 0 `;
     // const matchQuery = `SELECT match_id, latest_inning_number FROM matches WHERE commentary = 1 and status = 3 and latest_inning_number > 0 `;
-    const matchQuery = `SELECT match_id, latest_inning_number FROM matches WHERE commentary = 1 and latest_inning_number > 0 `;
+    // const matchQuery = `SELECT match_id, latest_inning_number FROM matches WHERE commentary = 1 and latest_inning_number > 0 `;
     
     const [matchResults]: any = await db.query(matchQuery);
 
@@ -1300,8 +1300,8 @@ export async function TeamPlayersData() {
 
 export async function TeamMatches() {
   try {
-    // const teamsQuery = `SELECT tid FROM teams WHERE tid not in (SELECT tid FROM team_matches)`;
-    const teamsQuery = `SELECT tid FROM teams`;
+    const teamsQuery = `SELECT tid FROM teams WHERE tid not in (SELECT tid FROM team_matches)`;
+    // const teamsQuery = `SELECT tid FROM teams`;
     const [teamsResults]: any = await db.query(teamsQuery);
 
     if (!teamsResults.length) {
