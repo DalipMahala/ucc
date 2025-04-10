@@ -8,10 +8,10 @@ const db = mysql.createPool({
     database: 'uccricket', // Your database name
     waitForConnections: true,
     connectionLimit: 100,  // Limits concurrent connections
-    queueLimit: 0
+    queueLimit: 5000, // Higher queue for your cron jobs
+    idleTimeout: 60000, // 1 minute idle timeout
+    enableKeepAlive: true,
+    keepAliveInitialDelay: 10000,
 });
-
-
-
 
 export default db;
