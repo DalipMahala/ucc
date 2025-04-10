@@ -200,7 +200,7 @@ export default async function Home(props: { params: Params }) {
         <div className="md:grid grid-cols-12 gap-4">
           <div className="lg:col-span-8 md:col-span-7">
             <div className="tab-section">
-              <div className="md:relative sticky md:top-0 top-[58px] z-[9] tabs ml-[-8px] w-[104.2%] md:ml-[0] md:w-auto mb-3 md:my-4">
+              <div className="md:relative sticky md:top-0 top-[50px] z-[9] tabs ml-[-8px] w-[104.2%] md:ml-[0] md:w-auto mb-3 md:my-4">
                 <div
                   className="flex justify-between md:justify-start text-[13px] md:space-x-8 space-x-4 p-2 md:bg-[#ffffff] md:text-[#000000] text-[#ffffff] bg-[#081736] md:rounded-lg overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
                               [&::-webkit-scrollbar-track]:bg-gray-100 
@@ -555,7 +555,7 @@ export default async function Home(props: { params: Params }) {
                               </div>
                               <div>
                                 <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                                  {items.competition.title} -{" "}
+                                  {truncateText(items.competition.title,5)} -{" "}
                                   {items.competition.season}
                                 </h4>
                               </div>
@@ -980,7 +980,7 @@ export default async function Home(props: { params: Params }) {
                               </div>
                               <div>
                                 <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                                  {cmatch.competition.title} -{" "}
+                                  {truncateText(cmatch.competition.title,2)} -{" "}
                                   {cmatch.competition.season}
                                 </h4>
                               </div>
@@ -1130,7 +1130,7 @@ export default async function Home(props: { params: Params }) {
                                       cmatch?.man_of_the_match?.pid
                                     }>
                                     <div className="flex items-center justify-between">
-                                      <div className="flex items-center gap-1" >
+                                      <div className="flex items-center gap-2" >
                                         <PlayerImage  key={cmatch?.man_of_the_match?.pid} player_id={cmatch?.man_of_the_match?.pid}
                                          height={22}
                                           width={22}
@@ -1338,7 +1338,7 @@ export default async function Home(props: { params: Params }) {
                               </div>
                               <div>
                                 <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                                  {ucmatch.competition.title} -{" "}
+                                  {truncateText(ucmatch.competition.title,3)} -{" "}
                                   {ucmatch.competition.season}
                                 </h4>
                               </div>

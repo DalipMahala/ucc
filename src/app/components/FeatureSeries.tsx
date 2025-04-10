@@ -80,13 +80,13 @@ export default function FeatureSeries({ featuredSeries }: Series) {
               <div className="col-span-8">
                 <div className="mb-4">
                   <div
-                    className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
+                    className="flex text-1xl md:space-x-8 space-x-4 p-2 bg-[#ffffff] rounded-lg overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
     [&::-webkit-scrollbar-track]:bg-gray-100 
     [&::-webkit-scrollbar-thumb]:bg-[#DFE9F6] 
     dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
     dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
                   >
-                    <button className="font-medium py-2 px-5 bg-[#1A80F8] text-white rounded-md whitespace-nowrap">
+                    <button className="font-medium py-2 md:px-5 px-2 bg-[#1A80F8] text-white rounded-md whitespace-nowrap">
                       <span>Fixtures</span>
                     </button>
                     <Link
@@ -137,14 +137,14 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center space-x-2">
                         <div
-                          className={`flex items-center ${matches[feature.cid]?.status == 3 ? "text-[#A70B0B]" :  "text-[#A45B09]" } rounded-full pr-2 font-semibold`}
+                          className={`flex items-center ${matches[feature.cid]?.status == 3 ? "text-[#A70B0B]" : "text-[#A45B09]"} rounded-full pr-2 font-semibold`}
                           style={{ gap: "3px" }}
                         >
                           <span className="rounded-full">●</span> {matches[feature.cid]?.status_str}
                         </div>
                         <div>
                           <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                          {matches[feature.cid]?.competition?.title}
+                            {matches[feature.cid]?.competition?.title}
                           </h4>
                         </div>
                       </div>
@@ -197,7 +197,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                         <div className="flex justify-between items-center text-[14px]">
                           <div className="">
                             <p className="text-[#586577] text-[12px] mb-4 font-medium">
-                            {matches[feature.cid]?.subtitle }, {matches[feature.cid]?.venue?.name} {matches[feature.cid]?.venue?.location}, {matches[feature.cid]?.venue?.country}
+                              {matches[feature.cid]?.subtitle}, {matches[feature.cid]?.venue?.name} {matches[feature.cid]?.venue?.location}, {matches[feature.cid]?.venue?.country}
                             </p>
                             <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
                               <div className="flex items-center space-x-2">
@@ -210,7 +210,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                                   loading="lazy"
                                 />
                                 <span className="font-semibold">
-                                {matches[feature.cid]?.teama?.name}
+                                  {matches[feature.cid]?.teama?.name}
                                 </span>
                               </div>
                             </div>
@@ -227,17 +227,17 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                                     loading="lazy"
                                   />
                                   <span className="font-semibold">
-                                  {matches[feature.cid]?.teamb?.name}
+                                    {matches[feature.cid]?.teamb?.name}
                                   </span>
                                 </div>
                               </div>
                             </div>
                           </div>
 
-                    
+
                           <div className=" font-medium text-center">
                             <p className="text-[#2F335C] text-[14px]">
-                            {format(new Date(matches[feature.cid]?.date_start), "dd MMMM - EEEE")}, <br /> {format(new Date(matches[feature.cid]?.date_start), "hh:mm:aa")}
+                              {format(new Date(matches[feature.cid]?.date_start), "dd MMMM - EEEE")}, <br /> {format(new Date(matches[feature.cid]?.date_start), "hh:mm:aa")}
                             </p>
                           </div>
                         </div>
@@ -304,14 +304,14 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center space-x-2">
                         <div
-                          className={`flex items-center ${matches[feature.cid]?.status == 3 ? "text-[#A70B0B]" :  "text-[#A45B09]" } rounded-full font-semibold`}
+                          className={`flex items-center ${matches[feature.cid]?.status == 3 ? "text-[#A70B0B]" : "text-[#A45B09]"} uppercase rounded-full font-semibold`}
                           style={{ gap: "3px" }}
                         >
                           <span className="rounded-full">●</span> {matches[feature.cid]?.status_str}
                         </div>
                         <div>
-                          <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                          {matches[feature.cid]?.competition?.title}
+                          <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                            {matches[feature.cid]?.competition?.title}
                           </h4>
                         </div>
                         <span className="absolute right-[12px] top-[19px]">
@@ -332,8 +332,8 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                     <div className="border-t-[1px] border-[#E7F2F4]"></div>
                     <div className="open-Performance-data">
                       <div className="py-2 pb-3">
-                        <p className="text-[#586577] text-[12px] mb-4 font-medium">
-                        {matches[feature.cid]?.subtitle }, {matches[feature.cid]?.venue?.name} {matches[feature.cid]?.venue?.location}, {matches[feature.cid]?.venue?.country}
+                        <p className="text-[#586577] text-[13px] mb-4 font-medium">
+                          {matches[feature.cid]?.subtitle}, {matches[feature.cid]?.venue?.name} {matches[feature.cid]?.venue?.location}, {matches[feature.cid]?.venue?.country}
                         </p>
                         <div className="flex justify-between items-center text-[14px]">
                           <div className="">
@@ -350,7 +350,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                                 <div>
                                   <span className="flex items-center gap-1">
                                     <span className="text-[#5e5e5e] font-medium">
-                                    {matches[feature.cid]?.teama?.name}
+                                      {matches[feature.cid]?.teama?.name}
                                     </span>
                                   </span>
                                 </div>
@@ -371,7 +371,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                                   <div>
                                     <span className="flex items-center gap-1">
                                       <span className="text-[#5e5e5e] font-medium">
-                                      {matches[feature.cid]?.teamb?.name}
+                                        {matches[feature.cid]?.teamb?.name}
                                       </span>
                                     </span>
                                   </div>
@@ -382,8 +382,8 @@ export default function FeatureSeries({ featuredSeries }: Series) {
 
                           <div>
                             <div className=" font-medium text-center">
-                              <p className="ttext-[#2F335C] font-light mt-1 text-[11px]">
-                              {format(new Date(matches[feature.cid]?.date_start), "dd MMMM - EEEE")}, 
+                              <p className="text-[#2F335C] font-medium mt-1 text-[13px]">
+                                {format(new Date(matches[feature.cid]?.date_start), "dd MMMM - EEEE")},
                                 <br />
                                 {format(new Date(matches[feature.cid]?.date_start), "hh:mm:aa")}
                               </p>
@@ -396,43 +396,44 @@ export default function FeatureSeries({ featuredSeries }: Series) {
 
                       <div className="flex items-center justify-between space-x-5 mt-2">
                         <div className="flex items-center">
-                        <Link
-                          href={
-                            "/series/" +
-                            urlStringEncode(
-                              feature.title + "-" + feature.season
-                            ) +
-                            "/" +
-                            feature.cid +
-                            "/points-table"
-                          }
-                        >
-                          <p className=" text-[#909090] text-[11px] font-medium">
-                            {" "}
-                            Points Table
-                          </p>
+                          <Link
+                            href={
+                              "/series/" +
+                              urlStringEncode(
+                                feature.title + "-" + feature.season
+                              ) +
+                              "/" +
+                              feature.cid +
+                              "/points-table"
+                            }
+                          >
+                            <p className=" text-[#586577] text-[13px] font-medium">
+                              {" "}
+                              Points Table
+                            </p>
                           </Link>
                           <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                           <div className="flex justify-end items-center space-x-2">
                             <Image
                               src="/assets/img/home/handshake.png"
                               className="h-[15px]"
-                              width={30}
-                              height={30}
+                              width={17}
+                              height={17}
+                              style={{ width: "17px", height: "17px" }}
                               alt=""
                               loading="lazy"
                             />
-                            <span className="text-[#909090] text-[11px] font-medium">
+                            <span className="text-[#586577] text-[13px] font-medium">
                               H2H
                             </span>
                           </div>
                         </div>
 
-                        <div className="flex items-center space-x-2 text-[11px]">
-                          <span className="text-[#909090] font-medium">
-                          {matches[feature.cid]?.teama?.short_name}
+                        <div className="flex items-center space-x-2 text-[13px]">
+                          <span className="text-[#586577] font-medium">
+                            {matches[feature.cid]?.teama?.short_name}
                           </span>
-                          <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-md text-[#0B773C] pr-2">
+                          <span className="flex items-center bg-[#00a632] border-[1px] border-[#00a632] rounded-md text-[#ffffff] pr-2">
                             <span className="">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -451,7 +452,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                             </span>
                             0
                           </span>
-                          <span className="flex items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-md text-[#A70B0B] pr-2">
+                          <span className="flex items-center bg-[#ea2323] border-[1px] border-[#ea2323]  rounded-md text-[#ffffff] pr-2">
                             <span className="">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
