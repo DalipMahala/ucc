@@ -59,10 +59,10 @@ const PhoneMenu = ({ data }: HeaderProps) => {
         </div>
       </div>
 
-      <div className="md:hidden sticky bottom-0 bg-[#0e2149] text-white text-1xl py-2 flex justify-around items-center">
+      <div className="md:hidden sticky bottom-0 bg-[#0e2149] text-[#8a8a8a] text-1xl py-2 flex justify-around items-center">
          <Link
           href="/"
-          className="block flex-col items-center py-[4px] px-[9px] bg-[#ffffffdb] text-black rounded-lg font-semibold"
+          className="flex flex-col items-center  text-[#ffffff] rounded-lg font-semibold"
         >
           <span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
@@ -75,14 +75,14 @@ const PhoneMenu = ({ data }: HeaderProps) => {
           </span>
           <span>Home</span>
          </Link>
-         <Link href="#" className="block flex-col items-center">
+         <Link href="#" className="flex flex-col items-center">
           <span>
             <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
               <g id="schedule-icon" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd" fillOpacity="0.87">
                 <path
                   d="M15.727914,16.342 L19.970514,20.5846 L18.556314,21.9988 L14.313714,17.7562 L15.727914,16.342 Z M5.1225,4.32 C5.5125,3.93 6.1425,3.93 6.5325,4.32 L6.5325,4.32 L15.0225,12.81 C15.4125,13.2 15.4125,13.83 15.0225,14.22 L15.0225,14.22 L12.1925,17.05 C11.8025,17.44 11.1725,17.44 10.7825,17.05 L10.7825,17.05 L2.2925,8.56 C1.9025,8.17 1.9025,7.54 2.2925,7.15 L2.2925,7.15 Z M18.4725,2 C20.4054966,2 21.9725,3.56700338 21.9725,5.5 C21.9725,7.43299662 20.4054966,9 18.4725,9 C16.5395034,9 14.9725,7.43299662 14.9725,5.5 C14.9725,3.56700338 16.5395034,2 18.4725,2 Z"
                   id="Combined-Shape"
-                  fill="#ffffff"
+                  fill="#8a8a8a"
                   fillRule="nonzero"
                 ></path>
               </g>
@@ -90,14 +90,14 @@ const PhoneMenu = ({ data }: HeaderProps) => {
           </span>
           Fixtures
          </Link>
-         <Link href={items[0].href} className="block flex-col items-center">
+         <Link href={items[0].href} className="flex flex-col items-center">
           <span>
             <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
               <g id="cup-icon" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                 <path
                   d="M19,5 L17,5 L17,3 L7,3 L7,5 L5,5 C3.9,5 3,5.9 3,7 L3,8 C3,10.55 4.92,12.63 7.39,12.94 C8.02,14.44 9.37,15.57 11,15.9 L11,19 L7,19 L7,21 L17,21 L17,19 L13,19 L13,15.9 C14.63,15.57 15.98,14.44 16.61,12.94 C19.08,12.63 21,10.55 21,8 L21,7 C21,5.9 20.1,5 19,5 Z M5,8 L5,7 L7,7 L7,10.82 C5.84,10.4 5,9.3 5,8 Z M19,8 C19,9.3 18.16,10.4 17,10.82 L17,7 L19,7 L19,8 Z"
                   id="Shape"
-                  fill="#ffffff"
+                  fill="#8a8a8a"
                   fillRule="nonzero"
                 ></path>
               </g>
@@ -105,7 +105,7 @@ const PhoneMenu = ({ data }: HeaderProps) => {
           </span>
           Series
          </Link>
-         <Link href="#" className="block flex-col items-center">
+         <Link href="#" className="flex flex-col items-center">
           <span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
               <path
@@ -121,7 +121,7 @@ const PhoneMenu = ({ data }: HeaderProps) => {
          <Link
           href="#"
           onClick={openNav}
-          className="block flex-col items-center"
+          className="flex flex-col items-center"
         >
           <span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">

@@ -67,7 +67,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                   <span className="text-[11px] font-medium">
                     {slide?.teamList?.[parseFloat(slide?.odds?.matchodds?.teama?.back) < parseFloat(slide?.odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
                   </span>
-                  <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] md:rounded-full rounded-md text-[#0B773C] pr-2">
+                  <span className="flex font-semibold items-center md:bg-[#FAFFFC] bg-[#00a632] border-[1px] md:border-[#0B773C] border-[#00a632] md:rounded-full rounded-md md:text-[#0B773C] text-[#ffffff] pr-2">
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                         : 0
                     }
                   </span>
-                  <span className="flex font-semibold items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  md:rounded-full rounded-md text-[#A70B0B] pr-2">
+                  <span className="flex font-semibold items-center md:bg-[#FFF7F7] bg-[#ea2323] border-[1px] md:border-[#A70B0B] border-[#ea2323]  md:rounded-full rounded-md md:text-[#A70B0B] text-[#ffffff] pr-2">
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

@@ -188,6 +188,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
+        
       </div>
       <hr className="border-gray-700 my-6" />
       <div className="flex flex-col md:flex-row justify-between items-center md:mx-4 md:gap-10 lg:mx-0">
