@@ -75,6 +75,13 @@ interface MatchItem {
   match_info: any;
 }
 
+function updateStatusNoteDirect(matchInfo: any) {
+  if (!matchInfo?.status_note) return;
+  
+  return matchInfo.status_note = matchInfo.status_note
+    .replace(new RegExp(matchInfo.teama.name, 'gi'), matchInfo.teama.short_name)
+    .replace(new RegExp(matchInfo.teamb.name, 'gi'), matchInfo.teamb.short_name);
+}
 
 type Params = Promise<{ matchType: string }>;
 
@@ -85,7 +92,7 @@ export default async function Home(props: { params: Params }) {
   if (matchType && !["live", "upcoming", "result"].includes(matchType)) {
     notFound();
   }
-
+  
   const open = null;
   let activeTabValue = "";
 
@@ -180,6 +187,8 @@ export default async function Home(props: { params: Params }) {
   const featuredSeries = await FeaturedSeries();
   // const  matchData = ChatComponent();
    const countryCompitition = await GetCountryCompitition();
+
+  
   return (
     <Layout headerData={liveSeriesData}>
       <ChatComponent></ChatComponent>
@@ -477,7 +486,7 @@ export default async function Home(props: { params: Params }) {
                                       width: "200px",
                                     }}
                                   >
-                                    {items.status_note}
+                                   { updateStatusNoteDirect(items) }
                                   </p>
                                 </div>
                               </div>
@@ -1176,7 +1185,10 @@ export default async function Home(props: { params: Params }) {
                               </div>
                             </div>
                             <div className="flex items-center space-x-2">
-                              <span className="text-[11px] font-medium">{ucmatch.teama.short_name}</span>
+                            <span className={"text-[11px] font-medium oddsTeam" + ucmatch.match_id}>
+                                {ucmatch?.[parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
+                              </span>
+                              
                               <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
                                 <span className="">
                                   <svg
@@ -1194,7 +1206,15 @@ export default async function Home(props: { params: Params }) {
                                     />
                                   </svg>
                                 </span>
-                                {ucmatch?.live_odds?.matchodds?.teama?.back > 0 ? Math.round((ucmatch?.live_odds?.matchodds?.teama?.back) * 100 - 100) : 0}
+                                {
+                                    (parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back)
+                                      ? ucmatch?.live_odds?.matchodds?.teama?.back
+                                      : ucmatch?.live_odds?.matchodds?.teamb?.back) > 0
+                                      ? Math.round((parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back)
+                                        ? ucmatch?.live_odds?.matchodds?.teama?.back
+                                        : ucmatch?.live_odds?.matchodds?.teamb?.back) * 100 - 100)
+                                      : 0
+                                  }
                               </span>
                               <span className="flex font-semibold items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-full text-[#A70B0B] pr-2">
                                 <span className="">
@@ -1213,7 +1233,15 @@ export default async function Home(props: { params: Params }) {
                                     />
                                   </svg>
                                 </span>
-                                {ucmatch?.live_odds?.matchodds?.teama?.lay > 0 ? Math.round((ucmatch?.live_odds?.matchodds?.teama?.lay) * 100 - 100) : 0}
+                                {
+                                    (parseFloat(ucmatch?.live_odds?.matchodds?.teama?.lay) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.lay)
+                                      ? ucmatch?.live_odds?.matchodds?.teama?.lay
+                                      : ucmatch?.live_odds?.matchodds?.teamb?.lay) > 0
+                                      ? Math.round((parseFloat(ucmatch?.live_odds?.matchodds?.teama?.lay) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.lay)
+                                        ? ucmatch?.live_odds?.matchodds?.teama?.lay
+                                        : ucmatch?.live_odds?.matchodds?.teamb?.lay) * 100 - 100)
+                                      : 0
+                                  }
                               </span>
                             </div>
                           </div>
@@ -1469,7 +1497,9 @@ export default async function Home(props: { params: Params }) {
                             </div>
 
                             <div className="flex items-center space-x-2 text-[13px]">
-                              <span className="text-[#586577] font-medium">{ucmatch.teama.short_name}</span>
+                              <span className={"text-[#586577] font-medium oddsTeam" + ucmatch.match_id}>
+                                {ucmatch?.[parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
+                              </span>
                               <span className="flex font-semibold items-center bg-[#00a632] border-[1px] border-[#00a632] rounded-md text-[#ffffff] pr-2">
                                 <span>
                                   <svg
@@ -1487,7 +1517,15 @@ export default async function Home(props: { params: Params }) {
                                     ></path>
                                   </svg>
                                 </span>
-                                {ucmatch?.live_odds?.matchodds?.teama?.back > 0 ? Math.round((ucmatch?.live_odds?.matchodds?.teama?.back) * 100 - 100) : 0}
+                                {
+                                    (parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back)
+                                      ? ucmatch?.live_odds?.matchodds?.teama?.back
+                                      : ucmatch?.live_odds?.matchodds?.teamb?.back) > 0
+                                      ? Math.round((parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back)
+                                        ? ucmatch?.live_odds?.matchodds?.teama?.back
+                                        : ucmatch?.live_odds?.matchodds?.teamb?.back) * 100 - 100)
+                                      : 0
+                                  }
                               </span>
                               <span className="flex font-semibold items-center bg-[#ea2323] border-[1px] border-[#ea2323] rounded-md text-[#ffffff] pr-2">
                                 <span>
@@ -1506,7 +1544,15 @@ export default async function Home(props: { params: Params }) {
                                     ></path>
                                   </svg>
                                 </span>
-                                {ucmatch?.live_odds?.matchodds?.teama?.lay > 0 ? Math.round((ucmatch?.live_odds?.matchodds?.teama?.lay) * 100 - 100) : 0}
+                                {
+                                    (parseFloat(ucmatch?.live_odds?.matchodds?.teama?.lay) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.lay)
+                                      ? ucmatch?.live_odds?.matchodds?.teama?.lay
+                                      : ucmatch?.live_odds?.matchodds?.teamb?.lay) > 0
+                                      ? Math.round((parseFloat(ucmatch?.live_odds?.matchodds?.teama?.lay) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.lay)
+                                        ? ucmatch?.live_odds?.matchodds?.teama?.lay
+                                        : ucmatch?.live_odds?.matchodds?.teamb?.lay) * 100 - 100)
+                                      : 0
+                                  }
                               </span>
                             </div>
                           </div>
