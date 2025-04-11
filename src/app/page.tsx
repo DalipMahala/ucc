@@ -538,7 +538,7 @@ export default async function Home(props: { params: Params }) {
                         <div className="lg:hidden rounded-lg p-4 mb-4 bg-[#ffffff] performance-section relative hover:shadow-lg">
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center space-x-2">
-                              <div className="flex items-center text-[#ea2323] rounded-full font-semibold uppercase text-[12px]">
+                              <div className="flex gap-[2px] items-center text-[#ea2323] rounded-full font-semibold uppercase text-[12px]">
                                 <span className="rounded-full">
                                   <svg className="h-[7px] w-[7px]">
                                     <circle
@@ -658,7 +658,7 @@ export default async function Home(props: { params: Params }) {
                                             </span>
                                             <p
                                               className={
-                                                "font-normal text-[14px] match" +
+                                                "flex items-center gap-2 font-normal text-[14px] match" +
                                                 items.match_id +
                                                 "-" +
                                                 items.teamb.team_id
@@ -985,7 +985,7 @@ export default async function Home(props: { params: Params }) {
                             <div className="flex items-center space-x-2">
                               <div
                                 className="flex text-[12px] items-center text-[#00a632] rounded-full uppercase font-semibold"
-                                style={{ gap: "3px" }}
+                                style={{ gap: "2px" }}
                               >
                                 <div className="w-[6px] h-[6px] bg-[#00a632] rounded-full"></div> {cmatch.status_str}
                               </div>
@@ -1362,7 +1362,7 @@ export default async function Home(props: { params: Params }) {
                             <div className="flex items-center space-x-2">
                               <div
                                 className="flex text-[12px] items-center uppercase text-[#A45B09] rounded-full font-semibold"
-                                style={{ gap: "3px" }}
+                                style={{ gap: "2px" }}
                               >
                                 <div className="w-[6px] h-[6px] bg-[#A45B09] rounded-full"></div> {ucmatch.status_str}
                               </div>
