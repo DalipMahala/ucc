@@ -166,7 +166,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                         </div>
                       ))}
                     </div>
-                    <div className="md:block hidden h-[70px] border-l-[1px] border-[#d0d3d7]"></div>
+                    <div className=" h-[70px] border-l-[1px] border-[#d0d3d7]"></div>
                     <div className="font-semibold w-[50%] text-center">
                       {isSameDay(new Date(), new Date(slide.countdown)) ? (
 

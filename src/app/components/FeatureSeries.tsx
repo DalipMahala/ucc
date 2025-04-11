@@ -137,19 +137,19 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center space-x-2">
                         <div
-                          className={`flex items-center ${matches[feature.cid]?.status == 3 ? "text-[#A70B0B]" : "text-[#A45B09]"} rounded-full pr-2 font-semibold`}
+                          className={`flex items-center text-[12px] uppercase ${matches[feature.cid]?.status == 3 ? "text-[#A70B0B]" : "text-[#A45B09]"} rounded-full pr-2 font-semibold`}
                           style={{ gap: "3px" }}
                         >
-                          <span className="rounded-full">●</span> {matches[feature.cid]?.status_str}
+                          <div className="w-[8px] h-[8px] bg-[#A45B09] rounded-full"></div> {matches[feature.cid]?.status_str}
                         </div>
                         <div>
-                          <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                          <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                             {matches[feature.cid]?.competition?.title}
                           </h4>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <span className="text-[13px] font-medium">{matches[feature.cid]?.teama?.short_name}</span>
+                        <span className="text-[11px] font-medium">{matches[feature.cid]?.teama?.short_name}</span>
                         <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-full text-[#0B773C] pr-2">
                           <span className="">
                             <svg
@@ -196,7 +196,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                       <div className="py-4 px-3">
                         <div className="flex justify-between items-center text-[14px]">
                           <div className="">
-                            <p className="text-[#586577] text-[12px] mb-4 font-medium">
+                            <p className="text-[#586577] text-[13px] mb-4 font-medium">
                               {matches[feature.cid]?.subtitle}, {matches[feature.cid]?.venue?.name} {matches[feature.cid]?.venue?.location}, {matches[feature.cid]?.venue?.country}
                             </p>
                             <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
@@ -209,7 +209,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                                   alt="aus"
                                   loading="lazy"
                                 />
-                                <span className="font-semibold">
+                                <span className="text-[#586577] font-medium text-[14px]">
                                   {matches[feature.cid]?.teama?.name}
                                 </span>
                               </div>
@@ -226,7 +226,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                                     alt="ind"
                                     loading="lazy"
                                   />
-                                  <span className="font-semibold">
+                                  <span className="text-[#586577] font-medium text-[14px]">
                                     {matches[feature.cid]?.teamb?.name}
                                   </span>
                                 </div>
@@ -258,7 +258,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                             "/points-table"
                           }
                         >
-                          <p className=" text-[#909090] font-medium">
+                          <p className="  text-[#586577] font-medium">
                             {" "}
                             Points Table
                           </p>
@@ -275,7 +275,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                             "/schedule-results/schedule"
                           }
                         >
-                          <p className="text-[#909090] font-medium">Schedule</p>
+                          <p className=" text-[#586577] font-medium">Schedule</p>
                         </Link>
                       </div>
 
@@ -283,12 +283,12 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                         <div className="flex mt-2 justify-end items-center space-x-2">
                           <Image
                             src="/assets/img/home/handshake.png"
-                            width={30}
-                            height={30}
+                            width={25}
+                            height={25}
                             alt=""
                             loading="lazy"
                           />
-                          <span className="text-[#909090] font-medium">
+                          <span className="text-[#586577] font-medium">
                             H2H
                           </span>
                         </div>
@@ -380,10 +380,12 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                             </div>
                           </div>
 
-                          <div>
+                          <div className="h-[100px] border-l-[1px] border-[#E7F2F4]"></div>
+
+                          <div className="">
                             <div className=" font-medium text-center">
                               <p className="text-[#2F335C] font-medium mt-1 text-[13px]">
-                                {format(new Date(matches[feature.cid]?.date_start), "dd MMMM - EEEE")},
+                                {format(new Date(matches[feature.cid]?.date_start), "dd MMMM - EEEE")}
                                 <br />
                                 {format(new Date(matches[feature.cid]?.date_start), "hh:mm:aa")}
                               </p>

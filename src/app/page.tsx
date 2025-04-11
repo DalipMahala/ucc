@@ -211,7 +211,7 @@ export default async function Home(props: { params: Params }) {
             <div className="tab-section">
               <div className="md:relative sticky md:top-0 top-[50px] z-[9] tabs ml-[-8px] w-[104.2%] md:ml-[0] md:w-auto mb-3 md:my-4">
                 <div
-                  className="flex justify-between md:justify-start text-[13px] md:space-x-8 space-x-4 p-2 md:bg-[#ffffff] md:text-[#000000] text-[#ffffff] bg-[#081736] md:rounded-lg overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
+                  className="flex justify-between md:justify-start text-[13px] md:space-x-8 space-x-4 md:p-2 pt-[2px] pb-2 px-2 md:bg-[#ffffff] md:text-[#000000] text-[#ffffff] bg-[#081736] md:rounded-lg overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
                               [&::-webkit-scrollbar-track]:bg-gray-100 
                               [&::-webkit-scrollbar-thumb]:bg-[#DFE9F6] 
                                dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
@@ -592,7 +592,7 @@ export default async function Home(props: { params: Params }) {
                                 </p>
                                 <div className="flex justify-between items-center text-[14px]">
 
-                                  <div className="w-[100%]">
+                                  <div className="w-[82%]">
                                     <div className="items-center space-x-2 font-medium md:w-full mb-4">
                                       <div className="flex items-center space-x-2">
                                         <Image
@@ -690,8 +690,10 @@ export default async function Home(props: { params: Params }) {
                                     </div>
                                   </div>
 
-                                  <div className="w-[50%] font-semibold text-center">
-                                    <p className={"mt-1 text-[#2F335C] text-[14px]  statusNote" +
+                                  <div className="h-[100px] border-l-[1px] border-[#E7F2F4]"></div>
+
+                                  <div className="w-[44%] font-semibold text-center">
+                                    <p className={"mt-1 mx-2 text-[#2F335C] text-[14px]  statusNote" +
                                       items.match_id
                                     }>
                                       {items.status_note}
@@ -1017,7 +1019,7 @@ export default async function Home(props: { params: Params }) {
                                   {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
                                 </p>
                                 <div className="flex justify-between items-center text-[14px]">
-                                  <div className="w-[100%]">
+                                  <div className="w-[98%]">
                                     <div className="items-center space-x-2 font-medium md:w-full mb-4">
                                       <div className="flex items-center space-x-2">
                                         <Image
@@ -1078,7 +1080,7 @@ export default async function Home(props: { params: Params }) {
                                     </div>
                                   </div>
 
-                                  {/* <!-- <div className="h-[100px] border-l-[1px] border-[#e7f2f4]"></div> --> */}
+                                   <div className="h-[100px] border-l-[1px] border-[#E7F2F4]"></div>
 
                                   <div className=" w-[50%] font-semibold flex flex-col items-center">
                                     <Image
@@ -1145,9 +1147,9 @@ export default async function Home(props: { params: Params }) {
                                           width={22}
                                          
                                           className="rounded-full"  />
-                                        <div>
+                                        <div className="text-center">
                                           <p className=" font-semibold">{truncateText(cmatch?.man_of_the_match?.name,1)}</p>
-                                          <p className="text-[11px]">Man of the </p>
+                                          <p className="text-[11px]">Man of the match </p>
                                         </div>
                                       </div>
                                     </div>
@@ -1433,6 +1435,8 @@ export default async function Home(props: { params: Params }) {
                                       </div>
                                     </div>
                                   </div>
+
+                                  <div className="h-[100px] border-l-[1px] border-[#E7F2F4]"></div>
 
                                   <div className="w-[80%] font-semibold text-center">
                                     <div className="text-[#144280] mt-1">
