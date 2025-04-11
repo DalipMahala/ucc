@@ -236,6 +236,7 @@ const teambLoss = (teamDetails?.teamb_lost_match * teamDetails?.teamAB_total_mat
                                               </div>
                                           </div>
                                       </div>
+                                      {(teamDetails?.teama_nr_match >0 || teamDetails?.teamb_nr_match > 0) &&
                                       <div className="my-4">
                                           <div className="flex justify-between items-center">
                                               <div className="flex justify-between items-center w-full">
@@ -261,6 +262,7 @@ const teambLoss = (teamDetails?.teamb_lost_match * teamDetails?.teamAB_total_mat
                                               </div>
                                           </div>
                                       </div>
+                                       }{(teamDetails?.teama_tied_match >0 || teamDetails?.teamb_tied_match > 0) &&
                                       <div className="my-4">
                                           <div className="flex justify-between items-center">
                                               <div className="flex justify-between items-center w-full">
@@ -286,6 +288,7 @@ const teambLoss = (teamDetails?.teamb_lost_match * teamDetails?.teamAB_total_mat
                                               </div>
                                           </div>
                                       </div>
+                                    }{(teamDetails?.teama_home_won_match >0 || teamDetails?.teamb_home_won_match > 0) &&
                                       <div className="my-4">
                                           <div className="flex justify-between items-center">
                                               <div className="flex justify-between items-center w-full">
@@ -311,6 +314,7 @@ const teambLoss = (teamDetails?.teamb_lost_match * teamDetails?.teamAB_total_mat
                                               </div>
                                           </div>
                                       </div>
+                                    }{(teamDetails?.teama_away_won_match >0 || teamDetails?.teamb_away_won_match > 0) &&
                                       <div className="my-4">
                                           <div className="flex justify-between items-center">
                                               <div className="flex justify-between items-center w-full">
@@ -336,6 +340,7 @@ const teambLoss = (teamDetails?.teamb_lost_match * teamDetails?.teamAB_total_mat
                                               </div>
                                           </div>
                                       </div>
+                                    }{(teamDetails?.teama_neutral_won_match >0 || teamDetails?.teamb_neutral_won_match > 0) &&
                                       <div className="my-4">
                                           <div className="flex justify-between items-center">
                                               <div className="flex justify-between items-center w-full">
@@ -361,6 +366,7 @@ const teambLoss = (teamDetails?.teamb_lost_match * teamDetails?.teamAB_total_mat
                                               </div>
                                           </div>
                                       </div>
+                                        }
                                   </div>
                               </div>
                                 }

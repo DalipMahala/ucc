@@ -19,6 +19,13 @@ interface BallEventData {
   ballEvent: string;
 }
 
+function updateStatusNoteDirect(matchInfo: any) {
+  if (!matchInfo?.status_note) return;
+  
+  return matchInfo.status_note = matchInfo.status_note
+    .replace(new RegExp(matchInfo.teama.name, 'gi'), matchInfo.teama.short_name)
+    .replace(new RegExp(matchInfo.teamb.name, 'gi'), matchInfo.teamb.short_name);
+}
 export default function Banner({ matchData, match_id }: Banner) {
 
 
@@ -38,7 +45,8 @@ export default function Banner({ matchData, match_id }: Banner) {
   const teambscores = liveMatch?.match_info?.teamb?.scores ?? "";
   const teamaovers = liveMatch?.match_info?.teama?.overs ?? "";
   const teambovers = liveMatch?.match_info?.teamb?.overs ?? "";
-
+  const seriesName = liveMatch?.match_info?.competition?.title ?? "";
+  
   // Split by " & " to separate both innings
   const [inning1teamarun, inning2teamarun] = teamascores.includes(" & ")
     ? teamascores.split(" & ")
@@ -86,10 +94,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                 {liveMatch?.match_info?.status_str}
               </div>
               <div className="text-[#8192B4] font-medium  text-1xl md:text-center md:mx-0 my-3">
-                {liveMatch?.match_info?.short_title},&nbsp;
-                
-                  {" "}
-                  {liveMatch?.match_info?.subtitle}
+                {seriesName}
                 
               </div>
               <div className="flex text-[#8192B4] text-1xl font-medium md:justify-start">
@@ -166,7 +171,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
                 <div className="text-[#8192B4] font-normal w-[44%] text-center md:my-0 my-4 flex gap-2 items-center justify-center">
                   <p className="text-[#00a632] lg:text-[24px] text-[16px] font-semibold uppercase">
-                    {liveMatch?.live?.status_note}
+                    {updateStatusNoteDirect(liveMatch?.match_info)}
                   </p>
                   <Image
                     src="/assets/img/home/win-2.png"
