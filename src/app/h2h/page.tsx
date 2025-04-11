@@ -4,7 +4,7 @@ import Image from 'next/image';
 import WeeklySlider from "@/app/components/WeeklySlider";
 import H2h from './h2h';
 import { liveSeries,FeaturedMatch } from "@/controller/homeController";
-import { H2hDetails, getTeamId } from "@/controller/h2hController";
+import { H2hDetails, getTeamId, h2hMatch } from "@/controller/h2hController";
 import { TeamDetails } from "@/controller/teamController";
 
 
@@ -29,10 +29,10 @@ export default async function Page(props: { params: Params }) {
   const teama_id = await getTeamId(teamA);
   const teamb_id = await getTeamId(teamB);
   const teamDetails = await H2hDetails(tblName,teama_id,teamb_id);
+  let completedMatch = await h2hMatch(matchType,teama_id,teamb_id);
   const teamADetails = await TeamDetails(teama_id);
   const teamBDetails = await TeamDetails(teamb_id);
   const liveSeriesData = await liveSeries();
-  // console.log(teamDetails);
   let frresponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/featuredMatches`, {
     method: "GET",
     headers: {
@@ -48,22 +48,6 @@ export default async function Page(props: { params: Params }) {
     ...rest
   }));
   const featuredMatch = futuredMatches;
-
-  let completedresponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/completedMatches`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
-    },
-    cache: "no-store",
-  });
-  let completedmatchArray = await completedresponse.json();
-
-  const completedfilteredMatches = completedmatchArray?.data?.map(({ match_info, ...rest }:FrMatch) => ({
-    ...match_info,
-    ...rest
-  }));
-  let completedMatch = completedfilteredMatches;
 
 
     return (

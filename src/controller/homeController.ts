@@ -409,7 +409,8 @@ FROM (
 ) c 
 INNER JOIN countries co ON c.country = co.country_code  
 GROUP BY co.country_name, co.country_code;
-      `);
+
+`);
 
     // console.log(rows);
     return rows;
@@ -418,3 +419,28 @@ GROUP BY co.country_name, co.country_code;
     // return res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
+      
+// SELECT 
+//     co.country_name,  
+//     co.country_code,  
+//     CONCAT('[', GROUP_CONCAT(
+//         CONCAT(
+//             '"cid": ', QUOTE(c.cid), ', ',
+//             '"title": ', QUOTE(c.title), ', ',
+//             '"abbr": ', QUOTE(c.abbr), ', ',
+//             '"category": ', QUOTE(c.category), ', ',
+//             '"status": ', QUOTE(c.status), ', ',
+//             '"game_format": ', QUOTE(c.game_format), ', ',
+//             '"season": ', QUOTE(c.season), ', ',
+//             '"datestart": ', QUOTE(c.datestart), ', ',
+//             '"dateend": ', QUOTE(c.dateend), ''
+//         )
+//         ORDER BY c.cid
+//         SEPARATOR ','
+//     ), ']') AS competitions 
+// FROM competitions c
+// INNER JOIN countries co ON c.country = co.country_code
+// WHERE c.category = 'domestic' 
+//   AND c.season = 2025
+// GROUP BY co.country_name, co.country_code;

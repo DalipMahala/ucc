@@ -30,7 +30,8 @@ const teambLoss = (teamDetails?.teamb_lost_match * teamDetails?.teamAB_total_mat
   const parts = urlStrings.split('-');
   const matchType = parts[parts.length - 1];
   const urlWithoutMatchType = parts.slice(0, -1).join('-');
-//   console.log(urlWithoutMatchType);
+
+//   console.log("completedMatch:",JSON.parse(completedMatch[0].teama));
 //   setActiveTab(matchType);
 
   const showHandler = () => {
@@ -126,6 +127,7 @@ const teambLoss = (teamDetails?.teamb_lost_match * teamDetails?.teamAB_total_mat
                   >
                       <div className="md:grid grid-cols-12 gap-4">
                           <div className="lg:col-span-8 md:col-span-7">
+                          {teamDetails?.teamAB_total_match > 0 &&
                               <div className="rounded-lg bg-[#ffffff] p-4">
                                   <h3 className="text-[15px] font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
                                   {teamADetails?.title} vs {teamBDetails?.title} Head to Head in {matchType.charAt(0).toUpperCase() + matchType.slice(1)} Records
@@ -172,7 +174,7 @@ const teambLoss = (teamDetails?.teamb_lost_match * teamDetails?.teamAB_total_mat
                                                               height={30}
                                                               alt="Bangladesh"
                                                               className="h-[16px] mr-2" />{" "}
-                                                          {teamADetails?.title}
+                                                          {teamBDetails?.title}
                                                       </span>
                                                   </div>
                                               </div>
@@ -361,6 +363,8 @@ const teambLoss = (teamDetails?.teamb_lost_match * teamDetails?.teamAB_total_mat
                                       </div>
                                   </div>
                               </div>
+                                }
+                              {completedMatch.length > 0 &&
                               <div className=" bg-[white] p-4 rounded-lg my-4">
                                   <div className="md:flex justify-between items-center mb-3">
                                       <h3 className="text-1xl font-semibold pl-[7px] border-l-[3px] border-[#229ED3]">
@@ -368,7 +372,7 @@ const teambLoss = (teamDetails?.teamb_lost_match * teamDetails?.teamAB_total_mat
                                       </h3>
                                   </div>
                                   <div className="grid grid-cols-12 gap-4 cust-tp-pera-card-section">
-                                    {completedMatch && completedMatch?.map((match:any,index:number)=>(
+                                    {completedMatch?.map((match:any,index:number)=>(
                                       <div className="md:col-span-6 col-span-12 cust-tp-pera-card" key={index}>
                                           <div className="bg-[#f2f7ff] rounded-lg max-w-md w-full p-4 border-[1px]">
                                               <div className="flex justify-between items-center pb-1">
@@ -385,16 +389,16 @@ const teambLoss = (teamDetails?.teamb_lost_match * teamDetails?.teamAB_total_mat
                                                       <div className="flex space-x-2 ">
                                                           <div className="flex items-center space-x-1 flex-col">
                                                               <Image  loading="lazy" 
-                                                                  src={match?.teama?.logo_url}
+                                                                  src={JSON.parse(match?.teama)?.logo_url}
                                                                   className="h-[30px] rounded-full"
                                                                   width={30}
                                                                   height={30}
-                                                                  alt={match?.teama?.short_name} />
-                                                              <span className="text-[#909090]">{match?.teama?.short_name}</span>
+                                                                  alt={JSON.parse(match?.teama)?.short_name} />
+                                                              <span className="text-[#909090]">{JSON.parse(match?.teama)?.short_name}</span>
                                                           </div>
                                                           <div className="mt-1">
-                                                              <p className="text-1xl font-semibold">{match?.teama?.scores}</p>
-                                                              <p className="text-[#909090]">({match?.teama?.overs} overs)</p>
+                                                              <p className="text-1xl font-semibold">{JSON.parse(match?.teama)?.scores}</p>
+                                                              {/* <p className="text-[#909090]">({JSON.parse(match?.teama)?.overs} overs)</p> */}
                                                           </div>
                                                       </div>
                                                   </a>
@@ -404,17 +408,17 @@ const teambLoss = (teamDetails?.teamb_lost_match * teamDetails?.teamAB_total_mat
                                                   <a href="#">
                                                       <div className="flex space-x-2 justify-end">
                                                           <div className="mt-1 text-end">
-                                                              <p className="text-1xl font-semibold">{match?.teamb?.scores}</p>
-                                                              <p className="text-[#909090]">({match?.teamb?.overs} overs)</p>
+                                                              <p className="text-1xl font-semibold">{JSON.parse(match?.teamb)?.scores}</p>
+                                                              {/* <p className="text-[#909090]">({JSON.parse(match?.teamb)?.overs} overs)</p> */}
                                                           </div>
                                                           <div className="flex items-center space-x-1 flex-col font-medium">
                                                               <Image  loading="lazy" 
-                                                                  src={match?.teamb?.logo_url}
+                                                                  src={JSON.parse(match?.teamb)?.logo_url}
                                                                   className="h-[30px] rounded-full"
                                                                   width={30}
                                                                   height={30}
-                                                                  alt={match?.teamb?.short_name}/>
-                                                              <span className="text-[#909090]">{match?.teamb?.short_name}</span>
+                                                                  alt={JSON.parse(match?.teamb)?.short_name}/>
+                                                              <span className="text-[#909090]">{JSON.parse(match?.teamb)?.short_name}</span>
                                                           </div>
                                                       </div>
                                                   </a>
@@ -433,7 +437,8 @@ const teambLoss = (teamDetails?.teamb_lost_match * teamDetails?.teamAB_total_mat
                                      
                                   </div>
                               </div>
-                              <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
+                                }
+                              <div className="rounded-lg bg-[#ffffff] p-4 my-4">
                                   <h3 className="text-1xl font-semibold mb-1">
                                   {teamADetails?.title} vs {teamBDetails?.title} 2025
                                   </h3>

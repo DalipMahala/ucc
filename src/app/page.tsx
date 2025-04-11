@@ -109,7 +109,7 @@ export default async function Home(props: { params: Params }) {
 
 
   const activeMainTab = activeTabValue;
-  console.log("open", activeMainTab);
+  // console.log("open", activeMainTab);
   // let completedMatch: MatchItem[] = await completedMatches();
   let completedresponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/completedMatches`, {
     method: "GET",
@@ -126,7 +126,7 @@ export default async function Home(props: { params: Params }) {
     ...rest
   }));
   let completedMatch: MatchItem[] = completedfilteredMatches;
-  console.log(completedMatch);
+  // console.log(completedMatch);
   // let upcomingMatch: MatchItem[] = await upcomingMatches();
   let upcomingresponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/upcomingMatches`, {
     method: "GET",
