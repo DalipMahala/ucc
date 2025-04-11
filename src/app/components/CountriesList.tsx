@@ -28,10 +28,10 @@ export default function CountriesList({ countries }: countries) {
   //   const filteredCountries = countries.filter((country:any) =>
   //     country.country_name.toLowerCase().includes(search.toLowerCase())
   //   );
-
+console.log(countries);
   const filteredCountries = countries
     ?.map((country: any) => {
-      const filteredLeagues = country.competitions.filter((league: any) =>
+      const filteredLeagues = country?.competitions?.filter((league: any) =>
         league.title.toLowerCase().includes(search.toLowerCase())
       );
 

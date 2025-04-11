@@ -28,25 +28,24 @@ export async function POST(req: NextRequest) {
     const teamPlayers =  await TeamPlayers(teamIds);
     const seriesFormat = SeriesDetails?.game_format;
     const uniqueFormats: any[] = [...new Set(SeriesDetails?.rounds.map((round:any) => round.match_format))];
-  
-   
+ 
 
-    const teamplayerData: Record<string, any[]> = {};
+    const teamplayerData: any = [];
 
     teamPlayers?.forEach((player) => {
-      const teamName = player.team?.title || player.team;
-      
-      if (!teamplayerData[teamName]) {
-        // Initialize with team info
-        teamplayerData[teamName] = [player.team];
-        
-        // Add players for each available format
-        uniqueFormats.forEach(format => {
-          if (player.players?.[format]) {
-            teamplayerData[teamName].push(player.players[format]);
-          }
-        });
+      // Find the team in teamplayerData or create a new one
+      let team = teamplayerData.find((t: any) => t.tid === player.team.tid);
+      if (!team) {
+        team = { ...player.team, players: [] };
+        teamplayerData.push(team);
       }
+
+      // Add players for each format
+      uniqueFormats.forEach((format) => {
+        if (player.players?.[format]) {
+          team.players.push(...player.players[format]);
+        }
+      });
     });
   
     

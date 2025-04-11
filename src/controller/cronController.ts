@@ -5,6 +5,7 @@ import fs from "fs";
 import path from "path";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import s3 from '@/lib/aws';
+import { RowDataPacket } from "mysql2/promise";
 
 const BUCKET_NAME = 'uc-application';
 
@@ -960,6 +961,106 @@ export async function InsertOrUpdateUpcomingCompetitions() {
     }
   }
 }
+export async function InsertOrUpdateCompletedCompetitions() {
+  const API_URL =
+    "https://rest.entitysport.com/exchange/competitions?token=7b58d13da34a07b0a047e129874fdbf4&per_page=100&status=result";
+
+  const data = await httpGet(API_URL);
+  const competitions = data?.response?.items || [];
+  const totalPages = data?.response?.total_pages || 0;
+
+  if (totalPages > 1) {
+    await delay(200);
+
+    // Create an array of promises to fetch all pages in parallel
+    const requests = Array.from({ length: totalPages }, (_, i) =>
+      httpGet(`${API_URL}&paged=${i + 1}`)
+    );
+
+    // Fetch all pages simultaneously
+    const results = await Promise.all(requests);
+
+    // Collect all match data
+    results.forEach((pagedata) => {
+      competitions.push(...(pagedata?.response?.items || []));
+    });
+  }
+
+  console.log("Values:", competitions);
+  if (competitions.length > 0) {
+    try {
+      const values = competitions.map(
+        (compt: {
+          cid: any;
+          title: any;
+          abbr: any;
+          category: any;
+          status: any;
+          game_format: any;
+          season: any;
+          datestart: any;
+          dateend: any;
+          country: any;
+          total_matches: any;
+          total_rounds: any;
+          total_teams: any;
+        }) => [
+          compt.cid,
+          compt.title,
+          compt.abbr,
+          compt.category,
+          compt.status,
+          compt.game_format,
+          compt.season,
+          compt.datestart,
+          compt.dateend,
+          compt.country,
+          compt.total_matches,
+          compt.total_rounds,
+          compt.total_teams,
+        ]
+      );
+
+      const query = `
+              INSERT INTO competitions ( cid,
+            title,
+            abbr,
+            category,
+            status,
+            game_format,
+            season,
+            datestart,
+            dateend,
+            country,
+            total_matches,
+            total_rounds,
+            total_teams)
+              VALUES ?
+              ON DUPLICATE KEY UPDATE 
+                  title = VALUES(title),
+            abbr = VALUES(abbr),
+            category = VALUES(category),
+            status = VALUES(status),
+            game_format = VALUES(game_format),
+            season = VALUES(season),
+            datestart = VALUES(datestart),
+            dateend = VALUES(dateend),
+            country = VALUES(country),
+            total_matches = VALUES(total_matches),
+            total_rounds = VALUES(total_rounds),
+            total_teams = VALUES(total_teams);
+          `;
+      
+      // console.log("Values:", matches);
+      await db.query(query, [values]);
+      console.log("SQL Query:", query);
+    } catch (error) {
+      console.error("Error in competitions upsert:", error);
+    }
+  }
+}
+
+
 
 export async function CompetitionInfo() {
   try {
