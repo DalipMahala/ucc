@@ -17,7 +17,7 @@ module.exports = {
     },
     {
       name: 'nextjs-cron', 
-      script: 'npx',
+      script: 'npm',
       args: '-- ts-node -r tsconfig-paths/register cron.ts', 
       cwd: '/var/www/uc-cricket', 
       instances: 1, 
@@ -30,7 +30,7 @@ module.exports = {
     },
     {
       name: 'cricket-data-service', 
-      script: 'npx',
+      script: 'npm',
       args: '-- ts-node -r tsconfig-paths/register server.ts', 
       cwd: '/var/www/uc-cricket', 
       instances: 1,
