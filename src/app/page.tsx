@@ -690,7 +690,7 @@ export default async function Home(props: { params: Params }) {
                                     </div>
                                   </div>
 
-                                  <div className="h-[100px] border-l-[1px] border-[#E7F2F4]"></div>
+                                  <div className="h-[100px] border-l-[1px] border-[#f2fafd]"></div>
 
                                   <div className="w-[44%] font-semibold text-center">
                                     <p className={"mt-1 mx-2 text-[#2F335C] text-[14px]  statusNote" +
@@ -1080,7 +1080,7 @@ export default async function Home(props: { params: Params }) {
                                     </div>
                                   </div>
 
-                                   <div className="h-[100px] border-l-[1px] border-[#E7F2F4]"></div>
+                                   <div className="h-[100px] border-l-[1px] border-[#f2fafd]"></div>
 
                                   <div className=" w-[50%] font-semibold flex flex-col items-center">
                                     <Image
@@ -1436,7 +1436,7 @@ export default async function Home(props: { params: Params }) {
                                     </div>
                                   </div>
 
-                                  <div className="h-[100px] border-l-[1px] border-[#E7F2F4]"></div>
+                                  <div className="h-[100px] border-l-[1px] border-[#f2fafd]"></div>
 
                                   <div className="w-[80%] font-semibold text-center">
                                     <div className="text-[#144280] mt-1">

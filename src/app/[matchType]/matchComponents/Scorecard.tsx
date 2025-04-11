@@ -404,7 +404,7 @@ export default function Scorecard({
                     <Link href={"/player/"+urlStringEncode(yetTobat.name)+"/"+yetTobat.player_id} className='hover:text-[#0b59ff]'  key={index}>
                       <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
                         <div>
-                         <PlayerImage key={yetTobat?.player_id} player_id={yetTobat.player_id} width={40} height={40} className="rounded-lg" />
+                         <PlayerImage key={yetTobat?.player_id} player_id={yetTobat.player_id} width={35} height={35} className="rounded-lg" />
                         </div>
                         <div className="font-medium">
                           <h2 className="text-[15px]">{yetTobat.name} </h2>

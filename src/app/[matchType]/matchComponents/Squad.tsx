@@ -188,12 +188,12 @@ export default function Squads({
                                                 <Link href={"/player/"+urlStringEncode(squads?.name)+"/"+squads?.player_id}  key={index}>
                                                     <div className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]">
                                                         <div className="relative">
-                                                        <PlayerImage key={squads?.player_id} player_id={squads?.player_id} width={80} height={80} className="w-16 h-16 mx-auto rounded-full mb-2" />
+                                                        <PlayerImage key={squads?.player_id} player_id={squads?.player_id} width={50} height={50} className="w-16 h-16 mx-auto rounded-full mb-2" />
                                                        
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/bat.png"
                                                                 className="h-[27px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
-                                                                width={27} height={27} alt=""
+                                                                width={20} height={20} alt=""
                                                             />
                                                         </div>
                                                         <h3 className="text-sm font-semibold text-blue-500 ">

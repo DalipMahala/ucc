@@ -188,7 +188,7 @@ export default function MoreInfo({
     setPlaying11Tab(tabName);
   };
 
-  const [activeOddTab, setActiveOddTab] = useState("tab1");
+  const [activeOddTab, setActiveOddTab] = useState("tab2");
   let teamwinpercentage = matchData?.teamwinpercentage;
   return (
     <>
@@ -279,14 +279,12 @@ export default function MoreInfo({
                       <div className="md:text-end">
                         <p className="text-[14px] mb-1 text-[#272B47] font-medium">
                           <span className="text-[14px] text-[#909090]">
-                            Date :
-                          </span>
-                          {matchData?.match_info?.date_start_ist}
+                            Date : </span>
+                           {matchData?.match_info?.date_start_ist}
                         </p>
                         <p className="text-[14px] text-[#272B47] font-medium">
                           <span className="text-[14px] text-[#909090]">
-                            Toss :
-                          </span>{" "}
+                            Toss :  </span>{" "}
                           {matchData?.match_info?.toss?.text}
                         </p>
                       </div>
@@ -1605,164 +1603,8 @@ export default function MoreInfo({
               </div>
 
               <div className="lg:col-span-4 md:col-span-5">
-                <div className="rounded-lg bg-[#ffffff]">
-                  <div className="p-4 cust-box-click-container">
-                    <h3 className="text-1xl font-semibold pl-[7px] mb-3 border-l-[3px] border-[#229ED3]">
-                      Playing XI
-                    </h3>
-                    <div className="border-t-[1px] border-[#E4E9F0]" />
-                    <div className="flex items-center justify-around py-4">
-                      <button
-                        onClick={(e) =>
-                          handlePlaying11Tab(e, "cust-box-click-playing11")
-                        }
-                        className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${
-                          playing11Tab === "cust-box-click-playing11"
-                            ? "bg-[#081736] text-white"
-                            : "bg-[#ffffff] text-[#6A7586]"
-                        }`}
-                      >
-                        <span>{matchData?.match_info?.teama.name}</span>
-                      </button>
 
-                      <button
-                        onClick={(e) =>
-                          handlePlaying11Tab(e, "cust-box-click-playing12")
-                        }
-                        className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${
-                          playing11Tab === "cust-box-click-playing12"
-                            ? "bg-[#081736] text-white"
-                            : "bg-[#ffffff] text-[#6A7586]"
-                        }`}
-                      >
-                        <span>{matchData?.match_info?.teamb.name}</span>
-                      </button>
-                    </div>
-                    <div className="border-t-[1px] border-[#E4E9F0]" />
-
-                    <div
-                      className={`cust-box-click-content cust-box-click-playing11 mt-4 ${
-                        playing11Tab === "cust-box-click-playing11"
-                          ? ""
-                          : "hidden"
-                      }`}
-                    >
-                      <div>
-                        {teama11Players?.map((player) => (
-                          <Link
-                            href={
-                              "/player/" +
-                              urlStringEncode(player?.name) +
-                              "/" +
-                              player?.player_id
-                            }
-                            key={player.player_id}
-                          >
-                            <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
-                              <div>
-                                <PlayerImage  key={player?.player_id} player_id={ player?.player_id} height={40} width={40} className="rounded-lg" />
-                                
-                              </div>
-                              <div className="font-medium">
-                                <h2 className="text-[15px]">
-                                  {" "}
-                                  {player.name}{" "}
-                                  {player.role_str !== ""
-                                    ? player.role_str
-                                    : ""}{" "}
-                                </h2>
-                                <p className="text-[#909090] font-normal">
-                                  {player.role}
-                                </p>
-                              </div>
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div
-                      className={`cust-box-click-content cust-box-click-playing12 mt-4 ${
-                        playing11Tab === "cust-box-click-playing12"
-                          ? ""
-                          : "hidden"
-                      }`}
-                    >
-                      <div>
-                        {teamb11Players?.map((player) => (
-                          <Link
-                            href={
-                              "/player/" +
-                              urlStringEncode(player?.name) +
-                              "/" +
-                              player?.player_id
-                            }
-                            key={player.player_id}
-                          >
-                            <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
-                              <div>
-                              <PlayerImage key={player?.player_id} player_id={ player?.player_id} height={40} width={40} className="rounded-lg" />
-                                
-                              </div>
-                              <div className="font-medium">
-                                <h2 className="text-[15px]">
-                                  {" "}
-                                  {player.name}{" "}
-                                  {player.role_str !== ""
-                                    ? player.role_str
-                                    : ""}{" "}
-                                </h2>
-                                <p className="text-[#909090] font-normal">
-                                  {player.role}
-                                </p>
-                              </div>
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="rounded-lg bg-[#ffffff] my-4 hidden md:block">
-                  <div className="p-4">
-                    <div className="flex space-x-2">
-                      <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
-                      <h3 className="text-1xl font-semibold mb-3">
-                        Pace vs Spin on Venue{" "}
-                        <span className="text-[#909090]">
-                          {" "}
-                          &nbsp;(Last 10 matches){" "}
-                        </span>
-                      </h3>
-                    </div>
-                    <div className="w-full">
-                      <div className="bg-[#B7132B] h-[4px] mr-2 mb-2">
-                        <div
-                          className="bg-[#13b76dbd] h-[4px]"
-                          style={{ width: "40%" }}
-                        />
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <p className=" text-gray-500">
-                          {" "}
-                          Pace:{" "}
-                          <span className="text-[#13b76dbd] text-[15px] font-semibold">
-                            40%{" "}
-                          </span>
-                        </p>
-                        <p className="text-gray-500 ">
-                          {" "}
-                          Spin:{" "}
-                          <span className="text-[#B7132B] text-[15px] font-semibold">
-                            60%{" "}
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="rounded-lg bg-[#ffffff]  my-4 hidden md:block">
+              <div className="rounded-lg bg-[#ffffff]  mb-4 hidden md:block">
                   <div className="p-4 cust-box-click-container">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex space-x-2">
@@ -1876,6 +1718,166 @@ export default function MoreInfo({
                     )}
                   </div>
                 </div>
+
+
+                <div className="rounded-lg bg-[#ffffff]">
+                  <div className="p-4 cust-box-click-container">
+                    <h3 className="text-1xl font-semibold pl-[7px] mb-3 border-l-[3px] border-[#229ED3]">
+                      Playing XI
+                    </h3>
+                    <div className="border-t-[1px] border-[#E4E9F0]" />
+                    <div className="flex items-center justify-around py-4">
+                      <button
+                        onClick={(e) =>
+                          handlePlaying11Tab(e, "cust-box-click-playing11")
+                        }
+                        className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${
+                          playing11Tab === "cust-box-click-playing11"
+                            ? "bg-[#081736] text-white"
+                            : "bg-[#ffffff] text-[#6A7586]"
+                        }`}
+                      >
+                        <span>{matchData?.match_info?.teama.name}</span>
+                      </button>
+
+                      <button
+                        onClick={(e) =>
+                          handlePlaying11Tab(e, "cust-box-click-playing12")
+                        }
+                        className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${
+                          playing11Tab === "cust-box-click-playing12"
+                            ? "bg-[#081736] text-white"
+                            : "bg-[#ffffff] text-[#6A7586]"
+                        }`}
+                      >
+                        <span>{matchData?.match_info?.teamb.name}</span>
+                      </button>
+                    </div>
+                    <div className="border-t-[1px] border-[#E4E9F0]" />
+
+                    <div
+                      className={`cust-box-click-content cust-box-click-playing11 mt-4 ${
+                        playing11Tab === "cust-box-click-playing11"
+                          ? ""
+                          : "hidden"
+                      }`}
+                    >
+                      <div>
+                        {teama11Players?.map((player) => (
+                          <Link
+                            href={
+                              "/player/" +
+                              urlStringEncode(player?.name) +
+                              "/" +
+                              player?.player_id
+                            }
+                            key={player.player_id}
+                          >
+                            <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
+                              <div>
+                                <PlayerImage  key={player?.player_id} player_id={ player?.player_id} height={35} width={35} className="rounded-lg" />
+                                
+                              </div>
+                              <div className="font-medium">
+                                <h2 className="text-[15px]">
+                                  {" "}
+                                  {player.name}{" "}
+                                  {player.role_str !== ""
+                                    ? player.role_str
+                                    : ""}{" "}
+                                </h2>
+                                <p className="text-[#909090] font-normal">
+                                  {player.role}
+                                </p>
+                              </div>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div
+                      className={`cust-box-click-content cust-box-click-playing12 mt-4 ${
+                        playing11Tab === "cust-box-click-playing12"
+                          ? ""
+                          : "hidden"
+                      }`}
+                    >
+                      <div>
+                        {teamb11Players?.map((player) => (
+                          <Link
+                            href={
+                              "/player/" +
+                              urlStringEncode(player?.name) +
+                              "/" +
+                              player?.player_id
+                            }
+                            key={player.player_id}
+                          >
+                            <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
+                              <div>
+                              <PlayerImage key={player?.player_id} player_id={ player?.player_id} height={35} width={35} className="rounded-lg" />
+                                
+                              </div>
+                              <div className="font-medium">
+                                <h2 className="text-[15px]">
+                                  {" "}
+                                  {player.name}{" "}
+                                  {player.role_str !== ""
+                                    ? player.role_str
+                                    : ""}{" "}
+                                </h2>
+                                <p className="text-[#909090] font-normal">
+                                  {player.role}
+                                </p>
+                              </div>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="rounded-lg bg-[#ffffff] my-4 hidden md:block">
+                  <div className="p-4">
+                    <div className="flex space-x-2">
+                      <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
+                      <h3 className="text-1xl font-semibold mb-3">
+                        Pace vs Spin on Venue{" "}
+                        <span className="text-[#909090]">
+                          {" "}
+                          &nbsp;(Last 10 matches){" "}
+                        </span>
+                      </h3>
+                    </div>
+                    <div className="w-full">
+                      <div className="bg-[#B7132B] h-[4px] mr-2 mb-2">
+                        <div
+                          className="bg-[#13b76dbd] h-[4px]"
+                          style={{ width: "40%" }}
+                        />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p className=" text-gray-500">
+                          {" "}
+                          Pace:{" "}
+                          <span className="text-[#13b76dbd] text-[15px] font-semibold">
+                            40%{" "}
+                          </span>
+                        </p>
+                        <p className="text-gray-500 ">
+                          {" "}
+                          Spin:{" "}
+                          <span className="text-[#B7132B] text-[15px] font-semibold">
+                            60%{" "}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                
               
               </div>
             </div>
