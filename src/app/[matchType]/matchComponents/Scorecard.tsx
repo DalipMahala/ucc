@@ -90,7 +90,7 @@ export default function Scorecard({
     <div className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
     <div className="my-4">
       <div id="tabs" className="my-4">
-        <div className="flex text-[14px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+        <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
         <Link href={"/moreinfo/"+matchUrl+"/" + match_id}>
             <button
               className="uppercase font-semibold py-2 px-3 whitespace-nowrap "

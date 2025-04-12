@@ -71,44 +71,44 @@ export default function Squads({
     return (
         <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
             <div id="tabs" className="my-4">
-            <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+            <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
         <Link href={"/moreinfo/"+matchUrl+"/" + match_id}>
             <button
-              className="font-medium py-2 px-3 whitespace-nowrap "
+              className="uppercase font-semibold py-2 px-3 whitespace-nowrap "
             >
               More Info
             </button>
           </Link>
           <Link href={"/live-score/"+matchUrl+"/" + match_id}>
             <button
-              className="font-medium py-2 px-3 whitespace-nowrap"
+              className="uppercase font-semibold py-2 px-3 whitespace-nowrap"
             >
               Live
             </button>
           </Link>
           <Link href={"/scorecard/"+matchUrl+"/" + match_id}>
             <button
-              className="font-medium py-2 px-3 whitespace-nowrap"
+              className="uppercase font-semibold py-2 px-3 whitespace-nowrap"
             >
               Scorecard
             </button>
           </Link>
           <Link href={"/squad/"+matchUrl+"/"+ match_id}>
             <button
-              className="font-medium py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
+              className="uppercase font-semibold py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
             >
               Squad
             </button>
           </Link>
           {isPointTable && (
           <Link href={"/series/"+urlStringEncode(matchDetails?.competition?.title+"-"+matchDetails?.competition?.season)+"/"+matchDetails?.competition?.cid+"/points-table"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
               Points Table
             </button>
           </Link>
           )}
           <Link href={"/series/"+urlStringEncode(matchDetails?.competition?.title+"-"+matchDetails?.competition?.season)+"/"+matchDetails?.competition?.cid+"/stats/most-run"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
               Stats
             </button>
           </Link>
@@ -165,7 +165,7 @@ export default function Squads({
                         {activeTab === "tab1" &&
                             <div id="south-team" className="team-content ">
                                 <div className="max-w-7xl mx-auto bg-white rounded-lg p-6">
-                                    <div className="flex items-center space-x-4 mb-6">
+                                    <div className="flex items-center space-x-4 mb-2">
                                         <Image  loading="lazy" 
                                             src={teamADetails.logo_url}
                                             width={45} height={45} alt={teamADetails.name}
@@ -176,6 +176,7 @@ export default function Squads({
                                             <span className="text-[#586577]">({teamASquad.length} players)</span>
                                         </h1>
                                     </div>
+                                    <div className='border-[E4E9F0] bottom-b-[1px] '></div>
                                     {/* Categories */}
                                     <div className="space-y-6">
                                         {/* Batsman Section */}
@@ -185,14 +186,14 @@ export default function Squads({
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                                 {teamASquadBatsmen?.map((squads:any, index:number) => (
-                                                <Link href={"/player/"+urlStringEncode(squads?.name)+"/"+squads?.player_id}  key={index}>
-                                                    <div className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]">
+                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(squads?.name)+"/"+squads?.player_id}  key={index}>
+                                                    <div className="text-center p-4">
                                                         <div className="relative">
-                                                        <PlayerImage key={squads?.player_id} player_id={squads?.player_id} width={50} height={50} className="w-[65px] h-[65px] mx-auto rounded-full mb-2" />
+                                                        <PlayerImage key={squads?.player_id} player_id={squads?.player_id} width={50} height={50} className="w-[41px] h-[47px] mx-auto rounded-full mb-2" />
                                                        
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/bat.png"
-                                                                className="h-[27px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
+                                                                className="h-[23px] absolute right-[15px] bottom-0 bg-white rounded-full p-[4px]"
                                                                 width={20} height={20} alt=""
                                                             />
                                                         </div>
@@ -213,15 +214,15 @@ export default function Squads({
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                             {teamASquadBowler?.map((bowler:any, index:number) => (
-                                                <Link href={"/player/"+urlStringEncode(bowler?.name)+"/"+bowler?.player_id}  key={index}>
-                                                    <div className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]">
+                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(bowler?.name)+"/"+bowler?.player_id}  key={index}>
+                                                    <div className="text-center p-4">
                                                         <div className="relative">
-                                                        <PlayerImage key={bowler?.player_id} player_id={bowler?.player_id} width={80} height={80} className="w-16 h-16 mx-auto rounded-full mb-2" />
+                                                        <PlayerImage key={bowler?.player_id} player_id={bowler?.player_id} width={41} height={47} className="w-[41px] h-[47px] mx-auto rounded-full mb-2" />
                                                        
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/ball.png"
-                                                                className="h-[24px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
-                                                                width={24} height={24} alt=""
+                                                                className="h-[19px] w-[19px] absolute right-[19px] bottom-0 bg-white rounded-full p-[4px]"
+                                                                width={19} height={19} alt=""
                                                             />
                                                         </div>
                                                         <h3 className="text-sm font-medium text-[#211726]">
@@ -241,14 +242,14 @@ export default function Squads({
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                             {teamASquadAll?.map((allrounder:any, index:number) => (
-                                                <Link href={"/player/"+urlStringEncode(allrounder?.name)+"/"+allrounder?.player_id}  key={index}>
-                                                    <div className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]">
+                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(allrounder?.name)+"/"+allrounder?.player_id}  key={index}>
+                                                    <div className="text-center p-4">
                                                         <div className="relative">
-                                                        <PlayerImage key={allrounder?.player_id} player_id={allrounder?.player_id} width={80} height={80} className="w-16 h-16 mx-auto rounded-full mb-2" />
+                                                        <PlayerImage key={allrounder?.player_id} player_id={allrounder?.player_id} width={41} height={47} className="w-[41px] h-[47px] mx-auto rounded-full mb-2" />
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/bat-ball.png"
-                                                                className="h-[27px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
-                                                                width={27} height={27} alt=""
+                                                                className="h-[23px] w-[23px] absolute right-[15px] bottom-0 bg-white rounded-full p-[4px]"
+                                                                width={23} height={23} alt=""
                                                             />
                                                         </div>
                                                         <h3 className="text-sm font-medium text-[#211726]">
@@ -289,14 +290,14 @@ export default function Squads({
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                                 {teamBSquadBatsmen?.map((squads:any, index:number) => (
-                                                <Link href={"/player/"+urlStringEncode(squads?.name)+"/"+squads?.player_id}  key={index}>
-                                                    <div className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]">
+                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(squads?.name)+"/"+squads?.player_id}  key={index}>
+                                                    <div className="text-center p-4">
                                                         <div className="relative">
-                                                        <PlayerImage key={squads?.player_id} player_id={squads?.player_id} width={80} height={80} className="w-16 h-16 mx-auto rounded-full mb-2" />
+                                                        <PlayerImage key={squads?.player_id} player_id={squads?.player_id} width={41} height={47} className="w-[41px] h-[47px] mx-auto rounded-full mb-2" />
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/bat.png"
-                                                                className="h-[27px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
-                                                                width={27} height={27} alt=""
+                                                                className="h-[23px] absolute right-[15px] bottom-0 bg-white rounded-full p-[4px]"
+                                                                width={20} height={20} alt=""
                                                             />
                                                         </div>
                                                         <h3 className="text-sm font-medium text-[#217AF7] ">
@@ -316,14 +317,14 @@ export default function Squads({
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                             {teamBSquadBowler?.map((bowler:any, index:number) => (
-                                                <Link href={"/player/"+urlStringEncode(bowler?.name)+"/"+bowler?.player_id}  key={index}>
-                                                    <div className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]">
+                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(bowler?.name)+"/"+bowler?.player_id}  key={index}>
+                                                    <div className="text-center p-4">
                                                         <div className="relative">
-                                                        <PlayerImage key={bowler?.player_id} player_id={bowler?.player_id} width={80} height={80} className="w-16 h-16 mx-auto rounded-full mb-2" />
+                                                        <PlayerImage key={bowler?.player_id} player_id={bowler?.player_id} width={41} height={47} className="w-[41] h-[47] mx-auto rounded-full mb-2" />
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/ball.png"
-                                                                className="h-[24px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
-                                                                width={24} height={24} alt=""
+                                                                className="h-[19px] w-[19px] absolute right-[19px] bottom-0 bg-white rounded-full p-[4px]"
+                                                                width={19} height={19} alt=""
                                                             />
                                                         </div>
                                                         <h3 className="text-sm font-medium text-[#211726]">
@@ -343,14 +344,14 @@ export default function Squads({
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                             {teamBSquadAll?.map((allrounder:any, index:number) => (
-                                                <Link href={"/player/"+urlStringEncode(allrounder.name)+"/"+allrounder.player_id}  key={index}>
-                                                    <div className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]">
+                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(allrounder.name)+"/"+allrounder.player_id}  key={index}>
+                                                    <div className="text-center p-4 rounded-md ">
                                                         <div className="relative">
-                                                        <PlayerImage key={allrounder?.player_id} player_id={allrounder?.player_id} width={80} height={80} className="w-16 h-16 mx-auto rounded-full mb-2" />
+                                                        <PlayerImage key={allrounder?.player_id} player_id={allrounder?.player_id} width={41} height={47} className="w-[41] h-[47] mx-auto rounded-full mb-2" />
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/bat-ball.png"
-                                                                className="h-[27px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
-                                                                width={27} height={27} alt=""
+                                                                className="h-[23px] w-[23px] absolute right-[15px] bottom-0 bg-white rounded-full p-[4px]"
+                                                                width={23} height={23} alt=""
                                                             />
                                                         </div>
                                                         <h3 className="text-sm font-medium text-[#211726]">

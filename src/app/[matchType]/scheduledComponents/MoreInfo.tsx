@@ -202,36 +202,36 @@ export default function MoreInfo({
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
       <div id="tabs" className="my-4">
-        <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+        <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
           <Link href={"/moreinfo/" + matchUrl + "/" + match_id}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap  bg-[#1A80F8] text-white rounded-md">
+            <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap  bg-[#1A80F8] text-white rounded-md">
               More Info
             </button>
           </Link>
           <Link href={"/live-score/" + matchUrl + "/" + match_id}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
               Live
             </button>
           </Link>
           <Link href={"/scorecard/" + matchUrl + "/" + match_id}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
               Scorecard
             </button>
           </Link>
           <Link href={"/squad/" + matchUrl + "/" + match_id}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
               Squad
             </button>
           </Link>
           {isPointTable && (
           <Link href={"/series/"+urlStringEncode(matchData?.match_info?.competition?.title+"-"+matchData?.match_info?.competition?.season)+"/"+matchData?.match_info?.competition?.cid+"/points-table"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
               Points Table
             </button>
           </Link>
           )}
           <Link href={"/series/"+urlStringEncode(matchData?.match_info?.competition?.title+"-"+matchData?.match_info?.competition?.season)+"/"+matchData?.match_info?.competition?.cid+"/stats/most-run"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
               Stats
             </button>
           </Link>
@@ -252,19 +252,19 @@ export default function MoreInfo({
                   {/* Responsive Grid Section */}
                   <div className="grid md:gap-6 gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-3 px-2">
                     <div>
-                      <h2 className="text-[15px] font-medium">Series :</h2>
+                      <h2 className="text-[13px] font-medium">Series :</h2>
                       <p className="font-normal text-[#586577]">
                         {matchData?.match_info?.competition?.title}
                       </p>
                     </div>
                     <div>
-                      <h2 className="text-[15px] font-medium">Date :</h2>
+                      <h2 className="text-[13px] font-medium">Date :</h2>
                       <p className="font-normal text-[#586577]">
                       {matchData?.match_info?.date_start_ist}
                       </p>
                     </div>
                     <div>
-                      <h2 className="text-[15px] font-medium">Stadium :</h2>
+                      <h2 className="text-[13px] font-medium">Stadium :</h2>
                       <p className="font-normal text-[#586577]">
                       {matchData?.match_info?.venue?.name}, {matchData?.match_info?.venue?.location}
                       </p>
@@ -274,13 +274,13 @@ export default function MoreInfo({
                   {/* Responsive Grid Section */}
                   <div className="grid md:gap-6 gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-3 px-2">
                     <div>
-                      <h2 className="text-[15px] font-medium">
+                      <h2 className="text-[13px] font-medium">
                         Third Umpire :
                       </h2>
                       <p className="font-normal text-[#586577]">{matchData?.match_info?.umpires}</p>
                     </div>
                     <div>
-                      <h2 className="text-[15px] font-medium">
+                      <h2 className="text-[13px] font-medium">
                         On-field Umpire :
                       </h2>
                       <p className="font-normal text-[#586577]">
@@ -288,7 +288,7 @@ export default function MoreInfo({
                       </p>
                     </div>
                     <div>
-                      <h2 className="text-[15px] font-medium">Referee :</h2>
+                      <h2 className="text-[13px] font-medium">Referee :</h2>
                       <p className="font-normal text-[#586577]">{matchData?.match_info?.referee}</p>
                     </div>
                   </div>
@@ -299,7 +299,7 @@ export default function MoreInfo({
                 <div>
                   <h3 className="text-[15px] font-semibold  pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
                     Recent Performance{" "}
-                    <span className="text-[#909090]"> (Last 5 match) </span>
+                    <span className="text-[#5C6081]"> (Last 5 match) </span>
                   </h3>
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <div className="md:px-2">
@@ -336,14 +336,14 @@ export default function MoreInfo({
                                   items.winning_team_id === teama_id ? (
                                     <span
                                       key={items.match_id}
-                                      className="bg-[#13b76dbd] text-white text-[13px] px-[6px] py-[3px] rounded"
+                                      className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded"
                                     >
                                       W
                                     </span>
                                   ) : (
                                     <span
                                       key={items.match_id}
-                                      className="bg-[#f63636c2] text-white text-[13px] px-[7px] py-[3px] rounded"
+                                      className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded"
                                     >
                                       L
                                     </span>
@@ -401,7 +401,7 @@ export default function MoreInfo({
                                                 height={25}
                                                 alt={items.teama.short_name}
                                               />
-                                              <span className="text-[#909090]">
+                                              <span className="text-[#5C6081]">
                                                 {items.teama.short_name}
                                               </span>
                                             </div>
@@ -417,7 +417,7 @@ export default function MoreInfo({
                                           <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                             <p>{items.teamb.scores}</p>
                                             <div className="flex items-center space-x-1">
-                                              <span className="text-[#909090]">
+                                              <span className="text-[#5C6081]">
                                                 {items.teamb.short_name}
                                               </span>
                                               <Image  loading="lazy" 
@@ -436,7 +436,7 @@ export default function MoreInfo({
                                           <p className="font-medium">
                                             {items.subtitle}
                                           </p>
-                                          <p className="text-[#909090] font-normal">
+                                          <p className="text-[#5C6081] font-normal">
                                             {items.short_title}
                                           </p>
                                         </div>
@@ -445,11 +445,11 @@ export default function MoreInfo({
                                         <div className="text-center">
                                           {items.winning_team_id ===
                                           teama_id ? (
-                                            <span className="bg-[#13b76dbd] text-white text-[13px] px-[6px] py-[3px] rounded">
+                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
                                               W
                                             </span>
                                           ) : (
-                                            <span className="bg-[#f63636c2] text-white text-[13px] px-[7px] py-[3px] rounded">
+                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded">
                                               L
                                             </span>
                                           )}
@@ -477,7 +477,7 @@ export default function MoreInfo({
                                         height={25}
                                         alt={items.teama.short_name}
                                       />
-                                      <span className="text-[#909090]">
+                                      <span className="text-[#5C6081]">
                                       {items.teama.short_name}
                                       </span>
                                     </div>
@@ -495,7 +495,7 @@ export default function MoreInfo({
                                         height={25}
                                         alt={items.teamb.short_name}
                                       />
-                                      <span className="text-[#909090]">
+                                      <span className="text-[#5C6081]">
                                       {items.teamb.short_name}
                                       </span>
                                     </div>
@@ -507,7 +507,7 @@ export default function MoreInfo({
                               <div className="flex items-center space-x-4">
                                 <div className="text-right leading-6">
                                   <p className="font-medium"> {items.subtitle}</p>
-                                  <p className="text-[#909090] font-normal">
+                                  <p className="text-[#5C6081] font-normal">
                                   {items.short_title}
                                   </p>
                                 </div>
@@ -515,11 +515,11 @@ export default function MoreInfo({
                                   <div className="text-center">
                                   {items.winning_team_id ===
                                           teama_id ? (
-                                            <span className="bg-[#13b76dbd] text-white text-[13px] px-[6px] py-[3px] rounded">
+                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
                                               W
                                             </span>
                                           ) : (
-                                            <span className="bg-[#f63636c2] text-white text-[13px] px-[7px] py-[3px] rounded">
+                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded">
                                               L
                                             </span>
                                           )}
@@ -569,14 +569,14 @@ export default function MoreInfo({
                                     items.winning_team_id === teamb_id ? (
                                       <span
                                         key={items.match_id}
-                                        className="bg-[#13b76dbd] text-white text-[13px] px-[6px] py-[3px] rounded"
+                                        className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded"
                                       >
                                         W
                                       </span>
                                     ) : (
                                       <span
                                         key={items.match_id}
-                                        className="bg-[#f63636c2] text-white text-[13px] px-[7px] py-[3px] rounded"
+                                        className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded"
                                       >
                                         L
                                       </span>
@@ -635,7 +635,7 @@ export default function MoreInfo({
                                                 height={25}
                                                 alt={items.teama.short_name}
                                               />
-                                              <span className="text-[#909090]">
+                                              <span className="text-[#5C6081]">
                                                 {items.teama.short_name}
                                               </span>
                                             </div>
@@ -651,7 +651,7 @@ export default function MoreInfo({
                                           <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                             <p>{items.teamb.scores}</p>
                                             <div className="flex items-center space-x-1">
-                                              <span className="text-[#909090]">
+                                              <span className="text-[#5C6081]">
                                                 {items.teamb.short_name}
                                               </span>
                                               <Image  loading="lazy" 
@@ -670,7 +670,7 @@ export default function MoreInfo({
                                           <p className="font-medium">
                                             {items.subtitle}
                                           </p>
-                                          <p className="text-[#909090] font-normal">
+                                          <p className="text-[#5C6081] font-normal">
                                             {items.short_title}
                                           </p>
                                         </div>
@@ -679,11 +679,11 @@ export default function MoreInfo({
                                         <div className="text-center">
                                           {items.winning_team_id ===
                                           teamb_id ? (
-                                            <span className="bg-[#13b76dbd] text-white text-[13px] px-[6px] py-[3px] rounded">
+                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
                                               W
                                             </span>
                                           ) : (
-                                            <span className="bg-[#f63636c2] text-white text-[13px] px-[7px] py-[3px] rounded">
+                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded">
                                               L
                                             </span>
                                           )}
@@ -711,7 +711,7 @@ export default function MoreInfo({
                                         height={25}
                                         alt={items.teama.short_name}
                                       />
-                                      <span className="text-[#909090]">
+                                      <span className="text-[#5C6081]">
                                       {items.teama.short_name}
                                       </span>
                                     </div>
@@ -729,7 +729,7 @@ export default function MoreInfo({
                                         height={25}
                                         alt={items.teamb.short_name}
                                       />
-                                      <span className="text-[#909090]">
+                                      <span className="text-[#5C6081]">
                                       {items.teamb.short_name}
                                       </span>
                                     </div>
@@ -741,7 +741,7 @@ export default function MoreInfo({
                               <div className="flex items-center space-x-4">
                                 <div className="text-right leading-6">
                                   <p className="font-medium"> {items.subtitle}</p>
-                                  <p className="text-[#909090] font-normal">
+                                  <p className="text-[#5C6081] font-normal">
                                   {items.short_title}
                                   </p>
                                 </div>
@@ -749,11 +749,11 @@ export default function MoreInfo({
                                   <div className="text-center">
                                   {items.winning_team_id ===
                                           teamb_id ? (
-                                            <span className="bg-[#13b76dbd] text-white text-[13px] px-[6px] py-[3px] rounded">
+                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
                                               W
                                             </span>
                                           ) : (
-                                            <span className="bg-[#f63636c2] text-white text-[13px] px-[7px] py-[3px] rounded">
+                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded">
                                               L
                                             </span>
                                           )}
@@ -795,7 +795,7 @@ export default function MoreInfo({
                     <div className=" font-normal text-center">
                       <p className="text-[#D28505] text-[17px] font-semibold">
                         {teamaWinMatch}{" "}
-                        <span className="text-[#009900]">
+                        <span className="text-[#13B76D]">
                           - {teambWinMatch}
                         </span>
                       </p>
@@ -822,7 +822,7 @@ export default function MoreInfo({
                       className="py-4 flex justify-between items-center"
                       key={index}
                     >
-                      <Link href="">
+                      <Link href="" className="w-[20%]">
                         <div className="font-medium  w-full">
                           <p className="mx-2 font-semibold uppercase">
                             {items.teama.short_name}
@@ -832,13 +832,13 @@ export default function MoreInfo({
                           </p>
                         </div>
                       </Link>
-                      <div className=" font-semibold text-center w-full">
+                      <div className=" font-semibold text-center w-[60%]">
                         <p className="text-[#3D4DCF]">{items.status_note}</p>
                         <p className="text-[#586577] font-medium">
                           {items.subtitle}, {items.short_title}
                         </p>
                       </div>
-                      <Link href="">
+                      <Link href="" className="w-[20%]">
                         <div className="font-medium text-right w-full">
                           <p className="mx-2 font-semibold uppercase">
                             {items.teamb.short_name}
@@ -910,7 +910,7 @@ export default function MoreInfo({
                                 />
                                 <p className="mx-2 text-1xl font-semibold">
                                   {matchData?.match_info?.teama?.short_name}
-                                  <span className="text-[13px] text-[#9094b6] font-medium block">
+                                  <span className="text-[13px] text-[#5C6081] font-medium block">
                                     vs all teams
                                   </span>
                                 </p>
@@ -920,7 +920,7 @@ export default function MoreInfo({
                               <div className="font-bold flex items-center">
                                 <p className="mx-2 text-1xl font-semibold text-right">
                                   {matchData?.match_info?.teamb?.short_name}
-                                  <span className="text-[13px] text-[#9094b6] font-medium block">
+                                  <span className="text-[13px] text-[#5C6081] font-medium block">
                                     vs all teams
                                   </span>
                                 </p>
@@ -942,7 +942,7 @@ export default function MoreInfo({
                               </p>
                             </div>
                             <div className=" font-semibold text-center w-full">
-                              <p className="text-[#73758B] font-normal">
+                              <p className="text-[#586577] font-normal">
                                 Matches Played
                               </p>
                             </div>
@@ -960,7 +960,7 @@ export default function MoreInfo({
                               </p>
                             </div>
                             <div className=" font-semibold text-center w-full">
-                              <p className="text-[#73758B] font-normal">Win</p>
+                              <p className="text-[#586577] font-normal">Win</p>
                             </div>
                             <div className="font-medium text-right w-full">
                               <p className="text-[#586577] font-medium">
@@ -976,7 +976,7 @@ export default function MoreInfo({
                               </p>
                             </div>
                             <div className=" font-semibold text-center w-full">
-                              <p className="text-[#73758B] font-normal">
+                              <p className="text-[#586577] font-normal">
                                 Avg Score
                               </p>
                             </div>
@@ -994,7 +994,7 @@ export default function MoreInfo({
                               </p>
                             </div>
                             <div className=" font-semibold text-center w-full">
-                              <p className="text-[#73758B] font-normal">
+                              <p className="text-[#586577] font-normal">
                                 Highest Score
                               </p>
                             </div>
@@ -1012,7 +1012,7 @@ export default function MoreInfo({
                               </p>
                             </div>
                             <div className=" font-semibold text-center w-full">
-                              <p className="text-[#73758B] font-normal">
+                              <p className="text-[#586577] font-normal">
                                 Lowest Score
                               </p>
                             </div>
@@ -1049,7 +1049,7 @@ export default function MoreInfo({
                                   />
                                   <p className="mx-2 text-1xl font-semibold">
                                     {matchData?.match_info?.teama?.short_name}
-                                    <span className="text-[13px] text-[#9094b6] font-medium block">
+                                    <span className="text-[13px] text-[#5C6081] font-medium block">
                                       vs all teams
                                     </span>
                                   </p>
@@ -1059,7 +1059,7 @@ export default function MoreInfo({
                                 <div className="font-bold flex items-center">
                                   <p className="mx-2 text-1xl font-semibold text-right">
                                     {matchData?.match_info?.teamb?.short_name}
-                                    <span className="text-[13px] text-[#9094b6] font-medium block">
+                                    <span className="text-[13px] text-[#5C6081] font-medium block">
                                       vs all teams
                                     </span>
                                   </p>
@@ -1083,7 +1083,7 @@ export default function MoreInfo({
                                 </p>
                               </div>
                               <div className=" font-semibold text-center w-full">
-                                <p className="text-[#73758B] font-normal">
+                                <p className="text-[#586577] font-normal">
                                   Matches Played
                                 </p>
                               </div>
@@ -1101,7 +1101,7 @@ export default function MoreInfo({
                                 </p>
                               </div>
                               <div className=" font-semibold text-center w-full">
-                                <p className="text-[#73758B] font-normal">
+                                <p className="text-[#586577] font-normal">
                                   Win
                                 </p>
                               </div>
@@ -1119,7 +1119,7 @@ export default function MoreInfo({
                                 </p>
                               </div>
                               <div className=" font-semibold text-center w-full">
-                                <p className="text-[#73758B] font-normal">
+                                <p className="text-[#586577] font-normal">
                                   Avg Score
                                 </p>
                               </div>
@@ -1137,7 +1137,7 @@ export default function MoreInfo({
                                 </p>
                               </div>
                               <div className=" font-semibold text-center w-full">
-                                <p className="text-[#73758B] font-normal">
+                                <p className="text-[#586577] font-normal">
                                   Highest Score
                                 </p>
                               </div>
@@ -1155,7 +1155,7 @@ export default function MoreInfo({
                                 </p>
                               </div>
                               <div className=" font-semibold text-center w-full">
-                                <p className="text-[#73758B] font-normal">
+                                <p className="text-[#586577] font-normal">
                                   Lowest Score
                                 </p>
                               </div>
@@ -1286,7 +1286,7 @@ export default function MoreInfo({
                         className="flex justify-center items-center w-[81px] h-[81px] rounded-full"
                         style={{
                           background:
-                            "conic-gradient(#3e436d 0 0%, #b7132b 0 "+matchVenueStats?.first_batting_match_won+"%, #13b76dbd 0 "+matchVenueStats?.first_bowling_match_won+"%)",
+                            "conic-gradient(#3e436d 0 0%, #b7132b 0 "+matchVenueStats?.first_batting_match_won+"%, #13B76D 0 "+matchVenueStats?.first_bowling_match_won+"%)",
                         }}
                       >
                         <div className="flex flex-col items-center w-[65px] h-[64px] p-4 rounded-full bg-white">
@@ -1297,7 +1297,7 @@ export default function MoreInfo({
                   </div>
                   <div className="col-span-1 relative">
                     <div className="pb-5">
-                      <p className="text-[#13b76dbd] font-semibold">{matchVenueStats?.first_batting_match_won}%</p>
+                      <p className="text-[#13B76D] font-semibold">{matchVenueStats?.first_batting_match_won}%</p>
                       <p className="text-[13px] text-[#3E436D]">
                         Win Bat first{" "}
                       </p>
@@ -1361,7 +1361,7 @@ export default function MoreInfo({
                         className="flex justify-center items-center w-[81px] h-[81px] rounded-full"
                         style={{
                           background:
-                            "conic-gradient(#3e436d 0 0%, #b7132b 0 "+matchVenueStats?.first_batting_match_won+"%, #13b76dbd 0 "+matchVenueStats?.first_bowling_match_won+"%)",
+                            "conic-gradient(#3e436d 0 0%, #b7132b 0 "+matchVenueStats?.first_batting_match_won+"%, #13B76D 0 "+matchVenueStats?.first_bowling_match_won+"%)",
                         }}
                       >
                         <div className="flex flex-col items-center w-[65px] h-[64px] p-4 rounded-full bg-white">
@@ -1375,7 +1375,7 @@ export default function MoreInfo({
                         <p className="text-[13px] text-[#3E436D]">
                           Win Bat first{" "}
                         </p>
-                        <p className="text-[#13b76dbd] font-semibold text-1xl">
+                        <p className="text-[#13B76D] font-semibold text-1xl">
                         {matchVenueStats?.first_batting_match_won}%
                         </p>
                       </div>
@@ -1439,7 +1439,7 @@ export default function MoreInfo({
                     <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
                     <h3 className="text-1xl font-semibold mb-3">
                       Pace vs Spin on Venue{" "}
-                      <span className="text-[#909090]">
+                      <span className="text-[#5C6081]">
                         {" "}
                         &nbsp;(Last 10 matches){" "}
                       </span>
@@ -1448,7 +1448,7 @@ export default function MoreInfo({
                   <div className="w-full">
                     <div className="bg-[#B7132B] h-[4px] mr-2 mb-2">
                       <div
-                        className="bg-[#13b76dbd] h-[4px]"
+                        className="bg-[#13B76D] h-[4px]"
                         style={{ width: "40%" }}
                       />
                     </div>
@@ -1456,7 +1456,7 @@ export default function MoreInfo({
                       <p className=" text-gray-500">
                         {" "}
                         Pace:{" "}
-                        <span className="text-[#13b76dbd] text-[15px] font-semibold">
+                        <span className="text-[#13B76D] text-[15px] font-semibold">
                           40%{" "}
                         </span>
                       </p>
@@ -1521,8 +1521,8 @@ export default function MoreInfo({
                       {teama11Players?.map((player:any) => (
                         <Link href={"/player/"+urlStringEncode(player?.name)+"/"+player?.player_id}  key={player.player_id}>
                           <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
-                            <div>
-                               <PlayerImage  key={player?.player_id} player_id={ player?.player_id} height={40} width={40} className="rounded-lg" />
+                            <div style={{ width: '40px', height: '40px' }}>
+                               <PlayerImage  key={player?.player_id} player_id={ player?.player_id} height={35} width={35} className="rounded-lg" />
                                                               
                             </div>
                             
@@ -1532,7 +1532,7 @@ export default function MoreInfo({
                                 {player.name}{" "}
                                 {player.role_str !== "" ? player.role_str : ""}{" "}
                               </h2>
-                              <p className="text-[#909090] font-normal">
+                              <p className="text-[#5C6081] font-normal">
                                 {player.role}
                               </p>
                             </div>
@@ -1563,7 +1563,7 @@ export default function MoreInfo({
                                 {player.name}{" "}
                                 {player.role_str !== "" ? player.role_str : ""}{" "}
                               </h2>
-                              <p className="text-[#909090] font-normal">
+                              <p className="text-[#5C6081] font-normal">
                                 {player.role}
                               </p>
                             </div>
@@ -1580,7 +1580,7 @@ export default function MoreInfo({
                     <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
                     <h3 className="text-1xl font-semibold mb-3">
                       Pace vs Spin on Venue{" "}
-                      <span className="text-[#909090]">
+                      <span className="text-[#5C6081]">
                         {" "}
                         &nbsp;(Last 10 matches){" "}
                       </span>
@@ -1589,7 +1589,7 @@ export default function MoreInfo({
                   <div className="w-full">
                     <div className="bg-[#B7132B] h-[4px] mr-2 mb-2">
                       <div
-                        className="bg-[#13b76dbd] h-[4px]"
+                        className="bg-[#13B76D] h-[4px]"
                         style={{ width: "40%" }}
                       />
                     </div>
@@ -1597,7 +1597,7 @@ export default function MoreInfo({
                       <p className=" text-gray-500">
                         {" "}
                         Pace:{" "}
-                        <span className="text-[#13b76dbd] text-[15px] font-semibold">
+                        <span className="text-[#13B76D] text-[15px] font-semibold">
                           40%{" "}
                         </span>
                       </p>

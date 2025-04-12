@@ -127,7 +127,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
               <div className="md:py-4 py-2 md:mb-0 mb-2">
                 <Link
                   href={
-                    "/morenfo/" +
+                    "/moreinfo/" +
                     urlStringEncode(
                       slide?.teams?.[0].country +
                       "-vs-" +
@@ -169,15 +169,18 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                     <div className=" h-[70px] border-l-[1px] border-[#d0d3d7]"></div>
                     <div className="font-semibold w-[50%] text-center">
                       {isSameDay(new Date(), new Date(slide.countdown)) ? (
-
+                        <>
+                        <span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
+                        
                         <CountdownTimer targetTime={slide.countdown} />
+                        </>
 
                       ) : (
                         <p className="text-[#586577] text-[13px] mb:mb-4 mb-1 font-medium">
 
                           {format(new Date(slide.countdown), "dd MMMM - EEEE")}
                           <br />
-                          <span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
+                          
                           <span className="text-[#144280] text-[14px] font-semibold">
                             {" "}
                             {format(new Date(slide.countdown), "hh:mm:aa")}{" "}

@@ -194,7 +194,7 @@ export default function MoreInfo({
     <>
       <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
         <div id="tabs" className="my-4">
-          <div className="flex text-[14px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+          <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
             <Link href={"/moreinfo/" + matchUrl + "/" + match_id}>
               <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap  bg-[#1A80F8] text-white rounded-md">
                 More Info
@@ -829,7 +829,7 @@ export default function MoreInfo({
                           className="py-4 flex justify-between items-center"
                           key={index}
                         >
-                          <Link href="">
+                          <Link className="w-[20%]" href="">
                             <div className="font-medium  w-full">
                               <p className="mx-2 font-semibold uppercase">
                                 {items.teama.short_name}
@@ -839,15 +839,15 @@ export default function MoreInfo({
                               </p>
                             </div>
                           </Link>
-                          <div className=" font-semibold text-center w-full">
+                          <div className=" font-semibold text-center w-[60%]">
                             <p className="text-[#3D4DCF]">
                               {items.status_note}
                             </p>
                             <p className="text-[#586577] font-medium">
-                              {items.subtitle}, {items.short_title}
+                              {items.subtitle} {items.short_title}
                             </p>
                           </div>
-                          <Link href="">
+                          <Link href="" className="w-[20%]">
                             <div className="font-medium text-right w-full">
                               <p className="mx-2 font-semibold uppercase">
                                 {items.teamb.short_name}

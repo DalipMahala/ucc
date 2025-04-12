@@ -488,19 +488,14 @@ export default function Banner({ matchData, match_id }: Banner) {
                 <span className="h-[10px] w-[10px] inline-block	bg-[#FF912C] rounded-full" />{" "}
                 {liveMatch?.match_info?.status_str}
               </div>
-              <div className="text-[#8192B4] font-normal w-full text-1xl md:text-center md:mx-0 my-3">
+              <div className="text-[#8192B4] font-medium w-full text-1xl md:text-center md:mx-0 my-3">
                 {liveMatch?.match_info?.short_title},&nbsp; {liveMatch?.match_info?.subtitle}
               </div>
 
-              <div className="flex text-[#8192B4] text-1xl font-normal w-full md:justify-end">
-                <Image
-                  src="/assets/img/clander.png"
-                  className="mr-2"
-                  width={20}
-                  height={10}
-                  alt=""
-                  loading="lazy"
-                />
+              <div className="flex gap-[3px] text-[#8192B4] text-1xl font-medium w-full md:justify-end">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                </svg>
                 {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "dd MMM yyyy") : ""}
               </div>
             </div>
@@ -508,10 +503,11 @@ export default function Banner({ matchData, match_id }: Banner) {
           <div className="border-t-[1px] border-[#E4E9F01A] h-48">
             <div className="lg:w-[1000px] mx-auto md:py-8 tracking-[1px]">
               <div className="flex py-8 justify-between items-center">
-                <div className="flex flex-col md:flex-row text-[#FF912C] font-bold uppercase  md:items-center items-start w-full">
+                <div className="flex flex-col md:flex-row text-[#FF912C] font-bold uppercase  md:items-center items-start w-[35%]">
                   {liveMatch?.match_info?.teama?.logo_url ? (
                     <Image
-                      className="md:h-[42px] md:w-[42px] h-[30px] w-[30px]"
+                      className="md:h-[42px] md:w-[42px] h-[30px] w-[30px] rounded-full"
+                      style={{ boxShadow: '0px 0px 3px 0px white' }}
                       src={liveMatch?.match_info?.teama?.logo_url}
                       width={30}
                       height={30}
@@ -520,16 +516,21 @@ export default function Banner({ matchData, match_id }: Banner) {
                     />
                   ) : (
                     "")}
-                  <p className="text-[#BDCCECA8] md:mx-3 mx-0 md:text-[18px] text-[14px] font-semibold uppercase">
+                  <p className="text-[#BDCCECA8] md:mx-3 mx-0 md:text-[22px] text-[14px] font-medium uppercase">
                     {liveMatch?.match_info?.teama?.short_name}
                   </p>
                 </div>
-                <div className="text-[#8192B4] font-normal w-full text-center">
+
+
+                <div className="text-[#8192B4] font-normal w-[30%] text-center">
                   <p className="text-[#C1CEEA] text-1xl"> {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "hh:mm:aa") : ""}  </p>
 
                   {liveMatch?.match_info?.date_start_ist ? isSameDay(new Date(), new Date(liveMatch?.match_info?.date_start_ist)) ? (
-                    <CountdownTimer targetTime={liveMatch?.match_info?.date_start_ist} />
 
+                    <div className="scheduled-timer">
+                      <CountdownTimer targetTime={liveMatch?.match_info?.date_start_ist} />
+                    </div>
+                    
                   ) : (
 
                     <p className="text-[#FFBD71] md:text-[24px] text-[16px] font-semibold">
@@ -539,14 +540,18 @@ export default function Banner({ matchData, match_id }: Banner) {
 
 
                 </div>
-                <div className="flex flex-col md:flex-row md:items-center items-end text-[#8192B4] font-normal w-full justify-end">
-                  <p className="text-[#BDCCECA8] md:block hidden md:text-[18px] text-[14px] md:mx-3 mx-0 font-semibold uppercase">
+
+
+                <div className="flex flex-col md:flex-row md:items-center items-end text-[#8192B4] font-normal w-[35%] justify-end">
+                  <p className="text-[#BDCCECA8] md:block hidden md:text-[22px] text-[14px] md:mx-3 mx-0 font-medium uppercase">
                     {liveMatch?.match_info?.teamb?.short_name}
                   </p>
                   {liveMatch?.match_info?.teamb?.logo_url ? (
                     <Image
                       src={liveMatch?.match_info?.teamb?.logo_url}
-                      className="md:h-[42px] md:w-[42px] h-[30px] w-[30px]"
+
+                      className="md:h-[42px] md:w-[42px] h-[30px] w-[30px] rounded-full"
+                      style={{ boxShadow: '0px 0px 3px 0px white' }}
                       width={30}
                       height={30}
                       alt={liveMatch?.match_info?.teamb?.short_name}
