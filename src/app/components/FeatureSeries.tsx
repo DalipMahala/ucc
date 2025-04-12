@@ -210,7 +210,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                                   loading="lazy"
                                 />
                                 <span className="text-[#586577] font-medium text-[14px]">
-                                  {matches[feature.cid]?.teama?.name}
+                                  {matches[feature.cid]?.teama?.short_name}
                                 </span>
                               </div>
                             </div>
@@ -227,7 +227,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                                     loading="lazy"
                                   />
                                   <span className="text-[#586577] font-medium text-[14px]">
-                                    {matches[feature.cid]?.teamb?.name}
+                                    {matches[feature.cid]?.teamb?.short_name}
                                   </span>
                                 </div>
                               </div>
@@ -278,8 +278,9 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                           <p className=" text-[#586577] font-medium">Schedule</p>
                         </Link>
                       </div>
-
-                      <Link href="#">
+                      {matches[feature.cid]?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(matches[feature.cid]?.format_str) &&
+                                <Link href={("/h2h/"+urlStringEncode(matches[feature.cid]?.teama?.name+"-vs-"+matches[feature.cid]?.teamb?.name)+"-head-to-head-in-"+matches[feature.cid]?.format_str).toLowerCase()}>
+                         
                         <div className="flex mt-2 justify-end items-center space-x-2">
                           <Image
                             src="/assets/img/home/handshake.png"
@@ -293,6 +294,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                           </span>
                         </div>
                       </Link>
+                      }
                     </div>
                   </div>
                 )}
@@ -350,7 +352,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                                 <div>
                                   <span className="flex items-center gap-1">
                                     <span className="text-[#5e5e5e] font-medium">
-                                      {matches[feature.cid]?.teama?.name}
+                                      {matches[feature.cid]?.teama?.short_name}
                                     </span>
                                   </span>
                                 </div>
@@ -371,7 +373,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                                   <div>
                                     <span className="flex items-center gap-1">
                                       <span className="text-[#5e5e5e] font-medium">
-                                        {matches[feature.cid]?.teamb?.name}
+                                        {matches[feature.cid]?.teamb?.short_name}
                                       </span>
                                     </span>
                                   </div>
@@ -415,6 +417,9 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                             </p>
                           </Link>
                           <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                          {matches[feature.cid]?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(matches[feature.cid]?.format_str) &&
+                                <Link href={("/h2h/"+urlStringEncode(matches[feature.cid]?.teama?.name+"-vs-"+matches[feature.cid]?.teamb?.name)+"-head-to-head-in-"+matches[feature.cid]?.format_str).toLowerCase()}>
+                         
                           <div className="flex justify-end items-center space-x-2">
                             <Image
                               src="/assets/img/home/handshake.png"
@@ -429,6 +434,8 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                               H2H
                             </span>
                           </div>
+                          </Link>
+                        }
                         </div>
 
                         <div className="flex items-center space-x-2 text-[13px]">

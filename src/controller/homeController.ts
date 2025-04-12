@@ -383,32 +383,33 @@ export async function GetCountryCompitition() {
   try {
     // Execute the optimized SQL query
     const [rows] = await db.execute(`
-          SELECT 
-    co.country_name,  
-    co.country_code,  
-    JSON_ARRAYAGG(
-        JSON_OBJECT(
-            'cid', c.cid,
-            'title', c.title,
-            'abbr', c.abbr,
-            'category', c.category,
-            'status', c.status,
-            'game_format', c.game_format,
-            'season', c.season,
-            'datestart', c.datestart,
-            'dateend', c.dateend,
-            'total_matches', c.total_matches
-        )
-    ) AS competitions 
+      SELECT 
+co.country_name,  
+co.country_code,  
+JSON_ARRAYAGG(
+    JSON_OBJECT(
+        'cid', c.cid,
+        'title', c.title,
+        'abbr', c.abbr,
+        'category', c.category,
+        'status', c.status,
+        'game_format', c.game_format,
+        'season', c.season,
+        'datestart', c.datestart,
+        'dateend', c.dateend,
+        'total_matches', c.total_matches
+    )
+) AS competitions 
 FROM (
-    SELECT 
-        c.cid, c.title, c.abbr, c.category, c.status, c.game_format, 
-        c.season, c.datestart, c.dateend, c.total_matches, c.country
-    FROM competitions c
-    WHERE c.category = 'domestic' AND c.season = 2025
+SELECT 
+    c.cid, c.title, c.abbr, c.category, c.status, c.game_format, 
+    c.season, c.datestart, c.dateend, c.total_matches, c.country
+FROM competitions c
+WHERE c.category = 'domestic' AND c.season = 2025
 ) c 
 INNER JOIN countries co ON c.country = co.country_code  
 GROUP BY co.country_name, co.country_code;
+         
 
 `);
 
@@ -421,26 +422,3 @@ GROUP BY co.country_name, co.country_code;
 }
 
       
-// SELECT 
-//     co.country_name,  
-//     co.country_code,  
-//     CONCAT('[', GROUP_CONCAT(
-//         CONCAT(
-//             '"cid": ', QUOTE(c.cid), ', ',
-//             '"title": ', QUOTE(c.title), ', ',
-//             '"abbr": ', QUOTE(c.abbr), ', ',
-//             '"category": ', QUOTE(c.category), ', ',
-//             '"status": ', QUOTE(c.status), ', ',
-//             '"game_format": ', QUOTE(c.game_format), ', ',
-//             '"season": ', QUOTE(c.season), ', ',
-//             '"datestart": ', QUOTE(c.datestart), ', ',
-//             '"dateend": ', QUOTE(c.dateend), ''
-//         )
-//         ORDER BY c.cid
-//         SEPARATOR ','
-//     ), ']') AS competitions 
-// FROM competitions c
-// INNER JOIN countries co ON c.country = co.country_code
-// WHERE c.category = 'domestic' 
-//   AND c.season = 2025
-// GROUP BY co.country_name, co.country_code;

@@ -42,13 +42,14 @@ export async function H2hDetails(tableName: string,teama:number,teamb:number) {
 }
 
 export async function getTeamId(teamName:string) {
-  const lowerName = teamName.toLowerCase();
+  const formattedName = teamName?.replaceAll('-', ' ');
+  const lowerName =  formattedName?.toLowerCase() ?? ''; 
     const [rows]:any = await db.query('SELECT tid FROM teams WHERE LOWER(title) = ? LIMIT 1',[lowerName]);
     return rows[0]?.tid ?? 0;
 }
 
 export async function h2hMatch(matchFormat: string,teama:number,teamb:number) {
-    const [rows]:any = await db.query(`SELECT * FROM matches WHERE LOWER(format_str) = '${matchFormat}' AND ( ( JSON_UNQUOTE(JSON_EXTRACT(teama, '$.team_id')) = ${teama} AND JSON_UNQUOTE(JSON_EXTRACT(teamb, '$.team_id')) = ${teamb}) OR ( JSON_UNQUOTE(JSON_EXTRACT(teama, '$.team_id')) = ${teamb} AND JSON_UNQUOTE(JSON_EXTRACT(teamb, '$.team_id')) = ${teamb}) ) ORDER BY date_end_ist DESC LIMIT 6`);
+    const [rows]:any = await db.query(`SELECT * FROM matches WHERE status = 2 and LOWER(format_str) = '${matchFormat}' AND ( ( JSON_UNQUOTE(JSON_EXTRACT(teama, '$.team_id')) = ${teama} AND JSON_UNQUOTE(JSON_EXTRACT(teamb, '$.team_id')) = ${teamb}) OR ( JSON_UNQUOTE(JSON_EXTRACT(teama, '$.team_id')) = ${teamb} AND JSON_UNQUOTE(JSON_EXTRACT(teamb, '$.team_id')) = ${teamb}) ) ORDER BY date_end_ist DESC LIMIT 6`);
     return rows ?? [];
 }
 

@@ -459,7 +459,9 @@ export default function ScheduleResults({
                             </Link>
                           </div>
 
-                          <Link href="/h2h">
+                          {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
+                                <Link href={("/h2h/"+urlStringEncode(items?.teama?.name+"-vs-"+items?.teamb?.name)+"-head-to-head-in-"+items?.format_str).toLowerCase()}>
+                                 
                             <div className="flex mt-2 justify-end items-center space-x-2">
                               <Image  loading="lazy" 
                                 src="/assets/img/home/handshake.png"
@@ -472,6 +474,7 @@ export default function ScheduleResults({
                               </span>
                             </div>
                           </Link>
+                        }
                         </div>
                       </div>
 
@@ -679,7 +682,9 @@ export default function ScheduleResults({
 
                               <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                               </>}
-                              <Link href="#">
+                              {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
+                                <Link href={("/h2h/"+urlStringEncode(items?.teama?.name+"-vs-"+items?.teamb?.name)+"-head-to-head-in-"+items?.format_str).toLowerCase()}>
+                                 
                                 <div className="flex justify-end items-center space-x-2">
                                   <Image  loading="lazy" 
                                     src="/assets/img/home/handshake.png"
@@ -693,6 +698,7 @@ export default function ScheduleResults({
                                   </span>
                                 </div>
                               </Link>
+                              }
                             </div>
 
                             <div className="flex items-center space-x-2 text-[11px]">
@@ -917,7 +923,9 @@ export default function ScheduleResults({
                             </Link>
                           </div>
 
-                          <Link href="/h2h">
+                          {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
+                                                          <Link href={("/h2h/"+urlStringEncode(cmatch?.teama?.name+"-vs-"+cmatch?.teamb?.name)+"-head-to-head-in-"+cmatch?.format_str).toLowerCase()}>
+                                                           
                             <div className="flex mt-2 justify-end items-center space-x-2">
                               <Image  loading="lazy" 
                                 src="/assets/img/home/handshake.png"
@@ -930,6 +938,7 @@ export default function ScheduleResults({
                               </span>
                             </div>
                           </Link>
+                          }
                         </div>
                       </div>
                       {/* Mobile */}
@@ -1083,7 +1092,9 @@ export default function ScheduleResults({
 
                               <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                               </>}
-                              <Link href="#">
+                              {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
+                                <Link href={("/h2h/"+urlStringEncode(cmatch?.teama?.name+"-vs-"+cmatch?.teamb?.name)+"-head-to-head-in-"+cmatch?.format_str).toLowerCase()}>
+                                 
                                 <div className="flex justify-end items-center space-x-2">
                                   <Image  loading="lazy" 
                                     src="/assets/img/home/handshake.png"
@@ -1097,6 +1108,7 @@ export default function ScheduleResults({
                                   </span>
                                 </div>
                               </Link>
+                              }
                             </div>
 
                             <div className="flex items-center justify-between">
@@ -1294,7 +1306,9 @@ export default function ScheduleResults({
                             </Link>
                           </div>
 
-                          <Link href="#">
+                          {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
+                                <Link href={("/h2h/"+urlStringEncode(ucmatch?.teama?.name+"-vs-"+ucmatch?.teamb?.name)+"-head-to-head-in-"+ucmatch?.format_str).toLowerCase()}>
+                                 
                             <div className="flex mt-2 justify-end items-center space-x-2">
                               <Image  loading="lazy" 
                                 src="/assets/img/home/handshake.png"
@@ -1307,6 +1321,7 @@ export default function ScheduleResults({
                               </span>
                             </div>
                           </Link>
+                          }
                         </div>
                       </div>
 
@@ -1446,7 +1461,9 @@ export default function ScheduleResults({
                             </Link>
                             <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                             </>}
-                            <Link href="#">
+                            {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
+                                <Link href={("/h2h/"+urlStringEncode(ucmatch?.teama?.name+"-vs-"+ucmatch?.teamb?.name)+"-head-to-head-in-"+ucmatch?.format_str).toLowerCase()}>
+                                 
                               <div className="flex justify-end items-center space-x-2">
                                 <Image  loading="lazy" 
                                   src="/assets/img/home/handshake.png"
@@ -1460,6 +1477,7 @@ export default function ScheduleResults({
                                 </span>
                               </div>
                             </Link>
+                            }
                           </div>
 
                           <div className="flex items-center space-x-2 text-[11px]">

@@ -6,9 +6,9 @@ declare global {
   }
 
   const db = global.db || mysql.createPool({
-    host: 'localhost', // Your MySQL host
-    user: 'root', // Your MySQL username
-    password:'', // Your MySQL password
+    host: '13.202.213.65', // Your MySQL host
+    user: 'ucc', // Your MySQL username
+    password:'Ucc@2025', // Your MySQL password
     database: 'uccricket', // Your database name
     waitForConnections: true,
     connectionLimit: 100,  // Limits concurrent connections

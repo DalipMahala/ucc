@@ -68,6 +68,9 @@ export async function POST(req: NextRequest) {
         bestBowling: await getJsonFromS3(fileMap["bowling_best_bowling_figures"]),
       };
       
+      if (data && (Array.isArray(data) && data.length > 0)) {
+        await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(data));
+      }
       return NextResponse.json({ success: true, data: data });
 
   } catch (error) {
