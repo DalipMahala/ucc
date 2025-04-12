@@ -33,7 +33,7 @@ const Header = ({ data }: HeaderProps) => {
 if(data){
    items = data?.map((item: any) => ({
     href: "/series/"+urlStringEncode(item.title+"-"+item.season)+"/"+item.cid,
-    imgSrc: item?.logo ? item?.logo : "/assets/img/series/series-1.png",
+    imgSrc: item?.header_logo ? item?.header_logo : "/assets/img/series/series-1.png",
     // imgSrc: "/assets/img/series/"+item.title+".png",
     alt: item.abbr,
     label: item.abbr,

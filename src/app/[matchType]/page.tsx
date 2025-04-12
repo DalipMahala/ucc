@@ -104,6 +104,7 @@ export default async function page(props: { params: Params }) {
   const seriesPointsTable = await SeriesPointsTable(cid);
   const seriesPointsTableMatches = await SeriesPointsTableMatches(Number(cid));
   // let featuredMatch = await FeaturedMatch();
+  console.log("matchCommentary",liveMatch);
   let frresponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/featuredMatches`, {
     method: "GET",
     headers: {
@@ -133,7 +134,7 @@ export default async function page(props: { params: Params }) {
       liveMatch?.live?.live_inning_number
     );
   }
-  // console.log("matchCommentary",matchTab);
+  
 
   const teamascores = liveMatch?.match_info?.teama?.scores ?? "";
   const teambscores = liveMatch?.match_info?.teamb?.scores ?? "";

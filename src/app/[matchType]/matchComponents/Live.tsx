@@ -899,7 +899,7 @@ Live) {
                         >
                           <div className="flex md:flex-row flex-col justify-between md:items-center gap-2">
                             <div className="text-[14px] font-normal">
-                              {matchinning.short_name} : {comment.score}
+                              {matchinning?.short_name} : {comment?.score}
                             </div>
                             <div className="text-[14px] font-normal">
                               {comment?.over}{" "}

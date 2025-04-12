@@ -72,6 +72,10 @@ class MatchWebSocket extends Component<object, MatchData> { // Changed from {} t
         data?.live?.live_inning?.batting_team_id !== undefined &&
         data?.live?.live_inning?.batting_team_id !== ""
       ) {
+        const match_status_note = data.status_note
+          .replace(new RegExp(data.teama.name, 'gi'), data.teama.short_name)
+          .replace(new RegExp(data.teamb.name, 'gi'), data.teamb.short_name);
+
         const a = parseFloat(data?.live_odds?.matchodds?.teama?.back);
         const b = parseFloat(data?.live_odds?.matchodds?.teamb?.back);
         const lesserTeam = a < b 
@@ -102,7 +106,7 @@ class MatchWebSocket extends Component<object, MatchData> { // Changed from {} t
           matchRuns: data?.live?.live_score?.runs,
           matchOvers: data?.live?.live_score?.overs,
           matchWikets: data?.live?.live_score?.wickets,
-          matchStatus: JSON.stringify(data?.live?.status_note),
+          matchStatus: JSON.stringify(match_status_note),
           matchcrr: data?.live?.live_score?.runrate,
           // matchlivedata: data,
         });
