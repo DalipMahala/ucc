@@ -114,13 +114,14 @@ export default function Banner({ matchData, match_id }: Banner) {
 
           <div className="border-t-[1px] border-[#E4E9F01A]">
             <div className="lg:w-[1000px] mx-auto md:py-8 tracking-[1px]">
-              <div className="md:flex py-8 justify-between items-center">
+              <div className="md:flex py-8 justify-between items-end">
 
 
-                <div className="flex gap-2 flex-row text-[#BDCCECA8] uppercase items-center w-[28%]">
+                <div className="flex gap-3 flex-row text-[#BDCCECA8] uppercase items-center w-[35%]">
                   {liveMatch?.match_info?.teama?.logo_url ? (
                     <Image
-                      className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px]"
+                      className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px] rounded-full"
+                      style={{ boxShadow: '0px 0px 3px 0px white' }}
                       src={liveMatch?.match_info?.teama?.logo_url}
                       width={30}
                       height={30}
@@ -129,12 +130,12 @@ export default function Banner({ matchData, match_id }: Banner) {
                     />
                   ) : ("")}
                   <div className="flex md:flex-col md:items-start items-center md:gap-0 gap-2">
-                    <p className="text-[#BDCCECA8] md:text-[20px]  text-[14px] font-medium uppercase">
+                    <p className="text-[#BDCCECA8] md:text-[18px]  text-[14px] font-medium uppercase">
                       {liveMatch?.match_info?.teama?.short_name}
                     </p>
                     <p
                       className={
-                        "md:text-[28px] text-[16px] font-medium matchinfo" +
+                        "md:text-[22px] text-[16px] font-semibold matchinfo" +
                         match_id +
                         "-" +
                         liveMatch?.match_info?.teama?.team_id
@@ -143,7 +144,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                       {inning1teamarun ? (
                         <>
                           {inning1teamarun}{" "}
-                          <span className="text-[15px] font-normal">
+                          <span className="text-[16px] font-medium">
                             ({inning1teamaOver})
                           </span>
                         </>
@@ -154,7 +155,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                       {inning2teamarun ? (
                         <>
                           {" "}
-                          &nbsp; &amp; &nbsp; {inning2teamarun}{" "}
+                           &amp; {inning2teamarun}{" "}
                           {inning2teamaOver !== "" && (
                             <span className="text-[13px] font-medium">
                               ({inning2teamaOver})
@@ -169,28 +170,30 @@ export default function Banner({ matchData, match_id }: Banner) {
                 </div>
 
 
-                <div className="text-[#8192B4] font-normal w-[44%] text-center md:my-0 my-4 flex gap-2 items-center justify-center">
-                  <p className="text-[#00a632] lg:text-[24px] text-[16px] font-semibold uppercase">
-                    {updateStatusNoteDirect(liveMatch?.match_info)}
+                <div className="text-[#8192B4] font-normal w-[30%] text-center md:my-0 my-4 flex gap-2 items-center justify-center">
+                  <p className="text-[#00a632] lg:text-[22px] text-[16px] font-semibold uppercase">
+                    {updateStatusNoteDirect(liveMatch?.match_info)} 🏆
                   </p>
-                  <Image
+                  
+                  {/* <Image
                     src="/assets/img/home/win-2.png"
                     width={32}
                     height={34}
                     alt=""
                     loading="lazy"
-                  />
+                  /> */}
+
                 </div>
 
 
-                <div className="flex gap-2 flex-row-reverse md:flex-row  items-center text-[#8192B4] font-normal w-[28%] justify-end">
+                <div className="flex gap-3 flex-row-reverse md:flex-row  items-center text-[#8192B4] font-normal w-[35%] justify-end">
                   <div className="flex md:flex-col md:items-end items-center md:gap-0 gap-2">
-                    <p className="text-[#BDCCECA8] md:text-[20px] text-[14px] font-medium uppercase">
+                    <p className="text-[#BDCCECA8] md:text-[18px] text-[14px] font-medium uppercase">
                       {liveMatch?.match_info?.teamb?.short_name}
                     </p>
                     <p
                       className={
-                        "md:text-[28px] text-[16px] font-medium matchinfo" +
+                        "md:text-[22px] text-[16px] font-semibold matchinfo" +
                         match_id +
                         "-" +
                         liveMatch?.match_info?.teamb?.team_id
@@ -199,7 +202,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                       {inning1teambrun ? (
                         <>
                           {inning1teambrun}{" "}
-                          <span className="text-[15px] font-normal">
+                          <span className="text-[16px] font-medium">
                             ({inning1teambOver})
                           </span>
                         </>
@@ -210,7 +213,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                       {inning2teambrun ? (
                         <>
                           {" "}
-                          &nbsp; &amp; &nbsp; {inning2teambrun}{" "}
+                           &amp;  {inning2teambrun}{" "}
                           {inning2teambOver !== "" && (
                             <span className="text-[13px] font-medium">
                               ({inning2teambOver})
@@ -225,7 +228,8 @@ export default function Banner({ matchData, match_id }: Banner) {
                   {liveMatch?.match_info?.teamb?.logo_url ? (
                     <Image
                       src={liveMatch?.match_info?.teamb?.logo_url}
-                      className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px]"
+                      className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px] rounded-full"
+                      style={{ boxShadow: '0px 0px 3px 0px white' }}
                       width={30}
                       height={30}
                       alt="ban"
@@ -520,7 +524,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                     />
                   ) : (
                     "")}
-                  <p className="text-[#BDCCECA8] md:mx-3 mx-0 md:text-[19px] text-[14px] font-semibold uppercase">
+                  <p className="text-[#BDCCECA8] md:mx-3 mx-0 md:text-[18px] text-[14px] font-semibold uppercase">
                     {liveMatch?.match_info?.teama?.short_name}
                   </p>
                 </div>
@@ -540,7 +544,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
                 </div>
                 <div className="flex flex-col md:flex-row md:items-center items-end text-[#8192B4] font-normal w-full justify-end">
-                  <p className="text-[#BDCCECA8] md:block hidden md:text-[19px] text-[14px] md:mx-3 mx-0 font-semibold uppercase">
+                  <p className="text-[#BDCCECA8] md:block hidden md:text-[18px] text-[14px] md:mx-3 mx-0 font-semibold uppercase">
                     {liveMatch?.match_info?.teamb?.short_name}
                   </p>
                   {liveMatch?.match_info?.teamb?.logo_url ? (
@@ -555,7 +559,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                   ) : (
                     ""
                   )}
-                  <p className="text-[#BDCCECA8] md:hidden md:text-[19px] text-[14px] md:mx-3 mx-0 font-semibold uppercase">
+                  <p className="text-[#BDCCECA8] md:hidden md:text-[18px] text-[14px] md:mx-3 mx-0 font-semibold uppercase">
                     {liveMatch?.match_info?.teamb?.short_name}
                   </p>
                 </div>
