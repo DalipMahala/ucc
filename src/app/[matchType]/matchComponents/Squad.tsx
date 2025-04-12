@@ -125,7 +125,7 @@ export default function Squads({
                 <div className="md:grid grid-cols-12 gap-4">
                     <div className="lg:col-span-4 md:col-span-5">
                         <div className="rounded-lg p-2 mb-4 bg-[#ffffff]">
-                            <div id="team-buttons" className="">
+                            <div id="team-buttons" className="text-[14px]">
 
                                 <button
                                     className={`team-btn border-b px-2 mb-1 py-3 w-full font-medium flex items-center ${activeTab === "tab1"
@@ -171,16 +171,16 @@ export default function Squads({
                                             width={45} height={45} alt={teamADetails.name}
                                             className="h-[45px] rounded-full"
                                         />
-                                        <h1 className="text-[16px] font-semibold text-gray-800">
+                                        <h1 className="text-[16px] font-semibold text-[#000000]">
                                         {teamADetails.name}{" "}
-                                            <span className="text-gray-500">({teamASquad.length} players)</span>
+                                            <span className="text-[#586577]">({teamASquad.length} players)</span>
                                         </h1>
                                     </div>
                                     {/* Categories */}
                                     <div className="space-y-6">
                                         {/* Batsman Section */}
                                         <div>
-                                            <h2 className="text-1xl font-semibold pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
+                                            <h2 className="text-1xl font-medium pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
                                                 Batsman
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -188,7 +188,7 @@ export default function Squads({
                                                 <Link href={"/player/"+urlStringEncode(squads?.name)+"/"+squads?.player_id}  key={index}>
                                                     <div className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]">
                                                         <div className="relative">
-                                                        <PlayerImage key={squads?.player_id} player_id={squads?.player_id} width={50} height={50} className="w-16 h-16 mx-auto rounded-full mb-2" />
+                                                        <PlayerImage key={squads?.player_id} player_id={squads?.player_id} width={50} height={50} className="w-[65px] h-[65px] mx-auto rounded-full mb-2" />
                                                        
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/bat.png"
@@ -196,10 +196,10 @@ export default function Squads({
                                                                 width={20} height={20} alt=""
                                                             />
                                                         </div>
-                                                        <h3 className="text-sm font-semibold text-blue-500 ">
-                                                        {squads.name} {squads.role_str !== '' && squads.role_str !== undefined ? (<span className="text-blue-500">{squads.role_str}</span>):("")}
+                                                        <h3 className="text-sm font-medium text-[#217AF7] ">
+                                                        {squads.name} {squads.role_str !== '' && squads.role_str !== undefined ? (<span className="text-[#217AF7]">{squads.role_str}</span>):("")}
                                                         </h3>
-                                                        <p className="text-xs text-gray-600">Batsman</p>
+                                                        <p className="text-xs text-[#586577]">Batsman</p>
                                                     </div>
                                                 </Link>
                                                 ))}
@@ -208,7 +208,7 @@ export default function Squads({
                                         </div>
                                         {/* Bowler Section */}
                                         <div>
-                                            <h2 className="text-1xl font-semibold pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
+                                            <h2 className="text-1xl font-medium pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
                                                 Bowler
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -224,10 +224,10 @@ export default function Squads({
                                                                 width={24} height={24} alt=""
                                                             />
                                                         </div>
-                                                        <h3 className="text-sm font-semibold text-gray-800">
+                                                        <h3 className="text-sm font-medium text-[#211726]">
                                                         {bowler.name}
                                                         </h3>
-                                                        <p className="text-xs text-gray-600">Bowler</p>
+                                                        <p className="text-xs text-[#586577]">Bowler</p>
                                                     </div>
                                                 </Link>
                                             ))}
@@ -236,7 +236,7 @@ export default function Squads({
                                         </div>
                                         {/* All-Rounder Section */}
                                         <div>
-                                            <h2 className="text-1xl font-semibold pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
+                                            <h2 className="text-1xl font-medium pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
                                                 All-Rounder
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -251,10 +251,10 @@ export default function Squads({
                                                                 width={27} height={27} alt=""
                                                             />
                                                         </div>
-                                                        <h3 className="text-sm font-semibold text-gray-800">
+                                                        <h3 className="text-sm font-medium text-[#211726]">
                                                         {allrounder.name}
                                                         </h3>
-                                                        <p className="text-xs text-gray-600">All-Rounder</p>
+                                                        <p className="text-xs text-[#586577]">All-Rounder</p>
                                                     </div>
                                                 </Link>
                                             ))}
@@ -275,16 +275,16 @@ export default function Squads({
                                     width={45} height={45} alt={teamBDetails.name}
                                     className="h-[45px] rounded-full"
                                 />
-                                <h1 className="text-[16px] font-semibold text-gray-800">
+                                <h1 className="text-[16px] font-semibold text-[#000000]">
                                 {teamBDetails.name}{" "}
-                                    <span className="text-gray-500">({teamBSquad.length} players)</span>
+                                    <span className="text-[#586577]">({teamBSquad.length} players)</span>
                                 </h1>
                             </div>
                             {/* Categories */}
                             <div className="space-y-6">
                                         {/* Batsman Section */}
                                         <div>
-                                            <h2 className="text-1xl font-semibold pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
+                                            <h2 className="text-1xl font-medium pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
                                                 Batsman
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -299,10 +299,10 @@ export default function Squads({
                                                                 width={27} height={27} alt=""
                                                             />
                                                         </div>
-                                                        <h3 className="text-sm font-semibold text-blue-500 ">
-                                                        {squads.name} {squads.role_str !== '' && squads.role_str !== undefined ? (<span className="text-blue-500">{squads.role_str}</span>):("")}
+                                                        <h3 className="text-sm font-medium text-[#217AF7] ">
+                                                        {squads.name} {squads.role_str !== '' && squads.role_str !== undefined ? (<span className="text-[#217AF7]">{squads.role_str}</span>):("")}
                                                         </h3>
-                                                        <p className="text-xs text-gray-600">Batsman</p>
+                                                        <p className="text-xs text-[#586577]">Batsman</p>
                                                     </div>
                                                 </Link>
                                                 ))}
@@ -311,7 +311,7 @@ export default function Squads({
                                         </div>
                                         {/* Bowler Section */}
                                         <div>
-                                            <h2 className="text-1xl font-semibold pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
+                                            <h2 className="text-1xl font-medium pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
                                                 Bowler
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -326,10 +326,10 @@ export default function Squads({
                                                                 width={24} height={24} alt=""
                                                             />
                                                         </div>
-                                                        <h3 className="text-sm font-semibold text-gray-800">
+                                                        <h3 className="text-sm font-medium text-[#211726]">
                                                         {bowler.name}
                                                         </h3>
-                                                        <p className="text-xs text-gray-600">Bowler</p>
+                                                        <p className="text-xs text-[#586577]">Bowler</p>
                                                     </div>
                                                 </Link>
                                             ))}
@@ -338,7 +338,7 @@ export default function Squads({
                                         </div>
                                         {/* All-Rounder Section */}
                                         <div>
-                                            <h2 className="text-1xl font-semibold pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
+                                            <h2 className="text-1xl font-medium pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
                                                 All-Rounder
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -353,10 +353,10 @@ export default function Squads({
                                                                 width={27} height={27} alt=""
                                                             />
                                                         </div>
-                                                        <h3 className="text-sm font-semibold text-gray-800">
+                                                        <h3 className="text-sm font-medium text-[#211726]">
                                                         {allrounder.name}
                                                         </h3>
-                                                        <p className="text-xs text-gray-600">All-Rounder</p>
+                                                        <p className="text-xs text-[#586577]">All-Rounder</p>
                                                     </div>
                                                 </Link>
                                             ))}

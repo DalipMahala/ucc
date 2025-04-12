@@ -54,8 +54,8 @@ export default function MoreInfo({
       items.winning_team_id === teama_id
         ? teamaWinMatch++
         : items.winning_team_id === teamb_id
-        ? teambWinMatch++
-        : ""
+          ? teambWinMatch++
+          : ""
     );
   }
 
@@ -73,30 +73,30 @@ export default function MoreInfo({
       }
     );
   }
-  
+
   const highestScoreTeamA = (teamAScores?.length ?? 0) > 0 ? Math.max(...teamAScores) : 0;
-  const lowestScoreTeamA =  (teamAScores?.length ?? 0) > 0 ? Math.min(...teamAScores) : 0;
+  const lowestScoreTeamA = (teamAScores?.length ?? 0) > 0 ? Math.min(...teamAScores) : 0;
   const averageScoreTeamA =
     teamAScores?.length > 0
       ? teamAScores.reduce((sum: any, score: any) => sum + score, 0) /
-        teamAScores.length
+      teamAScores.length
       : 0;
 
   let teamBScores: any = [];
-      if (Array.isArray(matchlistAB) && matchlistAB.length > 0) {
-      teamBScores = matchlistAB?.map(
-        (match: { teamb: { scores: string } }) => {
-          const score = match?.teamb?.scores?.split("/")[0]; // Get the runs before "/"
-          return parseInt(score, 10) || 0; // Convert to a number
-        }
-      );
-    }
+  if (Array.isArray(matchlistAB) && matchlistAB.length > 0) {
+    teamBScores = matchlistAB?.map(
+      (match: { teamb: { scores: string } }) => {
+        const score = match?.teamb?.scores?.split("/")[0]; // Get the runs before "/"
+        return parseInt(score, 10) || 0; // Convert to a number
+      }
+    );
+  }
   const highestScoreTeamB = (teamBScores?.length ?? 0) > 0 ? Math.max(...teamBScores) : 0;
   const lowestScoreTeamB = (teamBScores?.length ?? 0) > 0 ? Math.min(...teamBScores) : 0;
   const averageScoreTeamB =
     teamBScores?.length > 0
       ? teamBScores.reduce((sum: any, score: any) => sum + score, 0) /
-        teamBScores.length
+      teamBScores.length
       : 0;
 
   let sameVenueteamaWinMatch = 0;
@@ -107,8 +107,8 @@ export default function MoreInfo({
       items.winning_team_id === teama_id
         ? sameVenueteamaWinMatch++
         : items.winning_team_id === teamb_id
-        ? sameVenueteambWinMatch++
-        : ""
+          ? sameVenueteambWinMatch++
+          : ""
     );
   }
 
@@ -121,16 +121,16 @@ export default function MoreInfo({
       ? (sameVenueteambWinMatch / sameVenuematchPlayed) * 100
       : 0;
 
-  let sameVenueteamAScores : any = '';
+  let sameVenueteamAScores: any = '';
   if (Array.isArray(matchlistSameVenue) && matchlistSameVenue.length > 0) {
-     sameVenueteamAScores = matchlistSameVenue?.map(
+    sameVenueteamAScores = matchlistSameVenue?.map(
       (match: { teama: { scores: string } }) => {
         const score = match?.teama?.scores?.split("/")[0]; // Get the runs before "/"
         return parseInt(score, 10); // Convert to a number
       }
     );
   }
-  
+
   const sameVenuehighestScoreTeamA =
     (sameVenueteamAScores?.length ?? 0) > 0 ? Math.max(...sameVenueteamAScores) : 0;
   const sameVenuelowestScoreTeamA =
@@ -139,13 +139,13 @@ export default function MoreInfo({
   const sameVenueaverageScoreTeamA =
     sameVenueteamAScores?.length > 0
       ? sameVenueteamAScores.reduce((sum: any, score: any) => sum + score, 0) /
-        sameVenueteamAScores.length
+      sameVenueteamAScores.length
       : 0;
 
 
-      let sameVenueteamBScores : any = '';
+  let sameVenueteamBScores: any = '';
   if (Array.isArray(matchlistSameVenue) && matchlistSameVenue.length > 0) {
-     sameVenueteamBScores = matchlistSameVenue?.map(
+    sameVenueteamBScores = matchlistSameVenue?.map(
       (match: { teamb: { scores: string } }) => {
         const score = match?.teamb?.scores?.split("/")[0]; // Get the runs before "/"
         return parseInt(score, 10); // Convert to a number
@@ -159,7 +159,7 @@ export default function MoreInfo({
   const sameVenueaverageScoreTeamB =
     sameVenueteamBScores?.length > 0
       ? sameVenueteamBScores.reduce((sum: any, score: any) => sum + score, 0) /
-        sameVenueteamBScores.length
+      sameVenueteamBScores.length
       : 0;
 
   console.log("playing11", teama11Players);
@@ -216,31 +216,31 @@ export default function MoreInfo({
               </button>
             </Link>
             {isPointTable && (
-            <Link
-              href={
-                "/series/" +
-                urlStringEncode(
-                  matchDetails?.competition?.title +
+              <Link
+                href={
+                  "/series/" +
+                  urlStringEncode(
+                    matchDetails?.competition?.title +
                     "-" +
                     matchDetails?.competition?.season
-                ) +
-                "/" +
-                matchDetails?.competition?.cid +
-                "/points-table"
-              }
-            >
-              <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
-                Points Table
-              </button>
-            </Link>
+                  ) +
+                  "/" +
+                  matchDetails?.competition?.cid +
+                  "/points-table"
+                }
+              >
+                <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
+                  Points Table
+                </button>
+              </Link>
             )}
             <Link
               href={
                 "/series/" +
                 urlStringEncode(
                   matchDetails?.competition?.title +
-                    "-" +
-                    matchDetails?.competition?.season
+                  "-" +
+                  matchDetails?.competition?.season
                 ) +
                 "/" +
                 matchDetails?.competition?.cid +
@@ -265,10 +265,10 @@ export default function MoreInfo({
                     <div className="md:flex items-center justify-between">
                       <div className="flex gap-4 items-center md:mb-0 mb-[15px]">
                         <div>
-                        <MatchCard  teamA={matchData?.match_info?.teama?.logo_url}  teamB={matchData?.match_info?.teamb?.logo_url}  />
+                          <MatchCard teamA={matchData?.match_info?.teama?.logo_url} teamB={matchData?.match_info?.teamb?.logo_url} />
                         </div>
                         <div>
-                          <p className="text-[15px] text-[#586577] font-medium mb-1">
+                          <p className="text-[14px] text-[#586577] font-bold mb-1">
                             {matchData?.match_info?.subtitle}
                           </p>
                           <p className="text-[15px] text-[#272B47] font-medium mb-2">
@@ -280,7 +280,7 @@ export default function MoreInfo({
                         <p className="text-[14px] mb-1 text-[#272B47] font-medium">
                           <span className="text-[14px] text-[#586577]">
                             Date : </span>
-                           {matchData?.match_info?.date_start_ist}
+                          {matchData?.match_info?.date_start_ist}
                         </p>
                         <p className="text-[14px] text-[#272B47] font-medium">
                           <span className="text-[14px] text-[#586577]">
@@ -350,11 +350,10 @@ export default function MoreInfo({
 
                               <span>
                                 <button
-                                  className={`transform transition-transform ${
-                                    openHeading === 1
+                                  className={`transform transition-transform ${openHeading === 1
                                       ? "rotate-180"
                                       : "rotate-0"
-                                  }`}
+                                    }`}
                                 >
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -446,7 +445,7 @@ export default function MoreInfo({
                                         <td className="px-0 pr-0 py-1 text-[#2F335C]">
                                           <div className="text-center">
                                             {items.winning_team_id ===
-                                            teama_id ? (
+                                              teama_id ? (
                                               <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
                                                 W
                                               </span>
@@ -464,59 +463,59 @@ export default function MoreInfo({
                             </div>
                             {/* responsive teame data  */}
                             <div className="lg:hidden block">
-                          {matchlistA
-                                  .slice(0, 5)
-                                  .map((items: any, index: number) => (
-                            <div className="flex justify-between items-center py-4 px-2 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]" key={index}>
-                              <div className="">
-                                <Link href="#">
-                                  <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-3">
-                                    <div className="flex items-center space-x-1">
-                                      <Image  loading="lazy" 
-                                        src={items.teama.logo_url}
-                                        className="h-[18px] rounded-full"
-                                        width={25}
-                                        height={25}
-                                        alt={items.teama.short_name}
-                                      />
-                                      <span className="text-[#5C6081]">
-                                      {items.teama.short_name}
-                                      </span>
-                                    </div>
-                                    <p>{items.teama.scores}</p>
-                                  </div>
-                                </Link>
+                              {matchlistA
+                                .slice(0, 5)
+                                .map((items: any, index: number) => (
+                                  <div className="flex justify-between items-center py-4 px-2 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]" key={index}>
+                                    <div className="">
+                                      <Link href="#">
+                                        <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-3">
+                                          <div className="flex items-center space-x-1">
+                                            <Image loading="lazy"
+                                              src={items.teama.logo_url}
+                                              className="h-[18px] rounded-full"
+                                              width={25}
+                                              height={25}
+                                              alt={items.teama.short_name}
+                                            />
+                                            <span className="text-[#5C6081]">
+                                              {items.teama.short_name}
+                                            </span>
+                                          </div>
+                                          <p>{items.teama.scores}</p>
+                                        </div>
+                                      </Link>
 
-                                <div>
-                                  <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
-                                    <div className="flex items-center space-x-1">
-                                      <Image  loading="lazy" 
-                                        src={items.teamb.logo_url}
-                                        className="h-[18px]"
-                                        width={25}
-                                        height={25}
-                                        alt={items.teamb.short_name}
-                                      />
-                                      <span className="text-[#5C6081]">
-                                      {items.teamb.short_name}
-                                      </span>
+                                      <div>
+                                        <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
+                                          <div className="flex items-center space-x-1">
+                                            <Image loading="lazy"
+                                              src={items.teamb.logo_url}
+                                              className="h-[18px]"
+                                              width={25}
+                                              height={25}
+                                              alt={items.teamb.short_name}
+                                            />
+                                            <span className="text-[#5C6081]">
+                                              {items.teamb.short_name}
+                                            </span>
+                                          </div>
+                                          <p>{items.teamb.scores}</p>
+                                        </div>
+                                      </div>
                                     </div>
-                                    <p>{items.teamb.scores}</p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="hidden md:block h-[35px] border-l-[1px] border-[#d0d3d7]"></div>
-                              <div className="flex items-center space-x-4">
-                                <div className="text-right leading-6">
-                                  <p className="font-medium"> {items.subtitle}</p>
-                                  <p className="text-[#5C6081] font-normal">
-                                  {items.short_title}
-                                  </p>
-                                </div>
-                                <div>
-                                  <div className="text-center">
-                                  {items.winning_team_id ===
-                                          teama_id ? (
+                                    <div className="hidden md:block h-[35px] border-l-[1px] border-[#d0d3d7]"></div>
+                                    <div className="flex items-center space-x-4">
+                                      <div className="text-right leading-6">
+                                        <p className="font-medium"> {items.subtitle}</p>
+                                        <p className="text-[#5C6081] font-normal">
+                                          {items.short_title}
+                                        </p>
+                                      </div>
+                                      <div>
+                                        <div className="text-center">
+                                          {items.winning_team_id ===
+                                            teama_id ? (
                                             <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
                                               W
                                             </span>
@@ -525,14 +524,14 @@ export default function MoreInfo({
                                               L
                                             </span>
                                           )}
-                                           
+
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
+                                ))}
+
                             </div>
-                                  ))}
-                            
-                          </div>
                           </div>
                         )}
                       </div>
@@ -587,11 +586,10 @@ export default function MoreInfo({
                                   )}
                                 <span>
                                   <button
-                                    className={`transform transition-transform ${
-                                      openHeading === 2
+                                    className={`transform transition-transform ${openHeading === 2
                                         ? "rotate-180"
                                         : "rotate-0"
-                                    }`}
+                                      }`}
                                   >
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
@@ -683,7 +681,7 @@ export default function MoreInfo({
                                         <td className="px-0 pr-0 py-1 text-[#2F335C]">
                                           <div className="text-center">
                                             {items.winning_team_id ===
-                                            teamb_id ? (
+                                              teamb_id ? (
                                               <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
                                                 W
                                               </span>
@@ -701,59 +699,59 @@ export default function MoreInfo({
                             </div>
                             {/* responsive teame data  */}
                             <div className="lg:hidden block">
-                          {matchlistB
-                                  .slice(0, 5)
-                                  .map((items: any, index: number) => (
-                            <div className="flex justify-between items-center py-4 px-2 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]" key={index}>
-                              <div className="">
-                                <Link href="#">
-                                  <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-3">
-                                    <div className="flex items-center space-x-1">
-                                      <Image  loading="lazy" 
-                                        src={items.teama.logo_url}
-                                        className="h-[18px] rounded-full"
-                                        width={25}
-                                        height={25}
-                                        alt={items.teama.short_name}
-                                      />
-                                      <span className="text-[#5C6081]">
-                                      {items.teama.short_name}
-                                      </span>
-                                    </div>
-                                    <p>{items.teama.scores}</p>
-                                  </div>
-                                </Link>
+                              {matchlistB
+                                .slice(0, 5)
+                                .map((items: any, index: number) => (
+                                  <div className="flex justify-between items-center py-4 px-2 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]" key={index}>
+                                    <div className="">
+                                      <Link href="#">
+                                        <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-3">
+                                          <div className="flex items-center space-x-1">
+                                            <Image loading="lazy"
+                                              src={items.teama.logo_url}
+                                              className="h-[18px] rounded-full"
+                                              width={25}
+                                              height={25}
+                                              alt={items.teama.short_name}
+                                            />
+                                            <span className="text-[#5C6081]">
+                                              {items.teama.short_name}
+                                            </span>
+                                          </div>
+                                          <p>{items.teama.scores}</p>
+                                        </div>
+                                      </Link>
 
-                                <div>
-                                  <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
-                                    <div className="flex items-center space-x-1">
-                                      <Image  loading="lazy" 
-                                        src={items.teamb.logo_url}
-                                        className="h-[18px]"
-                                        width={25}
-                                        height={25}
-                                        alt={items.teamb.short_name}
-                                      />
-                                      <span className="text-[#5C6081]">
-                                      {items.teamb.short_name}
-                                      </span>
+                                      <div>
+                                        <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
+                                          <div className="flex items-center space-x-1">
+                                            <Image loading="lazy"
+                                              src={items.teamb.logo_url}
+                                              className="h-[18px]"
+                                              width={25}
+                                              height={25}
+                                              alt={items.teamb.short_name}
+                                            />
+                                            <span className="text-[#5C6081]">
+                                              {items.teamb.short_name}
+                                            </span>
+                                          </div>
+                                          <p>{items.teamb.scores}</p>
+                                        </div>
+                                      </div>
                                     </div>
-                                    <p>{items.teamb.scores}</p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="hidden md:block h-[35px] border-l-[1px] border-[#d0d3d7]"></div>
-                              <div className="flex items-center space-x-4">
-                                <div className="text-right leading-6">
-                                  <p className="font-medium"> {items.subtitle}</p>
-                                  <p className="text-[#5C6081] font-normal">
-                                  {items.short_title}
-                                  </p>
-                                </div>
-                                <div>
-                                  <div className="text-center">
-                                  {items.winning_team_id ===
-                                          teamb_id ? (
+                                    <div className="hidden md:block h-[35px] border-l-[1px] border-[#d0d3d7]"></div>
+                                    <div className="flex items-center space-x-4">
+                                      <div className="text-right leading-6">
+                                        <p className="font-medium"> {items.subtitle}</p>
+                                        <p className="text-[#5C6081] font-normal">
+                                          {items.short_title}
+                                        </p>
+                                      </div>
+                                      <div>
+                                        <div className="text-center">
+                                          {items.winning_team_id ===
+                                            teamb_id ? (
                                             <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
                                               W
                                             </span>
@@ -762,13 +760,13 @@ export default function MoreInfo({
                                               L
                                             </span>
                                           )}
-                                           
+
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
+                                ))}
                             </div>
-                                  ))}
-                          </div>
                           </div>
                         )}
                       </div>
@@ -875,11 +873,10 @@ export default function MoreInfo({
                           onClick={(e) =>
                             handleProbabilityTab(e, "cust-box-click-firview")
                           }
-                          className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${
-                            activeTab === "cust-box-click-firview"
+                          className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${activeTab === "cust-box-click-firview"
                               ? "bg-[#081736] text-white"
                               : "bg-[#ffffff] text-[#6A7586]"
-                          }`}
+                            }`}
                         >
                           <span>Overall</span>
                         </button>
@@ -888,11 +885,10 @@ export default function MoreInfo({
                           onClick={(e) =>
                             handleProbabilityTab(e, "cust-box-click-oddsview")
                           }
-                          className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${
-                            activeTab === "cust-box-click-oddsview"
+                          className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${activeTab === "cust-box-click-oddsview"
                               ? "bg-[#081736] text-white"
                               : "bg-[#ffffff] text-[#6A7586]"
-                          }`}
+                            }`}
                         >
                           <span>On Venue</span>
                         </button>
@@ -903,9 +899,8 @@ export default function MoreInfo({
 
                     <div>
                       <div
-                        className={`cust-box-click-content cust-box-click-firview mt-4 ${
-                          activeTab === "cust-box-click-firview" ? "" : "hidden"
-                        }`}
+                        className={`cust-box-click-content cust-box-click-firview mt-4 ${activeTab === "cust-box-click-firview" ? "" : "hidden"
+                          }`}
                       >
                         <div className="cust-box-click-content cust-box-click-overall1 mt-4">
                           <div>
@@ -1047,11 +1042,10 @@ export default function MoreInfo({
                       </div>
 
                       <div
-                        className={`cust-box-click-content cust-box-click-oddsview mt-4 ${
-                          activeTab === "cust-box-click-oddsview"
+                        className={`cust-box-click-content cust-box-click-oddsview mt-4 ${activeTab === "cust-box-click-oddsview"
                             ? ""
                             : "hidden"
-                        }`}
+                          }`}
                       >
                         <div className="cust-box-click-content cust-box-click-overall1 mt-4">
                           <div className="cust-box-click-content cust-box-click-overall1 mt-4">
@@ -1326,7 +1320,7 @@ export default function MoreInfo({
                         }}
                       >
                         <div className="flex flex-col items-center w-[65px] h-[64px] p-4 rounded-full bg-white">
-                          {/* <p className="font-bold text-[18px]">8</p> */}
+                          {/* <p className="font-bold leading-[21px] text-[18px]">8</p> */}
                           <p className="text-[10px]">Matches</p>
                         </div>
                       </div>
@@ -1559,9 +1553,9 @@ export default function MoreInfo({
                       </div>
                     </div>
                   </div>
-                  
+
                 </div>
-                
+
                 <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                   <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Umpires
@@ -1604,120 +1598,124 @@ export default function MoreInfo({
 
               <div className="lg:col-span-4 md:col-span-5">
 
-              <div className="rounded-lg bg-[#ffffff]  mb-4 hidden md:block">
-                  <div className="p-4 cust-box-click-container">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex space-x-2">
-                        <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
-                        <h3 className="text-1xl font-semibold">Probability</h3>
+
+                {matchData ? (
+
+                  <div className="rounded-lg bg-[#ffffff]  mb-4 hidden md:block">
+                    <div className="p-4 cust-box-click-container">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex space-x-2">
+                          <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
+                          <h3 className="text-1xl font-semibold">Probability</h3>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            className={`cust-box-click-button  font-medium ${activeOddTab === "tab1"
+                                ? "bg-[#081736] text-[#ffffff] "
+                                : "bg-[#ffffff] text-[#6A7586]"
+                              } px-5 py-1 rounded-full`}
+                            onClick={() => setActiveOddTab("tab1")}
+                          >
+                            <span>% View</span>
+                          </button>
+                          <button
+                            className={`cust-box-click-button font-medium ${activeOddTab === "tab2"
+                                ? "bg-[#081736] text-[#ffffff] "
+                                : "bg-[#ffffff] text-[#6A7586]"
+                              }  px-5 py-1 rounded-full`}
+                            onClick={() => setActiveOddTab("tab2")}
+                          >
+                            <span>Odds View</span>
+                          </button>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <button
-                          className={`cust-box-click-button  font-medium ${
-                            activeOddTab === "tab1"
-                              ? "bg-[#081736] text-[#ffffff] "
-                              : "bg-[#ffffff] text-[#6A7586]"
-                          } px-5 py-1 rounded-full`}
-                          onClick={() => setActiveOddTab("tab1")}
-                        >
-                          <span>% View</span>
-                        </button>
-                        <button
-                          className={`cust-box-click-button font-medium ${
-                            activeOddTab === "tab2"
-                              ? "bg-[#081736] text-[#ffffff] "
-                              : "bg-[#ffffff] text-[#6A7586]"
-                          }  px-5 py-1 rounded-full`}
-                          onClick={() => setActiveOddTab("tab2")}
-                        >
-                          <span>Odds View</span>
-                        </button>
-                      </div>
-                    </div>
-                    {activeOddTab === "tab1" && (
-                      <div className="cust-box-click-content">
-                        <div>
-                          
-                          <div className="relative mt-4 h-[4px] bg-gray-200 overflow-hidden">
-                            <div
-                              className="absolute h-full bg-[#13B76D]"
-                              style={{
-                                width: `${teamwinpercentage?.team_a_win}%`,
-                              }}
-                            />
-                            <div
-                              className="absolute h-full bg-[#EB9D29]"
-                              style={{
-                                width: `${teamwinpercentage?.draw}%`,
-                                left: `${teamwinpercentage?.team_a_win}%`,
-                              }}
-                            ></div>
-                            <div
-                              className="absolute h-full bg-[#B7132B]"
-                              style={{
-                                width: `${teamwinpercentage?.team_b_win}%`,
-                                left: `${
-                                  teamwinpercentage?.draw +
-                                  teamwinpercentage?.team_a_win
-                                }%`,
-                              }}
-                            ></div>
-                          </div>
-                          <div className="flex justify-between mt-2 text-sm">
-                            <p className="text-green-600 font-medium">
-                              {matchDetails?.teama?.short_name}:{" "}
-                              {teamwinpercentage?.team_a_win}%
-                            </p>
-                            {teamwinpercentage?.draw > 0 ? (
-                              <p className="text-yellow-600 font-medium">
-                                Drew: {teamwinpercentage?.draw}%
+                      {activeOddTab === "tab1" && (
+                        <div className="cust-box-click-content">
+                          <div>
+
+                            <div className="relative mt-4 h-[4px] bg-gray-200 overflow-hidden">
+                              <div
+                                className="absolute h-full bg-[#13B76D]"
+                                style={{
+                                  width: `${teamwinpercentage?.team_a_win}%`,
+                                }}
+                              />
+                              <div
+                                className="absolute h-full bg-[#EB9D29]"
+                                style={{
+                                  width: `${teamwinpercentage?.draw}%`,
+                                  left: `${teamwinpercentage?.team_a_win}%`,
+                                }}
+                              ></div>
+                              <div
+                                className="absolute h-full bg-[#B7132B]"
+                                style={{
+                                  width: `${teamwinpercentage?.team_b_win}%`,
+                                  left: `${teamwinpercentage?.draw +
+                                    teamwinpercentage?.team_a_win
+                                    }%`,
+                                }}
+                              ></div>
+                            </div>
+                            <div className="flex justify-between mt-2 text-sm">
+                              <p className="text-green-600 font-medium">
+                                {matchDetails?.teama?.short_name}:{" "}
+                                {teamwinpercentage?.team_a_win}%
                               </p>
-                            ) : (
-                              ""
-                            )}
-                            <p className="text-red-600 font-medium">
-                              {matchDetails?.teamb?.short_name}:{" "}
-                              {teamwinpercentage?.team_b_win}%
-                            </p>
+                              {teamwinpercentage?.draw > 0 ? (
+                                <p className="text-yellow-600 font-medium">
+                                  Drew: {teamwinpercentage?.draw}%
+                                </p>
+                              ) : (
+                                ""
+                              )}
+                              <p className="text-red-600 font-medium">
+                                {matchDetails?.teamb?.short_name}:{" "}
+                                {teamwinpercentage?.team_b_win}%
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    )}
-                    {activeOddTab === "tab2" && (
-                      <div className="cust-box-click-content">
-                        <div className="flex justify-between items-center border-t-[1px] pt-2">
-                          <div className="text-1xl font-medium">
-                            {matchData?.match_info?.teama?.short_name}
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
-                              {matchData?.live_odds?.matchodds?.teama
-                                ?.back !== null &&
-                                matchData?.live_odds?.matchodds?.teama
-                                ?.back !== undefined &&
-                                matchData?.live_odds?.matchodds?.teama
-                                ?.back !== ""
-                                ? Math.round((matchData?.live_odds?.matchodds?.teama
-                                    ?.back)*100-100)
-                                : 0}
-                            </p>
-                            <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
-                              {matchData?.live_odds?.matchodds?.teama
-                                ?.lay !== null &&
-                                matchData?.live_odds?.matchodds?.teama
-                                ?.lay !== undefined &&
-                                matchData?.live_odds?.matchodds?.teama
-                                ?.lay !== ""
-                                ? Math.round((matchData?.live_odds?.matchodds?.teama
-                                    ?.lay)*100-100)
-                                : 0}
-                            </p>
+                      )}
+                      {activeOddTab === "tab2" && (
+                        <div className="cust-box-click-content">
+                          <div className="flex justify-between items-center border-t-[1px] pt-2">
+                            <div className="text-1xl font-medium">
+                              {matchData?.match_info?.teama?.short_name}
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
+                                {matchData?.live_odds?.matchodds?.teama
+                                  ?.back !== null &&
+                                  matchData?.live_odds?.matchodds?.teama
+                                    ?.back !== undefined &&
+                                  matchData?.live_odds?.matchodds?.teama
+                                    ?.back !== ""
+                                  ? Math.round((matchData?.live_odds?.matchodds?.teama
+                                    ?.back) * 100 - 100)
+                                  : 0}
+                              </p>
+                              <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
+                                {matchData?.live_odds?.matchodds?.teama
+                                  ?.lay !== null &&
+                                  matchData?.live_odds?.matchodds?.teama
+                                    ?.lay !== undefined &&
+                                  matchData?.live_odds?.matchodds?.teama
+                                    ?.lay !== ""
+                                  ? Math.round((matchData?.live_odds?.matchodds?.teama
+                                    ?.lay) * 100 - 100)
+                                  : 0}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
-                </div>
+
+                ) : (
+                  ""
+                )}
 
 
                 <div className="rounded-lg bg-[#ffffff]">
@@ -1731,11 +1729,10 @@ export default function MoreInfo({
                         onClick={(e) =>
                           handlePlaying11Tab(e, "cust-box-click-playing11")
                         }
-                        className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${
-                          playing11Tab === "cust-box-click-playing11"
+                        className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${playing11Tab === "cust-box-click-playing11"
                             ? "bg-[#081736] text-white"
                             : "bg-[#ffffff] text-[#6A7586]"
-                        }`}
+                          }`}
                       >
                         <span>{matchData?.match_info?.teama.name}</span>
                       </button>
@@ -1744,11 +1741,10 @@ export default function MoreInfo({
                         onClick={(e) =>
                           handlePlaying11Tab(e, "cust-box-click-playing12")
                         }
-                        className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${
-                          playing11Tab === "cust-box-click-playing12"
+                        className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${playing11Tab === "cust-box-click-playing12"
                             ? "bg-[#081736] text-white"
                             : "bg-[#ffffff] text-[#6A7586]"
-                        }`}
+                          }`}
                       >
                         <span>{matchData?.match_info?.teamb.name}</span>
                       </button>
@@ -1756,11 +1752,10 @@ export default function MoreInfo({
                     <div className="border-t-[1px] border-[#E4E9F0]" />
 
                     <div
-                      className={`cust-box-click-content cust-box-click-playing11 mt-4 ${
-                        playing11Tab === "cust-box-click-playing11"
+                      className={`cust-box-click-content cust-box-click-playing11 ${playing11Tab === "cust-box-click-playing11"
                           ? ""
                           : "hidden"
-                      }`}
+                        }`}
                     >
                       <div>
                         {teama11Players?.map((player) => (
@@ -1774,9 +1769,9 @@ export default function MoreInfo({
                             key={player.player_id}
                           >
                             <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
-                              <div>
-                                <PlayerImage  key={player?.player_id} player_id={ player?.player_id} height={35} width={35} className="rounded-lg" />
-                                
+                              <div style={{ width: '40px', height: '40px' }}>
+                                <PlayerImage key={player?.player_id} player_id={player?.player_id} height={35} width={35} className="rounded-lg" />
+
                               </div>
                               <div className="font-medium">
                                 <h2 className="text-[15px]">
@@ -1797,11 +1792,10 @@ export default function MoreInfo({
                     </div>
 
                     <div
-                      className={`cust-box-click-content cust-box-click-playing12 mt-4 ${
-                        playing11Tab === "cust-box-click-playing12"
+                      className={`cust-box-click-content cust-box-click-playing12 mt-4 ${playing11Tab === "cust-box-click-playing12"
                           ? ""
                           : "hidden"
-                      }`}
+                        }`}
                     >
                       <div>
                         {teamb11Players?.map((player) => (
@@ -1816,8 +1810,8 @@ export default function MoreInfo({
                           >
                             <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
                               <div>
-                              <PlayerImage key={player?.player_id} player_id={ player?.player_id} height={35} width={35} className="rounded-lg" />
-                                
+                                <PlayerImage key={player?.player_id} player_id={player?.player_id} height={35} width={35} className="rounded-lg" />
+
                               </div>
                               <div className="font-medium">
                                 <h2 className="text-[15px]">
@@ -1876,9 +1870,9 @@ export default function MoreInfo({
                     </div>
                   </div>
                 </div>
-                
-                
-              
+
+
+
               </div>
             </div>
           </div>

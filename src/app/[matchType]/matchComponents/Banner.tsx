@@ -21,7 +21,7 @@ interface BallEventData {
 
 function updateStatusNoteDirect(matchInfo: any) {
   if (!matchInfo?.status_note) return;
-  
+
   return matchInfo.status_note = matchInfo.status_note
     .replace(new RegExp(matchInfo.teama.name, 'gi'), matchInfo.teama.short_name)
     .replace(new RegExp(matchInfo.teamb.name, 'gi'), matchInfo.teamb.short_name);
@@ -46,7 +46,7 @@ export default function Banner({ matchData, match_id }: Banner) {
   const teamaovers = liveMatch?.match_info?.teama?.overs ?? "";
   const teambovers = liveMatch?.match_info?.teamb?.overs ?? "";
   const seriesName = liveMatch?.match_info?.competition?.title ?? "";
-  
+
   // Split by " & " to separate both innings
   const [inning1teamarun, inning2teamarun] = teamascores.includes(" & ")
     ? teamascores.split(" & ")
@@ -95,17 +95,13 @@ export default function Banner({ matchData, match_id }: Banner) {
               </div>
               <div className="text-[#8192B4] font-medium  text-1xl md:text-center md:mx-0 my-3">
                 {seriesName}
-                
+
               </div>
-              <div className="flex text-[#8192B4] text-1xl font-medium md:justify-start">
-                <Image
-                  src="/assets/img/clander.png"
-                  className="mr-2"
-                  width={20}
-                  height={20}
-                  alt=""
-                  loading="lazy"
-                />
+              <div className="flex gap-[3px] items-center text-[#8192B4] text-1xl font-medium md:justify-start">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                </svg>
+
                 {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "dd MMM yyyy") : ""}
               </div>
             </div>
@@ -155,9 +151,9 @@ export default function Banner({ matchData, match_id }: Banner) {
                       {inning2teamarun ? (
                         <>
                           {" "}
-                           &amp; {inning2teamarun}{" "}
+                          &amp; {inning2teamarun}{" "}
                           {inning2teamaOver !== "" && (
-                            <span className="text-[13px] font-medium">
+                            <span className="text-[16px] font-medium">
                               ({inning2teamaOver})
                             </span>
                           )}
@@ -174,7 +170,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                   <p className="text-[#00a632] lg:text-[22px] text-[16px] font-semibold uppercase">
                     {updateStatusNoteDirect(liveMatch?.match_info)} 🏆
                   </p>
-                  
+
                   {/* <Image
                     src="/assets/img/home/win-2.png"
                     width={32}
@@ -213,9 +209,9 @@ export default function Banner({ matchData, match_id }: Banner) {
                       {inning2teambrun ? (
                         <>
                           {" "}
-                           &amp;  {inning2teambrun}{" "}
+                          &amp;  {inning2teambrun}{" "}
                           {inning2teambOver !== "" && (
-                            <span className="text-[13px] font-medium">
+                            <span className="text-[16px] font-medium">
                               ({inning2teambOver})
                             </span>
                           )}

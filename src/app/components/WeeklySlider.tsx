@@ -127,7 +127,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
               <div className="md:py-4 py-2 md:mb-0 mb-2">
                 <Link
                   href={
-                    "/matchinfo/" +
+                    "/morenfo/" +
                     urlStringEncode(
                       slide?.teams?.[0].country +
                       "-vs-" +
@@ -177,6 +177,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
 
                           {format(new Date(slide.countdown), "dd MMMM - EEEE")}
                           <br />
+                          <span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
                           <span className="text-[#144280] text-[14px] font-semibold">
                             {" "}
                             {format(new Date(slide.countdown), "hh:mm:aa")}{" "}
