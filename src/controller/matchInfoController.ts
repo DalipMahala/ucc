@@ -51,6 +51,7 @@ export async function MatcheInfo(matchid: number) {
   }
 
   const fileName =   rows[0].fileName;
+  const ballEvent =   rows[0].ball_event;
   try {
     const matches = await getJsonFromS3( fileName as string);
 
@@ -58,7 +59,7 @@ export async function MatcheInfo(matchid: number) {
     if (matches && (Array.isArray(matches) && matches.length > 0)) {
       await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(matches));
     }
-
+    matches["ballEvent"] = ballEvent;
       return matches;
       
       

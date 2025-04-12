@@ -699,7 +699,8 @@ export default async function Home(props: { params: Params }) {
                                     <p className={"mt-1 mx-2 text-[#2F335C] text-[14px]  statusNote" +
                                       items.match_id
                                     }>
-                                      {items.status_note}
+                                      {/* {items.status_note} */}
+                                      { updateStatusNoteDirect(items) }
                                     </p>
                                   </div>
                                 </div>

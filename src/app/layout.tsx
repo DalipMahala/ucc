@@ -1,8 +1,9 @@
 // import type { Metadata } from "next";
+import dynamic from 'next/dynamic';
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 // import { WebSocketProvider } from "./components/WebSocketProvider";
-
+import GoogleAnalytics from "./components/GoogleAnalytics";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -38,7 +39,9 @@ export default function RootLayout({
         {/* <WebSocketProvider> */}
           {children}
         {/* </WebSocketProvider> */}
+        <GoogleAnalytics />
       </body>
+      
     </html>
   );
 }

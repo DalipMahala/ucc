@@ -335,7 +335,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                 </div>
                 <div className="text-[#8192B4] font-normal w-full text-center md:my-0 my-4">
 
-                  {/* {liveMatch?.live?.status_note} */}
+                  {liveMatch?.ballEvent ? liveMatch?.ballEvent : ''}
                   <motion.div
                     key={ballEvent}
                     initial={{ scale: 0, opacity: 0, rotate: -15 }}

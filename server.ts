@@ -85,14 +85,10 @@ class WebSocketService {
       await db.query(query);
 
       // Ball-by-ball data
-      //   if (data.ball_event) {
-      //     await connection.execute(
-      //       `INSERT INTO ball_events
-      //       (match_id, event, timestamp)
-      //       VALUES (?, ?, NOW())`,
-      //       [data.match_id, data.ball_event]
-      //     );
-      //   }
+        if (data.ball_event) {
+          await db.execute(
+            `UPDATE match_info SET ball_event = '${data.ball_event}' WHERE match_id IN (${matchId})`);
+        }
 
       console.log(`Data saved for match ${data.match_id}`);
     } catch (err) {
