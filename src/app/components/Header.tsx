@@ -3,14 +3,14 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
 import Image from "next/image";
-import {urlStringEncode}  from "./../../utils/utility";
+import { urlStringEncode } from "./../../utils/utility";
 import GoogleAnalytics from "./GoogleAnalytics";
 interface HeaderProps {
   data: any; // Adjust type based on your data
 }
 const Header = ({ data }: HeaderProps) => {
 
-//  console.log("ssee",data);
+  //  console.log("ssee",data);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -27,20 +27,20 @@ const Header = ({ data }: HeaderProps) => {
   //       label: "BGT 2024-25",
   //     }
   //   )) 
-    
+
   // ];
   let items = [];
-if(data){
-   items = data?.map((item: any) => ({
-    href: "/series/"+urlStringEncode(item.title+"-"+item.season)+"/"+item.cid,
-    imgSrc: item?.header_logo ? item?.header_logo : "/assets/img/series/series-1.png",
-    // imgSrc: "/assets/img/series/"+item.title+".png",
-    alt: item.abbr,
-    label: item.abbr,
-  }));
-}else{
-   items = [];
-}
+  if (data) {
+    items = data?.map((item: any) => ({
+      href: "/series/" + urlStringEncode(item.title + "-" + item.season) + "/" + item.cid,
+      imgSrc: item?.header_logo ? item?.header_logo : "/assets/img/series/series-1.png",
+      // imgSrc: "/assets/img/series/"+item.title+".png",
+      alt: item.abbr,
+      label: item.abbr,
+    }));
+  } else {
+    items = [];
+  }
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 7;
@@ -67,13 +67,13 @@ if(data){
         <button className='border-[1px] border-white px-4 rounded-full py-1'>Use App</button>
 
       </div>
-{/* fixed top-0 left-0 w-full shadow-md z-50 */}
-      <header className="bg-[#081736] lg:px-0  px-3 sticky top-0 z-[999]">
-      <GoogleAnalytics />
+      {/* fixed top-0 left-0 w-full shadow-md z-50 */}
+      <header className="bg-[#081736] lg:px-0  px-3 sticky top-0 header-cls z-[999]">
+        <GoogleAnalytics />
         <div className="lg:w-[1000px] w-full mx-auto text-white md:py-5 pt-3 pb-3 flex items-center md:justify-between justify-center">
           <div>
             <Link href="/">
-              <Image priority  className="h-[39px] w-[173px]" src="/assets/img/logo.png" alt="" width={150} height={50} />
+              <Image priority className="h-[39px] w-[173px]" src="/assets/img/logo.png" alt="" width={150} height={50} />
             </Link>
           </div>
           {/* Toggle Button for Mobile */}
@@ -98,52 +98,52 @@ if(data){
           </button>
           {/* Navbar Links */}
           <nav id="menu" className="hidden lg:flex space-x-4 text-1xl">
-            <Link href="/" className="hover:text-yellow-400"  prefetch={true}>
+            <Link href="/" className="hover:text-yellow-400" prefetch={true}>
               Home
             </Link>
-            <Link href="#" className="hover:text-yellow-400"  prefetch={true}>
+            <Link href="#" className="hover:text-yellow-400" prefetch={true}>
               Fixtures
             </Link>
-            <Link href="#" className="hover:text-yellow-400"  prefetch={true}></Link>
+            <Link href="#" className="hover:text-yellow-400" prefetch={true}></Link>
             <div className="group">
-              <Link href="" className="hover:text-yellow-400"  prefetch={true}></Link>
+              <Link href="" className="hover:text-yellow-400" prefetch={true}></Link>
               <div className="flex items-center">
-              <Link
-                 href="/series"
-                className="hover:text-yellow-400 flex items-center"
-              >
-                Series
+                <Link
+                  href="/series"
+                  className="hover:text-yellow-400 flex items-center"
+                >
+                  Series
                 </Link>
                 <Link
-                 href="#" className="hover:text-yellow-400" onClick={toggleDropdown}
-                 >
-                <svg
-                  className="w-4 h-4 ml-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+                  href="#" className="hover:text-yellow-400" onClick={toggleDropdown}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </Link>
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </Link>
               </div>
             </div>
-            <Link href="" className="hover:text-yellow-400"  prefetch={true}>
+            <Link href="" className="hover:text-yellow-400" prefetch={true}>
               Teams
             </Link>
-            <Link href="/iccranking/man/team/odis" className="hover:text-yellow-400"  prefetch={true}>
+            <Link href="/iccranking/man/team/odis" className="hover:text-yellow-400" prefetch={true}>
               ICC Ranking
             </Link>
-            <Link href="" className="hover:text-yellow-400"  prefetch={true}>
+            <Link href="" className="hover:text-yellow-400" prefetch={true}>
               News
             </Link>
-            <Link href="" className="hover:text-yellow-400"  prefetch={true}>
+            <Link href="" className="hover:text-yellow-400" prefetch={true}>
               Fantasy Tips
             </Link>
             {/* <Link href="" className="hover:text-yellow-400">
@@ -211,10 +211,10 @@ if(data){
               >
                 {items
                   .slice(currentIndex, currentIndex + itemsPerPage)
-                  ?.map((item:any, index:number) => (
+                  ?.map((item: any, index: number) => (
                     <Link href={item.href || "#"} key={index}>
                       <div className="flex-shrink-0 w-[125px] flex items-center flex-col">
-                        <Image  loading="lazy"  
+                        <Image loading="lazy"
                           src={item.imgSrc}
                           alt={item.alt}
                           className="rounded-full w-[80px] h-[80px] border-2 border-[#3A7BD5] shadow-[0px_0px_10px_rgba(0,0,255,0.6)]"
