@@ -165,7 +165,7 @@ export default function Squads({
                         {activeTab === "tab1" &&
                             <div id="south-team" className="team-content ">
                                 <div className="max-w-7xl mx-auto bg-white rounded-lg p-6">
-                                    <div className="flex items-center space-x-4 mb-6">
+                                    <div className="flex items-center space-x-4 mb-3">
                                         <Image  loading="lazy" 
                                             src={teamADetails.logo_url}
                                             width={45} height={45} alt={teamADetails.name}
@@ -176,9 +176,9 @@ export default function Squads({
                                             <span className="text-[#586577]">({teamASquad.length} players)</span>
                                         </h1>
                                     </div>
-                                    <div className='border-[#E4E9F0] bottom-[5px] w-full'></div>
+                                    <div className='border-[#E4E9F0] border-b-[1px] w-full'></div>
                                     {/* Categories */}
-                                    <div className="space-y-6 mt-2">
+                                    <div className="space-y-6 mt-3">
                                         {/* Batsman Section */}
                                         <div>
                                             <h2 className="text-1xl font-medium pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">

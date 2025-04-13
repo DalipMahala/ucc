@@ -13,12 +13,23 @@
   box-sizing: border-box;
 }
 
- 
+
 body {
   font-family: "Noto Sans Display", sans-serif;
   font-size: 13px;
   background-color: #ECF2FD;
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 h1,
@@ -46,7 +57,7 @@ h6 {
 
 
 
-.scheduled-timer div{
+.scheduled-timer div {
   color: #FFBD71;
   font-size: 24px;
   font-weight: 600;
@@ -87,6 +98,236 @@ h6 {
   gap: 16px;
   overflow-x: auto;
 } */
+
+
+
+.animate-blinkFour {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 121px;
+  animation: blinkFour 2s ease-in;
+}
+
+
+@keyframes blinkFour {
+  0% {
+    background-color: transparent;
+  }
+
+  25% {
+    background-color: #ff730f40;
+  }
+
+  50% {
+    background-color: transparent;
+  }
+
+  75% {
+    background-color: #ff730f40;
+  }
+
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+.animate-blinkSix {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 121px;
+  animation: blinkSix 2s ease-in;
+}
+
+
+@keyframes blinkSix {
+  0% {
+    background-color: transparent;
+  }
+
+  25% {
+    background-color: #3bf27566;
+  }
+
+  50% {
+    background-color: transparent;
+  }
+
+  75% {
+    background-color: #3bf27566;
+  }
+
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+
+
+.animate-Out {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 121px;
+  animation: Out 2s ease-in;
+}
+
+
+@keyframes Out {
+  0% {
+    background-color: transparent;
+  }
+
+  25% {
+    background-color: #f841416b;
+  }
+
+  50% {
+    background-color: transparent;
+  }
+
+  75% {
+    background-color: #f841416b;
+  }
+
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+
+
+
+/* mobile LOve screen */
+
+
+
+.phone-animate-blinkFour {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 60px;
+  animation: phoneblinkFour 2s ease-in;
+}
+
+
+@keyframes phoneblinkFour {
+  0% {
+    background-color: transparent;
+  }
+
+  25% {
+    background-color: #ff730f40;
+  }
+
+  50% {
+    background-color: transparent;
+  }
+
+  75% {
+    background-color: #ff730f40;
+  }
+
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+.phone-animate-blinkSix {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 60px;
+  animation: phoneblinkSix 2s ease-in;
+}
+
+
+@keyframes phoneblinkSix {
+  0% {
+    background-color: transparent;
+  }
+
+  25% {
+    background-color: #3bf27566;
+  }
+
+  50% {
+    background-color: transparent;
+  }
+
+  75% {
+    background-color: #3bf27566;
+  }
+
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+
+
+.phone-animate-Out {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 100%;
+  height: 60px;
+  animation: phoneOut 2s ease-in;
+}
+
+
+@keyframes phoneOut {
+  0% {
+    background-color: transparent;
+  }
+
+  25% {
+    background-color: #f841416b;
+  }
+
+  50% {
+    background-color: transparent;
+  }
+
+  75% {
+    background-color: #f841416b;
+  }
+
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+
+
+
+
+
+
 
 @keyframes blink {
 

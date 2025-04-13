@@ -75,7 +75,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
     eventEmitter.on("ballEvent", handler);
 
-    
+
     // Proper cleanup function that returns void
     return () => {
       if (typeof eventEmitter.off === 'function') {
@@ -285,8 +285,8 @@ export default function Banner({ matchData, match_id }: Banner) {
             </span>
           </div>
           <div className="border-t-[1px] border-[#E4E9F01A]">
-            <div className="lg:w-[1000px] mx-auto md:py-9 tracking-[1px]">
-              <div className="hidden md:flex py-8 justify-between items-center">
+            <div className="lg:w-[1000px] mx-auto tracking-[1px]">
+              <div className="hidden md:flex h-[168px] justify-between items-center">
                 <div className="flex gap-2 flex-row text-[#BDCCECA8] uppercase items-center w-full">
                   {liveMatch?.match_info?.teama?.logo_url ? (
                     <Image
@@ -341,7 +341,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                 </div>
                 <div className="text-[#8192B4] font-normal w-full text-center md:my-0 my-4">
 
-                  
+
                   <motion.div
                     key={ballEvent}
                     initial={{ scale: 0, opacity: 0, rotate: -15 }}
@@ -356,7 +356,9 @@ export default function Banner({ matchData, match_id }: Banner) {
                       damping: 15,
                       color: { duration: 1.5, repeat: Infinity }
                     }}
-                    className={`text-[#FFBD71] lg:text-[20px] text-[16px] font-bold`}
+                    className={`text-[#FFBD71] lg:text-[40px] text-[16px] font-bold
+                     ${ballEvent.toUpperCase() === 'FOUR' ? "animate-blinkFour" : ""}
+                     ${ballEvent.toUpperCase() === 'SIX' ? "animate-blinkSix" : ""} `}
                   >
                     {ballEvent.toUpperCase() === 'FOUR' ? 4 : ballEvent.toUpperCase() === 'SIX' ? 6 : ballEvent.toUpperCase() === 'DOT' ? 0 : ballEvent}
                   </motion.div>
@@ -416,6 +418,8 @@ export default function Banner({ matchData, match_id }: Banner) {
                 </div>
               </div>
 
+              {/* mobile */}
+
               <div className="md:hidden block bg-[white] p-4 rounded-md mb-4">
                 <div>
                   <div>
@@ -446,7 +450,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
                       <div className="border-r-[1px] border-[#e5e5e5] h-[60px]"></div>
 
-                      <div className="w-full text-center">
+                      <div className="w-full h-[60px] text-center flex items-center justify-center">
                         <motion.div
                           key={ballEvent}
                           initial={{ scale: 0, opacity: 0, rotate: -15 }}
@@ -461,8 +465,14 @@ export default function Banner({ matchData, match_id }: Banner) {
                             damping: 15,
                             color: { duration: 1.5, repeat: Infinity }
                           }}
-                          className={`text-[24px] text-[#342df2] font-bold`}
-                        >
+
+                          className={`text-[#342df2]  text-[24px] font-bold
+                          ${ballEvent.toUpperCase() === 'for' ? "phone-animate-blinkFour" : ""}
+                          ${ballEvent.toUpperCase() === 'six' ? "phone-animate-blinkSix" : ""} `}
+                                                >
+
+
+
                           {ballEvent === 'four' ? 4 : ballEvent === 'six' ? 6 : ballEvent === 'dot' ? 0 : ballEvent}
                         </motion.div>
                       </div>
@@ -536,7 +546,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                     <div className="scheduled-timer">
                       <CountdownTimer targetTime={liveMatch?.match_info?.date_start_ist} />
                     </div>
-                    
+
                   ) : (
 
                     <p className="text-[#FFBD71] md:text-[24px] text-[16px] font-semibold">
