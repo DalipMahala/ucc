@@ -9,7 +9,7 @@ export async function H2hDetails(tableName: string,teama:number,teamb:number) {
     }
 
     const CACHE_KEY = "h2hDetails_" + teama+"vs"+teamb+"in"+tableName;
-    const CACHE_TTL = 600;
+    const CACHE_TTL = 60;
 
     try {
         // Check Redis Cache
