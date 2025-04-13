@@ -24,7 +24,7 @@ export default function TabButtons() {
       target.classList.add("md:bg-[#1A80F8]", "bg-[#081736]", "md:bottom-0", "border-b-[2px]", "border-[#ffffff]", "text-white");
 
       // Hide all sections initially
-      document.querySelectorAll(".liveMatch, .completedMatch, .upcomingMatch").forEach((el) => {
+      document.querySelectorAll(".liveMatch, .completedMatch, .upcomingMatch, .foryouMatch").forEach((el) => {
         el.classList.add("hidden");
       });
 
@@ -33,7 +33,8 @@ export default function TabButtons() {
         "live-tab": ".liveMatch",
         "completed-tab": ".completedMatch",
         "upcoming-tab": ".upcomingMatch",
-        "all-tab": ".liveMatch, .completedMatch, .upcomingMatch",
+        // "all-tab": ".liveMatch, .completedMatch, .upcomingMatch",
+        "all-tab" : ".foryouMatch",
       };
 
       if (sectionMap[target.id]) {

@@ -23,6 +23,7 @@ import CountriesList from "./components/CountriesList";
 import PLSeries from "./components/popularSeries";
 import PlayerImage from "@/app/components/PlayerImage";
 import React from "react";
+import ForYouMatches from "./components/forYouMatches";
 
 export const metadata: Metadata = {
   title: "UC Cricket - Live Scores, IPL 2025, T20, ODI, Test News &amp; Stats",
@@ -102,7 +103,7 @@ export default async function Home(props: { params: Params }) {
 
   if (matchType === "live") {
     activeTabValue = "live1";
-  } else if (matchType === "upcoming") {
+  }  else if (matchType === "upcoming") {
     activeTabValue = "scorecard1";
   } else if (matchType === "result") {
     activeTabValue = "finished1";
@@ -112,7 +113,7 @@ export default async function Home(props: { params: Params }) {
 
 
   const activeMainTab = activeTabValue;
-  // console.log("open", activeMainTab);
+  console.log("open", activeMainTab);
   // let completedMatch: MatchItem[] = await completedMatches();
   let completedresponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/completedMatches`, {
     method: "GET",
@@ -178,6 +179,8 @@ export default async function Home(props: { params: Params }) {
     ...rest
   }));
   const featuredMatch = futuredMatches;
+
+
   // console.log("liveMatch",completedMatch);
   completedMatch = completedMatch?.filter((item: { commentary: number }) => Number(item.commentary) === 1);
   upcomingMatch = upcomingMatch?.filter((item: { commentary: number }) => Number(item.commentary) === 1);
@@ -221,14 +224,14 @@ export default async function Home(props: { params: Params }) {
                                  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
                 >
 
-                  <button id="all-tab"
+                  {/* <button id="all-tab"
                     className={`font-semibold py-2 md:px-5 px-4 whitespace-nowrap uppercase ${activeMainTab === "info1"
                       ? "md:bg-[#1A80F8] bg-[#081736] md:bottom-0 border-b-[2px] border-[#ffffff] text-white"
                       : ""
                       } md:rounded-md`}
                   >
                     All
-                  </button>
+                  </button> */}
 
                   <button id="live-tab"
                     className={`font-semibold py-2 md:px-5 px-4  whitespace-nowrap uppercase ${activeMainTab === "live1"
@@ -237,6 +240,15 @@ export default async function Home(props: { params: Params }) {
                       } md:rounded-md`}
                   >
                     Live
+                  </button>
+
+                  <button id="all-tab"
+                    className={`font-semibold py-2 md:px-5 px-4  whitespace-nowrap uppercase ${activeMainTab === "info1"
+                      ? "md:bg-[#1A80F8] bg-[#081736] md:bottom-0 border-b-[2px] border-[#ffffff] text-white"
+                      : ""
+                      } md:rounded-md`}
+                  >
+                    For You
                   </button>
 
                   <button id="completed-tab"
@@ -261,13 +273,9 @@ export default async function Home(props: { params: Params }) {
               </div>
 
               <div className="tab-content-container">
-                <div
-                  id="info1"
-                  className={`tab-content ${activeMainTab === "info1" ? "" : "hidden"
-                    }`}
-                >
+                <div id="info1"  className={`tab-content ${activeMainTab === "info1" ? "" : ""  }`} >
                   {/* <!-- live match desktop view start --> */}
-                  <div className="liveMatch">
+                  <div className="liveMatch hidden">
                     {liveMatch?.map((items) => (
                       <div key={items.match_id}>
                         <div
@@ -822,7 +830,7 @@ export default async function Home(props: { params: Params }) {
 
                   </div>
 
-                  <div className="completedMatch">
+                  <div className="completedMatch hidden">
                     {completedMatch?.map((cmatch) => (
                       <div key={cmatch.match_id}>
                         <div
@@ -1174,7 +1182,7 @@ export default async function Home(props: { params: Params }) {
 
                   </div>
 
-                  <div className="upcomingMatch">
+                  <div className="upcomingMatch hidden">
                     {upcomingMatch?.map((ucmatch) => (
                       <div key={ucmatch.match_id}>
                         <div
@@ -1578,6 +1586,11 @@ export default async function Home(props: { params: Params }) {
                     ))}
 
                   </div>
+                  <div className="foryouMatch">
+                    <ForYouMatches/>
+
+                  </div>
+                  
                 </div>
 
 

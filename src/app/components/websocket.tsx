@@ -16,6 +16,15 @@ interface MatchData {
   // matchlivedata:any;
 }
 
+function updateStatusNoteDirect(matchInfo: any) {
+  if (!matchInfo?.status_note) return;
+  
+  return matchInfo.status_note = matchInfo.status_note
+    .replace(/^Stumps : /, '')
+    .replace(new RegExp(matchInfo.teama.name, 'gi'), matchInfo.teama.short_name)
+    .replace(new RegExp(matchInfo.teamb.name, 'gi'), matchInfo.teamb.short_name);
+}
+
 class MatchWebSocket extends Component<object, MatchData> { // Changed from {} to object
   private socket: WebSocket | null = null;
 
@@ -72,13 +81,13 @@ class MatchWebSocket extends Component<object, MatchData> { // Changed from {} t
         data?.live?.live_inning?.batting_team_id !== undefined &&
         data?.live?.live_inning?.batting_team_id !== ""
       ) {
-        const match_status_note = data?.match_info?.status_note.replace(new RegExp(data?.match_info?.teama?.name, 'gi'), data?.match_info?.teama?.short_name).replace(new RegExp(data?.match_info?.teama?.name, 'gi'), data?.match_info?.teama?.short_name);
-
+        const match_status_note = updateStatusNoteDirect(data?.match_info);
+        
         const a = parseFloat(data?.live_odds?.matchodds?.teama?.back);
         const b = parseFloat(data?.live_odds?.matchodds?.teamb?.back);
         const lesserTeam = a < b 
-          ? { matchId: data?.match_id,team: data?.match_info?.teama?.short_name, ...data.live_odds.matchodds.teama } 
-          : { matchId: data?.match_id,team: data?.match_info?.teamb?.short_name, ...data.live_odds.matchodds.teamb };
+          ? { matchId: data?.match_id,team: data?.match_info?.teama?.short_name, ...data?.live_odds?.matchodds?.teama } 
+          : { matchId: data?.match_id,team: data?.match_info?.teamb?.short_name, ...data?.live_odds?.matchodds?.teamb };
 
           eventEmitter.emit("oddsEvent", {
             matchId: data.match_id,

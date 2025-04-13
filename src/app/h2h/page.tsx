@@ -6,7 +6,7 @@ import H2h from './h2h';
 import { liveSeries,FeaturedMatch } from "@/controller/homeController";
 import { H2hDetails, getTeamId, h2hMatch } from "@/controller/h2hController";
 import { TeamDetails } from "@/controller/teamController";
-
+import { notFound } from 'next/navigation';
 
 type Params = Promise<{
   teamvsteam: string;
@@ -19,12 +19,18 @@ interface FrMatch {
 export default async function Page(props: { params: Params }) {
 
   const params = await props.params;
-
   const urlString = params?.teamvsteam ?? '';
+  if (urlString === '' || urlString === undefined) {
+    return notFound();
+  }
+
   // const parts = urlString.split('-');
 
   const [firstPart, secondPart] = urlString.split('-vs-');
   const teamA = firstPart;
+  if (!secondPart.length) {
+    return notFound();
+  }
   // const [teamB, matchType] = secondPart.split('-head-to-head-in-');
   const [teamB, matchType] = secondPart.includes('-head-to-head-in-')
     ? secondPart.split('-head-to-head-in-')
