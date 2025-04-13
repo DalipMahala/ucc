@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import Image from "next/image";
 import {urlStringEncode}  from "./../../utils/utility";
-
+import GoogleAnalytics from "./GoogleAnalytics";
 interface HeaderProps {
   data: any; // Adjust type based on your data
 }
@@ -69,6 +69,7 @@ if(data){
       </div>
 {/* fixed top-0 left-0 w-full shadow-md z-50 */}
       <header className="bg-[#081736] lg:px-0  px-3 sticky top-0 z-[999]">
+      <GoogleAnalytics />
         <div className="lg:w-[1000px] w-full mx-auto text-white md:py-5 pt-3 pb-3 flex items-center md:justify-between justify-center">
           <div>
             <Link href="/">

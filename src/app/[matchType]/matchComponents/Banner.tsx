@@ -63,8 +63,8 @@ export default function Banner({ matchData, match_id }: Banner) {
     : [teambovers, ""];
 
   // console.log("banner",liveMatch?.match_info?.teama);
-
-  const [ballEvent, setBallEvent] = useState('');
+  const lastevent = liveMatch?.ballEvent ? liveMatch?.ballEvent : '';
+  const [ballEvent, setBallEvent] = useState(lastevent);
 
   useEffect(() => {
     const handler = (data: BallEventData) => {
@@ -341,7 +341,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                 </div>
                 <div className="text-[#8192B4] font-normal w-full text-center md:my-0 my-4">
 
-                  {liveMatch?.ballEvent ? liveMatch?.ballEvent : ''}
+                  
                   <motion.div
                     key={ballEvent}
                     initial={{ scale: 0, opacity: 0, rotate: -15 }}
