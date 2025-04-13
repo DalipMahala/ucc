@@ -385,26 +385,26 @@ Live) {
     : { team: matchLiveData?.match_info?.teamb?.short_name, ...matchLiveData.live_odds.matchodds.teamb };
 
   return (
-    <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
+    <section className="lg:w-[1075px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
       <div id="tabs" className="my-4">
-        <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+        <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
           <Link href={"/moreinfo/" + matchUrl + "/" + match_id}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap ">
+            <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase ">
               More Info
             </button>
           </Link>
           <Link href={"/live-score/" + matchUrl + "/" + match_id}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md">
+            <button className="font-semibold py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md uppercase">
               Live
             </button>
           </Link>
           <Link href={"/scorecard/" + matchUrl + "/" + match_id}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase">
               Scorecard
             </button>
           </Link>
           <Link href={"/squad/" + matchUrl + "/" + match_id}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase">
               Squad
             </button>
           </Link>
@@ -422,7 +422,7 @@ Live) {
               "/points-table"
             }
           >
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase">
               Points Table
             </button>
           </Link>
@@ -440,7 +440,7 @@ Live) {
               "/stats/most-run"
             }
           >
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase">
               Stats
             </button>
           </Link>
@@ -450,12 +450,13 @@ Live) {
         <div id="tab-content">
           <div id="live" className="tab-content ">
             <div className="md:grid grid-cols-12 gap-4">
+
               <div className="lg:col-span-8 md:col-span-7 lg:grid grid-cols-12 gap-4">
                 <div className="col-span-8">
                   <div className="rounded-lg bg-white">
                     <div className="p-4">
                       <div className="flex items-center justify-between">
-                        <Link
+                        <Link className="w-[43%]"
                           href={
                             "/player/" +
                             urlStringEncode(
@@ -479,7 +480,7 @@ Live) {
                               />
                             </div>
                             <div className="font-medium">
-                              <h2 className="md:text-[15px] text-[14px] text-[#909090]">
+                              <h2 className="md:text-[15px] text-[14px] text-[#586577]">
                                 {getPlayerNameByPid(
                                   players,
                                   batsman?.[0]?.batsman_id
@@ -487,7 +488,7 @@ Live) {
                               </h2>
                               <p className="md:text-[15px] text-[14px] flex items-center">
                                 {batsman?.[0].runs}{" "}
-                                <span className="md:text-[13px] text-[12px] text-[#909090] px-1">
+                                <span className="md:text-[13px] text-[12px] text-[#586577] px-1">
                                   ({batsman?.[0]?.balls_faced})
                                 </span>
                                 {batsman?.[0]?.batsman_id ==
@@ -507,16 +508,18 @@ Live) {
                             </div>
                           </div>
                         </Link>
-                        <div className="font-medium text-center">
+                        <div className="font-medium text-center w-[14%] ">
                           <p className="md:text-[18px] text-[15px] text-[#13b76dbd]">
                             {currPartnership?.runs}{" "}
                             <span className="md:text-[15px] text-[13px] text-black">
                               ({currPartnership?.balls})
                             </span>
                           </p>
-                          <p>Partnership</p>
+                          <p>P-ship</p>
                         </div>
-                        <Link
+
+
+                        <Link className="w-[43%] flex justify-end"
                           href={
                             "/player/" +
                             urlStringEncode(
@@ -540,15 +543,15 @@ Live) {
                               />
                             </div>
                             <div className="font-medium text-end">
-                              <h2 className="md:text-[15px] text-[14px] text-[#909090]">
+                              <h2 className="md:text-[15px] text-[14px] text-[#586577]">
                                 {getPlayerNameByPid(
                                   players,
                                   batsman?.[1]?.batsman_id
                                 )}
                               </h2>
-                              <p className="md:text-[15px] text-[14px] flex items-center">
+                              <p className="md:text-[15px] text-[14px] flex items-center justify-end">
                                 {batsman?.[1]?.runs}{" "}
-                                <span className="md:text-[13px] text-[12px] text-[#909090] pl-1">
+                                <span className="md:text-[13px] text-[12px] text-[#586577] pl-1">
                                   ({batsman?.[1]?.balls_faced})
                                 </span>
                                 {batsman?.[0]?.batsman_id ==
@@ -572,6 +575,8 @@ Live) {
                     </div>
                   </div>
                 </div>
+
+
                 <div className="col-span-4 my-4 lg:my-0">
                   <div className="rounded-lg bg-white p-4">
                     <Link
@@ -607,7 +612,7 @@ Live) {
                           <p />
                         </div>
                         <div className="font-medium">
-                          <h2 className="md:text-[15px] text-[14px] text-[#909090]">
+                          <h2 className="md:text-[15px] text-[14px] text-[#586577]">
                             {getPlayerNameByPid(
                               players,
                               matchinfo?.bowlers?.[0]?.bowler_id
@@ -616,7 +621,7 @@ Live) {
                           <p className="md:text-[15px] text-[14px] flex items-center">
                             {matchinfo?.bowlers?.[0]?.wickets}-
                             {matchinfo?.bowlers?.[0]?.runs_conceded}{" "}
-                            <span className="md:text-[13px] text-[12px] text-[#909090] pt-[4px] px-1">
+                            <span className="md:text-[13px] text-[12px] text-[#586577] pt-[4px] px-1">
                               ({matchinfo?.bowlers?.[0]?.overs})
                             </span>
                           </p>
@@ -625,11 +630,13 @@ Live) {
                     </Link>
                   </div>
                 </div>
+
+
                 <div className="col-span-12 mb-4 md:mb-0">
                   <div className="rounded-lg bg-white p-4 flex lg:flex-row flex-col items-center md:gap-8 gap-4">
                     {/* Last Over Section */}
                     <div className="flex items-center gap-2">
-                      <span className="font-medium text-[#909090]">
+                      <span className="font-medium text-[#586577]">
                         Last Over:
                       </span>
                       <div className="flex gap-1">
@@ -656,7 +663,7 @@ Live) {
                     </div>
                     {/* This Over Section */}
                     <div className="flex items-center gap-2">
-                      <span className="font-medium text-[#909090]">
+                      <span className="font-medium text-[#586577]">
                         This Over:
                       </span>
                       <div className="flex gap-1">
@@ -686,6 +693,8 @@ Live) {
                   </div>
                 </div>
               </div>
+
+
               <div className="lg:col-span-4 md:col-span-5">
                 <div className="rounded-lg bg-[#ffffff]">
                   <div className="p-4 cust-box-click-container">
@@ -725,7 +734,7 @@ Live) {
                             {remainingOvers < "0" ? (
                               ""
                             ) : (
-                              <p className="text-[#909090]">
+                              <p className="text-[#586577]">
                                 Overs left today:{" "}
                                 <span className="font-semibol text-black">
                                   {remainingOvers}
@@ -800,7 +809,7 @@ Live) {
                                   )
                                 : 0}
                             </p>
-                            <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
+                            <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">
                               {matchOdds?.oddsEvent
                                 ?.lay !== null &&
                                 matchOdds?.oddsEvent
@@ -863,7 +872,7 @@ Live) {
             </div>
             <div className="cust-box-click-container">
               <div className="my-2">
-                <div className="flex gap-[10px] justify-between overflow-auto items-center py-2">
+                <div className="flex gap-[10px] overflow-auto items-center py-2">
                   <p className="font-medium text-[14px]">Commentary</p>
                   {updatedFilterarray.map((item) => (
                     <button
@@ -894,7 +903,7 @@ Live) {
                     ?.map((comment: any, index: number) =>
                       comment?.event === "overend" ? (
                         <div
-                          className="rounded-t-lg bg-white p-4 mt-4"
+                          className="rounded-t-lg bg-white p-4"
                           key={`over-${index}`}
                         >
                           <div className="flex md:flex-row flex-col justify-between md:items-center gap-2">
@@ -903,7 +912,7 @@ Live) {
                             </div>
                             <div className="text-[14px] font-normal">
                               {comment?.over}{" "}
-                              <span className="text-[#909090] font-medium text-[13px]">
+                              <span className="text-[#586577] font-medium text-[13px]">
                                 End Of Over
                               </span>
                             </div>
@@ -921,7 +930,7 @@ Live) {
                                 comment?.bats?.[0]?.batsman_id
                               )}
                               : {comment?.bats?.[0]?.runs}{" "}
-                              <span className="text-[#909090]">
+                              <span className="text-[#586577]">
                                 ({comment?.bats?.[0]?.balls_faced})
                               </span>{" "}
                               |{" "}
@@ -930,7 +939,7 @@ Live) {
                                 comment?.bats?.[1]?.batsman_id
                               )}
                               : {comment?.bats?.[1]?.runs}{" "}
-                              <span className="text-[#909090]">
+                              <span className="text-[#586577]">
                                 ({comment?.bats?.[1]?.balls_faced})
                               </span>
                             </div>
@@ -939,7 +948,7 @@ Live) {
                                 players,
                                 comment?.bowls?.[0]?.bowler_id
                               )}{" "}
-                              <span className="text-[#909090]">
+                              <span className="text-[#586577]">
                                 {comment?.bowls?.[0]?.overs}-
                                 {comment?.bowls?.[0]?.runs_conceded}-
                                 {comment?.bowls?.[0]?.wickets}

@@ -253,12 +253,11 @@ export default function Banner({ matchData, match_id }: Banner) {
           <div className="lg:w-[1000px] mx-auto lg:block hidden hover:shadow-lg">
             <div className="md:flex justify-between items-center md:py-0 py-4">
 
-              <div className="text-[#8192B4] font-normal  text-1xl md:text-center md:mx-0 my-3">
+              <div className="text-[#8192B4] font-medium  text-1xl md:text-center md:mx-0 my-3">
                 {liveMatch?.match_info?.short_title},&nbsp;
-                <span className="font-semibold text-[#b9b9b9]">
-                  {" "}
+                
                   {liveMatch?.match_info?.subtitle}
-                </span>
+               
               </div>
 
             </div>
@@ -287,10 +286,11 @@ export default function Banner({ matchData, match_id }: Banner) {
           <div className="border-t-[1px] border-[#E4E9F01A]">
             <div className="lg:w-[1000px] mx-auto tracking-[1px]">
               <div className="hidden md:flex h-[168px] justify-between items-center">
-                <div className="flex gap-2 flex-row text-[#BDCCECA8] uppercase items-center w-full">
+                <div className="flex gap-2 text-[#BDCCECA8] uppercase flex-row items-center w-full">
                   {liveMatch?.match_info?.teama?.logo_url ? (
                     <Image
-                      className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px]"
+                      className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px] rounded-full"
+                      style={{ boxShadow: '0px 0px 3px 0px white' }}
                       src={liveMatch?.match_info?.teama?.logo_url}
                       width={30}
                       height={30}
@@ -301,12 +301,12 @@ export default function Banner({ matchData, match_id }: Banner) {
                     ""
                   )}
                   <div className="flex md:flex-col md:items-start items-center md:gap-0 gap-2">
-                    <p className="text-[#BDCCECA8] md:text-[17px] lg:text-[19px] text-[14px] font-semibold uppercase">
+                    <p className="text-[#BDCCECA8] md:text-[18px]  text-[14px] font-medium uppercase">
                       {liveMatch?.match_info?.teama?.short_name}
                     </p>
                     <p
                       className={
-                        "lg:text-[18px] text-[16px] font-semibold matchinfo" +
+                        "md:text-[22px] text-[16px] font-semibold" +
                         match_id +
                         "-" +
                         liveMatch?.match_info?.teama?.team_id
@@ -315,7 +315,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                       {inning1teamarun ? (
                         <>
                           {inning1teamarun}{" "}
-                          <span className="text-[13px] font-medium">
+                          <span className="text-[16px] font-medium">
                             ({inning1teamaOver})
                           </span>
                         </>
@@ -328,7 +328,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                           {" "}
                           &nbsp; &amp; &nbsp; {inning2teamarun}{" "}
                           {inning2teamaOver !== "" && (
-                            <span className="text-[13px] font-medium">
+                            <span className="text-[16px] font-medium">
                               ({inning2teamaOver})
                             </span>
                           )}
@@ -358,7 +358,8 @@ export default function Banner({ matchData, match_id }: Banner) {
                     }}
                     className={`text-[#FFBD71] lg:text-[40px] text-[16px] font-bold
                      ${ballEvent.toUpperCase() === 'FOUR' ? "animate-blinkFour" : ""}
-                     ${ballEvent.toUpperCase() === 'SIX' ? "animate-blinkSix" : ""} `}
+                     ${ballEvent.toUpperCase() === 'SIX' ? "animate-blinkSix" : ""}
+                     ${ballEvent.toUpperCase() === 'WICKET' ? "animate-Out" : ""} `}
                   >
                     {ballEvent.toUpperCase() === 'FOUR' ? 4 : ballEvent.toUpperCase() === 'SIX' ? 6 : ballEvent.toUpperCase() === 'DOT' ? 0 : ballEvent}
                   </motion.div>
@@ -366,7 +367,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                 </div>
                 <div className="flex gap-2 flex-row-reverse md:flex-row  items-center text-[#8192B4] font-normal w-full justify-end">
                   <div className="flex md:flex-col md:items-end items-center md:gap-0 gap-2">
-                    <p className="text-[#BDCCECA8] md:text-[17px] lg:text-[19px] text-[14px] font-semibold uppercase">
+                    <p className="text-[#BDCCECA8] md:text-[18px] text-[14px] font-medium uppercase">
                       {liveMatch?.match_info?.teamb?.short_name}
                     </p>
                     <p
@@ -380,7 +381,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                       {inning1teambrun ? (
                         <>
                           {inning1teambrun}{" "}
-                          <span className="text-[13px] font-medium">
+                          <span className="text-[16px] font-medium">
                             ({inning1teambOver})
                           </span>
                         </>
@@ -393,7 +394,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                           {" "}
                           &nbsp; &amp; &nbsp; {inning2teambrun}{" "}
                           {inning2teambOver !== "" && (
-                            <span className="text-[13px] font-medium">
+                            <span className="text-[16px] font-medium">
                               ({inning2teambOver})
                             </span>
                           )}
@@ -406,7 +407,8 @@ export default function Banner({ matchData, match_id }: Banner) {
                   {liveMatch?.match_info?.teamb?.logo_url ? (
                     <Image
                       src={liveMatch?.match_info?.teamb?.logo_url}
-                      className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px]"
+                     className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px] rounded-full"
+                     style={{ boxShadow: '0px 0px 3px 0px white' }}
                       width={30}
                       height={30}
                       alt="ban"
@@ -467,13 +469,14 @@ export default function Banner({ matchData, match_id }: Banner) {
                           }}
 
                           className={`text-[#342df2]  text-[24px] font-bold
-                          ${ballEvent.toUpperCase() === 'for' ? "phone-animate-blinkFour" : ""}
-                          ${ballEvent.toUpperCase() === 'six' ? "phone-animate-blinkSix" : ""} `}
-                                                >
+                          ${ballEvent.toUpperCase() === 'FOUR' ? "phone-animate-blinkFour" : ""}
+                          ${ballEvent.toUpperCase() === 'SIX' ? "phone-animate-blinkSix" : ""}
+                          ${ballEvent.toUpperCase() === 'WICKET' ? "phone-animate-Out" : ""} `}
+                        >
 
 
 
-                          {ballEvent === 'four' ? 4 : ballEvent === 'six' ? 6 : ballEvent === 'dot' ? 0 : ballEvent}
+                          {ballEvent.toUpperCase() === 'FOUR' ? 4 : ballEvent.toUpperCase() === 'SIX' ? 6 : ballEvent.toUpperCase() === 'DOT' ? 0 : ballEvent}
                         </motion.div>
                       </div>
                     </div>
