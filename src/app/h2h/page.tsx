@@ -21,11 +21,14 @@ export default async function Page(props: { params: Params }) {
   const params = await props.params;
 
   const urlString = params?.teamvsteam ?? '';
-  const parts = urlString.split('-');
+  // const parts = urlString.split('-');
 
   const [firstPart, secondPart] = urlString.split('-vs-');
   const teamA = firstPart;
-  const [teamB, matchType] = secondPart.split('-head-to-head-in-');
+  // const [teamB, matchType] = secondPart.split('-head-to-head-in-');
+  const [teamB, matchType] = secondPart.includes('-head-to-head-in-')
+    ? secondPart.split('-head-to-head-in-')
+    : ['', ''];
 
   const tblName = matchType === 'odi' ? 'h2h_odi' : matchType === 'test' ? 'h2h_test' : 'h2h_t20'; 
   
@@ -36,7 +39,7 @@ export default async function Page(props: { params: Params }) {
   const teamADetails = await TeamDetails(teama_id);
   const teamBDetails = await TeamDetails(teamb_id);
   const liveSeriesData = await liveSeries();
-  console.log(teamA);
+  // console.log(teamA);
   let frresponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/featuredMatches`, {
     method: "GET",
     headers: {

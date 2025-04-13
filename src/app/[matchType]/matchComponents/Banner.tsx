@@ -23,6 +23,7 @@ function updateStatusNoteDirect(matchInfo: any) {
   if (!matchInfo?.status_note) return;
 
   return matchInfo.status_note = matchInfo.status_note
+    .replace(/^Stumps : /, '')
     .replace(new RegExp(matchInfo.teama.name, 'gi'), matchInfo.teama.short_name)
     .replace(new RegExp(matchInfo.teamb.name, 'gi'), matchInfo.teamb.short_name);
 }
@@ -74,9 +75,14 @@ export default function Banner({ matchData, match_id }: Banner) {
 
     eventEmitter.on("ballEvent", handler);
 
+    
     // Proper cleanup function that returns void
     return () => {
-      eventEmitter.off("ballEvent", handler);
+      if (typeof eventEmitter.off === 'function') {
+        eventEmitter.off("ballEvent", handler);
+      } else if (typeof eventEmitter.removeListener === 'function') {
+        eventEmitter.removeListener("ballEvent", handler);
+      }
     };
   }, [match_id]);
 

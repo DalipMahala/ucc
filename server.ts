@@ -52,6 +52,17 @@ class WebSocketService {
   }
 
   async processData(data: any) {
+
+    const matchId = data.match_id;
+    console.log(`Data event ${data}`);
+    // Ball-by-ball data
+      if (data.ball_event) {
+        const query2 = `UPDATE match_info SET ball_event = '${data.ball_event}' WHERE match_id IN (${matchId})`;
+
+        await db.query(query2);
+        console.log(`Data saved for event ${data.ball_event}`);
+      }
+
     if (!data.match_id || !data.match_info) return;
     console.log(
       `Data ${data.match_id} saved for match ${data.match_info.title}`
@@ -59,7 +70,7 @@ class WebSocketService {
     try {
       // Match data
       const matches = data;
-      const matchId = data.match_id;
+      
 
       const fileData = JSON.stringify(matches, null, 2);
                 const s3Key = `MatchData/match_${matchId}.json`;
@@ -84,12 +95,7 @@ class WebSocketService {
       //  const values =  [matchId, filePath ] ;
       await db.query(query);
 
-      // Ball-by-ball data
-        if (data.ball_event) {
-          await db.execute(
-            `UPDATE match_info SET ball_event = '${data.ball_event}' WHERE match_id IN (${matchId})`);
-        }
-
+        
       console.log(`Data saved for match ${data.match_id}`);
     } catch (err) {
       console.error("Database error:", err);
