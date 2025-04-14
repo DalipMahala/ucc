@@ -50,6 +50,7 @@ interface MatchItem {
     result: string;
     date_start_ist: string;
     match_info: any;
+    winning_team_id: string;
   
 }
 
@@ -126,15 +127,15 @@ export default async function CompletedMatches() {
                                         alt={cmatch.teama.short_name}
                                         loading="lazy"
                                       />
-                                      <span className="text-[#586577] font-medium text-[14px]">
+                                      <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
                                         {cmatch.teama.short_name} -{" "}
                                       </span>
                                     </div>
                                     <p className="text-[14px] flex gap-[4px] items-end">
-                                      <span className=" font-medium text-[#586577] ">
+                                    <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
                                         {cmatch.teama.scores}
                                       </span>
-                                      <span className="text-[#586577] text-[13px]">
+                                      <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[12px] text-[black]" : "font-medium text-[#586577]"}`}>
                                         {" "}
                                         ({cmatch.teama.overs})
                                       </span>
@@ -152,15 +153,15 @@ export default async function CompletedMatches() {
                                           alt={cmatch.teamb.short_name}
                                           loading="lazy"
                                         />
-                                        <span className="text-[#586577] font-medium text-[14px]">
+                                        <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
                                           {cmatch.teamb.short_name} -{" "}
                                         </span>
                                       </div>
                                       <p className="text-[14px] flex gap-[4px] items-end">
-                                        <span className=" font-medium text-[#586577]">
+                                      <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
                                           {cmatch.teamb.scores}
                                         </span>
-                                        <span className="font-medium text-[#586577]">
+                                        <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[12px] text-[black]" : "font-medium text-[#586577]"}`}>
                                           ({cmatch.teamb.overs})
                                         </span>
                                       </p>
@@ -300,16 +301,16 @@ export default async function CompletedMatches() {
                                         />
                                         <div>
                                           <span className="flex items-center gap-1">
-                                            <span className="text-[#5e5e5e] font-medium">
+                                            <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
                                               {cmatch.teama.short_name}
                                             </span>
                                           </span>
                                           <p className="flex items-end gap-2">
-                                            <span className=" font-medium text-[#434c59]">
+                                            <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#434c59]"}`}>
                                               {cmatch.teama.scores}
                                             </span>
 
-                                            <span className="text-[#586577] text-[12px] font-normal">
+                                            <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[12px] text-[black]" : "text-[#586577] text-[12px] font-normal"}`}>
                                               ({cmatch.teama.overs})
                                             </span>
                                           </p>
@@ -329,16 +330,16 @@ export default async function CompletedMatches() {
                                           />
                                           <div>
                                             <span className="flex items-center gap-1">
-                                              <span className="text-[#5e5e5e] font-medium">
+                                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
                                                 {cmatch.teamb.short_name}
                                               </span>
                                             </span>
                                             <p className="flex items-end gap-2">
-                                              <span className=" font-medium text-[#434c59]">
+                                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#434c59]"}`}>
                                                 {cmatch.teamb.scores}
                                               </span>
 
-                                              <span className="text-[#586577] text-[12px] font-normal">
+                                              <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[12px] text-[black]" : "font-medium text-[#434c59]"}`}>
                                                 ({cmatch.teama.overs})
                                               </span>
                                             </p>

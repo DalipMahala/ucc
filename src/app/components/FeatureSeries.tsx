@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { urlStringEncode } from "../../utils/utility";
 import FeatureNews from "@/app/components/FeatureNews";
-import { format } from "date-fns";
+import { format, isSameDay } from "date-fns";
+import CountdownTimer from "./countdownTimer";
 
 interface Series {
   featuredSeries: any;
@@ -197,7 +198,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                         <div className="flex justify-between items-center text-[14px]">
                           <div className="">
                             <p className="text-[#586577] text-[13px] mb-4 font-medium">
-                              {matches[feature.cid]?.subtitle}, {matches[feature.cid]?.venue?.name} {matches[feature.cid]?.venue?.location}, {matches[feature.cid]?.venue?.country}
+                              {matches[feature.cid]?.subtitle}, {matches[feature.cid]?.venue?.location}, {matches[feature.cid]?.venue?.country}
                             </p>
                             <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
                               <div className="flex items-center space-x-2">
@@ -234,11 +235,19 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                             </div>
                           </div>
 
-
                           <div className=" font-medium text-center">
+                          {isSameDay(new Date(), new Date(matches[feature.cid]?.date_start_ist)) ? (
+                                       <>
+                                       <span className="text-[13px] font-normal text-[#a45b09]">Start in</span> 
+
+                                        <CountdownTimer targetTime={matches[feature.cid]?.date_start_ist} />
+                                        </> 
+
+                                      ) : (
                             <p className="text-[#2F335C] text-[14px]">
-                              {format(new Date(matches[feature.cid]?.date_start), "dd MMMM - EEEE")}, <br /> {format(new Date(matches[feature.cid]?.date_start), "hh:mm:aa")}
+                              {format(new Date(matches[feature.cid]?.date_start_ist), "dd MMMM - EEEE")}, <br /> {format(new Date(matches[feature.cid]?.date_start_ist), "hh:mm:aa")}
                             </p>
+                             )}
                           </div>
                         </div>
                       </div>

@@ -241,7 +241,7 @@ export default async function LiveMatches() {
                                          <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
                                             {items.teama.scores ?? 0}
                                           </span>
-                                          <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[12px] text-[#586577]"}`}>
+                                          <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[12px] text-[black]" : "text-[12px] text-[#586577]"}`}>
                                             {" "}
                                             ({items.teama.overs ?? 0}){" "}
                                           </span>
@@ -288,7 +288,7 @@ export default async function LiveMatches() {
                                           <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
                                               {items.teamb.scores ?? 0}
                                             </span>
-                                            <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[12px] text-[#586577]"}`}>
+                                            <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[12px] text-[black]" : "text-[12px] text-[#586577]"}`}>
                                               {" "}
                                               ({items.teamb.overs ?? 0}){" "}
                                             </span>
@@ -458,7 +458,7 @@ export default async function LiveMatches() {
                                                 <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#434c59]"}`}>
                                                   {items.teama.scores ?? 0}
                                                 </span>
-                                                <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] text-[12px]"}`}>
+                                                <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "text-[12px] text-[black]" : "text-[#586577] text-[12px]"}`}>
                                                   {" "}
                                                   ({items.teama.overs ?? 0}){" "}
                                                 </span>
@@ -508,7 +508,7 @@ export default async function LiveMatches() {
                                                   <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#434c59]"}`}>
                                                     {items.teamb.scores ?? 0}
                                                   </span>
-                                                  <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] text-[12px]"}`}>
+                                                  <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "text-[12px] text-[black]" : "text-[#586577] text-[12px]"}`}>
                                                     {" "}
                                                     ({items.teamb.overs ?? 0}){" "}
                                                   </span>
