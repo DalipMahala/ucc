@@ -331,7 +331,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                       </p>
                       <p
                         className={
-                          "text-[16px] font-semibold matchinfo" +
+                          "text-[16px] text-end font-semibold matchinfo" +
                           match_id +
                           "-" +
                           liveMatch?.match_info?.teamb?.team_id
@@ -788,6 +788,7 @@ export default function Banner({ matchData, match_id }: Banner) {
               </div>
 
               {/* // mobile */}
+
               <div className="flex md:hidden py-3 justify-between items-center h-[120px]">
                 <div className="flex gap-3 text-[#FF912C] font-bold uppercase items-center w-[35%]">
                   {liveMatch?.match_info?.teama?.logo_url ? (

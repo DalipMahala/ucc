@@ -220,12 +220,14 @@ export default function Scorecard({
                       {batsman?.map((batsman:any, index: number) => (
                         <tr className="border-b" key={index}>
                           <td className="md:px-4 py-2 font-medium text-[#000000]">
-                            <Link href={"/player/"+urlStringEncode(batsman.name)+"/"+batsman.batsman_id} className=' flex gap-1 items-center'>
+                            <Link href={"/player/"+urlStringEncode(batsman.name)+"/"+batsman.batsman_id} className='flex gap-1 md:items-center md:flex-row flex-col relative'>
                               {" "}
+                              <p className='flex gap-1 items-center'>
                               {batsman.name}
                               {
                                 batsman.position === "striker"? (<Image  loading="lazy"  src="/assets/img/home/bat.png" width={12} height={12} className="h-[13px]" alt="" />) : ` `
                               }
+                              </p>
                               <p className="md:hidden text-[#586577] text-[11px] font-normal">
                               {batsman.how_out}
                               
@@ -378,8 +380,9 @@ export default function Scorecard({
                     </div>
                   </div>
                   <div className=" w-full flex md:flex-row flex-col md:gap-2 items-end md:items-center  justify-end">
-                    <Link href={"/player/"+urlStringEncode(players.find((p: { player_id: number; }) => p.player_id === partnership.batsmen[1].batsman_id)?.name)+"/"+partnership.batsmen[1].batsman_id} className=''> <p>{players.find((p: { player_id: number; }) => p.player_id === partnership.batsmen[1].batsman_id)?.name}</p> </Link>
-                    <p>
+                    <Link href={"/player/"+urlStringEncode(players.find((p: { player_id: number; }) => p.player_id === partnership.batsmen[1].batsman_id)?.name)+"/"+partnership.batsmen[1].batsman_id} className=''>
+                     <p className='text-end'>{players.find((p: { player_id: number; }) => p.player_id === partnership.batsmen[1].batsman_id)?.name}</p> </Link>
+                    <p className='text-end'>
                     {partnership.batsmen[1].runs} <span className="text-[#586577]">({partnership.batsmen[1].balls_faced})</span>
                     </p>
                   </div>
