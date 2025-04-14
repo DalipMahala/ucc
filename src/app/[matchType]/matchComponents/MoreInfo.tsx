@@ -1118,7 +1118,7 @@ export default function MoreInfo({
                               <div className="py-2 flex justify-between items-center">
                                 <div className="font-medium text-[#586577] w-full">
                                   <p className="mx-2 font-semibold text-[#439F76] uppercase">
-                                    {sameVenueteamaWinper}%
+                                    {sameVenueteamaWinper.toFixed(2)}%
                                   </p>
                                 </div>
                                 <div className=" font-semibold text-center w-full">
@@ -1128,7 +1128,7 @@ export default function MoreInfo({
                                 </div>
                                 <div className="font-medium text-right w-full">
                                   <p className="text-[#586577] font-medium">
-                                    {sameVenueteambWinper}%
+                                    {sameVenueteambWinper.toFixed(2)}%
                                   </p>
                                 </div>
                               </div>
