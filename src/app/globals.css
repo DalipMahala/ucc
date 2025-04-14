@@ -330,10 +330,14 @@ font-size: 27px;
 
 
 
+.scheduled-timer .banner-timer div{
+font-size: 17px;
+}
 
 
 
 
+/* *********************************************** */
 
 @keyframes blink {
 

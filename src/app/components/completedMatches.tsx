@@ -169,7 +169,8 @@ export default async function CompletedMatches() {
                                   </div>
                                 </div>
                               </Link>
-                              <div className="h-[100px] border-l-[1px] border-[#e7f2f4]"></div>
+
+                              <div className="h-[100px] border-l-[1px] border-[#efefef]"></div>
 
                               <Link className="w-[38%]" href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-match-" + cmatch?.match_number + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
                                 <div className=" font-semibold flex flex-col items-center">
@@ -186,6 +187,7 @@ export default async function CompletedMatches() {
                                   </p>
                                 </div>
                               </Link>
+
                               {(cmatch.man_of_the_match && !Array.isArray(cmatch.man_of_the_match)) &&
                                 <>
                                   <div className="h-[100px] border-l-[1px] border-[#e7f2f4]"></div>

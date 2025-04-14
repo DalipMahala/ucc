@@ -170,7 +170,7 @@ export default async function UpcomingMatches() {
                           <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-match-" + ucmatch?.match_number + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
                             <div className="py-3 px-3">
                               <div className="flex justify-between items-center text-[14px]">
-                                <div className="">
+                                <div className="w-[50%]">
                                   <p className="text-[#586577] text-[13px] mb-4 font-medium">
                                     {ucmatch.subtitle}, {ucmatch.format_str}, {ucmatch.venue.location}
                                   </p>
@@ -209,7 +209,9 @@ export default async function UpcomingMatches() {
                                   </div>
                                 </div>
 
-                                <div className="font-semibold text-center">
+                                <div className="h-[100px] border-l-[1px] border-[#efefef]"></div>
+
+                                <div className="w-[50%] font-semibold text-center">
                                   <div className="text-[#144280]">
                                     <div className=" font-medium text-center">
                                       

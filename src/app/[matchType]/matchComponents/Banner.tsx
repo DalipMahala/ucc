@@ -94,7 +94,10 @@ export default function Banner({ matchData, match_id }: Banner) {
 
         <section className="bg-[#0E2149] border-[1px] border-[#E4E9F01A] lg:px-0 px-3">
           <div className="lg:w-[1000px] mx-auto">
-            <div className="md:flex justify-between items-center md:py-0 py-4">
+
+            {/* desktop */}
+
+            <div className=" hidden md:flex justify-between items-center md:py-0 py-4">
               <div className=" text-1xl text-[#00a632] font-bold uppercase ">
                 <span className="h-[10px] w-[10px] inline-block	bg-[#00a632] rounded-full" />{" "}
                 {liveMatch?.match_info?.status_str}
@@ -111,12 +114,30 @@ export default function Banner({ matchData, match_id }: Banner) {
                 {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "dd MMM yyyy") : ""}
               </div>
             </div>
+
+            {/* mbobile */}
+
+            <div className="md:hidden">
+              <div className="items-center flex font-semibold text-[#b9b9b9] py-4">
+                <Link href="/">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-gray-400 group-hover:text-gray-600 transition-colors" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
+                </Link>
+
+                {seriesName}, {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "dd MMM yyyy") : ""}
+
+
+
+              </div>
+            </div>
           </div>
 
 
           <div className="border-t-[1px] border-[#E4E9F01A]">
             <div className="lg:w-[1000px] mx-auto md:py-8 tracking-[1px]">
-              <div className="md:flex py-8 justify-between items-end">
+
+              {/* Desktop */}
+
+              <div className="hidden md:flex py-8 justify-between items-end">
 
 
                 <div className="flex gap-3 flex-row text-[#BDCCECA8] uppercase items-center w-[35%]">
@@ -176,15 +197,6 @@ export default function Banner({ matchData, match_id }: Banner) {
                   <p className="text-[#00a632] lg:text-[22px] text-[16px] font-semibold uppercase">
                     {updateStatusNoteDirect(liveMatch?.match_info)} 🏆
                   </p>
-
-                  {/* <Image
-                    src="/assets/img/home/win-2.png"
-                    width={32}
-                    height={34}
-                    alt=""
-                    loading="lazy"
-                  /> */}
-
                 </div>
 
 
@@ -242,6 +254,143 @@ export default function Banner({ matchData, match_id }: Banner) {
                   )}
                 </div>
               </div>
+
+
+              {/* mobile */}
+
+              <div className="md:hidden py-3">
+
+
+                <div className="flex justify-between items-end">
+
+
+                  <div className="flex gap-3 flex-row text-[#BDCCECA8] uppercase items-center w-[47%]">
+                    {liveMatch?.match_info?.teama?.logo_url ? (
+                      <Image
+                        className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px] rounded-full"
+                        style={{ boxShadow: '0px 0px 3px 0px white' }}
+                        src={liveMatch?.match_info?.teama?.logo_url}
+                        width={30}
+                        height={30}
+                        alt="ind"
+                        loading="lazy"
+                      />
+                    ) : ("")}
+                    <div className="flex flex-col items-start">
+                      <p className="text-[#BDCCECA8] text-[14px] font-medium uppercase">
+                        {liveMatch?.match_info?.teama?.short_name}
+                      </p>
+                      <p
+                        className={
+                          "text-[16px] font-semibold matchinfo" +
+                          match_id +
+                          "-" +
+                          liveMatch?.match_info?.teama?.team_id
+                        }
+                      >
+                        {inning1teamarun ? (
+                          <>
+                            {inning1teamarun}{" "}
+                            <span className="text-[11px] font-medium">
+                              ({inning1teamaOver})
+                            </span>
+                          </>
+                        ) : (
+                          "Yet To Bat"
+                        )}
+
+                        {inning2teamarun ? (
+                          <>
+                            {" "}
+                            &amp; {inning2teamarun}{" "}
+                            {inning2teamaOver !== "" && (
+                              <span className="text-[11px] font-medium">
+                                ({inning2teamaOver})
+                              </span>
+                            )}
+                          </>
+                        ) : (
+                          " "
+                        )}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
+                    </svg>
+
+                  </div>
+
+
+                  <div className="flex gap-3 items-center text-[#8192B4] font-normal w-[47%] justify-end">
+                    <div className="flex flex-col items-end md:gap-0">
+                      <p className="text-[#BDCCECA8] text-[14px] font-medium uppercase">
+                        {liveMatch?.match_info?.teamb?.short_name}
+                      </p>
+                      <p
+                        className={
+                          "text-[16px] font-semibold matchinfo" +
+                          match_id +
+                          "-" +
+                          liveMatch?.match_info?.teamb?.team_id
+                        }
+                      >
+                        {inning1teambrun ? (
+                          <>
+                            {inning1teambrun}{" "}
+                            <span className="text-[11px] font-medium">
+                              ({inning1teambOver})
+                            </span>
+                          </>
+                        ) : (
+                          "Yet To Bat"
+                        )}
+
+                        {inning2teambrun ? (
+                          <>
+                            {" "}
+                            &amp;  {inning2teambrun}{" "}
+                            {inning2teambOver !== "" && (
+                              <span className="text-[11px] font-medium">
+                                ({inning2teambOver})
+                              </span>
+                            )}
+                          </>
+                        ) : (
+                          " "
+                        )}
+                      </p>
+                    </div>
+                    {liveMatch?.match_info?.teamb?.logo_url ? (
+                      <Image
+                        src={liveMatch?.match_info?.teamb?.logo_url}
+                        className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px] rounded-full"
+                        style={{ boxShadow: '0px 0px 3px 0px white' }}
+                        width={30}
+                        height={30}
+                        alt="ban"
+                        loading="lazy"
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </div>
+
+
+
+                </div>
+
+
+                <div className="text-[#8192B4] font-normal text-center mt-9 mb-2 flex gap-2 items-center justify-center">
+                  <p className="text-[#00a632] text-[14px] font-semibold uppercase">
+                    {updateStatusNoteDirect(liveMatch?.match_info)} 🏆
+                  </p>
+                </div>
+
+
+              </div>
             </div>
           </div>
         </section>
@@ -250,7 +399,7 @@ export default function Banner({ matchData, match_id }: Banner) {
         // live Banner
 
         <section className="bg-[#0E2149] border-[1px] border-[#E4E9F01A] lg:px-0 px-3">
-          <div className="lg:w-[1000px] mx-auto lg:block hidden hover:shadow-lg">
+          <div className="lg:w-[1075px] mx-auto lg:block hidden hover:shadow-lg">
             <div className="md:flex justify-between items-center md:py-0 py-4">
 
               <div className="text-[#8192B4] font-medium  text-1xl md:text-center md:mx-0 my-3">
@@ -262,6 +411,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
             </div>
           </div>
+
           <div className="lg:hidden rounded-lg md:p-4 px-0 py-4 performance-section relative hover:shadow-lg">
 
             <span className="flex items-center font-semibold text-[#b9b9b9] ">
@@ -283,8 +433,10 @@ export default function Banner({ matchData, match_id }: Banner) {
               {liveMatch?.match_info?.subtitle}
             </span>
           </div>
+
+
           <div className="border-t-[1px] border-[#E4E9F01A]">
-            <div className="lg:w-[1000px] mx-auto tracking-[1px]">
+            <div className="lg:w-[1075px] mx-auto tracking-[1px]">
               <div className="hidden md:flex h-[168px] justify-between items-center">
                 <div className="flex gap-2 text-[#BDCCECA8] uppercase flex-row items-center w-full">
                   {liveMatch?.match_info?.teama?.logo_url ? (
@@ -499,16 +651,16 @@ export default function Banner({ matchData, match_id }: Banner) {
                         <p className="flex gap-1 items-center">
                           <span> CRR :{" "} </span> <span>{liveMatch?.live?.live_score?.runrate}</span>
                         </p>
-                        {!!liveMatch?.live?.live_score?.required_runrate  &&
-                        <p className="flex gap-1 items-center">
-                          <span>RRR : </span><span>{liveMatch?.live?.live_score?.required_runrate}</span>
-                        </p>
+                        {!!liveMatch?.live?.live_score?.required_runrate &&
+                          <p className="flex gap-1 items-center">
+                            <span>RRR : </span><span>{liveMatch?.live?.live_score?.required_runrate}</span>
+                          </p>
                         }
                       </div>
                       {!!liveMatch?.live?.live_score?.target &&
-                      <p>
-                        Target: <span>{liveMatch?.live?.live_score?.target}</span>
-                      </p>
+                        <p>
+                          Target: <span>{liveMatch?.live?.live_score?.target}</span>
+                        </p>
                       }
                     </div>
 
@@ -527,7 +679,10 @@ export default function Banner({ matchData, match_id }: Banner) {
 
         <section className="bg-[#0E2149] border-[1px] border-[#E4E9F01A] lg:px-0 px-3">
           <div className="lg:w-[1000px] mx-auto">
-            <div className="md:flex justify-between items-center md:py-0 py-4">
+
+            {/* desktop */}
+
+            <div className="hidden md:flex justify-between items-center md:py-0 py-4">
               <div className=" text-1xl text-[#FF912C] font-bold uppercase w-full">
                 <span className="h-[10px] w-[10px] inline-block	bg-[#FF912C] rounded-full" />{" "}
                 {liveMatch?.match_info?.status_str}
@@ -543,11 +698,32 @@ export default function Banner({ matchData, match_id }: Banner) {
                 {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "dd MMM yyyy") : ""}
               </div>
             </div>
+
+
+
+            {/* mobile */}
+
+            <div className="md:hidden flex items-center">
+
+
+              <Link href="/">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-gray-400 group-hover:text-gray-600 transition-colors" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg></Link>
+
+              <div className="items-center flex font-semibold text-[#b9b9b9] py-4">
+                {liveMatch?.match_info?.short_title},&nbsp; {liveMatch?.match_info?.subtitle}
+              </div>
+
+            </div>
           </div>
-          <div className="border-t-[1px] border-[#E4E9F01A] h-48">
+
+
+          <div className="border-t-[1px] border-[#E4E9F01A] md:h-48">
             <div className="lg:w-[1000px] mx-auto md:py-8 tracking-[1px]">
+
+
               {/* desktop */}
-              <div className="flex py-8 justify-between items-center">
+
+              <div className="hidden md:flex py-8 justify-between items-center">
                 <div className="flex flex-col md:flex-row text-[#FF912C] font-bold uppercase  md:items-center items-start w-[35%]">
                   {liveMatch?.match_info?.teama?.logo_url ? (
                     <Image
@@ -612,8 +788,8 @@ export default function Banner({ matchData, match_id }: Banner) {
               </div>
 
               {/* // mobile */}
-              <div className="flex py-8 justify-between items-center">
-                <div className="flex flex-col md:flex-row text-[#FF912C] font-bold uppercase  md:items-center items-start w-[35%]">
+              <div className="flex md:hidden py-3 justify-between items-center h-[120px]">
+                <div className="flex gap-3 text-[#FF912C] font-bold uppercase items-center w-[35%]">
                   {liveMatch?.match_info?.teama?.logo_url ? (
                     <Image
                       className="md:h-[42px] md:w-[42px] h-[30px] w-[30px] rounded-full"
@@ -632,13 +808,15 @@ export default function Banner({ matchData, match_id }: Banner) {
                 </div>
 
 
-                <div className="text-[#8192B4] font-normal w-[30%] text-center">
-                  <p className="text-[#C1CEEA] text-1xl"> {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "hh:mm:aa") : ""}  </p>
+                <div className="text-[#8192B4] font-normal w-[50%] text-center">
+                  <p className="text-[#C1CEEA] text-[13px]"> {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "hh:mm:aa") : ""}  </p>
 
                   {liveMatch?.match_info?.date_start_ist ? isSameDay(new Date(), new Date(liveMatch?.match_info?.date_start_ist)) ? (
 
                     <div className="scheduled-timer">
-                      <CountdownTimer targetTime={liveMatch?.match_info?.date_start_ist} />
+                      <div className="banner-timer">
+                        <CountdownTimer targetTime={liveMatch?.match_info?.date_start_ist} />
+                      </div>
                     </div>
 
                   ) : (
@@ -652,7 +830,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                 </div>
 
 
-                <div className="flex flex-col md:flex-row md:items-center items-end text-[#8192B4] font-normal w-[35%] justify-end">
+                <div className="flex flex-row-reverse gap-3 items-center text-[#8192B4] font-normal w-[35%]">
                   <p className="text-[#BDCCECA8] md:block hidden md:text-[22px] text-[14px] md:mx-3 mx-0 font-medium uppercase">
                     {liveMatch?.match_info?.teamb?.short_name}
                   </p>

@@ -146,12 +146,13 @@ const FeatureNews = ({newsUrl}:url) => {
                         
                          
                         <Link href={post?.link}>
-                          <div className="flex gap-3 my-5">
+                          <div style={{ textShadow: '1px 2px 3px rgb(0 0 0 / 15%)' }} className="flex gap-3 my-5">
 
                             
                           {post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.thumbnail.source_url && (
                             <Image  loading="lazy" 
                               src={post._embedded["wp:featuredmedia"]?.[0].media_details.sizes.thumbnail.source_url}
+                              style={{ boxShadow: '0 8px 16px rgb(0 0 0 / 29%)' }}
                               width={90}
                               height={90}
                               alt={post?.title.rendered}
