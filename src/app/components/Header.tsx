@@ -12,7 +12,7 @@ interface HeaderProps {
 const Header = ({ data }: HeaderProps) => {
   const pathname = usePathname();
   const isMoreInfoPage = pathname.includes('/moreinfo/') || pathname.includes('/live-score/') || pathname.includes('/scorecard/') || pathname.includes('/squad/');
- console.log("ssee",pathname);
+//  console.log("ssee",pathname);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
