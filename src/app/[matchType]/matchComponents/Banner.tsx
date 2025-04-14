@@ -546,6 +546,72 @@ export default function Banner({ matchData, match_id }: Banner) {
           </div>
           <div className="border-t-[1px] border-[#E4E9F01A] h-48">
             <div className="lg:w-[1000px] mx-auto md:py-8 tracking-[1px]">
+              {/* desktop */}
+              <div className="flex py-8 justify-between items-center">
+                <div className="flex flex-col md:flex-row text-[#FF912C] font-bold uppercase  md:items-center items-start w-[35%]">
+                  {liveMatch?.match_info?.teama?.logo_url ? (
+                    <Image
+                      className="md:h-[42px] md:w-[42px] h-[30px] w-[30px] rounded-full"
+                      style={{ boxShadow: '0px 0px 3px 0px white' }}
+                      src={liveMatch?.match_info?.teama?.logo_url}
+                      width={30}
+                      height={30}
+                      alt={liveMatch?.match_info?.teama?.short_name}
+                      loading="lazy"
+                    />
+                  ) : (
+                    "")}
+                  <p className="text-[#BDCCECA8] md:mx-3 mx-0 md:text-[22px] text-[14px] font-medium uppercase">
+                    {liveMatch?.match_info?.teama?.short_name}
+                  </p>
+                </div>
+
+
+                <div className="text-[#8192B4] font-normal w-[30%] text-center">
+                  <p className="text-[#C1CEEA] text-1xl"> {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "hh:mm:aa") : ""}  </p>
+
+                  {liveMatch?.match_info?.date_start_ist ? isSameDay(new Date(), new Date(liveMatch?.match_info?.date_start_ist)) ? (
+
+                    <div className="scheduled-timer">
+                      <CountdownTimer targetTime={liveMatch?.match_info?.date_start_ist} />
+                    </div>
+
+                  ) : (
+
+                    <p className="text-[#FFBD71] md:text-[24px] text-[16px] font-semibold">
+                      {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "dd MMM yyyy") : ""}
+                    </p>
+                  ) : ""}
+
+
+                </div>
+
+
+                <div className="flex flex-col md:flex-row md:items-center items-end text-[#8192B4] font-normal w-[35%] justify-end">
+                  <p className="text-[#BDCCECA8] md:block hidden md:text-[22px] text-[14px] md:mx-3 mx-0 font-medium uppercase">
+                    {liveMatch?.match_info?.teamb?.short_name}
+                  </p>
+                  {liveMatch?.match_info?.teamb?.logo_url ? (
+                    <Image
+                      src={liveMatch?.match_info?.teamb?.logo_url}
+
+                      className="md:h-[42px] md:w-[42px] h-[30px] w-[30px] rounded-full"
+                      style={{ boxShadow: '0px 0px 3px 0px white' }}
+                      width={30}
+                      height={30}
+                      alt={liveMatch?.match_info?.teamb?.short_name}
+                      loading="lazy"
+                    />
+                  ) : (
+                    ""
+                  )}
+                  <p className="text-[#BDCCECA8] md:hidden md:text-[18px] text-[14px] md:mx-3 mx-0 font-semibold uppercase">
+                    {liveMatch?.match_info?.teamb?.short_name}
+                  </p>
+                </div>
+              </div>
+
+              {/* // mobile */}
               <div className="flex py-8 justify-between items-center">
                 <div className="flex flex-col md:flex-row text-[#FF912C] font-bold uppercase  md:items-center items-start w-[35%]">
                   {liveMatch?.match_info?.teama?.logo_url ? (
