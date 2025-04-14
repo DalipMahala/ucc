@@ -98,10 +98,12 @@ export default async function UpcomingMatches() {
                                 {ucmatch.status_str}
                               </div>
                               <div>
+                              <Link href={ "/series/" + urlStringEncode(ucmatch.competition.title + "-" + ucmatch.competition.season) +  "/" +  ucmatch.competition.cid  }  >
                                 <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                                   {ucmatch.competition.title} -{" "}
                                   {ucmatch.competition.season}
                                 </h4>
+                                </Link>
                               </div>
                             </div>
                             <div className="flex items-center space-x-2">
@@ -288,10 +290,12 @@ export default async function UpcomingMatches() {
                                 <div className="w-[6px] h-[6px] bg-[#A45B09] rounded-full"></div> {ucmatch.status_str}
                               </div>
                               <div>
+                              <Link href={ "/series/" + urlStringEncode(ucmatch.competition.title + "-" + ucmatch.competition.season) +  "/" +  ucmatch.competition.cid  }  >
                                 <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                                   {truncateText(ucmatch.competition.title,3)} -{" "}
                                   {ucmatch.competition.season}
                                 </h4>
+                                </Link>
                               </div>
                               <span className="absolute right-[12px] top-[19px]">
                                 <button className="arro-button">

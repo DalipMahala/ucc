@@ -521,7 +521,59 @@ export default function H2h({
                                               </div>
                                           </div>
                                       </div>
-                                        }
+                                        }{(teamDetails?.teama_highest_score >0 || teamDetails?.teamb_highest_score > 0) &&
+                                            <div className="my-4">
+                                                <div className="flex justify-between items-center">
+                                                    <div className="flex justify-between items-center w-full">
+                                                        <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                                            <div
+                                                                className="bg-[#13b76dbd] h-2"
+                                                                style={{ width: "0%" }}
+                                                            ></div>
+                                                        </div>
+                                                        <span>{teamDetails?.teama_highest_score}</span>
+                                                    </div>
+                                                    <div className="md:w-[50%] w-full text-center">
+                                                        <span className="font-semibold">Highest Score</span>
+                                                    </div>
+                                                    <div className="flex justify-between items-center w-full">
+                                                        <span>{teamDetails?.teamb_highest_score}</span>
+                                                        <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                                            <div
+                                                                className="bg-[#13b76dbd] h-2"
+                                                                style={{ width: "0%" }}
+                                                            ></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                              }{(teamDetails?.teama_lowest_score >0 || teamDetails?.teamb_lowest_score > 0) &&
+                                                <div className="my-4">
+                                                    <div className="flex justify-between items-center">
+                                                        <div className="flex justify-between items-center w-full">
+                                                            <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                                                <div
+                                                                    className="bg-[#13b76dbd] h-2"
+                                                                    style={{ width: "0%" }}
+                                                                ></div>
+                                                            </div>
+                                                            <span>{teamDetails?.teama_lowest_score}</span>
+                                                        </div>
+                                                        <div className="md:w-[50%] w-full text-center">
+                                                            <span className="font-semibold">Lowest Score</span>
+                                                        </div>
+                                                        <div className="flex justify-between items-center w-full">
+                                                            <span>{teamDetails?.teamb_lowest_score}</span>
+                                                            <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                                                <div
+                                                                    className="bg-[#13b76dbd] h-2"
+                                                                    style={{ width: "0%" }}
+                                                                ></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                  }
                     </div>
                   </div>
                 )}

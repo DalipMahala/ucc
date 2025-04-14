@@ -125,10 +125,12 @@ export default async function LiveMatches() {
                     {items?.game_state_str === 'Play Ongoing' ? items?.status_str : items?.game_state_str}
                   </div>
                   <div>
+                  <Link href={ "/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) +  "/" +  items.competition.cid  }  >
                     <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                       {items.competition.title} -{" "}
                       {items.competition.season}
                     </h4>
+                    </Link>
                   </div>
                 </div>
 
@@ -396,10 +398,12 @@ export default async function LiveMatches() {
                     {items.game_state_str === 'Play Ongoing' ? items.status_str : items.game_state_str}
                   </div>
                   <div>
+                  <Link href={ "/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) +  "/" +  items.competition.cid  }  >
                     <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                       {truncateText(items.competition.title, 5)} -{" "}
                       {items.competition.season}
                     </h4>
+                    </Link>
                   </div>
                   <span className="absolute right-4 top-[19px]">
                     <button className="arro-button">

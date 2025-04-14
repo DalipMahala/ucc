@@ -40,7 +40,7 @@ export default function PLSeries() {
           <Link
             href={
               "/series/" +
-              urlStringEncode(series.title + "-" + series.title) +
+              urlStringEncode(series.title + "-" + series.season) +
               "/" +
               series.cid
             }

@@ -99,10 +99,12 @@ export default async function CompletedMatches() {
                                 {cmatch.status_str}
                               </div>
                               <div>
+                              <Link href={ "/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) +  "/" +  cmatch.competition.cid  }  >
                                 <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                                   {cmatch.competition.title} -{" "}
                                   {cmatch.competition.season}
                                 </h4>
+                                </Link>
                               </div>
                             </div>
 
@@ -261,10 +263,12 @@ export default async function CompletedMatches() {
                                 <div className="w-[6px] h-[6px] bg-[#00a632] rounded-full"></div> {cmatch.status_str}
                               </div>
                               <div>
+                              <Link href={ "/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) +  "/" +  cmatch.competition.cid  }  >
                                 <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                                   {truncateText(cmatch.competition.title,2)} -{" "}
                                   {cmatch.competition.season}
                                 </h4>
+                                </Link>
                               </div>
                               <span className="absolute right-4 top-[19px]">
                                 <button className="arro-button">
