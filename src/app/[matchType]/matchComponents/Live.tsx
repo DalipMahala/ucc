@@ -8,6 +8,7 @@ import { calculateRemainingOvers, getPlayerNameByPid } from "@/utils/utility";
 import { PlayerStats } from "@/controller/playerController";
 import { urlStringEncode } from "@/utils/utility";
 import PlayerImage from "@/app/components/PlayerImage";
+import { useWakeLock } from '@/utils/useWakeLock';
 
 interface Live {
   match_id: number;
@@ -29,7 +30,7 @@ export default function Live({
   isPointTable
 }: // matchLast,
 Live) {
-  console.log("matchData", matchData);
+  useWakeLock();
   const [activeTab, setActiveTab] = useState("tab2");
 
   // const [allCommentries, setAllCommentries] = useState(

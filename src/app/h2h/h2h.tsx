@@ -52,11 +52,7 @@ export default function H2h({
     Math.round((teamDetails?.teama_won_match || 0) * totalMatches / 100) : 0;
   const teambWon = totalMatches > 0 ? 
     Math.round((teamDetails?.teamb_won_match || 0) * totalMatches / 100) : 0;
-  const teamaLoss = totalMatches > 0 ? 
-    Math.round((teamDetails?.teama_lost_match || 0) * totalMatches / 100) : 0;
-  const teambLoss = totalMatches > 0 ? 
-    Math.round((teamDetails?.teamb_lost_match || 0) * totalMatches / 100) : 0;
-
+ 
   // Safe URL parsing
   const matchType = urlStrings?.split('-').pop() || 'test';
   const urlWithoutMatchType = urlStrings?.split('-').slice(0, -1).join('-') || '';
@@ -369,9 +365,163 @@ export default function H2h({
                           </div>
                         </div>
                       </div>
+                      <div className="my-4">
+                            <div className="flex justify-between items-center">
+                                <div className="flex justify-between items-center w-full">
+                                    <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                        <div
+                                            className="bg-[#B7132B] h-2"
+                                            style={{ width: teambWon+"%" }}
+                                        ></div>
+                                    </div>
+                                    <span>{teamDetails?.teamb_won_match}</span>
+                                </div>
+                                <div className="md:w-[50%] w-full text-center">
+                                    <span className="font-semibold">Lost</span>
+                                </div>
+                                <div className="flex justify-between items-center w-full">
+                                    <span>{teamDetails?.teama_won_match}</span>
+                                    <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                        <div
+                                            className="bg-[#B7132B] h-2"
+                                            style={{ width: teamaWon+"%" }}
+                                        ></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                      {/* Additional stats sections (loss, no result, tied, etc.) */}
-                      {/* ... similar structure for other stats ... */}
+                        {(teamDetails?.nr_match >0 || teamDetails?.nr_match > 0) &&
+                                      <div className="my-4">
+                                          <div className="flex justify-between items-center">
+                                              <div className="flex justify-between items-center w-full">
+                                                  <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                                      <div
+                                                          className="bg-[#13b76dbd] h-2"
+                                                          style={{ width: "0%" }}
+                                                      ></div>
+                                                  </div>
+                                                  <span>{teamDetails?.nr_match}</span>
+                                              </div>
+                                              <div className="md:w-[50%] w-full text-center">
+                                                  <span className="font-semibold">No Result</span>
+                                              </div>
+                                              <div className="flex justify-between items-center w-full">
+                                                  <span>{teamDetails?.nr_match}</span>
+                                                  <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                                      <div
+                                                          className="bg-[#13b76dbd] h-2"
+                                                          style={{ width: "0%" }}
+                                                      ></div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                       }{(teamDetails?.tied_match >0 || teamDetails?.tied_match > 0) &&
+                                      <div className="my-4">
+                                          <div className="flex justify-between items-center">
+                                              <div className="flex justify-between items-center w-full">
+                                                  <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                                      <div
+                                                          className="bg-[#13b76dbd] h-2"
+                                                          style={{ width: "0%" }}
+                                                      ></div>
+                                                  </div>
+                                                  <span>{teamDetails?.tied_match}</span>
+                                              </div>
+                                              <div className="md:w-[50%] w-full text-center">
+                                                  <span className="font-semibold">Tied</span>
+                                              </div>
+                                              <div className="flex justify-between items-center w-full">
+                                                  <span>{teamDetails?.tied_match}</span>
+                                                  <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                                      <div
+                                                          className="bg-[#13b76dbd] h-2"
+                                                          style={{ width: "0%" }}
+                                                      ></div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                    }{(teamDetails?.teama_home_won_match >0 || teamDetails?.teamb_home_won_match > 0) &&
+                                      <div className="my-4">
+                                          <div className="flex justify-between items-center">
+                                              <div className="flex justify-between items-center w-full">
+                                                  <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                                      <div
+                                                          className="bg-[#13b76dbd] h-2"
+                                                          style={{ width: "0%" }}
+                                                      ></div>
+                                                  </div>
+                                                  <span>{teamDetails?.teama_home_won_match}</span>
+                                              </div>
+                                              <div className="md:w-[50%] w-full text-center">
+                                                  <span className="font-semibold">Home Won</span>
+                                              </div>
+                                              <div className="flex justify-between items-center w-full">
+                                                  <span>{teamDetails?.teamb_home_won_match}</span>
+                                                  <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                                      <div
+                                                          className="bg-[#13b76dbd] h-2"
+                                                          style={{ width: "0%" }}
+                                                      ></div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                    }{(teamDetails?.teama_away_won_match >0 || teamDetails?.teamb_away_won_match > 0) &&
+                                      <div className="my-4">
+                                          <div className="flex justify-between items-center">
+                                              <div className="flex justify-between items-center w-full">
+                                                  <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                                      <div
+                                                          className="bg-[#13b76dbd] h-2"
+                                                          style={{ width: "0%" }}
+                                                      ></div>
+                                                  </div>
+                                                  <span>{teamDetails?.teama_away_won_match}</span>
+                                              </div>
+                                              <div className="md:w-[50%] w-full text-center">
+                                                  <span className="font-semibold">Away Won</span>
+                                              </div>
+                                              <div className="flex justify-between items-center w-full">
+                                                  <span>{teamDetails?.teamb_away_won_match}</span>
+                                                  <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                                      <div
+                                                          className="bg-[#13b76dbd] h-2"
+                                                          style={{ width: "0%" }}
+                                                      ></div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                    }{(teamDetails?.teama_neutral_won_match >0 || teamDetails?.teamb_neutral_won_match > 0) &&
+                                      <div className="my-4">
+                                          <div className="flex justify-between items-center">
+                                              <div className="flex justify-between items-center w-full">
+                                                  <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                                      <div
+                                                          className="bg-[#13b76dbd] h-2"
+                                                          style={{ width: "0%" }}
+                                                      ></div>
+                                                  </div>
+                                                  <span>{teamDetails?.teama_neutral_won_match}</span>
+                                              </div>
+                                              <div className="md:w-[50%] w-full text-center">
+                                                  <span className="font-semibold">Neutral Won</span>
+                                              </div>
+                                              <div className="flex justify-between items-center w-full">
+                                                  <span>{teamDetails?.teamb_neutral_won_match}</span>
+                                                  <div className="flex-1 mx-4 bg-gray-200 h-2">
+                                                      <div
+                                                          className="bg-[#13b76dbd] h-2"
+                                                          style={{ width: "0%" }}
+                                                      ></div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                        }
                     </div>
                   </div>
                 )}
