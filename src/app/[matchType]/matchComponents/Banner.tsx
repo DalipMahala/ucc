@@ -255,14 +255,14 @@ export default function Banner({ matchData, match_id }: Banner) {
 
               <div className="text-[#8192B4] font-medium  text-1xl md:text-center md:mx-0 my-3">
                 {liveMatch?.match_info?.short_title},&nbsp;
-                
-                  {liveMatch?.match_info?.subtitle}
-               
+
+                {liveMatch?.match_info?.subtitle}
+
               </div>
 
             </div>
           </div>
-          <div className="lg:hidden rounded-lg p-4 performance-section relative hover:shadow-lg">
+          <div className="lg:hidden rounded-lg md:p-4 px-0 py-4 performance-section relative hover:shadow-lg">
 
             <span className="flex items-center font-semibold text-[#b9b9b9] ">
               <Link href="/">
@@ -407,8 +407,8 @@ export default function Banner({ matchData, match_id }: Banner) {
                   {liveMatch?.match_info?.teamb?.logo_url ? (
                     <Image
                       src={liveMatch?.match_info?.teamb?.logo_url}
-                     className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px] rounded-full"
-                     style={{ boxShadow: '0px 0px 3px 0px white' }}
+                      className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px] rounded-full"
+                      style={{ boxShadow: '0px 0px 3px 0px white' }}
                       width={30}
                       height={30}
                       alt="ban"
@@ -427,30 +427,37 @@ export default function Banner({ matchData, match_id }: Banner) {
                   <div>
 
                     <div className="flex items-center justify-between">
-                      <div className="flex gap-2 flex-row  uppercase items-center w-full">
-                        <Image
-                          className="lg:h-[42px] lg:w-[42px] h-[40px] w-[40px]"
-                          src={[liveMatch?.match_info?.teama, liveMatch?.match_info?.teamb].find(team => team?.team_id === liveMatch?.live?.live_inning?.batting_team_id)?.logo_url || null}
-                          width={30}
-                          height={30}
-                          alt="teams"
-                          loading="lazy"
-                        />
-                        <div className="flex flex-col items-start gap-0">
-                          <p className="text-[14px] font-semibold uppercase">
-                            {[liveMatch?.match_info?.teama, liveMatch?.match_info?.teamb].find(team => team?.team_id === liveMatch?.live?.live_inning?.batting_team_id)?.short_name || null}
-                          </p>
-                          <p className="lg:text-[18px] text-[18px] font-semibold">
-                            {liveMatch?.live?.live_score?.runs}/
-                            {liveMatch?.live?.live_score?.wickets}{" "}
-                            <span className="text-[13px] font-medium">
-                              ({liveMatch?.live?.live_score?.overs})
-                            </span>
-                          </p>
+                      <div className="w-full">
+                        <div className="flex gap-2 flex-row  uppercase items-center w-full">
+                          <Image
+                            className="lg:h-[42px] lg:w-[42px] h-[40px] w-[40px]"
+                            src={[liveMatch?.match_info?.teama, liveMatch?.match_info?.teamb].find(team => team?.team_id === liveMatch?.live?.live_inning?.batting_team_id)?.logo_url || null}
+                            width={30}
+                            height={30}
+                            alt="teams"
+                            loading="lazy"
+                          />
+                          <div className="flex flex-col items-start gap-0">
+                            <p className="text-[14px] font-semibold uppercase">
+                              {[liveMatch?.match_info?.teama, liveMatch?.match_info?.teamb].find(team => team?.team_id === liveMatch?.live?.live_inning?.batting_team_id)?.short_name || null}
+                            </p>
+                            <p className="lg:text-[18px] text-[18px] font-semibold">
+                              {liveMatch?.live?.live_score?.runs}/
+                              {liveMatch?.live?.live_score?.wickets}{" "}
+                              <span className="text-[13px] font-medium">
+                                ({liveMatch?.live?.live_score?.overs})
+                              </span>
+                            </p>
+                          </div>
+
+
+
                         </div>
+
+
                       </div>
 
-                      <div className="border-r-[1px] border-[#e5e5e5] h-[60px]"></div>
+                      {/* <div className="border-r-[1px] border-[#e5e5e5] h-[60px]"></div> */}
 
                       <div className="w-full h-[60px] text-center flex items-center justify-center">
                         <motion.div
@@ -468,26 +475,40 @@ export default function Banner({ matchData, match_id }: Banner) {
                             color: { duration: 1.5, repeat: Infinity }
                           }}
 
-                          className={`text-[#342df2]  text-[24px] font-bold
+                          className={`text-[#342df2]  text-[21px] font-bold
                           ${ballEvent.toUpperCase() === 'FOUR' ? "phone-animate-blinkFour" : ""}
                           ${ballEvent.toUpperCase() === 'SIX' ? "phone-animate-blinkSix" : ""}
-                          ${ballEvent.toUpperCase() === 'WICKET' ? "phone-animate-Out" : ""} `}
+                          ${ballEvent.toUpperCase() === 'WICKET' ? "phone-animate-Out" : ""}
+                           ${ballEvent === '1' ? "text-[35px]" : ""} 
+                           ${ballEvent === '2' ? "text-[35px]" : ""}
+                           ${ballEvent === '3' ? "text-[35px]" : ""}
+                           ${ballEvent.toUpperCase() === 'DOT' ? "text-[35px]" : ""}
+                           ${ballEvent === '5' ? "text-[35px]" : ""}  `}
                         >
-
-
 
                           {ballEvent.toUpperCase() === 'FOUR' ? 4 : ballEvent.toUpperCase() === 'SIX' ? 6 : ballEvent.toUpperCase() === 'DOT' ? 0 : ballEvent}
                         </motion.div>
                       </div>
+
                     </div>
 
-                    <div className="flex items-center justify-between mt-3 text-[14px]">
+
+
+                    <div className="flex items-center justify-between mt-1 pb-1 text-[12px] relative top-[12px]">
+                      <div className="flex gap-3 items-center">
+                        <p className="flex gap-1 items-center">
+                          <span> CRR :{" "} </span> <span>{liveMatch?.live?.live_score?.runrate}</span>
+                        </p>
+                        <p className="flex gap-1 items-center">
+                          <span>RRR : </span><span>{liveMatch?.live?.live_score?.required_runrate}</span>
+                        </p>
+                      </div>
                       <p>
-                        CRR :{" "}
-                        <span>{liveMatch?.live?.live_score?.runrate}</span>
+                        Target <span>{liveMatch?.live?.live_score?.target}</span>
                       </p>
-                      <p>{/* Over left Today : <span>36.0</span> */}</p>
                     </div>
+
+
                   </div>
 
                   <div></div>

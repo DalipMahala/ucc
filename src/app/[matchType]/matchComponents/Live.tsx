@@ -846,7 +846,7 @@ Live) {
                                   )
                                 : 0}
                             </p>
-                            <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
+                            <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">
                               {lesserTeam
                                 ?.lay !== null &&
                                 lesserTeam
