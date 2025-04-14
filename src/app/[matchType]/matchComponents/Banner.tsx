@@ -153,12 +153,13 @@ export default function Banner({ matchData, match_id }: Banner) {
                     />
                   ) : ("")}
                   <div className="flex md:flex-col md:items-start items-center md:gap-0 gap-2">
-                    <p className="text-[#BDCCECA8] md:text-[18px]  text-[14px] font-medium uppercase">
+                    <p 
+                    className={`${(liveMatch?.match_info?.teama?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] font-semibold md:text-[17px]" : "text-[#BDCCECA8] md:text-[17px]  text-[14px] font-medium uppercase"}`}>
                       {liveMatch?.match_info?.teama?.short_name}
                     </p>
                     <p
                       className={
-                        "md:text-[22px] text-[16px] font-semibold matchinfo" +
+                        "md:text-[20px] text-[16px] font-semibold matchinfo" +
                         match_id +
                         "-" +
                         liveMatch?.match_info?.teama?.team_id
@@ -167,7 +168,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                       {inning1teamarun ? (
                         <>
                           {inning1teamarun}{" "}
-                          <span className="text-[16px] font-medium">
+                          <span className={`${(liveMatch?.match_info?.teama?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] font-semibold md:text-[16px]" : "text-[#BDCCECA8]  text-[16px] font-medium uppercase"}`}>
                             ({inning1teamaOver})
                           </span>
                         </>
@@ -180,7 +181,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                           {" "}
                           &amp; {inning2teamarun}{" "}
                           {inning2teamaOver !== "" && (
-                            <span className="text-[16px] font-medium">
+                            <span className={`${(liveMatch?.match_info?.teama?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] font-semibold md:text-[16px]" : "text-[#BDCCECA8]  text-[16px] font-medium uppercase"}`}>
                               ({inning2teamaOver})
                             </span>
                           )}
@@ -202,12 +203,12 @@ export default function Banner({ matchData, match_id }: Banner) {
 
                 <div className="flex gap-3 flex-row-reverse md:flex-row  items-center text-[#8192B4] font-normal w-[35%] justify-end">
                   <div className="flex md:flex-col md:items-end items-center md:gap-0 gap-2">
-                    <p className="text-[#BDCCECA8] md:text-[18px] text-[14px] font-medium uppercase">
+                    <p className="text-[#BDCCECA8] md:text-[17px] text-[14px] font-medium uppercase">
                       {liveMatch?.match_info?.teamb?.short_name}
                     </p>
                     <p
                       className={
-                        "md:text-[22px] text-[16px] font-semibold matchinfo" +
+                        "md:text-[20px] text-[16px] font-semibold matchinfo" +
                         match_id +
                         "-" +
                         liveMatch?.match_info?.teamb?.team_id
@@ -453,12 +454,12 @@ export default function Banner({ matchData, match_id }: Banner) {
                     ""
                   )}
                   <div className="flex md:flex-col md:items-start items-center md:gap-0 gap-2">
-                    <p className="text-[#BDCCECA8] md:text-[18px]  text-[14px] font-medium uppercase">
+                    <p className="text-[#BDCCECA8] md:text-[17px]  text-[14px] font-medium uppercase">
                       {liveMatch?.match_info?.teama?.short_name}
                     </p>
                     <p
                       className={
-                        "md:text-[22px] text-[16px] font-semibold" +
+                        "md:text-[20px] text-[16px] font-semibold " +
                         match_id +
                         "-" +
                         liveMatch?.match_info?.teama?.team_id
@@ -519,12 +520,12 @@ export default function Banner({ matchData, match_id }: Banner) {
                 </div>
                 <div className="flex gap-2 flex-row-reverse md:flex-row  items-center text-[#8192B4] font-normal w-full justify-end">
                   <div className="flex md:flex-col md:items-end items-center md:gap-0 gap-2">
-                    <p className="text-[#BDCCECA8] md:text-[18px] text-[14px] font-medium uppercase">
+                    <p className="text-[#BDCCECA8] md:text-[17px] text-[14px] font-medium uppercase">
                       {liveMatch?.match_info?.teamb?.short_name}
                     </p>
                     <p
                       className={
-                        "lg:text-[18px] text-[16px] font-semibold matchinfo" +
+                        "lg:text-[20px] text-[16px] font-semibold matchinfo" +
                         match_id +
                         "-" +
                         liveMatch?.match_info?.teamb?.team_id
@@ -609,7 +610,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
                       </div>
 
-                      {/* <div className="border-r-[1px] border-[#e5e5e5] h-[60px]"></div> */}
+                      <div className="border-r-[1px] border-[#e5e5e5] h-[60px]"></div>
 
                       <div className="w-full h-[60px] text-center flex items-center justify-center">
                         <motion.div
@@ -646,7 +647,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
 
 
-                    <div className="flex items-center justify-between mt-1 pb-1 text-[12px] relative top-[12px]">
+                    <div className="flex items-center justify-between py-1 border-t-[1px] bottom-[#e5e5e5] text-[12px] relative top-[12px]">
                       <div className="flex gap-3 items-center">
                         <p className="flex gap-1 items-center">
                           <span> CRR :{" "} </span> <span>{liveMatch?.live?.live_score?.runrate}</span>
@@ -743,8 +744,9 @@ export default function Banner({ matchData, match_id }: Banner) {
                 </div>
 
 
-                <div className="text-[#8192B4] font-normal w-[30%] text-center">
-                  <p className="text-[#C1CEEA] text-1xl"> {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "hh:mm:aa") : ""}  </p>
+                <div className="text-[#8192B4] font-normal w-[30%] text-center h-[37px]">
+                  <p className="text-[#C1CEEA] text-1xl">
+                     {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "hh:mm:aa") : ""}  </p>
 
                   {liveMatch?.match_info?.date_start_ist ? isSameDay(new Date(), new Date(liveMatch?.match_info?.date_start_ist)) ? (
 

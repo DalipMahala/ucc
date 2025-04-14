@@ -24,6 +24,7 @@ export default function MoreInfo({
 }: MatchInfo) {
   const teama_id = matchData?.match_info?.teama?.team_id;
   const teamb_id = matchData?.match_info?.teamb?.team_id;
+  const matchDetails = matchData?.match_info;
 
   const playing11 = matchData?.["match-playing11"];
 //   const teama11Players = [
@@ -198,6 +199,10 @@ export default function MoreInfo({
   ) => {
     setPlaying11Tab(tabName);
   };
+
+
+  const [activeOddTab, setActiveOddTab] = useState("tab2");
+  let teamwinpercentage = matchData?.teamwinpercentage;
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
@@ -1475,6 +1480,134 @@ export default function MoreInfo({
             </div>
             {/* right section */}
             <div className="lg:col-span-4 md:col-span-5">
+
+
+
+
+
+{/* *********************************** */}
+
+
+<div className="rounded-lg bg-[#ffffff]  mb-4 hidden md:block">
+                    <div className="p-4 cust-box-click-container">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex space-x-2">
+                          <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
+                          <h3 className="text-1xl font-semibold">Probability</h3>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            className={`cust-box-click-button  font-medium ${activeOddTab === "tab1"
+                                ? "bg-[#081736] text-[#ffffff] "
+                                : "bg-[#ffffff] text-[#6A7586]"
+                              } px-5 py-1 rounded-full`}
+                            onClick={() => setActiveOddTab("tab1")}
+                          >
+                            <span>% View</span>
+                          </button>
+                          <button
+                            className={`cust-box-click-button font-medium ${activeOddTab === "tab2"
+                                ? "bg-[#081736] text-[#ffffff] "
+                                : "bg-[#ffffff] text-[#6A7586]"
+                              }  px-5 py-1 rounded-full`}
+                            onClick={() => setActiveOddTab("tab2")}
+                          >
+                            <span>Odds View</span>
+                          </button>
+                        </div>
+                      </div>
+                      {activeOddTab === "tab1" && (
+                        <div className="cust-box-click-content">
+                          <div>
+
+                            <div className="relative mt-4 h-[4px] bg-gray-200 overflow-hidden">
+                              <div
+                                className="absolute h-full bg-[#13B76D]"
+                                style={{
+                                  width: `${teamwinpercentage?.team_a_win}%`,
+                                }}
+                              />
+                              <div
+                                className="absolute h-full bg-[#EB9D29]"
+                                style={{
+                                  width: `${teamwinpercentage?.draw}%`,
+                                  left: `${teamwinpercentage?.team_a_win}%`,
+                                }}
+                              ></div>
+                              <div
+                                className="absolute h-full bg-[#B7132B]"
+                                style={{
+                                  width: `${teamwinpercentage?.team_b_win}%`,
+                                  left: `${teamwinpercentage?.draw +
+                                    teamwinpercentage?.team_a_win
+                                    }%`,
+                                }}
+                              ></div>
+                            </div>
+                            <div className="flex justify-between mt-2 text-sm">
+                              <p className="text-green-600 font-medium">
+                                {matchDetails?.teama?.short_name}:{" "}
+                                {teamwinpercentage?.team_a_win}%
+                              </p>
+                              {teamwinpercentage?.draw > 0 ? (
+                                <p className="text-yellow-600 font-medium">
+                                  Drew: {teamwinpercentage?.draw}%
+                                </p>
+                              ) : (
+                                ""
+                              )}
+                              <p className="text-red-600 font-medium">
+                                {matchDetails?.teamb?.short_name}:{" "}
+                                {teamwinpercentage?.team_b_win}%
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      {activeOddTab === "tab2" && (
+                        <div className="cust-box-click-content">
+                          <div className="flex justify-between items-center border-t-[1px] pt-2">
+                            <div className="text-1xl font-medium">
+                              {matchData?.match_info?.teama?.short_name}
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
+                                {matchData?.live_odds?.matchodds?.teama
+                                  ?.back !== null &&
+                                  matchData?.live_odds?.matchodds?.teama
+                                    ?.back !== undefined &&
+                                  matchData?.live_odds?.matchodds?.teama
+                                    ?.back !== ""
+                                  ? Math.round((matchData?.live_odds?.matchodds?.teama
+                                    ?.back) * 100 - 100)
+                                  : 0}
+                              </p>
+                              <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
+                                {matchData?.live_odds?.matchodds?.teama
+                                  ?.lay !== null &&
+                                  matchData?.live_odds?.matchodds?.teama
+                                    ?.lay !== undefined &&
+                                  matchData?.live_odds?.matchodds?.teama
+                                    ?.lay !== ""
+                                  ? Math.round((matchData?.live_odds?.matchodds?.teama
+                                    ?.lay) * 100 - 100)
+                                  : 0}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+
+{/* *********************************** */}
+
+
+
+
+
+
               <div className="rounded-lg bg-[#ffffff]">
                 <div className="p-4 cust-box-click-container">
                   <h3 className="text-1xl font-semibold pl-[7px] mb-3 border-l-[3px] border-[#229ED3]">
@@ -1486,7 +1619,7 @@ export default function MoreInfo({
                       onClick={(e) =>
                         handlePlaying11Tab(e, "cust-box-click-playing11")
                       }
-                      className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${
+                      className={` cust-box-click-button font-medium px-12 py-1 rounded-full ${
                         playing11Tab === "cust-box-click-playing11"
                           ? "bg-[#081736] text-white"
                           : "bg-[#ffffff] text-[#6A7586]"
@@ -1499,7 +1632,7 @@ export default function MoreInfo({
                       onClick={(e) =>
                         handlePlaying11Tab(e, "cust-box-click-playing12")
                       }
-                      className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${
+                      className={` cust-box-click-button font-medium px-12 py-1 rounded-full ${
                         playing11Tab === "cust-box-click-playing12"
                           ? "bg-[#081736] text-white"
                           : "bg-[#ffffff] text-[#6A7586]"
@@ -1521,7 +1654,7 @@ export default function MoreInfo({
                       {teama11Players?.map((player:any) => (
                         <Link href={"/player/"+urlStringEncode(player?.name)+"/"+player?.player_id}  key={player.player_id}>
                           <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
-                            <div style={{ width: '40px', height: '40px' }}>
+                            <div style={{ width: '35px', height: '35px' }}>
                                <PlayerImage  key={player?.player_id} player_id={ player?.player_id} height={35} width={35} className="rounded-lg" />
                                                               
                             </div>

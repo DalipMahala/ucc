@@ -193,7 +193,7 @@ export default function Squads({
                                                        
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/bat.png"
-                                                                className="h-[23px] absolute right-[15px] bottom-0 bg-white rounded-full p-[4px]"
+                                                                className="h-[23px] absolute right-[17px] bottom-0 bg-white rounded-full p-[4px]"
                                                                 width={20} height={20} alt=""
                                                             />
                                                         </div>
@@ -270,7 +270,7 @@ export default function Squads({
                         {activeTab === "tab2" && 
                         <div id="south-team" className="team-content ">
                         <div className="max-w-7xl mx-auto bg-white rounded-lg p-6">
-                            <div className="flex items-center space-x-4 mb-6">
+                            <div className="flex items-center space-x-4 mb-3">
                                 <Image  loading="lazy" 
                                     src={teamBDetails.logo_url}
                                     width={45} height={45} alt={teamBDetails.name}
@@ -281,8 +281,10 @@ export default function Squads({
                                     <span className="text-[#586577]">({teamBSquad.length} players)</span>
                                 </h1>
                             </div>
+
+                            <div className='border-[#E4E9F0] border-b-[1px] w-full'></div>
                             {/* Categories */}
-                            <div className="space-y-6">
+                            <div className="space-y-6 mt-3">
                                         {/* Batsman Section */}
                                         <div>
                                             <h2 className="text-1xl font-medium pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
@@ -296,7 +298,7 @@ export default function Squads({
                                                         <PlayerImage key={squads?.player_id} player_id={squads?.player_id} width={41} height={47} className="w-[41px] h-[47px] mx-auto rounded-full mb-2" />
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/bat.png"
-                                                                className="h-[23px] absolute right-[15px] bottom-0 bg-white rounded-full p-[4px]"
+                                                                className="h-[23px] absolute right-[17px] bottom-0 bg-white rounded-full p-[4px]"
                                                                 width={20} height={20} alt=""
                                                             />
                                                         </div>

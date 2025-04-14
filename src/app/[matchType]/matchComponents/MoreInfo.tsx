@@ -1729,7 +1729,7 @@ export default function MoreInfo({
                         onClick={(e) =>
                           handlePlaying11Tab(e, "cust-box-click-playing11")
                         }
-                        className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${playing11Tab === "cust-box-click-playing11"
+                        className={` cust-box-click-button font-medium px-12 py-1 rounded-full ${playing11Tab === "cust-box-click-playing11"
                             ? "bg-[#081736] text-white"
                             : "bg-[#ffffff] text-[#6A7586]"
                           }`}
@@ -1741,7 +1741,7 @@ export default function MoreInfo({
                         onClick={(e) =>
                           handlePlaying11Tab(e, "cust-box-click-playing12")
                         }
-                        className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${playing11Tab === "cust-box-click-playing12"
+                        className={` cust-box-click-button font-medium px-12 py-1 rounded-full ${playing11Tab === "cust-box-click-playing12"
                             ? "bg-[#081736] text-white"
                             : "bg-[#ffffff] text-[#6A7586]"
                           }`}
@@ -1769,7 +1769,7 @@ export default function MoreInfo({
                             key={player.player_id}
                           >
                             <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
-                              <div style={{ width: '40px', height: '40px' }}>
+                              <div style={{ width: '35px', height: '35px' }}>
                                 <PlayerImage key={player?.player_id} player_id={player?.player_id} height={35} width={35} className="rounded-lg" />
 
                               </div>

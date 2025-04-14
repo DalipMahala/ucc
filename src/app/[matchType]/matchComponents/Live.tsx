@@ -634,13 +634,13 @@ Live) {
 
 
                 <div className="col-span-12 mb-4 md:mb-0">
-                  <div className="rounded-lg bg-white p-4 flex lg:flex-row flex-col items-center md:gap-8 gap-4  whitespace-nowrap overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
+                  <div className="rounded-lg bg-white p-4 flex lg:flex-row flex-col-reverse  items-center md:gap-8 gap-4  whitespace-nowrap overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
                               [&::-webkit-scrollbar-track]:bg-gray-100 
                               [&::-webkit-scrollbar-thumb]:bg-[#DFE9F6] 
                                dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
                                  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-700">
                     {/* Last Over Section */}
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2   ">
                       <span className="font-medium text-[#586577]">
                         Last Over:
                       </span>
