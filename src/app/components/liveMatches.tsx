@@ -15,7 +15,7 @@ interface MatchItem {
     man_of_the_match_pname: string;
     match_number: string;
     commentary: number;
-    live: string;
+    live: any;
     match_id: number;
     status_str: string;
     competition: {
@@ -217,7 +217,7 @@ export default async function LiveMatches() {
                                         alt={items.teama.short_name}
                                         loading="lazy"
                                       />
-                                      <span className="text-[#586577] font-medium text-[14px]">
+                                      <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
                                         {items.teama.short_name} -{" "}
                                       </span>
                                     </div>
@@ -238,13 +238,16 @@ export default async function LiveMatches() {
                                         </span>
                                       ) : (
                                         <>
-                                          <span className="font-medium text-[#586577]">
-                                            {items.teama.scores}
+                                         <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
+                                            {items.teama.scores ?? 0}
                                           </span>
-                                          <span className="text-[#586577] text-[12px]">
+                                          <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[12px] text-[#586577]"}`}>
                                             {" "}
-                                            ({items.teama.overs}){" "}
+                                            ({items.teama.overs ?? 0}){" "}
                                           </span>
+                                          {(items.teama.team_id === items?.live?.live_inning?.batting_team_id) &&
+                                            <Image  loading="lazy"  src="/assets/img/home/bat.png" width={14} height={14} className="h-[12px] mb-[3px]" alt="bat" />
+                                            }
                                         </>
                                       )}
                                     </p>
@@ -261,7 +264,7 @@ export default async function LiveMatches() {
                                           alt={items.teamb.short_name}
                                           loading="lazy"
                                         />
-                                        <span className="text-[#586577] font-medium text-[14px]">
+                                        <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
                                           {items.teamb.short_name} -
                                         </span>
                                       </div>
@@ -282,13 +285,16 @@ export default async function LiveMatches() {
                                           </span>
                                         ) : (
                                           <>
-                                            <span className="font-medium text-[14px] text-[#586577]">
-                                              {items.teamb.scores}
+                                          <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
+                                              {items.teamb.scores ?? 0}
                                             </span>
-                                            <span className="text-[#586577] text-[12px]">
+                                            <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[12px] text-[#586577]"}`}>
                                               {" "}
-                                              ({items.teamb.overs}){" "}
+                                              ({items.teamb.overs ?? 0}){" "}
                                             </span>
+                                            {(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) &&
+                                            <Image  loading="lazy"  src="/assets/img/home/bat.png" width={14} height={14} className="h-[12px] mb-[3px]" alt="bat" />
+                                            }
                                           </>
                                         )}
                                       </p>
@@ -427,7 +433,8 @@ export default async function LiveMatches() {
                                         />
                                         <div>
                                           <span className="flex items-center gap-1">
-                                            <span className="text-[#586577] font-medium text-[14px]">
+                                          <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
+                                            
                                               {items.teama.short_name}
                                             </span>
 
@@ -448,13 +455,16 @@ export default async function LiveMatches() {
                                               </span>
                                             ) : (
                                               <>
-                                                <span className="font-medium text-[#434c59]">
-                                                  {items.teama.scores}
+                                                <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#434c59]"}`}>
+                                                  {items.teama.scores ?? 0}
                                                 </span>
-                                                <span className="text-[#586577] text-[12px]">
+                                                <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] text-[12px]"}`}>
                                                   {" "}
-                                                  ({items.teama.overs}){" "}
+                                                  ({items.teama.overs ?? 0}){" "}
                                                 </span>
+                                                {(items.teama.team_id === items?.live?.live_inning?.batting_team_id) &&
+                                                <Image  loading="lazy"  src="/assets/img/home/bat.png" width={14} height={14} className="h-[12px] mb-[3px]" alt="bat" />
+                                                }
                                               </>
                                             )}
 
@@ -475,7 +485,7 @@ export default async function LiveMatches() {
                                             loading="lazy"
                                           />
                                           <div>
-                                            <span className="text-[#5e5e5e] font-medium">
+                                          <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#5e5e5e] font-medium "}`}>
                                               {items.teamb.short_name}
                                             </span>
                                             <p
@@ -495,13 +505,16 @@ export default async function LiveMatches() {
                                                 </span>
                                               ) : (
                                                 <>
-                                                  <span className="font-medium text-[#434c59]">
-                                                    {items.teamb.scores}
+                                                  <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#434c59]"}`}>
+                                                    {items.teamb.scores ?? 0}
                                                   </span>
-                                                  <span className="text-[#586577] text-[12px]">
+                                                  <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] text-[12px]"}`}>
                                                     {" "}
-                                                    ({items.teamb.overs}){" "}
+                                                    ({items.teamb.overs ?? 0}){" "}
                                                   </span>
+                                                  {(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) &&
+                                                  <Image  loading="lazy"  src="/assets/img/home/bat.png" width={14} height={14} className="h-[12px] mb-[3px]" alt="bat" />
+                                                  }
                                                 </>
                                               )}
                                             </p>

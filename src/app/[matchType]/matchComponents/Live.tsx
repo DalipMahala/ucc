@@ -381,8 +381,8 @@ Live) {
   const a = parseFloat(matchLiveData?.live_odds?.matchodds?.teama?.back);
   const b = parseFloat(matchLiveData?.live_odds?.matchodds?.teamb?.back);
   const lesserTeam = a < b 
-    ? { team: matchLiveData?.match_info?.teama?.short_name, ...matchLiveData.live_odds.matchodds.teama } 
-    : { team: matchLiveData?.match_info?.teamb?.short_name, ...matchLiveData.live_odds.matchodds.teamb };
+    ? { team: matchLiveData?.match_info?.teama?.short_name, ...matchLiveData?.live_odds?.matchodds?.teama } 
+    : { team: matchLiveData?.match_info?.teamb?.short_name, ...matchLiveData?.live_odds?.matchodds?.teamb };
 
   return (
     <section className="lg:w-[1075px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
