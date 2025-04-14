@@ -8,7 +8,7 @@ const BUCKET_NAME = 'uc-application';
 
 export async function GET(req: NextRequest) {
   try {
-    const CACHE_KEY = "live_matches";
+    const CACHE_KEY = "live_matchesApi";
     const CACHE_TTL = 60;
 
     const cachedData = await redis.get(CACHE_KEY);

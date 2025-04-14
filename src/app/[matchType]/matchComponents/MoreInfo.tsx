@@ -1599,7 +1599,7 @@ export default function MoreInfo({
               <div className="lg:col-span-4 md:col-span-5">
 
 
-                {matchData ? (
+                {matchData?.match_info?.status_str !== 'Completed' ? (
 
                   <div className="rounded-lg bg-[#ffffff]  mb-4 hidden md:block">
                     <div className="p-4 cust-box-click-container">
@@ -1734,7 +1734,7 @@ export default function MoreInfo({
                             : "bg-[#ffffff] text-[#6A7586]"
                           }`}
                       >
-                        <span>{matchData?.match_info?.teama.name}</span>
+                        <span>{matchData?.match_info?.teama.short_name}</span>
                       </button>
 
                       <button
@@ -1746,7 +1746,7 @@ export default function MoreInfo({
                             : "bg-[#ffffff] text-[#6A7586]"
                           }`}
                       >
-                        <span>{matchData?.match_info?.teamb.name}</span>
+                        <span>{matchData?.match_info?.teamb.short_name}</span>
                       </button>
                     </div>
                     <div className="border-t-[1px] border-[#E4E9F0]" />

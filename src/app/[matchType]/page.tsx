@@ -6,6 +6,7 @@ import Banner from "./matchComponents/Banner";
 import Layout from "@/app/components/Layout";
 import Image from "next/image";
 import Live from "./matchComponents/Live";
+import LiveResult from "./resultComponents/Live";
 import Scorecard from "./matchComponents/Scorecard";
 import Squads from "./matchComponents/Squad";
 import Stats from "./matchComponents/Stats";
@@ -173,13 +174,21 @@ export default async function page(props: { params: Params }) {
             isPointTable={isPointTable}
           />
         ) : matchType === "live-score" ? (
-          <Live
+          liveMatch?.match_info?.status_str === "Completed" ? (
+          <LiveResult
             match_id={matchid}
             matchData={liveMatch}
             matchUrl={matchTab}
             matchCommentary={matchCommentary}
             isPointTable={isPointTable}
           />
+          ):(<Live
+            match_id={matchid}
+            matchData={liveMatch}
+            matchUrl={matchTab}
+            matchCommentary={matchCommentary}
+            isPointTable={isPointTable}
+          />)
         ) : matchType === "scorecard" ? (
           <Scorecard
             match_id={matchid}

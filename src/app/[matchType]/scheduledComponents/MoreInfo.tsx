@@ -1492,7 +1492,7 @@ export default function MoreInfo({
                           : "bg-[#ffffff] text-[#6A7586]"
                       }`}
                     >
-                      <span>{matchData?.match_info?.teama.name}</span>
+                      <span>{matchData?.match_info?.teama.short_name}</span>
                     </button>
 
                     <button
@@ -1505,7 +1505,7 @@ export default function MoreInfo({
                           : "bg-[#ffffff] text-[#6A7586]"
                       }`}
                     >
-                      <span>{matchData?.match_info?.teamb.name}</span>
+                      <span>{matchData?.match_info?.teamb.short_name}</span>
                     </button>
                   </div>
                   <div className="border-t-[1px] border-[#E4E9F0]" />
