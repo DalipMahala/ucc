@@ -633,7 +633,11 @@ Live) {
 
 
                 <div className="col-span-12 mb-4 md:mb-0">
-                  <div className="rounded-lg bg-white p-4 flex lg:flex-row flex-col items-center md:gap-8 gap-4">
+                  <div className="rounded-lg bg-white p-4 flex lg:flex-row flex-col items-center md:gap-8 gap-4  whitespace-nowrap overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
+                              [&::-webkit-scrollbar-track]:bg-gray-100 
+                              [&::-webkit-scrollbar-thumb]:bg-[#DFE9F6] 
+                               dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
+                                 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-700">
                     {/* Last Over Section */}
                     <div className="flex items-center gap-2">
                       <span className="font-medium text-[#586577]">
@@ -1021,7 +1025,7 @@ Live) {
                                       player_id={comment?.wicket_batsman_id}
                                       height={65}
                                       width={65}
-                                      className="rounded-lg md:mr-4 mr-2 h-[40px] md:h-[auto]"
+                                      className="rounded-lg md:mr-4 mr-2 h-[65px] w-[65px] md:w-[auto] md:h-[auto]"
                                     />
 
                                     <div>
@@ -1093,7 +1097,7 @@ Live) {
                               width={65}
                               height={65}
                               alt="Player"
-                              className="md:mr-4 mr-2 h-[40px] md:h-[auto]"
+                              className="md:mr-4 mr-2 h-[65px] w-[65px] md:w-[auto] md:h-[auto]"
                               loading="lazy"
                             />
                             {/* Player Info */}
