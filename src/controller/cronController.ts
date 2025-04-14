@@ -713,7 +713,7 @@ export async function MatchStatisticsCompleted() {
 
 export async function Last10MatchData() {
   try {
-    const matchQuery = `SELECT match_id FROM matches`;
+    const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_advance)`;
     
     const [matchResults]: any = await db.query(matchQuery);
 
@@ -751,8 +751,9 @@ export async function Last10MatchData() {
                         INSERT INTO match_advance ( match_id, fileName)
                         VALUES (${matchId}, '${s3Key}') 
                         ON DUPLICATE KEY UPDATE 
+                        match_id = ${matchId},
                         fileName = '${s3Key}';`;
-          console.log(`Data saved to`, query);
+          // console.log(`Data saved to`, query);
           //  const values =  [matchId, filePath ] ;
           await db.query(query);
         } catch (error) {
