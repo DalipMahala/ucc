@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "cid is required" }, { status: 400 });
     }
 
-    const CACHE_KEY = "seriesPointsTableMatchesCache"+cid;
+    const CACHE_KEY = "seriesFeaturedMatchesCache"+cid;
     const CACHE_TTL = 60;
 
     // Check Redis cache first
