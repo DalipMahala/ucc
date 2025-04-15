@@ -250,51 +250,51 @@ export default function Overview({
                         {(matches?.status === 2 || matches?.status === 3) &&
                         <Link href={"/scorecard/"+urlStringEncode(matches?.teama?.short_name+"-vs-"+matches?.teamb?.short_name+"-match-"+matches?.match_number+"-"+matches?.competition?.title+"-"+matches?.competition?.season)+"/" + matches.match_id} className="py-3 flex justify-between items-center">
                   
-                    <div className="flex space-x-2 font-medium	w-full">
-                      <Link href={"/team/"+urlStringEncode(matches?.teama?.name)+"/" + matches?.teama?.team_id} className="flex items-center space-x-1 flex-col">
-                       
-                          <Image
-                            loading="lazy"
-                            src={matches?.teama?.logo_url}
-                            className="h-[35px] rounded-full"
-                            width={35}
-                            height={35}
-                            alt={matches?.teama?.short_name}
-                          />
-                          <span className="text-[#909090]">{matches?.teama?.short_name}</span>
-                       
-                      </Link>
-                      <div className="mt-1">
-                        <p className="text-1xl font-semibold">{matches?.teama?.scores}</p>
-                        <p className="text-[#909090]">({matches?.teama?.overs})</p>
-                      </div>
-                    </div>
-                    <div className=" font-semibold text-center w-full">
-                      <p className="text-[#3D4DCF] text-[14px]">{matches?.result}</p>
-                      <p className="text-[#909090] text-[12px] font-normal">
-                      {matches?.subtitle}
-                      </p>
-                    </div>
-                    <div className="flex space-x-2 font-medium justify-end w-full">
-                      <div className="mt-1 text-end">
-                        <p className="text-1xl font-semibold">{matches?.teamb?.scores}</p>
-                        <p className="text-[#909090]">({matches?.teamb?.overs})</p>
-                      </div>
-                      <Link href={"/team/"+urlStringEncode(matches?.teamb?.name)+"/" + matches.teamb?.team_id}>
-                        <div className="flex items-center space-x-1 flex-col font-medium">
-                          <Image
-                            loading="lazy"
-                            src={matches?.teamb?.logo_url}
-                            className="h-[35px] rounded-full"
-                            width={35}
-                            height={35}
-                            alt={matches?.teamb?.short_name}
-                          />
-                          <span className="text-[#909090]">{matches?.teamb?.short_name}</span>
+                        <div className="flex space-x-2 font-medium	w-full">
+                          <Link href={"/team/"+urlStringEncode(matches?.teama?.name)+"/" + matches?.teama?.team_id} className="flex items-center space-x-1 flex-col">
+                          
+                              <Image
+                                loading="lazy"
+                                src={matches?.teama?.logo_url}
+                                className="h-[35px] rounded-full"
+                                width={35}
+                                height={35}
+                                alt={matches?.teama?.short_name}
+                              />
+                              <span className="text-[#909090]">{matches?.teama?.short_name}</span>
+                          
+                          </Link>
+                          <div className="mt-1">
+                            <p className="text-1xl font-semibold">{matches?.teama?.scores}</p>
+                            <p className="text-[#909090]">({matches?.teama?.overs})</p>
+                          </div>
+                        </div>
+                        <div className=" font-semibold text-center w-full">
+                          <p className="text-[#3D4DCF] text-[14px]">{matches?.result}</p>
+                          <p className="text-[#909090] text-[12px] font-normal">
+                          {matches?.subtitle}
+                          </p>
+                        </div>
+                        <div className="flex space-x-2 font-medium justify-end w-full">
+                          <div className="mt-1 text-end">
+                            <p className="text-1xl font-semibold">{matches?.teamb?.scores}</p>
+                            <p className="text-[#909090]">({matches?.teamb?.overs})</p>
+                          </div>
+                          <Link href={"/team/"+urlStringEncode(matches?.teamb?.name)+"/" + matches.teamb?.team_id}>
+                            <div className="flex items-center space-x-1 flex-col font-medium">
+                              <Image
+                                loading="lazy"
+                                src={matches?.teamb?.logo_url}
+                                className="h-[35px] rounded-full"
+                                width={35}
+                                height={35}
+                                alt={matches?.teamb?.short_name}
+                              />
+                              <span className="text-[#909090]">{matches?.teamb?.short_name}</span>
+                            </div>
+                          </Link>
                         </div>
                       </Link>
-                    </div>
-                  </Link>
                   }{matches?.status === 1 &&
                     <Link href={"/moreinfo/"+urlStringEncode(matches?.teama?.short_name+"-vs-"+matches?.teamb?.short_name+"-match-"+matches?.match_number+"-"+matches?.competition?.title+"-"+matches?.competition?.season)+"/" + matches.match_id}>
                     <div className="py-3 pb-0 flex justify-between items-center">

@@ -80,6 +80,7 @@ export default async function UpcomingMatches() {
   let upcomingMatch: MatchItem[] = upcomingfilteredMatches;
 
   upcomingMatch = upcomingMatch?.filter((item: { commentary: number }) => Number(item.commentary) === 1);
+  // console.log("upcomingMatch",upcomingMatch[0].teama.logo_url);
   return (
     <React.Fragment>
       <div>
@@ -179,7 +180,7 @@ export default async function UpcomingMatches() {
                       <div className="flex items-center space-x-2 font-medium x md:w-full mb-4">
                         <div className="flex items-center space-x-2">
                           <Image
-                            src={`${ucmatch.teama.logo_url}?tr=f-webp`}
+                            src={ucmatch.teama.logo_url}
                             className="h-[30px] rounded-full"
                             width={30}
                             height={30}
@@ -196,7 +197,7 @@ export default async function UpcomingMatches() {
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={`${ucmatch.teamb.logo_url}?tr=f-webp`}
+                              src={ucmatch.teamb.logo_url}
                               className="h-[30px]"
                               width={30}
                               height={30}
@@ -324,7 +325,7 @@ export default async function UpcomingMatches() {
                         <div className="items-center space-x-2 font-medium md:w-full mb-4">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={`${ucmatch.teama.logo_url}?tr=f-webp`}
+                              src={ucmatch.teama.logo_url}
                               className="h-[30px] rounded-full"
                               width={30}
                               height={30}
@@ -343,7 +344,7 @@ export default async function UpcomingMatches() {
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={`${ucmatch.teamb.logo_url}?tr=f-webp`}
+                              src={ucmatch.teamb.logo_url}
                               className="h-[30px] rounded-full"
                               width={30}
                               height={30}

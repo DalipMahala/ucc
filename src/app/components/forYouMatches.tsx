@@ -212,7 +212,7 @@ export default async function ForYouMatches() {
                         <div className="flex items-center space-x-2">
                           <Image
                             // src={items.teama.logo_url}
-                            src={`${items.teama.logo_url}?tr=f-webp`}
+                            src={items.teama.logo_url}
                             className="h-[30px] rounded-full"
                             width={30}
                             height={30}
@@ -256,7 +256,7 @@ export default async function ForYouMatches() {
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={`${items.teamb.logo_url}?tr=f-webp`}
+                              src={items.teamb.logo_url}
                               className="h-[30px]"
                               width={30}
                               height={30}
@@ -424,7 +424,7 @@ export default async function ForYouMatches() {
                         <div className="items-center space-x-2 font-medium md:w-full mb-4">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={`${items.teama.logo_url}?tr=f-webp`}
+                              src={items.teama.logo_url}
                               className="h-[30px] rounded-full"
                               width={30}
                               height={30}
@@ -473,7 +473,7 @@ export default async function ForYouMatches() {
                           <div className="flex items-center space-x-2 font-medium md:w-full">
                             <div className="flex items-center space-x-2">
                               <Image
-                                src={`${items.teamb.logo_url}?tr=f-webp`}
+                                src={items.teamb.logo_url}
                                 className="h-[30px]"
                                 width={30}
                                 height={30}
@@ -745,7 +745,7 @@ export default async function ForYouMatches() {
                       <div className="flex items-center space-x-2 font-medium x md:w-full mb-4">
                         <div className="flex items-center space-x-2">
                           <Image
-                            src={`${ucmatch.teama.logo_url}?tr=f-webp`}
+                            src={ucmatch.teama.logo_url}
                             className="h-[30px] rounded-full"
                             width={30}
                             height={30}
@@ -762,7 +762,7 @@ export default async function ForYouMatches() {
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={`${ucmatch.teamb.logo_url}?tr=f-webp`}
+                              src={ucmatch.teamb.logo_url}
                               className="h-[30px]"
                               width={30}
                               height={30}
@@ -890,7 +890,7 @@ export default async function ForYouMatches() {
                         <div className="items-center space-x-2 font-medium md:w-full mb-4">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={`${ucmatch.teama.logo_url}?tr=f-webp`}
+                              src={ucmatch.teama.logo_url}
                               className="h-[30px] rounded-full"
                               width={30}
                               height={30}
@@ -909,7 +909,7 @@ export default async function ForYouMatches() {
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={`${ucmatch.teamb.logo_url}?tr=f-webp`}
+                              src={ucmatch.teamb.logo_url}
                               className="h-[30px] rounded-full"
                               width={30}
                               height={30}
@@ -1099,7 +1099,7 @@ export default async function ForYouMatches() {
                       <div className="flex items-center space-x-2 font-medium md:w-full mb-4">
                         <div className="flex items-center space-x-2">
                           <Image
-                            src={`${cmatch.teama.logo_url}?tr=f-webp`}
+                            src={cmatch.teama.logo_url}
                             className="h-[30px] rounded-full"
                             width={30}
                             height={30}
@@ -1125,7 +1125,7 @@ export default async function ForYouMatches() {
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={`${cmatch.teamb.logo_url}?tr=f-webp`}
+                              src={cmatch.teamb.logo_url}
                               className="h-[30px]"
                               width={30}
                               height={30}
@@ -1273,7 +1273,7 @@ export default async function ForYouMatches() {
                         <div className="items-center space-x-2 font-medium md:w-full mb-4">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={`${cmatch.teama.logo_url}?tr=f-webp`}
+                              src={cmatch.teama.logo_url}
                               className="h-[30px] rounded-full"
                               width={30}
                               height={30}
@@ -1302,7 +1302,7 @@ export default async function ForYouMatches() {
                           <div className="flex items-center space-x-2 font-medium md:w-full">
                             <div className="flex items-center space-x-2">
                               <Image
-                                src={`${cmatch.teamb.logo_url}?tr=f-webp`}
+                                src={cmatch.teamb.logo_url}
                                 className="h-[30px] rounded-full"
                                 width={30}
                                 height={30}
