@@ -180,11 +180,11 @@ export default async function UpcomingMatches() {
                       <div className="flex items-center space-x-2 font-medium x md:w-full mb-4">
                         <div className="flex items-center space-x-2">
                           <Image
-                            src={ucmatch.teama.logo_url}
+                            src={ucmatch.teama.logo_url || '/assets/img/ring.png'}
                             className="h-[30px] rounded-full"
                             width={30}
                             height={30}
-                            alt={ucmatch.teama.short_name}
+                            alt={ucmatch.teama.short_name ?? 'team'}
                             loading="lazy"
                           />
                           <span className="text-[#586577] font-medium text-[14px]">
@@ -197,11 +197,11 @@ export default async function UpcomingMatches() {
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={ucmatch.teamb.logo_url}
+                              src={ucmatch.teamb.logo_url || '/assets/img/ring.png'}
                               className="h-[30px]"
                               width={30}
                               height={30}
-                              alt={ucmatch.teamb.short_name}
+                              alt={ucmatch.teamb.short_name || 'team'}
                               loading="lazy"
                             />
                             <span className="text-[#586577] font-medium text-[14px]">
@@ -325,7 +325,7 @@ export default async function UpcomingMatches() {
                         <div className="items-center space-x-2 font-medium md:w-full mb-4">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={ucmatch.teama.logo_url}
+                              src={ucmatch.teama.logo_url || '/assets/img/ring.png'}
                               className="h-[30px] rounded-full"
                               width={30}
                               height={30}
@@ -344,7 +344,7 @@ export default async function UpcomingMatches() {
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={ucmatch.teamb.logo_url}
+                              src={ucmatch.teamb.logo_url || '/assets/img/ring.png'}
                               className="h-[30px] rounded-full"
                               width={30}
                               height={30}
