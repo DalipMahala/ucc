@@ -22,9 +22,10 @@ export async function POST(req: NextRequest) {
     if (cachedData) {
       return NextResponse.json({ success: true, data: JSON.parse(cachedData) });
     }
-
+    
     // Fetch from database
     const [rows]: [any[], any]  = await db.execute('SELECT * FROM competition_matches WHERE cid = ?',[cid]);
+    // const [rows]: [any[], any]  = await db.execute(`SELECT * FROM match_info WHERE match_id in (SELECT match_id FROM matches WHERE JSON_UNQUOTE(JSON_EXTRACT(competition, '$.cid')) = ${cid})`);
 
     if (rows.length === 0) {
       return NextResponse.json(

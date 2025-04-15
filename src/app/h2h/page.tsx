@@ -5,7 +5,7 @@ import WeeklySlider from "@/app/components/WeeklySlider";
 import H2h from './h2h';
 import { liveSeries,FeaturedMatch } from "@/controller/homeController";
 import { H2hDetails, getTeamId, h2hMatch } from "@/controller/h2hController";
-import { TeamDetails } from "@/controller/teamController";
+import { TeamDetails, isIPLTeamDetails } from "@/controller/teamController";
 import { notFound } from 'next/navigation';
 
 type Params = Promise<{
@@ -36,10 +36,16 @@ export default async function Page(props: { params: Params }) {
     ? secondPart.split('-head-to-head-in-')
     : ['', ''];
 
-  const tblName = matchType === 'odi' ? 'h2h_odi' : matchType === 'test' ? 'h2h_test' : 'h2h_t20'; 
-  
+  let tblName = '';
   const teama_id = await getTeamId(teamA);
   const teamb_id = await getTeamId(teamB);
+  const cid = await isIPLTeamDetails(teama_id,2025);
+  if(cid !== null){
+    tblName = 'h2h_ipl'
+    }else{
+      tblName = matchType === 'odi' ? 'h2h_odi' : matchType === 'test' ? 'h2h_test' : 'h2h_t20'; 
+    }
+   
   const teamDetails = await H2hDetails(tblName,teama_id,teamb_id);
   let completedMatch = await h2hMatch(matchType,teama_id,teamb_id);
   const teamADetails = await TeamDetails(teama_id);

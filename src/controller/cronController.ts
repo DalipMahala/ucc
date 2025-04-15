@@ -352,7 +352,7 @@ export async function InsertOrUpdateMatches() {
 export async function MatchInfo() {
   try {
     const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_info) or (status !=4 and DATE(date_start_ist) BETWEEN DATE(NOW() - INTERVAL 1 DAY) AND DATE(NOW())  and commentary = 1)`;
-    // const matchQuery = `SELECT match_id FROM matches `;
+    // const matchQuery = `SELECT match_id FROM matches where match_id in (87729)`;
 
     // const matchQuery = `SELECT match_id FROM matches where status in (1,3)`;
     
@@ -392,22 +392,13 @@ export async function MatchInfo() {
           const command = new PutObjectCommand(params);
           const s3Upload = await s3.send(command);
           console.log(`File uploaded successfully to ${s3Upload}`);
-          // const fileUrl = `https://${BUCKET_NAME}.s3.amazonaws.com/${s3Key}`;
-          // Define absolute file path on Windows
-          // const storageDir = "/var/tmp/ucc/MatchData";
-          // if (!fs.existsSync(storageDir))
-          //   fs.mkdirSync(storageDir, { recursive: true });
-
-          // const filePath = path.join(storageDir, `match_${matchId}.json`);
-          // fs.writeFileSync(filePath, JSON.stringify(matches, null, 2));
-
-          // const formattedFilePath = filePath.replace(/\\/g, "\\\\"); // Escape backslashes
+         
           const query = `
                         INSERT INTO match_info ( match_id, fileName)
                         VALUES (${matchId}, '${s3Key}') 
                         ON DUPLICATE KEY UPDATE 
-                        match_id = ${matchId},
-                        fileName = '${s3Key}';`;
+                        fileName = '${s3Key}',
+                        updated_date = NOW()`;
 
           //  const values =  [matchId, filePath ] ;
           await db.query(query);
@@ -484,7 +475,7 @@ export async function MatchCommentary() {
               const insertQuery = `
                 INSERT INTO match_commentary (match_id, innings, fileName)
                 VALUES (?, ?, ?) 
-                ON DUPLICATE KEY UPDATE fileName = ?;
+                ON DUPLICATE KEY UPDATE updated_date = NOW(), fileName = ?;
               `;
               await db.query(insertQuery, [
                 match_id,
@@ -566,7 +557,7 @@ export async function MatchCommentaryCompleted() {
               const insertQuery = `
                 INSERT INTO match_commentary (match_id, innings, fileName)
                 VALUES (?, ?, ?) 
-                ON DUPLICATE KEY UPDATE fileName = ?;
+                ON DUPLICATE KEY UPDATE updated_date = NOW(), fileName = ?;
               `;
               await db.query(insertQuery, [
                 match_id,
@@ -638,7 +629,8 @@ export async function MatchStatistics() {
                         VALUES (${matchId}, '${s3Key}') 
                         ON DUPLICATE KEY UPDATE 
                         match_id = ${matchId},
-                        fileName = '${s3Key}';`;
+                        fileName = '${s3Key}',
+                        updated_date = NOW()`;
           // console.log(`Data saved to`, query);
           //  const values =  [matchId, filePath ] ;
           await db.query(query);
@@ -695,7 +687,8 @@ export async function MatchStatisticsCompleted() {
                         VALUES (${matchId}, '${s3Key}') 
                         ON DUPLICATE KEY UPDATE 
                         match_id = ${matchId},
-                        fileName = '${s3Key}';`;
+                        fileName = '${s3Key}',
+                        updated_date = NOW()`;
           // console.log(`Data saved to`, query);
           //  const values =  [matchId, filePath ] ;
           await db.query(query);
@@ -752,7 +745,8 @@ export async function Last10MatchData() {
                         VALUES (${matchId}, '${s3Key}') 
                         ON DUPLICATE KEY UPDATE 
                         match_id = ${matchId},
-                        fileName = '${s3Key}';`;
+                        fileName = '${s3Key}',
+                        updated_date = NOW()`;
           // console.log(`Data saved to`, query);
           //  const values =  [matchId, filePath ] ;
           await db.query(query);
@@ -1105,7 +1099,8 @@ export async function CompetitionInfo() {
                         VALUES (${cid}, '${s3Key}') 
                         ON DUPLICATE KEY UPDATE 
                         cid = ${cid},
-                        fileName = '${s3Key}';`;
+                        fileName = '${s3Key}',
+                        updated_date = NOW()`;
           // console.log(`Data saved to`, query);
           //  const values =  [matchId, filePath ] ;
           await db.query(query);
@@ -1184,7 +1179,8 @@ export async function CompetitionMatches() {
                         VALUES (${cid}, '${s3Key}') 
                         ON DUPLICATE KEY UPDATE 
                         cid = ${cid},
-                        fileName = '${s3Key}';`;
+                        fileName = '${s3Key}',
+                        updated_date = NOW()`;
           // console.log(`Data saved to`, query);
           //  const values =  [matchId, filePath ] ;
           await db.query(query);
