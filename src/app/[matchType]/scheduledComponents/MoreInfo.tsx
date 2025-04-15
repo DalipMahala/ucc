@@ -318,7 +318,7 @@ export default function MoreInfo({
                             <div>
                               <Image  loading="lazy" 
                                 src={matchData?.match_info?.teama?.logo_url}
-                                className="h-[25px]"
+                                className="h-[25px] rounded-full"
                                 width={25}
                                 height={20}
                                 alt={matchData?.match_info?.teama?.name}
@@ -554,7 +554,7 @@ export default function MoreInfo({
                                   width={25}
                                   height={25}
                                   alt={matchData?.match_info?.teamb?.name}
-                                  className="h-[25px]"
+                                  className="h-[25px] w-[25px] rounded-full"
                                 />
                               </div>
                               <h3 className="text-1xl font-medium">
@@ -786,7 +786,7 @@ export default function MoreInfo({
                     <Link href="">
                       <div className="font-bold uppercase flex items-center">
                         <Image  loading="lazy" 
-                          className="h-[30px]"
+                          className="h-[30px] w-[30px] rounded-full"
                           src={matchData?.match_info?.teama?.logo_url}
                           width={30}
                           height={30}
@@ -811,7 +811,7 @@ export default function MoreInfo({
                           {matchData?.match_info?.teamb?.short_name}
                         </p>
                         <Image  loading="lazy" 
-                          className="h-[30px]"
+                          className="h-[30px] w-[30px] rounded-full"
                           src={matchData?.match_info?.teamb?.logo_url}
                           width={30}
                           height={30}
@@ -907,7 +907,7 @@ export default function MoreInfo({
                             <Link href="">
                               <div className="font-bold flex items-center">
                                 <Image  loading="lazy" 
-                                  className="h-[30px]"
+                                  className="h-[30px] w-[30px] rounded-full"
                                   src={matchData?.match_info?.teama?.logo_url}
                                   width={30}
                                   height={30}
@@ -930,7 +930,7 @@ export default function MoreInfo({
                                   </span>
                                 </p>
                                 <Image  loading="lazy" 
-                                  className="h-[30px]"
+                                  className="h-[30px] w-[30px] rounded-full"
                                   src={matchData?.match_info?.teamb?.logo_url}
                                   width={30}
                                   height={30}
@@ -1044,7 +1044,7 @@ export default function MoreInfo({
                               <Link href="">
                                 <div className="font-bold flex items-center">
                                   <Image  loading="lazy" 
-                                    className="h-[30px]"
+                                    className="h-[30px] w-[30px] rounded-full"
                                     src={matchData?.match_info?.teama?.logo_url}
                                     width={30}
                                     height={30}
@@ -1069,7 +1069,7 @@ export default function MoreInfo({
                                     </span>
                                   </p>
                                   <Image  loading="lazy" 
-                                    className="h-[30px]"
+                                    className="h-[30px] w-[30px] rounded-full"
                                     src={matchData?.match_info?.teamb?.logo_url}
                                     width={30}
                                     height={30}
