@@ -215,7 +215,7 @@ export default async function LiveMatches() {
                         <div className="flex items-center space-x-2">
                           <Image
                             // src={items.teama.logo_url}
-                            src={items.teama.logo_url}
+                            src={items.teama.logo_url || '/assets/img/ring.png'}
                             className="h-[30px] rounded-full"
                             width={30}
                             height={30}
@@ -262,7 +262,7 @@ export default async function LiveMatches() {
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={items.teamb.logo_url}
+                              src={items.teamb.logo_url || '/assets/img/ring.png'}
                               className="h-[30px]"
                               width={30}
                               height={30}
@@ -433,7 +433,7 @@ export default async function LiveMatches() {
                         <div className="items-center space-x-2 font-medium md:w-full mb-4">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={items.teama.logo_url}
+                              src={items.teama.logo_url || '/assets/img/ring.png'}
                               className="h-[30px] rounded-full"
                               width={30}
                               height={30}
@@ -486,7 +486,7 @@ export default async function LiveMatches() {
                           <div className="flex items-center space-x-2 font-medium md:w-full">
                             <div className="flex items-center space-x-2">
                               <Image
-                                src={items.teamb.logo_url}
+                                src={items.teamb.logo_url || '/assets/img/ring.png'}
                                 className="h-[30px]"
                                 width={30}
                                 height={30}

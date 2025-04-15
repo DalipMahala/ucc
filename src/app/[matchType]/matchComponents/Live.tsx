@@ -390,7 +390,7 @@ export default function Live({
 
 
       <div className="flex rounded-lg bg-white p-4 md:hidden gap-4  whitespace-nowrap overflow-auto ">
-     
+
         {/* This Over Section */}
         <div className="flex items-center gap-2">
           <span className="font-medium text-[#586577]">
@@ -400,12 +400,12 @@ export default function Live({
             {thisOverRun?.map((thisOver: any, index: number) => (
               <span
                 className={`px-2 py-1 border rounded ${thisOver.score == 6
-                    ? "bg-[#13b76dbd] text-white"
-                    : thisOver.score == 4
-                      ? "bg-orange-500 text-white"
-                      : thisOver.score == "w"
-                        ? "bg-red-500 text-white"
-                        : "text-gray-700"
+                  ? "bg-[#13b76dbd] text-white"
+                  : thisOver.score == 4
+                    ? "bg-orange-500 text-white"
+                    : thisOver.score == "w"
+                      ? "bg-red-500 text-white"
+                      : "text-gray-700"
                   }`}
                 key={index}
               >
@@ -421,8 +421,8 @@ export default function Live({
         </div>
 
 
-   {/* Last Over Section */}
-   <div className="flex items-center gap-2">
+        {/* Last Over Section */}
+        <div className="flex items-center gap-2">
           <span className="font-medium text-[#586577]">
             Last Over:
           </span>
@@ -430,12 +430,12 @@ export default function Live({
             {lastOverRun?.map((lastOver: any, index: number) => (
               <span
                 className={`px-2 py-1 border rounded ${lastOver.score == 6
-                    ? "bg-[#13b76dbd] text-white"
-                    : lastOver.score == 4
-                      ? "bg-orange-500 text-white"
-                      : lastOver.score == "w"
-                        ? "bg-red-500 text-white"
-                        : "text-gray-700"
+                  ? "bg-[#13b76dbd] text-white"
+                  : lastOver.score == 4
+                    ? "bg-orange-500 text-white"
+                    : lastOver.score == "w"
+                      ? "bg-red-500 text-white"
+                      : "text-gray-700"
                   }`}
                 key={index}
               >
@@ -646,7 +646,7 @@ export default function Live({
 
 
                 <div className="col-span-4 my-4 lg:my-0">
-                  <div className="rounded-lg bg-white p-4">
+                  <div className="hidden md:block rounded-lg bg-white p-4">
                     <Link
                       href={
                         "/player/" +
@@ -697,6 +697,56 @@ export default function Live({
                       </div>
                     </Link>
                   </div>
+
+
+                  <div className="md:hidden rounded-lg bg-white py-2 px-4 ">
+                    <Link
+                      href={
+                        "/player/" +
+                        urlStringEncode(
+                          getPlayerNameByPid(
+                            players,
+                            matchinfo?.bowlers?.[0]?.bowler_id
+                          )
+                        ) +
+                        "/" +
+                        matchinfo?.bowlers?.[0]?.bowler_id
+                      }
+                    >
+
+
+                      <div className="flex items-center justify-between gap-3 font-medium mx-auto w-[73%]">
+                        <div className="flex ga-1 items-center  w-[50%]">
+                          <h2 className="md:text-[15px] text-[14px] text-[#586577]">
+                            {getPlayerNameByPid(
+                              players,
+                              matchinfo?.bowlers?.[0]?.bowler_id
+                            )}
+                          </h2>
+                          <Image
+                            src="/assets/img/player/ball.png"
+                            className="h-[13px] bg-white rounded-full p-[2px]"
+                            width={13}
+                            height={13}
+                            alt=""
+                            loading="lazy"
+                          />
+                        </div>
+                        <p className="md:text-[15px] text-[14px] flex items-center justify-end w-[50%]">
+                          {matchinfo?.bowlers?.[0]?.wickets}-
+                          {matchinfo?.bowlers?.[0]?.runs_conceded}{" "}
+                          <span className="md:text-[13px] text-[12px] text-[#586577] pt-[4px] px-1">
+                            ({matchinfo?.bowlers?.[0]?.overs})
+                          </span>
+                        </p>
+
+                      </div>
+                    </Link>
+                  </div>
+
+
+
+
                 </div>
 
 
@@ -715,12 +765,12 @@ export default function Live({
                         {lastOverRun?.map((lastOver: any, index: number) => (
                           <span
                             className={`px-2 py-1 border rounded ${lastOver.score == 6
-                                ? "bg-[#13b76dbd] text-white"
-                                : lastOver.score == 4
-                                  ? "bg-orange-500 text-white"
-                                  : lastOver.score == "w"
-                                    ? "bg-red-500 text-white"
-                                    : "text-gray-700"
+                              ? "bg-[#13b76dbd] text-white"
+                              : lastOver.score == 4
+                                ? "bg-orange-500 text-white"
+                                : lastOver.score == "w"
+                                  ? "bg-red-500 text-white"
+                                  : "text-gray-700"
                               }`}
                             key={index}
                           >
@@ -741,12 +791,12 @@ export default function Live({
                         {thisOverRun?.map((thisOver: any, index: number) => (
                           <span
                             className={`px-2 py-1 border rounded ${thisOver.score == 6
-                                ? "bg-[#13b76dbd] text-white"
-                                : thisOver.score == 4
-                                  ? "bg-orange-500 text-white"
-                                  : thisOver.score == "w"
-                                    ? "bg-red-500 text-white"
-                                    : "text-gray-700"
+                              ? "bg-[#13b76dbd] text-white"
+                              : thisOver.score == 4
+                                ? "bg-orange-500 text-white"
+                                : thisOver.score == "w"
+                                  ? "bg-red-500 text-white"
+                                  : "text-gray-700"
                               }`}
                             key={index}
                           >
@@ -776,8 +826,8 @@ export default function Live({
                       <div className="flex items-center gap-2">
                         <button
                           className={`cust-box-click-button  font-medium ${activeTab === "tab1"
-                              ? "bg-[#081736] text-[#ffffff] "
-                              : "bg-[#ffffff] text-[#6A7586]"
+                            ? "bg-[#081736] text-[#ffffff] "
+                            : "bg-[#ffffff] text-[#6A7586]"
                             } px-5 py-1 rounded-full`}
                           onClick={() => setActiveTab("tab1")}
                         >
@@ -785,8 +835,8 @@ export default function Live({
                         </button>
                         <button
                           className={`cust-box-click-button font-medium ${activeTab === "tab2"
-                              ? "bg-[#081736] text-[#ffffff] "
-                              : "bg-[#ffffff] text-[#6A7586]"
+                            ? "bg-[#081736] text-[#ffffff] "
+                            : "bg-[#ffffff] text-[#6A7586]"
                             }  px-5 py-1 rounded-full`}
                           onClick={() => setActiveTab("tab2")}
                         >
@@ -856,8 +906,8 @@ export default function Live({
                     )}
                     {activeTab === "tab2" && (
                       <div className="cust-box-click-content">
-                        {matchOdds?.oddsEvent !== undefined ? (<div className="flex justify-between items-center border-t-[1px] pt-2">
-                          <div className="text-1xl font-medium">
+                        {matchOdds?.oddsEvent !== undefined ? (<div className="flex justify-between items-center border-t-[1px] py-2">
+                          <div className="text-[14px] font-medium">
                             {matchOdds?.oddsEvent?.team}
                           </div>
                           <div className="flex items-center gap-2">
@@ -893,8 +943,8 @@ export default function Live({
                             </p>
                           </div>
                         </div>) : (
-                          <div className="flex justify-between items-center border-t-[1px] pt-2">
-                            <div className="text-1xl font-medium">
+                          <div className="flex justify-between items-center border-t-[1px] py-2">
+                            <div className="text-[14px] font-medium">
                               {lesserTeam?.team}
                             </div>
                             <div className="flex items-center gap-2">
@@ -931,9 +981,28 @@ export default function Live({
                             </div>
                           </div>
                         )}
+
+                        <div>
+                          <div className="flex justify-between items-center border-t-[1px] pt-2">
+                            <div className="text-[14px] font-medium">NAM-W</div>
+                            <div className="flex items-center gap-2">
+                              <p className="py-1 px-4 bg-orange-500 rounded-md text-white">38</p>
+                              <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">38</p></div>
+                          </div>
+                          {/* <div className="flex justify-between items-center border-t-[1px] pt-2">
+                            <div className="text-[14px] font-medium">NAM-W</div>
+                            <div className="flex items-center gap-2">
+                              <p className="py-1 px-4 bg-orange-500 rounded-md text-white">38</p>
+                              <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">38</p></div>
+                          </div> */}
+                        </div>
+
                       </div>
+
                     )}
                   </div>
+
+
                 </div>
               </div>
             </div>
@@ -945,8 +1014,8 @@ export default function Live({
                     <button
                       key={item}
                       className={`cust-box-click-button px-5 py-1 rounded-full font-medium ${filter === item
-                          ? "bg-[#081736] text-[#ffffff]"
-                          : "bg-[#ffffff] text-[#6A7586]"
+                        ? "bg-[#081736] text-[#ffffff]"
+                        : "bg-[#ffffff] text-[#6A7586]"
                         }`}
                       onClick={() => setFilter(item)}
                     >
@@ -963,7 +1032,7 @@ export default function Live({
                   </div>
                 </div>
               ) : (
-                <div className="cust-box-click-content" key="testMatch">
+                <div className="cust-box-click-content mb-4" key="testMatch">
                   {updatedCommentaries
                     ?.slice(0, visibleCount)
                     ?.map((comment: any, index: number) =>
@@ -1029,7 +1098,7 @@ export default function Live({
                         >
                           <div className="border-t-[1px] border-[#E7F2F4]" />
                           <div
-                            className="md:flex items-start py-3 md:px-3 gap-[21px] bg-white p-4"
+                            className="md:flex items-center py-3 md:px-3 gap-[21px] bg-white p-4"
                             key={comment?.event_id}
                           >
                             <div className="flex items-center gap-[10px] md:py-4 pb-4">
@@ -1038,12 +1107,12 @@ export default function Live({
                               </p>
                               <p
                                 className={`text-[16px] font-semibold px-[11px] py-[2px] rounded-lg ${comment?.run == 6
-                                    ? "bg-[#13b76dbd] text-white"
-                                    : comment?.run == 4
-                                      ? "bg-orange-500 text-white"
-                                      : comment?.score == "w"
-                                        ? "bg-red-500 text-white"
-                                        : " text-white bg-[#bec2d3]"
+                                  ? "bg-[#13b76dbd] text-white"
+                                  : comment?.run == 4
+                                    ? "bg-orange-500 text-white"
+                                    : comment?.score == "w"
+                                      ? "bg-red-500 text-white"
+                                      : " text-white bg-[#bec2d3]"
                                   }`}
                               >
                                 {comment?.score}
@@ -1084,9 +1153,9 @@ export default function Live({
                                     <PlayerImage
                                       key={comment?.wicket_batsman_id}
                                       player_id={comment?.wicket_batsman_id}
-                                      height={65}
-                                      width={65}
-                                      className="rounded-lg md:mr-4 mr-2 h-[65px] w-[65px] md:w-[auto] md:h-[auto]"
+                                      height={40}
+                                      width={40}
+                                      className="rounded-lg md:mr-4 mr-2 "
                                     />
 
                                     <div>

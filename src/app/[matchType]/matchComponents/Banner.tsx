@@ -612,6 +612,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                             alt="teams"
                             loading="lazy"
                           />
+
                           <div className="flex flex-col items-start gap-0">
                             <p className="text-[14px] font-semibold uppercase">
                               {[liveMatch?.match_info?.teama, liveMatch?.match_info?.teamb].find(team => team?.team_id === liveMatch?.live?.live_inning?.batting_team_id)?.short_name || null}
@@ -631,7 +632,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
                       <div className="border-r-[1px] border-[#e5e5e5] h-[60px]"></div>
 
-                      <div className="w-full h-[60px] text-center flex items-center justify-center">
+                      <div className="w-full h-[60px] mx-2 text-center flex items-center justify-center">
                         <motion.div
                           key={ballEvent}
                           initial={{ scale: 0, opacity: 0, rotate: -15 }}

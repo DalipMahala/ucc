@@ -238,7 +238,7 @@ export default function Scorecard({
                               </p>
                             </Link>
                           </td>
-                          <td className="md:px-4 py-2 hidden md:block text-[13px] text-[#586577]">
+                          <td className="md:px-4 py-2 hidden md:block text-[13px] text-[#586577] capitalize">
                           {batsman.how_out}
                           </td>
                           <td className="md:px-4 py-2 font-semibold text-[#000000]">
