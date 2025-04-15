@@ -189,11 +189,11 @@ export default function Squads({
                                                 <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(squads?.name)+"/"+squads?.player_id}  key={index}>
                                                     <div className="text-center p-4">
                                                         <div className="relative">
-                                                        <PlayerImage key={squads?.player_id} player_id={squads?.player_id} width={50} height={50} className="w-[41px] h-[47px] mx-auto rounded-full mb-2" />
+                                                        <PlayerImage key={squads?.player_id} player_id={squads?.player_id} width={47} height={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
                                                        
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/bat.png"
-                                                                className="h-[23px] absolute right-[17px] bottom-0 bg-white rounded-full p-[4px]"
+                                                                className="h-[23px] absolute md:right-[17px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
                                                                 width={20} height={20} alt=""
                                                             />
                                                         </div>
@@ -217,11 +217,11 @@ export default function Squads({
                                                 <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(bowler?.name)+"/"+bowler?.player_id}  key={index}>
                                                     <div className="text-center p-4">
                                                         <div className="relative">
-                                                        <PlayerImage key={bowler?.player_id} player_id={bowler?.player_id} width={41} height={47} className="w-[41px] h-[47px] mx-auto rounded-full mb-2" />
+                                                        <PlayerImage key={bowler?.player_id} player_id={bowler?.player_id} width={47} height={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
                                                        
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/ball.png"
-                                                                className="h-[19px] w-[19px] absolute right-[19px] bottom-0 bg-white rounded-full p-[4px]"
+                                                                className="h-[19px] w-[19px] absolute md:right-[19px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
                                                                 width={19} height={19} alt=""
                                                             />
                                                         </div>
@@ -245,10 +245,10 @@ export default function Squads({
                                                 <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(allrounder?.name)+"/"+allrounder?.player_id}  key={index}>
                                                     <div className="text-center p-4">
                                                         <div className="relative">
-                                                        <PlayerImage key={allrounder?.player_id} player_id={allrounder?.player_id} width={41} height={47} className="w-[41px] h-[47px] mx-auto rounded-full mb-2" />
+                                                        <PlayerImage key={allrounder?.player_id} player_id={allrounder?.player_id} width={47} height={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/bat-ball.png"
-                                                                className="h-[23px] w-[23px] absolute right-[15px] bottom-0 bg-white rounded-full p-[4px]"
+                                                                className="h-[23px] md:w-[23px] w-[23px] absolute md:right-[15px] right-[32px] bottom-0 bg-white rounded-full p-[4px]"
                                                                 width={23} height={23} alt=""
                                                             />
                                                         </div>
@@ -295,10 +295,10 @@ export default function Squads({
                                                 <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(squads?.name)+"/"+squads?.player_id}  key={index}>
                                                     <div className="text-center p-4">
                                                         <div className="relative">
-                                                        <PlayerImage key={squads?.player_id} player_id={squads?.player_id} width={41} height={47} className="w-[41px] h-[47px] mx-auto rounded-full mb-2" />
+                                                        <PlayerImage key={squads?.player_id} player_id={squads?.player_id} width={47} height={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/bat.png"
-                                                                className="h-[23px] absolute right-[17px] bottom-0 bg-white rounded-full p-[4px]"
+                                                                className="h-[23px] absolute md:right-[17px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
                                                                 width={20} height={20} alt=""
                                                             />
                                                         </div>
@@ -322,10 +322,10 @@ export default function Squads({
                                                 <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(bowler?.name)+"/"+bowler?.player_id}  key={index}>
                                                     <div className="text-center p-4">
                                                         <div className="relative">
-                                                        <PlayerImage key={bowler?.player_id} player_id={bowler?.player_id} width={41} height={47} className="w-[41] h-[47] mx-auto rounded-full mb-2" />
+                                                        <PlayerImage key={bowler?.player_id} player_id={bowler?.player_id} width={47} height={47} className="w-[47] h-[47] mx-auto rounded-full mb-2" />
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/ball.png"
-                                                                className="h-[19px] w-[19px] absolute right-[19px] bottom-0 bg-white rounded-full p-[4px]"
+                                                                className="h-[19px] w-[19px] absolute md:right-[19px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
                                                                 width={19} height={19} alt=""
                                                             />
                                                         </div>
@@ -349,10 +349,10 @@ export default function Squads({
                                                 <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(allrounder.name)+"/"+allrounder.player_id}  key={index}>
                                                     <div className="text-center p-4 rounded-md ">
                                                         <div className="relative">
-                                                        <PlayerImage key={allrounder?.player_id} player_id={allrounder?.player_id} width={41} height={47} className="w-[41] h-[47] mx-auto rounded-full mb-2" />
+                                                        <PlayerImage key={allrounder?.player_id} player_id={allrounder?.player_id} width={47} height={47} className="w-[47] h-[47] mx-auto rounded-full mb-2" />
                                                             <Image  loading="lazy" 
                                                                 src="/assets/img/player/bat-ball.png"
-                                                                className="h-[23px] w-[23px] absolute right-[15px] bottom-0 bg-white rounded-full p-[4px]"
+                                                                className="h-[23px] md:w-[23px] w-[23px] absolute md:right-[15px] right-[32px] bottom-0 bg-white rounded-full p-[4px]"
                                                                 width={23} height={23} alt=""
                                                             />
                                                         </div>

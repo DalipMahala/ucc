@@ -672,12 +672,19 @@ export default function Banner({ matchData, match_id }: Banner) {
                         <p className="flex gap-1 items-center">
                           <span> CRR :{" "} </span> <span>{liveMatch?.live?.live_score?.runrate}</span>
                         </p>
+
+                        
+
                         {!!liveMatch?.live?.live_score?.required_runrate &&
                           <p className="flex gap-1 items-center">
                             <span>RRR : </span><span>{liveMatch?.live?.live_score?.required_runrate}</span>
                           </p>
                         }
                       </div>
+                      <p>
+                          Toss: <span>PBKS</span>
+                        </p>
+                        
                       {!!liveMatch?.live?.live_score?.target &&
                         <p>
                           Target: <span>{liveMatch?.live?.live_score?.target}</span>
