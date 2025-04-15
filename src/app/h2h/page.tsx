@@ -40,7 +40,7 @@ export default async function Page(props: { params: Params }) {
   const teama_id = await getTeamId(teamA);
   const teamb_id = await getTeamId(teamB);
   const cid = await isIPLTeamDetails(teama_id,2025);
-  if(cid !== null){
+  if(cid !== null && matchType === 't20'){
     tblName = 'h2h_ipl'
     }else{
       tblName = matchType === 'odi' ? 'h2h_odi' : matchType === 'test' ? 'h2h_test' : 'h2h_t20'; 

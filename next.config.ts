@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  compress: true, // Enable compression
-
+  compress: true,
+  experimental: {
+    optimizeCss: true,
+    scrollRestoration: true,
+    // Remove unsupported options
+  },
   images: {
     domains: [
       "images.entitysport.com",
@@ -10,14 +14,29 @@ const nextConfig = {
       "fantasykhiladi.com",
       "flagcdn.com",
     ],
+    minimumCacheTTL: 60,
   },
-
-  webpack: (config: { optimization: { splitChunks: { chunks: string; minSize: number; maxSize: number; }; }; }, { isServer }: any) => {
+  webpack: (config: { optimization: any; }, { isServer }: any) => {
     if (!isServer) {
-      config.optimization.splitChunks = {
-        chunks: "all",
-        minSize: 20000,
-        maxSize: 200000,
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          minSize: 20000,
+          maxSize: 200000,
+          cacheGroups: {
+            defaultVendors: {
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10,
+              reuseExistingChunk: true,
+            },
+            default: {
+              minChunks: 2,
+              priority: -20,
+              reuseExistingChunk: true,
+            },
+          },
+        },
       };
     }
     return config;
