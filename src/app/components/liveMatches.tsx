@@ -135,7 +135,7 @@ export default async function LiveMatches() {
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <span className={"text-[11px] font-medium oddsTeam" + items.match_id}>
+                  <span className={"text-[11px] text-[#1F2937] font-semibold oddsTeam" + items.match_id}>
                     {items?.[parseFloat(items?.live_odds?.matchodds?.teama?.back) < parseFloat(items?.live_odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
                   </span>
                   <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
@@ -334,7 +334,7 @@ export default async function LiveMatches() {
                   {items?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(items?.competition?.title + "-" + items?.competition?.season) + "/" + items.competition?.cid + "/points-table"}>
-                        <p className=" text-[#586577] font-medium">
+                        <p className=" text-[#909090] font-semibold">
                           {" "}
                           Points Table
                         </p>
@@ -343,7 +343,7 @@ export default async function LiveMatches() {
                     </>
                   }
                   <Link href={"/series/" + urlStringEncode(items?.competition?.title + "-" + items?.competition?.season) + "/" + items?.competition?.cid + "/schedule-results/schedule"}>
-                    <p className="text-[#586577] font-medium">
+                    <p className="text-[#909090] font-semibold">
                       Schedule
                     </p>
                   </Link>
@@ -359,7 +359,7 @@ export default async function LiveMatches() {
                         alt=""
                         loading="lazy"
                       />
-                      <span className="text-[#586577] font-medium">
+                      <span className="text-[#586577] font-semibold">
                         H2H
                       </span>
                     </div>
@@ -555,18 +555,18 @@ export default async function LiveMatches() {
                     {items?.competition?.total_teams > 2 &&
                       <>
                         <Link href={"/series/" + urlStringEncode(items?.competition?.title + "-" + items?.competition?.season) + "/" + items.competition?.cid + "/points-table"}>
-                          <p className=" text-[#586577] text-[13px] font-medium">
+                          <p className=" text-[#909090] text-[13px] font-medium">
                             {" "}
                             Points Table
                           </p>
                         </Link>
 
-                        <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                        <div className="hidden md:block h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                       </>
                     }
                     {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
                       <Link href={("/h2h/" + urlStringEncode(items?.teama?.name + "-vs-" + items?.teamb?.name) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
-                        <div className="flex justify-end items-center space-x-2">
+                        <div className="pl-5 border-l-[1px] flex justify-end items-center space-x-2">
                           <Image
                             src="/assets/img/home/handshake.png"
                             className="h-[15px]"

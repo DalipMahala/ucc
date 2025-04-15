@@ -51,6 +51,7 @@ interface MatchItem {
     date_start_ist: string;
     match_info: any;
     winning_team_id: string;
+    result_type: number;
   
 }
 
@@ -176,6 +177,9 @@ export default async function CompletedMatches() {
 
                               <Link className="w-[38%]" href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-match-" + cmatch?.match_number + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
                                 <div className=" font-semibold flex flex-col items-center">
+                                  {(cmatch?.result_type === 1 || cmatch?.result_type === 2) &&  
+
+                                 
                                   <Image
                                     src="/assets/img/home/win.png"
                                     width={30}
@@ -184,6 +188,7 @@ export default async function CompletedMatches() {
                                     alt=""
                                     loading="lazy"
                                   />
+                                }
                                   <p className="text-[#00a632] text-[14px] w-[75%] text-center">
                                     {cmatch.result}
                                   </p>
@@ -219,15 +224,15 @@ export default async function CompletedMatches() {
                               {cmatch?.competition?.total_teams > 2 &&
                                 <>
                                   <Link href={"/series/" + urlStringEncode(cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.competition?.cid + "/points-table"}>
-                                    <p className=" text-[#586577] font-medium">
+                                    <p className=" text-[#909090] font-semibold">
                                       {" "}
                                       Points Table
                                     </p>
                                   </Link>
-                                  <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                                  <div className=" h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                                 </>}
                               <Link href={"/series/" + urlStringEncode(cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch?.competition?.cid + "/schedule-results/schedule"}>
-                                <p className="text-[#586577] font-medium">
+                                <p className="text-[#909090] font-semibold">
                                   Schedule
                                 </p>
                               </Link>
@@ -243,7 +248,7 @@ export default async function CompletedMatches() {
                                   alt=""
                                   loading="lazy"
                                 />
-                                <span className="text-[#586577] font-medium">
+                                <span className="text-[#586577] font-semibold">
                                   H2H
                                 </span>
                               </div>
@@ -294,7 +299,7 @@ export default async function CompletedMatches() {
                                   {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
                                 </p>
                                 <div className="flex justify-between items-center text-[14px]">
-                                  <div className="w-[98%]">
+                                  <div className="w-[100%]">
                                     <div className="items-center space-x-2 font-medium md:w-full mb-4">
                                       <div className="flex items-center space-x-2">
                                         <Image
@@ -381,17 +386,17 @@ export default async function CompletedMatches() {
                                 {cmatch?.competition?.total_teams > 2 &&
                                   <>
                                     <Link href={"/series/" + urlStringEncode(cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.competition?.cid + "/points-table"}>
-                                      <p className=" text-[#586577] text-[13px] font-medium">
+                                      <p className=" text-[#909090] text-[13px] font-medium">
                                         {" "}
                                         Points Table
                                       </p>
                                     </Link>
 
-                                    <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                                    <div className="hidden md:block h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                                   </>}
                                   {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
                                 <Link href={("/h2h/"+urlStringEncode(cmatch?.teama?.name+"-vs-"+cmatch?.teamb?.name)+"-head-to-head-in-"+cmatch?.format_str).toLowerCase()}>
-                                  <div className="flex justify-end items-center space-x-2">
+                                  <div className="pl-5 border-l-[1px] flex justify-end items-center space-x-2">
                                     <Image
                                       src="/assets/img/home/handshake.png"
                                       className="h-[15px]"

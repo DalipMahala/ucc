@@ -473,7 +473,7 @@ export default function MoreInfo({
                                           <div className="flex items-center space-x-1">
                                             <Image loading="lazy"
                                               src={items.teama.logo_url}
-                                              className="h-[18px] rounded-full"
+                                              className=" rounded-full"
                                               width={25}
                                               height={25}
                                               alt={items.teama.short_name}
@@ -491,7 +491,7 @@ export default function MoreInfo({
                                           <div className="flex items-center space-x-1">
                                             <Image loading="lazy"
                                               src={items.teamb.logo_url}
-                                              className="h-[18px]"
+                                              className=""
                                               width={25}
                                               height={25}
                                               alt={items.teamb.short_name}
@@ -709,7 +709,7 @@ export default function MoreInfo({
                                           <div className="flex items-center space-x-1">
                                             <Image loading="lazy"
                                               src={items.teama.logo_url}
-                                              className="h-[18px] rounded-full"
+                                              className=" rounded-full"
                                               width={25}
                                               height={25}
                                               alt={items.teama.short_name}
@@ -727,7 +727,7 @@ export default function MoreInfo({
                                           <div className="flex items-center space-x-1">
                                             <Image loading="lazy"
                                               src={items.teamb.logo_url}
-                                              className="h-[18px]"
+                                              className=""
                                               width={25}
                                               height={25}
                                               alt={items.teamb.short_name}
@@ -777,7 +777,7 @@ export default function MoreInfo({
                 <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                   <div key="mypage">
                     <h3 className="text-1xl font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
-                      Head To Head (Last 10 matches)
+                      Head To Head (Last matches)
                     </h3>
                     <div className="border-t-[1px] border-[#E4E9F0]" />
                     <div className="py-4 text-1xl flex justify-between items-center">
@@ -1319,7 +1319,7 @@ export default function MoreInfo({
                             "%)",
                         }}
                       >
-                        <div className="flex flex-col items-center w-[65px] h-[64px] p-4 rounded-full bg-white">
+                        <div className="flex flex-col items-center w-[65px] h-[64px] p-4 justify-center rounded-full bg-white">
                           {/* <p className="font-bold leading-[21px] text-[18px]">8</p> */}
                           <p className="text-[10px]">Matches</p>
                         </div>
@@ -1425,7 +1425,7 @@ export default function MoreInfo({
                               "%)",
                           }}
                         >
-                          <div className="flex flex-col items-center w-[65px] h-[64px] p-4 rounded-full bg-white">
+                          <div className="flex flex-col justify-center items-center w-[65px] h-[64px] p-4 rounded-full bg-white">
                             {/* <p className="font-bold text-[18px]">7</p> */}
                             <p className="text-[10px]">Matches</p>
                           </div>
@@ -1562,10 +1562,10 @@ export default function MoreInfo({
                   </h3>
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <div className="py-2 flex justify-between items-center">
-                    <div className="">
-                      <p className="mx-2 font-medium">On-field Umpire :</p>
+                    <div className="w-[20%]">
+                      <p className="mx-2 font-semibold">On-field Umpire :</p>
                     </div>
-                    <div className="">
+                    <div className="w-[80%]">
                       <p className="mx-2 text-[#586577] font-medium ">
                         {matchData?.match_info?.umpires}
                       </p>
@@ -1585,7 +1585,7 @@ export default function MoreInfo({
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <div className="py-2 pb-0 flex justify-between items-center">
                     <div className="">
-                      <p className="mx-2 font-medium">Referee :</p>
+                      <p className="mx-2 font-semibold">Referee :</p>
                     </div>
                     <div className="">
                       <p className="mx-2 text-[#586577] font-medium ">
@@ -1695,7 +1695,7 @@ export default function MoreInfo({
                                     ?.back) * 100 - 100)
                                   : 0}
                               </p>
-                              <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
+                              <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">
                                 {matchData?.live_odds?.matchodds?.teama
                                   ?.lay !== null &&
                                   matchData?.live_odds?.matchodds?.teama
@@ -1769,7 +1769,7 @@ export default function MoreInfo({
                             key={player.player_id}
                           >
                             <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
-                              <div style={{ width: '35px', height: '35px' }}>
+                              <div>
                                 <PlayerImage key={player?.player_id} player_id={player?.player_id} height={35} width={35} className="rounded-lg" />
 
                               </div>
@@ -1792,7 +1792,7 @@ export default function MoreInfo({
                     </div>
 
                     <div
-                      className={`cust-box-click-content cust-box-click-playing12 mt-4 ${playing11Tab === "cust-box-click-playing12"
+                      className={`cust-box-click-content cust-box-click-playing12 ${playing11Tab === "cust-box-click-playing12"
                           ? ""
                           : "hidden"
                         }`}

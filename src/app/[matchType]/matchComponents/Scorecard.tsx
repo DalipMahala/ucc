@@ -167,7 +167,11 @@ export default function Scorecard({
                   Batting
                 </h3>
                 <div>
-                  <div className="overflow-x-auto">
+                  <div className=" overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
+                              [&::-webkit-scrollbar-track]:bg-gray-100 
+                              [&::-webkit-scrollbar-thumb]:bg-[#DFE9F6] 
+                               dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
+                                 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
                     <table className="w-full text-sm text-left text-gray-600 whitespace-nowrap">
                       <thead className="bg-gray-100">
                         <tr>

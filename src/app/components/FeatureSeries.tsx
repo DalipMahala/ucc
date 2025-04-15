@@ -150,7 +150,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <span className="text-[11px] font-medium">{matches[feature.cid]?.teama?.short_name}</span>
+                        <span className="text-[11px] text-[#1F2937] font-semibold">{matches[feature.cid]?.teama?.short_name}</span>
                         <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-full text-[#0B773C] pr-2">
                           <span className="">
                             <svg
@@ -196,7 +196,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                     <Link href="/scheduled/infoUpcoming-match">
                       <div className="py-4 px-3">
                         <div className="flex justify-between items-center text-[14px]">
-                          <div className="">
+                          <div className="w-[50%]">
                             <p className="text-[#586577] text-[13px] mb-4 font-medium">
                               {matches[feature.cid]?.subtitle}, {matches[feature.cid]?.venue?.location}, {matches[feature.cid]?.venue?.country}
                             </p>
@@ -235,7 +235,9 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                             </div>
                           </div>
 
-                          <div className=" font-medium text-center">
+                          <div className="h-[100px] border-l-[1px] border-[#efefef]"></div>
+
+                          <div className="w-[50%] font-medium text-center">
                           {isSameDay(new Date(), new Date(matches[feature.cid]?.date_start_ist)) ? (
                                        <>
                                        <span className="text-[13px] font-normal text-[#a45b09]">Start in</span> 
@@ -267,7 +269,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                             "/points-table"
                           }
                         >
-                          <p className="  text-[#586577] font-medium">
+                          <p className="   text-[#909090] font-semibold">
                             {" "}
                             Points Table
                           </p>
@@ -284,7 +286,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                             "/schedule-results/schedule"
                           }
                         >
-                          <p className=" text-[#586577] font-medium">Schedule</p>
+                          <p className="  text-[#909090] font-semibold">Schedule</p>
                         </Link>
                       </div>
                       {matches[feature.cid]?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(matches[feature.cid]?.format_str) &&
@@ -396,6 +398,7 @@ export default function FeatureSeries({ featuredSeries }: Series) {
                           <div className="">
                             <div className=" font-medium text-center">
                               <p className="text-[#2F335C] font-medium mt-1 text-[13px]">
+                                
                                 {format(new Date(matches[feature.cid]?.date_start), "dd MMMM - EEEE")}
                                 <br />
                                 {format(new Date(matches[feature.cid]?.date_start), "hh:mm:aa")}

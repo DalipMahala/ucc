@@ -29,7 +29,7 @@ export default function Live({
   matchCommentary,
   isPointTable
 }: // matchLast,
-Live) {
+  Live) {
   useWakeLock();
   const [activeTab, setActiveTab] = useState("tab2");
 
@@ -51,7 +51,7 @@ Live) {
     }
   };
 
-  
+
   eventEmitter.on("matchLiveData", handleMatchData);
   // let matchInningbatsmen = matchCommentary?.commentaries[6]?.bowlers?.bowls?.overs;
 
@@ -59,10 +59,10 @@ Live) {
   const [matchOdds, setMatchOdds] = useState<any>(null);
   const handleOddData = (data: any) => {
     if (data?.matchId == match_id) {
-      setMatchOdds(data); 
+      setMatchOdds(data);
     }
   };
-  eventEmitter.on("oddsEvent",handleOddData);
+  eventEmitter.on("oddsEvent", handleOddData);
 
   // console.log("LiveOdds", matchOdds?.oddsEvent);
   let teamwinpercentage = matchLiveData?.teamwinpercentage;
@@ -163,9 +163,9 @@ Live) {
         }) =>
           item?.event_id
             ? existingItem?.event_id === item?.event_id &&
-              existingItem?.event === item?.event // Compare event_id for regular events
+            existingItem?.event === item?.event // Compare event_id for regular events
             : existingItem?.event === "overend" &&
-              existingItem?.over === item?.over // Compare "overend" events by over number
+            existingItem?.over === item?.over // Compare "overend" events by over number
       )
   );
   // Merge new unique data into firstArray
@@ -381,12 +381,78 @@ Live) {
 
   const a = parseFloat(matchLiveData?.live_odds?.matchodds?.teama?.back);
   const b = parseFloat(matchLiveData?.live_odds?.matchodds?.teamb?.back);
-  const lesserTeam = a < b 
-    ? { team: matchLiveData?.match_info?.teama?.short_name, ...matchLiveData?.live_odds?.matchodds?.teama } 
+  const lesserTeam = a < b
+    ? { team: matchLiveData?.match_info?.teama?.short_name, ...matchLiveData?.live_odds?.matchodds?.teama }
     : { team: matchLiveData?.match_info?.teamb?.short_name, ...matchLiveData?.live_odds?.matchodds?.teamb };
 
   return (
     <section className="lg:w-[1075px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
+
+
+      <div className="flex rounded-lg bg-white p-4 md:hidden gap-4  whitespace-nowrap overflow-auto ">
+     
+        {/* This Over Section */}
+        <div className="flex items-center gap-2">
+          <span className="font-medium text-[#586577]">
+            This Over:
+          </span>
+          <div className="flex gap-1">
+            {thisOverRun?.map((thisOver: any, index: number) => (
+              <span
+                className={`px-2 py-1 border rounded ${thisOver.score == 6
+                    ? "bg-[#13b76dbd] text-white"
+                    : thisOver.score == 4
+                      ? "bg-orange-500 text-white"
+                      : thisOver.score == "w"
+                        ? "bg-red-500 text-white"
+                        : "text-gray-700"
+                  }`}
+                key={index}
+              >
+                {thisOver.score}
+              </span>
+            ))}
+
+            {emptySpans}
+          </div>
+          <span className="font-medium text-1xl text-[#6A7586]">
+            = {thisOvertotalRuns}
+          </span>
+        </div>
+
+
+   {/* Last Over Section */}
+   <div className="flex items-center gap-2">
+          <span className="font-medium text-[#586577]">
+            Last Over:
+          </span>
+          <div className="flex gap-1">
+            {lastOverRun?.map((lastOver: any, index: number) => (
+              <span
+                className={`px-2 py-1 border rounded ${lastOver.score == 6
+                    ? "bg-[#13b76dbd] text-white"
+                    : lastOver.score == 4
+                      ? "bg-orange-500 text-white"
+                      : lastOver.score == "w"
+                        ? "bg-red-500 text-white"
+                        : "text-gray-700"
+                  }`}
+                key={index}
+              >
+                {lastOver.score}
+              </span>
+            ))}
+          </div>
+          <span className="font-medium text-1xl text-[#6A7586]">
+            = {lastOvertotalRuns}
+          </span>
+        </div>
+
+
+      </div>
+
+
+
       <div id="tabs" className="my-4">
         <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
           <Link href={"/moreinfo/" + matchUrl + "/" + match_id}>
@@ -410,31 +476,31 @@ Live) {
             </button>
           </Link>
           {isPointTable && (
-          <Link
-            href={
-              "/series/" +
-              urlStringEncode(
-                matchDetails?.competition?.title +
+            <Link
+              href={
+                "/series/" +
+                urlStringEncode(
+                  matchDetails?.competition?.title +
                   "-" +
                   matchDetails?.competition?.season
-              ) +
-              "/" +
-              matchDetails?.competition?.cid +
-              "/points-table"
-            }
-          >
-            <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase">
-              Points Table
-            </button>
-          </Link>
+                ) +
+                "/" +
+                matchDetails?.competition?.cid +
+                "/points-table"
+              }
+            >
+              <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase">
+                Points Table
+              </button>
+            </Link>
           )}
           <Link
             href={
               "/series/" +
               urlStringEncode(
                 matchDetails?.competition?.title +
-                  "-" +
-                  matchDetails?.competition?.season
+                "-" +
+                matchDetails?.competition?.season
               ) +
               "/" +
               matchDetails?.competition?.cid +
@@ -473,7 +539,7 @@ Live) {
                           <div className="flex items-center gap-3">
                             <div>
                               <PlayerImage
-                              key={batsman?.[0]?.batsman_id}
+                                key={batsman?.[0]?.batsman_id}
                                 player_id={batsman?.[0]?.batsman_id}
                                 height={40}
                                 width={40}
@@ -493,7 +559,7 @@ Live) {
                                   ({batsman?.[0]?.balls_faced})
                                 </span>
                                 {batsman?.[0]?.batsman_id ==
-                                currPartnership?.batsmen?.[0]?.batsman_id ? (
+                                  currPartnership?.batsmen?.[0]?.batsman_id ? (
                                   <Image
                                     src="/assets/img/home/bat.png"
                                     className="h-[14px]"
@@ -509,10 +575,11 @@ Live) {
                             </div>
                           </div>
                         </Link>
-                        <div className="font-medium text-center w-[14%] ">
-                          <p className="md:text-[18px] text-[15px] text-[#13b76dbd]">
+                        <div className="font-medium text-center w-[16%] ">
+                          <p className="md:text-[18px] font-semibold text-[17px] text-[#13b76dbd]">
                             {currPartnership?.runs}{" "}
-                            <span className="md:text-[15px] text-[13px] text-black">
+
+                            <span className="md:text-[15px] font-normal text-[11px] pl-[2px] text-black">
                               ({currPartnership?.balls})
                             </span>
                           </p>
@@ -536,7 +603,7 @@ Live) {
                           <div className="flex items-center justify-end flex-row-reverse gap-3">
                             <div>
                               <PlayerImage
-                              key={batsman?.[1]?.batsman_id}
+                                key={batsman?.[1]?.batsman_id}
                                 player_id={batsman?.[1]?.batsman_id}
                                 height={40}
                                 width={40}
@@ -556,7 +623,7 @@ Live) {
                                   ({batsman?.[1]?.balls_faced})
                                 </span>
                                 {batsman?.[0]?.batsman_id ==
-                                currPartnership?.batsman?.[1]?.batsman_id ? (
+                                  currPartnership?.batsman?.[1]?.batsman_id ? (
                                   <Image
                                     src="/assets/img/home/bat.png"
                                     className="h-[14px]"
@@ -596,7 +663,7 @@ Live) {
                       <div className="flex items-center gap-3">
                         <div className="relative">
                           <PlayerImage
-                          key={matchinfo?.bowlers?.[0]?.bowler_id}
+                            key={matchinfo?.bowlers?.[0]?.bowler_id}
                             player_id={matchinfo?.bowlers?.[0]?.bowler_id}
                             height={40}
                             width={40}
@@ -634,7 +701,7 @@ Live) {
 
 
                 <div className="col-span-12 mb-4 md:mb-0">
-                  <div className="rounded-lg bg-white p-4 flex lg:flex-row flex-col-reverse  items-center md:gap-8 gap-4  whitespace-nowrap overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
+                  <div className="hidden rounded-lg bg-white p-4 md:flex lg:flex-row flex-col-reverse  items-center md:gap-8 gap-4  whitespace-nowrap overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
                               [&::-webkit-scrollbar-track]:bg-gray-100 
                               [&::-webkit-scrollbar-thumb]:bg-[#DFE9F6] 
                                dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
@@ -647,15 +714,14 @@ Live) {
                       <div className="flex gap-1">
                         {lastOverRun?.map((lastOver: any, index: number) => (
                           <span
-                            className={`px-2 py-1 border rounded ${
-                              lastOver.score == 6
+                            className={`px-2 py-1 border rounded ${lastOver.score == 6
                                 ? "bg-[#13b76dbd] text-white"
                                 : lastOver.score == 4
-                                ? "bg-orange-500 text-white"
-                                : lastOver.score == "w"
-                                ? "bg-red-500 text-white"
-                                : "text-gray-700"
-                            }`}
+                                  ? "bg-orange-500 text-white"
+                                  : lastOver.score == "w"
+                                    ? "bg-red-500 text-white"
+                                    : "text-gray-700"
+                              }`}
                             key={index}
                           >
                             {lastOver.score}
@@ -674,15 +740,14 @@ Live) {
                       <div className="flex gap-1">
                         {thisOverRun?.map((thisOver: any, index: number) => (
                           <span
-                            className={`px-2 py-1 border rounded ${
-                              thisOver.score == 6
+                            className={`px-2 py-1 border rounded ${thisOver.score == 6
                                 ? "bg-[#13b76dbd] text-white"
                                 : thisOver.score == 4
-                                ? "bg-orange-500 text-white"
-                                : thisOver.score == "w"
-                                ? "bg-red-500 text-white"
-                                : "text-gray-700"
-                            }`}
+                                  ? "bg-orange-500 text-white"
+                                  : thisOver.score == "w"
+                                    ? "bg-red-500 text-white"
+                                    : "text-gray-700"
+                              }`}
                             key={index}
                           >
                             {thisOver.score}
@@ -710,21 +775,19 @@ Live) {
                       </div>
                       <div className="flex items-center gap-2">
                         <button
-                          className={`cust-box-click-button  font-medium ${
-                            activeTab === "tab1"
+                          className={`cust-box-click-button  font-medium ${activeTab === "tab1"
                               ? "bg-[#081736] text-[#ffffff] "
                               : "bg-[#ffffff] text-[#6A7586]"
-                          } px-5 py-1 rounded-full`}
+                            } px-5 py-1 rounded-full`}
                           onClick={() => setActiveTab("tab1")}
                         >
                           <span>% View</span>
                         </button>
                         <button
-                          className={`cust-box-click-button font-medium ${
-                            activeTab === "tab2"
+                          className={`cust-box-click-button font-medium ${activeTab === "tab2"
                               ? "bg-[#081736] text-[#ffffff] "
                               : "bg-[#ffffff] text-[#6A7586]"
-                          }  px-5 py-1 rounded-full`}
+                            }  px-5 py-1 rounded-full`}
                           onClick={() => setActiveTab("tab2")}
                         >
                           <span>Odds View</span>
@@ -765,10 +828,9 @@ Live) {
                               className="absolute h-full bg-[#B7132B]"
                               style={{
                                 width: `${teamwinpercentage?.team_b_win}%`,
-                                left: `${
-                                  teamwinpercentage?.draw +
+                                left: `${teamwinpercentage?.draw +
                                   teamwinpercentage?.team_a_win
-                                }%`,
+                                  }%`,
                               }}
                             ></div>
                           </div>
@@ -803,71 +865,71 @@ Live) {
                               {matchOdds?.oddsEvent
                                 ?.back !== null &&
                                 matchOdds?.oddsEvent
-                                ?.back !== undefined &&
+                                  ?.back !== undefined &&
                                 matchOdds?.oddsEvent
-                                ?.back !== ""
+                                  ?.back !== ""
                                 ? Math.round(
                                   matchOdds?.oddsEvent
-                                      ?.back *
-                                      100 -
-                                      100
-                                  )
+                                    ?.back *
+                                  100 -
+                                  100
+                                )
                                 : 0}
                             </p>
                             <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">
                               {matchOdds?.oddsEvent
                                 ?.lay !== null &&
                                 matchOdds?.oddsEvent
-                                ?.lay !== undefined &&
+                                  ?.lay !== undefined &&
                                 matchOdds?.oddsEvent
-                                ?.lay !== ""
+                                  ?.lay !== ""
                                 ? Math.round(
                                   matchOdds?.oddsEvent
-                                      ?.lay *
-                                      100 -
-                                      100
-                                  )
+                                    ?.lay *
+                                  100 -
+                                  100
+                                )
                                 : 0}
                             </p>
                           </div>
-                        </div>):(
-                        <div className="flex justify-between items-center border-t-[1px] pt-2">
-                          <div className="text-1xl font-medium">
-                            {lesserTeam?.team}
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
-                              {lesserTeam
-                                ?.back !== null &&
-                                lesserTeam
-                                ?.back !== undefined &&
-                                lesserTeam
-                                ?.back !== ""
-                                ? Math.round(
+                        </div>) : (
+                          <div className="flex justify-between items-center border-t-[1px] pt-2">
+                            <div className="text-1xl font-medium">
+                              {lesserTeam?.team}
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
+                                {lesserTeam
+                                  ?.back !== null &&
                                   lesserTeam
+                                    ?.back !== undefined &&
+                                  lesserTeam
+                                    ?.back !== ""
+                                  ? Math.round(
+                                    lesserTeam
                                       ?.back *
-                                      100 -
-                                      100
+                                    100 -
+                                    100
                                   )
-                                : 0}
-                            </p>
-                            <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">
-                              {lesserTeam
-                                ?.lay !== null &&
-                                lesserTeam
-                                ?.lay !== undefined &&
-                                lesserTeam
-                                ?.lay !== ""
-                                ? Math.round(
+                                  : 0}
+                              </p>
+                              <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">
+                                {lesserTeam
+                                  ?.lay !== null &&
                                   lesserTeam
+                                    ?.lay !== undefined &&
+                                  lesserTeam
+                                    ?.lay !== ""
+                                  ? Math.round(
+                                    lesserTeam
                                       ?.lay *
-                                      100 -
-                                      100
+                                    100 -
+                                    100
                                   )
-                                : 0}
-                            </p>
+                                  : 0}
+                              </p>
+                            </div>
                           </div>
-                        </div>
                         )}
                       </div>
                     )}
@@ -882,11 +944,10 @@ Live) {
                   {updatedFilterarray.map((item) => (
                     <button
                       key={item}
-                      className={`cust-box-click-button px-5 py-1 rounded-full font-medium ${
-                        filter === item
+                      className={`cust-box-click-button px-5 py-1 rounded-full font-medium ${filter === item
                           ? "bg-[#081736] text-[#ffffff]"
                           : "bg-[#ffffff] text-[#6A7586]"
-                      }`}
+                        }`}
                       onClick={() => setFilter(item)}
                     >
                       {item}
@@ -976,15 +1037,14 @@ Live) {
                                 {comment?.over}.{comment?.ball}
                               </p>
                               <p
-                                className={`text-[16px] font-semibold px-[11px] py-[2px] rounded-lg ${
-                                  comment?.run == 6
+                                className={`text-[16px] font-semibold px-[11px] py-[2px] rounded-lg ${comment?.run == 6
                                     ? "bg-[#13b76dbd] text-white"
                                     : comment?.run == 4
-                                    ? "bg-orange-500 text-white"
-                                    : comment?.score == "w"
-                                    ? "bg-red-500 text-white"
-                                    : " text-white bg-[#bec2d3]"
-                                }`}
+                                      ? "bg-orange-500 text-white"
+                                      : comment?.score == "w"
+                                        ? "bg-red-500 text-white"
+                                        : " text-white bg-[#bec2d3]"
+                                  }`}
                               >
                                 {comment?.score}
                               </p>
@@ -1022,7 +1082,7 @@ Live) {
                                 <div className="md:flex items-center justify-between">
                                   <div className="flex items-center">
                                     <PlayerImage
-                                    key={comment?.wicket_batsman_id}
+                                      key={comment?.wicket_batsman_id}
                                       player_id={comment?.wicket_batsman_id}
                                       height={65}
                                       width={65}
@@ -1037,8 +1097,8 @@ Live) {
                                             comment?.wicket_batsman_id !==
                                               undefined
                                               ? JSON.parse(
-                                                  comment?.wicket_batsman_id
-                                                )
+                                                comment?.wicket_batsman_id
+                                              )
                                               : {}
                                           )}
                                         </span>{" "}

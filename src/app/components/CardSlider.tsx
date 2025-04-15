@@ -106,7 +106,7 @@ export default function Slider() {
 
         {/* Controls */}
         <button
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-80 px-2 py-2 rounded-full"
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 md:bg-white bg-[#224ea4] md:text-[black] text-[white] bg-opacity-80 px-2 py-2 rounded-full"
           onClick={handlePrev}
           disabled={currentIndex === 0}
         >
@@ -117,7 +117,7 @@ export default function Slider() {
           </span>
         </button>
         <button
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-80 px-2 py-2 rounded-full"
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 md:bg-white bg-[#224ea4] md:text-[black] text-[white] bg-opacity-80 px-2 py-2 rounded-full"
           onClick={handleNext}
           disabled={currentIndex >= images.length - itemsPerPage}
         >

@@ -779,7 +779,7 @@ export default function MoreInfo({
               <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                 <div key="mypage">
                   <h3 className="text-1xl font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
-                    Head To Head (Last 10 matches)
+                    Head To Head (Last matches)
                   </h3>
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <div className="py-4 text-1xl flex justify-between items-center">
@@ -1522,7 +1522,7 @@ export default function MoreInfo({
 
                             <div className="relative mt-4 h-[4px] bg-gray-200 overflow-hidden">
                               <div
-                                className="absolute h-full bg-[#13B76D]"
+                                className="absolute h-full bg-[#00a632]"
                                 style={{
                                   width: `${teamwinpercentage?.team_a_win}%`,
                                 }}
@@ -1545,7 +1545,7 @@ export default function MoreInfo({
                               ></div>
                             </div>
                             <div className="flex justify-between mt-2 text-sm">
-                              <p className="text-green-600 font-medium">
+                              <p className="text-[#00a632] font-medium">
                                 {matchDetails?.teama?.short_name}:{" "}
                                 {teamwinpercentage?.team_a_win}%
                               </p>
@@ -1582,7 +1582,7 @@ export default function MoreInfo({
                                     ?.back) * 100 - 100)
                                   : 0}
                               </p>
-                              <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
+                              <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">
                                 {matchData?.live_odds?.matchodds?.teama
                                   ?.lay !== null &&
                                   matchData?.live_odds?.matchodds?.teama
@@ -1644,7 +1644,7 @@ export default function MoreInfo({
                   <div className="border-t-[1px] border-[#E4E9F0]" />
 
                   <div
-                    className={`cust-box-click-content cust-box-click-playing11 mt-4 ${
+                    className={`cust-box-click-content cust-box-click-playing11 ${
                       playing11Tab === "cust-box-click-playing11"
                         ? ""
                         : "hidden"
@@ -1654,7 +1654,7 @@ export default function MoreInfo({
                       {teama11Players?.map((player:any) => (
                         <Link href={"/player/"+urlStringEncode(player?.name)+"/"+player?.player_id}  key={player.player_id}>
                           <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
-                            <div style={{ width: '35px', height: '35px' }}>
+                            <div>
                                <PlayerImage  key={player?.player_id} player_id={ player?.player_id} height={35} width={35} className="rounded-lg" />
                                                               
                             </div>
@@ -1676,7 +1676,7 @@ export default function MoreInfo({
                   </div>
 
                   <div
-                    className={`cust-box-click-content cust-box-click-playing12 mt-4 ${
+                    className={`cust-box-click-content cust-box-click-playing12 ${
                       playing11Tab === "cust-box-click-playing12"
                         ? ""
                         : "hidden"
@@ -1687,7 +1687,7 @@ export default function MoreInfo({
                         <Link href={"/player/"+urlStringEncode(player?.name)+"/"+player?.player_id}  key={player.player_id}>
                           <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
                             <div>
-                            <PlayerImage  key={player?.player_id} player_id={ player?.player_id} height={40} width={40} className="rounded-lg" />
+                            <PlayerImage  key={player?.player_id} player_id={ player?.player_id} height={35} width={35} className="rounded-lg" />
                                
                             </div>
                             <div className="font-medium">

@@ -153,8 +153,8 @@ export default function Banner({ matchData, match_id }: Banner) {
                     />
                   ) : ("")}
                   <div className="flex md:flex-col md:items-start items-center md:gap-0 gap-2">
-                    <p 
-                    className={`${(liveMatch?.match_info?.teama?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] font-semibold md:text-[17px]" : "text-[#BDCCECA8] md:text-[17px]  text-[14px] font-medium uppercase"}`}>
+                    <p
+                      className={`${(liveMatch?.match_info?.teama?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] font-semibold md:text-[17px]" : "text-[#BDCCECA8] md:text-[17px]  text-[14px] font-medium uppercase"}`}>
                       {liveMatch?.match_info?.teama?.short_name}
                     </p>
                     <p
@@ -426,138 +426,172 @@ export default function Banner({ matchData, match_id }: Banner) {
 
           <div className="border-t-[1px] border-[#E4E9F01A]">
             <div className="lg:w-[1075px] mx-auto tracking-[1px]">
-              <div className="hidden md:flex h-[168px] justify-between items-center">
-                <div className="flex gap-2 text-[#BDCCECA8] uppercase flex-row items-center w-full">
-                  {liveMatch?.match_info?.teama?.logo_url ? (
-                    <Image
-                      className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px] rounded-full"
-                      style={{ boxShadow: '0px 0px 3px 0px white' }}
-                      src={liveMatch?.match_info?.teama?.logo_url}
-                      width={30}
-                      height={30}
-                      alt="ind"
-                      loading="lazy"
-                    />
-                  ) : (
-                    ""
-                  )}
-                  <div className="flex md:flex-col md:items-start items-center md:gap-0 gap-2">
-                    <p className="text-[#BDCCECA8] md:text-[17px]  text-[14px] font-medium uppercase">
-                      {liveMatch?.match_info?.teama?.short_name}
-                    </p>
-                    <p
-                      className={
-                        "md:text-[20px] text-[16px] font-semibold " +
-                        match_id +
-                        "-" +
-                        liveMatch?.match_info?.teama?.team_id
-                      }
-                    >
-                      {inning1teamarun ? (
-                        <>
-                          {inning1teamarun}{" "}
-                          <span className="text-[16px] font-medium">
-                            ({inning1teamaOver})
-                          </span>
-                        </>
-                      ) : (
-                        "Yet To Bat"
-                      )}
+              <div className="hidden md:block">
+                <div className="flex h-[168px] justify-between items-center">
+                  <div className="flex gap-2 text-[#BDCCECA8] uppercase flex-row items-center w-full">
+                    {liveMatch?.match_info?.teama?.logo_url ? (
+                      <Image
+                        className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px] rounded-full"
+                        style={{ boxShadow: '0px 0px 3px 0px white' }}
+                        src={liveMatch?.match_info?.teama?.logo_url}
+                        width={30}
+                        height={30}
+                        alt="ind"
+                        loading="lazy"
+                      />
+                    ) : (
+                      ""
+                    )}
+                    <div className="flex md:flex-col md:items-start items-center md:gap-0 gap-2">
+                      <p
+                        className={`${(liveMatch?.match_info.teama.team_id === liveMatch?.live?.live_inning?.batting_team_id) ? "font-semibold text-[#ffffff] text-[17px]" : "text-[#BDCCECA8] md:text-[17px]  text-[14px] font-medium uppercase"}`}>
+                        {liveMatch?.match_info?.teama?.short_name}
+                      </p>
 
-                      {inning2teamarun ? (
-                        <>
-                          {" "}
-                          &nbsp; &amp; &nbsp; {inning2teamarun}{" "}
-                          {inning2teamaOver !== "" && (
-                            <span className="text-[16px] font-medium">
-                              ({inning2teamaOver})
+                      <p
+                        className={`${(liveMatch?.match_info.teama.team_id === liveMatch?.live?.live_inning?.batting_team_id) ? " text-[#ffffff] font-semibold text-[17px]" : "text-[#BDCCECA8] md:text-[17px]  text-[14px] font-medium uppercase"}
+                     "matchinfo"${match_id}"-"${liveMatch?.match_info?.teama?.team_id}
+                     `}
+
+                      // className={
+                      //   "md:text-[20px] text-[16px] font-semibold " +
+                      //   match_id +
+                      //   "-" +
+                      //   liveMatch?.match_info?.teama?.team_id
+                      // }
+                      >
+                        {inning1teamarun ? (
+                          <>
+                            {inning1teamarun}{" "}
+                            {/* <span className="text-[16px] font-medium"> */}
+                            <span className={`${(liveMatch?.match_info.teama.team_id === liveMatch?.live?.live_inning?.batting_team_id) ? " text-[#ffffff] font-semibold text-[16px]" : "text-[#BDCCECA8]  text-[16px] font-semibold uppercase"}`}>
+                              ({inning1teamaOver})
                             </span>
-                          )}
-                        </>
-                      ) : (
-                        " "
-                      )}
-                    </p>
+                          </>
+                        ) : (
+                          "Yet To Bat"
+                        )}
+
+                        {inning2teamarun ? (
+                          <>
+                            {" "}
+                            &nbsp; &amp; &nbsp; {inning2teamarun}{" "}
+                            {inning2teamaOver !== "" && (
+                              // <span className="text-[16px] font-medium">
+                              <span className={`${(liveMatch?.match_info.teama.team_id === liveMatch?.live?.live_inning?.batting_team_id) ? " text-[#ffffff] font-semibold md:text-[16px]" : "text-[#BDCCECA8]  text-[16px] font-medium uppercase"}`}>
+                                ({inning2teamaOver})
+                              </span>
+                            )}
+                          </>
+                        ) : (
+                          " "
+                        )}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="text-[#8192B4] font-normal w-full text-center md:my-0 my-4">
 
 
-                  <motion.div
-                    key={ballEvent}
-                    initial={{ scale: 0, opacity: 0, rotate: -15 }}
-                    animate={{
-                      scale: 1,
-                      opacity: 1,
-                      rotate: 0,
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 500,
-                      damping: 15,
-                      color: { duration: 1.5, repeat: Infinity }
-                    }}
-                    className={`text-[#FFBD71] lg:text-[40px] text-[16px] font-bold
+                  <div className="text-[#8192B4] font-normal w-full text-center md:my-0 my-4">
+
+
+                    <motion.div
+                      key={ballEvent}
+                      initial={{ scale: 0, opacity: 0, rotate: -15 }}
+                      animate={{
+                        scale: 1,
+                        opacity: 1,
+                        rotate: 0,
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 15,
+                        color: { duration: 1.5, repeat: Infinity }
+                      }}
+                      className={`text-[#459af4] lg:text-[40px] text-[16px] font-bold
                      ${ballEvent.toUpperCase() === 'FOUR' ? "animate-blinkFour" : ""}
                      ${ballEvent.toUpperCase() === 'SIX' ? "animate-blinkSix" : ""}
                      ${ballEvent.toUpperCase() === 'WICKET' ? "animate-Out" : ""} `}
-                  >
-                    {ballEvent.toUpperCase() === 'FOUR' ? 4 : ballEvent.toUpperCase() === 'SIX' ? 6 : ballEvent.toUpperCase() === 'DOT' ? 0 : ballEvent}
-                  </motion.div>
+                    >
+                      {ballEvent.toUpperCase() === 'FOUR' ? 4 : ballEvent.toUpperCase() === 'SIX' ? 6 : ballEvent.toUpperCase() === 'DOT' ? 0 : ballEvent}
+                    </motion.div>
+
+                  </div>
+
+
+                  <div className="flex gap-2 flex-row-reverse md:flex-row  items-center text-[#8192B4] font-normal w-full justify-end">
+                    <div className="flex md:flex-col md:items-end items-center md:gap-0 gap-2">
+                      <p className={`${(liveMatch?.match_info.teamb.team_id === liveMatch?.live?.live_inning?.batting_team_id) ? "font-semibold text-[#ffffff] text-[17px]" : "text-[#BDCCECA8] md:text-[17px] text-[14px] font-medium uppercase"}`}>
+                        {liveMatch?.match_info?.teamb?.short_name}
+                      </p>
+                      <p
+                        // className={
+                        //   "lg:text-[20px] text-[16px] font-semibold matchinfo" +
+                        //   match_id +
+                        //   "-" +
+                        //   liveMatch?.match_info?.teamb?.team_id
+                        // }
+
+                        className={`${(liveMatch?.match_info.teamb.team_id === liveMatch?.live?.live_inning?.batting_team_id) ? " text-[#ffffff] font-semibold text-[17px]" : "text-[#BDCCECA8] md:text-[17px]  text-[14px] font-medium uppercase"}
+                      "matchinfo"${match_id}"-"${liveMatch?.match_info?.teamb?.team_id}
+                      `}
+                      >
+                        {inning1teambrun ? (
+                          <>
+                            {inning1teambrun}{" "}
+                            {/* <span className="text-[16px] font-medium"> */}
+                            <span className={`${(liveMatch?.match_info.teamb.team_id === liveMatch?.live?.live_inning?.batting_team_id) ? " text-[#ffffff] font-semibold text-[16px]" : "text-[#BDCCECA8]  text-[16px] font-semibold uppercase"}`}>
+                              ({inning1teambOver})
+                            </span>
+                          </>
+                        ) : (
+                          "Yet To Bat"
+                        )}
+
+                        {inning2teambrun ? (
+                          <>
+                            {" "}
+                            &nbsp; &amp; &nbsp; {inning2teambrun}{" "}
+                            {inning2teambOver !== "" && (
+                              // <span className="text-[16px] font-medium">
+                              <span className={`${(liveMatch?.match_info.teamb.team_id === liveMatch?.live?.live_inning?.batting_team_id) ? " text-[#ffffff] font-semibold text-[16px]" : "text-[#BDCCECA8]  text-[16px] font-semibold uppercase"}`}>
+                                ({inning2teambOver})
+                              </span>
+                            )}
+                          </>
+                        ) : (
+                          " "
+                        )}
+                      </p>
+                    </div>
+                    {liveMatch?.match_info?.teamb?.logo_url ? (
+                      <Image
+                        src={liveMatch?.match_info?.teamb?.logo_url}
+                        className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px] rounded-full"
+                        style={{ boxShadow: '0px 0px 3px 0px white' }}
+                        width={30}
+                        height={30}
+                        alt="ban"
+                        loading="lazy"
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </div>
 
                 </div>
-                <div className="flex gap-2 flex-row-reverse md:flex-row  items-center text-[#8192B4] font-normal w-full justify-end">
-                  <div className="flex md:flex-col md:items-end items-center md:gap-0 gap-2">
-                    <p className="text-[#BDCCECA8] md:text-[17px] text-[14px] font-medium uppercase">
-                      {liveMatch?.match_info?.teamb?.short_name}
+                <div className="flex items-center justify-between py-1  text-[12px] relative top-[-12px] text-[#c1ceea]">
+                  <div className="flex gap-3 items-center">
+                    <p className="flex gap-1 items-center">
+                      <span> CRR :{" "} </span> <span>{liveMatch?.live?.live_score?.runrate}</span>
                     </p>
-                    <p
-                      className={
-                        "lg:text-[20px] text-[16px] font-semibold matchinfo" +
-                        match_id +
-                        "-" +
-                        liveMatch?.match_info?.teamb?.team_id
-                      }
-                    >
-                      {inning1teambrun ? (
-                        <>
-                          {inning1teambrun}{" "}
-                          <span className="text-[16px] font-medium">
-                            ({inning1teambOver})
-                          </span>
-                        </>
-                      ) : (
-                        "Yet To Bat"
-                      )}
-
-                      {inning2teambrun ? (
-                        <>
-                          {" "}
-                          &nbsp; &amp; &nbsp; {inning2teambrun}{" "}
-                          {inning2teambOver !== "" && (
-                            <span className="text-[16px] font-medium">
-                              ({inning2teambOver})
-                            </span>
-                          )}
-                        </>
-                      ) : (
-                        " "
-                      )}
-                    </p>
+                    {!!liveMatch?.live?.live_score?.required_runrate &&
+                      <p className="flex gap-1 items-center">
+                        <span>RRR : </span><span>{liveMatch?.live?.live_score?.required_runrate}</span>
+                      </p>
+                    }
                   </div>
-                  {liveMatch?.match_info?.teamb?.logo_url ? (
-                    <Image
-                      src={liveMatch?.match_info?.teamb?.logo_url}
-                      className="lg:h-[42px] lg:w-[42px] h-[30px] w-[30px] rounded-full"
-                      style={{ boxShadow: '0px 0px 3px 0px white' }}
-                      width={30}
-                      height={30}
-                      alt="ban"
-                      loading="lazy"
-                    />
-                  ) : (
-                    ""
-                  )}
+                 
                 </div>
               </div>
 
@@ -591,10 +625,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                             </p>
                           </div>
 
-
-
                         </div>
-
 
                       </div>
 
@@ -616,7 +647,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                             color: { duration: 1.5, repeat: Infinity }
                           }}
 
-                          className={`text-[#342df2]  text-[21px] font-bold
+                          className={`text-[#459af4]  text-[21px] font-bold
                           ${ballEvent.toUpperCase() === 'FOUR' ? "phone-animate-blinkFour" : ""}
                           ${ballEvent.toUpperCase() === 'SIX' ? "phone-animate-blinkSix" : ""}
                           ${ballEvent.toUpperCase() === 'WICKET' ? "phone-animate-Out" : ""}
@@ -734,7 +765,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
                 <div className="text-[#8192B4] font-normal w-[30%] text-center h-[37px]">
                   <p className="text-[#C1CEEA] text-1xl">
-                     {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "hh:mm:aa") : ""}  </p>
+                    {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "hh:mm:aa") : ""}  </p>
 
                   {liveMatch?.match_info?.date_start_ist ? isSameDay(new Date(), new Date(liveMatch?.match_info?.date_start_ist)) ? (
 

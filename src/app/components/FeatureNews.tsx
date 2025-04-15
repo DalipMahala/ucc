@@ -48,13 +48,14 @@ const FeatureNews = ({newsUrl}:url) => {
       <div className="tab-section">
               <div className="tab-content-container">
                 <div id="news" className={`tab-content ${activeTab === 'news' ? '' : ''}`}>
-                  <div className="rounded-lg py-4 px-4 bg-[#ffffff] mb-4">
+                  <div className="rounded-lg py-4 px-4 bg-[#ffffff] mb-4" style={{ textShadow: 'rgb(0 0 0 / 4%) 1px 2px 3px' }}>
                   {news.slice(0,1)?.map((post: any, index:number) => (
                     <div className="lg:grid grid-cols-12 gap-4" key={index}>
                       <div className="col-span-6 ">
                       {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
                         <Image  loading="lazy" 
                           src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
+                          style={{ boxShadow: 'rgb(180 179 179 / 29%) 0px 8px 16px' }}
                           width={300}
                           height={300}
                           alt={post?.title.rendered}

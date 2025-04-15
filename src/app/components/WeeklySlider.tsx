@@ -62,9 +62,9 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                     <div className="w-[8px] h-[8px] bg-[#0F55A5] rounded-full animate-blink"></div> FEATURED
                   </div>
                 </div>
-                <div className="h-[20px] border-l-[1px] border-[#d0d3d7]" />
+                <div className="h-[20px] border-l-[1px] border-[#efefef]" />
                 <div className="flex items-center justify-end space-x-2 w-[50%] ">
-                  <span className="text-[11px] font-medium">
+                  <span className="text-[11px] text-[#1F2937] font-semibold ">
                     {slide?.teamList?.[parseFloat(slide?.odds?.matchodds?.teama?.back) < parseFloat(slide?.odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
                   </span>
                   <span className="flex font-semibold items-center md:bg-[#FAFFFC] bg-[#00a632] border-[1px] md:border-[#0B773C] border-[#00a632] md:rounded-full rounded-md md:text-[#0B773C] text-[#ffffff] pr-2">
@@ -159,14 +159,14 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                               width={25}
                               height={25}
                             />
-                            <span className=" font-semibold">
+                            <span className=" text-[#586577] font-medium text-[14px]">
                               {team.country}
                             </span>
                           </div>
                         </div>
                       ))}
                     </div>
-                    <div className=" h-[70px] border-l-[1px] border-[#d0d3d7]"></div>
+                    <div className=" h-[70px] border-l-[1px] border-[#efefef]"></div>
                     <div className="font-semibold w-[50%] text-center">
                       {isSameDay(new Date(), new Date(slide.countdown)) ? (
                         <>
@@ -195,9 +195,27 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                 </Link>
               </div>
               <div className="border-t-[1px] border-[#E7F2F4]" />
+              <Link  href={
+                    "/moreinfo/" +
+                    urlStringEncode(
+                      slide?.teams?.[0].country +
+                      "-vs-" +
+                      slide?.teams?.[1].country +
+                      "-match-" +
+                      slide?.match_number +
+                      "-" +
+                      slide?.title +
+                      "-" +
+                      slide?.season
+                    ) +
+                    "/" +
+                    slide.match_id
+                  }>
               <div className="mt-2">
                 <p className="text-[#909090] font-medium">{slide.match}</p>
               </div>
+              </Link>
+             
             </div>
           </div>
         ))}

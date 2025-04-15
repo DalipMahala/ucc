@@ -316,15 +316,15 @@ export default async function Home(props: { params: Params }) {
               {ranking?.ranks?.teams?.odis.slice(0, 10)?.map((team: any, index: number) => (
                 <div className="col-span-1" key={index}>
                   <div className="relative rounded-md overflow-hidden text-white">
-                    <Image
+                    {/* <Image
                       src={team?.logo_url}
                       alt="Team Logo"
                       fill
                       objectFit="cover"
-                      loading="lazy" // Ensures it loads first
+                      loading="lazy"
                       className="rounded-md"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#14439e] to-[#14429e] opacity-80"></div>
+                    /> */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#14439e] to-[#14429e7a] "></div>
                     <Link href={"/team/" + urlStringEncode(team?.team) + "/" + team?.tid}>
                       <div className="relative flex items-center space-x-2 justify-center  py-3">
                         <Image
