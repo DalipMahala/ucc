@@ -29,7 +29,7 @@ export default function LiveResult({
   matchCommentary,
   isPointTable
 }: // matchLast,
-Live) {
+  Live) {
   useWakeLock();
   const [activeTab, setActiveTab] = useState("tab2");
 
@@ -51,7 +51,7 @@ Live) {
     }
   };
 
-  
+
   eventEmitter.on("matchLiveData", handleMatchData);
   // let matchInningbatsmen = matchCommentary?.commentaries[6]?.bowlers?.bowls?.overs;
 
@@ -59,10 +59,10 @@ Live) {
   const [matchOdds, setMatchOdds] = useState<any>(null);
   const handleOddData = (data: any) => {
     if (data?.matchId == match_id) {
-      setMatchOdds(data); 
+      setMatchOdds(data);
     }
   };
-  eventEmitter.on("oddsEvent",handleOddData);
+  eventEmitter.on("oddsEvent", handleOddData);
 
   // console.log("LiveOdds", matchOdds?.oddsEvent);
   let teamwinpercentage = matchLiveData?.teamwinpercentage;
@@ -163,9 +163,9 @@ Live) {
         }) =>
           item?.event_id
             ? existingItem?.event_id === item?.event_id &&
-              existingItem?.event === item?.event // Compare event_id for regular events
+            existingItem?.event === item?.event // Compare event_id for regular events
             : existingItem?.event === "overend" &&
-              existingItem?.over === item?.over // Compare "overend" events by over number
+            existingItem?.over === item?.over // Compare "overend" events by over number
       )
   );
   // Merge new unique data into firstArray
@@ -381,8 +381,8 @@ Live) {
 
   const a = parseFloat(matchLiveData?.live_odds?.matchodds?.teama?.back);
   const b = parseFloat(matchLiveData?.live_odds?.matchodds?.teamb?.back);
-  const lesserTeam = a < b 
-    ? { team: matchLiveData?.match_info?.teama?.short_name, ...matchLiveData?.live_odds?.matchodds?.teama } 
+  const lesserTeam = a < b
+    ? { team: matchLiveData?.match_info?.teama?.short_name, ...matchLiveData?.live_odds?.matchodds?.teama }
     : { team: matchLiveData?.match_info?.teamb?.short_name, ...matchLiveData?.live_odds?.matchodds?.teamb };
 
   return (
@@ -410,31 +410,31 @@ Live) {
             </button>
           </Link>
           {isPointTable && (
-          <Link
-            href={
-              "/series/" +
-              urlStringEncode(
-                matchDetails?.competition?.title +
+            <Link
+              href={
+                "/series/" +
+                urlStringEncode(
+                  matchDetails?.competition?.title +
                   "-" +
                   matchDetails?.competition?.season
-              ) +
-              "/" +
-              matchDetails?.competition?.cid +
-              "/points-table"
-            }
-          >
-            <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase">
-              Points Table
-            </button>
-          </Link>
+                ) +
+                "/" +
+                matchDetails?.competition?.cid +
+                "/points-table"
+              }
+            >
+              <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase">
+                Points Table
+              </button>
+            </Link>
           )}
           <Link
             href={
               "/series/" +
               urlStringEncode(
                 matchDetails?.competition?.title +
-                  "-" +
-                  matchDetails?.competition?.season
+                "-" +
+                matchDetails?.competition?.season
               ) +
               "/" +
               matchDetails?.competition?.cid +
@@ -473,7 +473,7 @@ Live) {
                           <div className="flex items-center gap-3">
                             <div>
                               <PlayerImage
-                              key={batsman?.[0]?.batsman_id}
+                                key={batsman?.[0]?.batsman_id}
                                 player_id={batsman?.[0]?.batsman_id}
                                 height={40}
                                 width={40}
@@ -493,7 +493,7 @@ Live) {
                                   ({batsman?.[0]?.balls_faced})
                                 </span>
                                 {batsman?.[0]?.batsman_id ==
-                                currPartnership?.batsmen?.[0]?.batsman_id ? (
+                                  currPartnership?.batsmen?.[0]?.batsman_id ? (
                                   <Image
                                     src="/assets/img/home/bat.png"
                                     className="h-[14px]"
@@ -536,7 +536,7 @@ Live) {
                           <div className="flex items-center justify-end flex-row-reverse gap-3">
                             <div>
                               <PlayerImage
-                              key={batsman?.[1]?.batsman_id}
+                                key={batsman?.[1]?.batsman_id}
                                 player_id={batsman?.[1]?.batsman_id}
                                 height={40}
                                 width={40}
@@ -556,7 +556,7 @@ Live) {
                                   ({batsman?.[1]?.balls_faced})
                                 </span>
                                 {batsman?.[0]?.batsman_id ==
-                                currPartnership?.batsman?.[1]?.batsman_id ? (
+                                  currPartnership?.batsman?.[1]?.batsman_id ? (
                                   <Image
                                     src="/assets/img/home/bat.png"
                                     className="h-[14px]"
@@ -579,7 +579,7 @@ Live) {
 
 
                 <div className="col-span-4 my-4 lg:my-0">
-                  <div className="rounded-lg bg-white p-4">
+                  <div className="hidden md:block  rounded-lg bg-white p-4">
                     <Link
                       href={
                         "/player/" +
@@ -596,7 +596,7 @@ Live) {
                       <div className="flex items-center gap-3">
                         <div className="relative">
                           <PlayerImage
-                          key={matchinfo?.bowlers?.[0]?.bowler_id}
+                            key={matchinfo?.bowlers?.[0]?.bowler_id}
                             player_id={matchinfo?.bowlers?.[0]?.bowler_id}
                             height={40}
                             width={40}
@@ -630,6 +630,55 @@ Live) {
                       </div>
                     </Link>
                   </div>
+
+
+                  <div className="md:hidden rounded-lg bg-white py-2 px-4">
+                    <Link
+                      href={
+                        "/player/" +
+                        urlStringEncode(
+                          getPlayerNameByPid(
+                            players,
+                            matchinfo?.bowlers?.[0]?.bowler_id
+                          )
+                        ) +
+                        "/" +
+                        matchinfo?.bowlers?.[0]?.bowler_id
+                      }
+                    >
+                      <div className="flex items-center justify-between gap-3 font-medium mx-auto w-[73%]">
+
+                        
+                          <div className="flex ga-1 items-center  w-[50%]">
+                            <h2 className="md:text-[15px] text-[14px] text-[#586577]">
+                              {getPlayerNameByPid(
+                                players,
+                                matchinfo?.bowlers?.[0]?.bowler_id
+                              )}
+                            </h2>
+
+                            <Image
+                              src="/assets/img/player/ball.png"
+                              className="h-[13px] bg-white rounded-full p-[2px]"
+                              width={13}
+                              height={13}
+                              alt=""
+                              loading="lazy"
+                            />
+                          </div>
+                          <p className="md:text-[15px] text-[14px] flex items-center justify-end w-[50%]">
+                            {matchinfo?.bowlers?.[0]?.wickets}-
+                            {matchinfo?.bowlers?.[0]?.runs_conceded}{" "}
+                            <span className="md:text-[13px] text-[12px] text-[#586577] pt-[4px] px-1">
+                              ({matchinfo?.bowlers?.[0]?.overs})
+                            </span>
+                          </p>
+                        
+                      </div>
+                    </Link>
+                  </div>
+
+
                 </div>
 
 
@@ -643,11 +692,10 @@ Live) {
                   {updatedFilterarray.map((item) => (
                     <button
                       key={item}
-                      className={`cust-box-click-button px-5 py-1 rounded-full font-medium ${
-                        filter === item
+                      className={`cust-box-click-button px-5 py-1 rounded-full font-medium ${filter === item
                           ? "bg-[#081736] text-[#ffffff]"
                           : "bg-[#ffffff] text-[#6A7586]"
-                      }`}
+                        }`}
                       onClick={() => setFilter(item)}
                     >
                       {item}
@@ -729,7 +777,7 @@ Live) {
                         >
                           <div className="border-t-[1px] border-[#E7F2F4]" />
                           <div
-                            className="md:flex items-start py-3 md:px-3 gap-[21px] bg-white p-4"
+                            className="md:flex items-center py-3 md:px-3 gap-[21px] bg-white p-4"
                             key={comment?.event_id}
                           >
                             <div className="flex items-center gap-[10px] md:py-4 pb-4">
@@ -737,15 +785,14 @@ Live) {
                                 {comment?.over}.{comment?.ball}
                               </p>
                               <p
-                                className={`text-[16px] font-semibold px-[11px] py-[2px] rounded-lg ${
-                                  comment?.run == 6
+                                className={`text-[16px] font-semibold px-[11px] py-[2px] rounded-lg ${comment?.run == 6
                                     ? "bg-[#13b76dbd] text-white"
                                     : comment?.run == 4
-                                    ? "bg-orange-500 text-white"
-                                    : comment?.score == "w"
-                                    ? "bg-red-500 text-white"
-                                    : " text-white bg-[#bec2d3]"
-                                }`}
+                                      ? "bg-orange-500 text-white"
+                                      : comment?.score == "w"
+                                        ? "bg-red-500 text-white"
+                                        : " text-white bg-[#bec2d3]"
+                                  }`}
                               >
                                 {comment?.score}
                               </p>
@@ -783,11 +830,11 @@ Live) {
                                 <div className="md:flex items-center justify-between">
                                   <div className="flex items-center">
                                     <PlayerImage
-                                    key={comment?.wicket_batsman_id}
+                                      key={comment?.wicket_batsman_id}
                                       player_id={comment?.wicket_batsman_id}
                                       height={65}
                                       width={65}
-                                      className="rounded-lg md:mr-4 mr-2 h-[65px] w-[65px] md:w-[auto] md:h-[auto]"
+                                      className="rounded-lg md:mr-4 mr-2 h-[65px] w-[65px]"
                                     />
 
                                     <div>
@@ -798,14 +845,14 @@ Live) {
                                             comment?.wicket_batsman_id !==
                                               undefined
                                               ? JSON.parse(
-                                                  comment?.wicket_batsman_id
-                                                )
+                                                comment?.wicket_batsman_id
+                                              )
                                               : {}
                                           )}
                                         </span>{" "}
-                                        <span className="text-[#BFEF50] text-[14px]">
-                                          {comment?.batsman_runs}(
-                                          {comment?.batsman_balls})
+                                        <span className="text-[#BFEF50] text-[16px]">
+                                          {comment?.batsman_runs} (
+                                          <span className="text-[#BFEF50] text-[14px]">{comment?.batsman_balls}) </span>
                                         </span>
                                       </h2>
                                       <p className="text-[14px] font-normal">

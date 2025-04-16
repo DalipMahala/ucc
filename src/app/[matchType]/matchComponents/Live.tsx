@@ -1227,7 +1227,7 @@ export default function Live({
                               width={65}
                               height={65}
                               alt="Player"
-                              className="md:mr-4 mr-2 h-[65px] w-[65px] md:w-[auto] md:h-[auto]"
+                              className="md:mr-4 mr-2 h-[65px] w-[65px]"
                               loading="lazy"
                             />
                             {/* Player Info */}

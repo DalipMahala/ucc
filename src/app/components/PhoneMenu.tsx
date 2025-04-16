@@ -37,8 +37,8 @@ const PhoneMenu = ({ data }: HeaderProps) => {
       {/* Side Navigation */}
       <div
         id="mySidenav"
-        className={`fixed top-0 left-0 h-full bg-[#081736] overflow-x-hidden transition-width duration-500 ease-in-out z-50 ${
-          isOpen ? 'w-3/4' : 'w-0'
+        className={`fixed top-0 left-0 h-full bg-[#081736] overflow-x-hidden z-[99999] transition-width duration-500 ease-in-out ${
+          isOpen ? 'w-full' : 'w-0'
         }`}
       >
         <button
@@ -50,7 +50,7 @@ const PhoneMenu = ({ data }: HeaderProps) => {
         <div className="text-1xl text-white space-y-4 p-5">
            <Link href="/" className="block hover:text-yellow-400">Home </Link>
            <Link href="#" className="block hover:text-yellow-400">Fixtures </Link>
-           <Link href={items[0].href} className="block hover:text-yellow-400">Series </Link>
+           <Link href="/series" className="block hover:text-yellow-400">Series </Link>
            <Link href="#" className="block hover:text-yellow-400">Teams </Link>
            <Link href="/iccranking/man/team/odis" className="block hover:text-yellow-400">ICC Ranking </Link>
            <Link href="#" className="block hover:text-yellow-400">News </Link>
@@ -90,7 +90,7 @@ const PhoneMenu = ({ data }: HeaderProps) => {
           </span>
           Fixtures
          </Link>
-         <Link href={items[0].href} className="flex flex-col items-center">
+         <Link href="/series" className="flex flex-col items-center">
           <span>
             <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
               <g id="cup-icon" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">

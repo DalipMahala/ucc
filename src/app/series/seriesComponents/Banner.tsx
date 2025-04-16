@@ -114,7 +114,7 @@ console.log(result?.next?.logo);
                 <h2 className="lg:text-2xl md:text-[17px] font-semibold">
                   {seriesInfo?.title} {seriesInfo?.season}
                 </h2>
-                <p className="lg:text-sm md:text-[14px] text-gray-300 mb-2">
+                <p className="lg:text-sm md:text-[14px] text-gray-300 mb-2 capitalize">
                   {seriesInfo?.game_format} - {seriesInfo?.total_matches} Matches
                   - {seriesInfo?.total_teams} Teams |{" "}
                   {seriesInfo?.datestart

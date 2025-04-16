@@ -155,37 +155,37 @@ export default function Overview({
   console.log("completedMatch", selectedMatches);
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-      <div id="tabs" className="my-4">
-        <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+      <div id="tabs" className="mt-4">
+        <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
           <Link href={urlString}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md">
+            <button className="font-semibold py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md uppercase">
               Overview
             </button>
           </Link>
           <Link href={urlString + "/schedule-results"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap ">
+            <button className="font-semibold py-2 px-3 whitespace-nowrap  uppercase ">
               Schedule & Results
             </button>
           </Link>
           <Link href={urlString + "/squads"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap ">
+            <button className="font-semibold py-2 px-3 whitespace-nowrap  uppercase ">
               Squads
             </button>
           </Link>
           {isPointTable && (
             <Link href={urlString + "/points-table"}>
-              <button className="font-medium py-2 px-3 whitespace-nowrap">
+              <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase ">
                 Points Table
               </button>
             </Link>
           )}
           <Link href={urlString + "/news"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase ">
               News
             </button>
           </Link>
           <Link href={urlString + "/stats/most-run"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase ">
               Stats
             </button>
           </Link>
@@ -195,7 +195,7 @@ export default function Overview({
       <div id="tab-content">
         <div id="info" className="tab-content ">
           <div className="md:grid grid-cols-12 gap-4">
-            <div className="lg:col-span-8 md:col-span-7">
+            <div className="lg:col-span-8 md:col-span-7 mt-4">
               <div className="rounded-lg bg-white">
                 <div className="p-4">
                   <h3 className="text-[15px] font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
@@ -203,16 +203,16 @@ export default function Overview({
                   </h3>
                   <div className="border-t border-[#E4E9F0]" />
                   {/* Responsive Grid Section */}
-                  <div className="grid gap-2 grid-cols-1 py-3 px-2">
-                    <div className="flex items-center gap-16">
-                      <h2 className="font-normal text-[#586577]">Series :</h2>
-                      <p className="text-[14px] font-medium">
+                  <div className="grid gap-2 grid-cols-1 pt-3 px-2">
+                    <div className="flex items-center">
+                      <h2 className="font-text-[13px] font-medium text-[#586577] w-[15%]">Series :</h2>
+                      <p className="text-[13px] font-medium">
                         {seriesInfo?.title} {seriesInfo?.season}{" "}
                       </p>
                     </div>
-                    <div className="flex items-center gap-12">
-                      <h2 className="font-normal text-[#586577]">Duration :</h2>
-                      <p className="text-[14px] font-medium">
+                    <div className="flex items-center">
+                      <h2 className="text-[13px] font-medium text-[#586577] w-[15%]">Duration :</h2>
+                      <p className="text-[13px] font-medium">
                         {seriesInfo?.datestart
                           ? format(new Date(seriesInfo?.datestart), "dd MMM")
                           : ""}{" "}
@@ -222,16 +222,16 @@ export default function Overview({
                           : ""}
                       </p>
                     </div>
-                    <div className="flex items-center gap-14">
-                      <h2 className="font-normal text-[#586577]">Format :</h2>
-                      <p className="text-[14px] font-medium">
+                    <div className="flex items-center">
+                      <h2 className="text-[13px] font-medium text-[#586577] w-[15%]">Format :</h2>
+                      <p className="text-[13px] font-medium">
                         {" "}
                         {seriesInfo?.game_format?.toUpperCase()}
                       </p>
                     </div>
-                    <div className="flex items-center gap-14">
-                      <h2 className="font-normal text-[#586577]">Teams :</h2>
-                      <p className="text-[14px] font-medium">
+                    <div className="flex items-center">
+                      <h2 className="text-[13px] font-medium text-[#586577] w-[15%]">Teams :</h2>
+                      <p className="text-[13px] font-medium">
                         {seriesInfo?.total_teams} (Teams)
                       </p>
                     </div>
@@ -256,17 +256,17 @@ export default function Overview({
                               <Image
                                 loading="lazy"
                                 src={matches?.teama?.logo_url}
-                                className="h-[35px] rounded-full"
-                                width={35}
-                                height={35}
+                                className="h-[30px] rounded-full"
+                                width={30}
+                                height={30}
                                 alt={matches?.teama?.short_name}
                               />
-                              <span className="text-[#909090]">{matches?.teama?.short_name}</span>
+                              <span className="text-[#586577] font-medium text-[14px]">{matches?.teama?.short_name}</span>
                           
                           </Link>
                           <div className="mt-1">
                             <p className="text-1xl font-semibold">{matches?.teama?.scores}</p>
-                            <p className="text-[#909090]">({matches?.teama?.overs})</p>
+                            <p className="text-[#586577]">({matches?.teama?.overs})</p>
                           </div>
                         </div>
                         <div className=" font-semibold text-center w-full">
@@ -278,38 +278,38 @@ export default function Overview({
                         <div className="flex space-x-2 font-medium justify-end w-full">
                           <div className="mt-1 text-end">
                             <p className="text-1xl font-semibold">{matches?.teamb?.scores}</p>
-                            <p className="text-[#909090]">({matches?.teamb?.overs})</p>
+                            <p className="text-[#586577]">({matches?.teamb?.overs})</p>
                           </div>
                           <Link href={"/team/"+urlStringEncode(matches?.teamb?.name)+"/" + matches.teamb?.team_id}>
                             <div className="flex items-center space-x-1 flex-col font-medium">
                               <Image
                                 loading="lazy"
                                 src={matches?.teamb?.logo_url}
-                                className="h-[35px] rounded-full"
-                                width={35}
-                                height={35}
+                                className="h-[30px] rounded-full"
+                                width={30}
+                                height={30}
                                 alt={matches?.teamb?.short_name}
                               />
-                              <span className="text-[#909090]">{matches?.teamb?.short_name}</span>
+                              <span className="text-[#586577] font-medium text-[14px]">{matches?.teamb?.short_name}</span>
                             </div>
                           </Link>
                         </div>
                       </Link>
                   }{matches?.status === 1 &&
                     <Link href={"/moreinfo/"+urlStringEncode(matches?.teama?.short_name+"-vs-"+matches?.teamb?.short_name+"-match-"+matches?.match_number+"-"+matches?.competition?.title+"-"+matches?.competition?.season)+"/" + matches.match_id}>
-                    <div className="py-3 pb-0 flex justify-between items-center">
+                    <div className="py-3 flex justify-between items-center">
                     <div className="flex space-x-2 font-medium	w-full">
                       <Link href={"/team/"+urlStringEncode(matches?.teama?.name)+"/" + matches.teama?.team_id}>
                         <div className="flex items-center space-x-1 flex-row">
                         <Image
                             loading="lazy"
                             src={matches?.teama?.logo_url}
-                            className="h-[35px] rounded-full"
-                            width={35}
-                            height={35}
+                            className="h-[30px] rounded-full"
+                            width={30}
+                            height={30}
                             alt={matches?.teama?.short_name}
                           />
-                          <span className="text-[#909090]">{matches?.teama?.short_name}</span>
+                          <span className="text-[#586577] font-medium text-[14px]">{matches?.teama?.short_name}</span>
                         </div>
                       </Link>
                     </div>
@@ -325,12 +325,12 @@ export default function Overview({
                           <Image
                             loading="lazy"
                             src={matches?.teamb?.logo_url}
-                            className="h-[35px] rounded-full"
-                            width={35}
-                            height={35}
+                            className="h-[30px] rounded-full"
+                            width={30}
+                            height={30}
                             alt={matches?.teamb?.short_name}
                           />
-                          <span className="text-[#909090]">{matches?.teamb?.short_name}</span>
+                          <span className="text-[#586577] font-medium text-[14px]">{matches?.teamb?.short_name}</span>
                         </div>
                       </Link>
                     </div>
@@ -641,7 +641,7 @@ export default function Overview({
                                     <Image
                                       loading="lazy"
                                       src="/assets/img/player/default.png"
-                                      className="h-[33px]"
+                                      className="h-[33px] w-[33px] rounded-lg"
                                       width={33}
                                       height={33}
                                       alt="1"
@@ -669,7 +669,7 @@ export default function Overview({
                                     <Image
                                       loading="lazy"
                                       src="/assets/img/player/default.png"
-                                      className="h-[33px]"
+                                      className="h-[33px] w-[33px] rounded-lg"
                                       width={33}
                                       height={33}
                                       alt="1"
@@ -699,7 +699,7 @@ export default function Overview({
                                     <Image
                                       loading="lazy"
                                       src="/assets/img/player/default.png"
-                                      className="h-[33px]"
+                                      className="h-[33px] w-[33px] rounded-lg"
                                       width={33}
                                       height={33}
                                       alt="1"
@@ -1101,49 +1101,9 @@ export default function Overview({
               </div>
             </div>
             <div className="lg:col-span-4 md:col-span-5">
-              <div className="bg-white rounded-lg p-4 mb-4">
-                <div className="flex gap-1 items-center justify-between">
-                  <div className="flex gap-1 items-center">
-                    <div className="col-span-4 relative">
-                      <Image
-                        loading="lazy"
-                        src="/assets/img/home/trofi.png"
-                        className="h-[75px]"
-                        width={75}
-                        height={75}
-                        alt="1"
-                      />
-                    </div>
-                    <div className="col-span-8 relative">
-                      <h3 className="font-semibold text-[19px] mb-1">
-                        Weekly challenge
-                      </h3>
-                      <p className="font-semibold text-[13px] text-[#1a80f8]">
-                        <span className="text-[#586577]">Time Left:</span> 2
-                        Days 12h
-                      </p>
-                    </div>
-                  </div>
-                  <div className="">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="size-4"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              {/* Slider 1 */}
+              
               <WeeklySlider featuredMatch={featuredMatch} />
+
               {seriesInfo?.title === "Indian Premier League" && (
                 <>
                   <div className="my-4">
