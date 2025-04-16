@@ -46,36 +46,36 @@ export default function News({ urlString, isPointTable }: News) {
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
       <div id="tabs" className="my-4">
-        <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+        <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
           <Link href={urlString}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap ">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap ">
               Overview
             </button>
           </Link>
           <Link href={urlString + "/schedule-results"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap ">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap ">
               Schedule & Results
             </button>
           </Link>
           <Link href={urlString + "/squads"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap ">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap ">
               Squads
             </button>
           </Link>
           {isPointTable &&
           <Link href={urlString + "/points-table"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
               Points Table
             </button>
           </Link>
           }
           <Link href={urlString + "/news"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md">
               News
             </button>
           </Link>
           <Link href={urlString + "/stats/most-run"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
               Stats
             </button>
           </Link>
@@ -84,7 +84,7 @@ export default function News({ urlString, isPointTable }: News) {
 
       <div className="tab-content-container">
         <div
-          id="news"
+          id="news" style={{ textShadow: 'rgb(0 0 0 / 4%) 1px 2px 3px' }}
           className={`tab-content ${activeTab === "news" ? "" : ""}`}
         >
           <div className="rounded-lg py-4 px-4 bg-[#ffffff] mb-4">
@@ -93,6 +93,7 @@ export default function News({ urlString, isPointTable }: News) {
                 <div className="col-span-6 ">
                   {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
                     <Image  loading="lazy" 
+                    style={{ boxShadow: 'rgb(180 179 179 / 29%) 0px 8px 16px' }}
                       src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
                       width={300}
                       height={300}
@@ -182,7 +183,7 @@ export default function News({ urlString, isPointTable }: News) {
               {news.slice(1, 7)?.map((post: any, index: number) => (
                 <div className="col-span-6" key={index}>
                   <Link href={post?.link}>
-                    <div className="flex gap-3 my-5">
+                    <div className="flex gap-3 my-5" style={{ textShadow: 'rgb(0 0 0 / 4%) 1px 2px 3px' }}>
                       {post._embedded["wp:featuredmedia"]?.[0]?.media_details
                         .sizes.thumbnail.source_url && (
                         <Image  loading="lazy" 
@@ -194,6 +195,7 @@ export default function News({ urlString, isPointTable }: News) {
                           height={90}
                           alt={post?.title.rendered}
                           className="rounded-lg h-[90px]"
+                          style={{ boxShadow: 'rgb(180 179 179 / 29%) 0px 8px 16px' }}
                         />
                       )}
                       <div>

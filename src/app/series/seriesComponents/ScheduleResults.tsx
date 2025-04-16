@@ -13,9 +13,9 @@ interface ScheduleResults {
   urlString: string;
   seriesMatches: any;
   statsType: string;
-  featuredMatch:any;
-  isPointTable:boolean;
-  seriesId:number;
+  featuredMatch: any;
+  isPointTable: boolean;
+  seriesId: number;
 }
 export default function ScheduleResults({
   urlString,
@@ -25,7 +25,7 @@ export default function ScheduleResults({
   isPointTable,
   seriesId
 }: ScheduleResults) {
-   
+
 
   let completedMatch = seriesMatches?.resultMatch;
   let liveMatch = seriesMatches?.liveMatch;
@@ -33,128 +33,128 @@ export default function ScheduleResults({
 
 
   useEffect(() => {
-      const elements = document.querySelectorAll("#all-tab, #live-tab, #completed-tab, #upcoming-tab");
-  
-      // Ensure elements exist before adding event listeners
-      if (elements.length === 0) {
-        console.error("Tabs not found in the DOM!");
-        return;
-      }
-  
-      function handleClick(event: Event) {
-        const target = event.target as HTMLElement;
-        console.log("Clicked ID:", target.id);
-  
-        // Remove active styles from all tabs
-        document.querySelectorAll("#all-tab, #live-tab, #completed-tab, #upcoming-tab").forEach((el) => {
-          el.classList.remove("bg-[#1A80F8]", "text-white");
-        });
-  
-        // Add active style to clicked tab
-        target.classList.add("bg-[#1A80F8]", "text-white");
-  
-        // Hide all sections initially
-        document.querySelectorAll(".liveMatch, .completedMatch, .upcomingMatch").forEach((el) => {
-          el.classList.add("hidden");
-        });
-  
-        // Show only the relevant section
-        const sectionMap: Record<string, string> = {
-          "live-tab": ".liveMatch",
-          "completed-tab": ".completedMatch",
-          "upcoming-tab": ".upcomingMatch",
-          "all-tab": ".liveMatch, .completedMatch, .upcomingMatch",
-        };
-  
-        if (sectionMap[target.id]) {
-          document.querySelectorAll(sectionMap[target.id]).forEach((el) => el.classList.remove("hidden"));
-        }
-      }
-  
-      // Add event listeners
-      elements.forEach((element) => element.addEventListener("click", handleClick));
-  
-      if(statsType === 'schedule'){
-        const upcomingTab = document.querySelector("#upcoming-tab") as HTMLElement;
-        if (upcomingTab) {
-          upcomingTab.click();
-        } 
-      }
-      // Cleanup function to remove event listeners when component unmounts
-      return () => {
-        elements.forEach((element) => element.removeEventListener("click", handleClick));
-      };
-    }, []); // Run only once when component mounts
-  
-    const [activeMainTab, setActiveMainTab] = useState("info1");
+    const elements = document.querySelectorAll("#all-tab, #live-tab, #completed-tab, #upcoming-tab");
 
-    const [pageHtml, setPageHtml] = useState<string>('');
-        useEffect(() => {
-            async function fetchMatches() {
-              if (!seriesId || seriesId === 0) return;
-        
-              try {
-                
-                  const response = await fetch(`/api/series/SeriesHtml`, {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                      "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
-                    },
-                    body: JSON.stringify({ cid: seriesId }), 
-                  });
-        
-                  if (!response.ok) {
-                    console.error(
-                      `Error: API returned ${response.status} for CID ${seriesId}`
-                    );
-                    return null; // Skip failed requests
-                  }
-                  
-                  const result = await response.json();
-                  let items = result?.data?.[0]?.matchViewHtml || '';
-                  setPageHtml(items);
-              } catch (error) {
-                console.error("Error fetching matches:", error);
-              }
-            }
-        
-            fetchMatches();
-          }, [seriesId]);
+    // Ensure elements exist before adding event listeners
+    if (elements.length === 0) {
+      console.error("Tabs not found in the DOM!");
+      return;
+    }
+
+    function handleClick(event: Event) {
+      const target = event.target as HTMLElement;
+      console.log("Clicked ID:", target.id);
+
+      // Remove active styles from all tabs
+      document.querySelectorAll("#all-tab, #live-tab, #completed-tab, #upcoming-tab").forEach((el) => {
+        el.classList.remove("bg-[#1A80F8]", "text-white");
+      });
+
+      // Add active style to clicked tab
+      target.classList.add("bg-[#1A80F8]", "text-white");
+
+      // Hide all sections initially
+      document.querySelectorAll(".liveMatch, .completedMatch, .upcomingMatch").forEach((el) => {
+        el.classList.add("hidden");
+      });
+
+      // Show only the relevant section
+      const sectionMap: Record<string, string> = {
+        "live-tab": ".liveMatch",
+        "completed-tab": ".completedMatch",
+        "upcoming-tab": ".upcomingMatch",
+        "all-tab": ".liveMatch, .completedMatch, .upcomingMatch",
+      };
+
+      if (sectionMap[target.id]) {
+        document.querySelectorAll(sectionMap[target.id]).forEach((el) => el.classList.remove("hidden"));
+      }
+    }
+
+    // Add event listeners
+    elements.forEach((element) => element.addEventListener("click", handleClick));
+
+    if (statsType === 'schedule') {
+      const upcomingTab = document.querySelector("#upcoming-tab") as HTMLElement;
+      if (upcomingTab) {
+        upcomingTab.click();
+      }
+    }
+    // Cleanup function to remove event listeners when component unmounts
+    return () => {
+      elements.forEach((element) => element.removeEventListener("click", handleClick));
+    };
+  }, []); // Run only once when component mounts
+
+  const [activeMainTab, setActiveMainTab] = useState("info1");
+
+  const [pageHtml, setPageHtml] = useState<string>('');
+  useEffect(() => {
+    async function fetchMatches() {
+      if (!seriesId || seriesId === 0) return;
+
+      try {
+
+        const response = await fetch(`/api/series/SeriesHtml`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+          },
+          body: JSON.stringify({ cid: seriesId }),
+        });
+
+        if (!response.ok) {
+          console.error(
+            `Error: API returned ${response.status} for CID ${seriesId}`
+          );
+          return null; // Skip failed requests
+        }
+
+        const result = await response.json();
+        let items = result?.data?.[0]?.matchViewHtml || '';
+        setPageHtml(items);
+      } catch (error) {
+        console.error("Error fetching matches:", error);
+      }
+    }
+
+    fetchMatches();
+  }, [seriesId]);
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
       <div id="tabs" className="my-4">
-        <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+        <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
           <Link href={urlString}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap ">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap ">
               Overview
             </button>
           </Link>
           <Link href={urlString + "/schedule-results"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md">
               Schedule & Results
             </button>
           </Link>
           <Link href={urlString + "/squads"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap ">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap ">
               Squads
             </button>
           </Link>
           {isPointTable &&
-          <Link href={urlString + "/points-table"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
-              Points Table
-            </button>
-          </Link>
-        }
+            <Link href={urlString + "/points-table"}>
+              <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
+                Points Table
+              </button>
+            </Link>
+          }
           <Link href={urlString + "/news"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
               News
             </button>
           </Link>
           <Link href={urlString + "/stats/most-run/most-run"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
               Stats
             </button>
           </Link>
@@ -165,57 +165,52 @@ export default function ScheduleResults({
           <div className="lg:col-span-8 md:col-span-7">
             <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
               <div className="flex space-x-4">
-              <button  id="all-tab"
-                      className={`font-medium py-2 px-5 whitespace-nowrap ${
-                        activeMainTab === "info1"
-                          ? "bg-[#1A80F8] text-white"
-                          : ""
-                      } rounded-md`}
-                    >
-                      All
-                    </button>
-                  
-                    <button id="live-tab"
-                      className={`font-medium py-2 px-5 whitespace-nowrap ${
-                        activeMainTab === "live1"
-                          ? "bg-[#1A80F8] text-white"
-                          : ""
-                      } rounded-md`}
-                    >
-                      Live
-                    </button>
-                  
-                    <button  id="completed-tab"
-                      className={`font-medium py-2 px-5 whitespace-nowrap ${
-                        activeMainTab === "finished1"
-                          ? "bg-[#1A80F8] text-white"
-                          : ""
-                      } rounded-md`}
-                    >
-                      Finished
-                    </button>
-                  
-                    <button  id="upcoming-tab"
-                      className={`font-medium py-2 px-5 whitespace-nowrap ${
-                        activeMainTab === "scorecard1"
-                          ? "bg-[#1A80F8] text-white"
-                          : ""
-                      } rounded-md`}
-                    >
-                      Scheduled
-                    </button>
+                <button id="all-tab"
+                  className={`font-medium py-2 px-5 whitespace-nowrap  ${activeMainTab === "info1"
+                    ? "bg-[#1A80F8] text-white"
+                    : ""
+                    } rounded-md`}
+                >
+                  All
+                </button>
+
+                <button id="live-tab"
+                  className={`font-medium py-2 px-5 whitespace-nowrap ${activeMainTab === "live1"
+                    ? "bg-[#1A80F8] text-white"
+                    : ""
+                    } rounded-md`}
+                >
+                  Live
+                </button>
+
+                <button id="completed-tab"
+                  className={`font-medium py-2 px-5 whitespace-nowrap ${activeMainTab === "finished1"
+                    ? "bg-[#1A80F8] text-white"
+                    : ""
+                    } rounded-md`}
+                >
+                  Finished
+                </button>
+
+                <button id="upcoming-tab"
+                  className={`font-medium py-2 px-5 whitespace-nowrap ${activeMainTab === "scorecard1"
+                    ? "bg-[#1A80F8] text-white"
+                    : ""
+                    } rounded-md`}
+                >
+                  Scheduled
+                </button>
               </div>
             </div>
             <div className="tab-content-container">
               <div
                 id="info1"
-                className={`tab-content ${
-                  activeMainTab === "info1" ? "" : "hidden"
-                }`}
+                className={`tab-content ${activeMainTab === "info1" ? "" : "hidden"
+                  }`}
               >
                 {/* <!-- live match desktop view start --> */}
                 <div className="liveMatch">
-                  {liveMatch && liveMatch?.map((items:any, index: number) => (
+                  {liveMatch && liveMatch?.map((items: any, index: number) => (
                     <div key={index}>
                       <div
                         data-key={items.match_id}
@@ -223,19 +218,19 @@ export default function ScheduleResults({
                         className="lg:block hidden rounded-lg p-4 mb-4 bg-[#ffffff] hover:shadow-lg"
                       >
                         <div className="flex items-center justify-between mb-4">
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center space-x-2 w-[75%]">
                             <div
-                              className="flex items-center text-[#A70B0B] rounded-full pr-3  font-semibold"
+                              className="flex items-center text-[12px] text-[#A70B0B] rounded-full pr-3 uppercase font-semibold"
                               style={{ gap: "3px" }}
                             >
                               <span className="rounded-full">
-                                <svg className="h-[10px] w-[11px]">
+                                <svg className="h-[9px] w-[9px]">
                                   <circle
                                     fill="#ff0000"
                                     stroke="none"
-                                    cx="5"
-                                    cy="5"
-                                    r="5"
+                                    cx="4"
+                                    cy="4"
+                                    r="4"
                                   >
                                     <animate
                                       attributeName="opacity"
@@ -250,7 +245,7 @@ export default function ScheduleResults({
                               {items.status_str}
                             </div>
                             <div>
-                              <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                              <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                                 {items.competition.title} -{" "}
                                 {items.competition.season}
                               </h4>
@@ -260,7 +255,7 @@ export default function ScheduleResults({
                             <span className="text-[13px] font-medium">
                               {items.teama.short_name}
                             </span>
-                            <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-full text-[#0B773C] pr-2">
+                            <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
                               <span className="">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -281,7 +276,7 @@ export default function ScheduleResults({
                                 0
                               </span>
                             </span>
-                            <span className="flex items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-full text-[#A70B0B] pr-2">
+                            <span className="flex font-semibold items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-full text-[#A70B0B] pr-2">
                               <span className="">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -313,12 +308,12 @@ export default function ScheduleResults({
                               "/live-score/" +
                               urlStringEncode(
                                 items?.teama?.short_name +
-                                  "-vs-" +
-                                  items?.teamb?.short_name +
-                                  "-match-" +
-                                  items?.match_number +
-                                  "-" +
-                                  items?.competition?.title
+                                "-vs-" +
+                                items?.teamb?.short_name +
+                                "-match-" +
+                                items?.match_number +
+                                "-" +
+                                items?.competition?.title
                               ) +
                               "/" +
                               items.match_id
@@ -326,89 +321,95 @@ export default function ScheduleResults({
                           >
                             <div className="flex justify-between items-center text-[14px]">
                               <div className="">
-                                <p className="text-[#586577] text-[12px] mb-4 font-medium">
+                                <p className="text-[#586577] text-[13px] mb-4 font-medium">
                                   {items.subtitle} ,{items.format_str}, {items.venue.location}
                                 </p>
-                                <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
+                                <div className="flex items-center space-x-2 font-medium md:w-full mb-4">
                                   <div className="flex items-center space-x-2">
-                                    <Image  loading="lazy" 
+                                    <Image loading="lazy"
                                       src={items.teama.logo_url}
                                       className="h-[30px] rounded-full"
                                       width={30}
                                       height={30}
                                       alt={items.teama.short_name}
                                     />
-                                    <span className="text-[#909090] font-semibold">
+                                    <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
                                       {items.teama.short_name} -{" "}
                                     </span>
                                   </div>
                                   <p
                                     className={
-                                      "flex items-center gap-[1px] match" +
+                                      "flex items-center gap-[4px] match" +
                                       items.match_id +
                                       "-" +
                                       items.teama.team_id
                                     }
                                   >
                                     {items.teama.scores === undefined ||
-                                    items.teama.scores === null ||
-                                    items.teama.scores === "" ? (
+                                      items.teama.scores === null ||
+                                      items.teama.scores === "" ? (
                                       <span className="font-semibold">
                                         {" "}
                                         (Yet to bat){" "}
                                       </span>
                                     ) : (
                                       <>
-                                        <span className="font-semibold">
+                                        <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
                                           {items.teama.scores}
                                         </span>
-                                        <span className="text-[#909090] text-[13px]">
+                                        <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[12px] text-[black]" : "text-[12px] text-[#586577]"}`}>
                                           {" "}
                                           ({items.teama.overs}){" "}
                                         </span>
+                                        {(items.teama.team_id === items?.live?.live_inning?.batting_team_id) &&
+                                          <Image loading="lazy" src="/assets/img/home/bat.png" width={14} height={14} className="h-[12px] mb-[3px]" alt="bat" />
+                                        }
                                       </>
                                     )}
                                   </p>
                                 </div>
 
                                 <div>
-                                  <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
+                                  <div className="flex items-center space-x-2 font-medium md:w-full">
                                     <div className="flex items-center space-x-2">
-                                      <Image  loading="lazy" 
+                                      <Image loading="lazy"
                                         src={items.teamb.logo_url}
                                         className="h-[30px]"
                                         width={30}
                                         height={30}
                                         alt={items.teamb.short_name}
                                       />
-                                      <span className="text-[#909090] font-semibold">
+                                      <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
                                         {items.teamb.short_name} -
                                       </span>
                                     </div>
                                     <p
                                       className={
-                                        "flex items-center gap-[1px] match" +
+                                        "flex items-center gap-[4px] match" +
                                         items.match_id +
                                         "-" +
                                         items.teamb.team_id
                                       }
                                     >
                                       {items.teamb.scores === undefined ||
-                                      items.teamb.scores === null ||
-                                      items.teamb.scores === "" ? (
-                                        <span className="font-semibold">
+                                        items.teamb.scores === null ||
+                                        items.teamb.scores === "" ? (
+                                        <span className="font-medium text-[14px] text-[#586577]">
                                           {" "}
                                           (Yet to bat){" "}
                                         </span>
                                       ) : (
                                         <>
-                                          <span className="font-semibold">
+                                          <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
                                             {items.teamb.scores}
                                           </span>
-                                          <span className="text-[#909090] text-[13px]">
+                                          <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[12px] text-[black]" : "text-[12px] text-[#586577]"}`}>
                                             {" "}
                                             ({items.teamb.overs}){" "}
                                           </span>
+                                          {(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) &&
+                                            <Image loading="lazy" src="/assets/img/home/bat.png" width={14} height={14} className="h-[12px] mb-[3px]" alt="bat" />
+                                          }
                                         </>
                                       )}
                                     </p>
@@ -416,7 +417,7 @@ export default function ScheduleResults({
                                 </div>
                               </div>
 
-                              <div className=" font-medium text-center">
+                              <div className="w-[38%] font-semibold text-center">
                                 <p
                                   className={
                                     "text-[#2F335C] text-[14px] statusNote" +
@@ -438,42 +439,43 @@ export default function ScheduleResults({
 
                         <div className="flex items-center justify-between space-x-5 mt-3">
                           <div className="flex items-center">
-                          {isPointTable &&
-                          <>
-                            <Link
-                              href=
-                                {urlString + "/points-table"}
-                            >
-                              <p className=" text-[#909090] font-medium">
-                                {" "}
-                                Points Table
-                              </p>
-                            </Link>
-                            <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
-                            </>}
+                            {isPointTable &&
+                              <>
+                                <Link
+                                  href=
+                                  {urlString + "/points-table"}
+                                >
+                                  <p className=" text-[#909090] font-semibold">
+                                    {" "}
+                                    Points Table
+                                  </p>
+                                </Link>
+                                <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                              </>}
                             <Link href="#">
-                              <p className="text-[#909090] font-medium">
+                              <p className="text-[#909090] font-semibold">
                                 Schedule
                               </p>
                             </Link>
                           </div>
 
                           {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                                <Link href={("/h2h/"+urlStringEncode(items?.teama?.name+"-vs-"+items?.teamb?.name)+"-head-to-head-in-"+items?.format_str).toLowerCase()}>
-                                 
-                            <div className="flex mt-2 justify-end items-center space-x-2">
-                              <Image  loading="lazy" 
-                                src="/assets/img/home/handshake.png"
-                                width={30}
-                                height={30}
-                                alt=""
-                              />
-                              <span className="text-[#909090] font-medium">
-                                H2H
-                              </span>
-                            </div>
-                          </Link>
-                        }
+                            <Link href={("/h2h/" + urlStringEncode(items?.teama?.name + "-vs-" + items?.teamb?.name) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
+
+                              <div className="flex mt-2 justify-end items-center space-x-2">
+                                <Image loading="lazy"
+                                  src="/assets/img/home/handshake.png"
+                                  width={25}
+                                  height={25}
+                                  alt=""
+                                  style={{ width: "25px", height: "25px" }}
+                                />
+                                <span className="text-[#586577] text-[13px] font-semibold">
+                                  H2H
+                                </span>
+                              </div>
+                            </Link>
+                          }
                         </div>
                       </div>
 
@@ -512,7 +514,7 @@ export default function ScheduleResults({
                             </div>
                             <span className="absolute right-4 top-[19px]">
                               <button className="arro-button">
-                                <Image  loading="lazy" 
+                                <Image loading="lazy"
                                   src="/assets/img/arrow.png"
                                   className=""
                                   width={10}
@@ -531,12 +533,12 @@ export default function ScheduleResults({
                               "/live-score/" +
                               urlStringEncode(
                                 items?.teama?.short_name +
-                                  "-vs-" +
-                                  items?.teamb?.short_name +
-                                  "-match-" +
-                                  items?.match_number +
-                                  "-" +
-                                  items?.competition?.title
+                                "-vs-" +
+                                items?.teamb?.short_name +
+                                "-match-" +
+                                items?.match_number +
+                                "-" +
+                                items?.competition?.title
                               ) +
                               "/" +
                               items.match_id
@@ -550,7 +552,7 @@ export default function ScheduleResults({
                                 <div className="">
                                   <div className="items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
                                     <div className="flex items-center space-x-2">
-                                      <Image  loading="lazy" 
+                                      <Image loading="lazy"
                                         src={items.teama.logo_url}
                                         className="h-[30px] rounded-full"
                                         width={30}
@@ -562,7 +564,7 @@ export default function ScheduleResults({
                                           <span className="text-[#5e5e5e] font-medium">
                                             {items.teama.short_name}
                                           </span>
-                                          <Image  loading="lazy" 
+                                          <Image loading="lazy"
                                             src="/assets/img/home/bat.png"
                                             className="h-[15px]"
                                             width={30}
@@ -580,8 +582,8 @@ export default function ScheduleResults({
                                           }
                                         >
                                           {items.teama.scores === undefined ||
-                                          items.teama.scores === null ||
-                                          items.teama.scores === "" ? (
+                                            items.teama.scores === null ||
+                                            items.teama.scores === "" ? (
                                             <span className="font-semibold">
                                               {" "}
                                               (Yet to bat){" "}
@@ -605,7 +607,7 @@ export default function ScheduleResults({
                                   <div>
                                     <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                       <div className="flex items-center space-x-2">
-                                        <Image  loading="lazy" 
+                                        <Image loading="lazy"
                                           src={items.teamb.logo_url}
                                           className="h-[30px]"
                                           width={30}
@@ -625,8 +627,8 @@ export default function ScheduleResults({
                                             }
                                           >
                                             {items.teamb.scores === undefined ||
-                                            items.teamb.scores === null ||
-                                            items.teamb.scores === "" ? (
+                                              items.teamb.scores === null ||
+                                              items.teamb.scores === "" ? (
                                               <span className="font-semibold">
                                                 {" "}
                                                 (Yet to bat){" "}
@@ -667,35 +669,36 @@ export default function ScheduleResults({
 
                           <div className="flex items-center justify-between space-x-5 mt-2">
                             <div className="flex items-center">
-                            {isPointTable &&
-                          <>
-                              <Link
-                                href={urlString + "/points-table"}
-                              >
-                                <p className=" text-[#909090] text-[11px] font-medium">
-                                  {" "}
-                                  Points Table
-                                </p>
-                              </Link>
+                              {isPointTable &&
+                                <>
+                                  <Link
+                                    href={urlString + "/points-table"}
+                                  >
+                                    <p className=" text-[#586577] text-[13px] font-medium">
+                                      {" "}
+                                      Points Table
+                                    </p>
+                                  </Link>
 
-                              <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
-                              </>}
+                                  <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                                </>}
                               {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                                <Link href={("/h2h/"+urlStringEncode(items?.teama?.name+"-vs-"+items?.teamb?.name)+"-head-to-head-in-"+items?.format_str).toLowerCase()}>
-                                 
-                                <div className="flex justify-end items-center space-x-2">
-                                  <Image  loading="lazy" 
-                                    src="/assets/img/home/handshake.png"
-                                    className="h-[15px]"
-                                    width={30}
-                                    height={30}
-                                    alt=""
-                                  />
-                                  <span className="text-[#909090] text-[11px] font-medium">
-                                    H2H
-                                  </span>
-                                </div>
-                              </Link>
+                                <Link href={("/h2h/" + urlStringEncode(items?.teama?.name + "-vs-" + items?.teamb?.name) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
+
+                                  <div className="flex justify-end items-center space-x-2">
+                                    <Image loading="lazy"
+                                      src="/assets/img/home/handshake.png"
+                                      className="h-[17px] w-[17px]"
+                                      width={17}
+                                      height={17}
+                                      style={{ width: "17px", height: "17px" }}
+                                      alt=""
+                                    />
+                                    <span className="text-[#586577] text-[13px] font-medium">
+                                      H2H
+                                    </span>
+                                  </div>
+                                </Link>
                               }
                             </div>
 
@@ -752,6 +755,8 @@ export default function ScheduleResults({
                     </div>
                   ))}
                 </div>
+
+
                 <div className="completedMatch">
                   {completedMatch && completedMatch?.map((cmatch: any, index: number) => (
                     <div key={index}>
@@ -759,20 +764,20 @@ export default function ScheduleResults({
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center space-x-2">
                             <div
-                              className="flex items-center text-[#0B773C] rounded-full pr-3  font-semibold"
+                              className="flex items-center text-[12px] text-[#00a632] rounded-full pr-3 uppercase  font-semibold"
                               style={{ gap: "3px" }}
                             >
                               <span className="rounded-full">●</span>{" "}
                               {cmatch.status_str}
                             </div>
                             <div>
-                              <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                              <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                                 {cmatch.competition.title} -{" "}
                                 {cmatch.competition.season}
                               </h4>
                             </div>
                           </div>
-                          
+
                         </div>
 
                         <div className="border-t-[1px] border-[#E7F2F4]"></div>
@@ -784,39 +789,39 @@ export default function ScheduleResults({
                                 "/scorecard/" +
                                 urlStringEncode(
                                   cmatch?.teama?.short_name +
-                                    "-vs-" +
-                                    cmatch?.teamb?.short_name +
-                                    "-match-" +
-                                    cmatch?.match_number +
-                                    "-" +
-                                    cmatch?.competition?.title
+                                  "-vs-" +
+                                  cmatch?.teamb?.short_name +
+                                  "-match-" +
+                                  cmatch?.match_number +
+                                  "-" +
+                                  cmatch?.competition?.title
                                 ) +
                                 "/" +
                                 cmatch.match_id
                               }
                             >
                               <div className="">
-                                <p className="text-[#586577] text-[12px] mb-4 font-medium">
+                                <p className="text-[#586577] text-[13px] mb-4 font-medium">
                                   {cmatch.subtitle} ,{cmatch.format_str}, {cmatch.venue.location}
                                 </p>
                                 <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
                                   <div className="flex items-center space-x-2">
-                                    <Image  loading="lazy" 
+                                    <Image loading="lazy"
                                       src={cmatch.teama.logo_url}
                                       className="h-[30px] rounded-full"
                                       width={30}
                                       height={30}
                                       alt={cmatch.teama.short_name}
                                     />
-                                    <span className="text-[#909090] font-semibold">
+                                    <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
                                       {cmatch.teama.short_name} -{" "}
                                     </span>
                                   </div>
                                   <p>
-                                    <span className=" font-semibold">
-                                      {cmatch.teama.scores}
+                                    <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
+                                      {cmatch.teama.scores}  {" "}
                                     </span>
-                                    <span className="text-[#909090] text-[13px]">
+                                    <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[12px] text-[black]" : "font-medium text-[#586577]"}`}>
                                       {" "}
                                       ({cmatch.teama.overs})
                                     </span>
@@ -826,22 +831,22 @@ export default function ScheduleResults({
                                 <div>
                                   <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                     <div className="flex items-center space-x-2">
-                                      <Image  loading="lazy" 
+                                      <Image loading="lazy"
                                         src={cmatch.teamb.logo_url}
                                         className="h-[30px]"
                                         width={30}
                                         height={30}
                                         alt={cmatch.teamb.short_name}
                                       />
-                                      <span className="text-[#909090] font-semibold">
+                                      <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
                                         {cmatch.teamb.short_name} -{" "}
                                       </span>
                                     </div>
                                     <p>
-                                      <span className=" font-semibold">
-                                        {cmatch.teamb.scores}
+                                      <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
+                                        {cmatch.teamb.scores}{" "}
                                       </span>
-                                      <span className="text-[#909090] text-[13px]">
+                                      <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[12px] text-[black]" : "font-medium text-[#586577]"}`}>
                                         ({cmatch.teamb.overs})
                                       </span>
                                     </p>
@@ -849,49 +854,48 @@ export default function ScheduleResults({
                                 </div>
                               </div>
                             </Link>
-                            <div className="h-[100px] border-l-[1px] border-[#d0d3d7]"></div>
+                            <div className="h-[100px] border-l-[1px] border-[#efefef]"></div>
 
                             <Link
                               href={
                                 "/scorecard/" +
                                 urlStringEncode(
                                   cmatch?.teama?.short_name +
-                                    "-vs-" +
-                                    cmatch?.teamb?.short_name +
-                                    "-match-" +
-                                    cmatch?.match_number +
-                                    "-" +
-                                    cmatch?.competition?.title
+                                  "-vs-" +
+                                  cmatch?.teamb?.short_name +
+                                  "-match-" +
+                                  cmatch?.match_number +
+                                  "-" +
+                                  cmatch?.competition?.title
                                 ) +
                                 "/" +
                                 cmatch.match_id
                               }
                             >
                               <div className=" font-semibold flex flex-col items-center">
-                                <Image  loading="lazy" 
+                                <Image loading="lazy"
                                   src="/assets/img/home/win.png"
                                   width={30}
                                   height={30}
-                                  style={{ width: "auto", height: "auto" }}
+                                  style={{ width: "30px", height: "30px" }}
                                   alt=""
                                 />
-                                <p className="text-[#0B773C] text-1xl w-[75%] text-center">
+                                <p className="text-[#00a632] text-[14px] w-[75%] text-center">
                                   {cmatch.result}
                                 </p>
                               </div>
                             </Link>
 
-                            <div className="h-[100px] border-l-[1px] border-[#d0d3d7] hidden"></div>
+                            <div className="h-[100px] border-l-[1px] border-[#efefef] hidden"></div>
 
                             <div className="hidden flex-col items-center">
-                              <Image  loading="lazy" 
+                              <Image loading="lazy"
                                 src="/assets/img/default.png"
                                 width={40}
                                 height={40}
                                 alt=""
                               />
-
-                              <p className=" font-semibold">{cmatch?.man_of_the_match?.name}</p>
+                              <p className="font-semibold">{cmatch?.man_of_the_match?.name}</p>
                               <p>Man of the match</p>
                             </div>
                           </div>
@@ -900,41 +904,42 @@ export default function ScheduleResults({
 
                         <div className="flex items-center justify-between space-x-5 mt-3">
                           <div className="flex items-center">
-                          {isPointTable &&
-                          <>
-                            <Link
-                              href=
-                                {urlString + "/points-table"}
-                            >
-                              <p className=" text-[#909090] font-medium">
-                                {" "}
-                                Points Table
-                              </p>
-                            </Link>
-                            <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
-                            </>}
+                            {isPointTable &&
+                              <>
+                                <Link
+                                  href=
+                                  {urlString + "/points-table"}
+                                >
+                                  <p className=" text-[#909090] font-semibold">
+                                    {" "}
+                                    Points Table
+                                  </p>
+                                </Link>
+                                <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                              </>}
                             <Link href="#">
-                              <p className="text-[#909090] font-medium">
+                              <p className="text-[#909090] font-semibold">
                                 Schedule
                               </p>
                             </Link>
                           </div>
 
                           {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
-                                                          <Link href={("/h2h/"+urlStringEncode(cmatch?.teama?.name+"-vs-"+cmatch?.teamb?.name)+"-head-to-head-in-"+cmatch?.format_str).toLowerCase()}>
-                                                           
-                            <div className="flex mt-2 justify-end items-center space-x-2">
-                              <Image  loading="lazy" 
-                                src="/assets/img/home/handshake.png"
-                                width={30}
-                                height={30}
-                                alt=""
-                              />
-                              <span className="text-[#909090] font-medium">
-                                H2H
-                              </span>
-                            </div>
-                          </Link>
+                            <Link href={("/h2h/" + urlStringEncode(cmatch?.teama?.name + "-vs-" + cmatch?.teamb?.name) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
+
+                              <div className="flex mt-2 justify-end items-center space-x-2">
+                                <Image loading="lazy"
+                                  src="/assets/img/home/handshake.png"
+                                  width={25}
+                                  height={25}
+                                  style={{ width: "25px", height: "25px" }}
+                                  alt=""
+                                />
+                                <span className="text-[#909090] font-semibold">
+                                  H2H
+                                </span>
+                              </div>
+                            </Link>
                           }
                         </div>
                       </div>
@@ -944,21 +949,21 @@ export default function ScheduleResults({
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center space-x-2">
                             <div
-                              className="flex items-center text-[#0B773C] rounded-full  font-semibold"
+                              className="flex text-[12px] items-center text-[#00a632] rounded-full uppercase font-semibold"
                               style={{ gap: "3px" }}
                             >
-                              <span className="rounded-full">●</span>{" "}
+                              <div className="w-[6px] h-[6px] bg-[#00a632] rounded-full"></div> {" "}
                               {cmatch.status_str}
                             </div>
                             <div>
-                              <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                              <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                                 {cmatch.competition.title} -{" "}
                                 {cmatch.competition.season}
                               </h4>
                             </div>
                             <span className="absolute right-4 top-[19px]">
                               <button className="arro-button">
-                                <Image  loading="lazy" 
+                                <Image loading="lazy"
                                   src="/assets/img/arrow.png"
                                   className=""
                                   width={10}
@@ -978,26 +983,26 @@ export default function ScheduleResults({
                               "/scorecard/" +
                               urlStringEncode(
                                 cmatch?.teama?.short_name +
-                                  "-vs-" +
-                                  cmatch?.teamb?.short_name +
-                                  "-match-" +
-                                  cmatch?.match_number +
-                                  "-" +
-                                  cmatch?.competition?.title
+                                "-vs-" +
+                                cmatch?.teamb?.short_name +
+                                "-match-" +
+                                cmatch?.match_number +
+                                "-" +
+                                cmatch?.competition?.title
                               ) +
                               "/" +
                               cmatch.match_id
                             }
                           >
                             <div className="py-2 pb-3">
-                              <p className="text-[#586577] text-[11px] mb-4 font-normal">
+                              <p className="text-[#586577] text-[13px] mb-4 font-normal">
                                 {cmatch.subtitle} ,{cmatch.format_str}, {cmatch.venue.location}
                               </p>
                               <div className="flex justify-between items-center text-[14px]">
-                                <div className="">
-                                  <div className="items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
+                                <div className="w-[100%]">
+                                  <div className="items-center space-x-2 font-medium md:w-full mb-4">
                                     <div className="flex items-center space-x-2">
-                                      <Image  loading="lazy" 
+                                      <Image loading="lazy"
                                         src={cmatch.teama.logo_url}
                                         className="h-[30px] rounded-full"
                                         width={30}
@@ -1006,16 +1011,16 @@ export default function ScheduleResults({
                                       />
                                       <div>
                                         <span className="flex items-center gap-1">
-                                          <span className="text-[#5e5e5e] font-medium">
+                                        <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
                                             {cmatch.teama.short_name}
                                           </span>
                                         </span>
                                         <p className="flex items-end gap-2">
-                                          <span className=" font-semibold">
+                                        <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#434c59]"}`}>
                                             {cmatch.teama.scores}
                                           </span>
 
-                                          <span className="text-[#909090] text-[12px] font-normal">
+                                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[12px] text-[black]" : "text-[#586577] text-[12px] font-normal"}`}>
                                             ({cmatch.teama.overs})
                                           </span>
                                         </p>
@@ -1025,7 +1030,7 @@ export default function ScheduleResults({
                                   <div>
                                     <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                       <div className="flex items-center space-x-2">
-                                        <Image  loading="lazy" 
+                                        <Image loading="lazy"
                                           src={cmatch.teamb.logo_url}
                                           className="h-[30px] rounded-full"
                                           width={30}
@@ -1034,16 +1039,16 @@ export default function ScheduleResults({
                                         />
                                         <div>
                                           <span className="flex items-center gap-1">
-                                            <span className="text-[#5e5e5e] font-medium">
+                                          <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
                                               {cmatch.teamb.short_name}
                                             </span>
                                           </span>
                                           <p className="flex items-end gap-2">
-                                            <span className=" font-semibold">
+                                          <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#434c59]"}`}>
                                               {cmatch.teamb.scores}
                                             </span>
 
-                                            <span className="text-[#909090] text-[12px] font-normal">
+                                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[12px] text-[black]" : "font-medium text-[#434c59]"}`}>
                                               ({cmatch.teama.overs})
                                             </span>
                                           </p>
@@ -1053,17 +1058,17 @@ export default function ScheduleResults({
                                   </div>
                                 </div>
 
-                                {/* <!-- <div className="h-[100px] border-l-[1px] border-[#d0d3d7]"></div> --> */}
+                                 <div className="h-[100px] border-l-[1px] border-[#efefef]"></div>
 
-                                <div className=" font-semibold flex flex-col items-center">
-                                  <Image  loading="lazy" 
+                                <div className=" w-[50%] font-semibold flex flex-col items-center">
+                                  <Image loading="lazy"
                                     src="/assets/img/home/win.png"
                                     width={30}
                                     height={30}
-                                    style={{ width: "auto", height: "auto" }}
+                                    style={{ width: "30px", height: "30px" }}
                                     alt=""
                                   />
-                                  <p className="text-[#0B773C] font-semibold mt-1 text-[13px] w-[75%] text-center">
+                                  <p className="text-[#00a632] font-semibold mt-1 text-[13px] w-[75%] text-center">
                                     {cmatch.result}
                                   </p>
                                 </div>
@@ -1075,41 +1080,42 @@ export default function ScheduleResults({
 
                           <div className="flex items-center justify-between space-x-5 mt-2">
                             <div className="flex items-center">
-                            {isPointTable &&
-                          <>
-                              <Link
-                                href={urlString + "/points-table"}
-                              >
-                                <p className=" text-[#909090] text-[11px] font-medium">
-                                  {" "}
-                                  Points Table
-                                </p>
-                              </Link>
+                              {isPointTable &&
+                                <>
+                                  <Link
+                                    href={urlString + "/points-table"}
+                                  >
+                                    <p className=" text-[#586577] text-[13px] font-medium">
+                                      {" "}
+                                      Points Table
+                                    </p>
+                                  </Link>
 
-                              <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
-                              </>}
+                                  <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                                </>}
                               {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
-                                <Link href={("/h2h/"+urlStringEncode(cmatch?.teama?.name+"-vs-"+cmatch?.teamb?.name)+"-head-to-head-in-"+cmatch?.format_str).toLowerCase()}>
-                                 
-                                <div className="flex justify-end items-center space-x-2">
-                                  <Image  loading="lazy" 
-                                    src="/assets/img/home/handshake.png"
-                                    className="h-[15px]"
-                                    width={30}
-                                    height={30}
-                                    alt=""
-                                  />
-                                  <span className="text-[#909090] text-[11px] font-medium">
-                                    H2H
-                                  </span>
-                                </div>
-                              </Link>
+                                <Link href={("/h2h/" + urlStringEncode(cmatch?.teama?.name + "-vs-" + cmatch?.teamb?.name) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
+
+                                  <div className="flex justify-end items-center space-x-2">
+                                    <Image loading="lazy"
+                                      src="/assets/img/home/handshake.png"
+                                      className="h-[17px] w-[17px]"
+                                      width={17}
+                                      height={17}
+                                      style={{ width: "17px", height: "17px" }}
+                                      alt=""
+                                    />
+                                    <span className="text-[#586577] text-[13px] font-medium">
+                                      H2H
+                                    </span>
+                                  </div>
+                                </Link>
                               }
                             </div>
 
-                            <div className="flex items-center justify-between">
+                            <div className="hidden md:flex items-center justify-between">
                               <div className="flex items-center gap-1">
-                                <Image  loading="lazy" 
+                                <Image loading="lazy"
                                   src="/assets/img/player-2.png"
                                   className="h-[32px]"
                                   width={30}
@@ -1130,6 +1136,8 @@ export default function ScheduleResults({
                     </div>
                   ))}
                 </div>
+
+
                 <div className="upcomingMatch">
                   {upcomingMatch && upcomingMatch?.map((ucmatch: any, index: number) => (
                     <div key={index}>
@@ -1137,22 +1145,22 @@ export default function ScheduleResults({
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center space-x-2">
                             <div
-                              className="flex items-center text-[#A45B09] rounded-full pr-3  font-semibold"
+                              className="flex items-center text-[12px] text-[#A45B09] rounded-full pr-3 uppercase font-semibold"
                               style={{ gap: "3px" }}
                             >
-                              <span className="rounded-full">●</span>{" "}
+                              <div className="w-[8px] h-[8px] bg-[#A45B09] rounded-full animate-blink"></div>{" "}
                               {ucmatch.status_str}
                             </div>
                             <div>
-                              <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                              <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                                 {ucmatch.competition.title} -{" "}
                                 {ucmatch.competition.season}
                               </h4>
                             </div>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <span className="text-[13px] font-medium">AUS</span>
-                            <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-full text-[#0B773C] pr-2">
+                            <span className="text-[11px] text-[#1F2937] font-semibold oddsTeam">AUS</span>
+                            <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
                               <span className="">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -1171,7 +1179,7 @@ export default function ScheduleResults({
                               </span>
                               41
                             </span>
-                            <span className="flex items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-full text-[#A70B0B] pr-2">
+                            <span className="flex font-semibold items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-full text-[#A70B0B] pr-2">
                               <span className="">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -1199,49 +1207,49 @@ export default function ScheduleResults({
                             "/moreinfo/" +
                             urlStringEncode(
                               ucmatch?.teama?.short_name +
-                                "-vs-" +
-                                ucmatch?.teamb?.short_name +
-                                "-match-" +
-                                ucmatch?.match_number +
-                                "-" +
-                                ucmatch?.competition?.title
+                              "-vs-" +
+                              ucmatch?.teamb?.short_name +
+                              "-match-" +
+                              ucmatch?.match_number +
+                              "-" +
+                              ucmatch?.competition?.title
                             ) +
                             "/" +
                             ucmatch.match_id
                           }
                         >
-                          <div className="py-4 px-3">
+                          <div className="py-3 px-3">
                             <div className="flex justify-between items-center text-[14px]">
-                              <div className="">
-                                <p className="text-[#586577] text-[12px] mb-4 font-medium">
+                              <div className="w-[50%]">
+                                <p className="text-[#586577] text-[13px] mb-4 font-medium">
                                   {ucmatch.subtitle} ,{ucmatch.format_str}, {ucmatch.venue.location}
                                 </p>
-                                <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
+                                <div className="flex items-center space-x-2 font-medium x md:w-full mb-4">
                                   <div className="flex items-center space-x-2">
-                                    <Image  loading="lazy" 
+                                    <Image loading="lazy"
                                       src={ucmatch.teama.logo_url}
                                       className="h-[30px] rounded-full"
                                       width={30}
                                       height={30}
                                       alt={ucmatch.teama.short_name}
                                     />
-                                    <span className="font-semibold">
+                                    <span className="text-[#586577] font-medium text-[14px]">
                                       {ucmatch.teama.short_name}
                                     </span>
                                   </div>
                                 </div>
 
                                 <div>
-                                  <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
+                                  <div className="flex items-center space-x-2 font-medium md:w-full">
                                     <div className="flex items-center space-x-2">
-                                      <Image  loading="lazy" 
+                                      <Image loading="lazy"
                                         src={ucmatch.teamb.logo_url}
                                         className="h-[30px]"
                                         width={30}
                                         height={30}
                                         alt={ucmatch.teamb.short_name}
                                       />
-                                      <span className="font-semibold">
+                                      <span className="text-[#586577] font-medium text-[14px]">
                                         {ucmatch.teamb.short_name}
                                       </span>
                                     </div>
@@ -1249,16 +1257,23 @@ export default function ScheduleResults({
                                 </div>
                               </div>
 
-                              <div className="font-semibold text-center">
+                              <div className="h-[100px] border-l-[1px] border-[#efefef]"></div>
+
+                              <div className="w-[50%] font-semibold text-center">
                                 <div className="text-[#144280]">
                                   <div className=" font-medium text-center">
                                     {isSameDay(
                                       new Date(),
                                       new Date(ucmatch.date_start_ist)
                                     ) ? (
-                                      <CountdownTimer
-                                        targetTime={ucmatch.date_start_ist}
-                                      />
+                                      <>
+
+                                        <span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
+                                        <CountdownTimer
+                                          targetTime={ucmatch.date_start_ist}
+
+                                        />
+                                      </>
                                     ) : (
                                       <p className="text-[#2F335C] text-[14px]">
                                         {format(
@@ -1282,40 +1297,41 @@ export default function ScheduleResults({
 
                         <div className="flex items-center justify-between space-x-5 mt-3">
                           <div className="flex items-center">
-                          {isPointTable &&
-                          <>
-                            <Link
-                              href={urlString + "/points-table"}
-                            >
-                              <p className=" text-[#909090] font-medium">
-                                {" "}
-                                Points Table
-                              </p>
-                            </Link>
-                            <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
-                            </>}
+                            {isPointTable &&
+                              <>
+                                <Link
+                                  href={urlString + "/points-table"}
+                                >
+                                  <p className=" text-[#909090] font-semibold">
+                                    {" "}
+                                    Points Table
+                                  </p>
+                                </Link>
+                                <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                              </>}
                             <Link href="#">
-                              <p className="text-[#909090] font-medium">
+                              <p className="text-[#909090] font-semibold">
                                 Schedule
                               </p>
                             </Link>
                           </div>
 
                           {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                                <Link href={("/h2h/"+urlStringEncode(ucmatch?.teama?.name+"-vs-"+ucmatch?.teamb?.name)+"-head-to-head-in-"+ucmatch?.format_str).toLowerCase()}>
-                                 
-                            <div className="flex mt-2 justify-end items-center space-x-2">
-                              <Image  loading="lazy" 
-                                src="/assets/img/home/handshake.png"
-                                width={30}
-                                height={30}
-                                alt=""
-                              />
-                              <span className="text-[#909090] font-medium">
-                                H2H
-                              </span>
-                            </div>
-                          </Link>
+                            <Link href={("/h2h/" + urlStringEncode(ucmatch?.teama?.name + "-vs-" + ucmatch?.teamb?.name) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
+
+                              <div className="flex mt-2 justify-end items-center space-x-2">
+                                <Image loading="lazy"
+                                  src="/assets/img/home/handshake.png"
+                                  width={25}
+                                  height={25}
+                                  alt=""
+                                  style={{ width: "25px", height: "25px" }}
+                                />
+                                <span className="text-[#909090] font-semibold">
+                                  H2H
+                                </span>
+                              </div>
+                            </Link>
                           }
                         </div>
                       </div>
@@ -1325,21 +1341,21 @@ export default function ScheduleResults({
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center space-x-2">
                             <div
-                              className="flex items-center text-[#A45B09] rounded-full font-semibold"
-                              style={{ gap: "3px" }}
+                              className="flex text-[12px] items-center uppercase text-[#A45B09] rounded-full font-semibold"
+                              style={{ gap: "2px" }}
                             >
-                              <span className="rounded-full">●</span>{" "}
+                              <div className="w-[6px] h-[6px] bg-[#A45B09] rounded-full"></div>{" "}
                               {ucmatch.status_str}
                             </div>
                             <div>
-                              <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                              <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                                 {ucmatch.competition.title} -{" "}
                                 {ucmatch.competition.season}
                               </h4>
                             </div>
                             <span className="absolute right-[12px] top-[19px]">
                               <button className="arro-button">
-                                <Image  loading="lazy" 
+                                <Image loading="lazy"
                                   src="/assets/img/arrow.png"
                                   className=""
                                   width={10}
@@ -1357,12 +1373,12 @@ export default function ScheduleResults({
                             "/moreinfo/" +
                             urlStringEncode(
                               ucmatch?.teama?.short_name +
-                                "-vs-" +
-                                ucmatch?.teamb?.short_name +
-                                "-match-" +
-                                ucmatch?.match_number +
-                                "-" +
-                                ucmatch?.competition?.title
+                              "-vs-" +
+                              ucmatch?.teamb?.short_name +
+                              "-match-" +
+                              ucmatch?.match_number +
+                              "-" +
+                              ucmatch?.competition?.title
                             ) +
                             "/" +
                             ucmatch.match_id
@@ -1370,14 +1386,14 @@ export default function ScheduleResults({
                         >
                           <div className="open-Performance-data">
                             <div className="py-2 pb-3">
-                              <p className="text-[#586577] text-[12px] mb-4 font-medium">
+                              <p className="text-[#586577] text-[13px] mb-4 font-medium">
                                 {ucmatch.subtitle} ,{ucmatch.format_str}, {ucmatch.venue.location}
                               </p>
                               <div className="flex justify-between items-center text-[14px]">
-                                <div>
-                                  <div className="items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
+                                <div className="w-[80%]">
+                                  <div className="items-center space-x-2 font-medium md:w-full mb-4">
                                     <div className="flex items-center space-x-2">
-                                      <Image  loading="lazy" 
+                                      <Image loading="lazy"
                                         src={ucmatch.teama.logo_url}
                                         className="h-[30px] rounded-full"
                                         width={30}
@@ -1393,9 +1409,9 @@ export default function ScheduleResults({
                                       </div>
                                     </div>
                                   </div>
-                                  <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
+                                  <div className="flex items-center space-x-2 font-medium md:w-full">
                                     <div className="flex items-center space-x-2">
-                                      <Image  loading="lazy" 
+                                      <Image loading="lazy"
                                         src={ucmatch.teamb.logo_url}
                                         className="h-[30px] rounded-full"
                                         width={30}
@@ -1412,29 +1428,35 @@ export default function ScheduleResults({
                                     </div>
                                   </div>
                                 </div>
-                                <div className=" font-medium text-center">
-                                    {isSameDay(
-                                      new Date(),
-                                      new Date(ucmatch.date_start_ist)
-                                    ) ? (
+
+
+                                <div className="h-[100px] border-l-[1px] border-[#f2fafd]"></div>
+
+                                <div className="w-[80%] font-semibold text-center">
+                                  {isSameDay(
+                                    new Date(),
+                                    new Date(ucmatch.date_start_ist)
+                                  ) ? (
+                                    <><span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
                                       <CountdownTimer
                                         targetTime={ucmatch.date_start_ist}
                                       />
-                                    ) : (
-                                      <p className="text-[#2F335C] text-[14px]">
-                                        {format(
-                                          new Date(ucmatch.date_start_ist),
-                                          "dd MMMM - EEEE"
-                                        )}
-                                        , <br />
-                                        {format(
-                                          new Date(ucmatch.date_start_ist),
-                                          "hh:mm:aa"
-                                        )}
-                                      </p>
-                                    )}
-                                  </div>
-                                
+                                    </>
+                                  ) : (
+                                    <p className="text-[13px] font-medium">
+                                      {format(
+                                        new Date(ucmatch.date_start_ist),
+                                        "dd MMMM - EEEE"
+                                      )}
+                                      , <br />
+                                      {format(
+                                        new Date(ucmatch.date_start_ist),
+                                        "hh:mm:aa"
+                                      )}
+                                    </p>
+                                  )}
+                                </div>
+
                               </div>
                             </div>
                           </div>
@@ -1444,41 +1466,42 @@ export default function ScheduleResults({
 
                         <div className="flex items-center justify-between space-x-5 mt-2">
                           <div className="flex items-center">
-                          {isPointTable &&
-                          <>
-                            <Link
-                              href={urlString + "/points-table"}
-                            >
-                              <p className="text-[#909090] text-[11px] font-medium">
-                                Points Table
-                              </p>
-                            </Link>
-                            <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
-                            </>}
+                            {isPointTable &&
+                              <>
+                                <Link
+                                  href={urlString + "/points-table"}
+                                >
+                                  <p className="text-[#586577] text-[13px] font-medium">
+                                    Points Table
+                                  </p>
+                                </Link>
+                                <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                              </>}
                             {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                                <Link href={("/h2h/"+urlStringEncode(ucmatch?.teama?.name+"-vs-"+ucmatch?.teamb?.name)+"-head-to-head-in-"+ucmatch?.format_str).toLowerCase()}>
-                                 
-                              <div className="flex justify-end items-center space-x-2">
-                                <Image  loading="lazy" 
-                                  src="/assets/img/home/handshake.png"
-                                  className="h-[15px]"
-                                  width={30}
-                                  height={30}
-                                  alt=""
-                                />
-                                <span className="text-[#909090] text-[11px] font-medium">
-                                  H2H
-                                </span>
-                              </div>
-                            </Link>
+                              <Link href={("/h2h/" + urlStringEncode(ucmatch?.teama?.name + "-vs-" + ucmatch?.teamb?.name) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
+
+                                <div className="flex justify-end items-center space-x-2">
+                                  <Image loading="lazy"
+                                    src="/assets/img/home/handshake.png"
+                                    className="h-[17px] w-[17px]"
+                                    width={17}
+                                    height={17}
+                                    style={{ width: "17px", height: "17px" }}
+                                    alt=""
+                                  />
+                                  <span className="text-[#586577] text-[13px] font-medium">
+                                    H2H
+                                  </span>
+                                </div>
+                              </Link>
                             }
                           </div>
 
-                          <div className="flex items-center space-x-2 text-[11px]">
-                            <span className="text-[#909090] font-medium">
-                            {ucmatch.teama.short_name}
+                          <div className="flex items-center space-x-2 text-[13px]">
+                            <span className="text-[#586577] font-medium">
+                              {ucmatch.teama.short_name}
                             </span>
-                            <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-md text-[#0B773C] pr-2">
+                            <span className="flex font-semibold items-center bg-[#00a632] border-[1px] border-[#00a632] rounded-md text-[#ffffff] pr-2">
                               <span>
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -1495,9 +1518,9 @@ export default function ScheduleResults({
                                   ></path>
                                 </svg>
                               </span>
-                             0
+                              0
                             </span>
-                            <span className="flex items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B] rounded-md text-[#A70B0B] pr-2">
+                            <span className="flex font-semibold items-center bg-[#ea2323] border-[1px] border-[#ea2323] rounded-md text-[#ffffff] pr-2">
                               <span>
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -1523,59 +1546,20 @@ export default function ScheduleResults({
                   ))}
                 </div>
 
-             
+
               </div>
             </div>
 
-            
+
           </div>
 
-          <div className="lg:col-span-4 md:col-span-5">
-            <div className="bg-white rounded-lg p-4 mb-4">
-              <div className="flex gap-1 items-center justify-between">
-                <div className="flex gap-1 items-center">
-                  <div className="col-span-4 relative">
-                    <Image  loading="lazy" 
-                      src="/assets/img/home/trofi.png"
-                      className="h-[75px]"
-                      width={75}
-                      height={75}
-                      alt="1"
-                    />
-                  </div>
-                  <div className="col-span-8 relative">
-                    <h3 className="font-semibold text-[19px] mb-1">
-                      Weekly challenge
-                    </h3>
-                    <p className="font-semibold text-[13px] text-[#1a80f8]">
-                      <span className="text-[#586577]">Time Left:</span>2 Days
-                      12h
-                    </p>
-                  </div>
-                </div>
-                <div className="">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-4"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
+          <div className="lg:col-span-4 md:col-span-5 md:-mt-4">
+           
 
             <WeeklySlider featuredMatch={featuredMatch} />
 
-            <FantasyTips/>
-            
+            <FantasyTips />
+
           </div>
         </div>
       </div>

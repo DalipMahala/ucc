@@ -127,7 +127,7 @@ export default async function LiveMatches() {
                   <div>
                   <Link href={ "/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) +  "/" +  items.competition.cid  }  >
                     <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
-                      {items.competition.title} -{" "}
+                      {items.competition.title} - {" "}
                       {items.competition.season}
                     </h4>
                     </Link>

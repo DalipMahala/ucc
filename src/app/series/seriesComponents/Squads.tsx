@@ -19,36 +19,36 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
       <div id="tabs" className="my-4">
-        <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+        <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
           <Link href={urlString}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap ">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap ">
               Overview
             </button>
           </Link>
           <Link href={urlString + "/schedule-results"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap ">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap ">
               Schedule & Results
             </button>
           </Link>
           <Link href={urlString + "/squads"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md">
               Squads
             </button>
           </Link>
           {isPointTable &&
           <Link href={urlString + "/points-table"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
               Points Table
             </button>
           </Link>
           }
           <Link href={urlString + "/news"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
               News
             </button>
           </Link>
           <Link href={urlString + "/stats/most-run"}>
-            <button className="font-medium py-2 px-3 whitespace-nowrap">
+            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
               Stats
             </button>
           </Link>
@@ -95,7 +95,7 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
             activeTab === "tab"+index && (
               <div id="south-team" className="team-content " key={index}>
                 <div className="max-w-7xl mx-auto bg-white rounded-lg p-6">
-                  <div className="flex items-center space-x-4 mb-6">
+                  <div className="flex items-center space-x-4 mb-3">
                     <Image  loading="lazy" 
                       src={teamslist?.team.logo_url}
                       width={45}
@@ -103,6 +103,9 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                       alt={teamslist?.team.abbr}
                       className="h-[45px] rounded-full"
                     />
+
+
+
                     <h1 className="text-[16px] font-semibold text-gray-800">
                       {teamslist?.team.abbr}{" "}
                       <span className="text-gray-500">
@@ -110,8 +113,10 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                       </span>
                     </h1>
                   </div>
+
+                  <div className='border-[#E4E9F0] border-b-[1px] w-full'></div>
                   
-                  <div className="space-y-6">
+                  <div className="space-y-6 mt-3">
                     <div>
                       <h2 className="text-1xl font-semibold pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
                         Batsman
@@ -119,7 +124,7 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                         {uniqueFormats.flatMap((format) => teamslist?.players[format] ?? [])?.map((squads: any, index: number) => (
                             (squads.playing_role === 'bat' || squads.playing_role === 'wk') &&
-                          <Link
+                          <Link className="rounded-md border-[1px] border-[##E2E2E2]"
                             href={
                               "/player/" +
                               urlStringEncode(squads?.short_name) +
@@ -128,13 +133,13 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                             }
                             key={index}
                           >
-                            <div className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]">
+                            <div className="text-center p-4 ">
                               <div className="relative">
-                                 <PlayerImage key={squads?.pid} player_id={ squads?.pid} height={80} width={80} className="w-16 h-16 mx-auto rounded-full mb-2" />
+                                 <PlayerImage key={squads?.pid} player_id={ squads?.pid} height={47} width={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
                                 
                                 <Image  loading="lazy" 
                                   src="/assets/img/player/bat.png"
-                                  className="h-[27px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
+                                  className="h-[27px] absolute md:right-2 right-[25px] bottom-0 bg-white rounded-full p-[4px]"
                                   width={27}
                                   height={27}
                                   alt={squads.short_name}
@@ -165,7 +170,7 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                       {uniqueFormats.flatMap((format) => teamslist?.players[format] ?? [])?.map((bowler: any, index: number) => (
                             bowler.playing_role === 'bowl' &&
-                          <Link
+                          <Link className="rounded-md border-[1px] border-[##E2E2E2]"
                             href={
                               "/player/" +
                               urlStringEncode(bowler?.short_name) +
@@ -174,12 +179,12 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                             }
                             key={index}
                           >
-                            <div className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]">
+                            <div className="text-center p-4 ">
                               <div className="relative">
-                              <PlayerImage key={bowler?.pid} player_id={ bowler?.pid} height={80} width={80} className="w-16 h-16 mx-auto rounded-full mb-2" />
+                              <PlayerImage key={bowler?.pid} player_id={ bowler?.pid} height={47} width={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
                                 <Image  loading="lazy" 
                                   src="/assets/img/player/ball.png"
-                                  className="h-[24px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
+                                  className="h-[24px] absolute md:right-2 right-[25px] bottom-0 bg-white rounded-full p-[4px]"
                                   width={24}
                                   height={24}
                                   alt={bowler.short_name}
@@ -202,7 +207,7 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                       {uniqueFormats.flatMap((format) => teamslist?.players[format] ?? [])?.map((allrounder: any, index: number) => (
                         allrounder.playing_role === 'all' &&
-                          <Link
+                          <Link className="rounded-md border-[1px] border-[##E2E2E2]"
                             href={
                               "/player/" +
                               urlStringEncode(allrounder?.short_name) +
@@ -211,12 +216,12 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                             }
                             key={index}
                           >
-                            <div className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]">
+                            <div className="text-center p-4">
                               <div className="relative">
-                              <PlayerImage key={allrounder?.pid}  player_id={ allrounder?.pid} height={80} width={80} className="w-16 h-16 mx-auto rounded-full mb-2" />
+                              <PlayerImage key={allrounder?.pid}  player_id={ allrounder?.pid} height={47} width={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
                                 <Image  loading="lazy" 
                                   src="/assets/img/player/bat-ball.png"
-                                  className="h-[27px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
+                                  className="h-[27px] absolute md:right-2 right-[25px] bottom-0 bg-white rounded-full p-[4px]"
                                   width={27}
                                   height={27}
                                   alt={allrounder.short_name}

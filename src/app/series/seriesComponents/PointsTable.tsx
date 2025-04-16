@@ -48,17 +48,17 @@ interface PointsTable {
 
         <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
             <div id="tabs" className="my-4">
-                <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+                <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
                     <Link href={urlString}>
                         <button
-                            className="font-medium py-2 px-3 whitespace-nowrap "
+                            className="font-semibold uppercase py-2 px-3 whitespace-nowrap "
                         >
                             Overview
                         </button>
                     </Link>
                     <Link href={urlString+"/schedule-results"}>
                         <button
-                            className="font-medium py-2 px-3 whitespace-nowrap "
+                            className="font-semibold uppercase py-2 px-3 whitespace-nowrap "
                         >
                             Schedule & Results
 
@@ -66,28 +66,28 @@ interface PointsTable {
                     </Link>
                     <Link href={urlString+"/squads"}>
                         <button
-                            className="font-medium py-2 px-3 whitespace-nowrap "
+                            className="font-semibold uppercase py-2 px-3 whitespace-nowrap "
                         >
                             Squads
                         </button>
                     </Link>
                     <Link href={urlString+"/points-table"}>
                         <button
-                            className="font-medium py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
+                            className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
                         >
                             Points Table
                         </button>
                     </Link>
                     <Link href={urlString+"/news"}>
                         <button
-                            className="font-medium py-2 px-3 whitespace-nowrap"
+                            className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
                         >
                             News
                         </button>
                     </Link>
                     <Link href={urlString+"/stats/most-run"}>
                         <button
-                            className="font-medium py-2 px-3 whitespace-nowrap" >
+                            className="font-semibold uppercase py-2 px-3 whitespace-nowrap" >
                             Stats
                         </button>
                     </Link>
@@ -203,12 +203,12 @@ interface PointsTable {
                                                 <td className="md:px-2 pl-[14px] py-3">{point?.loss}</td>
                                                 <td className="md:px-2 pl-[14px] py-3">{point?.draw}</td>
                                                 <td className="md:px-2 pl-[14px] py-3">{point?.nr}</td>
-                                                <td className="md:px-2 pl-[14px] py-3">{point?.points}</td>
+                                                <td className="md:px-2 pl-[14px] py-3 font-semibold ">{point?.points}</td>
                                                 <td className="md:px-2 pl-[14px] py-3">{point?.netrr}</td>
                                                 <td className="md:px-2 pl-[14px] py-3">
                                                     <div className="ml-auto flex gap-1 items-center">
                                                     {point?.lastfivematchresult.split(",")?.map((item: string, index:number) => (
-                                                <span className={`${item === "W" ? "bg-[#13b76dbd]" : "bg-[#f63636c2]" } text-white text-[13px] px-[4px] py-[0px] rounded`} key={index}>
+                                                <span className={`${item === "W" ? "bg-[#13B76D]" : "bg-[#F63636]" } text-white text-[13px] px-[4px] py-[0px] rounded`} key={index}>
                                                     {item}
                                                 </span>
                                                 ))}
@@ -333,40 +333,8 @@ interface PointsTable {
 
                     </div>
 
-                    <div className="lg:col-span-4 md:col-span-5">
-                        <div className="bg-white rounded-lg p-4 mb-4">
-                            <div className="flex gap-1 items-center justify-between">
-                                <div className="flex gap-1 items-center">
-                                    <div className="col-span-4 relative">
-                                        <Image  loading="lazy"  src="/assets/img/home/trofi.png" className="h-[75px]" width={75} height={75} alt="1" />
-                                    </div>
-                                    <div className="col-span-8 relative">
-                                        <h3 className="font-semibold text-[19px] mb-1">
-                                            Weekly challenge
-                                        </h3>
-                                        <p className="font-semibold text-[13px] text-[#1a80f8]">
-                                            <span className="text-[#586577]">Time Left:</span>2 Days 12h
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth="1.5"
-                                        stroke="currentColor"
-                                        className="size-4"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                        />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="lg:col-span-4 md:col-span-5 -mt-4">
+                      
 
                         <WeeklySlider featuredMatch={featuredMatch} />
 

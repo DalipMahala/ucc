@@ -256,6 +256,8 @@ export default async function CompletedMatches() {
                 }
               </div>
             </div>
+
+            
             {/* Mobile */}
 
             <div className="lg:hidden rounded-lg p-4 mb-4 bg-[#ffffff] performance-section relative">
