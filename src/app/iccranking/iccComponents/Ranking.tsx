@@ -51,10 +51,10 @@ interface Team {
 
         <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
             <div id="tabs" className="my-4">
-                <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+                <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
                     <Link href="/iccranking/man/team/odis">
                     <button
-                        className={`font-medium py-2 px-5 whitespace-nowrap ${iccRankingName === 'man' ? "bg-[#1A80F8] text-white rounded-md" :""} `}
+                        className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${iccRankingName === 'man' ? "bg-[#1A80F8] text-white rounded-md" :""} `}
                     >
                         Man
                     </button>
@@ -62,7 +62,7 @@ interface Team {
 
                     <Link href="/iccranking/woman/team/odis">
                     <button
-                        className={`font-medium py-2 px-5 whitespace-nowrap ${iccRankingName === 'woman' ? "bg-[#1A80F8] text-white rounded-md" :""} `}
+                        className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${iccRankingName === 'woman' ? "bg-[#1A80F8] text-white rounded-md" :""} `}
                     >
                         Woman
                     </button>
@@ -74,29 +74,33 @@ interface Team {
 
             <div id="info">
             <div className="cust-box-click-container">
-              <div className="flex gap-4 items-center my-2 py-2 overflow-auto">
+              <div className="flex gap-4 items-center my-2 md:py-2 relative overflow-x-auto [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[1px] 
+                              [&::-webkit-scrollbar-track]:bg-[#ecf2fd] 
+                              [&::-webkit-scrollbar-thumb]:bg-[#ecf2fd] 
+                               dark:[&::-webkit-scrollbar-track]:bg-[#ecf2fd] 
+                                 dark:[&::-webkit-scrollbar-thumb]:bg-[#ecf2fd]">
                 <Link href={"/iccranking/"+iccRankingName+"/team/odis"}>
-                <button className={`cust-box-click-button font-medium px-7 py-1 rounded-full whitespace-nowrap ${iccRankingType === 'team' ? "bg-[#081736] text-white" : "bg-[#ffffff] text-[#6A7586]" }`}>
+                <button className={`cust-box-click-button font-medium md:px-7 px-[19px] py-1 rounded-full whitespace-nowrap ${iccRankingType === 'team' ? "bg-[#081736] text-white" : "bg-[#ffffff] text-[#6A7586]" }`}>
                 
                   <span>Team</span>
                 </button>
                 </Link>
                 <Link href={"/iccranking/"+iccRankingName+"/batter/odis"}>
-                <button className={`cust-box-click-button font-medium px-7 py-1 rounded-full whitespace-nowrap ${iccRankingType === 'batter' ? "bg-[#081736] text-white" : "bg-[#ffffff] text-[#6A7586]" }`}
+                <button className={`cust-box-click-button font-medium md:px-7 px-[19px] py-1 rounded-full whitespace-nowrap ${iccRankingType === 'batter' ? "bg-[#081736] text-white" : "bg-[#ffffff] text-[#6A7586]" }`}
                   
                 >
                   <span>Batter</span>
                 </button>
                 </Link>
                 <Link href={"/iccranking/"+iccRankingName+"/bowler/odis"}>
-                <button className={`cust-box-click-button font-medium px-7 py-1 rounded-full whitespace-nowrap ${iccRankingType === 'bowler' ? "bg-[#081736] text-white" : "bg-[#ffffff] text-[#6A7586]" }`}
+                <button className={`cust-box-click-button font-medium md:px-7 px-[19px] py-1 rounded-full whitespace-nowrap ${iccRankingType === 'bowler' ? "bg-[#081736] text-white" : "bg-[#ffffff] text-[#6A7586]" }`}
                  
                 >
                   <span>Bowler</span>
                 </button>
                 </Link> 
                 <Link href={"/iccranking/"+iccRankingName+"/all-rounder/odis"}>
-                <button className={`cust-box-click-button font-medium px-7 py-1 rounded-full whitespace-nowrap ${iccRankingType === 'all-rounder' ? "bg-[#081736] text-white" : "bg-[#ffffff] text-[#6A7586]" }`}
+                <button className={`cust-box-click-button font-medium md:px-7 px-[19px] py-1 rounded-full whitespace-nowrap ${iccRankingType === 'all-rounder' ? "bg-[#081736] text-white" : "bg-[#ffffff] text-[#6A7586]" }`}
                   
                 >
                   <span>All Rounder</span>
@@ -191,7 +195,7 @@ interface Team {
                                 <Link href={"/player/"+urlStringEncode(rankDetails.player)+"/"+rankDetails.pid}> {rankDetails.player} </Link> </td>
                                 }
                                 <td className="py-2 px-3">{rankDetails.team}</td>
-                                <td className="py-2 px-3">{rankDetails.rating}</td>
+                                <td className="py-2 px-3 font-semibold">{rankDetails.rating}</td>
                               </tr>
                               ))}
                              

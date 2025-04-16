@@ -370,7 +370,6 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
                                                                 </tr>
                                                             ))}
 
-
                                                         </tbody>
                                                     </table>
                                                 </div>
