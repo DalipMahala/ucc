@@ -196,7 +196,7 @@ export default function H2h({
 
   return (
     <>
-      <section className="bg-[#0E2149] border-[1px] border-[#E4E9F01A] lg:px-0 px-3">
+      <section className="bg-[#0E2149] border-[1px] border-[#E4E9F01A] lg:px-0 px-3 mb-4">
         <div className="border-t-[1px] border-[#E4E9F01A]">
           <div className="lg:w-[1000px] mx-auto md:py-8 tracking-[1px]">
             <div className="flex py-8 justify-between items-center">
@@ -247,7 +247,7 @@ export default function H2h({
 
       <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
         {teamADetails?.type !== 'club' &&
-        <div id="tabs" className="my-4">
+        <div id="tabs" className="mb-4">
           <div className="flex text-[13px] md:space-x-8 space-x-5 p-2 bg-[#ffffff] rounded-lg overflow-auto">
             <Link href={`${urlWithoutMatchType}-test`}>
               <button

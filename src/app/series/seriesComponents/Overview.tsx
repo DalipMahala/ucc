@@ -866,7 +866,7 @@ export default function Overview({
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                          <p className="mb-2 font-medium">Most Runs</p>
+                          <p className="mb-2 font-medium text-[#3e3e3e]">Most Runs</p>
 
                           <PlayerImage
                            key={seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid}
@@ -876,14 +876,14 @@ export default function Overview({
                             className="rounded-full h-[45px]"
                           />
 
-                          <h3 className="mt-2 text-[14px] font-semibold">
+                          <h3 className="mt-2 text-[14px] font-semibold text-gray-800">
                             {seriesKeystats?.mostRuns?.stats?.[0]?.player?.short_name}
                           </h3>
-                          <p className="text-[#909090]">
+                          <p className="text-[#586577]">
                             {seriesKeystats?.mostRuns?.stats?.[0]?.team?.abbr}
                           </p>
                           <div className="flex items-center gap-2 mt-2">
-                            <p className="text-[18px] font-semibold">
+                            <p className="text-[16px] font-semibold">
                               {seriesKeystats?.mostRuns?.stats?.[0]?.runs}
                             </p>
                             <p className="text-gray-600 text-sm">Runs</p>
@@ -905,7 +905,7 @@ export default function Overview({
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                          <p className="mb-2 font-medium">Highest Strike</p>
+                          <p className="mb-2 font-medium text-[#3e3e3e]">Highest Strike</p>
                           <PlayerImage
                           key={seriesKeystats?.highStrike?.stats?.[0]?.player?.pid}
                             player_id={seriesKeystats?.highStrike?.stats?.[0]?.player?.pid}
@@ -913,14 +913,14 @@ export default function Overview({
                             width={45}
                             className="rounded-full h-[45px]"
                           />
-                          <h3 className="mt-2 text-[14px] font-semibold">
+                          <h3 className="mt-2 text-[14px] font-semibold text-gray-800">
                             {seriesKeystats?.highStrike?.stats?.[0]?.player?.short_name}
                           </h3>
-                          <p className="text-[#909090]">
+                          <p className="text-[#586577]">
                             {seriesKeystats?.highStrike?.stats?.[0]?.team?.abbr}
                           </p>
                           <div className="flex items-center gap-2 mt-2">
-                            <p className="text-[18px] font-semibold">
+                            <p className="text-[16px] font-semibold">
                               {seriesKeystats?.highStrike?.stats?.[0]?.strike}
                             </p>
                             <p className="text-gray-600 text-sm"></p>
@@ -942,7 +942,7 @@ export default function Overview({
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                          <p className="mb-2 font-medium">Most Wickets</p>
+                          <p className="mb-2 font-medium text-[#3e3e3e]">Most Wickets</p>
                           <PlayerImage
                           key={seriesKeystats?.topWickets?.stats?.[0]?.player?.pid}
                             player_id={seriesKeystats?.topWickets?.stats?.[0]?.player?.pid}
@@ -950,14 +950,14 @@ export default function Overview({
                             width={45}
                             className="rounded-full h-[45px]"
                           />
-                          <h3 className="mt-2 text-[14px] font-semibold">
+                          <h3 className="mt-2 text-[14px] font-semibold text-gray-800">
                             {seriesKeystats?.topWickets?.stats?.[0]?.player?.short_name}
                           </h3>
-                          <p className="text-[#909090]">
+                          <p className="text-[#586577]">
                             {seriesKeystats?.topWickets?.stats?.[0]?.team?.abbr}
                           </p>
                           <div className="flex items-center gap-2 mt-2">
-                            <p className="text-[18px] font-semibold">
+                            <p className="text-[16px] font-semibold">
                               {seriesKeystats?.topWickets?.stats?.[0]?.wickets}
                             </p>
                             <p className="text-gray-600 text-sm">Wickets</p>
@@ -979,7 +979,7 @@ export default function Overview({
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                          <p className="mb-2 font-medium">Best Figures</p>
+                          <p className="mb-2 font-medium text-[#3e3e3e]">Best Figures</p>
                           <PlayerImage
                           key={seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid}
                             player_id={seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid}
@@ -987,14 +987,14 @@ export default function Overview({
                             width={45}
                             className="rounded-full h-[45px]"
                           />
-                          <h3 className="mt-2 text-[14px] font-semibold">
+                          <h3 className="mt-2 text-[14px] font-semibold text-gray-800">
                             {seriesKeystats?.bestBowling?.stats?.[0]?.player?.short_name}
                           </h3>
-                          <p className="text-[#909090]">
+                          <p className="text-[#586577]">
                             {seriesKeystats?.bestBowling?.stats?.[0]?.team?.abbr}
-                          </p>
+                          </p>  
                           <div className="flex items-center gap-2 mt-2">
-                            <p className="text-[18px] font-semibold">
+                            <p className="text-[16px] font-semibold">
                               {seriesKeystats?.bestBowling?.stats?.[0]?.bestmatch}
                             </p>
                           </div>

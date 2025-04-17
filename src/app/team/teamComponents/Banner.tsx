@@ -19,7 +19,7 @@ export default function Banner({ teamDetails }: Banner) {
               height={30}
               alt={teamDetails?.alt_name}
             />
-            <h3 className="text-1xl font-semibold ">
+            <h3 className="md:text-1xl text-[16px] font-semibold ">
               {teamDetails?.title} Team
             </h3>
           </div>
