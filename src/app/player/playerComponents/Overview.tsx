@@ -3,13 +3,14 @@
 import React, { useState } from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
-import {   format  } from "date-fns";
-import {getAgeDetails } from "@/utils/timerUtils";
+import { format } from "date-fns";
+import { getAgeDetails } from "@/utils/timerUtils";
 import { urlStringEncode } from "@/utils/utility";
 import PLSeries from "@/app/components/popularSeries";
 import PlayerImage from "@/app/components/PlayerImage";
 import PlayerNews from "@/app/components/PlayerNews";
 import FantasyTips from "@/app/components/FantasyTips";
+import WeeklySlider from "@/app/components/WeeklySlider"
 
 interface Overview {
   playerAdvanceStats: any | null;
@@ -17,9 +18,16 @@ interface Overview {
   urlString: string;
   ranking: any | null;
   playerProfile: any | null;
+  featuredMatch: any;
 }
-export default function Overview({playerAdvanceStats, playerStats, urlString, ranking, playerProfile}: Overview) {
 
+
+
+export default function Overview({ playerAdvanceStats, playerStats, urlString, ranking, playerProfile,  featuredMatch, }: Overview) {
+
+
+
+  
   const profile = playerStats?.player;
   const playerBatting = playerStats?.batting ?? {};
   const playerBowling = playerStats?.bowling ?? {};
@@ -32,17 +40,17 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
     profile?.playing_role === "bat"
       ? "Batting"
       : profile?.playing_role === "bowl"
-      ? "Bowler"
-      : profile?.playing_role === "all"
-      ? "All-Rounder"
-      : "Unknown";
+        ? "Bowler"
+        : profile?.playing_role === "all"
+          ? "All-Rounder"
+          : "Unknown";
 
   // Player Rankings (Handles missing ranking data safely)
   let odiRank = "",
     testRank = "",
     t20Rank = "";
   const playerRank = ranking?.ranks ?? {};
- 
+
 
   if (profile?.playing_role === "bat") {
     odiRank =
@@ -149,44 +157,47 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedValue(event.target.value);
   };
-  
+
   let topPlayer = [];
-  if(selectedValue === "odi"){
+  if (selectedValue === "odi") {
     topPlayer = ranking?.ranks?.[topTab]?.odis;
-  }else if(selectedValue === "test"){
+  } else if (selectedValue === "test") {
     topPlayer = ranking?.ranks?.[topTab]?.tests;
-  }else if(selectedValue === "t20"){
+  } else if (selectedValue === "t20") {
     topPlayer = ranking?.ranks?.[topTab]?.t20s;
   }
   const newsUrl = playerProfile[0]?.newUrl;
+
+
+  
   return (
     <section className="lg:w-[1000px] md:mx-auto my-5 mx-2">
       <div className="">
 
         <div id="tabs" className="my-4">
-          <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
-            <Link href={"/player/"+urlString}>
-              <button className="font-medium py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
+          <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+            <Link href={"/player/" + urlString}>
+              <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
               >
                 Overview
               </button>
             </Link>
-            <Link href={"/player/"+urlString+"/stats"}>
-              <button className="font-medium py-2 px-3 whitespace-nowrap "
+            <Link href={"/player/" + urlString + "/stats"}>
+              <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap "
               >
                 Stats
               </button>
             </Link>
 
-            <Link href={"/player/"+urlString+"/news"}>
+            <Link href={"/player/" + urlString + "/news"}>
               <button
-                className="font-medium py-2 px-3 whitespace-nowrap"
+                className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
               >
                 News
               </button>
             </Link>
-            <Link href={"/player/"+urlString+"/photos"}>
-              <button className="font-medium py-2 px-3 whitespace-nowrap"
+            <Link href={"/player/" + urlString + "/photos"}>
+              <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
               >
                 Photos
               </button>
@@ -199,7 +210,9 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
             <div className="md:grid grid-cols-12 gap-4">
               {/* Tabs */}
               <div className="lg:col-span-8 md:col-span-7">
-                <div className="rounded-lg bg-white p-4 mb-4">
+
+
+                <div className="md:hidden rounded-lg bg-white p-4 mb-4">
                   <h3 className="text-[15px] font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                     ICC Ranking
                   </h3>
@@ -207,7 +220,7 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                   <div className="grid md:grid-cols-1 grid-cols-1 gap-4 mt-4">
                     <div className="bg-[#f2f7ff] w-full  border-[1px] rounded-md">
                       <h6 className=" px-6 py-1 font-semibold rounded-t-md bg-[#c7dcff] text-[14px]">
-                         {playerRole}
+                        {playerRole}
                       </h6>
                       <div className="flex font-semibold text-[#0F55A5] text-center px-6 justify-between space-x-4 my-2">
                         <p>
@@ -215,11 +228,11 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                         </p>
                         <div className="border-solid border-l-[1px] border-gray-400" />
                         <p>
-                        {odiRank} <br /> <span className=""> ODI</span>
+                          {odiRank} <br /> <span className=""> ODI</span>
                         </p>
                         <div className="border-solid border-l-[1px] border-gray-400" />
                         <p>
-                        {t20Rank} <br /> <span className=""> T20</span>
+                          {t20Rank} <br /> <span className=""> T20</span>
                         </p>
                       </div>
                     </div>
@@ -243,11 +256,19 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                     </div> */}
                   </div>
                 </div>
-                <div className="rounded-lg p-4 bg-[#ffffff]">
-                  <h3 className="text-[15px] font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+
+
+                <div className="flex justify-between items-center pb-2">
+
+                  <h3 className="text-1xl font-semibold pl-[7px] border-l-[3px] border-[#229ED3]">
                     Personal Information
                   </h3>
-                  <div className="border-t-[1px] border-[#E7F2F4]" />
+
+                </div>
+
+                <div className="rounded-lg px-4 py-2 bg-[#ffffff]">
+
+                  
                   <div className="relative overflow-x-auto">
                     <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400 text-[13px]">
                       <tbody>
@@ -258,7 +279,7 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                           >
                             Full Name
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C]">
+                          <td className="px-6 py-2 text-[#2F335C] font-medium">
                             {profile?.first_name}
                           </td>
                         </tr>
@@ -269,8 +290,8 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                           >
                             Date of Birth
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C]">
-                          {profile?.birthdate !== undefined && profile?.birthdate !== '' ? format(new Date(profile?.birthdate), "dd MMM yyyy") :""}
+                          <td className="px-6 py-2 text-[#2F335C] font-medium">
+                            {profile?.birthdate !== undefined && profile?.birthdate !== '' ? format(new Date(profile?.birthdate), "dd MMM yyyy") : ""}
                           </td>
                         </tr>
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -280,8 +301,8 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                           >
                             Age
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C]">
-                            {profile?.birthdate !== undefined && profile?.birthdate !== '' ? getAgeDetails(profile?.birthdate) :""}
+                          <td className="px-6 py-2 text-[#2F335C] font-medium">
+                            {profile?.birthdate !== undefined && profile?.birthdate !== '' ? getAgeDetails(profile?.birthdate) : ""}
                           </td>
                         </tr>
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -291,7 +312,7 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                           >
                             Nationality
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C]">{profile?.nationality}</td>
+                          <td className="px-6 py-2 text-[#2F335C] font-medium">{profile?.nationality}</td>
                         </tr>
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                           <th
@@ -300,11 +321,11 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                           >
                             Birth Place
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C]">
-                          {profile?.birthplace}
+                          <td className="px-6 py-2 text-[#2F335C] font-medium">
+                            {profile?.birthplace}
                           </td>
                         </tr>
-                        
+
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                           <th
                             scope="row"
@@ -312,7 +333,7 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                           >
                             Role
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C]">{playerRole}</td>
+                          <td className="px-6 py-2 text-[#2F335C] font-medium">{playerRole}</td>
                         </tr>
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                           <th
@@ -321,8 +342,8 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                           >
                             Batting Style
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C]">
-                          {profile?.batting_style}
+                          <td className="px-6 py-2 text-[#2F335C] font-medium">
+                            {profile?.batting_style}
                           </td>
                         </tr>
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -332,8 +353,8 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                           >
                             Bowling Style
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C]">
-                          {profile?.bowling_style}
+                          <td className="px-6 py-2 text-[#2F335C] font-medium">
+                            {profile?.bowling_style}
                           </td>
                         </tr>
                         {/* <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -396,10 +417,10 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                     </div>
                   </div>
                   <div className={`cust-box-click-content cust-box-click-batting ${careerTab === 'cust-box-click-batting' ? "" : "hidden"}`}>
-                    <div className="rounded-lg p-6 bg-[#ffffff]">
+                    <div className="rounded-lg p-4 bg-[#ffffff]">
                       <div className="md:flex items-center justify-between">
-                        <h3 className="text-1xl font-medium mb-2">
-                        {profile?.first_name} Recent Form
+                        <h3 className="text-[13px] font-semibold text-[#586577] mb-2">
+                          {profile?.first_name} Recent Form
                         </h3>
                         <div className="text-right">
                           {/* <p className="text-[#1A80F8] font-semibold flex items-center text-[13px]">
@@ -428,9 +449,9 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                           className="cust-slider flex gap-4 transition-transform duration-500 ease-in-out"
                           style={{ transform: `translateX(-${currentIndex * (100 / visibleSlides)}%)` }}
                         >
-                          {slides?.map((slide:any) => (
+                          {slides?.map((slide: any) => (
                             <div key={slide.id} className="cust-slide w-1/4 flex-shrink-0 rounded-lg border-[1px] border-[#ebebeb]">
-                              <div className="bg-white p-4 text-center">
+                              <div className="bg-white p-4 text-center rounded-lg">
                                 <p className="text-1xl text-[#1A80F8] font-semibold mb-2">{slide.text}</p>
                                 <p className="text-gray-500 font-medium text-[12px]">{slide.match}</p>
                               </div>
@@ -484,11 +505,11 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                       </div>
 
 
-                      <h3 className="text-1xl font-medium mt-4 mb-2">
-                      {profile?.first_name} Career Stats
+                      <h3 className="text-[13px] font-semibold text-[#586577] mt-4 mb-2">
+                        {profile?.first_name} Career Stats
                       </h3>
                       <div className="border-t-[1px] border-[#E7F2F4]" />
-                      <h3 className="text-[14px] font-normal mt-2 mb-1">Batting</h3>
+                      <h3 className="text-[13px] font-semibold text-[#2c323b] mt-2 mb-1">Batting</h3>
                       <div>
                         <div
                           className="relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
@@ -502,7 +523,7 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                               <tr>
                                 <th
                                   scope="col"
-                                  className="px-4 py-3 bg-[#C3DBFF33] font-semibold"
+                                  className="px-4 py-3 bg-[#f3f8ff] font-semibold sticky left-0"
                                 >
                                   Format
                                 </th>
@@ -540,73 +561,73 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                                   Fifty
                                 </th>
                                 <th scope="col" className="px-4 py-3 font-semibold">
-                                 Century
+                                  Century
                                 </th>
                               </tr>
                             </thead>
                             <tbody className="text-xs">
-                            {battingArray?.map((item, index) => (
-                              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
-                                <th
-                                  scope="row"
-                                  className="px-4 py-4 font-medium text-gray-900 bg-[#C3DBFF33] whitespace-nowrap dark:text-white"
-                                >
-                                  {item.formatType}
-                                </th>
-                                <td className="px-4 py-4">{item.matches}</td>
-                                <td className="px-4 py-4">{item.innings}</td>
-                                <td className="px-4 py-4">{item.runs}</td>
-                                <td className="px-4 py-4">{item.average}</td>
-                                <td className="px-4 py-4">{item.run4}</td>
-                                <td className="px-4 py-4">{item.run6}</td>
-                                <td className="px-4 py-4">{item.strike}</td>
-                                <td className="px-4 py-4">{item.notout}</td>
-                                <td className="px-4 py-4">{item.balls}</td>
-                                <td className="px-4 py-4">{item.highest}</td>
-                                <td className="px-4 py-4">{item.run50}</td>
-                                <td className="px-4 py-4">{item.run100}</td>
-                              </tr>
-                            ))}
-                              
-                              
+                              {battingArray?.map((item, index) => (
+                                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
+                                  <th
+                                    scope="row"
+                                    className="px-4 py-4 font-medium text-gray-900 bg-[#f3f8ff] whitespace-nowrap dark:text-white sticky left-0"
+                                  >
+                                    {item.formatType}
+                                  </th>
+                                  <td className="px-4 py-4">{item.matches}</td>
+                                  <td className="px-4 py-4">{item.innings}</td>
+                                  <td className="px-4 py-4">{item.runs}</td>
+                                  <td className="px-4 py-4">{item.average}</td>
+                                  <td className="px-4 py-4">{item.run4}</td>
+                                  <td className="px-4 py-4">{item.run6}</td>
+                                  <td className="px-4 py-4">{item.strike}</td>
+                                  <td className="px-4 py-4">{item.notout}</td>
+                                  <td className="px-4 py-4">{item.balls}</td>
+                                  <td className="px-4 py-4">{item.highest}</td>
+                                  <td className="px-4 py-4">{item.run50}</td>
+                                  <td className="px-4 py-4">{item.run100}</td>
+                                </tr>
+                              ))}
+
+
                             </tbody>
                           </table>
                         </div>
                       </div>
-                      <h3 className="text-[14px] font-normal mt-2 mb-1">Teams</h3>
-                      <div className="mt-4">
+                      <h3 className="text-[13px] font-semibold text-[#586577] mt-3 mb-1">Teams</h3>
+                      <div className="mt-1">
                         <div className="grid md:grid-cols-5 grid-cols-2 gap-4">
-                        {teamsPlayedFor?.map((teams:any, index: number) => (
-                          <div className="col-span-1" key={index}>
-                            <Link href={"/team/"+urlStringEncode(teams.abbr)+"/"+teams.tid}>
-                            <div className="bg-white p-2 rounded-lg border-[1px] border-[#ebebeb] text-center mb-2">
-                              <div className="flex items-center justify-center">
-                              {teams.logo_url ? (
-                                <Image  loading="lazy" 
-                                  src={teams.logo_url}
-                                  width={20} height={20} alt={teams.alt_name}
-                                  className="h-[30px] w-[30px] rounded-full"
-                                />
-                                ) : (
-                                "")}
-                              </div>
-                              <p className=" font-semibold text-[12px] pt-1">
-                                {teams.abbr}
-                              </p>
+                          {teamsPlayedFor?.map((teams: any, index: number) => (
+                            <div className="col-span-1" key={index}>
+                              <Link href={"/team/" + urlStringEncode(teams.abbr) + "/" + teams.tid}>
+                                <div className="bg-white p-2 rounded-lg border-[1px] border-[#ebebeb] text-center mb-2">
+                                  <div className="flex items-center justify-center">
+                                    {teams.logo_url ? (
+                                      <Image loading="lazy"
+                                        src={teams.logo_url}
+                                        width={42} height={42} alt={teams.alt_name}
+                                        className="h-[42px] w-[42px] rounded-full"
+                                      />
+                                    ) : (
+                                      "")}
+                                  </div>
+                                  <p className=" font-semibold text-[12px] pt-1">
+                                    {teams.abbr}
+                                  </p>
+                                </div>
+                              </Link>
                             </div>
-                            </Link>
-                          </div>
-                        ))}
-                         
+                          ))}
+
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className={`cust-box-click-content cust-box-click-batting ${careerTab === 'cust-box-click-bowling' ? "" : "hidden"}`}>
-                  <div className="rounded-lg p-6 bg-[#ffffff]">
+                    <div className="rounded-lg p-6 bg-[#ffffff]">
                       <div className="md:flex items-center justify-between">
                         <h3 className="text-1xl font-medium mb-2">
-                        {profile?.first_name} Recent Form
+                          {profile?.first_name} Recent Form
                         </h3>
                         <div className="text-right">
                           {/* <p className="text-[#1A80F8] font-semibold flex items-center text-[13px]">
@@ -635,7 +656,7 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                           className="cust-slider flex gap-4 transition-transform duration-500 ease-in-out"
                           style={{ transform: `translateX(-${currentIndex * (100 / visibleSlides)}%)` }}
                         >
-                          {slidesBol?.map((slide:any) => (
+                          {slidesBol?.map((slide: any) => (
                             <div key={slide.id} className="cust-slide w-1/4 flex-shrink-0 rounded-lg border-[1px] border-[#ebebeb]">
                               <div className="bg-white p-4 text-center">
                                 <p className="text-1xl text-[#1A80F8] font-semibold mb-2">{slide.text}</p>
@@ -692,7 +713,7 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
 
 
                       <h3 className="text-1xl font-medium mt-4 mb-2">
-                      {profile?.first_name} Career Stats
+                        {profile?.first_name} Career Stats
                       </h3>
                       <div className="border-t-[1px] border-[#E7F2F4]" />
                       <h3 className="text-[14px] font-normal mt-2 mb-1">Bowling</h3>
@@ -726,53 +747,53 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                                   Avg
                                 </th>
                                 <th scope="col" className="px-4 py-3 font-semibold">
-                                Wicket4i
+                                  Wicket4i
                                 </th>
                                 <th scope="col" className="px-4 py-3 font-semibold">
-                                Wicket5i
+                                  Wicket5i
                                 </th>
                                 <th scope="col" className="px-4 py-3 font-semibold">
                                   SR
                                 </th>
                                 <th scope="col" className="px-4 py-3 font-semibold">
-                                Econ
+                                  Econ
                                 </th>
                                 <th scope="col" className="px-4 py-3 font-semibold">
                                   Balls
                                 </th>
                                 <th scope="col" className="px-4 py-3 font-semibold">
-                                Wickets
+                                  Wickets
                                 </th>
                                 <th scope="col" className="px-4 py-3 font-semibold">
-                                Overs
+                                  Overs
                                 </th>
-                                
+
                               </tr>
                             </thead>
                             <tbody className="text-xs">
-                            {bowlingArray?.map((item, index) => (
-                              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
-                                <th
-                                  scope="row"
-                                  className="px-4 py-4 font-medium text-gray-900 bg-[#C3DBFF33] whitespace-nowrap dark:text-white"
-                                >
-                                  {item.formatType}
-                                </th>
-                                <td className="px-4 py-4">{item.matches}</td>
-                                <td className="px-4 py-4">{item.innings}</td>
-                                <td className="px-4 py-4">{item.runs}</td>
-                                <td className="px-4 py-4">{item.average}</td>
-                                <td className="px-4 py-4">{item.wicket4i}</td>
-                                <td className="px-4 py-4">{item.wicket5i}</td>
-                                <td className="px-4 py-4">{item.strike}</td>
-                                <td className="px-4 py-4">{item.econ}</td>
-                                <td className="px-4 py-4">{item.balls}</td>
-                                <td className="px-4 py-4">{item.wickets}</td>
-                                <td className="px-4 py-4">{item.overs}</td>
-                              </tr>
-                            ))}
-                              
-                              
+                              {bowlingArray?.map((item, index) => (
+                                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
+                                  <th
+                                    scope="row"
+                                    className="px-4 py-4 font-medium text-gray-900 bg-[#C3DBFF33] whitespace-nowrap dark:text-white"
+                                  >
+                                    {item.formatType}
+                                  </th>
+                                  <td className="px-4 py-4">{item.matches}</td>
+                                  <td className="px-4 py-4">{item.innings}</td>
+                                  <td className="px-4 py-4">{item.runs}</td>
+                                  <td className="px-4 py-4">{item.average}</td>
+                                  <td className="px-4 py-4">{item.wicket4i}</td>
+                                  <td className="px-4 py-4">{item.wicket5i}</td>
+                                  <td className="px-4 py-4">{item.strike}</td>
+                                  <td className="px-4 py-4">{item.econ}</td>
+                                  <td className="px-4 py-4">{item.balls}</td>
+                                  <td className="px-4 py-4">{item.wickets}</td>
+                                  <td className="px-4 py-4">{item.overs}</td>
+                                </tr>
+                              ))}
+
+
                             </tbody>
                           </table>
                         </div>
@@ -780,27 +801,27 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                       <h3 className="text-[14px] font-normal mt-2 mb-1">Teams</h3>
                       <div className="mt-4">
                         <div className="grid md:grid-cols-5 grid-cols-2 gap-4">
-                        {teamsPlayedFor?.map((teams:any, index: number) => (
-                          <div className="col-span-1" key={index}>
-                            <Link href={"/team/"+urlStringEncode(teams.abbr)+"/"+teams.tid}>
-                            <div className="bg-white p-2 rounded-lg border-[1px] border-[#ebebeb] text-center mb-2">
-                              <div className="flex items-center justify-center">
-                                {teams.logo_url ? (
-                                <Image  loading="lazy" 
-                                  src={teams.logo_url}
-                                  width={20} height={20} alt={teams.alt_name}
-                                  className="h-[30px] w-[30px] rounded-full"
-                                />
-                                ):("")}
-                              </div>
-                              <p className=" font-semibold text-[12px] pt-1">
-                                {teams.abbr}
-                              </p>
+                          {teamsPlayedFor?.map((teams: any, index: number) => (
+                            <div className="col-span-1" key={index}>
+                              <Link href={"/team/" + urlStringEncode(teams.abbr) + "/" + teams.tid}>
+                                <div className="bg-white p-2 rounded-lg border-[1px] border-[#ebebeb] text-center mb-2">
+                                  <div className="flex items-center justify-center">
+                                    {teams.logo_url ? (
+                                      <Image loading="lazy"
+                                        src={teams.logo_url}
+                                        width={20} height={20} alt={teams.alt_name}
+                                        className="h-[30px] w-[30px] rounded-full"
+                                      />
+                                    ) : ("")}
+                                  </div>
+                                  <p className=" font-semibold text-[12px] pt-1">
+                                    {teams.abbr}
+                                  </p>
+                                </div>
+                              </Link>
                             </div>
-                            </Link>
-                          </div>
-                        ))}
-                         
+                          ))}
+
                         </div>
                       </div>
                     </div>
@@ -808,101 +829,101 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                 </div>
 
 
-                
+
                 <div className="pt-4 mb-2">
                   <h3 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8]">
                     Debut &amp; Last Matches
                   </h3>
                 </div>
                 {playerDebutData.length > 0 &&
-                <div className=" rounded-lg p-4 bg-[#ffffff] mb-4">
-                  <div className="relative overflow-x-auto">
-                    <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                      <tbody>
-                        {playerDebutData?.map((debut:any, index:number) => (
-                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
-                          <th
-                            scope="row"
-                            className="px-6 py-2 text-[#586577] whitespace-nowrap dark:text-white font-normal"
-                          >
-                            {debut.format_str}
-                          </th>
-                          <td className="px-6 py-2 text-[#2F335C]">
-                            <p className="text-[#217AF7]">
-                               {debut.match_title}, {format(new Date(debut.match_date), "dd MMM yyyy")}
-                            </p>
-                          </td>
-                        </tr>
-                        ))}
-                      
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className="flex items-center justify-between py-4">
-                    <form action="" className="w-full md:w-[auto]">
-                      <div className="md:flex items-center md:space-x-2">
-                        <p>Popular Players</p>
-                        <div className="mt-2 md:mt-0">
-                          {/* select opction */}
-                          <select
-                            className="border-[1px] border-border-gray-700 md:w-[154px] w-full py-1 px-2 rounded-md"
-                            name="select"
-                            id=""
-                            value={selectedValue} onChange={handleChange}
-                          >
-                            
-                            <option value="odi">ODI</option>
-                            <option value="test">Test</option>
-                            <option value="t20">T20</option>
-                          </select>
-                        </div>
-                      </div>
-                    </form>
-                    <div>
-                      <button
-                        onClick={() => handleTopTabClick('batsmen')}
-                        className={`cust-box-click-button font-medium px-5 py-1 ${topTab === 'batsmen' ? 'bg-[#081736] text-white' : ''} rounded-full`}
-                      >
-                        <span>Batsmen</span>
-                      </button>
-                      <button
-                        onClick={() => handleTopTabClick('bowlers')}
-                        className={`cust-box-click-button font-medium px-5 py-1 ${topTab === 'bowlers' ? 'bg-[#081736] text-white' : ''} rounded-full`}
-                      >
-                        <span>Bowlers</span>
-                      </button>
+                  <div className=" rounded-lg p-4 bg-[#ffffff] mb-4">
+                    <div className="relative overflow-x-auto mb-4">
+                      <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <tbody>
+                          {playerDebutData?.map((debut: any, index: number) => (
+                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
+                              <th
+                                scope="row"
+                                className="px-6 py-2 text-[#586577] whitespace-nowrap dark:text-white font-normal"
+                              >
+                                {debut.format_str}
+                              </th>
+                              <td className="px-6 py-2 text-[#2F335C] font-medium">
+                                <p className="text-[#217AF7]">
+                                  {debut.match_title}, {format(new Date(debut.match_date), "dd MMM yyyy")}
+                                </p>
+                              </td>
+                            </tr>
+                          ))}
+
+                        </tbody>
+                      </table>
                     </div>
-                  </div>
-                  <div className={`grid md:grid-cols-4 grid-cols-2 gap-4 `}>
-                  {topPlayer?.slice(0,4)?.map((players:any, index:number) => (
-                    <div className="col-span-1 bg-white p-4 rounded-lg border-[1px] border-[#ebebeb] " key={index}>
-                      <Link href={"/player/"+urlStringEncode(players?.player)+"/"+players?.pid}>
-                      <div className="text-center">
-                        <div className="flex justify-center mb-2">
-                          <div className="relative">
-                             <PlayerImage player_id={players?.pid} height={80} width={80} className="w-16 h-16 mx-auto rounded-full mb-2" key={players?.pid}/>
+                    <div className="flex items-center justify-between py-4">
+                      <form action="" className="w-full md:w-[auto]">
+                        <div className="md:flex items-center md:space-x-2">
+                          <p>Popular Players</p>
+                          <div className="mt-2 md:mt-0">
+                            {/* select opction */}
+                            <select
+                              className="border-[1px] border-border-gray-700 md:w-[154px] w-full py-1 px-2 rounded-md"
+                              name="select"
+                              id=""
+                              value={selectedValue} onChange={handleChange}
+                            >
 
-                            <Image  loading="lazy" 
-                              src={topTab === 'bowlers' ? "/assets/img/player/ball.png" : "/assets/img/player/bat.png"}
-                              className="h-[24px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
-                              width={24} height={24} alt=""
-                            />
-
+                              <option value="odi">ODI</option>
+                              <option value="test">Test</option>
+                              <option value="t20">T20</option>
+                            </select>
                           </div>
                         </div>
-                        <p className="text-[14px] font-medium">{players?.player}</p>
-                        <p className="text-gray-500 font-medium text-[12px]">
-                        {topTab === 'bowlers' ? "Bowler" : "Batter"}
-                        </p>
+                      </form>
+                      <div>
+                        <button
+                          onClick={() => handleTopTabClick('batsmen')}
+                          className={`cust-box-click-button font-medium px-5 py-1 ${topTab === 'batsmen' ? 'bg-[#081736] text-white' : ''} rounded-full`}
+                        >
+                          <span>Batsmen</span>
+                        </button>
+                        <button
+                          onClick={() => handleTopTabClick('bowlers')}
+                          className={`cust-box-click-button font-medium px-5 py-1 ${topTab === 'bowlers' ? 'bg-[#081736] text-white' : ''} rounded-full`}
+                        >
+                          <span>Bowlers</span>
+                        </button>
                       </div>
-                      </Link>
                     </div>
-                  ))}
+                    <div className={`grid md:grid-cols-4 grid-cols-2 gap-4 `}>
+                      {topPlayer?.slice(0, 4)?.map((players: any, index: number) => (
+                        <div className="col-span-1 bg-white p-4 rounded-lg border-[1px] border-[#ebebeb] " key={index}>
+                          <Link href={"/player/" + urlStringEncode(players?.player) + "/" + players?.pid}>
+                            <div className="text-center">
+                              <div className="flex justify-center mb-2">
+                                <div className="relative">
+                                  <PlayerImage player_id={players?.pid} height={47} width={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" key={players?.pid} />
 
-                   
+                                  <Image loading="lazy"
+                                    src={topTab === 'bowlers' ? "/assets/img/player/ball.png" : "/assets/img/player/bat.png"}
+                                    className="h-[24px] absolute right-[-12px] bottom-0 bg-white rounded-full p-[4px]"
+                                    width={24} height={24} alt=""
+                                  />
+
+                                </div>
+                              </div>
+                              <p className="text-[14px] font-medium">{players?.player}</p>
+                              <p className="text-gray-500 font-medium text-[12px]">
+                                {topTab === 'bowlers' ? "Bowler" : "Batter"}
+                              </p>
+                            </div>
+                          </Link>
+                        </div>
+                      ))}
+
+
+                    </div>
+
                   </div>
-                  
-                </div>
                 }
                 <div className="rounded-lg bg-[#ffffff] p-4 mb-4 hidden">
                   <h3 className="text-1xl font-semibold mb-1">
@@ -935,57 +956,20 @@ export default function Overview({playerAdvanceStats, playerStats, urlString, ra
                   </Link>
                 </div>
                 {newsUrl !== undefined && newsUrl !== null && newsUrl !== "" ?
-                <PlayerNews newsUrl={newsUrl}></PlayerNews> : ""
+                  <PlayerNews newsUrl={newsUrl}></PlayerNews> : ""
                 }
               </div>
               {/* Right Sidebar Section */}
               <div className="lg:col-span-4 md:col-span-5">
                 <div className="">
-                  <div className="bg-white rounded-lg p-4 mb-4">
-                    <div className="flex gap-1 items-center justify-between">
-                      <div className="flex gap-1 items-center">
-                        <div className="col-span-4 relative">
-                          <Image  loading="lazy" 
-                            src="/assets/img/home/trofi.png"
-                            className="h-[75px]"
-                            width={75} height={75} alt=""
-                          />
-                        </div>
-                        <div className="col-span-8 relative">
-                          <h3 className="font-semibold text-[19px] mb-1">
-                            Weekly challenge
-                          </h3>
-                          <p className="font-semibold text-[13px] text-[#1a80f8]">
-                            <span className="text-[#586577]">Time Left:</span>2 Days
-                            12h
-                          </p>
-                        </div>
-                      </div>
-                      <div className="">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className="size-4"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-
+                 
+                <WeeklySlider featuredMatch={featuredMatch} />
 
                   <FantasyTips />
 
-                  
+
                   <PLSeries />
-                  
+
                 </div>
               </div>
             </div>
