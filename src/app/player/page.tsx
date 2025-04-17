@@ -7,8 +7,6 @@ import News from './playerComponents/News';
 import Photos from './playerComponents/Photos';
 import { PlayerStats, PlayerAdvanceStats, Ranking, PlayerProfile } from "@/controller/playerController";
 import { urlStringEncode} from "@/utils/utility";
-import { liveSeries } from "@/controller/homeController";
-
 
 
 type Params = Promise<{ playerId: number; playerTap: string; }>
@@ -29,7 +27,6 @@ export default async function page(props: { params: Params }) {
   const playerProfile = await PlayerProfile(playerId);
   const ranking = await Ranking();
   const urlString = urlStringEncode(playerStats?.player?.first_name)+"/"+playerStats?.player?.pid;
-  const liveSeriesData = await liveSeries();
     //  console.log('params', playerStats);
 
 
@@ -51,11 +48,11 @@ export default async function page(props: { params: Params }) {
 
 
     return (
-        <Layout  headerData={liveSeriesData}>
+        <Layout>
 
             <Banner playerStats={playerStats}></Banner>
 
-            {playerTab === "" || playerTab === undefined && <Overview playerAdvanceStats={playerAdvanceStats} playerStats={playerStats}  urlString={urlString} ranking={ranking} playerProfile={playerProfile} featuredMatch = {featuredMatch} />}
+            {playerTab === "" || playerTab === undefined && <Overview playerAdvanceStats={playerAdvanceStats} playerStats={playerStats}  urlString={urlString} ranking={ranking} playerProfile={playerProfile} />}
             {playerTab === "stats" && <Stats playerAdvanceStats={playerAdvanceStats}  urlString={urlString} />}
             {playerTab === "news" && <News  urlString={urlString}/>}
             {playerTab === "photos" && <Photos  urlString={urlString}/>}

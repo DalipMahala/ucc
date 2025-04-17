@@ -1,6 +1,5 @@
 import React from 'react'
 import Layout from "@/app/components/Layout";
-import { liveSeries } from "@/controller/homeController";
 import { TeamDetails, TeamLast5match, TeamPlayersById, isIPLTeamDetails } from "@/controller/teamController";
 import { Ranking } from "@/controller/playerController";
 import Teams from './teamComponents/teamDetails';
@@ -15,7 +14,6 @@ export default async function page(props: { params: Params }) {
   const teamType = params?.teamType;
   const teamId = params?.teamId;
 
-  const liveSeriesData = await liveSeries();
   const teamDetails = await TeamDetails(teamId);
   const teamPlayers = await TeamPlayersById(teamId);
   const teamLast5match = await TeamLast5match(teamId,2);
@@ -27,7 +25,7 @@ export default async function page(props: { params: Params }) {
   }
   // console.log("iplTeams",iplTeams);
   return (
-    <Layout headerData={liveSeriesData}>
+    <Layout >
       
       <Teams  teamLast5match={teamLast5match} teamUpcomingMatch={teamUpcomingMatch} teamDetails={teamDetails} params={params} teamPlayers={teamPlayers}/>
   

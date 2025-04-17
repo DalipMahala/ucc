@@ -18,12 +18,11 @@ interface Overview {
   urlString: string;
   ranking: any | null;
   playerProfile: any | null;
-  featuredMatch: any;
 }
 
 
 
-export default function Overview({ playerAdvanceStats, playerStats, urlString, ranking, playerProfile, featuredMatch, }: Overview) {
+export default function Overview({ playerAdvanceStats, playerStats, urlString, ranking, playerProfile }: Overview) {
 
 
 
@@ -981,7 +980,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
               <div className="lg:col-span-4 md:col-span-5">
                 <div className="">
 
-                  <WeeklySlider featuredMatch={featuredMatch} />
+                  <WeeklySlider/>
 
                   <FantasyTips />
 
