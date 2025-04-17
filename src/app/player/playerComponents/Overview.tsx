@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { format } from "date-fns";
 import { getAgeDetails } from "@/utils/timerUtils";
 import { urlStringEncode } from "@/utils/utility";
-import PLSeries from "@/app/components/popularSeries";
+
 import PlayerImage from "@/app/components/PlayerImage";
 import PlayerNews from "@/app/components/PlayerNews";
 import FantasyTips from "@/app/components/FantasyTips";
@@ -23,11 +23,11 @@ interface Overview {
 
 
 
-export default function Overview({ playerAdvanceStats, playerStats, urlString, ranking, playerProfile,  featuredMatch, }: Overview) {
+export default function Overview({ playerAdvanceStats, playerStats, urlString, ranking, playerProfile, featuredMatch, }: Overview) {
 
 
 
-  
+
   const profile = playerStats?.player;
   const playerBatting = playerStats?.batting ?? {};
   const playerBowling = playerStats?.bowling ?? {};
@@ -169,12 +169,21 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
   const newsUrl = playerProfile[0]?.newUrl;
 
 
-  
+
   return (
-    <section className="lg:w-[1000px] md:mx-auto my-5 mx-2">
+    <section className="lg:w-[1000px] md:mx-auto mx-2">
       <div className="">
 
-        <div id="tabs" className="my-4">
+        
+
+        <div id="tab-content">
+          <div id="overview">
+            <div className="md:grid grid-cols-12 gap-4">
+              {/* Tabs */}
+              <div className="lg:col-span-8 md:col-span-7">
+
+
+              <div id="tabs" className="my-4">
           <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
             <Link href={"/player/" + urlString}>
               <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
@@ -196,20 +205,14 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                 News
               </button>
             </Link>
-            <Link href={"/player/" + urlString + "/photos"}>
+            {/* <Link href={"/player/" + urlString + "/photos"}>
               <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
               >
                 Photos
               </button>
-            </Link>
+            </Link> */}
           </div>
         </div>
-
-        <div id="tab-content">
-          <div id="overview">
-            <div className="md:grid grid-cols-12 gap-4">
-              {/* Tabs */}
-              <div className="lg:col-span-8 md:col-span-7">
 
 
                 <div className="md:hidden rounded-lg bg-white p-4 mb-4">
@@ -268,7 +271,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
 
                 <div className="rounded-lg px-4 py-2 bg-[#ffffff]">
 
-                  
+
                   <div className="relative overflow-x-auto">
                     <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400 text-[13px]">
                       <tbody>
@@ -450,7 +453,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                           style={{ transform: `translateX(-${currentIndex * (100 / visibleSlides)}%)` }}
                         >
                           {slides?.map((slide: any) => (
-                            <div key={slide.id} className="cust-slide w-1/4 flex-shrink-0 rounded-lg border-[1px] border-[#ebebeb]">
+                            <div key={slide.id} className="cust-slide md:w-1/4 w-1/3 flex-shrink-0 rounded-lg border-[1px] border-[#ebebeb]">
                               <div className="bg-white p-4 text-center rounded-lg">
                                 <p className="text-1xl text-[#1A80F8] font-semibold mb-2">{slide.text}</p>
                                 <p className="text-gray-500 font-medium text-[12px]">{slide.match}</p>
@@ -859,8 +862,8 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                         </tbody>
                       </table>
                     </div>
-                    <div className="flex items-center justify-between py-4">
-                      <form action="" className="w-full md:w-[auto]">
+                    <div className="flex md:items-center items-end justify-between py-4">
+                      <form action="" className="w-[50%] md:w-[auto]">
                         <div className="md:flex items-center md:space-x-2">
                           <p>Popular Players</p>
                           <div className="mt-2 md:mt-0">
@@ -879,16 +882,16 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                           </div>
                         </div>
                       </form>
-                      <div>
+                      <div className='flex'>
                         <button
                           onClick={() => handleTopTabClick('batsmen')}
-                          className={`cust-box-click-button font-medium px-5 py-1 ${topTab === 'batsmen' ? 'bg-[#081736] text-white' : ''} rounded-full`}
+                          className={`cust-box-click-button font-medium md:px-5 px-4 py-1 ${topTab === 'batsmen' ? 'bg-[#081736] text-white' : ''} rounded-full`}
                         >
                           <span>Batsmen</span>
                         </button>
                         <button
                           onClick={() => handleTopTabClick('bowlers')}
-                          className={`cust-box-click-button font-medium px-5 py-1 ${topTab === 'bowlers' ? 'bg-[#081736] text-white' : ''} rounded-full`}
+                          className={`cust-box-click-button font-medium md:px-5 px-4 py-1 ${topTab === 'bowlers' ? 'bg-[#081736] text-white' : ''} rounded-full`}
                         >
                           <span>Bowlers</span>
                         </button>
@@ -958,17 +961,32 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                 {newsUrl !== undefined && newsUrl !== null && newsUrl !== "" ?
                   <PlayerNews newsUrl={newsUrl}></PlayerNews> : ""
                 }
+
+                <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
+                  <h3 className="text-1xl font-semibold mb-1">India vs Zimbabwe 2024</h3>
+                  <p className="text-gray-500 font-normal">The biggest tournament in the cricketing circuit, the ICC T20 WORLD Cup is underway in the USAs and the West Indies. The tournament received excellent response from the fans worldwide...</p>
+                  <a href="#">
+                    <p className="text-[#1A80F8] font-semibold flex items-center text-[13px] pt-2 underline">
+                      Read more
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-3 ml-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"></path>
+                      </svg>
+                    </p>
+                  </a>
+                </div>
+
+
               </div>
               {/* Right Sidebar Section */}
               <div className="lg:col-span-4 md:col-span-5">
                 <div className="">
-                 
-                <WeeklySlider featuredMatch={featuredMatch} />
+
+                  <WeeklySlider featuredMatch={featuredMatch} />
 
                   <FantasyTips />
 
 
-                  <PLSeries />
+
 
                 </div>
               </div>

@@ -55,15 +55,15 @@ export default function Stats({urlString, playerAdvanceStats}: Stats) {
         <section className="lg:w-[1000px] md:mx-auto my-5 mx-2">
             <div className="">
                 <div id="tabs" className="my-4">
-                    <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+                    <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
                         <Link href={"/player/"+urlString}>
-                            <button className="font-medium py-2 px-3 whitespace-nowrap"
+                            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
                             >
                                 Overview
                             </button>
                         </Link>
                         <Link href={"/player/"+urlString+"/stats"}>
-                            <button className="font-medium py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
+                            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
                             >
                                 Stats
                             </button>
@@ -71,24 +71,24 @@ export default function Stats({urlString, playerAdvanceStats}: Stats) {
 
                         <Link href={"/player/"+urlString+"/news"}>
                             <button
-                                className="font-medium py-2 px-3 whitespace-nowrap"
+                                className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
                             >
                                 News
                             </button>
                         </Link>
-                        <Link href={"/player/"+urlString+"/photos"}>
-                            <button className="font-medium py-2 px-3 whitespace-nowrap"
+                        {/* <Link href={"/player/"+urlString+"/photos"}>
+                            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
                             >
                                 Photos
                             </button>
-                        </Link>
+                        </Link> */}
                     </div>
                 </div>
 
                 <div id="tab-content">
                     <div id="stats">
                         <div className="cust-box-click-container">
-                            <h2 className="text-[20px] font-semibold">{playerAdvanceStats?.player?.title}</h2>
+                            <h2 className="text-[18px] mb-[1px] font-semibold">{playerAdvanceStats?.player?.title}</h2>
                             <div className="md:flex justify-between items-center mb-3">
                                 <h3 className=" font-medium pl-[7px] border-l-[3px] border-[#229ED3]">
                                     Vs Team stats
@@ -165,7 +165,7 @@ export default function Stats({urlString, playerAdvanceStats}: Stats) {
                                                             </td>
                                                             <td className="px-3 py-3">{teams?.innings}</td>
                                                             <td className="px-3 py-3">{teams?.notout}</td>
-                                                            <td className="px-3 py-3">{teams?.runs}</td>
+                                                            <td className="px-3 py-3 font-semibold">{teams?.runs}</td>
                                                             <td className="px-3 py-3">{teams?.balls}</td>
                                                             <td className="px-3 py-3">{teams?.run100}</td>
                                                             <td className="px-3 py-3">{teams?.run50}</td>
@@ -231,7 +231,7 @@ export default function Stats({urlString, playerAdvanceStats}: Stats) {
                                                                 </Link>
                                                             </td>
                                                             <td className="px-3 py-3">{teams.innings}</td>
-                                                            <td className="px-3 py-3">{teams.wickets}</td>
+                                                            <td className="px-3 py-3 font-semibold">{teams.wickets}</td>
                                                             <td className="px-3 py-3">{teams.runs}</td>
                                                             <td className="px-3 py-3">{teams.balls}</td>
                                                             <td className="px-3 py-3">{teams.wicket4i}</td>
@@ -562,7 +562,7 @@ export default function Stats({urlString, playerAdvanceStats}: Stats) {
                                                             <td className="px-3 py-3">{tournaments?.batting?.matches}</td>
                                                             <td className="px-3 py-3">{tournaments?.batting?.innings}</td>
                                                             <td className="px-3 py-3">{tournaments?.batting?.notout}</td>
-                                                            <td className="px-3 py-3">{tournaments?.batting?.runs}</td>
+                                                            <td className="px-3 py-3 font-semibold">{tournaments?.batting?.runs}</td>
                                                             <td className="px-3 py-3">{tournaments?.batting?.balls}</td>
                                                             <td className="px-3 py-3">{tournaments?.batting?.run100}</td>
                                                             <td className="px-3 py-3">{tournaments?.batting?.run4}</td>
@@ -614,7 +614,7 @@ export default function Stats({urlString, playerAdvanceStats}: Stats) {
                                                             <td className="px-3 py-3">{tournaments?.bowling?.innings}</td>
                                                             <td className="px-3 py-3">{tournaments?.bowling?.runs}</td>
                                                             <td className="px-3 py-3">{tournaments?.bowling?.overs}</td>
-                                                            <td className="px-3 py-3">{tournaments?.bowling?.wickets}</td>
+                                                            <td className="px-3 py-3 font-semibold">{tournaments?.bowling?.wickets}</td>
                                                             <td className="px-3 py-3">{tournaments?.bowling?.maidens}</td>
                                                             <td className="px-3 py-3">{tournaments?.bowling?.dot}</td>
                                                             <td className="px-3 py-3">{tournaments?.bowling?.econ}</td>
@@ -662,7 +662,7 @@ export default function Stats({urlString, playerAdvanceStats}: Stats) {
                                                                     {lmatches.match_title}
                                                                 </Link>
                                                             </td>
-                                                            <td className="px-3 py-3">{lmatches.runs}</td>
+                                                            <td className="px-3 py-3 font-semibold">{lmatches.runs}</td>
                                                             <td className="px-3 py-3">{lmatches.balls}</td>
                                                             <td className="px-3 py-3">{lmatches.run4}</td>
                                                             <td className="px-3 py-3">{lmatches.run6}</td>
@@ -713,7 +713,7 @@ export default function Stats({urlString, playerAdvanceStats}: Stats) {
                                                             </td>
                                                             <td className="px-3 py-3">{lmatches.runs}</td>
                                                             <td className="px-3 py-3">{lmatches.overs}</td>
-                                                            <td className="px-3 py-3">{lmatches.wickets}</td>
+                                                            <td className="px-3 py-3 font-semibold">{lmatches.wickets}</td>
                                                             <td className="px-3 py-3">{lmatches.maidens}</td>
                                                             <td className="px-3 py-3">{lmatches.dot}</td>
                                                             <td className="px-3 py-3">{lmatches.hattrick}</td>
