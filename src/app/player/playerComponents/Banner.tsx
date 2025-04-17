@@ -47,7 +47,7 @@ export default function Banner({ playerStats }: Banner) {
                     <div className="md:mb-4 mb-2 relative z-[1]">
                         <h2 className="text-2xl font-medium mb-3 md:text-start text-center">{profile?.first_name}</h2>
                         <div className="lg:flex items-center lg:space-x-5">
-                            <div className="flex md:justify-start justify-center items-center space-x-2 md:mb-2 lg:mb-0 mb-0 ">
+                            <div className="flex md:justify-start justify-center items-center space-x-2 mb-2 ">
                                 <Link href="#">
                                     <Image loading="lazy" src="/assets/img/india.png" alt="" className="h-[1.5rem]" width={24} height={24} />
                                 </Link>
