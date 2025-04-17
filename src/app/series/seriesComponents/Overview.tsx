@@ -16,14 +16,12 @@ interface Overview {
   seriesInfo: any;
   seriesKeystats: any;
   urlString: string;
-  featuredMatch: any;
   isPointTable: boolean;
 }
 export default function Overview({
   seriesInfo,
   seriesKeystats,
   urlString,
-  featuredMatch,
   isPointTable,
 }: Overview) {
   const standings = seriesInfo?.standing?.standings;
@@ -1088,7 +1086,7 @@ export default function Overview({
             </div>
             <div className="lg:col-span-4 md:col-span-5">
 
-              <WeeklySlider featuredMatch={featuredMatch} />
+              <WeeklySlider/>
 
               {seriesInfo?.title === "Indian Premier League" && (
                 <>

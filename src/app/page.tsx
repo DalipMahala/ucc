@@ -16,7 +16,7 @@ import { Ranking } from "@/controller/playerController";
 import News from "@/app/components/News";
 import FeatureSeries from "@/app/components/FeatureSeries";
 import {
-  liveSeries, GetCountryCompitition, FeaturedMatch, FeaturedSeries
+  liveSeries, GetCountryCompitition, FeaturedSeries
 } from "@/controller/homeController";
 import type { Metadata } from "next";
 import CountriesList from "./components/CountriesList";
@@ -116,23 +116,6 @@ export default async function Home(props: { params: Params }) {
 
 
   const activeMainTab = activeTabValue;
-  
-  // let featuredMatch: MatchItem[] = await FeaturedMatch();
-  let frresponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/featuredMatches`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
-    },
-    cache: "no-store",
-  });
-  let featuredmatchArray = await frresponse.json();
-  
-  const futuredMatches = featuredmatchArray?.data?.map(({ match_info, ...rest }:MatchItem) => ({
-    ...match_info,
-    ...rest
-  }));
-  const featuredMatch = futuredMatches;
 
   const liveSeriesData = await liveSeries();
   const ranking = await Ranking();
@@ -291,7 +274,7 @@ export default async function Home(props: { params: Params }) {
               </div>
             </div>
             <div className="md:h-[260px]">
-              <WeeklySlider featuredMatch={featuredMatch} />
+              <WeeklySlider />
             </div>
 
             <PLSeries />

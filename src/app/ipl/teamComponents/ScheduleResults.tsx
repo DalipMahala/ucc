@@ -11,7 +11,6 @@ import FantasyTips from "@/app/components/FantasyTips";
 
 interface ScheduleResults {
   seriesMatches: any;
-  featuredMatch:any;
   seriesId:number;
   pointTables: any;
   teamPlayers: any;
@@ -20,7 +19,6 @@ interface ScheduleResults {
 export default function ScheduleResults({
   params,
   seriesMatches,
-  featuredMatch,
   seriesId,
   pointTables,
   teamPlayers
@@ -1334,7 +1332,7 @@ export default function ScheduleResults({
               </div>
             </div>
 
-            <WeeklySlider featuredMatch={featuredMatch} />
+            <WeeklySlider />
 
             <FantasyTips/>
             

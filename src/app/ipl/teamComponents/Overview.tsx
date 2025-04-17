@@ -16,7 +16,6 @@ interface teamview {
   teamPlayers: any;
   teamLast5match: any;
   pointTables: any;
-  featuredMatch: any;
   matcheInfo: any;
   seriesMatches: any;
   venueDetails: any;
@@ -27,7 +26,6 @@ export default function Overview({
   teamPlayers,
   teamLast5match,
   pointTables,
-  featuredMatch,
   matcheInfo,
   seriesMatches,
   venueDetails
@@ -1059,7 +1057,7 @@ export default function Overview({
 
               {/* <!-- Slider 1 --> */}
 
-              <WeeklySlider featuredMatch={featuredMatch} />
+              <WeeklySlider />
 
               <div className="my-4">
                 <div className="mb-2">

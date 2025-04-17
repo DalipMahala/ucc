@@ -25,7 +25,6 @@ interface MatchData {
 }
 
 interface H2hProps {
-  featuredMatch: any | null;
   teamDetails: any | null;
   teamADetails: TeamData | null;
   teamBDetails: TeamData | null;
@@ -34,7 +33,6 @@ interface H2hProps {
 }
 
 export default function H2h({
-  featuredMatch,
   teamDetails,
   teamADetails,
   teamBDetails,
@@ -651,7 +649,7 @@ export default function H2h({
 
               <div className="lg:col-span-4 md:col-span-5 -mt-4">
 
-                <WeeklySlider featuredMatch={featuredMatch} />
+                <WeeklySlider/>
                 <PLSeries />
                 <FantasyTips />
               </div>

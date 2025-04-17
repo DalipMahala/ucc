@@ -3,7 +3,7 @@ import Layout from "@/app/components/Layout";
 import Image from 'next/image';
 import WeeklySlider from "@/app/components/WeeklySlider";
 import H2h from './h2h';
-import { liveSeries,FeaturedMatch } from "@/controller/homeController";
+import { liveSeries } from "@/controller/homeController";
 import { H2hDetails, getTeamId, h2hMatch } from "@/controller/h2hController";
 import { TeamDetails, isIPLTeamDetails } from "@/controller/teamController";
 import { notFound } from 'next/navigation';
@@ -52,27 +52,12 @@ export default async function Page(props: { params: Params }) {
   const teamBDetails = await TeamDetails(teamDetails?.teamb_id);
   const liveSeriesData = await liveSeries();
   // console.log(teamA);
-  let frresponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/featuredMatches`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
-    },
-    cache: "no-store",
-  });
-  let featuredmatchArray = await frresponse.json();
-  
-  const futuredMatches = featuredmatchArray?.data?.map(({ match_info, ...rest }:FrMatch) => ({
-    ...match_info,
-    ...rest
-  }));
-  const featuredMatch = futuredMatches;
-
+ 
 
     return (
         <Layout  headerData={liveSeriesData}>
             
-        <H2h featuredMatch={featuredMatch} teamDetails={teamDetails} teamADetails={teamADetails} teamBDetails={teamBDetails} urlStrings={urlString} completedMatch={completedMatch}></H2h>
+        <H2h teamDetails={teamDetails} teamADetails={teamADetails} teamBDetails={teamBDetails} urlStrings={urlString} completedMatch={completedMatch}></H2h>
 
         </Layout>
     )

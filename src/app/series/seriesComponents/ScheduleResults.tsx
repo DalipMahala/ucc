@@ -13,7 +13,6 @@ interface ScheduleResults {
   urlString: string;
   seriesMatches: any;
   statsType: string;
-  featuredMatch: any;
   isPointTable: boolean;
   seriesId: number;
 }
@@ -21,7 +20,6 @@ export default function ScheduleResults({
   urlString,
   seriesMatches,
   statsType,
-  featuredMatch,
   isPointTable,
   seriesId
 }: ScheduleResults) {
@@ -1556,7 +1554,7 @@ export default function ScheduleResults({
           <div className="lg:col-span-4 md:col-span-5 md:-mt-4">
            
 
-            <WeeklySlider featuredMatch={featuredMatch} />
+            <WeeklySlider/>
 
             <FantasyTips />
 

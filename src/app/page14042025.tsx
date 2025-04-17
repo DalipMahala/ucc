@@ -1643,7 +1643,7 @@ export default async function Home(props: { params: Params }) {
               </div>
             </div>
             <div className="md:h-[260px]">
-              <WeeklySlider featuredMatch={featuredMatch} />
+              <WeeklySlider />
             </div>
 
             <PLSeries />

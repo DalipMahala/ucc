@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "@/app/components/Layout";
-import { liveSeries, FeaturedMatch } from "@/controller/homeController";
+import { liveSeries } from "@/controller/homeController";
 import { SeriesPointsTable, SeriesMatches, MatcheInfo } from "@/controller/matchInfoController";
 import {
   TeamDetails,
@@ -32,7 +32,6 @@ export default async function page(props: { params: Params }) {
   const venueDetails = await TeamVenue(teamId);
   const pointTables = await SeriesPointsTable(cid);
   const seriesMatches =  await SeriesMatches(cid);
-  const featuredMatch = await FeaturedMatch();
   let matcheInfo = [];
   if(seriesMatches?.scheduledMatch.length > 0){
     const  matchid = seriesMatches?.scheduledMatch?.filter((m: { teama: { team_id: any; }; teamb: { team_id: any; }; }) => [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teamId)))?.[0]?.match_id;
@@ -47,11 +46,11 @@ export default async function page(props: { params: Params }) {
     <Layout headerData={liveSeriesData}>
       <IplBanner cid={cid} params={params} teamPlayers={teamPlayers} venueDetails={venueDetails}></IplBanner>
       {teamType === "" || teamType === undefined? (
-      <Overview  cid={cid} params={params} teamPlayers={teamPlayers} teamLast5match={teamLast5match} pointTables={pointTables} featuredMatch={featuredMatch} matcheInfo={matcheInfo} seriesMatches={seriesMatches} venueDetails={venueDetails}/>
+      <Overview  cid={cid} params={params} teamPlayers={teamPlayers} teamLast5match={teamLast5match} pointTables={pointTables} matcheInfo={matcheInfo} seriesMatches={seriesMatches} venueDetails={venueDetails}/>
       ): teamType === "squads" ? (
       <Squads  pointTables={pointTables} teamPlayers={teamPlayers} matcheInfo={matcheInfo}/>
       ): teamType === "schedule-results" ? (
-        <ScheduleResults seriesId={cid} params={params} seriesMatches={seriesMatches} featuredMatch={featuredMatch} teamPlayers={teamPlayers} pointTables={pointTables} />
+        <ScheduleResults seriesId={cid} params={params} seriesMatches={seriesMatches} teamPlayers={teamPlayers} pointTables={pointTables} />
         ): null
     }
     </Layout>

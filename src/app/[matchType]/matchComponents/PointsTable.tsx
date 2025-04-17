@@ -11,7 +11,6 @@ interface PointsTable {
     matchUrl :string | null;
     seriesPointsTable: any | null;
     seriesPointsTableMatches: any | null;
-    featuredMatch: any | null;
 
   }
 export default function PointsTable({
@@ -20,7 +19,6 @@ export default function PointsTable({
     matchUrl,
     seriesPointsTable,
     seriesPointsTableMatches,
-    featuredMatch
   }: PointsTable) {
 
     console.log("matchUC",seriesPointsTableMatches);
@@ -449,7 +447,7 @@ export default function PointsTable({
                     </div>
                 </div>
 
-                <WeeklySlider featuredMatch={featuredMatch} />
+                <WeeklySlider />
 
 
 

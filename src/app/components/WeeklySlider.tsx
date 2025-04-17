@@ -6,11 +6,41 @@ import Link from "next/link";
 import { urlStringEncode } from "../../utils/utility";
 import CountdownTimer from "./../components/countdownTimer";
 
-interface featuredMatch {
-  featuredMatch: any; // Adjust type based on your data
+interface MatchItem{
+  match_info:any;
 }
 
-const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
+const WeeklySlider = () => {
+
+  const [featuredMatch, setFeaturedMatch] = useState([]);
+    const [loading, setLoading] = useState(true);
+  
+    useEffect(() => {
+      fetch("/api/match/featuredMatches", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+        },
+        cache: "no-store",
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          
+          if (res.success) {
+  
+            const futuredM = res?.data?.map(({ match_info, ...rest }:MatchItem) => ({
+              ...match_info,
+              ...rest
+            }));
+
+            setFeaturedMatch(futuredM);
+          }
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
+    }, []);
+  
   const [activeIndex, setActiveIndex] = useState(0);
   const [slides, setSlides] = useState<any[]>([]); // Use state to store the slides
 
@@ -42,7 +72,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
   const handleNextClick = () => {
     setActiveIndex(activeIndex === slides.length - 1 ? 0 : activeIndex + 1);
   };
-
+console.log("ada",featuredMatch);
   return (
     <div className="cust-slider-container w-full overflow-hidden my-4 ">
 
@@ -65,7 +95,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                 <div className="h-[20px] border-l-[1px] border-[#efefef]" />
                 <div className="flex items-center justify-end space-x-2 w-[50%] ">
                   <span className="text-[11px] text-[#1F2937] font-semibold ">
-                    {slide?.teamList?.[parseFloat(slide?.odds?.matchodds?.teama?.back) < parseFloat(slide?.odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
+                    {slide?.teamList?.[parseFloat(slide?.odds?.matchodds?.teama?.back) < parseFloat(slide?.odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb']?.short_name}
                   </span>
                   <span className="flex font-semibold items-center md:bg-[#FAFFFC] bg-[#00a632] border-[1px] md:border-[#0B773C] border-[#00a632] md:rounded-full rounded-md md:text-[#0B773C] text-[#ffffff] pr-2">
                     <span>
@@ -85,12 +115,12 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                       </svg>
                     </span>
                     {
-                      (parseFloat(slide.odds?.matchodds?.teama?.back) < parseFloat(slide.odds?.matchodds?.teamb?.back)
-                        ? slide.odds?.matchodds?.teama?.back
-                        : slide.odds?.matchodds?.teamb?.back) > 0
-                        ? Math.round((parseFloat(slide.odds?.matchodds?.teama?.back) < parseFloat(slide.odds?.matchodds?.teamb?.back)
-                          ? slide.odds?.matchodds?.teama?.back
-                          : slide.odds?.matchodds?.teamb?.back) * 100 - 100)
+                      (parseFloat(slide?.odds?.matchodds?.teama?.back) < parseFloat(slide?.odds?.matchodds?.teamb?.back)
+                        ? slide?.odds?.matchodds?.teama?.back
+                        : slide?.odds?.matchodds?.teamb?.back) > 0
+                        ? Math.round((parseFloat(slide?.odds?.matchodds?.teama?.back) < parseFloat(slide?.odds?.matchodds?.teamb?.back)
+                          ? slide?.odds?.matchodds?.teama?.back
+                          : slide?.odds?.matchodds?.teamb?.back) * 100 - 100)
                         : 0
                     }
                   </span>
@@ -112,12 +142,12 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                       </svg>
                     </span>
                     {
-                      (parseFloat(slide.odds?.matchodds?.teama?.lay) < parseFloat(slide.odds?.matchodds?.teamb?.lay)
-                        ? slide.odds?.matchodds?.teama?.lay
-                        : slide.odds?.matchodds?.teamb?.lay) > 0
-                        ? Math.round((parseFloat(slide.odds?.matchodds?.teama?.lay) < parseFloat(slide.odds?.matchodds?.teamb?.lay)
-                          ? slide.odds?.matchodds?.teama?.lay
-                          : slide.odds?.matchodds?.teamb?.lay) * 100 - 100)
+                      (parseFloat(slide?.odds?.matchodds?.teama?.lay) < parseFloat(slide?.odds?.matchodds?.teamb?.lay)
+                        ? slide?.odds?.matchodds?.teama?.lay
+                        : slide?.odds?.matchodds?.teamb?.lay) > 0
+                        ? Math.round((parseFloat(slide?.odds?.matchodds?.teama?.lay) < parseFloat(slide?.odds?.matchodds?.teamb?.lay)
+                          ? slide?.odds?.matchodds?.teama?.lay
+                          : slide?.odds?.matchodds?.teamb?.lay) * 100 - 100)
                         : 0
                     }
                   </span>
@@ -168,7 +198,7 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                     </div>
                     <div className=" h-[70px] border-l-[1px] border-[#efefef]"></div>
                     <div className="font-semibold w-[50%] text-center">
-                      {isSameDay(new Date(), new Date(slide.countdown)) ? (
+                      {isSameDay(new Date(), slide.countdown ? new Date(slide.countdown): '') ? (
                         <>
                         <span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
                         
@@ -178,12 +208,12 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
                       ) : (
                         <p className="text-[#586577] text-[13px] mb:mb-4 mb-1 font-medium">
 
-                          {format(new Date(slide.countdown), "dd MMMM - EEEE")}
+                          {slide.countdown ? format(new Date(slide.countdown), "dd MMMM - EEEE") : ''}
                           <br />
                           
                           <span className="text-[#144280] text-[14px] font-semibold">
                             {" "}
-                            {format(new Date(slide.countdown), "hh:mm:aa")}{" "}
+                            {slide.countdown ? format(new Date(slide.countdown), "hh:mm:aa") : ''}{" "}
                           </span>
 
 

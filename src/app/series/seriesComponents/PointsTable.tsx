@@ -9,7 +9,6 @@ import PLSeries from "@/app/components/popularSeries";
 interface PointsTable {
     urlString: string; 
     seriesInfo: any;
-    featuredMatch:any;
   }
 
   async function fetchHtml(seriesId: number) {
@@ -38,7 +37,7 @@ interface PointsTable {
       return '';
     }
   }
-  export default async function PointsTable({urlString, seriesInfo,featuredMatch} : PointsTable) {
+  export default async function PointsTable({urlString, seriesInfo} : PointsTable) {
 
     const standings = seriesInfo?.standing?.standings;
 
@@ -336,7 +335,7 @@ interface PointsTable {
                     <div className="lg:col-span-4 md:col-span-5 -mt-4">
                       
 
-                        <WeeklySlider featuredMatch={featuredMatch} />
+                        <WeeklySlider />
 
 
 

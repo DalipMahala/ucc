@@ -521,7 +521,7 @@ const teambLoss = (teamDetails?.teamb_lost_match * teamDetails?.teamAB_total_mat
                                       </div>
                                   </div>
                               </div>
-                              <WeeklySlider featuredMatch={featuredMatch}/>
+                              <WeeklySlider/>
                               <PLSeries />
                               <FantasyTips />
                           </div>

@@ -11,7 +11,7 @@ import PointsTable from './seriesComponents/PointsTable';
 import News from './seriesComponents/News';
 import Stats from './seriesComponents/Stats';
 import SeriesList from './seriesComponents/SeriesList';
-import { liveSeries, seriesById, AllSeriesList, FeaturedMatch } from "@/controller/homeController";
+import { liveSeries, seriesById, AllSeriesList } from "@/controller/homeController";
 import { SeriesKeyStats, SeriesMatches } from "@/controller/matchInfoController";
 import { TeamPlayers } from "@/controller/teamController";
 
@@ -38,22 +38,7 @@ export default async function page(props: { params: Params }) {
    
   const teamPlayers =  await TeamPlayers(teamIds);
   const tournamentsList = await AllSeriesList();
-  // const featuredMatch = await FeaturedMatch();
-  let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/featuredMatches`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
-    },
-    cache: "no-store",
-  });
-  let featuredmatchArray = await response.json();
   
-  const filteredMatches = featuredmatchArray?.data?.map(({ match_info, ...rest }:FrMatch) => ({
-    ...match_info,
-    ...rest
-  }));
-  const featuredMatch = filteredMatches;
 
   const standings = SeriesDetails?.standing?.standings;
   const isPointTable = Array.isArray(standings) && standings.length > 0;
@@ -67,10 +52,10 @@ export default async function page(props: { params: Params }) {
             <>
           <Banner seriesData={liveSeriesData} seriesInfo={SeriesDetails}></Banner>
 
-          {seriesTab === ""  || seriesTab === undefined && <Overview  seriesInfo={SeriesDetails} seriesKeystats={seriesKeystats} urlString={urlString} featuredMatch={featuredMatch} isPointTable={isPointTable}/>}
-          {seriesTab === "schedule-results" && <ScheduleResults seriesId={seriesId} seriesMatches={seriesMatches} urlString={urlString} statsType={statsType} featuredMatch={featuredMatch} isPointTable={isPointTable}/>}
+          {seriesTab === ""  || seriesTab === undefined && <Overview  seriesInfo={SeriesDetails} seriesKeystats={seriesKeystats} urlString={urlString} isPointTable={isPointTable}/>}
+          {seriesTab === "schedule-results" && <ScheduleResults seriesId={seriesId} seriesMatches={seriesMatches} urlString={urlString} statsType={statsType} isPointTable={isPointTable}/>}
           {seriesTab === "squads" && <Squads teamPlayers={teamPlayers}  seriesInfo={SeriesDetails} urlString={urlString} isPointTable={isPointTable}/>}
-          {seriesTab === "points-table" && <PointsTable seriesInfo={SeriesDetails} urlString={urlString} featuredMatch={featuredMatch}/>}
+          {seriesTab === "points-table" && <PointsTable seriesInfo={SeriesDetails} urlString={urlString} />}
           {seriesTab === "news" && <News  urlString={urlString} isPointTable={isPointTable}/>}
           {seriesTab === "stats" && <Stats seriesId={seriesId} urlString={urlString} statsType={statsType} isPointTable={isPointTable}/>}
           
