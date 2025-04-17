@@ -12,7 +12,7 @@ export default function Banner({ teamDetails }: Banner) {
       <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
         <Link href="#">
           <div className="flex items-center gap-2 mb-2">
-            <Image  loading="lazy" 
+            <Image loading="lazy"
               src={teamDetails?.logo_url}
               className="h-[30px]"
               width={30}
@@ -29,10 +29,12 @@ export default function Banner({ teamDetails }: Banner) {
           The Indian Cricket Team is governed by the Board of Control for
           Cricket in India (BCCI), the governing body of cricket in the country.
           The first recorded match in India was in 1721 when a group of sailors
-          gathered to play in Western India. However, it was only on 25th June
-          1932 at the famous Lord cricket ground in England that a national team
-          played an official Test match. Only the sixth team to...
+          gathered to play in Western India...  <span className="text-[#1A80F8] font-semibold text-[13px] pt-2 underline">
+          Read more{" "}
+          
+        </span>
         </p>
+       
       </div>
     </div>
   );
