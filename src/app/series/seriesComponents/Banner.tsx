@@ -22,7 +22,7 @@ export default function IplBanner({
     url: `/series/${urlStringEncode(item.title + "-" + item.season)}/${
       item.cid
     }`,
-    src: item?.logo ? item?.logo : "/assets/img/series/series-1.png",
+    src: item?.header_logo ? item?.header_logo : "/assets/img/series/series-1.png",
   }));
 
   // Get previous, current, and next series info
@@ -49,9 +49,9 @@ export default function IplBanner({
       )}/${result.previous.cid}`
     : "";
 
-    const nextImage = result?.next?.logo ? result?.next?.logo : "/assets/img/series/series-1.png";
-    const currentImage = result?.current?.logo ? result?.current?.logo : "/assets/img/series/series-1.png";
-console.log(result?.next?.logo);
+    const nextImage = result?.next?.header_logo ? result?.next?.header_logo : "/assets/img/series/series-1.png";
+    const currentImage = result?.current?.header_logo ? result?.current?.header_logo : "/assets/img/series/series-1.png";
+console.log(result?.next?.header_logo);
   // Handle slider scrolling
   const handleScroll = (direction: "left" | "right") => {
     if (!sliderRef.current) return;

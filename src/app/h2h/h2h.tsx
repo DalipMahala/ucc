@@ -49,9 +49,9 @@ export default function H2h({
   // Safe calculations with fallbacks
   const totalMatches = teamDetails?.teamAB_total_match || 0;
   const teamaWon = totalMatches > 0 ? 
-    Math.round((teamDetails?.teama_won_match || 0) * totalMatches / 100) : 0;
+    Math.round((teamDetails?.teama_won_match || 0) * 100 / totalMatches) : 0;
   const teambWon = totalMatches > 0 ? 
-    Math.round((teamDetails?.teamb_won_match || 0) * totalMatches / 100) : 0;
+    Math.round((teamDetails?.teamb_won_match || 0) * 100 / totalMatches) : 0;
  
   // Safe URL parsing
   const matchType = urlStrings?.split('-').pop() || 'test';

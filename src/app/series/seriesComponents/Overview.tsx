@@ -251,7 +251,7 @@ export default function Overview({
                         <Link href={"/scorecard/" + urlStringEncode(matches?.teama?.short_name + "-vs-" + matches?.teamb?.short_name + "-match-" + matches?.match_number + "-" + matches?.competition?.title + "-" + matches?.competition?.season) + "/" + matches.match_id} className="py-3 flex justify-between items-center">
 
                           <div className="flex space-x-2 font-medium	w-full">
-                            <Link href={"/team/" + urlStringEncode(matches?.teama?.name) + "/" + matches?.teama?.team_id} className="flex items-center space-x-1 flex-col">
+                            <div className="flex items-center space-x-1 flex-col" >
 
                               <Image
                                 loading="lazy"
@@ -263,7 +263,7 @@ export default function Overview({
                               />
                               <span className="text-[#586577] font-medium text-[14px]">{matches?.teama?.short_name}</span>
 
-                            </Link>
+                            </div>
                             <div className="mt-1">
                               <p className="text-1xl font-semibold">{matches?.teama?.scores}</p>
                               <p className="text-[#586577]">({matches?.teama?.overs})</p>
@@ -280,7 +280,6 @@ export default function Overview({
                               <p className="text-1xl font-semibold">{matches?.teamb?.scores}</p>
                               <p className="text-[#586577]">({matches?.teamb?.overs})</p>
                             </div>
-                            <Link href={"/team/" + urlStringEncode(matches?.teamb?.name) + "/" + matches.teamb?.team_id}>
                               <div className="flex items-center space-x-1 flex-col font-medium">
                                 <Image
                                   loading="lazy"
@@ -292,14 +291,12 @@ export default function Overview({
                                 />
                                 <span className="text-[#586577] font-medium text-[14px]">{matches?.teamb?.short_name}</span>
                               </div>
-                            </Link>
                           </div>
                         </Link>
                       }{matches?.status === 1 &&
                         <Link href={"/moreinfo/" + urlStringEncode(matches?.teama?.short_name + "-vs-" + matches?.teamb?.short_name + "-match-" + matches?.match_number + "-" + matches?.competition?.title + "-" + matches?.competition?.season) + "/" + matches.match_id}>
                           <div className="py-3 flex justify-between items-center">
                             <div className="flex space-x-2 font-medium	w-full">
-                              <Link href={"/team/" + urlStringEncode(matches?.teama?.name) + "/" + matches.teama?.team_id}>
                                 <div className="flex items-center space-x-1 flex-row">
                                   <Image
                                     loading="lazy"
@@ -311,7 +308,6 @@ export default function Overview({
                                   />
                                   <span className="text-[#586577] font-medium text-[14px]">{matches?.teama?.short_name}</span>
                                 </div>
-                              </Link>
                             </div>
                             <div className=" font-semibold text-center w-full">
                               <p className="text-[#414143] text-[14px]">{matches?.subtitle} on</p>
@@ -320,7 +316,6 @@ export default function Overview({
                               </p>
                             </div>
                             <div className="flex space-x-2 font-medium justify-end w-full">
-                              <Link href={"/team/" + urlStringEncode(matches?.teamb?.name) + "/" + matches.teamb?.team_id}>
                                 <div className="flex items-center gap-1 flex-row-reverse font-medium">
                                   <Image
                                     loading="lazy"
@@ -332,7 +327,6 @@ export default function Overview({
                                   />
                                   <span className="text-[#586577] font-medium text-[14px]">{matches?.teamb?.short_name}</span>
                                 </div>
-                              </Link>
                             </div>
                           </div>
                         </Link>
@@ -355,7 +349,6 @@ export default function Overview({
                             <div className="flex justify-between items-center">
                               <div className="w-[50%]">
                                 <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full mb-3">
-                                  <Link href={"/team/" + urlStringEncode(matches?.teama?.name) + "/" + matches.teama?.team_id}>
                                     <div className="flex items-center space-x-1 flex-col">
                                       <Image
                                         loading="lazy"
@@ -367,14 +360,12 @@ export default function Overview({
                                       />
                                       <span className="text-[#586577] font-medium">{matches?.teama?.short_name}</span>
                                     </div>
-                                  </Link>
                                   <div className="flex items-center gap-2 mt-1">
                                     <p className="text-1xl font-semibold">{matches?.teama?.scores}</p>
                                     <p className="text-[#586577] font-medium text-[13px]">({matches?.teama?.overs})</p>
                                   </div>
                                 </div>
                                 <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full">
-                                  <Link href={"/team/" + urlStringEncode(matches?.teamb?.name) + "/" + matches.teamb?.team_id}>
                                     <div className="flex items-center space-x-1 flex-col">
                                       <Image
                                         loading="lazy"
@@ -386,7 +377,6 @@ export default function Overview({
                                       />
                                       <span className="text-[#586577] font-medium">{matches?.teamb?.short_name}</span>
                                     </div>
-                                  </Link>
                                   <div className="flex items-center gap-2 mt-1">
                                     <p className="text-1xl font-semibold">{matches?.teamb?.scores}</p>
                                     <p className="text-[#586577] font-medium">({matches?.teamb?.overs})</p>
@@ -409,7 +399,6 @@ export default function Overview({
                             <div className="flex justify-between items-center">
                               <div className="w-[50%]">
                                 <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full mb-3">
-                                  <Link href={"/team/" + urlStringEncode(matches?.teama?.name) + "/" + matches.teama?.team_id}>
                                     <div className="flex items-center space-x-1 ">
                                       <Image
                                         loading="lazy"
@@ -421,10 +410,8 @@ export default function Overview({
                                       />
                                       <span className="text-[#586577] font-medium">{matches?.teama?.short_name}</span>
                                     </div>
-                                  </Link>
                                 </div>
                                 <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full">
-                                  <Link href={"/team/" + urlStringEncode(matches?.teamb?.name) + "/" + matches.teamb?.team_id}>
                                     <div className="flex items-center space-x-1 ">
                                       <Image
                                         loading="lazy"
@@ -436,7 +423,6 @@ export default function Overview({
                                       />
                                       <span className="text-[#586577] font-medium">{matches?.teamb?.short_name}</span>
                                     </div>
-                                  </Link>
                                 </div>
                               </div>
                               <div className="h-[60px] border-l-[1px] border-[#d0d3d7]" />

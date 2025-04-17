@@ -16,7 +16,8 @@ import {
   TeamPlayersData,
   TeamMatches,
   InsertOrUpdatePlayers,
-  MatchCommentaryCompleted
+  MatchCommentaryCompleted,
+  PlayerStatsData
 } from "./src/controller/cronController"; // Import controllers
 
 const jobs = [
@@ -35,6 +36,7 @@ const jobs = [
   { schedule: "0 1 * * *", task: InsertOrUpdateTeams },
   { schedule: "0 2 * * *", task: TeamPlayersData },
   { schedule: "0 2 * * *", task: TeamMatches },
+  { schedule: "0 * * * *", task: PlayerStatsData },
   // { schedule: "0 2 * * *", task: InsertOrUpdatePlayers }
 ];
 

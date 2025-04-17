@@ -373,8 +373,7 @@ export default function ScheduleResults({
                             <div className="flex justify-between items-center text-[14px]">
                               <div className="">
                                 <p className="text-[#586577] text-[12px] mb-4 font-medium">
-                                  {items.subtitle} ,{items.format_str} 
-                                  {items.venue.name}, {items.venue.location}
+                                  {items.subtitle} ,{items.format_str}, {items.venue.location}
                                 </p>
                                 <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
                                   <div className="flex items-center space-x-2">
@@ -551,8 +550,7 @@ export default function ScheduleResults({
                           >
                             <div className="py-2 pb-3">
                               <p className="text-[#586577] text-[11px] mb-4 font-normal">
-                                {items.subtitle} ,{items.format_str} 
-                                {items.venue.name}, {items.venue.location}
+                                {items.subtitle} ,{items.format_str}, {items.venue.location}
                               </p>
                               <div className="flex justify-between items-center text-[14px]">
                                 <div className="">
@@ -722,8 +720,7 @@ export default function ScheduleResults({
                             >
                               <div className="">
                                 <p className="text-[#586577] text-[12px] mb-4 font-medium">
-                                  {cmatch.subtitle} ,{cmatch.format_str} 
-                                  {cmatch.venue.name}, {cmatch.venue.location}
+                                  {cmatch.subtitle} ,{cmatch.format_str} , {cmatch.venue.location}
                                 </p>
                                 <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
                                   <div className="flex items-center space-x-2">
@@ -877,8 +874,7 @@ export default function ScheduleResults({
                           >
                             <div className="py-2 pb-3">
                               <p className="text-[#586577] text-[11px] mb-4 font-normal">
-                                {cmatch.subtitle} ,{cmatch.format_str} 
-                                {cmatch.venue.name}, {cmatch.venue.location}
+                                {cmatch.subtitle} ,{cmatch.format_str}, {cmatch.venue.location}
                               </p>
                               <div className="flex justify-between items-center text-[14px]">
                                 <div className="">
@@ -1048,8 +1044,7 @@ export default function ScheduleResults({
                             <div className="flex justify-between items-center text-[14px]">
                               <div className="">
                                 <p className="text-[#586577] text-[12px] mb-4 font-medium">
-                                  {ucmatch.subtitle} ,{ucmatch.format_str} 
-                                  {ucmatch.venue.name}, {ucmatch.venue.location}
+                                  {ucmatch.subtitle} ,{ucmatch.format_str}, {ucmatch.venue.location}
                                 </p>
                                 <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
                                   <div className="flex items-center space-x-2">
@@ -1167,8 +1162,7 @@ export default function ScheduleResults({
                           <div className="open-Performance-data">
                             <div className="py-2 pb-3">
                               <p className="text-[#586577] text-[12px] mb-4 font-medium">
-                                {ucmatch.subtitle} ,{ucmatch.format_str} 
-                                {ucmatch.venue.name}, {ucmatch.venue.location}
+                                {ucmatch.subtitle} ,{ucmatch.format_str}, {ucmatch.venue.location}
                               </p>
                               <div className="flex justify-between items-center text-[14px]">
                                 <div>

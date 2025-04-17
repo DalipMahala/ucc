@@ -48,8 +48,8 @@ export default async function Page(props: { params: Params }) {
    
   const teamDetails = await H2hDetails(tblName,teama_id,teamb_id);
   let completedMatch = await h2hMatch(matchType,teama_id,teamb_id);
-  const teamADetails = await TeamDetails(teama_id);
-  const teamBDetails = await TeamDetails(teamb_id);
+  const teamADetails = await TeamDetails(teamDetails?.teama_id);
+  const teamBDetails = await TeamDetails(teamDetails?.teamb_id);
   const liveSeriesData = await liveSeries();
   // console.log(teamA);
   let frresponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/featuredMatches`, {

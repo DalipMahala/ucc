@@ -19,16 +19,16 @@ const WeeklySlider = ({ featuredMatch }: featuredMatch) => {
       // Transform the data only once after the component mounts
       const transformedSlides = featuredMatch.map((match: any) => ({
         teams: [
-          { country: match.teama.short_name, flag: match.teama.logo_url },
-          { country: match.teamb.short_name, flag: match.teamb.logo_url },
+          { country: match?.teama?.short_name, flag: match?.teama?.logo_url },
+          { country: match?.teamb?.short_name, flag: match?.teamb?.logo_url },
         ],
-        countdown: match.date_start_ist,
-        match: match.competition.title + " " + match.competition.season,
-        match_number: match.match_number,
-        title: match.competition?.title,
-        season: match.competition?.season,
-        match_id: match.match_id,
-        odds: match.live_odds,
+        countdown: match?.date_start_ist,
+        match: match?.competition?.title + " " + match?.competition?.season,
+        match_number: match?.match_number,
+        title: match?.competition?.title,
+        season: match?.competition?.season,
+        match_id: match?.match_id,
+        odds: match?.live_odds,
         teamList: match
       }));
       setSlides(transformedSlides); // Store the transformed data
