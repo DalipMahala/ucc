@@ -1,15 +1,13 @@
 "use client";
 
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from "next/image";
 import { urlStringEncode } from "./../../utils/utility";
 import GoogleAnalytics from "./GoogleAnalytics";
 import { usePathname } from 'next/navigation';
-interface HeaderProps {
-  data: any; // Adjust type based on your data
-}
-const Header = ({ data }: HeaderProps) => {
+
+const Header = () => {
   const pathname = usePathname();
   const isMoreInfoPage = pathname.includes('/moreinfo/') || pathname.includes('/live-score/') || pathname.includes('/scorecard/') || pathname.includes('/squad/');
 //  console.log("ssee",pathname);
@@ -19,7 +17,30 @@ const Header = ({ data }: HeaderProps) => {
     setIsDropdownOpen((prev) => !prev);
   };
 
+  
+  const [series, setSeries] = useState([]);
+    const [loading, setLoading] = useState(true);
+  
+    useEffect(() => {
+      fetch("/api/series/liveSeries", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          
+          if (res.success) {
+            setSeries(res.data);
+          }
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
+    }, []);
 
+    const data = series;
   // const items = [
   //   data.map((item:any) => (
   //     {
@@ -31,7 +52,7 @@ const Header = ({ data }: HeaderProps) => {
   //   )) 
 
   // ];
-  let items = [];
+  let items: any[] = [];
   if (data) {
     items = data?.map((item: any) => ({
       href: "/series/" + urlStringEncode(item.title + "-" + item.season) + "/" + item.cid,

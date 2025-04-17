@@ -196,7 +196,7 @@ export default async function Home(props: { params: Params }) {
 
   
   return (
-    <Layout headerData={liveSeriesData}>
+    <Layout>
       <ChatComponent></ChatComponent>
       <TabButtons></TabButtons>
       <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">

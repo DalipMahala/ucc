@@ -14,7 +14,7 @@ import PointsTable from "./matchComponents/PointsTable";
 import LiveUpcoming from "./scheduledComponents/Live";
 import ScorecardUpcoming from "./scheduledComponents/Scorecard";
 import MoreInfoUpcoming from "./scheduledComponents/MoreInfo";
-import { liveSeries, seriesById } from "@/controller/homeController";
+import { seriesById } from "@/controller/homeController";
 import {
   MatcheInfo,
   Last10Match,
@@ -137,11 +137,9 @@ export default async function page(props: { params: Params }) {
   const [inning1teambOver, inning2teambOver] = teambovers.includes(" & ")
     ? teambovers.split(" & ")
     : [teambovers, ""];
-
-  const liveSeriesData = await liveSeries();
   
   return (
-    <Layout headerData={liveSeriesData}>
+    <Layout>
       <ChatComponent></ChatComponent>
       <Banner matchData={liveMatch} match_id={matchid} />
 

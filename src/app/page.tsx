@@ -15,8 +15,7 @@ import CountdownTimer from "./components/countdownTimer";
 import { Ranking } from "@/controller/playerController";
 import News from "@/app/components/News";
 import FeatureSeries from "@/app/components/FeatureSeries";
-import {
-  liveSeries, GetCountryCompitition, FeaturedSeries
+import { GetCountryCompitition, FeaturedSeries
 } from "@/controller/homeController";
 import type { Metadata } from "next";
 import CountriesList from "./components/CountriesList";
@@ -117,7 +116,7 @@ export default async function Home(props: { params: Params }) {
 
   const activeMainTab = activeTabValue;
 
-  const liveSeriesData = await liveSeries();
+
   const ranking = await Ranking();
   const featuredSeries = await FeaturedSeries();
   // const  matchData = ChatComponent();
@@ -125,7 +124,7 @@ export default async function Home(props: { params: Params }) {
 
   
   return (
-    <Layout headerData={liveSeriesData}>
+    <Layout>
       <ChatComponent></ChatComponent>
       <TabButtons></TabButtons>
       <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">

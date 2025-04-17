@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from "next/image";
 import {urlStringEncode}  from "./../../utils/utility";
@@ -7,7 +7,7 @@ import {urlStringEncode}  from "./../../utils/utility";
 interface HeaderProps {
   data: any; // Adjust type based on your data
 }
-const PhoneMenu = ({ data }: HeaderProps) => {
+const PhoneMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   
   const openNav = () => {
@@ -17,6 +17,30 @@ const PhoneMenu = ({ data }: HeaderProps) => {
   const closeNav = () => {
     setIsOpen(false);
   };
+
+  const [series, setSeries] = useState([]);
+      const [loading, setLoading] = useState(true);
+    
+      useEffect(() => {
+        fetch("/api/series/liveSeries", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+          },
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            
+            if (res.success) {
+              setSeries(res.data);
+            }
+            setLoading(false);
+          })
+          .catch(() => setLoading(false));
+      }, []);
+  
+      const data = series;
 
   let items = [];
   if(data){

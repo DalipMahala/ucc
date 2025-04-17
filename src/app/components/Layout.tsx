@@ -7,10 +7,9 @@ import PhoneMenu from "./PhoneMenu";
 
 interface LayoutProps {
   children: React.ReactNode;
-  headerData: any;
 }
 
-const Layout = ({ children, headerData  }: LayoutProps) => {
+const Layout = ({ children  }: LayoutProps) => {
   const [loading, setLoading] = useState(false);
   const [delayedLoading, setDelayedLoading] = useState(false); // Delayed loader state
   const pathname = usePathname();
@@ -54,12 +53,12 @@ const Layout = ({ children, headerData  }: LayoutProps) => {
         </div>
       )}
       <div  onClick={handleClick}>
-      <Header  data={headerData}/>
+      <Header/>
       <main  >
       {children}
       </main>
       <Footer />
-      <PhoneMenu  data={headerData} /> 
+      <PhoneMenu /> 
       </div>
     </>
   );

@@ -1,9 +1,6 @@
 import React from 'react'
 import Layout from "@/app/components/Layout";
-import Image from 'next/image';
-import WeeklySlider from "@/app/components/WeeklySlider";
 import H2h from './h2h';
-import { liveSeries } from "@/controller/homeController";
 import { H2hDetails, getTeamId, h2hMatch } from "@/controller/h2hController";
 import { TeamDetails, isIPLTeamDetails } from "@/controller/teamController";
 import { notFound } from 'next/navigation';
@@ -50,12 +47,11 @@ export default async function Page(props: { params: Params }) {
   let completedMatch = await h2hMatch(matchType,teama_id,teamb_id);
   const teamADetails = await TeamDetails(teamDetails?.teama_id);
   const teamBDetails = await TeamDetails(teamDetails?.teamb_id);
-  const liveSeriesData = await liveSeries();
   // console.log(teamA);
  
 
     return (
-        <Layout  headerData={liveSeriesData}>
+        <Layout>
             
         <H2h teamDetails={teamDetails} teamADetails={teamADetails} teamBDetails={teamBDetails} urlStrings={urlString} completedMatch={completedMatch}></H2h>
 

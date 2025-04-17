@@ -45,7 +45,7 @@ export default async function page(props: { params: Params }) {
   //  console.log('teamIds', isPointTable);
 
   return (
-    <Layout headerData={liveSeriesData}>
+    <Layout>
           {seriesName === '' || seriesName === undefined ? (
           <SeriesList tournamentsList={tournamentsList}></SeriesList>
           ):(

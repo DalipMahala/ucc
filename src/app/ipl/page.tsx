@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "@/app/components/Layout";
-import { liveSeries } from "@/controller/homeController";
 import { SeriesPointsTable, SeriesMatches, MatcheInfo } from "@/controller/matchInfoController";
 import {
   TeamDetails,
@@ -23,7 +22,7 @@ export default async function page(props: { params: Params }) {
   const teamId = params?.teamId;
   const teamType = params?.teamType;
   
-  const liveSeriesData = await liveSeries();
+ 
   const teamDetails = await TeamDetails(teamId);
   const teamPlayers = await TeamPlayersById(teamId);
   const teamLast5match = await TeamLast5match(teamId, 2);
@@ -43,7 +42,7 @@ export default async function page(props: { params: Params }) {
   // console.log("scheduledMatch", seriesMatches?.scheduledMatch.length);
   // console.log("resultMatch", seriesMatches?.resultMatch.length);
   return (
-    <Layout headerData={liveSeriesData}>
+    <Layout>
       <IplBanner cid={cid} params={params} teamPlayers={teamPlayers} venueDetails={venueDetails}></IplBanner>
       {teamType === "" || teamType === undefined? (
       <Overview  cid={cid} params={params} teamPlayers={teamPlayers} teamLast5match={teamLast5match} pointTables={pointTables} matcheInfo={matcheInfo} seriesMatches={seriesMatches} venueDetails={venueDetails}/>
