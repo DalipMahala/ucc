@@ -70,7 +70,7 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
                 {["All", ...statusTypes]?.map((item: any) => (
                   <button
                     key={item}
-                    className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] bg-[#ffffff] text-[#6A7586] ${statusFilter === item ? "bg-[#1b2d51] text-white" : ""
+                    className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA]  ${statusFilter === item ? "bg-[#1b2d51] text-white" : "bg-[#ffffff] text-[#6A7586]"
                       } rounded-full`}
                     onClick={() => setStatusFilter(item)}
                   >
