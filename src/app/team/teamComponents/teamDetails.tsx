@@ -43,11 +43,11 @@ export default function Team({
   const matchData = Array.isArray(teamLast5match) ? teamLast5match : [];
   
   const captains = teamPlayers?.[0]?.captains;
+  const teamData = teamPlayers?.[0]?.team;
   const teamType = params?.teamType ? params?.teamType : captains?.[0]?.format_str;
   const teamCaptains = captains.filter((captain: { format_str: string; }) => captain.format_str === teamType);
   const squads =  teamPlayers?.[0]?.players?.[teamType];
-  const coach = teamDetails?.team?.head_coach
-console.log("captain", coach);
+// console.log("captain", coach);
   
   let total_match = teamDetails?.total_match_odi;
   let win_match = teamDetails?.win_match_odi;
@@ -111,27 +111,70 @@ console.log("captain", coach);
           <div id="tab-content">
             <div id="test" className="">
             {teamCaptains.map((cap: any, index: number) => (
-              <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mb-4" key={index}>
-                <div className="bg-white rounded-lg p-4">
-                  <Link href={"/player/"+urlStringEncode(cap?.title)+"/"+cap?.pid}>
-                    <div className="flex items-center space-x-3">
-                      <div>
-                        <PlayerImage  key={cap?.pid} player_id={cap?.pid} height={40} width={40} className="rounded-full" />
-                        
+                <div
+                  className="grid md:grid-cols-2 grid-cols-1 gap-4 mb-4"
+                  key={index}
+                >
+                  {teamData?.head_coach !== '' &&
+                  <div className="bg-white rounded-lg p-4">
+                      <div className="flex items-center space-x-3">
+                        <div>
+                          <Image
+                            src="/assets/img/player/default.png"
+                            className="h-[40] rounded-full"
+                            width={40}
+                            height={40}
+                            alt="R sharma (c)"
+                          />
+                        </div>
+                        <div className="font-medium">
+                          <h2 className="text-[15px]">
+                            {" "}
+                            {teamData?.head_coach.charAt(0).toUpperCase() +
+                            teamData?.head_coach.slice(1)}{" "}
+                            <span className="text-[#909090] font-normal">
+                              (Coach)
+                            </span>{" "}
+                          </h2>
+                        </div>
                       </div>
-                      <div className="font-medium">
-                        <h2 className="text-[15px]">
-                          {" "}
-                          {cap?.title}{" "}
-                          <span className="text-[#909090] font-normal">
-                                                        ({teamName.charAt(0).toUpperCase() + teamName.slice(1)}&nbsp;Captain)
-                                                    </span>{" "}
-                        </h2>
+                  </div>
+                }
+                  <div className="bg-white rounded-lg p-4">
+                    <Link
+                      href={
+                        "/player/" +
+                        urlStringEncode(cap?.title) +
+                        "/" +
+                        cap?.pid
+                      }
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div>
+                          <PlayerImage
+                            key={cap?.pid}
+                            player_id={cap?.pid}
+                            height={40}
+                            width={40}
+                            className="rounded-full"
+                          />
+                        </div>
+                        <div className="font-medium">
+                          <h2 className="text-[15px]">
+                            {" "}
+                            {cap?.title}{" "}
+                            <span className="text-[#909090] font-normal">
+                              (
+                              {teamName.charAt(0).toUpperCase() +
+                                teamName.slice(1)}
+                              &nbsp;Captain)
+                            </span>{" "}
+                          </h2>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
                 </div>
-              </div>
               ))}
               <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
                 <div className="flex justify-between items-center pb-2">

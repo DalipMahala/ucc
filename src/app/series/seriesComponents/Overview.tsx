@@ -27,7 +27,7 @@ export default function Overview({
   isPointTable,
 }: Overview) {
   const standings = seriesInfo?.standing?.standings;
-  // console.log("seriesKeystats",seriesInfo);
+  console.log("seriesKeystats",seriesKeystats);
 
   const [open, setOpen] = useState({
     mostRuns: false,
@@ -846,94 +846,47 @@ export default function Overview({
                   </div>
                 </>
               )}
-              <div className="">
-
-                <h3 className="text-1xl font-semibold pl-[4px] border-l-[3px] border-[#2182F8]">
-                  Key Stats
-                </h3>
-
-                <div className="mt-4">
-                  <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-2 items-center gap-2">
-                    <div className="col-span-1">
-                      <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                        <p className="mb-2 font-medium">Most Runs</p>
-                        <img className="h-[45px]" alt="A Kerr" src="/assets/img/player/g-1.png" /><a href="/t20series#"><h3 className="mt-2 text-[14px] font-semibold">L Wolvaardt</h3></a>
-                        <p className="text-[#909090]">South Africa-W</p>
-                        <div className="flex items-center gap-2 mt-2">
-                          <p className="text-[18px] font-semibold">190</p>
-                          <p className="text-gray-600 text-sm">Runs</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-span-1">
-                      <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                        <p className="mb-2 font-medium">Highest Score</p>
-                        <img className="h-[45px]" alt="A Kerr" src="/assets/img/player/g-3.png" /><a href="/t20series#"><h3 className="mt-2 text-[14px] font-semibold">L Wolvaardt</h3></a>
-                        <p className="text-[#909090]">A Bosch - SA-W</p>
-                        <div className="flex items-center gap-2 mt-2">
-                          <p className="text-[18px] font-semibold">74</p>
-                          <p className="text-gray-600 text-sm">Runs</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-span-1">
-                      <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                        <p className="mb-2 font-medium">Most Wickets</p>
-                        <img className="h-[45px]" alt="A Kerr" src="/assets/img/player/g-2.png" /><a href="/t20series#"><h3 className="mt-2 text-[14px] font-semibold">A Kerr</h3></a>
-                        <p className="text-[#909090]">New Zealand-W</p>
-                        <div className="flex items-center gap-2 mt-2">
-                          <p className="text-[18px] font-semibold">12</p>
-                          <p className="text-gray-600 text-sm">Wickets</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-span-1">
-                      <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                        <p className="mb-2 font-medium">Best Figures</p>
-                        <img className="h-[45px]" alt="A Kerr" src="/assets/img/player/g-4.png" /><a href="/t20series#"><h3 className="mt-2 text-[14px] font-semibold">K Ramhar</h3></a>
-                        <p className="text-[#909090]">West Indies-W</p>
-                        <div className="flex items-center gap-2 mt-2"><p className="text-[18px] font-semibold">17/4</p></div>
-                      </div>
-                    </div>
-                  </div>
+              <div className="flex justify-between items-center pb-4">
+                <div>
+                  <h3 className="text-1xl font-semibold pl-[4px] border-l-[3px] border-[#2182F8]">
+                    Key Stats
+                  </h3>
                 </div>
-
-
               </div>
               <div className="mb-4">
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-2 items-center gap-2">
-                  {seriesKeystats?.mostRuns?.player?.short_name && (
+                  {seriesKeystats?.mostRuns?.stats?.[0]?.player?.short_name && (
                     <div className="col-span-1">
                       <Link
                         href={
                           "/player/" +
                           urlStringEncode(
-                            seriesKeystats?.mostRuns?.player?.first_name
+                            seriesKeystats?.mostRuns?.stats?.[0]?.player?.first_name
                           ) +
                           "/" +
-                          seriesKeystats?.mostRuns?.player?.pid
+                          seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
                           <p className="mb-2 font-medium">Most Runs</p>
 
                           <PlayerImage
-                            key={seriesKeystats?.mostRuns?.player?.pid}
-                            player_id={seriesKeystats?.mostRuns?.player?.pid}
+                           key={seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid}
+                            player_id={seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid}
                             height={45}
                             width={45}
                             className="rounded-full h-[45px]"
                           />
 
                           <h3 className="mt-2 text-[14px] font-semibold">
-                            {seriesKeystats?.mostRuns?.player?.short_name}
+                            {seriesKeystats?.mostRuns?.stats?.[0]?.player?.short_name}
                           </h3>
                           <p className="text-[#909090]">
-                            {seriesKeystats?.mostRuns?.team?.title}
+                            {seriesKeystats?.mostRuns?.stats?.[0]?.team?.abbr}
                           </p>
                           <div className="flex items-center gap-2 mt-2">
                             <p className="text-[18px] font-semibold">
-                              {seriesKeystats?.mostRuns?.runs}
+                              {seriesKeystats?.mostRuns?.stats?.[0]?.runs}
                             </p>
                             <p className="text-gray-600 text-sm">Runs</p>
                           </div>
@@ -941,36 +894,36 @@ export default function Overview({
                       </Link>
                     </div>
                   )}
-                  {seriesKeystats?.highStrike?.player?.short_name && (
+                  {seriesKeystats?.highStrike?.stats?.[0]?.player?.short_name && (
                     <div className="col-span-1">
                       <Link
                         href={
                           "/player/" +
                           urlStringEncode(
-                            seriesKeystats?.highStrike?.player?.first_name
+                            seriesKeystats?.highStrike?.stats?.[0]?.player?.first_name
                           ) +
                           "/" +
-                          seriesKeystats?.highStrike?.player?.pid
+                          seriesKeystats?.highStrike?.stats?.[0]?.player?.pid
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
                           <p className="mb-2 font-medium">Highest Strike</p>
                           <PlayerImage
-                            key={seriesKeystats?.highStrike?.player?.pid}
-                            player_id={seriesKeystats?.highStrike?.player?.pid}
+                          key={seriesKeystats?.highStrike?.stats?.[0]?.player?.pid}
+                            player_id={seriesKeystats?.highStrike?.stats?.[0]?.player?.pid}
                             height={45}
                             width={45}
                             className="rounded-full h-[45px]"
                           />
                           <h3 className="mt-2 text-[14px] font-semibold">
-                            {seriesKeystats?.highStrike?.player?.short_name}
+                            {seriesKeystats?.highStrike?.stats?.[0]?.player?.short_name}
                           </h3>
                           <p className="text-[#909090]">
-                            {seriesKeystats?.highStrike?.team?.title}
+                            {seriesKeystats?.highStrike?.stats?.[0]?.team?.abbr}
                           </p>
                           <div className="flex items-center gap-2 mt-2">
                             <p className="text-[18px] font-semibold">
-                              {seriesKeystats?.highStrike?.strike}
+                              {seriesKeystats?.highStrike?.stats?.[0]?.strike}
                             </p>
                             <p className="text-gray-600 text-sm"></p>
                           </div>
@@ -978,36 +931,36 @@ export default function Overview({
                       </Link>
                     </div>
                   )}
-                  {seriesKeystats?.topWickets?.player?.short_name && (
+                  {seriesKeystats?.topWickets?.stats?.[0]?.player?.short_name && (
                     <div className="col-span-1">
                       <Link
                         href={
                           "/player/" +
                           urlStringEncode(
-                            seriesKeystats?.topWickets?.player?.first_name
+                            seriesKeystats?.topWickets?.stats?.[0]?.player?.first_name
                           ) +
                           "/" +
-                          seriesKeystats?.topWickets?.player?.pid
+                          seriesKeystats?.topWickets?.stats?.[0]?.player?.pid
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
                           <p className="mb-2 font-medium">Most Wickets</p>
                           <PlayerImage
-                            key={seriesKeystats?.topWickets?.player?.pid}
-                            player_id={seriesKeystats?.topWickets?.player?.pid}
+                          key={seriesKeystats?.topWickets?.stats?.[0]?.player?.pid}
+                            player_id={seriesKeystats?.topWickets?.stats?.[0]?.player?.pid}
                             height={45}
                             width={45}
                             className="rounded-full h-[45px]"
                           />
                           <h3 className="mt-2 text-[14px] font-semibold">
-                            {seriesKeystats?.topWickets?.player?.short_name}
+                            {seriesKeystats?.topWickets?.stats?.[0]?.player?.short_name}
                           </h3>
                           <p className="text-[#909090]">
-                            {seriesKeystats?.topWickets?.team?.title}
+                            {seriesKeystats?.topWickets?.stats?.[0]?.team?.abbr}
                           </p>
                           <div className="flex items-center gap-2 mt-2">
                             <p className="text-[18px] font-semibold">
-                              {seriesKeystats?.topWickets?.wickets}
+                              {seriesKeystats?.topWickets?.stats?.[0]?.wickets}
                             </p>
                             <p className="text-gray-600 text-sm">Wickets</p>
                           </div>
@@ -1015,36 +968,36 @@ export default function Overview({
                       </Link>
                     </div>
                   )}
-                  {seriesKeystats?.bestBowling?.player?.short_name && (
+                  {seriesKeystats?.bestBowling?.stats?.[0]?.player?.short_name && (
                     <div className="col-span-1">
                       <Link
                         href={
                           "/player/" +
                           urlStringEncode(
-                            seriesKeystats?.bestBowling?.player?.first_name
+                            seriesKeystats?.bestBowling?.stats?.[0]?.player?.first_name
                           ) +
                           "/" +
-                          seriesKeystats?.bestBowling?.player?.pid
+                          seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
                           <p className="mb-2 font-medium">Best Figures</p>
                           <PlayerImage
-                            key={seriesKeystats?.bestBowling?.player?.pid}
-                            player_id={seriesKeystats?.bestBowling?.player?.pid}
+                          key={seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid}
+                            player_id={seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid}
                             height={45}
                             width={45}
                             className="rounded-full h-[45px]"
                           />
                           <h3 className="mt-2 text-[14px] font-semibold">
-                            {seriesKeystats?.bestBowling?.player?.short_name}
+                            {seriesKeystats?.bestBowling?.stats?.[0]?.player?.short_name}
                           </h3>
                           <p className="text-[#909090]">
-                            {seriesKeystats?.bestBowling?.team?.title}
+                            {seriesKeystats?.bestBowling?.stats?.[0]?.team?.abbr}
                           </p>
                           <div className="flex items-center gap-2 mt-2">
                             <p className="text-[18px] font-semibold">
-                              {seriesKeystats?.bestBowling?.bestmatch}
+                              {seriesKeystats?.bestBowling?.stats?.[0]?.bestmatch}
                             </p>
                           </div>
                         </div>
@@ -1053,6 +1006,7 @@ export default function Overview({
                   )}
                 </div>
               </div>
+            
               <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
                 <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                   Team Name
