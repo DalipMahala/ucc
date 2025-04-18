@@ -41,7 +41,7 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
           <div className="tab-section">
             <div className="tabs my-3 md:my-4">
               <div
-                className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
+                className="flex text-[13px] md:space-x-8 space-x-6  p-2 bg-[#ffffff] rounded-lg overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
                               [&::-webkit-scrollbar-track]:bg-[#ecf2fd] 
                               [&::-webkit-scrollbar-thumb]:bg-[#ecf2fd] 
                                dark:[&::-webkit-scrollbar-track]:bg-neutral-[#ecf2fd] 
@@ -50,7 +50,7 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
                 {uniqueTypes?.map((item: any) => (
                   <button
                     key={item}
-                    className={`uppercase font-semibold py-2 px-5 whitespace-nowrap ${filter === item ? "bg-[#1A80F8] text-white" : ""
+                    className={`uppercase font-semibold py-2 md:px-5 px-3 whitespace-nowrap ${filter === item ? "bg-[#1A80F8] text-white" : ""
                       } rounded-md`}
                     onClick={() => setFilter(item)}
                   >
@@ -61,7 +61,7 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
             </div>
             <div className="tabs my-3 md:my-4">
               <div
-                className="flex text-[13px] md:space-x-8 space-x-4 rounded-lg overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
+                className="flex text-[13px] md:space-x-8 space-x-4 rounded-lg overflow-auto relative overflow-x-scroll  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[1px] 
                               [&::-webkit-scrollbar-track]:bg-[#ecf2fd] 
                               [&::-webkit-scrollbar-thumb]:bg-[#ecf2fd] 
                                dark:[&::-webkit-scrollbar-track]:bg-[#ecf2fd] 
@@ -118,7 +118,7 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
                             <div className="flex items-center space-x-2 font-medium w-[162px] md:w-[50%]">
                               <div className="flex items-center space-x-2">
                                 <Image loading="lazy"
-                                  src="/assets/img/series/ipl.png"
+                                  src={series?.logo ? series?.logo : "/assets/img/series/ipl.webp"}
                                   className="h-[30px] rounded-full"
                                   width={30}
                                   height={30}
@@ -152,7 +152,7 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
                             <div className=" flex items-center gap-3 text-[14px]">
                               <div className="flex items-center space-x-2">
                                 <Image loading="lazy"
-                                  src="/assets/img/series/ipl.png"
+                                  src={series?.logo ? series?.logo : "/assets/img/series/ipl.webp"}
                                   className="h-[50px] w-[50px] rounded-lg"
                                   width={50}
                                   height={50}

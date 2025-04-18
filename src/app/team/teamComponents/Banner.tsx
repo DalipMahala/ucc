@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import ReadMoreCard from "@/app/components/ReadMoreCard";
 
 interface Banner {
   teamDetails: any | null;
@@ -25,15 +26,16 @@ export default function Banner({ teamDetails }: Banner) {
           </div>
         </Link>
         <div className="border-t-[1px] border-[#E4E9F0]" />
-        <p className="text-gray-500 font-normal pt-2">
-          The Indian Cricket Team is governed by the Board of Control for
+       
+
+        <ReadMoreCard
+                    title=""
+                    content="The Indian Cricket Team is governed by the Board of Control for
           Cricket in India (BCCI), the governing body of cricket in the country.
           The first recorded match in India was in 1721 when a group of sailors
-          gathered to play in Western India...  <span className="text-[#1A80F8] font-semibold text-[13px] pt-2 underline">
-          Read more{" "}
-          
-        </span>
-        </p>
+          gathered to play in Western India"
+                    wordLimit={30}
+                  />
        
       </div>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { urlStringEncode } from "./../../../utils/utility";
@@ -10,6 +10,7 @@ interface HeaderProps {
   seriesData: any[]; // Adjust type based on your data
   seriesInfo: any;
 }
+
 export default function IplBanner({
   seriesData = [],
   seriesInfo,
@@ -19,8 +20,8 @@ export default function IplBanner({
 
   // Default images array if seriesData is empty
   const images = seriesData?.map((item) => ({
-    url: `/series/${urlStringEncode(item.title + "-" + item.season)}/${item.cid
-      }`,
+    cid: item.cid,
+    url: `/series/${urlStringEncode(item.title + "-" + item.season)}/${item.cid}`,
     src: item?.header_logo ? item?.header_logo : "/assets/img/series/series-1.png",
   }));
 
@@ -39,18 +40,18 @@ export default function IplBanner({
   const result = previousAndNext(seriesData, seriesInfo?.cid);
   const nextUrl = result?.next
     ? `/series/${urlStringEncode(
-      result.next.title + "-" + result.next.season
-    )}/${result.next.cid}`
+        result.next.title + "-" + result.next.season
+      )}/${result.next.cid}`
     : "";
   const backUrl = result?.previous
     ? `/series/${urlStringEncode(
-      result.previous.title + "-" + result.previous.season
-    )}/${result.previous.cid}`
+        result.previous.title + "-" + result.previous.season
+      )}/${result.previous.cid}`
     : "";
 
   const nextImage = result?.next?.header_logo ? result?.next?.header_logo : "/assets/img/series/series-1.png";
   const currentImage = result?.current?.header_logo ? result?.current?.header_logo : "/assets/img/series/series-1.png";
-  console.log(result?.next?.header_logo);
+
   // Handle slider scrolling
   const handleScroll = (direction: "left" | "right") => {
     if (!sliderRef.current) return;
@@ -67,6 +68,19 @@ export default function IplBanner({
     }
   };
 
+  // Focus on the active series when the component mounts
+  useEffect(() => {
+    if (sliderRef.current) {
+      const activeElement = sliderRef.current.querySelector('.active-series');
+      if (activeElement) {
+        activeElement.scrollIntoView({
+          behavior: "smooth",
+          block: "center", // Center the active element in the view
+        });
+      }
+    }
+  }, [seriesInfo?.cid]);
+
   return (
     <section className="bg-[#0E2149]">
       <div
@@ -75,8 +89,6 @@ export default function IplBanner({
       >
         <div className="flex items-center justify-between md:p-4 max-w-6xl mx-auto">
           {/* Left Arrow */}
-
-
           {backUrl !== "" ? (
             <Link href={backUrl}>
               <button className="md:block hidden p-2 bg-gray-700 rounded-full hover:bg-gray-600">
@@ -100,16 +112,15 @@ export default function IplBanner({
             ""
           )}
 
-
           {/* Content Section */}
-          {/* Content Section full screen  */}
           <div className="hidden md:flex flex-grow items-center justify-between px-6 ">
             {/* Left Section */}
             <div className="flex items-center space-x-4">
-              <Image loading="lazy"
+              <Image
+                loading="lazy"
                 src={currentImage}
                 alt="Event Logo"
-                className="md:h-[70px] lg:h-[100px] rounded-full"// border-[2px] border-[solid] border-color-[#7779a8]
+                className="md:h-[70px] lg:h-[100px] rounded-full"
                 width={100}
                 height={100}
               />
@@ -118,15 +129,9 @@ export default function IplBanner({
                   {seriesInfo?.title} {seriesInfo?.season}
                 </h2>
                 <p className="lg:text-sm md:text-[14px] text-gray-300 mb-2 capitalize">
-                  {seriesInfo?.game_format} - {seriesInfo?.total_matches} Matches
-                  - {seriesInfo?.total_teams} Teams |{" "}
-                  {seriesInfo?.datestart
-                    ? format(new Date(seriesInfo?.datestart), "dd MMMM")
-                    : ""}{" "}
-                  to{" "}
-                  {seriesInfo?.dateend
-                    ? format(new Date(seriesInfo?.dateend), "dd MMMM")
-                    : ""}
+                  {seriesInfo?.game_format} - {seriesInfo?.total_matches} Matches - {seriesInfo?.total_teams} Teams |{" "}
+                  {seriesInfo?.datestart ? format(new Date(seriesInfo?.datestart), "dd MMMM") : ""} to{" "}
+                  {seriesInfo?.dateend ? format(new Date(seriesInfo?.dateend), "dd MMMM") : ""}
                 </p>
                 <select className="border border-gray-500 rounded px-2 bg-[#0e2149] hidden">
                   <option>2020</option>
@@ -135,6 +140,7 @@ export default function IplBanner({
                 </select>
               </div>
             </div>
+
             {/* Right Section */}
             {result?.next?.title ? (
               <div className="flex items-center space-x-4">
@@ -144,7 +150,8 @@ export default function IplBanner({
                   {result?.next?.season}
                 </p>
                 <div className="flex items-center justify-center w-12 h-12 rounded-full">
-                  <Image loading="lazy"
+                  <Image
+                    loading="lazy"
                     src={nextImage}
                     width={40}
                     height={40}
@@ -158,47 +165,42 @@ export default function IplBanner({
             )}
           </div>
 
-
-          {/* right button */}
-
-
-
-          {/* mobile slider start  */}
-
+          {/* Mobile banner start */}
           <div className="md:hidden">
             <div className="relative">
-             
               <div className="relative mx-4">
                 <div
                   id="series"
                   ref={sliderRef}
                   className="flex gap-3 transition-transform duration-300 overflow-x-scroll [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[1px] 
                               [&::-webkit-scrollbar-track]:bg-[#0e2149] 
-                              [&::-webkit-scrollbar-thumb]:bg-[#0e2149] 
-                               dark:[&::-webkit-scrollbar-track]:bg-[green] 
-                                 dark:[&::-webkit-scrollbar-thumb]:bg-[red]"
+                              [&::-webkit-scrollbar-thumb]:bg-[#0e2149]"
                 >
-                  {images?.map((image: any, index: number) => (
-                    <div key={index} className="flex-none w-1/5">
-                      <Link
-                        href={image.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Image loading="lazy"
-                          src={image.src}
-                          alt={`series-${index + 1}`}
-                          width={70}
-                          height={70}
-                          className="rounded-full"
-                        />
-                      </Link>
-                    </div>
-                  ))}
+                  {images?.map((image: any, index: number) => {
+                    const isActive = image.cid === seriesInfo?.cid;
+                    return (
+                      <div key={index} className="flex-none w-1/5">
+                        <Link
+                          href={image.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Image
+                            loading="lazy"
+                            src={image.src}
+                            alt={`series-${index + 1}`}
+                            width={100}
+                            height={100}
+                            className={`rounded-full ${isActive ? 'border-[2px] border-[#539ff9] p-2 rounded-lg active-series' : ''}`}
+                          />
+                        </Link>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
-
             </div>
+
             <div className="px-4 mt-5">
               <h2 className="text-[17px] font-semibold">
                 {seriesInfo?.title} {seriesInfo?.season}
@@ -206,13 +208,8 @@ export default function IplBanner({
               <p className="text-[13px] text-gray-300 mb-2">
                 {seriesInfo?.game_format} - {seriesInfo?.total_matches} Matches -{" "}
                 {seriesInfo?.total_teams} Teams |{" "}
-                {seriesInfo?.datestart
-                  ? format(new Date(seriesInfo?.datestart), "dd MMMM")
-                  : ""}{" "}
-                to{" "}
-                {seriesInfo?.dateend
-                  ? format(new Date(seriesInfo?.dateend), "dd MMMM")
-                  : ""}
+                {seriesInfo?.datestart ? format(new Date(seriesInfo?.datestart), "dd MMMM") : ""} to{" "}
+                {seriesInfo?.dateend ? format(new Date(seriesInfo?.dateend), "dd MMMM") : ""}
               </p>
 
               <select className="border border-gray-500 rounded px-2 bg-[#0e2149] hidden">
@@ -221,14 +218,7 @@ export default function IplBanner({
               </select>
             </div>
           </div>
-
-
-
-          {/* mobile slider end */}
-
-
-
-
+          {/* Mobile banner end */}
 
           {/* Right Arrow */}
           {nextUrl !== "" ? (
