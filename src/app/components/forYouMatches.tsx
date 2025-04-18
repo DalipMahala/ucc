@@ -749,11 +749,11 @@ export default async function ForYouMatches() {
                             className="h-[30px] rounded-full"
                             width={30}
                             height={30}
-                            alt={ucmatch.teama.short_name}
+                            alt={ucmatch?.teama?.name}
                             loading="lazy"
                           />
                           <span className="text-[#586577] font-medium text-[14px]">
-                            {ucmatch.teama.short_name}
+                            {ucmatch?.teama?.name}
                           </span>
                         </div>
                       </div>
@@ -770,7 +770,7 @@ export default async function ForYouMatches() {
                               loading="lazy"
                             />
                             <span className="text-[#586577] font-medium text-[14px]">
-                              {ucmatch.teamb.short_name}
+                              {ucmatch?.teamb?.name}
                             </span>
                           </div>
                         </div>
@@ -900,7 +900,7 @@ export default async function ForYouMatches() {
                             <div>
                               <span className="flex items-center gap-1">
                                 <span className="text-[#5e5e5e] font-medium">
-                                  {ucmatch.teama.short_name}
+                                  {ucmatch?.teama?.name}
                                 </span>
                               </span>
                             </div>
@@ -913,13 +913,13 @@ export default async function ForYouMatches() {
                               className="h-[30px] rounded-full"
                               width={30}
                               height={30}
-                              alt={ucmatch.teamb.short_name}
+                              alt={ucmatch?.teamb?.short_name}
                               loading="lazy"
                             />
                             <div>
                               <span className="flex items-center gap-1">
                                 <span className="text-[#5e5e5e] font-medium">
-                                  {ucmatch.teamb.short_name}
+                                  {ucmatch?.teamb?.name}
                                 </span>
                               </span>
                             </div>
