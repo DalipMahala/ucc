@@ -11,6 +11,7 @@ import PlayerImage from "@/app/components/PlayerImage";
 import PlayerNews from "@/app/components/PlayerNews";
 import FantasyTips from "@/app/components/FantasyTips";
 import WeeklySlider from "@/app/components/WeeklySlider";
+import ReadMoreCard from "@/app/components/ReadMoreCard";
 
 
 interface Overview {
@@ -163,7 +164,6 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
     topPlayer = ranking?.ranks?.[topTab]?.t20s;
   }
   const newsUrl = playerProfile[0]?.newUrl;
-
 
 
   return (
@@ -925,50 +925,29 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                   </div>
                 }
                 <div className="rounded-lg bg-[#ffffff] p-4 mb-4 hidden">
-                  <h3 className="text-1xl font-semibold mb-1">
-                    India vs Zimbabwe 2024
-                  </h3>
-                  <p className="text-gray-500 font-normal">
-                    The biggest tournament in the cricketing circuit, the ICC T20
-                    WORLD Cup is underway in the USAs and the West Indies. The
-                    tournament received excellent response from the fans
-                    worldwide...
-                  </p>
-                  <Link href="#">
-                    <p className="text-[#1A80F8] font-semibold flex items-center text-[13px] pt-2 underline">
-                      Read more{" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="size-3 ml-2"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                        />
-                      </svg>
-                    </p>
-                  </Link>
+                <ReadMoreCard
+                      title="India vs Zimbabwe 2025"
+                      content="The biggest tournament in the cricketing circuit, the ICC T20
+  WORLD Cup is underway in the USAs and the West Indies. The
+  tournament received excellent response from the fans worldwide"
+                      wordLimit={10} // 💥 Dynamic!
+                    />
                 </div>
                 {newsUrl !== undefined && newsUrl !== null && newsUrl !== "" ?
                   <PlayerNews newsUrl={newsUrl}></PlayerNews> : ""
                 }
 
                 <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
-                  <h3 className="text-1xl font-semibold mb-1">India vs Zimbabwe 2024</h3>
-                  <p className="text-gray-500 font-normal">The biggest tournament in the cricketing circuit, the ICC T20 WORLD Cup is underway in the USAs and the West Indies. The tournament received excellent response from the fans worldwide...</p>
-                  <a href="#">
-                    <p className="text-[#1A80F8] font-semibold flex items-center text-[13px] pt-2 underline">
-                      Read more
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-3 ml-2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"></path>
-                      </svg>
-                    </p>
-                  </a>
+                 
+                    <ReadMoreCard
+                      title="India vs Zimbabwe 2025"
+                      content="The biggest tournament in the cricketing circuit, the ICC T20
+  WORLD Cup is underway in the USAs and the West Indies. The
+  tournament received excellent response from the fans worldwide"
+                      wordLimit={10} // 💥 Dynamic!
+                    />
+                 
+                  
                 </div>
 
 
