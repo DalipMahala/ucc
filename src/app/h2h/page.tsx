@@ -40,10 +40,10 @@ export default async function Page(props: { params: Params }) {
   if(cid !== null && matchType === 't20'){
     tblName = 'h2h_ipl'
     }else{
-      tblName = matchType === 'odi' ? 'h2h_odi' : matchType === 'test' ? 'h2h_test' : 'h2h_t20'; 
+      tblName = 'h2h'; 
     }
    
-  const teamDetails = await H2hDetails(matchType,teama_id,teamb_id);
+  const teamDetails = await H2hDetails(tblName,matchType,teama_id,teamb_id);
   let completedMatch = await h2hMatch(matchType,teama_id,teamb_id);
   const teamADetails = await TeamDetails(teamDetails?.teama_id);
   const teamBDetails = await TeamDetails(teamDetails?.teamb_id);
