@@ -73,12 +73,12 @@ const PhoneMenu = () => {
         </button>
         <div className="text-1xl text-white space-y-4 p-5">
            <Link href="/" className="block hover:text-yellow-400">Home </Link>
-           <Link href="#" className="block hover:text-yellow-400">Fixtures </Link>
+           {/* <Link href="#" className="block hover:text-yellow-400">Fixtures </Link> */}
            <Link href="/series" className="block hover:text-yellow-400">Series </Link>
-           <Link href="#" className="block hover:text-yellow-400">Teams </Link>
+           {/* <Link href="#" className="block hover:text-yellow-400">Teams </Link> */}
            <Link href="/iccranking/man/team/odis" className="block hover:text-yellow-400">ICC Ranking </Link>
            <Link href="#" className="block hover:text-yellow-400">News </Link>
-           <Link href="#" className="block hover:text-yellow-400">Fantasy Tips </Link>
+           <Link href="https://uccricket.live/fantasy-cricket/dream11-prediction/" className="block hover:text-yellow-400">Fantasy Tips </Link>
            {/* <Link href="#" className="block hover:text-yellow-400">Point Table </Link> */}
         </div>
       </div>
@@ -99,7 +99,7 @@ const PhoneMenu = () => {
           </span>
           <span>Home</span>
          </Link>
-         <Link href="#" className="flex flex-col items-center">
+         {/* <Link href="#" className="flex flex-col items-center">
           <span>
             <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
               <g id="schedule-icon" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd" fillOpacity="0.87">
@@ -113,7 +113,7 @@ const PhoneMenu = () => {
             </svg>
           </span>
           Fixtures
-         </Link>
+         </Link> */}
          <Link href="/series" className="flex flex-col items-center">
           <span>
             <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -129,7 +129,7 @@ const PhoneMenu = () => {
           </span>
           Series
          </Link>
-         <Link href="#" className="flex flex-col items-center">
+         <Link href="https://uccricket.live/news/" className="flex flex-col items-center">
           <span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
               <path

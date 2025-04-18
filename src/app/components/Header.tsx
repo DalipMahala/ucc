@@ -108,9 +108,9 @@ const Header = () => {
             <Link href="/" className="hover:text-yellow-400" prefetch={true}>
               Home
             </Link>
-            <Link href="#" className="hover:text-yellow-400" prefetch={true}>
+            {/* <Link href="#" className="hover:text-yellow-400" prefetch={true}>
               Fixtures
-            </Link>
+            </Link> */}
 
             <div className="flex items-center">
               <Link
@@ -151,16 +151,16 @@ const Header = () => {
               </div>
             </div>
 
-            <Link href="" className="hover:text-yellow-400" prefetch={true}>
+            {/* <Link href="" className="hover:text-yellow-400" prefetch={true}>
               Teams
-            </Link>
+            </Link> */}
             <Link href="/iccranking/man/team/odis" className="hover:text-yellow-400" prefetch={true}>
               ICC Ranking
             </Link>
-            <Link href="" className="hover:text-yellow-400" prefetch={true}>
+            <Link href="https://uccricket.live/news/" className="hover:text-yellow-400" prefetch={true}>
               News
             </Link>
-            <Link href="" className="hover:text-yellow-400" prefetch={true}>
+            <Link href="https://uccricket.live/fantasy-cricket/dream11-prediction/" className="hover:text-yellow-400" prefetch={true}>
               Fantasy Tips
             </Link>
           </nav>
