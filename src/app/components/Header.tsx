@@ -10,54 +10,42 @@ import { usePathname } from 'next/navigation';
 const Header = () => {
   const pathname = usePathname();
   const isMoreInfoPage = pathname.includes('/moreinfo/') || pathname.includes('/live-score/') || pathname.includes('/scorecard/') || pathname.includes('/squad/');
-//  console.log("ssee",pathname);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMouseOverDropdown, setIsMouseOverDropdown] = useState(false);
+  const [isClicked, setIsClicked] = useState(false); // 👈 New state for click
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen((prev) => !prev);
+  const toggleDropdown = (open: boolean, clicked = false) => {
+    setIsDropdownOpen(open);
+    setIsClicked(clicked);
   };
 
-  
   const [series, setSeries] = useState([]);
-    const [loading, setLoading] = useState(true);
-  
-    useEffect(() => {
-      fetch("/api/series/liveSeries", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
-        },
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/series/liveSeries", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success) {
+          setSeries(res.data);
+        }
+        setLoading(false);
       })
-        .then((res) => res.json())
-        .then((res) => {
-          
-          if (res.success) {
-            setSeries(res.data);
-          }
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
-    }, []);
+      .catch(() => setLoading(false));
+  }, []);
 
-    const data = series;
-  // const items = [
-  //   data.map((item:any) => (
-  //     {
-  //       href: "/series/T20/overview",
-  //       imgSrc: "/assets/img/series/series-1.png",
-  //       alt: item.abbr,
-  //       label: "BGT 2024-25",
-  //     }
-  //   )) 
-
-  // ];
+  const data = series;
   let items: any[] = [];
   if (data) {
     items = data?.map((item: any) => ({
       href: "/series/" + urlStringEncode(item.title + "-" + item.season) + "/" + item.cid,
       imgSrc: item?.header_logo ? item?.header_logo : "/assets/img/series/series-1.png",
-      // imgSrc: "/assets/img/series/"+item.title+".png",
       alt: item.abbr,
       label: item.abbr,
     }));
@@ -80,26 +68,22 @@ const Header = () => {
     }
   };
 
-
   return (
     <>
-
-      <div className='md:hidden hidden items-center justify-between py-2 px-2 bg-[#3793ff] text-white' >
-
+      <div className='md:hidden hidden items-center justify-between py-2 px-2 bg-[#3793ff] text-white'>
         <p> Uc Cricket is better on App, Get now! </p>
         <button className='border-[1px] border-white px-4 rounded-full py-1'>Use App</button>
-
       </div>
-{/* fixed top-0 left-0 w-full shadow-md z-50 */}
-        <header className={`bg-[#081736] lg:px-0  px-3 sticky top-0 z-[999] ${isMoreInfoPage ? 'hidden md:block' : 'block'}`}>
-      <GoogleAnalytics />
+
+      <header className={`bg-[#081736] lg:px-0 px-3 sticky top-0 z-[999] ${isMoreInfoPage ? 'hidden md:block' : 'block'}`}>
+        <GoogleAnalytics />
         <div className="lg:w-[1000px] w-full mx-auto text-white md:py-5 pt-3 pb-3 flex items-center md:justify-between justify-center">
           <div>
             <Link href="/">
               <Image priority className="h-[39px] w-[173px]" src="/assets/img/logo.png" alt="" width={150} height={50} />
             </Link>
           </div>
-          {/* Toggle Button for Mobile */}
+
           <button
             id="menu-toggle"
             className="lg:hidden text-white focus:outline-none hidden"
@@ -119,7 +103,7 @@ const Header = () => {
               ></path>
             </svg>
           </button>
-          {/* Navbar Links */}
+
           <nav id="menu" className="hidden lg:flex space-x-4 text-1xl">
             <Link href="/" className="hover:text-yellow-400" prefetch={true}>
               Home
@@ -127,36 +111,46 @@ const Header = () => {
             <Link href="#" className="hover:text-yellow-400" prefetch={true}>
               Fixtures
             </Link>
-            <Link href="#" className="hover:text-yellow-400" prefetch={true}></Link>
-            <div className="group">
-              <Link href="" className="hover:text-yellow-400" prefetch={true}></Link>
-              <div className="flex items-center">
-                <Link
-                  href="/series"
-                  className="hover:text-yellow-400 flex items-center"
+
+            <div className="flex items-center">
+              <Link
+                href="/series"
+                className="hover:text-yellow-400 flex items-center"
+              >
+                Series
+              </Link>
+            </div>
+
+            <div
+              className="group relative"
+              onMouseEnter={() => !isClicked && toggleDropdown(true)}
+              onMouseLeave={() => {
+                if (!isMouseOverDropdown && !isClicked) {
+                  toggleDropdown(false);
+                }
+              }}
+            >
+              <div
+                onClick={() => toggleDropdown(!isDropdownOpen, !isDropdownOpen)} // 👈 Toggle on click
+                className='hover:text-yellow-400 cursor-pointer absolute left-[-18px] h-[70px] w-[32px] top-[2px]'
+              >
+                <svg
+                  className="w-5 h-5 ml-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  Series
-                </Link>
-                <Link
-                  href="#" className="hover:text-yellow-400" onClick={toggleDropdown}
-                >
-                  <svg
-                    className="w-4 h-4 ml-1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </Link>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
               </div>
             </div>
+
             <Link href="" className="hover:text-yellow-400" prefetch={true}>
               Teams
             </Link>
@@ -169,56 +163,29 @@ const Header = () => {
             <Link href="" className="hover:text-yellow-400" prefetch={true}>
               Fantasy Tips
             </Link>
-            {/* <Link href="" className="hover:text-yellow-400">
-              Point Table
-            </Link> */}
           </nav>
-        </div>
-        {/* Mobile Menu */}
-        <div
-          id="mobile-menu"
-          className="lg:hidden bg-[#081736] text-1xl text-white space-y-4 py-5 hidden"
-        >
-          <Link href="/" className="block hover:text-yellow-400">
-            Home
-          </Link>
-          <Link href="" className="block hover:text-yellow-400">
-            Fixtures
-          </Link>
-          <Link href="#" className="block hover:text-yellow-400">
-            Series
-          </Link>
-          <Link href="" className="block hover:text-yellow-400">
-            Teams
-          </Link>
-          <Link href="/icc-ranking" className="block hover:text-yellow-400">
-            ICC Ranking
-          </Link>
-          <Link href="" className="block hover:text-yellow-400">
-            News
-          </Link>
-          <Link href="" className="block hover:text-yellow-400">
-            Fantasy Tips
-          </Link>
-          <Link href="" className="block hover:text-yellow-400">
-            Point Table
-          </Link>
         </div>
       </header>
 
       {isDropdownOpen &&
         <div
           id="drop-series-slider"
-          className="text-white w-full overflow-hidden transition-all duration-300 absolute z-[99] h-[200vh] bg-[#0000004f]"
-          onClick={() => setIsDropdownOpen(false)} // Close slider on background click
+          className="text-white overflow-hidden transition-all duration-300 z-[99] fixed w-full h-[100%] bg-[#0000004f]"
+          onClick={() => {
+            toggleDropdown(false);
+            setIsClicked(false); // 👈 Reset click state
+          }}
+          onMouseEnter={() => setIsMouseOverDropdown(true)}
+          onMouseLeave={() => {
+            setIsMouseOverDropdown(false);
+            if (!isClicked) toggleDropdown(false);
+          }}
         >
-          {/* Slider Navigation */}
           <div
             className="bg-[#081736]"
-            onClick={(e) => e.stopPropagation()} // Prevent closing slider when clicking inside the slider content
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center lg:w-[1000px] w-full mx-auto">
-              {/* Previous Button */}
+            <div className="flex items-center lg:w-[1000px] w-full mx-auto relative">
               <button
                 onClick={handlePrev}
                 className={`text-yellow-400 text-xl ${currentIndex === 0 ? "opacity-50 cursor-not-allowed" : ""}`}
@@ -227,16 +194,15 @@ const Header = () => {
                 ❮
               </button>
 
-              {/* Slider Content */}
               <div
                 id="drop-slider"
-                className="flex gap-4 overflow-hidden scroll-smooth mx-[25px] my-4"
+                className="flex gap-4 overflow-hidden scroll-smooth mx-[25px] mt-4 mb-6"
               >
                 {items
                   .slice(currentIndex, currentIndex + itemsPerPage)
                   ?.map((item: any, index: number) => (
                     <Link href={item.href || "#"} key={index}>
-                      <div className="flex-shrink-0 w-[125px] flex items-center flex-col">
+                      <div className="flex-shrink-0 w-[140px] flex items-center flex-col">
                         <Image loading="lazy"
                           src={item.imgSrc}
                           alt={item.alt}
@@ -249,7 +215,6 @@ const Header = () => {
                   ))}
               </div>
 
-              {/* Next Button */}
               <button
                 onClick={handleNext}
                 className={`text-yellow-400 text-xl ${currentIndex + itemsPerPage >= items.length ? "opacity-50 cursor-not-allowed" : ""
@@ -262,9 +227,8 @@ const Header = () => {
           </div>
         </div>
       }
-
     </>
   )
 }
 
-export default Header
+export default Header;
