@@ -23,7 +23,7 @@ import {
 const jobs = [
   { schedule: "0 3 * * *", task: InsertAllMatches },
   { schedule: "*/1 * * * *", task: InsertOrUpdateMatches },
-  // { schedule: "*/1 * * * *", task: MatchInfo },
+  { schedule: "0 6,18 * * *", task: MatchInfo },
   { schedule: "*/1 * * * *", task: MatchStatistics },
   { schedule: "*/5 * * * *", task: MatchCommentary },
   { schedule: "0 * * * *", task: Last10MatchData },

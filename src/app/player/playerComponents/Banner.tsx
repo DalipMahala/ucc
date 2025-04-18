@@ -5,9 +5,65 @@ import { getAge } from "@/utils/timerUtils";
 
 interface Banner {
     playerStats: any | null;
+    ranking: any | null;
 }
-export default function Banner({ playerStats }: Banner) {
+export default function Banner({ playerStats, ranking }: Banner) {
     const profile = playerStats?.player;
+
+    const playerRole =
+    profile?.playing_role === "bat"
+      ? "Batting"
+      : profile?.playing_role === "bowl"
+        ? "Bowler"
+        : profile?.playing_role === "all"
+          ? "All-Rounder"
+          : "Unknown";
+    const playerRank = ranking?.ranks ?? {};
+
+    let odiRank = "",
+    testRank = "",
+    t20Rank = "";
+  if (profile?.playing_role === "bat") {
+    odiRank =
+      playerRank?.batsmen?.odis?.find(
+        (item: { pid: number }) => Number(item.pid) === profile?.pid
+      )?.rating ?? "";
+    testRank =
+      playerRank?.batsmen?.tests?.find(
+        (item: { pid: number }) => Number(item.pid) === profile?.pid
+      )?.rating ?? "";
+    t20Rank =
+      playerRank?.batsmen?.t20s?.find(
+        (item: { pid: number }) => Number(item.pid) === profile?.pid
+      )?.rating ?? "";
+  } else if (profile?.playing_role === "bowl") {
+    odiRank =
+      playerRank?.bowlers?.odis?.find(
+        (item: { pid: number }) => Number(item.pid) === profile?.pid
+      )?.rating ?? "";
+    testRank =
+      playerRank?.bowlers?.tests?.find(
+        (item: { pid: number }) => Number(item.pid) === profile?.pid
+      )?.rating ?? "";
+    t20Rank =
+      playerRank?.bowlers?.t20s?.find(
+        (item: { pid: number }) => Number(item.pid) === profile?.pid
+      )?.rating ?? "";
+  } else if (profile?.playing_role === "all") {
+    odiRank =
+      playerRank?.["all-rounders"]?.odis?.find(
+        (item: { pid: number }) => Number(item.pid) === profile?.pid
+      )?.rating ?? "";
+    testRank =
+      playerRank?.["all-rounders"]?.tests?.find(
+        (item: { pid: number }) => Number(item.pid) === profile?.pid
+      )?.rating ?? "";
+    t20Rank =
+      playerRank?.["all-rounders"]?.t20s?.find(
+        (item: { pid: number }) => Number(item.pid) === profile?.pid
+      )?.rating ?? "";
+  }
+
     return (
 
         <section
@@ -81,44 +137,25 @@ export default function Banner({ playerStats }: Banner) {
                         <div className='hidden md:block'>
                             <div className='flex gap-1 mt-4'>
                                 <div className='bg-[#0086D7]'>
-                                    <p className='bg-[#006CAD] py-1 px-3'>Batting</p>
+                                    <p className='bg-[#006CAD] py-1 px-3'>{playerRole}</p>
                                     <div className='flex gap-1 items-center'>
-                                        <p className='px-8 py-2 flex flex-col justify-center items-center'><span className='text-[#FFC21C]  text-[14px] font-semibold'>05</span>
+                                        <p className='px-8 py-2 flex flex-col justify-center items-center'><span className='text-[#FFC21C]  text-[14px] font-semibold'>{testRank ? testRank : "-"}</span>
                                             <span className='text-[11px]'>TEST</span>
                                         </p>
                                         <div className='border-[#0098F4] border-l-[1px] h-[40px]'></div>
-                                        <p className='px-8 py-2 flex flex-col justify-center items-center '><span className='text-[#FFC21C] text-[14px]  font-semibold'>02</span>
+                                        <p className='px-8 py-2 flex flex-col justify-center items-center '><span className='text-[#FFC21C] text-[14px]  font-semibold'>{odiRank ? odiRank : "-"}</span>
                                             <span className='text-[11px]'>ODI</span>
                                         </p>
 
                                         <div className='border-[#0098F4] border-l-[1px] h-[40px]'></div>
 
-                                        <p className='px-8 py-2 flex flex-col justify-center items-center'><span className='text-[#FFC21C]  text-[14px] font-semibold'>05</span>
+                                        <p className='px-8 py-2 flex flex-col justify-center items-center'><span className='text-[#FFC21C]  text-[14px] font-semibold'>{t20Rank ? t20Rank: "-"}</span>
                                             <span className='text-[11px]'>T20</span>
                                         </p>
 
                                     </div>
                                 </div>
 
-                                <div className='bg-[#0086D7]'>
-                                    <p className='bg-[#006CAD] py-1 px-3'>Bowling</p>
-                                    <div className='flex gap-1 items-center'>
-                                        <p className='px-8 py-2 flex flex-col justify-center items-center'><span className='text-[#FFC21C]  text-[14px] font-semibold'>154</span>
-                                            <span className='text-[11px]'>TEST</span>
-                                        </p>
-                                        <div className='border-[#0098F4] border-l-[1px] h-[40px]'></div>
-                                        <p className='px-8 py-2 flex flex-col justify-center items-center '><span className='text-[#FFC21C] text-[14px]  font-semibold'>328</span>
-                                            <span className='text-[11px]'>ODI</span>
-                                        </p>
-
-                                        <div className='border-[#0098F4] border-l-[1px] h-[40px]'></div>
-
-                                        <p className='px-8 py-2 flex flex-col justify-center items-center'><span className='text-[#FFC21C]  text-[14px] font-semibold'>799</span>
-                                            <span className='text-[11px]'>T20</span>
-                                        </p>
-
-                                    </div>
-                                </div>
                             </div>
                             <button className='py-1 px-4 rounded-t-none rounded-md bg-[#FFC21C] text-[#0E2149] uppercase font-semibold text-[12px]'>ICC Ranking</button>
                         </div>

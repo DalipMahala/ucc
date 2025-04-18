@@ -43,7 +43,7 @@ export default async function Page(props: { params: Params }) {
       tblName = matchType === 'odi' ? 'h2h_odi' : matchType === 'test' ? 'h2h_test' : 'h2h_t20'; 
     }
    
-  const teamDetails = await H2hDetails(tblName,teama_id,teamb_id);
+  const teamDetails = await H2hDetails(matchType,teama_id,teamb_id);
   let completedMatch = await h2hMatch(matchType,teama_id,teamb_id);
   const teamADetails = await TeamDetails(teamDetails?.teama_id);
   const teamBDetails = await TeamDetails(teamDetails?.teamb_id);
