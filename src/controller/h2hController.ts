@@ -3,12 +3,12 @@ import { httpGet } from "@/lib/http";
 import redis from "../config/redis";
 import db from "../config/db";
 
-export async function H2hDetails(format: string,teama:number,teamb:number) {
+export async function H2hDetails(tableName: string, format: string,teama:number,teamb:number) {
     if (!format) {
       return { notFound: true }; // Handle undefined ID gracefully
     }
 
-    const CACHE_KEY = "h2hDetails_" + teama+"vs"+teamb+"in"+format;
+    const CACHE_KEY = "h2hDetails_" + teama+"vs"+teamb+"in"+tableName;
     const CACHE_TTL = 60;
 
     try {
@@ -20,7 +20,7 @@ export async function H2hDetails(format: string,teama:number,teamb:number) {
         }
        
         // Fetch Data
-        const [rows]: any = await db.execute('SELECT * FROM h2h WHERE format = "'+format+'" and (teama_id = ? AND teamb_id = ?) OR (teama_id = ? AND teamb_id = ?)', [teama,teamb,teamb,teama]);
+        const [rows]: any = await db.execute('SELECT * FROM '+tableName+' WHERE format = "'+format+'" and (teama_id = ? AND teamb_id = ?) OR (teama_id = ? AND teamb_id = ?)', [teama,teamb,teamb,teama]);
   
         if (!rows || rows.length === 0) {
             return null; // Return notFound if no data found

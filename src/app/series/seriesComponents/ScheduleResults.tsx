@@ -51,6 +51,7 @@ export default function ScheduleResults({
 
       // Add active style to clicked tab
       target.classList.add("bg-[#000000]", "text-white");
+      target.classList.remove("bg-[#ffffff]");
 
       // Hide all sections initially
       document.querySelectorAll(".liveMatch, .completedMatch, .upcomingMatch").forEach((el) => {
@@ -167,34 +168,34 @@ export default function ScheduleResults({
                 <button id="all-tab"
                   className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA]  ${activeMainTab === "info1"
                     ? "bg-[#000000] text-white"
-                    : "bg-[#ffffff]"
+                    : ""
                     } rounded-full`}
                 >
                   All
                 </button>
 
                 <button id="live-tab"
-                  className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "live1"
+                  className={`font-medium py-1 md:px-7 px-6 bg-[#ffffff] whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "live1"
                     ? "bg-[#000000] text-white"
-                    : "bg-[#ffffff]"
+                    : ""
                     } rounded-full`}
                 >
                   Live
                 </button>
 
                 <button id="completed-tab"
-                  className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "finished1"
+                  className={`font-medium py-1 md:px-7 px-6 bg-[#ffffff] whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "finished1"
                     ? "bg-[#000000] text-white"
-                    : "bg-[#ffffff]"
+                    : ""
                     } rounded-full`}
                 >
                   Finished
                 </button>
 
                 <button id="upcoming-tab"
-                  className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "scorecard1"
+                  className={`font-medium py-1 md:px-7 px-6 bg-[#ffffff] whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "scorecard1"
                     ? "bg-[#000000] text-white"
-                    : "bg-[#ffffff]"
+                    : ""
                     } rounded-full`}
                 >
                   Scheduled
