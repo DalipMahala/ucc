@@ -72,7 +72,7 @@ const WeeklySlider = () => {
   const handleNextClick = () => {
     setActiveIndex(activeIndex === slides.length - 1 ? 0 : activeIndex + 1);
   };
-console.log("ada",featuredMatch);
+
   return (
     <div className="cust-slider-container w-full overflow-hidden my-4 ">
 

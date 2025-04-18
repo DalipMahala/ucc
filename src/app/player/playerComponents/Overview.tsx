@@ -10,7 +10,8 @@ import { urlStringEncode } from "@/utils/utility";
 import PlayerImage from "@/app/components/PlayerImage";
 import PlayerNews from "@/app/components/PlayerNews";
 import FantasyTips from "@/app/components/FantasyTips";
-import WeeklySlider from "@/app/components/WeeklySlider"
+import WeeklySlider from "@/app/components/WeeklySlider";
+
 
 interface Overview {
   playerAdvanceStats: any | null;
@@ -21,11 +22,7 @@ interface Overview {
 }
 
 
-
 export default function Overview({ playerAdvanceStats, playerStats, urlString, ranking, playerProfile }: Overview) {
-
-
-
 
   const profile = playerStats?.player;
   const playerBatting = playerStats?.batting ?? {};
@@ -33,7 +30,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
   const last10Match = playerAdvanceStats?.last10_matches ?? {};
   const teamsPlayedFor = playerAdvanceStats?.teams_played_for ?? [];
   const playerDebutData = playerAdvanceStats?.player?.debut_data ?? {};
-
+  // console.log(teamTitleShortName('Tigers XI vs Lions XI'));
   // Determine Player Role
   const playerRole =
     profile?.playing_role === "bat"

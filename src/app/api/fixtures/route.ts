@@ -1,76 +1,117 @@
+
 import { NextRequest, NextResponse } from "next/server";
 import db from "@/config/db";
 import redis from "@/config/redis";
-import getJsonFromS3 from '@/lib/s3-utils';
+import { RowDataPacket } from "mysql2";
 
-const BUCKET_NAME = 'uc-application';
+const ITEMS_PER_PAGE = 20;
+
+interface MatchRecord extends RowDataPacket {
+  // Define your match record fields here
+  id: number;
+  commentary: number;
+  date_end_ist: string;
+  // Add other fields as needed
+}
+
+interface CountResult extends RowDataPacket {
+  total: number;
+}
 
 export async function POST(req: NextRequest) {
-    try {
-      // Extract `cid` from request body
-      const body = await req.json();
-      const { filter } = body;
+  try {
+    const body = await req.json();
+    const { filter, page = 1 } = body;
+    const offset = (page - 1) * ITEMS_PER_PAGE;
 
-    const CACHE_KEY = "fixtures_matches_"+filter;
-    const CACHE_TTL = 60;
+    const CACHE_KEY = `fixtures_matches_${filter}_page_${page}`;
+    const CACHE_TTL = 1;
 
     const cachedData = await redis.get(CACHE_KEY);
     if (cachedData) {
-      console.log("coming from cache fixtures matches");
-      return NextResponse.json({ success: true, data: JSON.parse(cachedData) });
+      console.log("Returning cached fixtures matches");
+      return NextResponse.json({ 
+        success: true, 
+        data: JSON.parse(cachedData) 
+      });
     }
-    let query = '';
+
+    let baseQuery = '';
     if(filter === ''){
-        query =
+        baseQuery =
         "SELECT * FROM matches WHERE commentary = 1 and DATE(date_end_ist) BETWEEN DATE(NOW() - INTERVAL 45 DAY) AND DATE(NOW() + INTERVAL 60 DAY)";
     }else if(filter === '1'){
-        query =
+        baseQuery =
         "SELECT * FROM matches WHERE commentary = 1 and domestic = 1 and DATE(date_end_ist) BETWEEN DATE(NOW() - INTERVAL 45 DAY) AND DATE(NOW() + INTERVAL 60 DAY)";
     }else if(filter === '2'){
-        query =
+        baseQuery =
         "SELECT * FROM matches WHERE commentary = 1 and domestic = 2 and DATE(date_end_ist) BETWEEN DATE(NOW() - INTERVAL 45 DAY) AND DATE(NOW() + INTERVAL 60 DAY)";
     }else if(filter.toLowerCase() === 't20'){
-        query =
+        baseQuery =
         "SELECT * FROM matches WHERE commentary = 1 and LOWER(format_str) = 't20' and DATE(date_end_ist) BETWEEN DATE(NOW() - INTERVAL 45 DAY) AND DATE(NOW() + INTERVAL 60 DAY)";
     }else if(filter.toLowerCase() === 'test'){
-        query =
+        baseQuery =
         "SELECT * FROM matches WHERE commentary = 1 and LOWER(format_str) = 'test' and DATE(date_end_ist) BETWEEN DATE(NOW() - INTERVAL 45 DAY) AND DATE(NOW() + INTERVAL 60 DAY)";
     }
     else if(filter.toLowerCase() === 'odi'){
-        query =
+        baseQuery =
         "SELECT * FROM matches WHERE commentary = 1 and LOWER(format_str) = 'odi' and DATE(date_end_ist) BETWEEN DATE(NOW() - INTERVAL 45 DAY) AND DATE(NOW() + INTERVAL 60 DAY)";
     }else if(filter.toLowerCase() === 't20i'){
-        query =
+        baseQuery =
         "SELECT * FROM matches WHERE commentary = 1 and LOWER(format_str) = 't20i' and DATE(date_end_ist) BETWEEN DATE(NOW() - INTERVAL 45 DAY) AND DATE(NOW() + INTERVAL 60 DAY)";
     }else{
-        query =
+        baseQuery =
         "SELECT * FROM matches WHERE commentary = 1 and DATE(date_end_ist) BETWEEN DATE(NOW() - INTERVAL 45 DAY) AND DATE(NOW() + INTERVAL 60 DAY)";
     }
     
-    const [rows] = await db.query<any[]>(query);
-
-    if (!rows || rows.length === 0) {
-      return NextResponse.json({ success: false, data: [] }, { status: 404 });
+    const [countRows] = await db.query<CountResult[]>(
+        `SELECT COUNT(*) as total FROM (${baseQuery}) as count_query`
+      );
+      const total = countRows[0]?.total || 0;
+  
+      // Get paginated data
+      const [rows] = await db.query<MatchRecord[]>(
+        `${baseQuery} LIMIT ? OFFSET ?`,
+        [ITEMS_PER_PAGE, offset]
+      );
+  
+      if (!rows || rows.length === 0) {
+        return NextResponse.json({ 
+          success: false, 
+          data: [] 
+        }, { status: 404 });
+      }
+  
+      // Process the data (your existing transformation logic)
+      const updatedJson = rows.map(obj => ({
+        ...obj,
+        live_odds: Array.isArray(obj.live_odds) && obj.live_odds.length === 0 ? {} : obj.live_odds
+      }));
+  
+      if (rows.length > 0) {
+        await redis.setex(
+          CACHE_KEY, 
+          CACHE_TTL, 
+          JSON.stringify(updatedJson)
+        );
+      }
+  
+      return NextResponse.json({
+        success: true,
+        data: updatedJson,
+        pagination: {
+          totalItems: total,
+          itemsPerPage: ITEMS_PER_PAGE,
+          currentPage: page,
+          totalPages: Math.ceil(total / ITEMS_PER_PAGE)
+        }
+      });
+  
+    } catch (error) {
+      console.error("API Error:", error);
+      return NextResponse.json(
+        { error: "Internal Server Error" },
+        { status: 500 }
+      );
     }
-
-    let allMatches: any[] = rows;
-
- 
-  const updatedJson = allMatches.map(obj => Object.fromEntries(Object.entries(obj).map(([k, v]) => [["live_odds"].includes(k) && Array.isArray(v) && v.length === 0 ? k : k, (["live_odds"].includes(k) && Array.isArray(v) && v.length === 0) ? {} : v])));
-  if (rows.length > 0) {
-    await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(updatedJson));
   }
-  return NextResponse.json({ success: true, data: updatedJson });
-}catch (error) {
-    console.error("API Error:", error);
-
-    if (error instanceof Error) {
-      console.error("Error message:", error.message);  // Log the error message for more detail
-    }
-
-    return NextResponse.json(
-      { error: "Internal Server Errors" },
-      { status: 500 }
-    );
-  }
-}
