@@ -308,7 +308,7 @@ export default function Overview({
                                 </div>
                             </div>
                             <div className=" font-semibold text-center w-full">
-                              <p className="text-[#414143] text-[14px]">{matches?.subtitle} on</p>
+                              <p className="text-[#2F335C] text-[14px]">{matches?.subtitle} on</p>
                               <p className="text-[#909090] text-[12px] font-normal">
                                 {matches?.date_start_ist}
                               </p>
@@ -406,7 +406,7 @@ export default function Overview({
                                         height={25}
                                         alt={matches?.teama?.short_name}
                                       />
-                                      <span className="text-[#586577] font-medium">{matches?.teama?.short_name}</span>
+                                      <span className="text-[#586577] font-medium text-[14px]">{matches?.teama?.short_name}</span>
                                     </div>
                                 </div>
                                 <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full">
@@ -419,14 +419,14 @@ export default function Overview({
                                         height={25}
                                         alt={matches?.teamb?.short_name}
                                       />
-                                      <span className="text-[#586577] font-medium">{matches?.teamb?.short_name}</span>
+                                      <span className="text-[#586577] font-medium text-[14px]">{matches?.teamb?.short_name}</span>
                                     </div>
                                 </div>
                               </div>
                               <div className="h-[60px] border-l-[1px] border-[#d0d3d7]" />
                               <div className="w-[50%] font-semibold text-right">
-                                <p className="text-[#414143]">{matches?.subtitle} on </p>
-                                <p className="text-[#909090] text-[12px] font-normal">
+                                <p className="text-[#2F335C]">{matches?.subtitle} on </p>
+                                <p className="text-[#586577] text-[12px] font-normal">
                                   {matches?.date_start_ist}
                                 </p>
                               </div>

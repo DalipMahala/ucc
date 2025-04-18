@@ -19,9 +19,8 @@ export default function IplBanner({
 
   // Default images array if seriesData is empty
   const images = seriesData?.map((item) => ({
-    url: `/series/${urlStringEncode(item.title + "-" + item.season)}/${
-      item.cid
-    }`,
+    url: `/series/${urlStringEncode(item.title + "-" + item.season)}/${item.cid
+      }`,
     src: item?.header_logo ? item?.header_logo : "/assets/img/series/series-1.png",
   }));
 
@@ -40,18 +39,18 @@ export default function IplBanner({
   const result = previousAndNext(seriesData, seriesInfo?.cid);
   const nextUrl = result?.next
     ? `/series/${urlStringEncode(
-        result.next.title + "-" + result.next.season
-      )}/${result.next.cid}`
+      result.next.title + "-" + result.next.season
+    )}/${result.next.cid}`
     : "";
   const backUrl = result?.previous
     ? `/series/${urlStringEncode(
-        result.previous.title + "-" + result.previous.season
-      )}/${result.previous.cid}`
+      result.previous.title + "-" + result.previous.season
+    )}/${result.previous.cid}`
     : "";
 
-    const nextImage = result?.next?.header_logo ? result?.next?.header_logo : "/assets/img/series/series-1.png";
-    const currentImage = result?.current?.header_logo ? result?.current?.header_logo : "/assets/img/series/series-1.png";
-console.log(result?.next?.header_logo);
+  const nextImage = result?.next?.header_logo ? result?.next?.header_logo : "/assets/img/series/series-1.png";
+  const currentImage = result?.current?.header_logo ? result?.current?.header_logo : "/assets/img/series/series-1.png";
+  console.log(result?.next?.header_logo);
   // Handle slider scrolling
   const handleScroll = (direction: "left" | "right") => {
     if (!sliderRef.current) return;
@@ -71,11 +70,13 @@ console.log(result?.next?.header_logo);
   return (
     <section className="bg-[#0E2149]">
       <div
-        className="lg:w-[1000px] mx-auto text-white pt-5 pb-10 "
+        className="lg:w-[1000px] mx-auto text-white pt-5 pb-10"
         style={{ paddingTop: "37px" }}
       >
         <div className="flex items-center justify-between md:p-4 max-w-6xl mx-auto">
           {/* Left Arrow */}
+
+
           {backUrl !== "" ? (
             <Link href={backUrl}>
               <button className="md:block hidden p-2 bg-gray-700 rounded-full hover:bg-gray-600">
@@ -98,12 +99,14 @@ console.log(result?.next?.header_logo);
           ) : (
             ""
           )}
+
+
           {/* Content Section */}
           {/* Content Section full screen  */}
           <div className="hidden md:flex flex-grow items-center justify-between px-6 ">
             {/* Left Section */}
             <div className="flex items-center space-x-4">
-              <Image  loading="lazy" 
+              <Image loading="lazy"
                 src={currentImage}
                 alt="Event Logo"
                 className="md:h-[70px] lg:h-[100px] rounded-full"// border-[2px] border-[solid] border-color-[#7779a8]
@@ -141,7 +144,7 @@ console.log(result?.next?.header_logo);
                   {result?.next?.season}
                 </p>
                 <div className="flex items-center justify-center w-12 h-12 rounded-full">
-                  <Image  loading="lazy" 
+                  <Image loading="lazy"
                     src={nextImage}
                     width={40}
                     height={40}
@@ -154,47 +157,26 @@ console.log(result?.next?.header_logo);
               ""
             )}
           </div>
-          {/* Content Section mobile screen  */}
+
+
+          {/* right button */}
+
+
+
+          {/* mobile slider start  */}
+
           <div className="md:hidden">
             <div className="relative">
-              {/* Left Arrow */}
-              {backUrl !== "" ? (
-                <Link href={backUrl}>
-                  <button
-                    id="left-arrow"
-                    className={`absolute left-[6px] top-1/2 -translate-y-1/2 bg-[#ffffff] p-[7px] rounded-full border-2 ${
-                      scrollPosition === 0 ? "hidden" : ""
-                    }`}
-                    onClick={() => handleScroll("left")}
-                    style={{ zIndex: 1 }}
-                  >
-                    <span className="text-[20px] font-bold">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="size-3 text-[black]"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M15.75 19.5 8.25 12l7.5-7.5"
-                        ></path>
-                      </svg>
-                    </span>
-                  </button>
-                </Link>
-              ) : (
-                ""
-              )}
-              {/* Slider */}
-              <div className="relative overflow-hidden mx-4">
+             
+              <div className="relative mx-4">
                 <div
                   id="series"
                   ref={sliderRef}
-                  className="flex gap-3 transition-transform duration-300 overflow-x-hidden"
+                  className="flex gap-3 transition-transform duration-300 overflow-x-scroll [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[1px] 
+                              [&::-webkit-scrollbar-track]:bg-[#0e2149] 
+                              [&::-webkit-scrollbar-thumb]:bg-[#0e2149] 
+                               dark:[&::-webkit-scrollbar-track]:bg-[green] 
+                                 dark:[&::-webkit-scrollbar-thumb]:bg-[red]"
                 >
                   {images?.map((image: any, index: number) => (
                     <div key={index} className="flex-none w-1/5">
@@ -203,11 +185,12 @@ console.log(result?.next?.header_logo);
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <Image  loading="lazy" 
+                        <Image loading="lazy"
                           src={image.src}
                           alt={`series-${index + 1}`}
                           width={70}
                           height={70}
+                          className="rounded-full"
                         />
                       </Link>
                     </div>
@@ -215,38 +198,6 @@ console.log(result?.next?.header_logo);
                 </div>
               </div>
 
-              {/* Right Arrow */}
-              {nextUrl !== "" ? (
-                <Link href={nextUrl}>
-                  <button
-                    id="right-arrow"
-                    className={`absolute right-[31px] top-1/2 -translate-y-1/2 bg-[#ffffff] p-[7px] rounded-full border-2 ${
-                      scrollPosition >= images.length - 5 ? "hidden" : ""
-                    }`}
-                    onClick={() => handleScroll("right")}
-                    style={{ zIndex: 1 }}
-                  >
-                    <span className="text-[20px] font-bold">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="size-3 text-[black]"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                        ></path>
-                      </svg>
-                    </span>
-                  </button>
-                </Link>
-              ) : (
-                ""
-              )}
             </div>
             <div className="px-4 mt-5">
               <h2 className="text-[17px] font-semibold">
@@ -270,6 +221,15 @@ console.log(result?.next?.header_logo);
               </select>
             </div>
           </div>
+
+
+
+          {/* mobile slider end */}
+
+
+
+
+
           {/* Right Arrow */}
           {nextUrl !== "" ? (
             <Link href={nextUrl}>
