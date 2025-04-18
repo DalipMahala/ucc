@@ -298,18 +298,7 @@ export default async function UpcomingMatches() {
                       </h4>
                     </Link>
                   </div>
-                  <span className="absolute right-[12px] top-[19px]">
-                    <button className="arro-button">
-                      <Image
-                        src="/assets/img/arrow.png"
-                        className=""
-                        width={10}
-                        height={15}
-                        alt=""
-                        loading="lazy"
-                      />
-                    </button>
-                  </span>
+                 
                 </div>
               </div>
 

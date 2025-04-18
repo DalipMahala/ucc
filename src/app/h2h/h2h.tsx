@@ -8,6 +8,7 @@ import WeeklySlider from "@/app/components/WeeklySlider";
 import NewsSection from "./NewsSection";
 import PLSeries from "@/app/components/popularSeries";
 import FantasyTips from "@/app/components/FantasyTips";
+import ReadMoreCard from "@/app/components/ReadMoreCard";
 
 interface TeamData {
   title?: string;
@@ -247,39 +248,39 @@ export default function H2h({
 
       <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
         {teamADetails?.type !== 'club' &&
-        <div id="tabs" className="mb-4">
-          <div className="flex text-[13px] md:space-x-8 space-x-5 p-2 bg-[#ffffff] rounded-lg overflow-auto">
-            <Link href={`${urlWithoutMatchType}-test`}>
-              <button
-                className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${matchType === "test" ? "bg-[#1A80F8] text-white" : ""} rounded-md`}
-              >
-                Test
-              </button>
-            </Link>
-            <Link href={`${urlWithoutMatchType}-odi`}>
-              <button
-                className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${matchType === "odi" ? "bg-[#1A80F8] text-white" : ""} rounded-md`}
-              >
-                ODI
-              </button>
-            </Link>
-            <Link href={`${urlWithoutMatchType}-t20`}>
-              <button
-                className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${matchType === "t20" ? "bg-[#1A80F8] text-white" : ""} rounded-md`}
-              >
-                T20
-              </button>
-            </Link>
-            <Link href={`${urlWithoutMatchType}-t20s`}>
-              <button
-                className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${matchType === "t20wc" ? "bg-[#1A80F8] text-white" : ""} rounded-md`}
-              >
-                T20 WC
-              </button>
-            </Link>
+          <div id="tabs" className="mb-4">
+            <div className="flex text-[13px] md:space-x-8 space-x-5 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+              <Link href={`${urlWithoutMatchType}-test`}>
+                <button
+                  className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${matchType === "test" ? "bg-[#1A80F8] text-white" : ""} rounded-md`}
+                >
+                  Test
+                </button>
+              </Link>
+              <Link href={`${urlWithoutMatchType}-odi`}>
+                <button
+                  className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${matchType === "odi" ? "bg-[#1A80F8] text-white" : ""} rounded-md`}
+                >
+                  ODI
+                </button>
+              </Link>
+              <Link href={`${urlWithoutMatchType}-t20`}>
+                <button
+                  className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${matchType === "t20" ? "bg-[#1A80F8] text-white" : ""} rounded-md`}
+                >
+                  T20
+                </button>
+              </Link>
+              <Link href={`${urlWithoutMatchType}-t20s`}>
+                <button
+                  className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${matchType === "t20wc" ? "bg-[#1A80F8] text-white" : ""} rounded-md`}
+                >
+                  T20 WC
+                </button>
+              </Link>
+            </div>
           </div>
-        </div>
-}
+        }
         <div id="tab-content">
           <div className="tab-content">
             <div className="md:grid grid-cols-12 gap-4">
@@ -299,8 +300,11 @@ export default function H2h({
                           {teamDetails.teama_nr_match > 0 ? ` ${teamDetails.teama_nr_match} matches ended without a result.` : ''}
 
                           <span className="text-[#1A80F8] pl-1 font-semibold underline cursor-pointer">
-                            Read more{" "} 
+                            Read more{" "}
                           </span>
+
+
+
                         </p>
 
                       </div>
@@ -611,31 +615,18 @@ export default function H2h({
                   <h3 className="text-1xl font-semibold mb-1">
                     {teamADetails.title} vs {teamBDetails.title} 2025
                   </h3>
-                  <p className="text-gray-500 font-normal">
-                    The biggest tournament in the cricketing circuit, the ICC
+
+                  <ReadMoreCard
+                    title=""
+                    content="The biggest tournament in the cricketing circuit, the ICC
                     T20 WORLD Cup is underway in the USAs and the West Indies.
                     The tournament received excellent response from the fans
-                    worldwide...
-                  </p>
-                  <Link href="#">
-                    <p className="text-[#1A80F8] font-semibold flex items-center text-[13px] pt-2 underline">
-                      Read more{" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="size-3 ml-2"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                        />
-                      </svg>
-                    </p>
-                  </Link>
+                    worldwide The biggest tournament in the cricketing circuit, the ICC
+                    T20 WORLD Cup is underway in the USAs and the West Indies.
+                    The tournament received excellent response from the fans
+                    worldwide"
+                    wordLimit={30}
+                  />
                 </div>
 
                 <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
@@ -649,7 +640,7 @@ export default function H2h({
 
               <div className="lg:col-span-4 md:col-span-5 -mt-4">
 
-                <WeeklySlider/>
+                <WeeklySlider />
                 <PLSeries />
                 <FantasyTips />
               </div>

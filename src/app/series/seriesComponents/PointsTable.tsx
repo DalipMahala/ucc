@@ -5,39 +5,40 @@ import Link from 'next/link';
 import WeeklySlider from "@/app/components/WeeklySlider";
 import { urlStringEncode } from '@/utils/utility';
 import PLSeries from "@/app/components/popularSeries";
+import ReadMoreCard from "@/app/components/ReadMoreCard";
 
 interface PointsTable {
-    urlString: string; 
+    urlString: string;
     seriesInfo: any;
-  }
+}
 
-  async function fetchHtml(seriesId: number) {
+async function fetchHtml(seriesId: number) {
     if (!seriesId || seriesId === 0) return '';
-  
+
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/series/SeriesHtml`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
-        },
-        body: JSON.stringify({ cid: seriesId }),
-        cache: "no-store", // Prevents Next.js from caching the API response
-      });
-  
-      if (!response.ok) {
-        console.error(`Error: API returned ${response.status} for CID ${seriesId}`);
-        return '';
-      }
-  
-      const result = await response.json();
-      return result?.data?.[0] ?? [];
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/series/SeriesHtml`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+            },
+            body: JSON.stringify({ cid: seriesId }),
+            cache: "no-store", // Prevents Next.js from caching the API response
+        });
+
+        if (!response.ok) {
+            console.error(`Error: API returned ${response.status} for CID ${seriesId}`);
+            return '';
+        }
+
+        const result = await response.json();
+        return result?.data?.[0] ?? [];
     } catch (error) {
-      console.error("Error fetching matches:", error);
-      return '';
+        console.error("Error fetching matches:", error);
+        return '';
     }
-  }
-  export default async function PointsTable({urlString, seriesInfo} : PointsTable) {
+}
+export default async function PointsTable({ urlString, seriesInfo }: PointsTable) {
 
     const standings = seriesInfo?.standing?.standings;
 
@@ -55,7 +56,7 @@ interface PointsTable {
                             Overview
                         </button>
                     </Link>
-                    <Link href={urlString+"/schedule-results"}>
+                    <Link href={urlString + "/schedule-results"}>
                         <button
                             className="font-semibold uppercase py-2 px-3 whitespace-nowrap "
                         >
@@ -63,28 +64,28 @@ interface PointsTable {
 
                         </button>
                     </Link>
-                    <Link href={urlString+"/squads"}>
+                    <Link href={urlString + "/squads"}>
                         <button
                             className="font-semibold uppercase py-2 px-3 whitespace-nowrap "
                         >
                             Squads
                         </button>
                     </Link>
-                    <Link href={urlString+"/points-table"}>
+                    <Link href={urlString + "/points-table"}>
                         <button
                             className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
                         >
                             Points Table
                         </button>
                     </Link>
-                    <Link href={urlString+"/news"}>
+                    <Link href={urlString + "/news"}>
                         <button
                             className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
                         >
                             News
                         </button>
                     </Link>
-                    <Link href={urlString+"/stats/most-run"}>
+                    <Link href={urlString + "/stats/most-run"}>
                         <button
                             className="font-semibold uppercase py-2 px-3 whitespace-nowrap" >
                             Stats
@@ -99,130 +100,111 @@ interface PointsTable {
                 <div className="md:grid grid-cols-12 gap-4">
                     <div className="lg:col-span-8 md:col-span-7">
                         <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
-                        {pageHtml?.pointsTableHtml1 && typeof pageHtml?.pointsTableHtml1 === "string" ? (
+                            {pageHtml?.pointsTableHtml1 && typeof pageHtml?.pointsTableHtml1 === "string" ? (
                                 <div dangerouslySetInnerHTML={{ __html: pageHtml?.pointsTableHtml1 }} />
                             ) : (
-                              <> 
-                            <h3 className="text-1xl font-semibold mb-1">
-                                South Africa Women vs New Zealand Women, Final
-                            </h3>
-                            <p
-                                className="text-gray-500 font-normal"
-                            >
-
-                                The biggest tournament in the cricketing circuit, the ICC T20
-                                WORLD Cup is underway in the USAs and the West Indies. The
-                                tournament received excellent response from the fans worldwide...
-
-                            </p>
-                            <button
-                                className="text-blue-600 font-semibold flex items-center text-[13px] pt-2 underline"
-                            >
-                                Read More
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    stroke="currentColor"
-                                    className="w-4 h-4 ml-1"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+                                <>
+                                   
+                                    
+                                    <ReadMoreCard
+                                        title=" South Africa Women vs New Zealand Women, Final"
+                                        content="The biggest tournament in the cricketing circuit, the ICC T20
+                                        WORLD Cup is underway in the USAs and the West Indies. The
+                                        tournament received excellent response from the fans worldwide The biggest tournament in the cricketing circuit, the ICC T20
+                                        WORLD Cup is underway in the USAs and the West Indies. The
+                                        tournament received excellent response from the fans worldwide"
+                                        wordLimit={30} 
                                     />
-                                </svg>
-                            </button>
-                            </>
+
+                                </>
                             )}
                         </div>
-                        {standings?.map((rounds : any, index:number) => (
-                        <div className="rounded-lg bg-[#ffffff] mb-2 p-4"   key={index}>
-                            <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
-                            {rounds?.round?.name}
-                            </h3>
-                            <div>
-                                <div
-                                    className="overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[8px] 
+                        {standings?.map((rounds: any, index: number) => (
+                            <div className="rounded-lg bg-[#ffffff] mb-2 p-4" key={index}>
+                                <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
+                                    {rounds?.round?.name}
+                                </h3>
+                                <div>
+                                    <div
+                                        className="overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[8px] 
                   [&::-webkit-scrollbar-track]:bg-gray-100 
                   [&::-webkit-scrollbar-thumb]:bg-[#DFE9F6] 
                   dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
                   dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
-                                >
-                                    <table className="w-full text-sm text-left text-gray-500 whitespace-nowrap">
-                                        <thead className="bg-blue-50 text-gray-700 ">
-                                            <tr>
-                                                <th className="md:px-2 pl-[14px] py-3 font-medium w-[10px]">
-                                                    No
-                                                </th>
-                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
-                                                    Team
-                                                </th>
-                                                <th className="md:px-2 pl-[14px] py-3 font-medium">M</th>
-                                                <th className="md:px-2 pl-[14px] py-3 font-medium">W</th>
-                                                <th className="md:px-2 pl-[14px] py-3 font-medium">L</th>
-                                                <th className="md:px-2 pl-[14px] py-3 font-medium">T</th>
-                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
-                                                    N/R
-                                                </th>
-                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
-                                                    PTS
-                                                </th>
-                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
-                                                    Net RR
-                                                </th>
-                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
-                                                    Form
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="divide-y divide-gray-200">
-                                        {rounds.standings?.map((point : any, index:number) => ( 
-                                            <tr className="hover:bg-[#fffae5]" key={index}>
-                                                <td className="md:px-2 pl-[14px] py-3 w-[10px]">{index + 1}</td>
-                                                <td className="md:px-2 pl-[14px] py-3 text-[#217AF7]">
-                                                    <Link href={"/team/"+urlStringEncode(point?.team.title)+"/"+point?.team.tid}>
-                                                        <div className="flex items-center gap-[5px] w-[120px]">
-                                                            <div>
-                                                                <Image  loading="lazy" 
-                                                                    src={point?.team?.thumb_url}
-                                                                    className="h-[20px]"
-                                                                    width={20} height={20} alt="1"
-                                                                />
+                                    >
+                                        <table className="w-full text-sm text-left text-gray-500 whitespace-nowrap">
+                                            <thead className="bg-blue-50 text-gray-700 ">
+                                                <tr>
+                                                    <th className="md:px-2 pl-[14px] py-3 font-medium w-[10px]">
+                                                        No
+                                                    </th>
+                                                    <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                        Team
+                                                    </th>
+                                                    <th className="md:px-2 pl-[14px] py-3 font-medium">M</th>
+                                                    <th className="md:px-2 pl-[14px] py-3 font-medium">W</th>
+                                                    <th className="md:px-2 pl-[14px] py-3 font-medium">L</th>
+                                                    <th className="md:px-2 pl-[14px] py-3 font-medium">T</th>
+                                                    <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                        N/R
+                                                    </th>
+                                                    <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                        PTS
+                                                    </th>
+                                                    <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                        Net RR
+                                                    </th>
+                                                    <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                        Form
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-gray-200">
+                                                {rounds.standings?.map((point: any, index: number) => (
+                                                    <tr className="hover:bg-[#fffae5]" key={index}>
+                                                        <td className="md:px-2 pl-[14px] py-3 w-[10px]">{index + 1}</td>
+                                                        <td className="md:px-2 pl-[14px] py-3 text-[#217AF7]">
+                                                            <Link href={"/team/" + urlStringEncode(point?.team.title) + "/" + point?.team.tid}>
+                                                                <div className="flex items-center gap-[5px] w-[120px]">
+                                                                    <div>
+                                                                        <Image loading="lazy"
+                                                                            src={point?.team?.thumb_url}
+                                                                            className="h-[20px]"
+                                                                            width={20} height={20} alt="1"
+                                                                        />
+                                                                    </div>
+                                                                    <p>
+                                                                        {point?.team?.abbr} {point?.quality === "true" ? <span className="text-[#00B564]"> (Q)</span> : ""}
+                                                                    </p>
+                                                                </div>
+                                                            </Link>
+                                                        </td>
+                                                        <td className="md:px-2 pl-[14px] py-3">{point?.played}</td>
+                                                        <td className="md:px-2 pl-[14px] py-3">{point?.win}</td>
+                                                        <td className="md:px-2 pl-[14px] py-3">{point?.loss}</td>
+                                                        <td className="md:px-2 pl-[14px] py-3">{point?.draw}</td>
+                                                        <td className="md:px-2 pl-[14px] py-3">{point?.nr}</td>
+                                                        <td className="md:px-2 pl-[14px] py-3 font-semibold ">{point?.points}</td>
+                                                        <td className="md:px-2 pl-[14px] py-3">{point?.netrr}</td>
+                                                        <td className="md:px-2 pl-[14px] py-3">
+                                                            <div className="ml-auto flex gap-1 items-center">
+                                                                {point?.lastfivematchresult.split(",")?.map((item: string, index: number) => (
+                                                                    <span className={`${item === "W" ? "bg-[#13B76D]" : "bg-[#F63636]"} text-white text-[13px] px-[4px] py-[0px] rounded`} key={index}>
+                                                                        {item}
+                                                                    </span>
+                                                                ))}
+
+
                                                             </div>
-                                                            <p>
-                                                            {point?.team?.abbr} {point?.quality === "true" ? <span className="text-[#00B564]"> (Q)</span> : ""}
-                                                            </p>
-                                                        </div>
-                                                    </Link>
-                                                </td>
-                                                <td className="md:px-2 pl-[14px] py-3">{point?.played}</td>
-                                                <td className="md:px-2 pl-[14px] py-3">{point?.win}</td>
-                                                <td className="md:px-2 pl-[14px] py-3">{point?.loss}</td>
-                                                <td className="md:px-2 pl-[14px] py-3">{point?.draw}</td>
-                                                <td className="md:px-2 pl-[14px] py-3">{point?.nr}</td>
-                                                <td className="md:px-2 pl-[14px] py-3 font-semibold ">{point?.points}</td>
-                                                <td className="md:px-2 pl-[14px] py-3">{point?.netrr}</td>
-                                                <td className="md:px-2 pl-[14px] py-3">
-                                                    <div className="ml-auto flex gap-1 items-center">
-                                                    {point?.lastfivematchresult.split(",")?.map((item: string, index:number) => (
-                                                <span className={`${item === "W" ? "bg-[#13B76D]" : "bg-[#F63636]" } text-white text-[13px] px-[4px] py-[0px] rounded`} key={index}>
-                                                    {item}
-                                                </span>
+                                                        </td>
+                                                    </tr>
                                                 ))}
-                                                        
-                                                        
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                            
-                                        </tbody>
-                                    </table>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         ))}
                         <div className="mb-4">
                             <p className="font-semibold">
@@ -248,41 +230,24 @@ interface PointsTable {
 
 
                         <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
-                        {pageHtml?.pointsTableHtml2 && typeof pageHtml?.pointsTableHtml2 === "string" ? (
+                            {pageHtml?.pointsTableHtml2 && typeof pageHtml?.pointsTableHtml2 === "string" ? (
                                 <div dangerouslySetInnerHTML={{ __html: pageHtml?.pointsTableHtml2 }} />
                             ) : (
-                              <> 
-                            <h3 className="text-1xl font-semibold mb-1">
-                                India vs Zimbabwe 2024
-                            </h3>
-                            <p
-                                className="text-gray-500 font-normal "
-                            >
-                                The biggest tournament in the cricketing circuit, the ICC T20
-                                WORLD Cup is underway in the USAs and the West Indies. The
-                                tournament received excellent response from the fans worldwide...
+                                <>
 
-                            </p>
-                            <button
-                                className="text-blue-600 font-semibold flex items-center text-[13px] pt-2 underline"
-                            >
-                                Read More
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    stroke="currentColor"
-                                    className="w-4 h-4 ml-1"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+
+                                    <ReadMoreCard
+                                        title="India vs Zimbabwe 2025"
+                                        content=" The biggest tournament in the cricketing circuit, the ICC T20
+                                WORLD Cup is underway in the USAs and the West Indies. The
+                                tournament received excellent response from the fans worldwide
+                                 The biggest tournament in the cricketing circuit, the ICC T20
+                                WORLD Cup is underway in the USAs and the West Indies. The
+                                tournament received excellent response from the fans worldwide"
+                                        wordLimit={30} // 💥 Dynamic!
                                     />
-                                </svg>
-                            </button>
-                            </>
+
+                                </>
                             )}
                         </div>
 
@@ -333,13 +298,13 @@ interface PointsTable {
                     </div>
 
                     <div className="lg:col-span-4 md:col-span-5 -mt-4">
-                      
+
 
                         <WeeklySlider />
 
 
 
-                        <PLSeries/>
+                        <PLSeries />
                     </div>
                 </div>
             </div>

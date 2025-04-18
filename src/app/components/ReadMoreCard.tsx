@@ -1,4 +1,6 @@
 // components/ReadMoreCard.tsx
+"use client"
+
 import { useState } from "react";
 import Link from "next/link";
 
@@ -21,7 +23,7 @@ const ReadMoreCard = ({ title, content, wordLimit = 100, link }: ReadMoreCardPro
   };
 
   return (
-    <div className="rounded-lg bg-white p-4 mb-4 ">
+    <div className="">
       <h3 className="text-1xl font-semibold mb-1">{title}</h3>
       <p className="text-gray-500 font-normal">
         {isExpanded || !isLong ? content : truncated}

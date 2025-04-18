@@ -511,17 +511,7 @@ export default function ScheduleResults({
                                 {items.competition.season}
                               </h4>
                             </div>
-                            <span className="absolute right-4 top-[19px]">
-                              <button className="arro-button">
-                                <Image loading="lazy"
-                                  src="/assets/img/arrow.png"
-                                  className=""
-                                  width={10}
-                                  height={15}
-                                  alt=""
-                                />
-                              </button>
-                            </span>
+                           
                           </div>
                         </div>
 
@@ -960,17 +950,7 @@ export default function ScheduleResults({
                                 {cmatch.competition.season}
                               </h4>
                             </div>
-                            <span className="absolute right-4 top-[19px]">
-                              <button className="arro-button">
-                                <Image loading="lazy"
-                                  src="/assets/img/arrow.png"
-                                  className=""
-                                  width={10}
-                                  height={15}
-                                  alt=""
-                                />
-                              </button>
-                            </span>
+                           
                           </div>
                         </div>
 
@@ -1352,17 +1332,7 @@ export default function ScheduleResults({
                                 {ucmatch.competition.season}
                               </h4>
                             </div>
-                            <span className="absolute right-[12px] top-[19px]">
-                              <button className="arro-button">
-                                <Image loading="lazy"
-                                  src="/assets/img/arrow.png"
-                                  className=""
-                                  width={10}
-                                  height={15}
-                                  alt=""
-                                />
-                              </button>
-                            </span>
+                           
                           </div>
                         </div>
 

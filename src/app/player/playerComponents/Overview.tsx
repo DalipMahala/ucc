@@ -170,7 +170,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
     <section className="lg:w-[1000px] md:mx-auto mx-2">
       <div className="">
 
-        
+
 
         <div id="tab-content">
           <div id="overview">
@@ -179,36 +179,36 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
               <div className="lg:col-span-8 md:col-span-7">
 
 
-              <div id="tabs" className="my-4">
-          <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
-            <Link href={"/player/" + urlString}>
-              <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
-              >
-                Overview
-              </button>
-            </Link>
-            <Link href={"/player/" + urlString + "/stats"}>
-              <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap "
-              >
-                Stats
-              </button>
-            </Link>
+                <div id="tabs" className="my-4">
+                  <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+                    <Link href={"/player/" + urlString}>
+                      <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
+                      >
+                        Overview
+                      </button>
+                    </Link>
+                    <Link href={"/player/" + urlString + "/stats"}>
+                      <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap "
+                      >
+                        Stats
+                      </button>
+                    </Link>
 
-            <Link href={"/player/" + urlString + "/news"}>
-              <button
-                className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
-              >
-                News
-              </button>
-            </Link>
-            {/* <Link href={"/player/" + urlString + "/photos"}>
+                    <Link href={"/player/" + urlString + "/news"}>
+                      <button
+                        className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
+                      >
+                        News
+                      </button>
+                    </Link>
+                    {/* <Link href={"/player/" + urlString + "/photos"}>
               <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
               >
                 Photos
               </button>
             </Link> */}
-          </div>
-        </div>
+                  </div>
+                </div>
 
 
                 <div className="md:hidden rounded-lg bg-white p-4 mb-4">
@@ -925,29 +925,29 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                   </div>
                 }
                 <div className="rounded-lg bg-[#ffffff] p-4 mb-4 hidden">
-                <ReadMoreCard
-                      title="India vs Zimbabwe 2025"
-                      content="The biggest tournament in the cricketing circuit, the ICC T20
+                  <ReadMoreCard
+                    title="India vs Zimbabwe 2025"
+                    content="The biggest tournament in the cricketing circuit, the ICC T20
   WORLD Cup is underway in the USAs and the West Indies. The
   tournament received excellent response from the fans worldwide"
-                      wordLimit={10} // 💥 Dynamic!
-                    />
+                    wordLimit={10} // 💥 Dynamic!
+                  />
                 </div>
                 {newsUrl !== undefined && newsUrl !== null && newsUrl !== "" ?
                   <PlayerNews newsUrl={newsUrl}></PlayerNews> : ""
                 }
 
                 <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
-                 
-                    <ReadMoreCard
-                      title="India vs Zimbabwe 2025"
-                      content="The biggest tournament in the cricketing circuit, the ICC T20
+
+                  <ReadMoreCard
+                    title="India vs Zimbabwe 2025"
+                    content="The biggest tournament in the cricketing circuit, the ICC T20
   WORLD Cup is underway in the USAs and the West Indies. The
   tournament received excellent response from the fans worldwide"
-                      wordLimit={10} // 💥 Dynamic!
-                    />
-                 
-                  
+                    wordLimit={10} // 💥 Dynamic!
+                  />
+
+
                 </div>
 
 
@@ -956,7 +956,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
               <div className="lg:col-span-4 md:col-span-5">
                 <div className="">
 
-                  <WeeklySlider/>
+                  <WeeklySlider />
 
                   <FantasyTips />
 
