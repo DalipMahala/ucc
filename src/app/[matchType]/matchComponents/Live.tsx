@@ -386,7 +386,7 @@ export default function Live({
     : { team: matchLiveData?.match_info?.teamb?.short_name, ...matchLiveData?.live_odds?.matchodds?.teamb };
 
   return (
-    <section className="lg:w-[1075px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
+    <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
 
 
       <div className="flex rounded-lg bg-white p-4 md:hidden gap-4  whitespace-nowrap overflow-auto ">

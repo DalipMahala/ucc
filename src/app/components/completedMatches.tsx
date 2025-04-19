@@ -377,17 +377,17 @@ export default async function CompletedMatches() {
                     {cmatch?.competition?.total_teams > 2 &&
                       <>
                         <Link href={"/series/" + urlStringEncode(cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.competition?.cid + "/points-table"}>
-                          <p className=" text-[#909090] text-[13px] font-medium">
+                          <p className=" text-[#586577] text-[13px] font-medium">
                             {" "}
                             Points Table
                           </p>
                         </Link>
 
-                        <div className="hidden md:block h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                        <div className=" h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                       </>}
                     {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
                       <Link href={("/h2h/" + urlStringEncode(cmatch?.teama?.name + "-vs-" + cmatch?.teamb?.name) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
-                        <div className="pl-5 border-l-[1px] flex justify-end items-center space-x-2">
+                        <div className="flex justify-end items-center space-x-2">
                           <Image
                             src="/assets/img/home/handshake.png"
                             className="h-[15px]"

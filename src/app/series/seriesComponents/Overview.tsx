@@ -10,6 +10,7 @@ import NewsSection from "./NewsSection";
 import PlayerImage from "@/app/components/PlayerImage";
 import PLSeries from "@/app/components/popularSeries";
 import FantasyTips from "@/app/components/FantasyTips";
+import ReadMoreCard from "@/app/components/ReadMoreCard";
 
 interface Overview {
   //seriesData: any[]; // Adjust type based on your data
@@ -1046,32 +1047,15 @@ export default function Overview({
                   <div dangerouslySetInnerHTML={{ __html: pageHtml }} />
                 ) : (
                   <>
-                    <h3 className="text-1xl font-semibold mb-1">
-                      India vs Zimbabwe 2024
-                    </h3>
-                    <p className="text-gray-500 font-normal">
-                      The biggest tournament in the cricketing circuit, the ICC
+                    
+                    <ReadMoreCard
+                                        title=" India vs Zimbabwe 2024"
+                                        content="The biggest tournament in the cricketing circuit, the ICC
                       T20 WORLD Cup is underway in the USAs and the West Indies.
                       The tournament received excellent response from the fans
-                      worldwide and the finals of the gran...
-                    </p>
-                    <p className="text-[#1A80F8] font-semibold flex items-center text-[13px] pt-2 underline">
-                      Read more{" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="size-3 ml-2"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                        />
-                      </svg>
-                    </p>
+                      worldwide and the finals of the gran"
+                                        wordLimit={35} 
+                                    />
                   </>
                 )}
               </div>

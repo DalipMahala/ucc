@@ -193,7 +193,16 @@ export default function Banner({ matchData, match_id }: Banner) {
 
                 <div className="text-[#8192B4] font-normal w-[30%] text-center md:my-0 my-4 flex gap-2 items-center justify-center">
                   <p className="text-[#00a632] lg:text-[22px] text-[16px] font-semibold uppercase">
-                    {updateStatusNoteDirect(liveMatch?.match_info)} 🏆
+                    {updateStatusNoteDirect(liveMatch?.match_info)} 
+                    <Image
+                      src="/assets/img/home/win.png"
+                      width={28}
+                      height={28}
+                      style={{ width: "28px", height: "28px" }}
+                      className="inline-block ml-2"
+                      alt=""
+                      loading="lazy"
+                    />
                   </p>
                 </div>
 
@@ -388,7 +397,7 @@ export default function Banner({ matchData, match_id }: Banner) {
         // live Banner
 
         <section className="bg-[#0E2149] border-[1px] border-[#E4E9F01A] lg:px-0 px-3">
-          <div className="lg:w-[1075px] mx-auto lg:block hidden hover:shadow-lg">
+          <div className="lg:w-[1000px] mx-auto lg:block hidden hover:shadow-lg">
             <div className="md:flex justify-between items-center md:py-0 py-4">
 
               <div className="text-[#8192B4] font-medium  text-1xl md:text-center md:mx-0 my-3">
@@ -425,7 +434,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
 
           <div className="border-t-[1px] border-[#E4E9F01A]">
-            <div className="lg:w-[1075px] mx-auto tracking-[1px]">
+            <div className="lg:w-[1000px] mx-auto tracking-[1px]">
               <div className="hidden md:block">
                 <div className="flex h-[168px] justify-between items-center">
                   <div className="flex gap-2 text-[#BDCCECA8] uppercase flex-row items-center w-full">
@@ -591,7 +600,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                       </p>
                     }
                   </div>
-                 
+
                 </div>
               </div>
 
@@ -673,7 +682,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                           <span> CRR :{" "} </span> <span>{liveMatch?.live?.live_score?.runrate}</span>
                         </p>
 
-                        
+
 
                         {!!liveMatch?.live?.live_score?.required_runrate &&
                           <p className="flex gap-1 items-center">
@@ -682,9 +691,9 @@ export default function Banner({ matchData, match_id }: Banner) {
                         }
                       </div>
                       <p>
-                          Toss: <span>PBKS</span>
-                        </p>
-                        
+                        Toss: <span>PBKS</span>
+                      </p>
+
                       {!!liveMatch?.live?.live_score?.target &&
                         <p>
                           Target: <span>{liveMatch?.live?.live_score?.target}</span>

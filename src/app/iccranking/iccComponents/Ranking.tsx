@@ -174,13 +174,13 @@ interface Team {
                           <table className="w-full text-left text-sm text-gray-600">
                             <thead className="bg-gray-100">
                               <tr>
-                                <th className="py-2 px-2 font-medium text-gray-700">Rank</th>
+                                <th className="py-2 px-3 font-semibold text-gray-700 ">Rank</th>
                                 <th className="font-medium text-gray-700" />
                                 {iccRankingType !=='team' &&
-                                <th className="py-2 px-3 font-medium text-gray-700">Name</th>
+                                <th className="py-2 px-3 font-semibold text-gray-700">Name</th>
                                 }
-                                <th className="py-2 px-3 font-medium text-gray-700">Team</th>
-                                <th className="py-2 px-3 font-medium text-gray-700">Rating</th>
+                                <th className="py-2 px-3 font-semibold text-gray-700">Team</th>
+                                <th className="py-2 px-3 font-semibold text-gray-700">Rating</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -188,7 +188,7 @@ interface Team {
 
 
                               <tr key={index}>
-                                <td className="text-center">{rankDetails.rank}</td>
+                                <td className="py-2 px-3 ">{rankDetails.rank}</td>
                                 <td className="px-1">-</td>
                                 {iccRankingType !=='team' &&
                                 <td className="py-2 px-3 font-medium text-[#3d3d3d]">

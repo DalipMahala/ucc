@@ -7,7 +7,7 @@ import { urlStringEncode } from "./../../../utils/utility";
 import { format } from "date-fns";
 
 interface HeaderProps {
-  seriesData: any[]; // Adjust type based on your data
+  seriesData: any[];
   seriesInfo: any;
 }
 
@@ -18,18 +18,15 @@ export default function IplBanner({
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const [scrollPosition, setScrollPosition] = useState(0);
 
-  // Default images array if seriesData is empty
   const images = seriesData?.map((item) => ({
     cid: item.cid,
     url: `/series/${urlStringEncode(item.title + "-" + item.season)}/${item.cid}`,
     src: item?.header_logo ? item?.header_logo : "/assets/img/series/series-1.png",
   }));
 
-  // Get previous, current, and next series info
   const previousAndNext = (data: any[], targetCid: number) => {
     const index = data.findIndex((item) => item.cid === targetCid);
     if (index === -1) return { previous: null, current: null, next: null };
-
     return {
       previous: data[index - 1] || null,
       current: data[index] || null,
@@ -38,26 +35,27 @@ export default function IplBanner({
   };
 
   const result = previousAndNext(seriesData, seriesInfo?.cid);
+
   const nextUrl = result?.next
-    ? `/series/${urlStringEncode(
-        result.next.title + "-" + result.next.season
-      )}/${result.next.cid}`
+    ? `/series/${urlStringEncode(result.next.title + "-" + result.next.season)}/${result.next.cid}`
     : "";
   const backUrl = result?.previous
-    ? `/series/${urlStringEncode(
-        result.previous.title + "-" + result.previous.season
-      )}/${result.previous.cid}`
+    ? `/series/${urlStringEncode(result.previous.title + "-" + result.previous.season)}/${result.previous.cid}`
     : "";
 
-  const nextImage = result?.next?.header_logo ? result?.next?.header_logo : "/assets/img/series/series-1.png";
-  const currentImage = result?.current?.header_logo ? result?.current?.header_logo : "/assets/img/series/series-1.png";
+  const nextImage = result?.next?.header_logo
+    ? result?.next?.header_logo
+    : "/assets/img/series/series-1.png";
 
-  // Handle slider scrolling
+  const currentImage = result?.current?.header_logo
+    ? result?.current?.header_logo
+    : "/assets/img/series/series-1.png";
+
   const handleScroll = (direction: "left" | "right") => {
     if (!sliderRef.current) return;
 
     const slider = sliderRef.current;
-    const slideWidth = slider.children[0]?.clientWidth + 80 || 200; // Default width fallback
+    const slideWidth = slider.children[0]?.clientWidth + 80 || 200;
 
     if (direction === "right" && scrollPosition < images.length - 3) {
       setScrollPosition((prev) => prev + 1);
@@ -68,14 +66,14 @@ export default function IplBanner({
     }
   };
 
-  // Focus on the active series when the component mounts
   useEffect(() => {
     if (sliderRef.current) {
-      const activeElement = sliderRef.current.querySelector('.active-series');
+      const activeElement = sliderRef.current.querySelector(".active-series");
       if (activeElement) {
-        activeElement.scrollIntoView({
+        (activeElement as HTMLElement).scrollIntoView({
           behavior: "smooth",
-          block: "center", // Center the active element in the view
+          inline: "center",
+          block: "nearest",
         });
       }
     }
@@ -88,8 +86,7 @@ export default function IplBanner({
         style={{ paddingTop: "37px" }}
       >
         <div className="flex items-center justify-between md:p-4 max-w-6xl mx-auto">
-          {/* Left Arrow */}
-          {backUrl !== "" ? (
+          {backUrl !== "" && (
             <Link href={backUrl}>
               <button className="md:block hidden p-2 bg-gray-700 rounded-full hover:bg-gray-600">
                 <svg
@@ -100,21 +97,14 @@ export default function IplBanner({
                   stroke="currentColor"
                   strokeWidth={2}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15 19l-7-7 7-7"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
             </Link>
-          ) : (
-            ""
           )}
 
-          {/* Content Section */}
-          <div className="hidden md:flex flex-grow items-center justify-between px-6 ">
-            {/* Left Section */}
+          {/* Desktop Content */}
+          <div className="hidden md:flex flex-grow items-center justify-between px-6">
             <div className="flex items-center space-x-4">
               <Image
                 loading="lazy"
@@ -129,9 +119,15 @@ export default function IplBanner({
                   {seriesInfo?.title} {seriesInfo?.season}
                 </h2>
                 <p className="lg:text-sm md:text-[14px] text-gray-300 mb-2 capitalize">
-                  {seriesInfo?.game_format} - {seriesInfo?.total_matches} Matches - {seriesInfo?.total_teams} Teams |{" "}
-                  {seriesInfo?.datestart ? format(new Date(seriesInfo?.datestart), "dd MMMM") : ""} to{" "}
-                  {seriesInfo?.dateend ? format(new Date(seriesInfo?.dateend), "dd MMMM") : ""}
+                  {seriesInfo?.game_format} - {seriesInfo?.total_matches} Matches -{" "}
+                  {seriesInfo?.total_teams} Teams |{" "}
+                  {seriesInfo?.datestart
+                    ? format(new Date(seriesInfo?.datestart), "dd MMMM")
+                    : ""}{" "}
+                  to{" "}
+                  {seriesInfo?.dateend
+                    ? format(new Date(seriesInfo?.dateend), "dd MMMM")
+                    : ""}
                 </p>
                 <select className="border border-gray-500 rounded px-2 bg-[#0e2149] hidden">
                   <option>2020</option>
@@ -141,8 +137,7 @@ export default function IplBanner({
               </div>
             </div>
 
-            {/* Right Section */}
-            {result?.next?.title ? (
+            {result?.next?.title && (
               <div className="flex items-center space-x-4">
                 <p className="text-sm">
                   {result?.next?.title}
@@ -156,42 +151,41 @@ export default function IplBanner({
                     width={40}
                     height={40}
                     alt="Series Logo"
-                    className="rounded-full w-12 h-12 "
+                    className="rounded-full w-12 h-12"
                   />
                 </div>
               </div>
-            ) : (
-              ""
             )}
           </div>
 
-          {/* Mobile banner start */}
+          {/* Mobile Banner */}
           <div className="md:hidden">
             <div className="relative">
               <div className="relative mx-4">
                 <div
                   id="series"
                   ref={sliderRef}
-                  className="flex gap-3 transition-transform duration-300 overflow-x-scroll [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[1px] 
-                              [&::-webkit-scrollbar-track]:bg-[#0e2149] 
-                              [&::-webkit-scrollbar-thumb]:bg-[#0e2149]"
+                  className="flex items-center gap-3 transition-transform duration-300 overflow-x-scroll 
+                  [&::-webkit-scrollbar]:h-[1px] 
+                  [&::-webkit-scrollbar-track]:bg-[#0e2149] 
+                  [&::-webkit-scrollbar-thumb]:bg-[#0e2149]"
                 >
                   {images?.map((image: any, index: number) => {
                     const isActive = image.cid === seriesInfo?.cid;
                     return (
-                      <div key={index} className="flex-none w-1/5">
-                        <Link
-                          href={image.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                      <div key={index} className="flex-none w-1/4">
+                        <Link href={image.url} className="flex justify-center">
                           <Image
                             loading="lazy"
                             src={image.src}
                             alt={`series-${index + 1}`}
-                            width={100}
-                            height={100}
-                            className={`rounded-full ${isActive ? 'border-[2px] border-[#539ff9] p-2 rounded-lg active-series' : ''}`}
+                            width={70}
+                            height={70}
+                            className={`rounded-full ${
+                              isActive
+                                ? "w-[100px] h-[100px] border-[2px] border-[#539ff9] p-2 rounded-[20px] active-series"
+                                : "w-[70px] h-[70]"
+                            }`}
                           />
                         </Link>
                       </div>
@@ -208,8 +202,13 @@ export default function IplBanner({
               <p className="text-[13px] text-gray-300 mb-2">
                 {seriesInfo?.game_format} - {seriesInfo?.total_matches} Matches -{" "}
                 {seriesInfo?.total_teams} Teams |{" "}
-                {seriesInfo?.datestart ? format(new Date(seriesInfo?.datestart), "dd MMMM") : ""} to{" "}
-                {seriesInfo?.dateend ? format(new Date(seriesInfo?.dateend), "dd MMMM") : ""}
+                {seriesInfo?.datestart
+                  ? format(new Date(seriesInfo?.datestart), "dd MMMM")
+                  : ""}{" "}
+                to{" "}
+                {seriesInfo?.dateend
+                  ? format(new Date(seriesInfo?.dateend), "dd MMMM")
+                  : ""}
               </p>
 
               <select className="border border-gray-500 rounded px-2 bg-[#0e2149] hidden">
@@ -218,10 +217,9 @@ export default function IplBanner({
               </select>
             </div>
           </div>
-          {/* Mobile banner end */}
 
           {/* Right Arrow */}
-          {nextUrl !== "" ? (
+          {nextUrl !== "" && (
             <Link href={nextUrl}>
               <button className="md:block hidden p-2 bg-gray-700 rounded-full hover:bg-gray-600">
                 <svg
@@ -232,16 +230,10 @@ export default function IplBanner({
                   stroke="currentColor"
                   strokeWidth={2}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 5l7 7-7 7"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </button>
             </Link>
-          ) : (
-            ""
           )}
         </div>
       </div>

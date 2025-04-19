@@ -394,7 +394,7 @@ export default async function UpcomingMatches() {
                   {ucmatch?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.competition?.cid + "/points-table"}>
-                        <p className="text-[#909090] text-[13px] font-medium">
+                        <p className="pr-[10px] text-[#909090] text-[13px] font-medium">
                           Points Table
                         </p>
                       </Link>
@@ -402,7 +402,7 @@ export default async function UpcomingMatches() {
                     </>}
                   {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
                     <Link href={("/h2h/" + urlStringEncode(ucmatch?.teama?.name + "-vs-" + ucmatch?.teamb?.name) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
-                      <div className="pl-5 border-l-[1px] flex justify-end items-center space-x-2">
+                      <div className="pl-[10px] border-l-[1px] flex justify-end items-center space-x-2">
                         <Image
                           src="/assets/img/home/handshake.png"
                           className="h-[15px]"
