@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Image from "next/image";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -18,38 +19,38 @@ const Footer = () => {
           <ul className="space-y-2 mt-3">
             <li>
               {" "}
-              <a href="#" className="">
+              <Link href={"/team/india/25"}>
                 {" "}
                 India{" "}
-              </a>{" "}
+              </Link>{" "}
             </li>
             <li>
               {" "}
-              <a href="#" className="">
+              <Link href={"/team/australia/5"}>
                 {" "}
                 Australia{" "}
-              </a>{" "}
+              </Link>{" "}
             </li>
             <li>
               {" "}
-              <a href="#" className="">
+              <Link href={"/team/pakistan/13"}>
                 {" "}
                 Pakistan{" "}
-              </a>{" "}
+              </Link>{" "}
             </li>
             <li>
               {" "}
-              <a href="#" className="">
+              <Link href={"/team/south-africa/19"}>
                 {" "}
                 South Africa{" "}
-              </a>{" "}
+              </Link>{" "}
             </li>
             <li>
               {" "}
-              <a href="#" className="">
+              <Link href={"/team/new-zealand/7"}>
                 {" "}
                 New Zealand{" "}
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -63,38 +64,38 @@ const Footer = () => {
           <ul className="space-y-2 mt-3 text-right md:text-center">
             <li>
               {" "}
-              <a href="#" className="">
+              <Link href={"/player/virat-kohli/119"}>
                 {" "}
                 Virat Kohli{" "}
-              </a>{" "}
+              </Link>{" "}
             </li>
             <li>
               {" "}
-              <a href="#" className="">
+              <Link href="/player/rohit-sharma/115">
                 {" "}
                 Rohit Sharma{" "}
-              </a>{" "}
+              </Link>{" "}
             </li>
             <li>
               {" "}
-              <a href="#" className="">
+              <Link href="/player/r-jadeja/125">
                 {" "}
                 Ravindra Jadeja{" "}
-              </a>{" "}
+              </Link>{" "}
             </li>
             <li>
               {" "}
-              <a href="#" className="">
+              <Link href="/player/h-pandya/727">
                 {" "}
                 Hardik Pandya{" "}
-              </a>{" "}
+              </Link>{" "}
             </li>
             <li>
               {" "}
-              <a href="#" className="">
+              <Link href="/player/s-gill/90739">
                 {" "}
                 Shubman Gill{" "}
-              </a>{" "}
+              </Link>{" "}
             </li>
           </ul>
         </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getAge } from "@/utils/timerUtils";
+import PlayerProfileImage from "@/app/components/PlayerProfileImage";
 
 interface Banner {
     playerStats: any | null;
@@ -73,23 +74,9 @@ export default function Banner({ playerStats, ranking }: Banner) {
             <div className="lg:w-[1000px] mx-auto text-white relative">
                 <div className="md:flex items-center md:space-x-8">
                     <div className="flex justify-center relative">
-
-                        <Image loading="lazy"
-                            src="/assets/img/playerProfile/p-2.svg"
-                            alt="Player Image"
-                            className=" rounded-lg hidden md:block"
-                            width={230} height={300}
-
-                        />
-
-                        <Image loading="lazy"
-                            src="/assets/img/playerProfile/p-2.svg"
-                            alt="Player Image"
-                            className=" rounded-lg md:hidden"
-                            width={150} height={200}
-
-                        />
-
+                  <PlayerProfileImage key={profile?.pid} player_id={profile?.pid} height={300} width={230} className="rounded-lg hidden md:block" />
+                  <PlayerProfileImage key={profile?.pid+"_"+profile?.pid} player_id={profile?.pid} height={200} width={150} className="rounded-lg md:hidden" />
+                        
                         <div className="absolute bottom-0 md:hidden" style={{
                             height: '82px',
                             background: 'linear-gradient(rgb(0 198 255 / 0%), rgb(14 33 73))',

@@ -151,7 +151,7 @@ export default function Overview({
       selectedMatches = upcomingMatch.slice(0, 3);
     }
   }
-  console.log("completedMatch", selectedMatches);
+  // console.log("completedMatch", seriesKeystats?.mostRuns?.stats);
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
       <div id="tabs" className="mt-4">
@@ -601,7 +601,7 @@ export default function Overview({
                                 Mat
                               </th>
                               <th className="md:px-2 pl-[14px] py-3 font-medium">
-                                Inns
+                                Runs
                               </th>
                               <th className="md:px-2 pl-[14px] py-3 font-medium">
                                 HS
@@ -618,94 +618,38 @@ export default function Overview({
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-gray-200">
-                            <tr className="bg-[#FB7E02] text-white">
+                            {seriesKeystats?.mostRuns?.stats?.slice(0,3)?.map((player:any, index:number) =>(
+                            
+                            <tr className={index === 0 ? "bg-[#FB7E02] text-white" : ""} key={index}>
                               <td className="md:px-3 pl-[14px] py-3">
                                 <div className="flex items-center gap-[5px] md:w-[240px] w-[185px]">
                                   <div>
-                                    <Image
-                                      loading="lazy"
-                                      src="/assets/img/player/default.png"
-                                      className="h-[33px] w-[33px] rounded-lg"
-                                      width={33}
-                                      height={33}
-                                      alt="1"
-                                    />
+                                  <PlayerImage
+                                      key={player?.player?.pid}
+                                        player_id={player?.player?.pid}
+                                        height={33}
+                                        width={33}
+                                        className="h-[33px] w-[33px] rounded-lg"
+                                      />
+                                   
                                   </div>
                                   <Link href="/player/playername/overview">
                                     <div>
-                                      <p className="font-medium">Virat Kohli</p>
-                                      <p className="text-[12px]">RCB</p>
+                                      <p className="font-medium">{player?.player?.short_name}</p>
+                                      <p className="text-[12px]">{player?.team?.abbr}</p>
                                     </div>
                                   </Link>
                                 </div>
                               </td>
-                              <td className="md:px-2 pl-[14px] py-3">15</td>
-                              <td className="md:px-2 pl-[14px] py-3">741</td>
-                              <td className="md:px-2 pl-[14px] py-3">113</td>
-                              <td className="md:px-2 pl-[14px] py-3">45.50</td>
-                              <td className="md:px-2 pl-[14px] py-3">145.70</td>
-                              <td className="md:px-2 pl-[14px] py-3">38</td>
+                              <td className="md:px-2 pl-[14px] py-3">{player?.matches}</td>
+                              <td className="md:px-2 pl-[14px] py-3">{player?.runs}</td>
+                              <td className="md:px-2 pl-[14px] py-3">{player?.highest}</td>
+                              <td className="md:px-2 pl-[14px] py-3">{player?.average}</td>
+                              <td className="md:px-2 pl-[14px] py-3">{player?.strike}</td>
+                              <td className="md:px-2 pl-[14px] py-3">{player?.run6}</td>
                             </tr>
-                            <tr>
-                              <td className="px-3 py-3">
-                                <div className="flex items-center gap-[5px] md:w-[240px] w-[185px]">
-                                  <div>
-                                    <Image
-                                      loading="lazy"
-                                      src="/assets/img/player/default.png"
-                                      className="h-[33px] w-[33px] rounded-lg"
-                                      width={33}
-                                      height={33}
-                                      alt="1"
-                                    />
-                                  </div>
-                                  <Link href="/player/playername/overview">
-                                    <div>
-                                      <p className="text-[#3e3e3e] font-medium">
-                                        Virat Kohli
-                                      </p>
-                                      <p className="text-[12px]">RCB</p>
-                                    </div>
-                                  </Link>
-                                </div>
-                              </td>
-                              <td className="md:px-2 pl-[14px] py-3">15</td>
-                              <td className="md:px-2 pl-[14px] py-3">741</td>
-                              <td className="md:px-2 pl-[14px] py-3">113</td>
-                              <td className="md:px-2 pl-[14px] py-3">45.50</td>
-                              <td className="md:px-2 pl-[14px] py-3">145.70</td>
-                              <td className="md:px-2 pl-[14px] py-3">38</td>
-                            </tr>
-                            <tr>
-                              <td className="px-3 py-3 md:w-[240px] w-[185px]">
-                                <div className="flex items-center gap-[5px]">
-                                  <div>
-                                    <Image
-                                      loading="lazy"
-                                      src="/assets/img/player/default.png"
-                                      className="h-[33px] w-[33px] rounded-lg"
-                                      width={33}
-                                      height={33}
-                                      alt="1"
-                                    />
-                                  </div>
-                                  <Link href="/player/playername/overview">
-                                    <div>
-                                      <p className="text-[#3e3e3e] font-medium">
-                                        Virat Kohli
-                                      </p>
-                                      <p className="text-[12px]">RCB</p>
-                                    </div>
-                                  </Link>
-                                </div>
-                              </td>
-                              <td className="md:px-2 pl-[14px] py-3">15</td>
-                              <td className="md:px-2 pl-[14px] py-3">741</td>
-                              <td className="md:px-2 pl-[14px] py-3">113</td>
-                              <td className="md:px-2 pl-[14px] py-3">45.50</td>
-                              <td className="md:px-2 pl-[14px] py-3">145.70</td>
-                              <td className="md:px-2 pl-[14px] py-3">38</td>
-                            </tr>
+                            ))}
+                           
                           </tbody>
                         </table>
                       </div>
@@ -748,96 +692,37 @@ export default function Overview({
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-gray-200">
-                            <tr className="bg-[#9E26BC] text-white">
+                          {seriesKeystats?.topWickets?.stats?.slice(0,3)?.map((player:any, index:number) =>(
+                            <tr className={index === 0 ? "bg-[#9E26BC] text-white" : ""} key={index}>
                               <td className="px-3 py-3">
                                 <div className="flex items-center gap-[5px] md:w-[240px] w-[185px]">
                                   <div>
-                                    <Image
-                                      loading="lazy"
-                                      src="/assets/img/player/8.png"
-                                      className="h-[33px] w-[33px] rounded-lg"
-                                      width={33}
-                                      height={33}
-                                      alt="1"
-                                    />
+                                  <PlayerImage
+                                      key={player?.player?.pid}
+                                        player_id={player?.player?.pid}
+                                        height={33}
+                                        width={33}
+                                        className="h-[33px] w-[33px] rounded-lg"
+                                      />
+                                  
                                   </div>
                                   <Link href="/player/playername/overview">
                                     <div>
-                                      <p className="font-medium">
-                                        Harshal Patel
-                                      </p>
-                                      <p className="text-[12px]">PBKS</p>
+                                    <p className="font-medium">{player?.player?.short_name}</p>
+                                    <p className="text-[12px]">{player?.team?.abbr}</p>
                                     </div>
                                   </Link>
                                 </div>
                               </td>
-                              <td className="md:px-2 pl-[14px] py-3">15</td>
-                              <td className="md:px-2 pl-[14px] py-3">741</td>
-                              <td className="md:px-2 pl-[14px] py-3">113</td>
-                              <td className="md:px-2 pl-[14px] py-3">45.50</td>
-                              <td className="md:px-2 pl-[14px] py-3">145.70</td>
-                              <td className="md:px-2 pl-[14px] py-3">38</td>
+                              <td className="md:px-2 pl-[14px] py-3">{player?.matches}</td>
+                              <td className="md:px-2 pl-[14px] py-3">{player?.overs}</td>
+                              <td className="md:px-2 pl-[14px] py-3">{player?.wickets}</td>
+                              <td className="md:px-2 pl-[14px] py-3">{player?.average}</td>
+                              <td className="md:px-2 pl-[14px] py-3">{player?.econ}</td>
+                              <td className="md:px-2 pl-[14px] py-3">{player?.wicket5i}</td>
                             </tr>
-                            <tr>
-                              <td className="px-3 py-3">
-                                <div className="flex items-center gap-[5px] md:w-[240px] w-[185px]">
-                                  <div>
-                                    <Image
-                                      loading="lazy"
-                                      src="/assets/img/player/8.png"
-                                      className="h-[33px] w-[33px] rounded-lg"
-                                      width={33}
-                                      height={33}
-                                      alt="1"
-                                    />
-                                  </div>
-                                  <Link href="/player/playername/overview">
-                                    <div>
-                                      <p className="text-[#3e3e3e] font-medium">
-                                        Varun Chakaravarthy
-                                      </p>
-                                      <p className="text-[12px]">KKR</p>
-                                    </div>
-                                  </Link>
-                                </div>
-                              </td>
-                              <td className="md:px-2 pl-[14px] py-3">15</td>
-                              <td className="md:px-2 pl-[14px] py-3">741</td>
-                              <td className="md:px-2 pl-[14px] py-3">113</td>
-                              <td className="md:px-2 pl-[14px] py-3">45.50</td>
-                              <td className="md:px-2 pl-[14px] py-3">145.70</td>
-                              <td className="md:px-2 pl-[14px] py-3">38</td>
-                            </tr>
-                            <tr>
-                              <td className="px-3 py-3 md:w-[240px] w-[185px]">
-                                <div className="flex items-center gap-[5px]">
-                                  <div>
-                                    <Image
-                                      loading="lazy"
-                                      src="/assets/img/player/8.png"
-                                      className="h-[33px] w-[33px] rounded-lg"
-                                      width={33}
-                                      height={33}
-                                      alt="1"
-                                    />
-                                  </div>
-                                  <Link href="/player/playername/overview">
-                                    <div>
-                                      <p className="text-[#3e3e3e] font-medium">
-                                        Jasprit Bumrah
-                                      </p>
-                                      <p className="text-[12px]">MI</p>
-                                    </div>
-                                  </Link>
-                                </div>
-                              </td>
-                              <td className="md:px-2 pl-[14px] py-3">15</td>
-                              <td className="md:px-2 pl-[14px] py-3">741</td>
-                              <td className="md:px-2 pl-[14px] py-3">113</td>
-                              <td className="md:px-2 pl-[14px] py-3">45.50</td>
-                              <td className="md:px-2 pl-[14px] py-3">145.70</td>
-                              <td className="md:px-2 pl-[14px] py-3">38</td>
-                            </tr>
+                          ))}
+                           
                           </tbody>
                         </table>
                       </div>

@@ -55,6 +55,8 @@ export default function Team({
   let tie_match = teamDetails?.tie_match_odi;
   let nr_match = teamDetails?.nr_match_odi;
   let win_per_match = teamDetails?.total_match_odi ? (teamDetails?.win_match_odi / teamDetails?.total_match_odi) * 100 : 0;
+  let debut_match = teamDetails?.debut_match_odi;
+  let debut_match_result = teamDetails?.debut_match_result_odi;
   if (teamType === "test") {
     total_match = teamDetails?.total_match_test;
     win_match = teamDetails?.win_match_test;
@@ -62,6 +64,8 @@ export default function Team({
     tie_match = teamDetails?.tie_match_test;
     nr_match = teamDetails?.nr_match_test;
     win_per_match = teamDetails?.total_match_test ? (teamDetails?.win_match_test / teamDetails?.total_match_test) * 100 : 0;
+    debut_match = teamDetails?.debut_match_test;
+    debut_match_result = teamDetails?.debut_match_result_test;
   } else if (teamType === "t20i") {
     total_match = teamDetails?.total_match_t20;
     win_match = teamDetails?.win_match_t20;
@@ -69,6 +73,8 @@ export default function Team({
     tie_match = teamDetails?.tie_match_t20;
     nr_match = teamDetails?.nr_match_t20;
     win_per_match = teamDetails?.total_match_t20 ? (teamDetails?.win_match_t20 / teamDetails?.total_match_t20) * 100 : 0;
+    debut_match = teamDetails?.debut_match_t20;
+    debut_match_result = teamDetails?.debut_match_result_t20;
   }
 
 
@@ -256,11 +262,10 @@ export default function Team({
                       </div>
                       <div className="p-2 ">
                         <p className="font-semibold">
-                          Vs&nbsp;ENG&nbsp;on&nbsp;Jun 25,
-                          1932&nbsp;at&nbsp;Lords..
+                          {debut_match}
                         </p>
                         <p className="text-[11px]">
-                          England beat India by 158 runs
+                          {debut_match_result}
                         </p>
                       </div>
                     </div>
@@ -313,7 +318,7 @@ export default function Team({
                             />
                           </svg>
                         </span>
-                        41
+                        0
                       </span>
                       <span className="flex font-semibold items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-full text-[#A70B0B] pr-2">
                         <span className="">
@@ -332,7 +337,7 @@ export default function Team({
                             />
                           </svg>
                         </span>
-                        45
+                        0
                       </span>
                     </div>
                   </div>
@@ -464,7 +469,7 @@ export default function Team({
                       </Link>
                     </div>
 
-                    <Link href="#">
+                    <Link href={("/h2h/" + urlStringEncode(ucmatch?.teama?.name + "-vs-" + ucmatch?.teamb?.name) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
                       <div className="flex mt-2 justify-end items-center space-x-2">
                         <Image
                           loading="lazy"
@@ -634,7 +639,7 @@ export default function Team({
                         </p>
                       </Link>
                       <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
-                      <Link href="#">
+                      <Link href={("/h2h/" + urlStringEncode(ucmatch?.teama?.name + "-vs-" + ucmatch?.teamb?.name) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
                         <div className="flex justify-end items-center space-x-2">
                           <Image
                             loading="lazy"
@@ -671,7 +676,7 @@ export default function Team({
                             ></path>
                           </svg>
                         </span>
-                        41
+                        0
                       </span>
                       <span className="flex items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B] rounded-md text-[#A70B0B] pr-2">
                         <span>
@@ -690,7 +695,7 @@ export default function Team({
                             ></path>
                           </svg>
                         </span>
-                        45
+                        0
                       </span>
                     </div>
                   </div>

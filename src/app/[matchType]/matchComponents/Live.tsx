@@ -558,8 +558,8 @@ export default function Live({
                                 <span className="md:text-[13px] text-[12px] text-[#586577] px-1">
                                   ({batsman?.[0]?.balls_faced})
                                 </span>
-                                {batsman?.[0]?.batsman_id ==
-                                  currPartnership?.batsmen?.[0]?.batsman_id ? (
+                                {/* {batsman?.[0]?.batsman_id ==
+                                  currPartnership?.batsmen?.[0]?.batsman_id ? ( */}
                                   <Image
                                     src="/assets/img/home/bat.png"
                                     className="h-[14px]"
@@ -568,9 +568,9 @@ export default function Live({
                                     alt=""
                                     loading="lazy"
                                   />
-                                ) : (
+                                {/* ) : (
                                   ""
-                                )}
+                                )} */}
                               </p>
                             </div>
                           </div>

@@ -173,7 +173,7 @@ export default function ScheduleResults({
                 >
                   All
                 </button>
-
+                {liveMatch.length > 0 &&
                 <button id="live-tab"
                   className={`font-medium py-1 md:px-7 px-6 bg-[#ffffff] whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "live1"
                     ? "bg-[#000000] text-white"
@@ -182,7 +182,7 @@ export default function ScheduleResults({
                 >
                   Live
                 </button>
-
+              }{completedMatch.length > 0 &&
                 <button id="completed-tab"
                   className={`font-medium py-1 md:px-7 px-6 bg-[#ffffff] whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "finished1"
                     ? "bg-[#000000] text-white"
@@ -191,7 +191,7 @@ export default function ScheduleResults({
                 >
                   Finished
                 </button>
-
+              }{upcomingMatch.length > 0 &&
                 <button id="upcoming-tab"
                   className={`font-medium py-1 md:px-7 px-6 bg-[#ffffff] whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "scorecard1"
                     ? "bg-[#000000] text-white"
@@ -200,6 +200,7 @@ export default function ScheduleResults({
                 >
                   Scheduled
                 </button>
+                }
               </div>
             </div>
             <div className="tab-content-container">
