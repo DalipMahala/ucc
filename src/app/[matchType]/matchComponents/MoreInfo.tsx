@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { urlStringEncode } from "@/utils/utility";
 import MatchCard from "./matchCard";
 import PlayerImage from "@/app/components/PlayerImage";
-// import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import MatchTabs from "./Menu";
 
 interface MatchInfo {
   match_id: number;
@@ -38,7 +38,7 @@ export default function MoreInfo({
       (player: { playing11: string }) => player.playing11 === "true"
     ) || []),
   ];
-  console.log("test1",matchLast.items.teama_vs_teamb_last10_match_same_venue);
+  // console.log("test1",matchLast.items.teama_vs_teamb_last10_match_same_venue);
   const matchlistA = matchLast?.items?.teama_last10_match;
   const matchlistB = matchLast?.items?.teamb_last10_match;
   const matchlistAB = matchLast?.items?.teama_vs_teamb_last10_match ?? "";
@@ -190,69 +190,64 @@ export default function MoreInfo({
 
   const [activeOddTab, setActiveOddTab] = useState("tab2");
   let teamwinpercentage = matchData?.teamwinpercentage;
+
+  const [matchUrls, setMatchUrls] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const getAllMatchIds = () => {
+      const allIds = [
+        ...matchlistA.map((item: { match_id: any; }) => item.match_id),
+        ...matchlistB.map((item: { match_id: any; }) => item.match_id),
+        ...matchlistAB.map((item: { match_id: any; }) => item.match_id),
+      ];
+      return [...new Set(allIds)]; // Deduplicate
+    };
+    
+    const fetchMatchUrls = async () => {
+      const ids = getAllMatchIds();
+      if (ids.length === 0) return;
+      const res = await fetch('/api/match-urls', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+        body: JSON.stringify({ ids }),
+      });
+      const data = await res.json();
+      setMatchUrls(data);
+    };
+
+    fetchMatchUrls();
+  }, [matchlistA, matchlistB, matchlistAB]);
+
+  const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const getAllPlayerIds = () => {
+      const allIds = [
+        ...teama11Players.map((item: { player_id: any; }) => item.player_id),
+        ...teamb11Players.map((item: { player_id: any; }) => item.player_id),
+      ];
+      return [...new Set(allIds)]; // Deduplicate
+    };
+   
+    const fetchPlayerUrls = async () => {
+      const ids = getAllPlayerIds();
+      if (ids.length === 0) return;
+      const res = await fetch('/api/player-urls', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+        body: JSON.stringify({ ids }),
+      });
+      const data = await res.json();
+      setPlayerUrls(data);
+    };
+
+    fetchPlayerUrls();
+  }, [teama11Players, teamb11Players]);
   return (
     <>
       <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-        <div id="tabs" className="my-4">
-          <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
-            <Link href={"/moreinfo/" + matchUrl + "/" + match_id}>
-              <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap  bg-[#1A80F8] text-white rounded-md">
-                More Info
-              </button>
-            </Link>
-            <Link href={"/live-score/" + matchUrl + "/" + match_id}>
-              <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
-                Live
-              </button>
-            </Link>
-            <Link href={"/scorecard/" + matchUrl + "/" + match_id}>
-              <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
-                Scorecard
-              </button>
-            </Link>
-            <Link href={"/squad/" + matchUrl + "/" + match_id}>
-              <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
-                Squad
-              </button>
-            </Link>
-            {isPointTable && (
-              <Link
-                href={
-                  "/series/" +
-                  urlStringEncode(
-                    matchDetails?.competition?.title +
-                    "-" +
-                    matchDetails?.competition?.season
-                  ) +
-                  "/" +
-                  matchDetails?.competition?.cid +
-                  "/points-table"
-                }
-              >
-                <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
-                  Points Table
-                </button>
-              </Link>
-            )}
-            <Link
-              href={
-                "/series/" +
-                urlStringEncode(
-                  matchDetails?.competition?.title +
-                  "-" +
-                  matchDetails?.competition?.season
-                ) +
-                "/" +
-                matchDetails?.competition?.cid +
-                "/stats/most-run"
-              }
-            >
-              <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
-                Stats
-              </button>
-            </Link>
-          </div>
-        </div>
+      <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable}/>
+      
 
         <div id="tab-content">
           {/*------------------------  More Info Seaction Start ---------------------------*/}
@@ -305,7 +300,7 @@ export default function MoreInfo({
                           className="flex items-center justify-between my-3"
                           onClick={() => handleToggle(1)}
                         >
-                          <Link href="">
+                         
                             <div className="flex items-center space-x-3">
                               <div>
                                 <Image
@@ -321,7 +316,7 @@ export default function MoreInfo({
                                 {matchData?.match_info?.teama?.name}
                               </h3>
                             </div>
-                          </Link>
+                        
                           <div>
                             <div className="ml-auto flex gap-1 items-center">
                               {matchlistA && matchlistA
@@ -389,8 +384,9 @@ export default function MoreInfo({
                                         className="whitespace-nowrap bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-[13px]"
                                         key={index}
                                       >
-                                        <td className="px-4 pl-0 py-1 ">
-                                          <Link href="#">
+                                       
+                                        <td className="px-8 pl-0 py-1 ">
+                                        <Link className="w-full flex" href={"/scorecard/" + matchUrls[items.match_id]}>
                                             <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                               <div className="flex items-center space-x-1">
                                                 <Image
@@ -407,13 +403,14 @@ export default function MoreInfo({
                                               </div>
                                               <p>{items.teama.scores}</p>
                                             </div>
-                                          </Link>
+                                            </Link>
                                         </td>
-                                        <td className="md:px-4 py-2 font-medium text-[#6A7586]">
+
+                                        <td className="md:px-8 py-2 font-medium text-[#6A7586]">
                                           VS
                                         </td>
-                                        <td className="md:px-4 py-2">
-                                          <Link href="#">
+                                        <td className="md:px-8 py-2">
+                                        <Link className="w-full flex" href={"/scorecard/" + matchUrls[items.match_id]}>
                                             <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                               <p>{items.teamb.scores}</p>
                                               <div className="flex items-center space-x-1">
@@ -430,8 +427,9 @@ export default function MoreInfo({
                                                 />
                                               </div>
                                             </div>
-                                          </Link>
+                                            </Link>
                                         </td>
+                                        
                                         <td className="md:px-4 py-2">
                                           <div className="text-right leading-6">
                                             <p className="font-medium">
@@ -466,9 +464,8 @@ export default function MoreInfo({
                               {matchlistA
                                 .slice(0, 5)
                                 .map((items: any, index: number) => (
-                                  <div className="flex justify-between items-center py-4 px-2 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]" key={index}>
+                                    <Link className="flex justify-between items-center py-4 px-2 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]" key={index} href={"/scorecard/" + matchUrls[items.match_id]}>
                                     <div className="">
-                                      <Link href="#">
                                         <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-3">
                                           <div className="flex items-center space-x-1">
                                             <Image loading="lazy"
@@ -484,7 +481,6 @@ export default function MoreInfo({
                                           </div>
                                           <p>{items.teama.scores}</p>
                                         </div>
-                                      </Link>
 
                                       <div>
                                         <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
@@ -528,7 +524,7 @@ export default function MoreInfo({
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
+                                    </Link>
                                 ))}
 
                             </div>
@@ -542,7 +538,6 @@ export default function MoreInfo({
                             className="flex items-center justify-between my-3"
                             onClick={() => handleToggle(2)}
                           >
-                            <Link href="">
                               <div className="flex items-center space-x-3">
                                 <div>
                                   <Image
@@ -558,7 +553,6 @@ export default function MoreInfo({
                                   {matchData?.match_info?.teamb?.name}
                                 </h3>
                               </div>
-                            </Link>
                             <div>
                               <div className="ml-auto flex gap-1 items-center">
                                 {matchlistB && matchlistB
@@ -625,8 +619,9 @@ export default function MoreInfo({
                                         className="whitespace-nowrap bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-[13px]"
                                         key={index}
                                       >
-                                        <td className="px-4 pl-0 py-1 ">
-                                          <Link href="#">
+                                        
+                                        <td className="px-8 pl-0 py-1 ">
+                                        <Link className="w-full flex" href={"/scorecard/" + matchUrls[items.match_id]}>
                                             <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                               <div className="flex items-center space-x-1">
                                                 <Image
@@ -643,13 +638,13 @@ export default function MoreInfo({
                                               </div>
                                               <p>{items.teama.scores}</p>
                                             </div>
-                                          </Link>
+                                            </Link>
                                         </td>
-                                        <td className="md:px-4 py-2 font-medium text-[#6A7586]">
+                                        <td className="md:px-8 py-2 font-medium text-[#6A7586]">
                                           VS
                                         </td>
-                                        <td className="md:px-4 py-2">
-                                          <Link href="#">
+                                        <td className="md:px-8 py-2">
+                                        <Link className="w-full flex" href={"/scorecard/" + matchUrls[items.match_id]}>
                                             <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                               <p>{items.teamb.scores}</p>
                                               <div className="flex items-center space-x-1">
@@ -666,8 +661,9 @@ export default function MoreInfo({
                                                 />
                                               </div>
                                             </div>
-                                          </Link>
+                                            </Link>
                                         </td>
+                                        
                                         <td className="md:px-4 py-2">
                                           <div className="text-right leading-6">
                                             <p className="font-medium">
@@ -702,9 +698,9 @@ export default function MoreInfo({
                               {matchlistB
                                 .slice(0, 5)
                                 .map((items: any, index: number) => (
-                                  <div className="flex justify-between items-center py-4 px-2 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]" key={index}>
+                                    <Link className="flex justify-between items-center py-4 px-2 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]" key={index} href={"/scorecard/" + matchUrls[items.match_id]}>
                                     <div className="">
-                                      <Link href="#">
+                                     
                                         <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-3">
                                           <div className="flex items-center space-x-1">
                                             <Image loading="lazy"
@@ -720,7 +716,7 @@ export default function MoreInfo({
                                           </div>
                                           <p>{items.teama.scores}</p>
                                         </div>
-                                      </Link>
+                                      
 
                                       <div>
                                         <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
@@ -764,7 +760,7 @@ export default function MoreInfo({
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
+                                    </Link>
                                 ))}
                             </div>
                           </div>
@@ -777,11 +773,11 @@ export default function MoreInfo({
                 <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                   <div key="mypage">
                     <h3 className="text-1xl font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
-                      Head To Head (Last matches)
+                      Head To Head (Last 5 matches)
                     </h3>
                     <div className="border-t-[1px] border-[#E4E9F0]" />
                     <div className="py-4 text-1xl flex justify-between items-center">
-                      <Link href="">
+                   
                         <div className="font-bold uppercase flex items-center">
                           <Image
                             loading="lazy"
@@ -795,7 +791,7 @@ export default function MoreInfo({
                             {matchData?.match_info?.teama?.short_name}
                           </p>
                         </div>
-                      </Link>
+                    
                       <div className=" font-normal text-center">
                         <p className="text-[#D28505] text-[17px] font-semibold">
                           {teamaWinMatch}{" "}
@@ -804,7 +800,7 @@ export default function MoreInfo({
                           </span>
                         </p>
                       </div>
-                      <Link href="">
+                      
                         <div className="font-bold uppercase flex items-center">
                           <p className="mx-2 font-semibold uppercase">
                             {matchData?.match_info?.teamb?.short_name}
@@ -818,19 +814,19 @@ export default function MoreInfo({
                             alt={matchData?.match_info?.teamb?.short_name}
                           />
                         </div>
-                      </Link>
+                     
                     </div>
 
                     <div className="border-t-[1px] border-[#E4E9F0]" />
                     {matchlistAB && matchlistAB
-                      .slice(0, 10)
+                      .slice(0, 5)
                       .map((items: any, index: number) => (
                         <div
                           className="py-4 flex justify-between items-center"
                           key={index}
                         >
-                          <Link className="w-[20%]" href="">
-                            <div className="font-medium  w-full">
+                          <Link className="w-full flex" href={"/scorecard/" + matchUrls[items.match_id]}>
+                            <div className="font-medium w-[20%] ">
                               <p className="mx-2 font-semibold uppercase">
                                 {items.teama.short_name}
                               </p>
@@ -838,7 +834,6 @@ export default function MoreInfo({
                                 {items.teama.scores}
                               </p>
                             </div>
-                          </Link>
                           <div className=" font-semibold text-center w-[60%]">
                             <p className="text-[#3D4DCF]">
                               {items.status_note}
@@ -847,8 +842,7 @@ export default function MoreInfo({
                               {items.subtitle} {items.short_title}
                             </p>
                           </div>
-                          <Link href="" className="w-[20%]">
-                            <div className="font-medium text-right w-full">
+                            <div className="font-medium text-right w-[20%]">
                               <p className="mx-2 font-semibold uppercase">
                                 {items.teamb.short_name}
                               </p>
@@ -905,7 +899,7 @@ export default function MoreInfo({
                         <div className="cust-box-click-content cust-box-click-overall1 mt-4">
                           <div>
                             <div className="py-4 flex justify-between items-center">
-                              <Link href="">
+                             
                                 <div className="font-bold flex items-center">
                                   <Image
                                     loading="lazy"
@@ -924,8 +918,7 @@ export default function MoreInfo({
                                     </span>
                                   </p>
                                 </div>
-                              </Link>
-                              <Link href="">
+                             
                                 <div className="font-bold flex items-center">
                                   <p className="mx-2 text-1xl font-semibold text-right">
                                     {matchData?.match_info?.teamb?.short_name}
@@ -944,7 +937,7 @@ export default function MoreInfo({
                                     }
                                   />
                                 </div>
-                              </Link>
+                           
                             </div>
                             <div className="border-t-[1px] border-[#E4E9F0]" />
                             <div className="py-2 flex justify-between items-center">
@@ -1051,7 +1044,7 @@ export default function MoreInfo({
                           <div className="cust-box-click-content cust-box-click-overall1 mt-4">
                             <div>
                               <div className="py-4 flex justify-between items-center">
-                                <Link href="">
+                               
                                   <div className="font-bold flex items-center">
                                     <Image
                                       loading="lazy"
@@ -1072,8 +1065,7 @@ export default function MoreInfo({
                                       </span>
                                     </p>
                                   </div>
-                                </Link>
-                                <Link href="">
+                              
                                   <div className="font-bold flex items-center">
                                     <p className="mx-2 text-1xl font-semibold text-right">
                                       {matchData?.match_info?.teamb?.short_name}
@@ -1094,7 +1086,7 @@ export default function MoreInfo({
                                       }
                                     />
                                   </div>
-                                </Link>
+                               
                               </div>
                               <div className="border-t-[1px] border-[#E4E9F0]" />
                               <div className="py-2 flex justify-between items-center">
@@ -1321,7 +1313,7 @@ export default function MoreInfo({
                       >
                         <div className="flex flex-col items-center w-[65px] h-[64px] p-4 justify-center rounded-full bg-white">
                           {/* <p className="font-bold leading-[21px] text-[18px]">8</p> */}
-                          <p className="text-[10px]">Matches</p>
+                          <p className="text-[10px]"></p>
                         </div>
                       </div>
                     </div>
@@ -1762,9 +1754,7 @@ export default function MoreInfo({
                           <Link
                             href={
                               "/player/" +
-                              urlStringEncode(player?.name) +
-                              "/" +
-                              player?.player_id
+                              playerUrls[player?.player_id]
                             }
                             key={player.player_id}
                           >
@@ -1802,9 +1792,7 @@ export default function MoreInfo({
                           <Link
                             href={
                               "/player/" +
-                              urlStringEncode(player?.name) +
-                              "/" +
-                              player?.player_id
+                              playerUrls[player?.player_id]
                             }
                             key={player.player_id}
                           >

@@ -221,7 +221,7 @@ export default function IplBanner({cid,params, teamPlayers, venueDetails}: Banne
                 </p>
               </div>
               <h2 className="text-[17px] font-semibold">
-                Kolkata Knight Riders
+              {teams?.title}
               </h2>
               <Link href="#" className="text-green-400 hover:underline mt-2">
                 More Seasons »

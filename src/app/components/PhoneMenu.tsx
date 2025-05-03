@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from "next/image";
 import {urlStringEncode}  from "./../../utils/utility";
+import { usePathname, useRouter  } from "next/navigation";
 
 interface HeaderProps {
   data: any; // Adjust type based on your data
@@ -18,43 +19,10 @@ const PhoneMenu = () => {
     setIsOpen(false);
   };
 
-  const [series, setSeries] = useState([]);
-      const [loading, setLoading] = useState(true);
-    
-      useEffect(() => {
-        fetch("/api/series/liveSeries", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
-          },
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            
-            if (res.success) {
-              setSeries(res.data);
-            }
-            setLoading(false);
-          })
-          .catch(() => setLoading(false));
-      }, []);
   
-      const data = series;
-
-  let items = [];
-  if(data){
-     items = data?.map((item: any) => ({
-      href: "/series/"+urlStringEncode(item.title+"-"+item.season)+"/"+item.cid,
-      imgSrc: "/assets/img/series/series-1.png",
-      alt: item.abbr,
-      label: item.abbr,
-    }));
-  }else{
-     items = [];
-  }
+  const pathname = usePathname();
   
-// console.log(items[0].href);
+// console.log("pathname",pathname);
 
   return ( 
     <>
@@ -86,7 +54,7 @@ const PhoneMenu = () => {
       <div className="md:hidden sticky bottom-0 bg-[#0e2149] text-[#8a8a8a] text-1xl py-2 flex justify-around items-center">
          <Link
           href="/"
-          className="flex flex-col items-center  text-[#ffffff] rounded-lg font-semibold"
+          className={`flex flex-col items-center ${pathname === '/' ? "text-[#ffffff] rounded-lg font-semibold":""}`}
         >
           <span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
@@ -114,7 +82,7 @@ const PhoneMenu = () => {
           </span>
           Fixtures
          </Link> */}
-         <Link href="/series" className="flex flex-col items-center">
+         <Link href="/series" className={`flex flex-col items-center ${pathname === '/series' ? "text-[#ffffff] rounded-lg font-semibold":""}`}>
           <span>
             <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
               <g id="cup-icon" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">

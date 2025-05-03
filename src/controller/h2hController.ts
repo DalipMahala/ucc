@@ -8,7 +8,7 @@ export async function H2hDetails(tableName: string, format: string,teama:number,
       return { notFound: true }; // Handle undefined ID gracefully
     }
 
-    const CACHE_KEY = "h2hDetails_" + teama+"vs"+teamb+"in"+tableName;
+    const CACHE_KEY = "h2hDetails_" + teama+"vs"+teamb+"in"+format;
     const CACHE_TTL = 60;
 
     try {
@@ -20,7 +20,7 @@ export async function H2hDetails(tableName: string, format: string,teama:number,
         }
        
         // Fetch Data
-        const [rows]: any = await db.execute('SELECT * FROM '+tableName+' WHERE format = "'+format+'" and (teama_id = ? AND teamb_id = ?) OR (teama_id = ? AND teamb_id = ?)', [teama,teamb,teamb,teama]);
+        const [rows]: any = await db.execute('SELECT * FROM '+tableName+' WHERE format = "'+format+'" and ((teama_id = ? AND teamb_id = ?) OR (teama_id = ? AND teamb_id = ?))', [teama,teamb,teamb,teama]);
   
         if (!rows || rows.length === 0) {
             return null; // Return notFound if no data found
@@ -44,7 +44,7 @@ export async function H2hDetails(tableName: string, format: string,teama:number,
 export async function getTeamId(teamName:string) {
   const formattedName = teamName?.replaceAll('-', ' ');
   const lowerName =  formattedName?.toLowerCase() ?? ''; 
-    const [rows]:any = await db.query('SELECT tid FROM teams WHERE LOWER(title) = ? LIMIT 1',[lowerName]);
+    const [rows]:any = await db.query('SELECT tid FROM teams WHERE LOWER(title) = ? OR LOWER(abbr) = ? LIMIT 1', [lowerName, lowerName]);
     return rows[0]?.tid ?? 0;
 }
 

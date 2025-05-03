@@ -13,6 +13,8 @@ interface SeriesList {
   tournamentsList: any | null;
 }
 export default function SeriesList({ tournamentsList }: SeriesList) {
+
+  
   const uniqueTypes = [
     ...new Set(
       tournamentsList?.map(
@@ -29,9 +31,11 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
     ),
   ].reverse();
   const [statusFilter, setStatusFilter] = useState('All');
-  const seriesList = tournamentsList.filter(
+  let seriesList = tournamentsList.filter(
     (item: { category: string, status: string }) => item.category === filter && (statusFilter === "All" || item.status === statusFilter)
   );
+
+  seriesList = [...seriesList].sort((a, b) => ['live', 'fixture', 'result'].indexOf(a.status) - ['live', 'fixture', 'result'].indexOf(b.status) || new Date(a.datestart).getTime() - new Date(b.datestart).getTime());
 
   console.log(statusTypes);
   return (

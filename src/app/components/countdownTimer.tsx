@@ -42,8 +42,8 @@ const CountdownTimer = ({ targetTime }: { targetTime: string }) => {
         "Time's up!"
       ) : (
         <span>
-           {/* {timeLeft.hours}h : {timeLeft.minutes}m : {timeLeft.seconds}s */}
-           {timeLeft.hours}h : {timeLeft.minutes}m 
+           {timeLeft.hours}h : {timeLeft.minutes}m : {timeLeft.seconds}s
+           {/* {timeLeft.hours}h : {timeLeft.minutes}m  */}
         </span>
       )}
     </div>

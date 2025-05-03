@@ -4,7 +4,6 @@ import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
 import Image from "next/image";
 import { urlStringEncode } from "./../../utils/utility";
-import GoogleAnalytics from "./GoogleAnalytics";
 import { usePathname } from 'next/navigation';
 
 const Header = () => {
@@ -76,11 +75,11 @@ const Header = () => {
       </div>
 
       <header className={`bg-[#081736] lg:px-0 px-3 sticky top-0 z-[999] ${isMoreInfoPage ? 'hidden md:block' : 'block'}`}>
-        <GoogleAnalytics />
+       
         <div className="lg:w-[1000px] w-full mx-auto text-white md:py-5 pt-3 pb-3 flex items-center md:justify-between justify-center">
           <div>
             <Link href="/">
-              <Image priority className="h-[39px] w-[173px]" src="/assets/img/logo.png" alt="" width={150} height={50} />
+              <Image priority fetchPriority="high" className="h-[39px] w-[173px]" src="/assets/img/logo.png" alt="logo" width={150} height={50} />
             </Link>
           </div>
 

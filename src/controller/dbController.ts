@@ -1,6 +1,6 @@
 import db from "../config/db";
 import { httpGet } from "../lib/http";
-import pLimit from "p-limit";
+const pLimit = require("p-limit");
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import s3 from '@/lib/aws';
 import getJsonFromS3 from '@/lib/s3-utils';

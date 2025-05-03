@@ -26,7 +26,7 @@ export  function getPlayerNameByPid(players:any, pid:number) {
 
 export  function urlStringEncode(str: string) {
   if (!str) return ''; 
-  const formattedString = str.toLowerCase().replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, ''); 
+  const formattedString = str.toLowerCase().replace(/\s+/g, '-').replace(/\//g, '-').replace(/[^a-zA-Z0-9-]/g, ''); 
 
   return formattedString;
 }
@@ -43,6 +43,9 @@ export  function urlStringEncode(str: string) {
 
 export const truncateText = (text: string, wordLimit: number) => {
   return text.split(" ").slice(0, wordLimit).join(" ") + "...";
+};
+export const textLimit = (text: string, wordLimit: number) => {
+  return text.slice(0, wordLimit) + "...";
 };
 
 

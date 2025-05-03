@@ -14,7 +14,7 @@ export default function TabButtons() {
     function handleClick(event: Event) {
       const target = event.target as HTMLElement;
       console.log("Clicked ID:", target.id);
-
+      
       // Remove active styles from all tabs
       document.querySelectorAll("#all-tab, #live-tab, #completed-tab, #upcoming-tab").forEach((el) => {
         el.classList.remove("md:bg-[#1A80F8]", "bg-[#081736]", "md:bottom-0", "border-b-[2px]", "border-[#ffffff]", "text-white");

@@ -41,8 +41,8 @@ export async function generateMetadata(props: {
           teama?.short_name +
             "-vs-" +
             teamb?.short_name +
-            "-match-" +
-            matchInfo?.match_number +
+            "-" +
+            matchInfo?.subtitle +
             "-" +
             matchInfo?.competition?.title
         ) +
@@ -58,8 +58,8 @@ export async function generateMetadata(props: {
             teama?.short_name +
               "-vs-" +
               teamb?.short_name +
-              "-match-" +
-              matchInfo?.match_number +
+              "-" +
+              matchInfo?.subtitle +
               "-" +
               matchInfo?.competition?.title
           ) +

@@ -42,7 +42,7 @@ export default async function page(props: { params: Params }) {
 
   const standings = SeriesDetails?.standing?.standings;
   const isPointTable = Array.isArray(standings) && standings.length > 0;
-  //  console.log('teamIds', isPointTable);
+  //  console.log('teamIds', seriesMatches);
 
   return (
     <Layout>
@@ -55,9 +55,9 @@ export default async function page(props: { params: Params }) {
           {seriesTab === ""  || seriesTab === undefined && <Overview  seriesInfo={SeriesDetails} seriesKeystats={seriesKeystats} urlString={urlString} isPointTable={isPointTable}/>}
           {seriesTab === "schedule-results" && <ScheduleResults seriesId={seriesId} seriesMatches={seriesMatches} urlString={urlString} statsType={statsType} isPointTable={isPointTable}/>}
           {seriesTab === "squads" && <Squads teamPlayers={teamPlayers}  seriesInfo={SeriesDetails} urlString={urlString} isPointTable={isPointTable}/>}
-          {seriesTab === "points-table" && <PointsTable seriesInfo={SeriesDetails} urlString={urlString} />}
+          {seriesTab === "points-table" && <PointsTable seriesInfo={SeriesDetails} urlString={urlString} isPointTable={isPointTable} />}
           {seriesTab === "news" && <News  urlString={urlString} isPointTable={isPointTable}/>}
-          {seriesTab === "stats" && <Stats seriesId={seriesId} urlString={urlString} statsType={statsType} isPointTable={isPointTable}/>}
+          {seriesTab === "stats" && <Stats seriesId={seriesId} urlString={urlString} statsType={statsType} isPointTable={isPointTable} seriesInfo={SeriesDetails}/>}
           
           </>
           )

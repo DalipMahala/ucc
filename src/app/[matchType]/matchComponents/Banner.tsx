@@ -19,6 +19,20 @@ interface BallEventData {
   ballEvent: string;
 }
 
+const TeamShortName = ({ teamData, teamId }: { teamData: any, teamId: number }) => {
+  // Find the team with matching ID
+  const team = teamData.teama.team_id === teamId 
+    ? teamData.teama
+    : teamData.teamb.team_id === teamId 
+      ? teamData.teamb 
+      : null;
+
+  if (!team) {
+    return <span>Team not found</span>;
+  }else{
+    return team.short_name;
+  }
+}
 function updateStatusNoteDirect(matchInfo: any) {
   if (!matchInfo?.status_note) return;
 
@@ -38,7 +52,7 @@ export default function Banner({ matchData, match_id }: Banner) {
       setmatchLiveData(data); // ✅ Update only when new data is received
     }
   };
-
+  eventEmitter.off("matchLiveData", handleMatchData);
   eventEmitter.on("matchLiveData", handleMatchData);
 
   const liveMatch = matchLiveData;
@@ -72,7 +86,7 @@ export default function Banner({ matchData, match_id }: Banner) {
         setBallEvent(data.ballEvent);
       }
     };
-
+    eventEmitter.off("ballEvent", handler);
     eventEmitter.on("ballEvent", handler);
 
 
@@ -80,8 +94,8 @@ export default function Banner({ matchData, match_id }: Banner) {
     return () => {
       if (typeof eventEmitter.off === 'function') {
         eventEmitter.off("ballEvent", handler);
-      } else if (typeof eventEmitter.removeListener === 'function') {
-        eventEmitter.removeListener("ballEvent", handler);
+      } else if (typeof eventEmitter.off === 'function') {
+        eventEmitter.off("ballEvent", handler);
       }
     };
   }, [match_id]);
@@ -691,7 +705,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                         }
                       </div>
                       <p>
-                        Toss: <span>PBKS</span>
+                        Toss: <span><TeamShortName teamData={liveMatch?.match_info} teamId={liveMatch?.match_info?.toss?.winner} /></span>
                       </p>
 
                       {!!liveMatch?.live?.live_score?.target &&
@@ -709,6 +723,14 @@ export default function Banner({ matchData, match_id }: Banner) {
               </div>
             </div>
           </div>
+          {!!liveMatch?.live?.live_score?.required_runrate &&
+          <div className="lg:hidden rounded-lg md:p-2 px-0 performance-section relative hover:shadow-lg">
+            <span className="flex items-center font-semibold text-[#b9b9b9] ">
+            {updateStatusNoteDirect(liveMatch?.match_info)} 
+            </span>
+          </div>
+          }
+
         </section>
       ) : (
 

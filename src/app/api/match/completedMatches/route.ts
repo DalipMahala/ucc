@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
     }
 
     const query =
-      "SELECT mi.fileName FROM match_info mi JOIN ( SELECT match_id FROM matches WHERE commentary = 1 and status = 2 ORDER BY date_end_ist DESC LIMIT 10) m ON mi.match_id = m.match_id";
+      "SELECT mi.fileName FROM match_info mi JOIN ( SELECT match_id FROM matches WHERE commentary = 1 and status in (2,4) and DATE(date_end_ist) >= DATE(NOW() - INTERVAL 2 DAY) ORDER BY updated_date DESC) m ON mi.match_id = m.match_id";
     const [rows] = await db.query<any[]>(query);
 
     if (!rows || rows.length === 0) {
@@ -51,6 +51,7 @@ export async function GET(req: NextRequest) {
   if (rows.length > 0) {
     await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(updatedJson));
   }
+  
   return NextResponse.json({ success: true, data: updatedJson });
 }catch (error) {
     console.error("API Error:", error);

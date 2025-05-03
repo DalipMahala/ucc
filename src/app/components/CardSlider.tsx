@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {textLimit} from "@/utils/utility";
 
 interface Story {
   title: string;
@@ -12,8 +13,12 @@ interface Story {
 }
 
 export default function Slider() {
-
   const [images, setImages] = useState<any[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const itemsPerPage = 1.5;
 
   useEffect(() => {
     const fetchStories = async () => {
@@ -25,7 +30,7 @@ export default function Slider() {
             "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
           },
           cache: "no-store",
-        }); // Your API route
+        });
         const text = await response.text();
         const parser = new DOMParser();
         const xml = parser.parseFromString(text, "text/xml");
@@ -35,8 +40,6 @@ export default function Slider() {
           const title = item.querySelector("title")?.textContent || "";
           const link = item.querySelector("link")?.textContent || "";
           const description = item.querySelector("description")?.textContent || "";
-
-          // Extract image URL from description using regex
           const imgMatch = description.match(/<img[^>]+src=["'](.*?)["']/);
           const image = imgMatch ? imgMatch[1] : "";
 
@@ -52,10 +55,6 @@ export default function Slider() {
     fetchStories();
   }, []);
 
-  // console.log("yes",images);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 1.5;
-
   const handleNext = () => {
     if (currentIndex < images.length - itemsPerPage) {
       setCurrentIndex((prevIndex) => prevIndex + 1);
@@ -68,7 +67,26 @@ export default function Slider() {
     }
   };
 
+  // Touch event handlers for mobile swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
 
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 50) {
+      // Swipe left (next)
+      handleNext();
+    }
+
+    if (touchStart - touchEnd < -50) {
+      // Swipe right (prev)
+      handlePrev();
+    }
+  };
 
   return (
     <>
@@ -78,29 +96,58 @@ export default function Slider() {
             Web Stories
           </h3>
         </div>
+        <Link href="https://uccricket.live/web-stories/">
+          <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
+            View More{" "}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="size-3 ml-2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+              />
+            </svg>
+          </div>
+        </Link>
       </div>
       <div className="relative w-full max-w-5xl mx-auto overflow-hidden pb-2">
         {/* Main Slider */}
         <div
+          ref={sliderRef}
           className="flex gap-4 transition-transform duration-500"
           style={{ transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)` }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
-
-
           {images?.map((image, index) => (
-
             <div
               key={index}
               className="md:w-1/5 w-1/2 flex-shrink-0 relative"
               style={{ minWidth: '20%' }}
-
             >
               <Link href={image.link}>
-                <Image loading="lazy" src={image.image} alt={image.title} className="rounded-lg w-full" width={200} height={30} />
-                <p className="absolute bottom-[12px] text-white font-semibold text-center px-2 text-[14px] md:text-[13px]">{image.title}</p>
+                <Image 
+                  loading="lazy" 
+                  src={image.image} 
+                  alt={image.title} 
+                  className="rounded-lg w-full" 
+                  width={200} 
+                  height={30} 
+                />
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/100 to-transparent" />
+                
+                <p className="absolute bottom-2 left-0 right-0 text-white font-semibold px-2 text-[14px] md:text-[13px]">
+                  {textLimit(image.title,40)}
+                </p>
               </Link>
             </div>
-
           ))}
         </div>
 
@@ -127,8 +174,6 @@ export default function Slider() {
             </svg>
           </span>
         </button>
-
-
       </div>
     </>
   );

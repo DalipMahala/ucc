@@ -9,6 +9,8 @@ import CountdownTimer from "./countdownTimer";
 import PlayerImage from "./PlayerImage";
 
 interface MatchItem {
+  title: string;
+  short_title: string;
   game_state_str: string;
   man_of_the_match: any;
   live_odds: any;
@@ -61,7 +63,16 @@ function updateStatusNoteDirect(matchInfo: any) {
     .replace(new RegExp(matchInfo.teama.name, 'gi'), matchInfo.teama.short_name)
     .replace(new RegExp(matchInfo.teamb.name, 'gi'), matchInfo.teamb.short_name);
 }
+function matchOddsCal(data: any) {
+  if (!data) return;
 
+  const a = parseFloat(data?.live_odds?.matchodds?.teama?.back || 0);
+  const b = parseFloat(data?.live_odds?.matchodds?.teamb?.back || 0);
+  const lesserTeam = a < b 
+    ? { matchId: data?.match_id,team: data?.teama?.short_name, ...data?.live_odds?.matchodds?.teama } 
+    : { matchId: data?.match_id,team: data?.teamb?.short_name, ...data?.live_odds?.matchodds?.teamb };
+    return lesserTeam;
+}
 export default async function LiveMatches() {
   let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/liveMatches`, {
     method: "GET",
@@ -136,7 +147,7 @@ export default async function LiveMatches() {
 
                 <div className="flex items-center space-x-2">
                   <span className={"text-[11px] text-[#1F2937] font-semibold oddsTeam" + items.match_id}>
-                    {items?.[parseFloat(items?.live_odds?.matchodds?.teama?.back) < parseFloat(items?.live_odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
+                    {matchOddsCal(items)?.team}
                   </span>
                   <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
                     <span className="">
@@ -156,15 +167,7 @@ export default async function LiveMatches() {
                       </svg>
                     </span>
                     <span className={"oddback" + items.match_id}>
-                      {
-                        (parseFloat(items?.live_odds?.matchodds?.teama?.back) < parseFloat(items?.live_odds?.matchodds?.teamb?.back)
-                          ? items?.live_odds?.matchodds?.teama?.back
-                          : items?.live_odds?.matchodds?.teamb?.back) > 0
-                          ? Math.round((parseFloat(items?.live_odds?.matchodds?.teama?.back) < parseFloat(items?.live_odds?.matchodds?.teamb?.back)
-                            ? items?.live_odds?.matchodds?.teama?.back
-                            : items?.live_odds?.matchodds?.teamb?.back) * 100 - 100)
-                          : 0
-                      }
+                    {matchOddsCal(items)?.back > 0 ? Math.round((matchOddsCal(items)?.back) * 100 - 100)  : 0}
                       {/* {items?.live_odds?.matchodds?.teama?.back > 0  ? Math.round((items?.live_odds?.matchodds?.teama?.back)*100-100) : 0} */}
                     </span>
                   </span>
@@ -186,15 +189,7 @@ export default async function LiveMatches() {
                       </svg>
                     </span>
                     <span className={"oddlay" + items.match_id}>
-                      {
-                        (parseFloat(items?.live_odds?.matchodds?.teama?.lay) < parseFloat(items?.live_odds?.matchodds?.teamb?.lay)
-                          ? items?.live_odds?.matchodds?.teama?.lay
-                          : items?.live_odds?.matchodds?.teamb?.lay) > 0
-                          ? Math.round((parseFloat(items?.live_odds?.matchodds?.teama?.lay) < parseFloat(items?.live_odds?.matchodds?.teamb?.lay)
-                            ? items?.live_odds?.matchodds?.teama?.lay
-                            : items?.live_odds?.matchodds?.teamb?.lay) * 100 - 100)
-                          : 0
-                      }
+                    {matchOddsCal(items)?.lay > 0 ? Math.round((matchOddsCal(items)?.lay) * 100 - 100)  : 0}
                       {/* {items?.live_odds?.matchodds?.teama?.lay > 0 ? Math.round((items?.live_odds?.matchodds?.teama?.lay)*100-100) : 0} */}
                     </span>
                   </span>
@@ -205,7 +200,7 @@ export default async function LiveMatches() {
               <div className="border-t-[1px] border-[#E7F2F4]"></div>
 
               <div className="py-3 px-3">
-                <Link href={"/live-score/" + urlStringEncode(items?.teama?.short_name + "-vs-" + items?.teamb?.short_name + "-match-" + items?.match_number + "-" + items?.competition?.title + "-" + items?.competition?.season) + "/" + items.match_id}>
+                <Link href={"/live-score/" + urlStringEncode(items?.teama?.short_name + "-vs-" + items?.teamb?.short_name + "-" + items?.subtitle + "-" + items?.competition?.title + "-" + items?.competition?.season) + "/" + items.match_id}>
                   <div className="flex justify-between items-center text-[14px]">
                     <div className="w-[55%]">
                       <p className="text-[#586577] text-[13px] mb-4 font-medium">
@@ -349,7 +344,7 @@ export default async function LiveMatches() {
                   </Link>
                 </div>
                 {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                  <Link href={("/h2h/" + urlStringEncode(items?.teama?.name + "-vs-" + items?.teamb?.name) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
+                  <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title : items?.title) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
                     <div className="flex justify-end items-center space-x-2">
                       <Image
                         src="/assets/img/home/handshake.png"
@@ -411,7 +406,7 @@ export default async function LiveMatches() {
 
               <div className="border-t-[1px] border-[#E7F2F4]"></div>
               <div className="open-Performance-data">
-                <Link href={"/live-score/" + urlStringEncode(items?.teama?.short_name + "-vs-" + items?.teamb?.short_name + "-match-" + items?.match_number + "-" + items?.competition?.title + "-" + items?.competition?.season) + "/" + items.match_id}>
+                <Link href={"/live-score/" + urlStringEncode(items?.teama?.short_name + "-vs-" + items?.teamb?.short_name + "-" + items?.subtitle + "-" + items?.competition?.title + "-" + items?.competition?.season) + "/" + items.match_id}>
                   <div className="py-2 pb-3">
                     <p className="text-[#586577] text-[13px] mb-4 font-normal">
                       {items.subtitle}, {items.format_str}, {items.venue.location}
@@ -554,7 +549,7 @@ export default async function LiveMatches() {
                       </>
                     }
                     {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                      <Link href={("/h2h/" + urlStringEncode(items?.teama?.name + "-vs-" + items?.teamb?.name) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
+                      <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title : items?.title) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
                         <div className="pl-5 border-l-[1px] flex justify-end items-center space-x-2">
                           <Image
                             src="/assets/img/home/handshake.png"
@@ -575,7 +570,7 @@ export default async function LiveMatches() {
 
                   <div className="flex items-center space-x-2 text-[13px]">
                     <span className={"text-[#586577] font-medium oddsTeam" + items.match_id}>
-                      {items?.[parseFloat(items?.live_odds?.matchodds?.teama?.back) < parseFloat(items?.live_odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
+                      {matchOddsCal(items)?.team}
                     </span>
                     <span className="flex items-center bg-[#00a632] border-[1px] border-[#00a632] rounded-md text-[#ffffff] pr-2">
                       <span className="">
@@ -595,15 +590,7 @@ export default async function LiveMatches() {
                         </svg>
                       </span>
                       <span className={"oddback" + items.match_id}>
-                        {
-                          (parseFloat(items?.live_odds?.matchodds?.teama?.back) < parseFloat(items?.live_odds?.matchodds?.teamb?.back)
-                            ? items?.live_odds?.matchodds?.teama?.back
-                            : items?.live_odds?.matchodds?.teamb?.back) > 0
-                            ? Math.round((parseFloat(items?.live_odds?.matchodds?.teama?.back) < parseFloat(items?.live_odds?.matchodds?.teamb?.back)
-                              ? items?.live_odds?.matchodds?.teama?.back
-                              : items?.live_odds?.matchodds?.teamb?.back) * 100 - 100)
-                            : 0
-                        }
+                      {matchOddsCal(items)?.back > 0 ? Math.round((matchOddsCal(items)?.back) * 100 - 100)  : 0}
                         {/* {items?.live_odds?.matchodds?.teama?.back > 0  ? Math.round((items?.live_odds?.matchodds?.teama?.back)*100-100) : 0} */}
                       </span>
                     </span>
@@ -625,15 +612,7 @@ export default async function LiveMatches() {
                         </svg>
                       </span>
                       <span className={"oddlay" + items.match_id}>
-                        {
-                          (parseFloat(items?.live_odds?.matchodds?.teama?.lay) < parseFloat(items?.live_odds?.matchodds?.teamb?.lay)
-                            ? items?.live_odds?.matchodds?.teama?.lay
-                            : items?.live_odds?.matchodds?.teamb?.lay) > 0
-                            ? Math.round((parseFloat(items?.live_odds?.matchodds?.teama?.lay) < parseFloat(items?.live_odds?.matchodds?.teamb?.lay)
-                              ? items?.live_odds?.matchodds?.teama?.lay
-                              : items?.live_odds?.matchodds?.teamb?.lay) * 100 - 100)
-                            : 0
-                        }
+                      {matchOddsCal(items)?.lay > 0 ? Math.round((matchOddsCal(items)?.lay) * 100 - 100)  : 0}
                         {/* {items?.live_odds?.matchodds?.teama?.lay > 0  ? Math.round((items?.live_odds?.matchodds?.teama?.lay)*100-100) : 0} */}
                       </span>
                     </span>

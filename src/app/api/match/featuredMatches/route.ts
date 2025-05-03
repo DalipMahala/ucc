@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ success: true, data: JSON.parse(cachedData) });
     }
     const query =
-      "SELECT mi.fileName FROM match_info mi JOIN ( SELECT match_id FROM matches where status in (1,3) and commentary= 1 and is_featured = 1) m ON mi.match_id = m.match_id";
+      "SELECT mi.fileName FROM match_info mi JOIN ( SELECT match_id FROM matches where status in (1,3) and commentary= 1 and is_featured = 1 limit 5) m ON mi.match_id = m.match_id";
     const [rows] = await db.query<any[]>(query);
     if (!rows || !rows.length || rows.length === 0) {
       return NextResponse.json({ success: false, data: [] }, { status: 404 });
@@ -61,26 +61,4 @@ export async function GET(req: NextRequest) {
     );
   }
 }
-// export async function GET(req: NextRequest) {
-//     try {
-//         const CACHE_KEY = "upcoming_matches";
-//         const CACHE_TTL = 60;
 
-//         const cachedData = await redis.get(CACHE_KEY);
-//         if (cachedData) {
-//             console.log("coming from cache upcoming_matches");
-//             return NextResponse.json({ success: true, data: JSON.parse(cachedData) });
-//         }
-//         const query = "SELECT * FROM matches WHERE status = 1 ORDER BY id DESC LIMIT 10";
-//         const [rows] = await db.query<any[]>(query);
-
-//         if (rows.length > 0) {
-//             await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(rows));
-//         }
-
-//         return NextResponse.json({ success: true, data: rows });
-//     } catch (error) {
-//         console.error("API Error:", error);
-//         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
-//     }
-// }

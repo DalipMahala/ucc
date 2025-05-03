@@ -53,41 +53,41 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
     odiRank =
       playerRank?.batsmen?.odis?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
     testRank =
       playerRank?.batsmen?.tests?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
     t20Rank =
       playerRank?.batsmen?.t20s?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
   } else if (profile?.playing_role === "bowl") {
     odiRank =
       playerRank?.bowlers?.odis?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
     testRank =
       playerRank?.bowlers?.tests?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
     t20Rank =
       playerRank?.bowlers?.t20s?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
   } else if (profile?.playing_role === "all") {
     odiRank =
       playerRank?.["all-rounders"]?.odis?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
     testRank =
       playerRank?.["all-rounders"]?.tests?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
     t20Rank =
       playerRank?.["all-rounders"]?.t20s?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
   }
 
   // Convert Batting/Bowling Stats to Array
@@ -924,15 +924,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
 
                   </div>
                 }
-                <div className="rounded-lg bg-[#ffffff] p-4 mb-4 hidden">
-                  <ReadMoreCard
-                    title="India vs Zimbabwe 2025"
-                    content="The biggest tournament in the cricketing circuit, the ICC T20
-  WORLD Cup is underway in the USAs and the West Indies. The
-  tournament received excellent response from the fans worldwide"
-                    wordLimit={10} // 💥 Dynamic!
-                  />
-                </div>
+                
                 {newsUrl !== undefined && newsUrl !== null && newsUrl !== "" ?
                   <PlayerNews newsUrl={newsUrl}></PlayerNews> : ""
                 }
@@ -940,10 +932,8 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                 <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
 
                   <ReadMoreCard
-                    title="India vs Zimbabwe 2025"
-                    content="The biggest tournament in the cricketing circuit, the ICC T20
-  WORLD Cup is underway in the USAs and the West Indies. The
-  tournament received excellent response from the fans worldwide"
+                    title={"About "+profile?.first_name}
+                    content={profile?.first_name+" is a stylish "+playerRole+" known for his 360-degree shot-making. Born in "+profile?.birthplace+", SKY made his international debut for India in 2021 and quickly became a key T20I player. He plays domestic cricket for Mumbai and represents Mumbai Indians in the IPL."}
                     wordLimit={10} // 💥 Dynamic!
                   />
 

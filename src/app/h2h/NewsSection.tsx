@@ -27,7 +27,9 @@ export default function NewsSection({ urlString }: News) {
           className="col-span-6 border-r-[1px] border-[#E7F2F4] pr-[16px]"
           key={index}
         >
+          <Link href={post?.link}>
           {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
+            
             <Image  loading="lazy" 
               src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
               width={300}
@@ -45,7 +47,7 @@ export default function NewsSection({ urlString }: News) {
               ),
             }}
           ></h3>
-
+        </Link>
           <p
             className="text-gray-500 font-normal"
             dangerouslySetInnerHTML={{
@@ -60,10 +62,12 @@ export default function NewsSection({ urlString }: News) {
       <div className="col-span-6">
       {news.slice(1, 4)?.map((post: any, index: number) => (
         <React.Fragment key={index}>
-          <Link href={post?.link}>
+          
           <div className="flex gap-3 my-3">
+          <Link href={post?.link}  className="w-[60%]">
             {post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes
               .thumbnail.source_url && (
+                
                 <Image  loading="lazy" 
                   src={post._embedded["wp:featuredmedia"]?.[0].media_details.sizes
                     .thumbnail.source_url}
@@ -71,8 +75,11 @@ export default function NewsSection({ urlString }: News) {
                   height={90}
                   alt={post?.title.rendered}
                   className="rounded-lg h-[90px]" />
+                  
               )}
+              </Link>
             <div>
+            <Link href={post?.link}>
               <h4
                 className="text-[13px] font-semibold mb-2"
                 dangerouslySetInnerHTML={{
@@ -81,6 +88,7 @@ export default function NewsSection({ urlString }: News) {
                   ),
                 }}
               ></h4>
+              </Link>
               <p className="text-[12px] text-gray-500 flex items-center">
                 <span className="ml-2 pr-[1px]">
                   <svg
@@ -101,7 +109,7 @@ export default function NewsSection({ urlString }: News) {
                     ></polygon>
                   </svg>
                 </span>{" "}
-                {post._embedded?.author[0]?.name}{" "}
+                <Link href={post?._embedded?.author[0]?.link}>{post._embedded?.author[0]?.name}{" "}</Link>
                 <span className="ml-2 pr-[1px]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +130,7 @@ export default function NewsSection({ urlString }: News) {
               </p>
             </div>
           </div>
-        </Link><div className="border-t-[1px] border-[#E7F2F4]" />
+        <div className="border-t-[1px] border-[#E7F2F4]" />
         </React.Fragment>
       ))}
       </div>

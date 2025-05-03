@@ -117,7 +117,7 @@ export default function ScheduleResults({
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-      <div id="tabs" className="my-4">
+      <div id="tabs" className="mt-4">
           <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
           <Link href={"/ipl/"+pointTables?.season+"/"+urlStringEncode(teams?.title)+"/"+teams?.tid}>
               <button
@@ -191,7 +191,7 @@ export default function ScheduleResults({
                 ) +
                 "/" +
                 pointTables?.cid +
-                "/stats/most-run"
+                "/stats/batting-most-run"
               }
             >
               <button
@@ -206,7 +206,7 @@ export default function ScheduleResults({
       <div id="live" className="">
         <div className="md:grid grid-cols-12 gap-4">
           <div className="lg:col-span-8 md:col-span-7">
-            <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
+            <div className="rounded-lg bg-[#ffffff] p-4 mt-4">
               <div className="flex space-x-4">
               <button  id="all-tab"
                       className={`font-medium py-2 px-5 whitespace-nowrap ${
@@ -250,7 +250,7 @@ export default function ScheduleResults({
                 }
               </div>
             </div>
-            <div className="tab-content-container">
+            <div className="tab-content-container mt-4">
               <div
                 id="info1"
                 className={`tab-content ${
@@ -359,8 +359,8 @@ export default function ScheduleResults({
                                 items?.teama?.short_name +
                                   "-vs-" +
                                   items?.teamb?.short_name +
-                                  "-match-" +
-                                  items?.match_number +
+                                  "-" +
+                                  items?.subtitle +
                                   "-" +
                                   items?.competition?.title
                               ) +
@@ -537,8 +537,8 @@ export default function ScheduleResults({
                                 items?.teama?.short_name +
                                   "-vs-" +
                                   items?.teamb?.short_name +
-                                  "-match-" +
-                                  items?.match_number +
+                                  "-" +
+                                  items?.subtitle +
                                   "-" +
                                   items?.competition?.title
                               ) +
@@ -707,8 +707,8 @@ export default function ScheduleResults({
                                   cmatch?.teama?.short_name +
                                     "-vs-" +
                                     cmatch?.teamb?.short_name +
-                                    "-match-" +
-                                    cmatch?.match_number +
+                                    "-" +
+                                    cmatch?.subtitle +
                                     "-" +
                                     cmatch?.competition?.title
                                 ) +
@@ -779,8 +779,8 @@ export default function ScheduleResults({
                                   cmatch?.teama?.short_name +
                                     "-vs-" +
                                     cmatch?.teamb?.short_name +
-                                    "-match-" +
-                                    cmatch?.match_number +
+                                    "-" +
+                                    cmatch?.subtitle +
                                     "-" +
                                     cmatch?.competition?.title
                                 ) +
@@ -861,8 +861,8 @@ export default function ScheduleResults({
                                 cmatch?.teama?.short_name +
                                   "-vs-" +
                                   cmatch?.teamb?.short_name +
-                                  "-match-" +
-                                  cmatch?.match_number +
+                                  "-" +
+                                  cmatch?.subtitle +
                                   "-" +
                                   cmatch?.competition?.title
                               ) +
@@ -1029,8 +1029,8 @@ export default function ScheduleResults({
                               ucmatch?.teama?.short_name +
                                 "-vs-" +
                                 ucmatch?.teamb?.short_name +
-                                "-match-" +
-                                ucmatch?.match_number +
+                                "-" +
+                                ucmatch?.subtitle +
                                 "-" +
                                 ucmatch?.competition?.title
                             ) +
@@ -1148,8 +1148,8 @@ export default function ScheduleResults({
                               ucmatch?.teama?.short_name +
                                 "-vs-" +
                                 ucmatch?.teamb?.short_name +
-                                "-match-" +
-                                ucmatch?.match_number +
+                                "-" +
+                                ucmatch?.subtitle +
                                 "-" +
                                 ucmatch?.competition?.title
                             ) +
@@ -1291,7 +1291,7 @@ export default function ScheduleResults({
           </div>
 
           <div className="lg:col-span-4 md:col-span-5">
-            <div className="bg-white rounded-lg p-4 mb-4">
+            <div className="bg-white rounded-lg p-4 mb-4 hidden">
               <div className="flex gap-1 items-center justify-between">
                 <div className="flex gap-1 items-center">
                   <div className="col-span-4 relative">

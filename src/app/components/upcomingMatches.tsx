@@ -9,6 +9,8 @@ import CountdownTimer from "./countdownTimer";
 import PlayerImage from "./PlayerImage";
 
 interface MatchItem {
+  title: string;
+  short_title: string;
   game_state_str: string;
   man_of_the_match: any;
   live_odds: any;
@@ -61,7 +63,16 @@ function updateStatusNoteDirect(matchInfo: any) {
     .replace(new RegExp(matchInfo.teama.name, 'gi'), matchInfo.teama.short_name)
     .replace(new RegExp(matchInfo.teamb.name, 'gi'), matchInfo.teamb.short_name);
 }
+function matchOddsCal(data: any) {
+  if (!data) return;
 
+  const a = parseFloat(data?.live_odds?.matchodds?.teama?.back || 0);
+  const b = parseFloat(data?.live_odds?.matchodds?.teamb?.back || 0);
+  const lesserTeam = a < b 
+    ? { matchId: data?.match_id,team: data?.teama?.short_name, ...data?.live_odds?.matchodds?.teama } 
+    : { matchId: data?.match_id,team: data?.teamb?.short_name, ...data?.live_odds?.matchodds?.teamb };
+    return lesserTeam;
+}
 export default async function UpcomingMatches() {
   let upcomingresponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/upcomingMatches`, {
     method: "GET",
@@ -109,7 +120,7 @@ export default async function UpcomingMatches() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className={"text-[11px] text-[#1F2937] font-semibold oddsTeam" + ucmatch.match_id}>
-                    {ucmatch?.[parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
+                    {matchOddsCal(ucmatch)?.team}
                   </span>
 
                   <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
@@ -129,15 +140,7 @@ export default async function UpcomingMatches() {
                         />
                       </svg>
                     </span>
-                    {
-                      (parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back)
-                        ? ucmatch?.live_odds?.matchodds?.teama?.back
-                        : ucmatch?.live_odds?.matchodds?.teamb?.back) > 0
-                        ? Math.round((parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back)
-                          ? ucmatch?.live_odds?.matchodds?.teama?.back
-                          : ucmatch?.live_odds?.matchodds?.teamb?.back) * 100 - 100)
-                        : 0
-                    }
+                    {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100)  : 0}
                   </span>
                   <span className="flex font-semibold items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-full text-[#A70B0B] pr-2">
                     <span className="">
@@ -156,21 +159,13 @@ export default async function UpcomingMatches() {
                         />
                       </svg>
                     </span>
-                    {
-                      (parseFloat(ucmatch?.live_odds?.matchodds?.teama?.lay) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.lay)
-                        ? ucmatch?.live_odds?.matchodds?.teama?.lay
-                        : ucmatch?.live_odds?.matchodds?.teamb?.lay) > 0
-                        ? Math.round((parseFloat(ucmatch?.live_odds?.matchodds?.teama?.lay) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.lay)
-                          ? ucmatch?.live_odds?.matchodds?.teama?.lay
-                          : ucmatch?.live_odds?.matchodds?.teamb?.lay) * 100 - 100)
-                        : 0
-                    }
+                    {matchOddsCal(ucmatch)?.lay > 0 ? Math.round((matchOddsCal(ucmatch)?.lay) * 100 - 100)  : 0}
                   </span>
                 </div>
               </div>
 
               <div className="border-t-[1px] border-[#E7F2F4]"></div>
-              <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-match-" + ucmatch?.match_number + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
+              <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-" + ucmatch?.subtitle + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
                 <div className="py-3 px-3">
                   <div className="flex justify-between items-center text-[14px]">
                     <div className="w-[50%]">
@@ -261,7 +256,7 @@ export default async function UpcomingMatches() {
                   </Link>
                 </div>
                 {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                  <Link href={("/h2h/" + urlStringEncode(ucmatch?.teama?.name + "-vs-" + ucmatch?.teamb?.name) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
+                  <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title : ucmatch?.title) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
                     <div className="flex justify-end items-center space-x-2">
                       <Image
                         src="/assets/img/home/handshake.png"
@@ -303,7 +298,7 @@ export default async function UpcomingMatches() {
               </div>
 
               <div className="border-t-[1px] border-[#E7F2F4]"></div>
-              <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-match-" + ucmatch?.match_number + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
+              <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-" + ucmatch?.subtitle + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
                 <div className="open-Performance-data">
                   <div className="py-2 pb-3">
                     <p className="text-[#586577] text-[13px] mb-4 font-medium">
@@ -401,7 +396,7 @@ export default async function UpcomingMatches() {
                       <div className="hidden md:block h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                     </>}
                   {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                    <Link href={("/h2h/" + urlStringEncode(ucmatch?.teama?.name + "-vs-" + ucmatch?.teamb?.name) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
+                    <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title : ucmatch?.title) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
                       <div className="pl-[10px] border-l-[1px] flex justify-end items-center space-x-2">
                         <Image
                           src="/assets/img/home/handshake.png"
@@ -422,7 +417,7 @@ export default async function UpcomingMatches() {
 
                 <div className="flex items-center space-x-2 text-[13px]">
                   <span className={"text-[#586577] font-medium oddsTeam" + ucmatch.match_id}>
-                    {ucmatch?.[parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
+                    {matchOddsCal(ucmatch)?.team}
                   </span>
                   <span className="flex font-semibold items-center bg-[#00a632] border-[1px] border-[#00a632] rounded-md text-[#ffffff] pr-2">
                     <span>
@@ -441,15 +436,7 @@ export default async function UpcomingMatches() {
                         ></path>
                       </svg>
                     </span>
-                    {
-                      (parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back)
-                        ? ucmatch?.live_odds?.matchodds?.teama?.back
-                        : ucmatch?.live_odds?.matchodds?.teamb?.back) > 0
-                        ? Math.round((parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back)
-                          ? ucmatch?.live_odds?.matchodds?.teama?.back
-                          : ucmatch?.live_odds?.matchodds?.teamb?.back) * 100 - 100)
-                        : 0
-                    }
+                    {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100)  : 0}
                   </span>
                   <span className="flex font-semibold items-center bg-[#ea2323] border-[1px] border-[#ea2323] rounded-md text-[#ffffff] pr-2">
                     <span>
@@ -468,15 +455,7 @@ export default async function UpcomingMatches() {
                         ></path>
                       </svg>
                     </span>
-                    {
-                      (parseFloat(ucmatch?.live_odds?.matchodds?.teama?.lay) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.lay)
-                        ? ucmatch?.live_odds?.matchodds?.teama?.lay
-                        : ucmatch?.live_odds?.matchodds?.teamb?.lay) > 0
-                        ? Math.round((parseFloat(ucmatch?.live_odds?.matchodds?.teama?.lay) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.lay)
-                          ? ucmatch?.live_odds?.matchodds?.teama?.lay
-                          : ucmatch?.live_odds?.matchodds?.teamb?.lay) * 100 - 100)
-                        : 0
-                    }
+                    {matchOddsCal(ucmatch)?.lay > 0 ? Math.round((matchOddsCal(ucmatch)?.lay) * 100 - 100)  : 0}
                   </span>
                 </div>
               </div>

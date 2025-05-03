@@ -5,7 +5,38 @@ import db from "../config/db";
 import fs from 'fs';
 import getJsonFromS3 from '@/lib/s3-utils';
 
+export async function isValidMatch(matchid: number,url: string) {
+  if (!matchid) {
+    return { notFound: true };
+  }
 
+  const [rows]  = await db.execute('SELECT match_id FROM matches WHERE match_id = ? and (match_url_full = ? or match_url_short = ?)',[matchid,url,url]);
+  // const match = data[0] || [];
+  
+  return Array.isArray(rows) && rows.length > 0;
+    
+  
+}
+
+export async function getMatchUrlsByIds(matchIds: string[]): Promise<Record<string, string>> {
+  if (!matchIds.length) return {};
+
+  const placeholders = matchIds.map(() => '?').join(',');
+  const [rows] = await db.execute(
+    `SELECT match_id, COALESCE(match_url_short, match_url_full) AS match_url
+     FROM matches WHERE match_id IN (${placeholders})`,
+    matchIds
+  );
+
+  const result: Record<string, string> = {};
+  if (Array.isArray(rows)) {
+    for (const row of rows as any[]) {
+      result[row.match_id] = row.match_url;
+    }
+  }
+
+  return result;
+}
 export async function MatcheInfo_old(matchid: number) {
   if (!matchid) {
     return { notFound: true };
@@ -581,7 +612,7 @@ export async function SeriesMatches(cid: number) {
         liveMatch: Match[];
       } = { scheduledMatch: [], resultMatch: [], liveMatch: [] };
       
-      allMatches.items.forEach((match: { status: number }) => {
+      allMatches?.items?.forEach((match: { status: number }) => {
         if (match.status === 1) categorizedMatches.scheduledMatch.push(match);
         else if (match.status === 2) categorizedMatches.resultMatch.push(match);
         else if (match.status === 3) categorizedMatches.liveMatch.push(match);

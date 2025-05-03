@@ -9,6 +9,7 @@ import { PlayerStats } from "@/controller/playerController";
 import { urlStringEncode } from "@/utils/utility";
 import PlayerImage from "@/app/components/PlayerImage";
 import { useWakeLock } from '@/utils/useWakeLock';
+import MatchTabs from "./../matchComponents/Menu";
 
 interface Live {
   match_id: number;
@@ -22,6 +23,9 @@ interface Live {
   // matchLast:any | null;
 }
 
+function getPlayerRecord(scoreCard:any,pid:number){
+  return scoreCard?.batsmen.find((batsman: { batsman_id: any; }) => Number(batsman.batsman_id) === pid);
+}
 export default function LiveResult({
   match_id,
   matchData,
@@ -43,26 +47,10 @@ export default function LiveResult({
       : []
   );
   const [matchLiveData, setmatchLiveData] = useState(matchData);
-
-  const handleMatchData = (data: any) => {
-    if (data?.match_id == match_id) {
-      // console.log("matchCommentary",data?.live?.commentaries);
-      setmatchLiveData(data); // ✅ Update only when new data is received
-    }
-  };
-
-
-  eventEmitter.on("matchLiveData", handleMatchData);
   // let matchInningbatsmen = matchCommentary?.commentaries[6]?.bowlers?.bowls?.overs;
 
   // let commentaries = matchInningCommentaries;
-  const [matchOdds, setMatchOdds] = useState<any>(null);
-  const handleOddData = (data: any) => {
-    if (data?.matchId == match_id) {
-      setMatchOdds(data);
-    }
-  };
-  eventEmitter.on("oddsEvent", handleOddData);
+ 
 
   // console.log("LiveOdds", matchOdds?.oddsEvent);
   let teamwinpercentage = matchLiveData?.teamwinpercentage;
@@ -71,7 +59,7 @@ export default function LiveResult({
   let matchinfo = matchLiveData?.live;
   let matchinning = matchLiveData?.live?.live_inning;
   let commentaries = matchLiveData?.live?.commentaries;
-  // let scorecard = matchLiveData?.scorecard?.innings?.batsmen;
+  let scorecard = matchLiveData?.scorecard?.innings.find((inning: { number: number; }) => inning.number === 2);
   let batsman = matchinfo?.batsmen;
   let bowlers = matchinning?.bowlers;
   let fows = matchinning?.fows;
@@ -114,6 +102,7 @@ export default function LiveResult({
     players = matchLiveData?.players;
     matchinning = matchLiveData?.live?.live_inning;
     commentaries = matchLiveData?.live?.commentaries;
+    scorecard = matchLiveData?.scorecard?.innings.find((inning: { number: number; }) => inning.number === 2);
     batsman = matchinfo.batsmen;
     bowlers = matchinning.bowlers;
     fows = matchinning.fows;
@@ -379,74 +368,10 @@ export default function LiveResult({
     };
   }, [filter]);
 
-  const a = parseFloat(matchLiveData?.live_odds?.matchodds?.teama?.back);
-  const b = parseFloat(matchLiveData?.live_odds?.matchodds?.teamb?.back);
-  const lesserTeam = a < b
-    ? { team: matchLiveData?.match_info?.teama?.short_name, ...matchLiveData?.live_odds?.matchodds?.teama }
-    : { team: matchLiveData?.match_info?.teamb?.short_name, ...matchLiveData?.live_odds?.matchodds?.teamb };
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-      <div id="tabs" className="my-4">
-        <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
-          <Link href={"/moreinfo/" + matchUrl + "/" + match_id}>
-            <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase ">
-              More Info
-            </button>
-          </Link>
-          <Link href={"/live-score/" + matchUrl + "/" + match_id}>
-            <button className="font-semibold py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md uppercase">
-              Live
-            </button>
-          </Link>
-          <Link href={"/scorecard/" + matchUrl + "/" + match_id}>
-            <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase">
-              Scorecard
-            </button>
-          </Link>
-          <Link href={"/squad/" + matchUrl + "/" + match_id}>
-            <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase">
-              Squad
-            </button>
-          </Link>
-          {isPointTable && (
-            <Link
-              href={
-                "/series/" +
-                urlStringEncode(
-                  matchDetails?.competition?.title +
-                  "-" +
-                  matchDetails?.competition?.season
-                ) +
-                "/" +
-                matchDetails?.competition?.cid +
-                "/points-table"
-              }
-            >
-              <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase">
-                Points Table
-              </button>
-            </Link>
-          )}
-          <Link
-            href={
-              "/series/" +
-              urlStringEncode(
-                matchDetails?.competition?.title +
-                "-" +
-                matchDetails?.competition?.season
-              ) +
-              "/" +
-              matchDetails?.competition?.cid +
-              "/stats/most-run"
-            }
-          >
-            <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase">
-              Stats
-            </button>
-          </Link>
-        </div>
-      </div>
+       <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable}/>
       {updatedCommentaries && updatedCommentaries.length > 0 ? (
         <div id="tab-content">
           <div id="live" className="tab-content ">
@@ -461,10 +386,8 @@ export default function LiveResult({
                           href={
                             "/player/" +
                             urlStringEncode(
-                              getPlayerNameByPid(
-                                players,
-                                batsman?.[0]?.batsman_id
-                              )
+                                batsman?.[0]?.name
+                              
                             ) +
                             "/" +
                             batsman?.[0]?.batsman_id
@@ -524,10 +447,7 @@ export default function LiveResult({
                           href={
                             "/player/" +
                             urlStringEncode(
-                              getPlayerNameByPid(
-                                players,
-                                batsman?.[1]?.batsman_id
-                              )
+                                batsman?.[1]?.name
                             ) +
                             "/" +
                             batsman?.[1]?.batsman_id
@@ -584,10 +504,7 @@ export default function LiveResult({
                       href={
                         "/player/" +
                         urlStringEncode(
-                          getPlayerNameByPid(
-                            players,
-                            matchinfo?.bowlers?.[0]?.bowler_id
-                          )
+                            matchinfo?.bowlers?.[0]?.name
                         ) +
                         "/" +
                         matchinfo?.bowlers?.[0]?.bowler_id
@@ -637,34 +554,42 @@ export default function LiveResult({
                       href={
                         "/player/" +
                         urlStringEncode(
-                          getPlayerNameByPid(
-                            players,
-                            matchinfo?.bowlers?.[0]?.bowler_id
-                          )
+                            matchinfo?.bowlers?.[0]?.name
+                          
                         ) +
                         "/" +
                         matchinfo?.bowlers?.[0]?.bowler_id
                       }
                     >
-                      <div className="flex items-center justify-between gap-3 font-medium mx-auto w-[73%]">
+                      <div className="flex items-center justify-between gap-3 font-medium mx-auto w-[100%]">
 
                         
                           <div className="flex ga-1 items-center  w-[50%]">
-                            <h2 className="md:text-[15px] text-[14px] text-[#586577]">
+                            <div className="relative">
+                            <PlayerImage
+                                key={matchinfo?.bowlers?.[0]?.bowler_id}
+                                player_id={matchinfo?.bowlers?.[0]?.bowler_id}
+                                height={40}
+                                width={40}
+                                className="rounded-lg"
+                              />
+                               <Image
+                              src="/assets/img/player/ball.png"
+                              className="absolute -bottom-1.5 -right-0.5 h-[13px] bg-white rounded-full p-[2px]"
+                              width={13}
+                              height={13}
+                              alt=""
+                              loading="lazy"
+                            />
+                            </div>
+                            <h2 className="md:text-[15px] text-[14px] text-[#586577] pl-[10px]">
                               {getPlayerNameByPid(
                                 players,
                                 matchinfo?.bowlers?.[0]?.bowler_id
                               )}
                             </h2>
 
-                            <Image
-                              src="/assets/img/player/ball.png"
-                              className="h-[13px] bg-white rounded-full p-[2px]"
-                              width={13}
-                              height={13}
-                              alt=""
-                              loading="lazy"
-                            />
+                           
                           </div>
                           <p className="md:text-[15px] text-[14px] flex items-center justify-end w-[50%]">
                             {matchinfo?.bowlers?.[0]?.wickets}-
@@ -717,20 +642,20 @@ export default function LiveResult({
                     ?.map((comment: any, index: number) =>
                       comment?.event === "overend" ? (
                         <div
-                          className="rounded-t-lg bg-white p-4"
+                          className="rounded-t-lg bg-[#081736] p-4 mt-6"
                           key={`over-${index}`}
                         >
                           <div className="flex md:flex-row flex-col justify-between md:items-center gap-2">
-                            <div className="text-[14px] font-normal">
+                            <div className="text-[14px] font-normal  text-white">
                               {matchinning.short_name} : {comment.score}
                             </div>
-                            <div className="text-[14px] font-normal">
+                            <div className="text-[14px] font-normal  text-[#3992f4]">
                               {comment?.over}{" "}
-                              <span className="text-[#586577] font-medium text-[13px]">
+                              <span className="text-[#586577] font-medium text-[13px]  text-white">
                                 End Of Over
                               </span>
                             </div>
-                            <div className="text-[14px] font-normal text-black">
+                            <div className="text-[14px] font-normal text-white">
                               {lastOverRun &&
                                 lastOverRun?.map(
                                   (lastOver: any, idx: number) => (
@@ -738,13 +663,13 @@ export default function LiveResult({
                                   )
                                 )}
                             </div>
-                            <div className="text-[14px] font-normal">
+                            <div className="text-[14px] font-normal  text-white">
                               {getPlayerNameByPid(
                                 players,
                                 comment?.bats?.[0]?.batsman_id
                               )}
                               : {comment?.bats?.[0]?.runs}{" "}
-                              <span className="text-[#586577]">
+                              <span className="text-[#3992f4]">
                                 ({comment?.bats?.[0]?.balls_faced})
                               </span>{" "}
                               |{" "}
@@ -753,16 +678,16 @@ export default function LiveResult({
                                 comment?.bats?.[1]?.batsman_id
                               )}
                               : {comment?.bats?.[1]?.runs}{" "}
-                              <span className="text-[#586577]">
+                              <span className="text-[#3992f4]">
                                 ({comment?.bats?.[1]?.balls_faced})
                               </span>
                             </div>
-                            <div className="text-[14px] font-normal">
+                            <div className="text-[14px] font-normal  text-white">
                               {getPlayerNameByPid(
                                 players,
                                 comment?.bowls?.[0]?.bowler_id
                               )}{" "}
-                              <span className="text-[#586577]">
+                              <span className="text-[#3992f4]">
                                 {comment?.bowls?.[0]?.overs}-
                                 {comment?.bowls?.[0]?.runs_conceded}-
                                 {comment?.bowls?.[0]?.wickets}
@@ -863,18 +788,18 @@ export default function LiveResult({
                                   <div className="flex gap-4 justify-end">
                                     <div>
                                       <p className="md:text-1xl text-[14px] font-normal">
-                                        {/* 4s/6s */}
+                                        4s/6s
                                       </p>
                                       <p className="md:text-2xl text-[16px] font-semibold">
-                                        {/* 6/0 */}
+                                      {getPlayerRecord(scorecard,Number(comment?.wicket_batsman_id))?.fours}/{getPlayerRecord(scorecard,Number(comment?.wicket_batsman_id))?.sixes}
                                       </p>
                                     </div>
                                     <div className="text-end">
                                       <p className="md:text-1xl text-[14px] font-normal">
-                                        {/* SR */}
+                                        SR
                                       </p>
                                       <p className="md:text-2xl text-[16px] font-semibold">
-                                        {/* 153.63 */}
+                                      {getPlayerRecord(scorecard,Number(comment?.wicket_batsman_id))?.strike_rate}
                                       </p>
                                     </div>
                                   </div>

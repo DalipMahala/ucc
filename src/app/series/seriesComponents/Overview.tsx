@@ -11,6 +11,7 @@ import PlayerImage from "@/app/components/PlayerImage";
 import PLSeries from "@/app/components/popularSeries";
 import FantasyTips from "@/app/components/FantasyTips";
 import ReadMoreCard from "@/app/components/ReadMoreCard";
+import TabMenu from "./menu";
 
 interface Overview {
   //seriesData: any[]; // Adjust type based on your data
@@ -26,7 +27,7 @@ export default function Overview({
   isPointTable,
 }: Overview) {
   const standings = seriesInfo?.standing?.standings;
-  console.log("seriesKeystats",seriesKeystats);
+  // console.log("seriesKeystats",seriesKeystats);
 
   const [open, setOpen] = useState({
     mostRuns: false,
@@ -154,42 +155,7 @@ export default function Overview({
   // console.log("completedMatch", seriesKeystats?.mostRuns?.stats);
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-      <div id="tabs" className="mt-4">
-        <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
-          <Link href={urlString}>
-            <button className="font-semibold py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md uppercase">
-              Overview
-            </button>
-          </Link>
-          <Link href={urlString + "/schedule-results"}>
-            <button className="font-semibold py-2 px-3 whitespace-nowrap  uppercase ">
-              Schedule & Results
-            </button>
-          </Link>
-          <Link href={urlString + "/squads"}>
-            <button className="font-semibold py-2 px-3 whitespace-nowrap  uppercase ">
-              Squads
-            </button>
-          </Link>
-          {isPointTable && (
-            <Link href={urlString + "/points-table"}>
-              <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase ">
-                Points Table
-              </button>
-            </Link>
-          )}
-          <Link href={urlString + "/news"}>
-            <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase ">
-              News
-            </button>
-          </Link>
-          <Link href={urlString + "/stats/most-run"}>
-            <button className="font-semibold py-2 px-3 whitespace-nowrap uppercase ">
-              Stats
-            </button>
-          </Link>
-        </div>
-      </div>
+     <TabMenu urlString={urlString} isPointTable={isPointTable}/>
 
       <div id="tab-content">
         <div id="info" className="tab-content ">
@@ -247,7 +213,7 @@ export default function Overview({
                     <React.Fragment key={index}>
                       <div className="border-t-[1px] border-[#E4E9F0]" />
                       {(matches?.status === 2 || matches?.status === 3) &&
-                        <Link href={"/scorecard/" + urlStringEncode(matches?.teama?.short_name + "-vs-" + matches?.teamb?.short_name + "-match-" + matches?.match_number + "-" + matches?.competition?.title + "-" + matches?.competition?.season) + "/" + matches.match_id} className="py-3 flex justify-between items-center">
+                        <Link href={"/scorecard/" + urlStringEncode(matches?.teama?.short_name + "-vs-" + matches?.teamb?.short_name + "-" + matches?.subtitle + "-" + matches?.competition?.title + "-" + matches?.competition?.season) + "/" + matches.match_id} className="py-3 flex justify-between items-center">
 
                           <div className="flex space-x-2 font-medium	w-full">
                             <div className="flex items-center space-x-1 flex-col" >
@@ -293,7 +259,7 @@ export default function Overview({
                           </div>
                         </Link>
                       }{matches?.status === 1 &&
-                        <Link href={"/moreinfo/" + urlStringEncode(matches?.teama?.short_name + "-vs-" + matches?.teamb?.short_name + "-match-" + matches?.match_number + "-" + matches?.competition?.title + "-" + matches?.competition?.season) + "/" + matches.match_id}>
+                        <Link href={"/moreinfo/" + urlStringEncode(matches?.teama?.short_name + "-vs-" + matches?.teamb?.short_name + "-" + matches?.subtitle + "-" + matches?.competition?.title + "-" + matches?.competition?.season) + "/" + matches.match_id}>
                           <div className="py-3 flex justify-between items-center">
                             <div className="flex space-x-2 font-medium	w-full">
                                 <div className="flex items-center space-x-1 flex-row">
@@ -340,7 +306,7 @@ export default function Overview({
                   {selectedMatches?.map((matches: any, index: number) => (
                     <React.Fragment key={index}>
                       {(matches?.status === 2 || matches?.status === 3) &&
-                        <Link href={"/scorecard/" + urlStringEncode(matches?.teama?.short_name + "-vs-" + matches?.teamb?.short_name + "-match-" + matches?.match_number + "-" + matches?.competition?.title + "-" + matches?.competition?.season) + "/" + matches.match_id}>
+                        <Link href={"/scorecard/" + urlStringEncode(matches?.teama?.short_name + "-vs-" + matches?.teamb?.short_name + "-" + matches?.subtitle + "-" + matches?.competition?.title + "-" + matches?.competition?.season) + "/" + matches.match_id}>
                           <div className="py-4 px-3 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]">
                             <p className="text-[#586577] text-[12px] mb-4 font-normal">
                               {matches?.subtitle}
@@ -390,7 +356,7 @@ export default function Overview({
                           </div>
                         </Link>
                       }{matches?.status === 1 &&
-                        <Link href={"/moreinfo/" + urlStringEncode(matches?.teama?.short_name + "-vs-" + matches?.teamb?.short_name + "-match-" + matches?.match_number + "-" + matches?.competition?.title + "-" + matches?.competition?.season) + "/" + matches.match_id}>
+                        <Link href={"/moreinfo/" + urlStringEncode(matches?.teama?.short_name + "-vs-" + matches?.teamb?.short_name + "-" + matches?.subtitle + "-" + matches?.competition?.title + "-" + matches?.competition?.season) + "/" + matches.match_id}>
                           <div className="py-4 px-3 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]">
                             <p className="text-[#586577] text-[12px] mb-4 font-normal">
                               {matches?.subtitle}
@@ -489,7 +455,7 @@ export default function Overview({
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-gray-200">
-                            {rounds.standings?.map(
+                            {rounds.standings?.slice(0,4).map(
                               (point: any, index: number) => (
                                 <tr className="hover:bg-[#fffae5]" key={index}>
                                   <td className="md:px-2 pl-[14px] py-3 w-[10px]">
@@ -571,9 +537,17 @@ export default function Overview({
                                 </tr>
                               )
                             )}
+                            
                           </tbody>
                         </table>
                       </div>
+                      {rounds?.standings?.length > 4 &&
+                      <div className="px-4 text-center">
+                          <Link href={urlString+"/points-table"} className="px-8 bg-[#081736] font-semibold text-white py-2 rounded hover:bg-blue-700">
+                            View More
+                          </Link>
+                        </div>
+                      }
                     </div>
                   </div>
                 ))}
@@ -606,9 +580,9 @@ export default function Overview({
                               <th className="md:px-2 pl-[14px] py-3 font-medium">
                                 HS
                               </th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              {/* <th className="md:px-2 pl-[14px] py-3 font-medium">
                                 Avg
-                              </th>
+                              </th> */}
                               <th className="md:px-2 pl-[14px] py-3 font-medium">
                                 SR
                               </th>
@@ -633,7 +607,7 @@ export default function Overview({
                                       />
                                    
                                   </div>
-                                  <Link href="/player/playername/overview">
+                                  <Link href={"/player/"+urlStringEncode(player?.player?.title)+"/"+player?.player?.pid}>
                                     <div>
                                       <p className="font-medium">{player?.player?.short_name}</p>
                                       <p className="text-[12px]">{player?.team?.abbr}</p>
@@ -644,7 +618,7 @@ export default function Overview({
                               <td className="md:px-2 pl-[14px] py-3">{player?.matches}</td>
                               <td className="md:px-2 pl-[14px] py-3">{player?.runs}</td>
                               <td className="md:px-2 pl-[14px] py-3">{player?.highest}</td>
-                              <td className="md:px-2 pl-[14px] py-3">{player?.average}</td>
+                              {/* <td className="md:px-2 pl-[14px] py-3">{player?.average}</td> */}
                               <td className="md:px-2 pl-[14px] py-3">{player?.strike}</td>
                               <td className="md:px-2 pl-[14px] py-3">{player?.run6}</td>
                             </tr>
@@ -680,9 +654,9 @@ export default function Overview({
                               <th className="md:px-2 pl-[14px] py-3 font-medium">
                                 W
                               </th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              {/* <th className="md:px-2 pl-[14px] py-3 font-medium">
                                 Avg
-                              </th>
+                              </th> */}
                               <th className="md:px-2 pl-[14px] py-3 font-medium">
                                 Eco
                               </th>
@@ -706,7 +680,7 @@ export default function Overview({
                                       />
                                   
                                   </div>
-                                  <Link href="/player/playername/overview">
+                                  <Link href={"/player/"+urlStringEncode(player?.player?.title)+"/"+player?.player?.pid}>
                                     <div>
                                     <p className="font-medium">{player?.player?.short_name}</p>
                                     <p className="text-[12px]">{player?.team?.abbr}</p>
@@ -717,7 +691,7 @@ export default function Overview({
                               <td className="md:px-2 pl-[14px] py-3">{player?.matches}</td>
                               <td className="md:px-2 pl-[14px] py-3">{player?.overs}</td>
                               <td className="md:px-2 pl-[14px] py-3">{player?.wickets}</td>
-                              <td className="md:px-2 pl-[14px] py-3">{player?.average}</td>
+                              {/* <td className="md:px-2 pl-[14px] py-3">{player?.average}</td> */}
                               <td className="md:px-2 pl-[14px] py-3">{player?.econ}</td>
                               <td className="md:px-2 pl-[14px] py-3">{player?.wicket5i}</td>
                             </tr>
@@ -736,6 +710,25 @@ export default function Overview({
                     Key Stats
                   </h3>
                 </div>
+                <Link href={urlString+"/stats/batting-most-run"}>
+                  <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
+                    View More{" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="size-3 ml-2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+                      />
+                    </svg>
+                  </div>
+                </Link>
               </div>
               <div className="mb-4">
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-2 items-center gap-2">
@@ -926,23 +919,29 @@ export default function Overview({
                   ))}
                 </div>
               </div>
-
+             
               <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
-                {pageHtml && typeof pageHtml === "string" ? (
-                  <div dangerouslySetInnerHTML={{ __html: pageHtml }} />
-                ) : (
-                  <>
-                    
-                    <ReadMoreCard
-                                        title=" India vs Zimbabwe 2024"
-                                        content="The biggest tournament in the cricketing circuit, the ICC
-                      T20 WORLD Cup is underway in the USAs and the West Indies.
-                      The tournament received excellent response from the fans
-                      worldwide and the finals of the gran"
+              <ReadMoreCard
+                                        title={seriesInfo?.title+" "+seriesInfo?.season+" – Overview"}
+                                        content = {
+                                          "The " + (seriesInfo?.title ? seriesInfo.title : "") + " " + 
+                                          (seriesInfo?.season ? seriesInfo.season : "") + 
+                                          " is one of the biggest cricket events of the year. It started on " + 
+                                          (seriesInfo?.datestart ? format(new Date(seriesInfo.datestart), 'dd MMM yyyy') : "[start date not available]") + 
+                                          " and will end on " + 
+                                          (seriesInfo?.dateend ? format(new Date(seriesInfo.dateend), 'dd MMM yyyy') : "[end date not available]") + 
+                                          ". The matches are being played in the "+[...new Set(seriesInfo?.venue_list.map((venue: { country: any; }) => venue.country))]+".<br/>This tournament has "+seriesInfo?.total_teams+" teams playing "+seriesInfo?.total_matches+" exciting "+seriesInfo?.game_format.toUpperCase()+" matches. Fans all over the world are enjoying the close matches, amazing sixes, and great bowling spells.\n\n"
+                                          +"<br/><strong>Featured Teams</strong><br/>"+
+                                          " Top cricketing "+(["ODI", "TEST", "T20I"].includes(seriesInfo?.game_format?.toUpperCase()) ? 'nations' : 'domestic') + " like "+[...new Set(seriesInfo?.teams.map((teams: { abbr: any; }) => teams.abbr))]+" and more are part of this global contest."+
+                                           "<br/><strong>Host Nations/City</strong><br/>"+
+                                           seriesInfo?.title+" is being played in: "+
+                                           [...new Set(seriesInfo?.venue_list.map((venue: { country: any; }) => venue.country))]
+                                        }
                                         wordLimit={35} 
                                     />
-                  </>
-                )}
+                {pageHtml && typeof pageHtml === "string" ? (
+                  <div dangerouslySetInnerHTML={{ __html: pageHtml }} />
+                ) : ("")}
               </div>
               <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
                 <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
@@ -967,348 +966,73 @@ export default function Overview({
                     </div>
                     <div className="bg-white rounded-lg px-4">
                       <div className="border-b mb-4">
-                        <button
-                          className="w-full flex text-[14px] justify-between items-center pb-3 pt-4"
-                          onClick={() => toggleOpen("mostRuns")}
-                        >
+                        <Link href={urlString+"/stats/batting-most-run"}
+                          className="w-full flex text-[14px] justify-between items-center pb-3 pt-4" >
                           <span className="flex items-center font-medium text-[#394351]">
                             Most Runs in IPL
                           </span>
-                          <span className="transform transition-transform ">
-                            <Image
-                              loading="lazy"
-                              src="/assets/img/arrow.png"
-                              className="h-[7px]"
-                              width={10}
-                              height={15}
-                              alt="arrow"
-                            />
-                          </span>
-                        </button>
-                        {open.mostRuns && (
-                          <div className="pl-8 py-2 space-y-2 font-normal text-[14px] text-[#51555E]">
-                            <p className="flex items-center"><svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="size-3 text-[#1A80F8] mr-1"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                                />
-                              </svg> Bangabandhu T20 C</p>
-                          </div>
-                        )}
+                          
+                        </Link>
+                        
                       </div>
 
                       <div className="border-b mb-4">
-                        <button
-                          className="w-full flex text-[14px] justify-between items-center pb-3"
-                          onClick={() => toggleOpen("mostHundreds")}
-                        >
+                        <Link href={urlString+"/stats/batting-most-hundreds"}
+                          className="w-full flex text-[14px] justify-between items-center pb-3" >
                           <span className="flex items-center font-medium text-[#394351]">
                             Most Hundreds in IPL
                           </span>
-                          <span className="transform transition-transform ">
-                            <Image
-                              loading="lazy"
-                              src="/assets/img/arrow.png"
-                              className="h-[7px]"
-                              width={10}
-                              height={15}
-                              alt="arrow"
-                            />
-                          </span>
-                        </button>
-                        {open.mostHundreds && (
-                          <div className="pl-8 py-2 space-y-2 font-normal text-[14px] text-[#51555E]">
-                            <p className="flex items-center"> <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="size-3 text-[#1A80F8] mr-1"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                                />
-                              </svg> Bangabandhu T20 C</p>
-                          </div>
-                        )}
+                         
+                        </Link>
+                       
                       </div>
 
                       <div className="border-b mb-4">
-                        <button
-                          className="w-full flex text-[14px] justify-between items-center pb-3"
-                          onClick={() => toggleOpen("mostFifties")}
-                        >
+                        <Link href={urlString+"/stats/batting-most-fifties"}
+                          className="w-full flex text-[14px] justify-between items-center pb-3" >
                           <span className="flex items-center font-medium text-[#394351]">
                             Most Fifties in IPL
                           </span>
-                          <span className="transform transition-transform ">
-                            <Image
-                              loading="lazy"
-                              src="/assets/img/arrow.png"
-                              className="h-[7px]"
-                              width={10}
-                              height={15}
-                              alt="arrow"
-                            />
-                          </span>
-                        </button>
-                        {open.mostFifties && (
-                          <div className="pl-8 py-2 space-y-2 font-normal text-[14px] text-[#51555E]">
-                            <p className="flex items-center">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="size-3 text-[#1A80F8] mr-1"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                                />
-                              </svg>
-                              Bangabandhu T20 C
-                            </p>
-                            <p className="flex items-center">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="size-3 text-[#1A80F8] mr-1"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                                />
-                              </svg>
-                              Bangladesh Premier
-                            </p>
-                            <p className="flex items-center">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="size-3 text-[#1A80F8] mr-1"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                                />
-                              </svg>
-                              Bangladesh Tri-Series
-                            </p>
-                            <p className="flex items-center">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="size-3 text-[#1A80F8] mr-1"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                                />
-                              </svg>
-                              BCB Presidents Cup
-                            </p>
-                            <p className="flex items-center">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="size-3 text-[#1A80F8] mr-1"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                                />
-                              </svg>
-                              Dhaka Premier League
-                            </p>
-                          </div>
-                        )}
+                         
+                        </Link>
+                       
                       </div>
 
-                      <div className="border-b mb-4">
-                        <button
-                          className="w-full flex text-[14px] justify-between items-center pb-3"
-                          onClick={() => toggleOpen("mostDucks")}
-                        >
-                          <span className="flex items-center font-medium text-[#394351]">
-                            Most Ducks in IPL
-                          </span>
-                          <span className="transform transition-transform ">
-                            <Image
-                              loading="lazy"
-                              src="/assets/img/arrow.png"
-                              className="h-[7px]"
-                              width={10}
-                              height={15}
-                              alt="arrow"
-                            />
-                          </span>
-                        </button>
-                        {open.mostDucks && (
-                          <div className="pl-8 py-2 space-y-2 font-normal text-[14px] text-[#51555E]">
-                            <p className="flex items-center"> <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="size-3 text-[#1A80F8] mr-1"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                                />
-                              </svg> Bangabandhu T20 C</p>
-                          </div>
-                        )}
-                      </div>
 
                       <div className="border-b mb-4">
-                        <button
-                          className="w-full flex text-[14px] justify-between items-center pb-3"
-                          onClick={() => toggleOpen("highestBattingAverage")}
-                        >
+                        <Link href={urlString+"/stats/batting-highest-average"}
+                          className="w-full flex text-[14px] justify-between items-center pb-3" >
                           <span className="flex items-center font-medium text-[#394351]">
                             Highest Batting Average in IPL
                           </span>
-                          <span className="transform transition-transform ">
-                            <Image
-                              loading="lazy"
-                              src="/assets/img/arrow.png"
-                              className="h-[7px]"
-                              width={10}
-                              height={15}
-                              alt="arrow"
-                            />
+                         
+                        </Link>
+                        
+                      </div>
+                      
+                      <div className="border-b mb-4">
+                        <Link href={urlString+"/stats/bowling-most-wicket"}
+                          className="w-full flex text-[14px] justify-between items-center pb-3" >
+                          <span className="flex items-center font-medium text-[#394351]">
+                            Most Wickets in IPL
                           </span>
-                        </button>
-                        {open.highestBattingAverage && (
-                          <div className="pl-8 py-2 space-y-2 font-normal text-[14px] text-[#51555E]">
-                            <p className="flex items-center"> <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="size-3 text-[#1A80F8] mr-1"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                                />
-                              </svg> Bangabandhu T20 C</p>
-                          </div>
-                        )}
+                          
+                        </Link>
+                        
                       </div>
 
                       <div className="border-b mb-4">
-                        <button
-                          className="w-full flex text-[14px] justify-between items-center pb-3"
-                          onClick={() => toggleOpen("highestScore")}
-                        >
+                        <Link href={urlString+"/stats/bowling-best-average"}
+                          className="w-full flex text-[14px] justify-between items-center pb-3">
                           <span className="flex items-center font-medium text-[#394351]">
-                            Highest Individual Score in IPL
+                            Highest Bowling Average in IPL
                           </span>
-                          <span className="transform transition-transform ">
-                            <Image
-                              loading="lazy"
-                              src="/assets/img/arrow.png"
-                              className="h-[7px]"
-                              width={10}
-                              height={15}
-                              alt="arrow"
-                            />
-                          </span>
-                        </button>
-                        {open.highestScore && (
-                          <div className="pl-8 py-2 space-y-2 font-normal text-[14px] text-[#51555E]">
-                            <p className="flex items-center"> <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="size-3 text-[#1A80F8] mr-1"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                                />
-                              </svg> Bangabandhu T20 C</p>
-                          </div>
-                        )}
+                         
+                        </Link>
+                        
                       </div>
 
-                      <div className="mb-4">
-                        <button
-                          className="w-full flex text-[14px] justify-between items-center pb-3"
-                          onClick={() => toggleOpen("mostMatchesAsCaptain")}
-                        >
-                          <span className="flex items-center font-medium text-[#394351]">
-                            Most Matches as Captain in IPL
-                          </span>
-                          <span className="transform transition-transform ">
-                            <Image
-                              loading="lazy"
-                              src="/assets/img/arrow.png"
-                              className="h-[7px]"
-                              width={10}
-                              height={15}
-                              alt="arrow"
-                            />
-                          </span>
-                        </button>
-                        {open.mostMatchesAsCaptain && (
-                          <div className="pl-8 py-2 space-y-2 font-normal text-[14px] text-[#51555E]">
-                            <p className="flex items-center"> <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="size-3 text-[#1A80F8] mr-1"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                                />
-                              </svg> Bangabandhu T20 C</p>
-                          </div>
-                        )}
-                      </div>
+                  
                     </div>
                   </div>
                   <PLSeries />

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { urlStringEncode} from "@/utils/utility";
 import PlayerImage from "@/app/components/PlayerImage";
+import TabMenu from "./menu";
 
 interface Squad {
   urlString: string;
@@ -18,43 +19,7 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
   const uniqueFormats: any[] = [...new Set(seriesInfo?.rounds.map((round:any) => round.match_format))];
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-      <div id="tabs" className="my-4">
-        <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
-          <Link href={urlString}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap ">
-              Overview
-            </button>
-          </Link>
-          <Link href={urlString + "/schedule-results"}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap ">
-              Schedule & Results
-            </button>
-          </Link>
-          <Link href={urlString + "/squads"}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md">
-              Squads
-            </button>
-          </Link>
-          {isPointTable &&
-          <Link href={urlString + "/points-table"}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
-              Points Table
-            </button>
-          </Link>
-          }
-          <Link href={urlString + "/news"}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
-              News
-            </button>
-          </Link>
-          <Link href={urlString + "/stats/most-run"}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
-              Stats
-            </button>
-          </Link>
-        </div>
-      </div>
-
+      <TabMenu urlString={urlString} isPointTable={isPointTable}/>
       <div id="squads" className="tab-content">
         <div className="py-2 mb-2">
           <h3 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8]">
@@ -127,7 +92,7 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                           <Link className="rounded-md border-[1px] border-[##E2E2E2]"
                             href={
                               "/player/" +
-                              urlStringEncode(squads?.short_name) +
+                              urlStringEncode(squads?.title) +
                               "/" +
                               squads?.pid
                             }
@@ -173,7 +138,7 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                           <Link className="rounded-md border-[1px] border-[##E2E2E2]"
                             href={
                               "/player/" +
-                              urlStringEncode(bowler?.short_name) +
+                              urlStringEncode(bowler?.title) +
                               "/" +
                               bowler?.pid
                             }
@@ -210,7 +175,7 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                           <Link className="rounded-md border-[1px] border-[##E2E2E2]"
                             href={
                               "/player/" +
-                              urlStringEncode(allrounder?.short_name) +
+                              urlStringEncode(allrounder?.title) +
                               "/" +
                               allrounder?.pid
                             }

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from 'next/link';
 import WeeklySlider from "@/app/components/WeeklySlider";
 import { urlStringEncode } from '@/utils/utility';
+import MatchTabs from "./Menu";
 
 interface PointsTable {
     match_id: number;  
@@ -11,7 +12,7 @@ interface PointsTable {
     matchUrl :string | null;
     seriesPointsTable: any | null;
     seriesPointsTableMatches: any | null;
-
+    isPointTable: boolean;
   }
 export default function PointsTable({
     match_id,
@@ -19,9 +20,11 @@ export default function PointsTable({
     matchUrl,
     seriesPointsTable,
     seriesPointsTableMatches,
+    isPointTable
   }: PointsTable) {
 
     console.log("matchUC",seriesPointsTableMatches);
+    const matchDetails = matchData?.match_info;
         const pointTable = seriesPointsTable;
         // const cid = matchData?.match_info?.competition?.cid;
         const standings = pointTable?.standing?.standings;
@@ -49,52 +52,7 @@ export default function PointsTable({
     
 
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-    <div id="tabs" className="my-4">
-    <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
-        <Link href={"/moreinfo/"+matchUrl+"/" + match_id}>
-            <button
-              className="font-medium py-2 px-3 whitespace-nowrap "
-            >
-              More Info
-            </button>
-          </Link>
-          <Link href={"/live-score/"+matchUrl+"/" + match_id}>
-            <button
-              className="font-medium py-2 px-3 whitespace-nowrap"
-            >
-              Live
-            </button>
-          </Link>
-          <Link href={"/scorecard/"+matchUrl+"/" + match_id}>
-            <button
-              className="font-medium py-2 px-3 whitespace-nowrap"
-            >
-              Scorecard
-            </button>
-          </Link>
-          <Link href={"/squad/"+matchUrl+"/"+ match_id}>
-            <button
-              className="font-medium py-2 px-3 whitespace-nowrap"
-            >
-              Squad
-            </button>
-          </Link>
-          <Link href={"/points-table/"+matchUrl+"/"+ match_id}>
-            <button
-              className="font-medium py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
-            >
-              Points Table
-            </button>
-          </Link>
-          <Link href={"/stats/"+matchUrl+"/"+ match_id}>
-            <button
-              className="font-medium py-2 px-3 whitespace-nowrap"
-            >
-              Stats
-            </button>
-          </Link>
-        </div>
-    </div>
+   <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable}/>
 
 
     <div id="points" className="">
@@ -414,7 +372,7 @@ export default function PointsTable({
 
             <div className="lg:col-span-4 md:col-span-5">
                 <div className="bg-white rounded-lg p-4 mb-4">
-                    <div className="flex gap-1 items-center justify-between">
+                    <div className="flex gap-1 items-center justify-between hidden">
                         <div className="flex gap-1 items-center">
                             <div className="col-span-4 relative">
                                 <Image  loading="lazy"  src="/assets/img/home/trofi.png" className="h-[75px]" width={75} height={75} alt="1" />

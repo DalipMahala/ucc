@@ -16,30 +16,46 @@ module.exports = {
       time: true
     },
     {
-      name: 'nextjs-cron', 
-      script: 'npm',
-      args: '-- ts-node -r tsconfig-paths/register cron.ts', 
-      cwd: '/var/www/uc-cricket', 
-      instances: 1, 
-      autorestart: true,
-      watch: false,
-      max_memory_restart: '500M',
+      name: "uc-cricket-ws",
+      script: "./server.ts",
+      interpreter: "node",
+      interpreter_args: "-r ts-node/register -r tsconfig-paths/register",
+      cwd: "./", // Root directory
       env: {
-        NODE_ENV: 'production',
+        NODE_ENV: "production",
+        WS_TOKEN: "7b58d13da34a07b0a047e129874fdbf4"
       },
+      log_date_format: "YYYY-MM-DD HH:mm:ss",
+      error_file: "./logs/ws-error.log",
+      out_file: "./logs/ws-output.log",
+      time: true,
+      autorestart: true,
+      restart_delay: 5000,
+      max_restarts: 10,
+      watch: false,
+      instances: 1, // Only one WebSocket connection needed
+      exec_mode: "fork"
     },
     {
-      name: 'cricket-data-service', 
-      script: 'npm',
-      args: '-- ts-node -r tsconfig-paths/register server.ts', 
-      cwd: '/var/www/uc-cricket', 
-      instances: 1,
-      autorestart: true,
-      watch: false,
-      max_memory_restart: '500M',
+      name: "nextjs-cron",
+      script: "./cron.ts",
+      interpreter: "node",
+      interpreter_args: "-r ts-node/register -r tsconfig-paths/register",
+      cwd: "./", // Root directory
       env: {
-        NODE_ENV: 'production',
+        NODE_ENV: "production",
+        WS_TOKEN: "7b58d13da34a07b0a047e129874fdbf4"
       },
-    },
+      log_date_format: "YYYY-MM-DD HH:mm:ss",
+      error_file: "./logs/cron-error.log",
+      out_file: "./logs/cron-output.log",
+      time: true,
+      autorestart: true,
+      restart_delay: 5000,
+      max_restarts: 10,
+      watch: false,
+      instances: 1, // Only one WebSocket connection needed
+      exec_mode: "fork"
+    }
   ]
   }

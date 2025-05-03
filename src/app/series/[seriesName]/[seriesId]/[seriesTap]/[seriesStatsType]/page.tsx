@@ -47,7 +47,7 @@ export async function generateMetadata(props: {
   let twittertitle = "";
   let twitterdescription = "";
 
-  if (seriesStatsType === "highest-average") {
+  if (seriesStatsType === "batting-highest-average") {
     title = `Best Batting Average in ${seriesTitle} ${seriesSeason} | Top Performers`;
     description = `Find players with the highest batting average in ${seriesTitle} ${seriesSeason}. Check out consistent top scorers with the best average.`;
     keywords = `${seriesTitle} ${seriesSeason} stats, most runs in ICC ${seriesSeason}, most wickets in ${seriesTitle}, top players ICC ${seriesSeason}, ICC ${seriesSeason} batting records, ICC ${seriesSeason} bowling stats, player rankings`;
@@ -55,9 +55,9 @@ export async function generateMetadata(props: {
       urlStringEncode(seriesTitle + "-" + seriesSeason) +
       "/" +
       seriesId +
-      "/stats/highest-average"
+      "/stats/batting-highest-average"
     }`;
-  } else if (seriesStatsType === "highest-strikerate") {
+  } else if (seriesStatsType === "batting-highest-strike-rate") {
     title = `Best Batting Strike Rate in ${seriesTitle} ${seriesSeason}`;
     description = `Discover the batsmen with the highest strike rate in ${seriesTitle} ${seriesSeason}. Find the most aggressive players with quick scoring rates.`;
     keywords = `${seriesTitle} ${seriesSeason} stats, most runs in ICC ${seriesSeason}, most wickets in ${seriesTitle}, top players ICC ${seriesSeason}, ICC ${seriesSeason} batting records, ICC ${seriesSeason} bowling stats, player rankings`;
@@ -65,9 +65,9 @@ export async function generateMetadata(props: {
       urlStringEncode(seriesTitle + "-" + seriesSeason) +
       "/" +
       seriesId +
-      "/stats/highest-strikerate"
+      "/stats/batting-highest-strike-rate"
     }`;
-  } else if (seriesStatsType === "most-hundreds") {
+  } else if (seriesStatsType === "batting-most-hundreds") {
     title = `Most Hundreds in ${seriesTitle} ${seriesSeason} | Century Scorers`;
     description = `Check out players with the most hundreds in ${seriesTitle} ${seriesSeason}. Track the top century scorers of the tournament.`;
     keywords = `${seriesTitle} ${seriesSeason} stats, most runs in ICC ${seriesSeason}, most wickets in ${seriesTitle}, top players ICC ${seriesSeason}, ICC ${seriesSeason} batting records, ICC ${seriesSeason} bowling stats, player rankings`;
@@ -75,9 +75,9 @@ export async function generateMetadata(props: {
       urlStringEncode(seriesTitle + "-" + seriesSeason) +
       "/" +
       seriesId +
-      "/stats/most-hundreds"
+      "/stats/batting-most-hundreds"
     }`;
-  } else if (seriesStatsType === "most-fifties") {
+  } else if (seriesStatsType === "batting-most-fifties") {
     title = `Most Fifties in ${seriesTitle} ${seriesSeason} | Half-Century Makers`;
     description = `Find the players with the most fifties in ${seriesTitle} ${seriesSeason}. Track batsmen with consistent half-centuries.`;
     keywords = `${seriesTitle} ${seriesSeason} stats, most runs in ICC ${seriesSeason}, most wickets in ${seriesTitle}, top players ICC ${seriesSeason}, ICC ${seriesSeason} batting records, ICC ${seriesSeason} bowling stats, player rankings`;
@@ -85,9 +85,9 @@ export async function generateMetadata(props: {
       urlStringEncode(seriesTitle + "-" + seriesSeason) +
       "/" +
       seriesId +
-      "/stats/most-fifties"
+      "/stats/batting-most-fifties"
     }`;
-  } else if (seriesStatsType === "most-fours") {
+  } else if (seriesStatsType === "batting-most-fours") {
     title = `Most Fours in ${seriesTitle} ${seriesSeason} | Boundaries Hit`;
     description = `Discover the players with the most fours in ${seriesTitle} ${seriesSeason}. Track the batsmen with the highest number of boundaries.`;
     keywords = `${seriesTitle} ${seriesSeason} stats, most runs in ICC ${seriesSeason}, most wickets in ${seriesTitle}, top players ICC ${seriesSeason}, ICC ${seriesSeason} batting records, ICC ${seriesSeason} bowling stats, player rankings`;
@@ -95,9 +95,9 @@ export async function generateMetadata(props: {
       urlStringEncode(seriesTitle + "-" + seriesSeason) +
       "/" +
       seriesId +
-      "/stats/most-fours"
+      "/stats/batting-most-fours"
     }`;
-  } else if (seriesStatsType === "most-sixes") {
+  } else if (seriesStatsType === "batting-most-sixes") {
     title = `Most Sixes in ${seriesTitle} ${seriesSeason} | Boundaries Hit`;
     description = `Check out the biggest hitters of ${seriesTitle} ${seriesSeason} with the most sixes. Find out who cleared the boundary the most times.`;
     keywords = `${seriesTitle} ${seriesSeason} stats, most runs in ICC ${seriesSeason}, most wickets in ${seriesTitle}, top players ICC ${seriesSeason}, ICC ${seriesSeason} batting records, ICC ${seriesSeason} bowling stats, player rankings`;
@@ -105,9 +105,9 @@ export async function generateMetadata(props: {
       urlStringEncode(seriesTitle + "-" + seriesSeason) +
       "/" +
       seriesId +
-      "/stats/most-sixes"
+      "/stats/batting-most-sixes"
     }`;
-  } else if (seriesStatsType === "most-wicket") {
+  } else if (seriesStatsType === "bowling-most-wicket") {
     title = `Most Wickets in ${seriesTitle} ${seriesSeason} | Leading Bowlers`;
     description = `Check the list of top wicket-takers in ${seriesTitle} ${seriesSeason}. Track the best bowlers and match-winning performances.`;
     keywords = `${seriesTitle} ${seriesSeason} stats, most runs in ICC ${seriesSeason}, most wickets in ${seriesTitle}, top players ICC ${seriesSeason}, ICC ${seriesSeason} batting records, ICC ${seriesSeason} bowling stats, player rankings`;
@@ -115,9 +115,9 @@ export async function generateMetadata(props: {
       urlStringEncode(seriesTitle + "-" + seriesSeason) +
       "/" +
       seriesId +
-      "/stats/most-wicket"
+      "/stats/bowling-most-wicket"
     }`;
-  } else if (seriesStatsType === "best-average") {
+  } else if (seriesStatsType === "bowling-best-average") {
     title = `Best Bowling Average in ${seriesTitle} ${seriesSeason}`;
     description = `Find the bowlers with the best bowling average in ${seriesTitle} ${seriesSeason}. Check out the most effective wicket-takers.`;
     keywords = `${seriesTitle} ${seriesSeason} stats, most runs in ICC ${seriesSeason}, most wickets in ${seriesTitle}, top players ICC ${seriesSeason}, ICC ${seriesSeason} batting records, ICC ${seriesSeason} bowling stats, player rankings`;
@@ -125,9 +125,9 @@ export async function generateMetadata(props: {
       urlStringEncode(seriesTitle + "-" + seriesSeason) +
       "/" +
       seriesId +
-      "/stats/best-average"
+      "/stats/bowling-best-average"
     }`;
-  } else if (seriesStatsType === "best-bowling") {
+  } else if (seriesStatsType === "bowling-best-figures") {
     title = `Best Bowling Figures in ${seriesTitle} ${seriesSeason}`;
     description = `Check the best individual bowling performances in ${seriesTitle} ${seriesSeason}. Track match-winning spells and best figures.`;
     keywords = `${seriesTitle} ${seriesSeason} stats, most runs in ICC ${seriesSeason}, most wickets in ${seriesTitle}, top players ICC ${seriesSeason}, ICC ${seriesSeason} batting records, ICC ${seriesSeason} bowling stats, player rankings`;
@@ -135,9 +135,9 @@ export async function generateMetadata(props: {
       urlStringEncode(seriesTitle + "-" + seriesSeason) +
       "/" +
       seriesId +
-      "/stats/best-bowling"
+      "/stats/bowling-best-figures"
     }`;
-  } else if (seriesStatsType === "most-five_wickets") {
+  } else if (seriesStatsType === "bowling-most-five-wicket-hauls") {
     title = `Most Five-Wicket Hauls in ${seriesTitle} ${seriesSeason}`;
     description = `Check the list of bowlers with the most five-wicket hauls in ${seriesTitle} ${seriesSeason}. Find top bowling performances.`;
     keywords = `${seriesTitle} ${seriesSeason} stats, most runs in ICC ${seriesSeason}, most wickets in ${seriesTitle}, top players ICC ${seriesSeason}, ICC ${seriesSeason} batting records, ICC ${seriesSeason} bowling stats, player rankings`;
@@ -145,9 +145,9 @@ export async function generateMetadata(props: {
       urlStringEncode(seriesTitle + "-" + seriesSeason) +
       "/" +
       seriesId +
-      "/stats/most-five_wickets"
+      "/stats/bowling-most-five-wicket-hauls"
     }`;
-  } else if (seriesStatsType === "best-economy") {
+  } else if (seriesStatsType === "bowling-best-economy-rates") {
     title = `Best Bowling Economy in ${seriesTitle} ${seriesSeason}`;
     description = `Find the bowlers with the best economy rate in ${seriesTitle} ${seriesSeason}. Track the most economical bowlers.`;
     keywords = `${seriesTitle} ${seriesSeason} stats, most runs in ICC ${seriesSeason}, most wickets in ${seriesTitle}, top players ICC ${seriesSeason}, ICC ${seriesSeason} batting records, ICC ${seriesSeason} bowling stats, player rankings`;
@@ -155,9 +155,9 @@ export async function generateMetadata(props: {
       urlStringEncode(seriesTitle + "-" + seriesSeason) +
       "/" +
       seriesId +
-      "/stats/best-economy"
+      "/stats/bowling-best-economy-rates"
     }`;
-  } else if (seriesStatsType === "best-strike") {
+  } else if (seriesStatsType === "bowling-best-strike-rates") {
     title = `Best Bowling Strike Rate in ${seriesTitle} ${seriesSeason}`;
     description = `Check out the bowlers with the best bowling strike rate in ${seriesTitle} ${seriesSeason}. Track quick wicket-takers.`;
     keywords = `${seriesTitle} ${seriesSeason} stats, most runs in ICC ${seriesSeason}, most wickets in ${seriesTitle}, top players ICC ${seriesSeason}, ICC ${seriesSeason} batting records, ICC ${seriesSeason} bowling stats, player rankings`;
@@ -165,7 +165,7 @@ export async function generateMetadata(props: {
       urlStringEncode(seriesTitle + "-" + seriesSeason) +
       "/" +
       seriesId +
-      "/stats/best-strike"
+      "/stats/bowling-best-strike-rates"
     }`;
   } else {
     title = `Most Runs in ${seriesTitle} ${seriesSeason} | Leading Run Scorers`;
@@ -175,7 +175,7 @@ export async function generateMetadata(props: {
       urlStringEncode(seriesTitle + "-" + seriesSeason) +
       "/" +
       seriesId +
-      "/stats/most-run"
+      "/stats/batting-most-run"
     }`;
   }
 

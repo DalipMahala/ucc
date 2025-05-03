@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useState, useEffect } from "react";
 import { urlStringEncode} from "@/utils/utility";
 import PlayerImage from "@/app/components/PlayerImage";
+import MatchTabs from "./Menu";
 
 
 interface Squads {
@@ -70,50 +71,7 @@ export default function Squads({
 
     return (
         <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-            <div id="tabs" className="my-4">
-            <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
-        <Link href={"/moreinfo/"+matchUrl+"/" + match_id}>
-            <button
-              className="uppercase font-semibold py-2 px-3 whitespace-nowrap "
-            >
-              More Info
-            </button>
-          </Link>
-          <Link href={"/live-score/"+matchUrl+"/" + match_id}>
-            <button
-              className="uppercase font-semibold py-2 px-3 whitespace-nowrap"
-            >
-              Live
-            </button>
-          </Link>
-          <Link href={"/scorecard/"+matchUrl+"/" + match_id}>
-            <button
-              className="uppercase font-semibold py-2 px-3 whitespace-nowrap"
-            >
-              Scorecard
-            </button>
-          </Link>
-          <Link href={"/squad/"+matchUrl+"/"+ match_id}>
-            <button
-              className="uppercase font-semibold py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
-            >
-              Squad
-            </button>
-          </Link>
-          {isPointTable && (
-          <Link href={"/series/"+urlStringEncode(matchDetails?.competition?.title+"-"+matchDetails?.competition?.season)+"/"+matchDetails?.competition?.cid+"/points-table"}>
-            <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
-              Points Table
-            </button>
-          </Link>
-          )}
-          <Link href={"/series/"+urlStringEncode(matchDetails?.competition?.title+"-"+matchDetails?.competition?.season)+"/"+matchDetails?.competition?.cid+"/stats/most-run"}>
-            <button className="uppercase font-semibold py-2 px-3 whitespace-nowrap">
-              Stats
-            </button>
-          </Link>
-        </div>
-            </div>
+            <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable}/>
 
             {teamADetails && teamBDetails &&
                         <div id="squads" className="tab-content">

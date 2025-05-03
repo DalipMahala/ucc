@@ -8,6 +8,7 @@ import { urlStringEncode } from "../../../utils/utility";
 import { format, isSameDay } from "date-fns";
 import CountdownTimer from "../../components/countdownTimer";
 import FantasyTips from "@/app/components/FantasyTips";
+import TabMenu from "./menu";
 
 interface ScheduleResults {
   urlString: string;
@@ -124,42 +125,7 @@ export default function ScheduleResults({
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-      <div id="tabs" className="my-4">
-        <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
-          <Link href={urlString}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap ">
-              Overview
-            </button>
-          </Link>
-          <Link href={urlString + "/schedule-results"}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md">
-              Schedule & Results
-            </button>
-          </Link>
-          <Link href={urlString + "/squads"}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap ">
-              Squads
-            </button>
-          </Link>
-          {isPointTable &&
-            <Link href={urlString + "/points-table"}>
-              <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
-                Points Table
-              </button>
-            </Link>
-          }
-          <Link href={urlString + "/news"}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
-              News
-            </button>
-          </Link>
-          <Link href={urlString + "/stats/most-run/most-run"}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
-              Stats
-            </button>
-          </Link>
-        </div>
-      </div>
+      <TabMenu urlString={urlString} isPointTable={isPointTable}/>
       <div id="live" className="">
         <div className="md:grid grid-cols-12 gap-4">
           <div className="lg:col-span-8 md:col-span-7">
@@ -311,10 +277,12 @@ export default function ScheduleResults({
                                 items?.teama?.short_name +
                                 "-vs-" +
                                 items?.teamb?.short_name +
-                                "-match-" +
-                                items?.match_number +
                                 "-" +
-                                items?.competition?.title
+                                items?.subtitle +
+                                "-" +
+                                items?.competition?.title +
+                                "-" +
+                                items?.competition?.season
                               ) +
                               "/" +
                               items.match_id
@@ -451,17 +419,17 @@ export default function ScheduleResults({
                                     Points Table
                                   </p>
                                 </Link>
-                                <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                                {/* <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div> */}
                               </>}
-                            <Link href="#">
+                            {/* <Link href="#">
                               <p className="text-[#909090] font-semibold">
                                 Schedule
                               </p>
-                            </Link>
+                            </Link> */}
                           </div>
 
                           {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                            <Link href={("/h2h/" + urlStringEncode(items?.teama?.name + "-vs-" + items?.teamb?.name) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
+                            <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title : items?.title) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
 
                               <div className="flex mt-2 justify-end items-center space-x-2">
                                 <Image loading="lazy"
@@ -526,10 +494,12 @@ export default function ScheduleResults({
                                 items?.teama?.short_name +
                                 "-vs-" +
                                 items?.teamb?.short_name +
-                                "-match-" +
-                                items?.match_number +
                                 "-" +
-                                items?.competition?.title
+                                items?.subtitle +
+                                "-" +
+                                items?.competition?.title +
+                                "-" +
+                                items?.competition?.season
                               ) +
                               "/" +
                               items.match_id
@@ -674,7 +644,7 @@ export default function ScheduleResults({
                                   <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                                 </>}
                               {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                                <Link href={("/h2h/" + urlStringEncode(items?.teama?.name + "-vs-" + items?.teamb?.name) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
+                                <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title : items?.title) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
 
                                   <div className="flex justify-end items-center space-x-2">
                                     <Image loading="lazy"
@@ -782,10 +752,12 @@ export default function ScheduleResults({
                                   cmatch?.teama?.short_name +
                                   "-vs-" +
                                   cmatch?.teamb?.short_name +
-                                  "-match-" +
-                                  cmatch?.match_number +
                                   "-" +
-                                  cmatch?.competition?.title
+                                  cmatch?.subtitle +
+                                  "-" +
+                                  cmatch?.competition?.title +
+                                  "-" +
+                                  cmatch?.competition?.season
                                 ) +
                                 "/" +
                                 cmatch.match_id
@@ -854,8 +826,8 @@ export default function ScheduleResults({
                                   cmatch?.teama?.short_name +
                                   "-vs-" +
                                   cmatch?.teamb?.short_name +
-                                  "-match-" +
-                                  cmatch?.match_number +
+                                  "-" +
+                                  cmatch?.subtitle +
                                   "-" +
                                   cmatch?.competition?.title
                                 ) +
@@ -906,17 +878,17 @@ export default function ScheduleResults({
                                     Points Table
                                   </p>
                                 </Link>
-                                <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                                {/* <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div> */}
                               </>}
-                            <Link href="#">
+                            {/* <Link href="#">
                               <p className="text-[#909090] font-semibold">
                                 Schedule
                               </p>
-                            </Link>
+                            </Link> */}
                           </div>
 
                           {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
-                            <Link href={("/h2h/" + urlStringEncode(cmatch?.teama?.name + "-vs-" + cmatch?.teamb?.name) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
+                            <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title : cmatch?.title) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
 
                               <div className="flex mt-2 justify-end items-center space-x-2">
                                 <Image loading="lazy"
@@ -966,10 +938,12 @@ export default function ScheduleResults({
                                 cmatch?.teama?.short_name +
                                 "-vs-" +
                                 cmatch?.teamb?.short_name +
-                                "-match-" +
-                                cmatch?.match_number +
                                 "-" +
-                                cmatch?.competition?.title
+                                cmatch?.subtitle +
+                                "-" +
+                                cmatch?.competition?.title +
+                                "-" +
+                                cmatch?.competition?.season
                               ) +
                               "/" +
                               cmatch.match_id
@@ -1075,7 +1049,7 @@ export default function ScheduleResults({
                                   <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                                 </>}
                               {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
-                                <Link href={("/h2h/" + urlStringEncode(cmatch?.teama?.name + "-vs-" + cmatch?.teamb?.name) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
+                                <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title : cmatch?.title) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
 
                                   <div className="flex justify-end items-center space-x-2">
                                     <Image loading="lazy"
@@ -1139,7 +1113,7 @@ export default function ScheduleResults({
                               </h4>
                             </div>
                           </div>
-                          <div className="flex items-center space-x-2">
+                          <div className="hidden items-center space-x-2">
                             <span className="text-[11px] text-[#1F2937] font-semibold oddsTeam">AUS</span>
                             <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
                               <span className="">
@@ -1190,10 +1164,12 @@ export default function ScheduleResults({
                               ucmatch?.teama?.short_name +
                               "-vs-" +
                               ucmatch?.teamb?.short_name +
-                              "-match-" +
-                              ucmatch?.match_number +
                               "-" +
-                              ucmatch?.competition?.title
+                              ucmatch?.subtitle +
+                              "-" +
+                              ucmatch?.competition?.title +
+                              "-" +
+                              ucmatch?.competition?.season
                             ) +
                             "/" +
                             ucmatch.match_id
@@ -1288,17 +1264,17 @@ export default function ScheduleResults({
                                     Points Table
                                   </p>
                                 </Link>
-                                <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                                {/* <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div> */}
                               </>}
-                            <Link href="#">
+                            {/* <Link href="#">
                               <p className="text-[#909090] font-semibold">
                                 Schedule
                               </p>
-                            </Link>
+                            </Link> */}
                           </div>
 
                           {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                            <Link href={("/h2h/" + urlStringEncode(ucmatch?.teama?.name + "-vs-" + ucmatch?.teamb?.name) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
+                            <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title : ucmatch?.title) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
 
                               <div className="flex mt-2 justify-end items-center space-x-2">
                                 <Image loading="lazy"
@@ -1346,10 +1322,12 @@ export default function ScheduleResults({
                               ucmatch?.teama?.short_name +
                               "-vs-" +
                               ucmatch?.teamb?.short_name +
-                              "-match-" +
-                              ucmatch?.match_number +
                               "-" +
-                              ucmatch?.competition?.title
+                              ucmatch?.subtitle +
+                              "-" +
+                              ucmatch?.competition?.title +
+                              "-" +
+                              ucmatch?.competition?.season
                             ) +
                             "/" +
                             ucmatch.match_id
@@ -1449,7 +1427,7 @@ export default function ScheduleResults({
                                 <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                               </>}
                             {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                              <Link href={("/h2h/" + urlStringEncode(ucmatch?.teama?.name + "-vs-" + ucmatch?.teamb?.name) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
+                              <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title : ucmatch?.title) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
 
                                 <div className="flex justify-end items-center space-x-2">
                                   <Image loading="lazy"
@@ -1468,7 +1446,7 @@ export default function ScheduleResults({
                             }
                           </div>
 
-                          <div className="flex items-center space-x-2 text-[13px]">
+                          <div className="hidden items-center space-x-2 text-[13px]">
                             <span className="text-[#586577] font-medium">
                               {ucmatch.teama.short_name}
                             </span>

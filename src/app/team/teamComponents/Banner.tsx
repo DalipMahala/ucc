@@ -5,9 +5,15 @@ import ReadMoreCard from "@/app/components/ReadMoreCard";
 
 interface Banner {
   teamDetails: any | null;
+  teamType: string;
+  teamCaptains: any;
+  coach: string;
 }
 
-export default function Banner({ teamDetails }: Banner) {
+export default function Banner({ teamDetails, teamType, teamCaptains, coach }: Banner) {
+  // console.log(teamDetails);
+  const teamType2 = (teamType=== 't20i' ? 't20':teamType);
+  const debut = 'debut_match_'+teamType2;
   return (
     <div>
       <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
@@ -30,10 +36,9 @@ export default function Banner({ teamDetails }: Banner) {
 
         <ReadMoreCard
                     title=""
-                    content="The Indian Cricket Team is governed by the Board of Control for
-          Cricket in India (BCCI), the governing body of cricket in the country.
-          The first recorded match in India was in 1721 when a group of sailors
-          gathered to play in Western India"
+                    content={"The "+teamDetails?.title+" "+(teamDetails?.type === 'club'? 'Domestic' : 'National')+" "+teamType+" Cricket Team is one of the most respected and successful teams in "+(teamDetails?.type === 'club'? '' : 'world')+" "+teamType+" cricket. Managed by the Board of Control for Cricket in India (BCCI), the team played its first-ever "+teamType+" match on "+teamDetails?.[debut]+""+
+                      "</br>Currently led by "+teamCaptains[0]?.title+" and coached by "+coach+", India continues to be a dominant force in home conditions and is a strong competitor overseas."
+                    }
                     wordLimit={30}
                   />
        

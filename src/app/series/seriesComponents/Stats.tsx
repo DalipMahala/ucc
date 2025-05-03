@@ -2,12 +2,15 @@ import React from "react";
 import Link from 'next/link';
 import { MatcheStats } from "@/controller/matchInfoController";
 import { urlStringEncode } from "@/utils/utility";
+import ReadMoreCard from "@/app/components/ReadMoreCard";
+import TabMenu from "./menu";
 
 interface Stats {
     urlString: string;
     statsType: string | null;
     seriesId: number;
     isPointTable: boolean;
+    seriesInfo: any;
 }
 
 async function fetchHtml(seriesId: number) {
@@ -37,45 +40,81 @@ async function fetchHtml(seriesId: number) {
     }
 }
 
-export default async function Stats({ seriesId, urlString, statsType, isPointTable }: Stats) {
+export default async function Stats({ seriesId, urlString, statsType, isPointTable, seriesInfo }: Stats) {
 
     const pageHtml = await fetchHtml(seriesId);
 
     const renderStatus = () => {
         switch (statsType) {
-            case "most-run":
+            case "batting-most-run":
                 return "batting_most_runs";
-            case "highest-average":
+            case "batting-highest-average":
                 return "batting_highest_average";
-            case "highest-strikerate":
+            case "batting-highest-strike-rate":
                 return "batting_highest_strikerate";
-            case "most-hundreds":
+            case "batting-most-hundreds":
                 return "batting_most_run100";
-            case "most-fifties":
+            case "batting-most-fifties":
                 return "batting_most_run50";
-            case "most-fours":
+            case "batting-most-fours":
                 return "batting_most_run4";
-            case "most-sixes":
+            case "batting-most-sixes":
                 return "batting_most_run6";
 
 
-            case "most-wicket":
+            case "bowling-most-wicket":
                 return "bowling_top_wicket_takers";
-            case "best-average":
+            case "bowling-best-average":
                 return "bowling_best_averages";
-            case "best-bowling":
+            case "bowling-best-figures":
                 return "bowling_best_bowling_figures";
-            case "most-five_wickets":
+            case "bowling-most-five-wicket-hauls":
                 return "bowling_five_wickets";
-            case "best-economy":
+            case "bowling-best-economy-rates":
                 return "bowling_best_economy_rates";
-            case "best-strike":
+            case "bowling-best-strike-rates":
                 return "bowling_best_strike_rates";
             default:
                 return "batting_most_runs";
         }
     };
     const statType = renderStatus();
+
+    const renderStatusName = () => {
+        switch (statsType) {
+            case "batting-most-run":
+                return "Most Runs";
+            case "batting-highest-average":
+                return "Best Batting Average";
+            case "batting-highest-strike-rate":
+                return "Best Batting Strike Rate";
+            case "batting-most-hundreds":
+                return "Most Hundreds";
+            case "batting-most-fifties":
+                return "Most Fifties";
+            case "batting-most-fours":
+                return "Most Fours";
+            case "batting-most-sixes":
+                return "Most Sixes";
+
+
+            case "bowling-most-wicket":
+                return "Most Wickets";
+            case "bowling-best-average":
+                return "Best Bowling Average";
+            case "bowling-best-figures":
+                return "Best Bowling";
+            case "bowling-most-five-wicket-hauls":
+                return "Most 5 Wickets Haul";
+            case "bowling-best-economy-rates":
+                return "Best Economy";
+            case "bowling-best-strike-rates":
+                return "Best Bowling Strike Rate";
+            default:
+                return "Most Runs";
+        }
+    };
+    const statsName = renderStatusName();
     const statsMatch = await MatcheStats(seriesId, statType);
     const matchStats = statsMatch?.stats;
     // console.log("renderStatus",matchStats);
@@ -83,53 +122,7 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
     return (
         <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
 
-            <div id="tabs" className="my-4">
-                <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
-                    <Link href={urlString}>
-                        <button
-                            className="font-semibold uppercase py-2 px-3 whitespace-nowrap " >
-                            Overview
-                        </button>
-                    </Link>
-                    <Link href={urlString + "/schedule-results"}>
-                        <button
-                            className="font-semibold uppercase py-2 px-3 whitespace-nowrap "
-                        >
-                            Schedule & Results
-
-                        </button>
-                    </Link>
-                    <Link href={urlString + "/squads"}>
-                        <button
-                            className="font-semibold uppercase py-2 px-3 whitespace-nowrap "
-                        >
-                            Squads
-                        </button>
-                    </Link>
-                    {isPointTable &&
-                        <Link href={urlString + "/points-table"}>
-                            <button
-                                className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
-                            >
-                                Points Table
-                            </button>
-                        </Link>
-                    }
-                    <Link href={urlString + "/news"}>
-                        <button
-                            className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
-                        >
-                            News
-                        </button>
-                    </Link>
-                    <Link href={urlString + "/stats/most-run"}>
-                        <button
-                            className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md" >
-                            Stats
-                        </button>
-                    </Link>
-                </div>
-            </div>
+            <TabMenu urlString={urlString} isPointTable={isPointTable}/>
             {matchStats !== undefined && matchStats !== null && matchStats !== '' ? (
                 <>
                     <div id="stats">
@@ -142,58 +135,58 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
                                         </h3>
                                     </div>
                                     <div id="team-buttons" className="">
-                                        <Link href={urlString + "/stats/most-run"}>
+                                        <Link href={urlString + "/stats/batting-most-run"}>
                                             <button
 
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'most-run' || statsType == undefined ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
+                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'batting-most-run' || statsType == undefined ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
                                             >
                                                 Most Runs
                                             </button>
                                         </Link>
-                                        <Link href={urlString + "/stats/highest-average"}>
+                                        <Link href={urlString + "/stats/batting-highest-average"}>
                                             <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'highest-average' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
+                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'batting-highest-average' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
                                             >
                                                 Best Batting Average
                                             </button>
                                         </Link>
-                                        <Link href={urlString + "/stats/highest-strikerate"}>
+                                        <Link href={urlString + "/stats/batting-highest-strike-rate"}>
                                             <button
 
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'highest-strikerate' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
+                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'batting-highest-strike-rate' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
 
                                             >
                                                 Best Batting Strike Rate
                                             </button>
                                         </Link>
 
-                                        <Link href={urlString + "/stats/most-hundreds"}>
+                                        <Link href={urlString + "/stats/batting-most-hundreds"}>
                                             <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'most-hundreds' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
+                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'batting-most-hundreds' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
                                             >
                                                 Most Hundreds
                                             </button>
                                         </Link>
 
-                                        <Link href={urlString + "/stats/most-fifties"}>
+                                        <Link href={urlString + "/stats/batting-most-fifties"}>
                                             <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'most-fifties' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
+                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'batting-most-fifties' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
                                             >
                                                 Most Fifties
                                             </button>
                                         </Link>
 
-                                        <Link href={urlString + "/stats/most-fours"}>
+                                        <Link href={urlString + "/stats/batting-most-fours"}>
                                             <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'most-fours' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
+                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'batting-most-fours' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
                                             >
                                                 Most Fours
                                             </button>
                                         </Link>
 
-                                        <Link href={urlString + "/stats/most-sixes"}>
+                                        <Link href={urlString + "/stats/batting-most-sixes"}>
                                             <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'most-sixes' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
+                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'batting-most-sixes' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
                                             >
                                                 Most Sixes
                                             </button>
@@ -208,48 +201,48 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
                                         </h3>
                                     </div>
                                     <div id="team-buttons" className="">
-                                        <Link href={urlString + "/stats/most-wicket"}>
+                                        <Link href={urlString + "/stats/bowling-most-wicket"}>
                                             <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'most-wicket' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
+                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'bowling-most-wicket' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
                                             >
                                                 Most Wickets
                                             </button>
                                         </Link>
-                                        <Link href={urlString + "/stats/best-average"}>
+                                        <Link href={urlString + "/stats/bowling-best-average"}>
                                             <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'best-average' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
+                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'bowling-best-average' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
                                             >
                                                 Best Bowling Average
                                             </button>
                                         </Link>
 
-                                        <Link href={urlString + "/stats/best-bowling"}>
+                                        <Link href={urlString + "/stats/bowling-best-figures"}>
                                             <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'best-bowling' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
+                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'bowling-best-figures' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
                                             >
                                                 Best Bowling
                                             </button>
                                         </Link>
 
-                                        <Link href={urlString + "/stats/most-five_wickets"}>
+                                        <Link href={urlString + "/stats/bowling-most-five-wicket-hauls"}>
                                             <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'most-five_wickets' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
+                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'bowling-most-five-wicket-hauls' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
                                             >
                                                 Most 5 Wickets Haul
                                             </button>
                                         </Link>
 
-                                        <Link href={urlString + "/stats/best-economy"}>
+                                        <Link href={urlString + "/stats/bowling-best-economy-rates"}>
                                             <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'best-economy' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
+                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'bowling-best-economy-rates' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
                                             >
                                                 Best Economy
                                             </button>
                                         </Link>
 
-                                        <Link href={urlString + "/stats/best-strike"}>
+                                        <Link href={urlString + "/stats/bowling-best-strike-rates"}>
                                             <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'best-strike' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
+                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'bowling-best-strike-rates' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
                                             >
                                                 Best Bowling Strike Rate
                                             </button>
@@ -260,7 +253,7 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
                             <div className="lg:col-span-9 md:col-span-8">
                                 <div id="most-runs" className={`state-content most-runs" ? "" : "hidden"}`} >
                                     <div>
-                                        <div className={`rounded-lg bg-[#ffffff] mb-4 p-4 ${statsType == "most-wicket" || statsType == "best-average" || statsType == "best-bowling" || statsType == "most-five_wickets" || statsType == "best-economy" || statsType == "best-strike" ? "hidden" : ""}`}>
+                                        <div className={`rounded-lg bg-[#ffffff] mb-4 p-4 ${statsType == "bowling-most-wicket" || statsType == "bowling-best-average" || statsType == "bowling-best-figures" || statsType == "bowling-most-five-wicket-hauls" || statsType == "bowling-best-economy-rates" || statsType == "bowling-best-strike-rates" ? "hidden" : ""}`}>
                                             <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                                                 Batting
                                             </h3>
@@ -304,12 +297,12 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
                                                                     <td className="md:px-2 pl-[14px] py-3">{stats?.matches}</td>
                                                                     <td className="md:px-2 pl-[14px] py-3">{stats?.innings}</td>
 
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'most-run' ? "font-semibold" : ""}`}>{stats?.runs}</td>
+                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'batting-most-run' ? "font-semibold" : ""}`}>{stats?.runs}</td>
 
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'highest-average' ? "font-semibold" : ""}`}>{stats?.average}</td>
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'most-fours' ? "font-semibold" : ""}`}>{stats?.run4}</td>
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'most-sixes' ? "font-semibold" : ""}`}>{stats?.run6}</td>
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'highest-strikerate' ? "font-semibold" : ""}`}>{stats?.strike}</td>
+                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'batting-highest-average' ? "font-semibold" : ""}`}>{stats?.average}</td>
+                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'batting-most-fours' ? "font-semibold" : ""}`}>{stats?.run4}</td>
+                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'batting-most-sixes' ? "font-semibold" : ""}`}>{stats?.run6}</td>
+                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'batting-highest-strike-rate' ? "font-semibold" : ""}`}>{stats?.strike}</td>
                                                                 </tr>
                                                             ))}
 
@@ -319,7 +312,7 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
                                             </div>
                                         </div>
 
-                                        <div className={`rounded-lg bg-[#ffffff] mb-4 p-4  ${statsType == "most-wicket" || statsType == "best-average" || statsType == "best-bowling" || statsType == "most-five_wickets" || statsType == "best-economy" || statsType == "best-strike" ? "" : "hidden"}`}>
+                                        <div className={`rounded-lg bg-[#ffffff] mb-4 p-4  ${statsType == "bowling-most-wicket" || statsType == "bowling-best-average" || statsType == "bowling-best-figures" || statsType == "bowling-most-five-wicket-hauls" || statsType == "bowling-best-economy-rates" || statsType == "bowling-best-strike-rates" ? "" : "hidden"}`}>
                                             <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                                                 Bowling
                                             </h3>
@@ -362,11 +355,11 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
                                                                     </td>
                                                                     <td className="md:px-2 pl-[14px] py-3">{stats?.matches}</td>
                                                                     <td className="md:px-2 pl-[14px] py-3">{stats?.innings}</td>
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'most-wicket' ? "font-semibold" : ""}`}>{stats?.wickets}</td>
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'best-average' ? "font-semibold" : ""}`}>{stats?.average}</td>
+                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'bowling-most-wicket' ? "font-semibold" : ""}`}>{stats?.wickets}</td>
+                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'bowling-best-average' ? "font-semibold" : ""}`}>{stats?.average}</td>
                                                                     <td className="md:px-2 pl-[14px] py-3">{stats?.wicket4i}</td>
                                                                     <td className="md:px-2 pl-[14px] py-3">{stats?.wicket5i}</td>
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'best-strike' ? "font-semibold" : ""}`}>{stats?.strike}</td>
+                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'bowling-best-strike-rates' ? "font-semibold" : ""}`}>{stats?.strike}</td>
                                                                 </tr>
                                                             ))}
 
@@ -386,18 +379,84 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
                     <div className="rounded-lg py-4 px-4 bg-[#ffffff] mb-4">
                         <div className="lg:grid grid-cols-12 gap-4">
                             <div className="col-span-12">
-                                {pageHtml && typeof pageHtml === "string" ? (
+                            {statsType == "bowling-most-wicket" || statsType == "bowling-best-average" || statsType == "bowling-best-figures" || statsType == "bowling-most-five-wicket-hauls" || statsType == "bowling-best-economy-rates" || statsType == "bowling-best-strike-rates" ? 
+                            <ReadMoreCard
+                            title={`${statsName || "Stats"} in ${seriesInfo?.title || ""} ${seriesInfo?.season || ""} – Player Rankings`}
+                            content={
+                              `Here is the updated list of bowlers with the ${statsName || "stats"} in the ${seriesInfo?.title || ""} ${seriesInfo?.season || ""}. ` +
+                              `These players have been in excellent form, helping their teams with consistent performances.` +
+                              (matchStats[0]?.player?.first_name ? 
+                                ` At the top of the chart is ${matchStats[0].player.first_name} (${matchStats[0]?.team?.abbr || "N/A"}), ` +
+                                `who has taken ${matchStats[0]?.wickets || "N/A"} wickets in ${matchStats[0]?.matches || "N/A"} matches ` +
+                                `with an economy of ${matchStats[0]?.econ || "N/A"}.` 
+                                : ""
+                              ) +
+                              "<br/><br/>" +
+                              (matchStats[1]?.player?.first_name ? 
+                                `<strong>Top Performers So Far</strong><br/>` +
+                                `<strong>${matchStats[1].player.first_name}</strong> – ${matchStats[1]?.matches || "N/A"} matches, ` +
+                                `${matchStats[1]?.wickets || "N/A"} wickets, Econ: ${matchStats[1]?.econ || "N/A"}<br/>` 
+                                : ""
+                              ) +
+                              (matchStats[2]?.player?.first_name ? 
+                                `<strong>${matchStats[2].player.first_name}</strong> – ${matchStats[2]?.matches || "N/A"} matches, ` +
+                                `${matchStats[2]?.wickets || "N/A"} wickets, Econ: ${matchStats[2]?.econ || "N/A"}<br/>` 
+                                : ""
+                              ) +
+                              (matchStats[3]?.player?.first_name ? 
+                                `<strong>${matchStats[3].player.first_name}</strong> – ${matchStats[3]?.matches || "N/A"} matches, ` +
+                                `${matchStats[3]?.wickets || "N/A"} wickets, Econ: ${matchStats[3]?.econ || "N/A"}<br/>` 
+                                : ""
+                              ) +
+                              (matchStats[0]?.player?.first_name ? 
+                                `These bowlers are making a strong impact and are in the race for the ${statsName || "stats"} in ` +
+                                `${seriesInfo?.title || "the tournament"}.`
+                                : ""
+                              )
+                            }
+                            wordLimit={30}
+                          />
+                          : 
+                          <ReadMoreCard
+                          title={`${statsName || "Stats"} in ${seriesInfo?.title || ""} ${seriesInfo?.season || ""} – Player Rankings`}
+                          content={
+                            `Here is the updated list of batters with the ${statsName || "stats"} in the ${seriesInfo?.title || ""} ${seriesInfo?.season || ""}. ` +
+                            `These players have been in excellent form, helping their teams with consistent performances.` +
+                            (matchStats[0]?.player?.first_name ? 
+                              ` At the top of the chart is ${matchStats[0].player.first_name} (${matchStats[0]?.team?.abbr || "N/A"}), ` +
+                              `who has scored ${matchStats[0]?.runs || "N/A"} runs in ${matchStats[0]?.matches || "N/A"} matches ` +
+                              `with an average of ${matchStats[0]?.average || "N/A"}.` 
+                              : ""
+                            ) +
+                            "<br/><br/>" +
+                            (matchStats[1]?.player?.first_name ? 
+                              `<strong>Top Performers So Far</strong><br/>` +
+                              `<strong>${matchStats[1].player.first_name}</strong> – ${matchStats[1]?.matches || "N/A"} matches, ` +
+                              `${matchStats[1]?.runs || "N/A"} runs, Avg: ${matchStats[1]?.average || "N/A"}<br/>` 
+                              : ""
+                            ) +
+                            (matchStats[2]?.player?.first_name ? 
+                              `<strong>${matchStats[2].player.first_name}</strong> – ${matchStats[2]?.matches || "N/A"} matches, ` +
+                              `${matchStats[2]?.runs || "N/A"} runs, Avg: ${matchStats[2]?.average || "N/A"}<br/>` 
+                              : ""
+                            ) +
+                            (matchStats[3]?.player?.first_name ? 
+                              `<strong>${matchStats[3].player.first_name}</strong> – ${matchStats[3]?.matches || "N/A"} matches, ` +
+                              `${matchStats[3]?.runs || "N/A"} runs, Avg: ${matchStats[3]?.average || "N/A"}<br/>` 
+                              : ""
+                            ) +
+                            (matchStats[0]?.player?.first_name ? 
+                              `These batters are making a strong impact and are in the race for the ${statsName || "stats"} in ` +
+                              `${seriesInfo?.title || "the tournament"}.`
+                              : ""
+                            )
+                          }
+                          wordLimit={30}
+                        />
+                                }
+                                        {pageHtml && typeof pageHtml === "string" ? (
                                     <div dangerouslySetInnerHTML={{ __html: pageHtml }} />
-                                ) : (
-                                    <>
-                                        <h3 className="text-1xl font-semibold mb-1" style={{ lineHeight: "21px" }}>Live - Jagadeesan hits
-                                            a century; Haryana trounce
-                                        </h3>
-                                        <p className="text-gray-500 font-normal">
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias dicta maiores esse adipisci autem nesciunt placeat saepe corporis explicabo, enim tenetur non laboriosam ipsam nihil est aut. Odit nostrum dicta maiores, ipsam vero hic, recusandae, fugit doloribus voluptas a at! Quae recusandae est reprehenderit ratione. Nam, cupiditate quibusdam ab aut eos corporis omnis, culpa dolorum eligendi ea inventore! A, quo modi excepturi neque similique aliquam saepe quis, aut alias pariatur eligendi enim expedita doloremque ex recusandae distinctio. Ut mollitia adipisci soluta consequatur! Quisquam sit nemo doloremque illo libero sapiente facere minima, impedit maxime ut porro eius adipisci asperiores? Sit, architecto.
-                                        </p>
-                                    </>
-                                )}
+                                ) : ("")}
                             </div>
                         </div>
 

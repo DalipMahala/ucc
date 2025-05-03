@@ -62,6 +62,17 @@ function updateStatusNoteDirect(matchInfo: any) {
     .replace(new RegExp(matchInfo.teamb.name, 'gi'), matchInfo.teamb.short_name);
 }
 
+function matchOddsCal(data: any) {
+  if (!data) return;
+
+  const a = parseFloat(data?.live_odds?.matchodds?.teama?.back || 0);
+  const b = parseFloat(data?.live_odds?.matchodds?.teamb?.back || 0);
+  const lesserTeam = a < b
+    ? { matchId: data?.match_id, team: data?.teama?.short_name, ...data?.live_odds?.matchodds?.teama }
+    : { matchId: data?.match_id, team: data?.teamb?.short_name, ...data?.live_odds?.matchodds?.teamb };
+  return lesserTeam;
+}
+
 export default async function ForYouMatches() {
   let forYouresponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/forYouMatches`, {
     method: "GET",
@@ -134,7 +145,7 @@ export default async function ForYouMatches() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className={"text-[11px] text-[#586577] font-semibold oddsTeam" + items.match_id}>
-                    {items?.[parseFloat(items?.live_odds?.matchodds?.teama?.back) < parseFloat(items?.live_odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
+                    {matchOddsCal(items)?.team}
                   </span>
                   <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
                     <span className="">
@@ -154,15 +165,7 @@ export default async function ForYouMatches() {
                       </svg>
                     </span>
                     <span className={"oddback" + items.match_id}>
-                      {
-                        (parseFloat(items?.live_odds?.matchodds?.teama?.back) < parseFloat(items?.live_odds?.matchodds?.teamb?.back)
-                          ? items?.live_odds?.matchodds?.teama?.back
-                          : items?.live_odds?.matchodds?.teamb?.back) > 0
-                          ? Math.round((parseFloat(items?.live_odds?.matchodds?.teama?.back) < parseFloat(items?.live_odds?.matchodds?.teamb?.back)
-                            ? items?.live_odds?.matchodds?.teama?.back
-                            : items?.live_odds?.matchodds?.teamb?.back) * 100 - 100)
-                          : 0
-                      }
+                      {matchOddsCal(items)?.back > 0 ? Math.round((matchOddsCal(items)?.back) * 100 - 100) : 0}
                       {/* {items?.live_odds?.matchodds?.teama?.back > 0  ? Math.round((items?.live_odds?.matchodds?.teama?.back)*100-100) : 0} */}
                     </span>
                   </span>
@@ -184,15 +187,7 @@ export default async function ForYouMatches() {
                       </svg>
                     </span>
                     <span className={"oddlay" + items.match_id}>
-                      {
-                        (parseFloat(items?.live_odds?.matchodds?.teama?.lay) < parseFloat(items?.live_odds?.matchodds?.teamb?.lay)
-                          ? items?.live_odds?.matchodds?.teama?.lay
-                          : items?.live_odds?.matchodds?.teamb?.lay) > 0
-                          ? Math.round((parseFloat(items?.live_odds?.matchodds?.teama?.lay) < parseFloat(items?.live_odds?.matchodds?.teamb?.lay)
-                            ? items?.live_odds?.matchodds?.teama?.lay
-                            : items?.live_odds?.matchodds?.teamb?.lay) * 100 - 100)
-                          : 0
-                      }
+                      {matchOddsCal(items)?.lay > 0 ? Math.round((matchOddsCal(items)?.lay) * 100 - 100) : 0}
                       {/* {items?.live_odds?.matchodds?.teama?.lay > 0 ? Math.round((items?.live_odds?.matchodds?.teama?.lay)*100-100) : 0} */}
                     </span>
                   </span>
@@ -202,24 +197,24 @@ export default async function ForYouMatches() {
               <div className="border-t-[1px] border-[#E7F2F4]"></div>
 
               <div className="py-3 px-3">
-                <Link href={"/live-score/" + urlStringEncode(items?.teama?.short_name + "-vs-" + items?.teamb?.short_name + "-match-" + items?.match_number + "-" + items?.competition?.title + "-" + items?.competition?.season) + "/" + items.match_id}>
+                <Link href={"/live-score/" + urlStringEncode(items?.teama?.short_name + "-vs-" + items?.teamb?.short_name + "-" + items?.subtitle + "-" + items?.competition?.title + "-" + items?.competition?.season) + "/" + items?.match_id}>
                   <div className="flex justify-between items-center text-[14px]">
                     <div className="w-[55%]">
                       <p className="text-[#586577] text-[13px] mb-4 font-medium">
-                        {items.subtitle}, {items.format_str}, {items.venue.location}
+                        {items?.subtitle}, {items?.format_str}, {items?.venue?.location}
                       </p>
                       <div className="flex items-center space-x-2 font-medium md:w-full mb-4">
                         <div className="flex items-center space-x-2">
                           <Image
                             // src={items.teama.logo_url}
-                            src={items.teama.logo_url || '/assets/img/ring.png'}
+                            src={items?.teama?.logo_url || '/assets/img/ring.png'}
                             className="h-[30px] rounded-full"
                             width={30}
                             height={30}
-                            alt={items.teama.short_name}
+                            alt={items?.teama?.short_name}
                             loading="lazy"
                           />
-                          <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
+                          <span className={`${(items?.teama?.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
                             {items.teama.short_name} -{" "}
                           </span>
                         </div>
@@ -256,11 +251,11 @@ export default async function ForYouMatches() {
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
-                              src={items.teamb.logo_url || '/assets/img/ring.png'}
+                              src={items?.teamb?.logo_url || '/assets/img/ring.png'}
                               className="h-[30px]"
                               width={30}
                               height={30}
-                              alt={items.teamb.short_name}
+                              alt={items?.teamb?.short_name ?? "team"}
                               loading="lazy"
                             />
                             <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
@@ -340,7 +335,7 @@ export default async function ForYouMatches() {
                   </Link>
                 </div>
                 {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                  <Link href={("/h2h/" + urlStringEncode(items?.teama?.name + "-vs-" + items?.teamb?.name) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
+                  <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title : items?.title) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
                     <div className="flex justify-end items-center space-x-2">
                       <Image
                         src="/assets/img/home/handshake.png"
@@ -396,13 +391,13 @@ export default async function ForYouMatches() {
                       </h4>
                     </Link>
                   </div>
-                  
+
                 </div>
               </div>
 
               <div className="border-t-[1px] border-[#E7F2F4]"></div>
               <div className="open-Performance-data">
-                <Link href={"/live-score/" + urlStringEncode(items?.teama?.short_name + "-vs-" + items?.teamb?.short_name + "-match-" + items?.match_number + "-" + items?.competition?.title + "-" + items?.competition?.season) + "/" + items.match_id}>
+                <Link href={"/live-score/" + urlStringEncode(items?.teama?.short_name + "-vs-" + items?.teamb?.short_name + "-" + items?.subtitle + "-" + items?.competition?.title + "-" + items?.competition?.season) + "/" + items.match_id}>
                   <div className="py-2 pb-3">
                     <p className="text-[#586577] text-[13px] mb-4 font-normal">
                       {items.subtitle}, {items.format_str}, {items.venue.location}
@@ -540,7 +535,7 @@ export default async function ForYouMatches() {
                       </>
                     }
                     {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                      <Link href={("/h2h/" + urlStringEncode(items?.teama?.name + "-vs-" + items?.teamb?.name) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
+                      <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title : items?.title) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
                         <div className="flex justify-end items-center space-x-2">
                           <Image
                             src="/assets/img/home/handshake.png"
@@ -561,7 +556,7 @@ export default async function ForYouMatches() {
 
                   <div className="flex items-center space-x-2 text-[13px]">
                     <span className={"text-[#586577] font-medium oddsTeam" + items.match_id}>
-                      {items?.[parseFloat(items?.live_odds?.matchodds?.teama?.back) < parseFloat(items?.live_odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
+                      {matchOddsCal(items)?.team}
                     </span>
                     <span className="flex items-center bg-[#00a632] border-[1px] border-[#00a632] rounded-md text-[#ffffff] pr-2">
                       <span className="">
@@ -581,15 +576,7 @@ export default async function ForYouMatches() {
                         </svg>
                       </span>
                       <span className={"oddback" + items.match_id}>
-                        {
-                          (parseFloat(items?.live_odds?.matchodds?.teama?.back) < parseFloat(items?.live_odds?.matchodds?.teamb?.back)
-                            ? items?.live_odds?.matchodds?.teama?.back
-                            : items?.live_odds?.matchodds?.teamb?.back) > 0
-                            ? Math.round((parseFloat(items?.live_odds?.matchodds?.teama?.back) < parseFloat(items?.live_odds?.matchodds?.teamb?.back)
-                              ? items?.live_odds?.matchodds?.teama?.back
-                              : items?.live_odds?.matchodds?.teamb?.back) * 100 - 100)
-                            : 0
-                        }
+                        {matchOddsCal(items)?.back > 0 ? Math.round((matchOddsCal(items)?.back) * 100 - 100) : 0}
                         {/* {items?.live_odds?.matchodds?.teama?.back > 0  ? Math.round((items?.live_odds?.matchodds?.teama?.back)*100-100) : 0} */}
                       </span>
                     </span>
@@ -611,15 +598,7 @@ export default async function ForYouMatches() {
                         </svg>
                       </span>
                       <span className={"oddlay" + items.match_id}>
-                        {
-                          (parseFloat(items?.live_odds?.matchodds?.teama?.lay) < parseFloat(items?.live_odds?.matchodds?.teamb?.lay)
-                            ? items?.live_odds?.matchodds?.teama?.lay
-                            : items?.live_odds?.matchodds?.teamb?.lay) > 0
-                            ? Math.round((parseFloat(items?.live_odds?.matchodds?.teama?.lay) < parseFloat(items?.live_odds?.matchodds?.teamb?.lay)
-                              ? items?.live_odds?.matchodds?.teama?.lay
-                              : items?.live_odds?.matchodds?.teamb?.lay) * 100 - 100)
-                            : 0
-                        }
+                        {matchOddsCal(items)?.lay > 0 ? Math.round((matchOddsCal(items)?.lay) * 100 - 100) : 0}
                         {/* {items?.live_odds?.matchodds?.teama?.lay > 0  ? Math.round((items?.live_odds?.matchodds?.teama?.lay)*100-100) : 0} */}
                       </span>
                     </span>
@@ -663,7 +642,7 @@ export default async function ForYouMatches() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className={"text-[11px] text-[#1F2937] font-semibold oddsTeam" + ucmatch.match_id}>
-                    {ucmatch?.[parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
+                    {matchOddsCal(ucmatch)?.team}
                   </span>
 
                   <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
@@ -683,15 +662,7 @@ export default async function ForYouMatches() {
                         />
                       </svg>
                     </span>
-                    {
-                      (parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back)
-                        ? ucmatch?.live_odds?.matchodds?.teama?.back
-                        : ucmatch?.live_odds?.matchodds?.teamb?.back) > 0
-                        ? Math.round((parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back)
-                          ? ucmatch?.live_odds?.matchodds?.teama?.back
-                          : ucmatch?.live_odds?.matchodds?.teamb?.back) * 100 - 100)
-                        : 0
-                    }
+                    {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100) : 0}
                   </span>
                   <span className="flex font-semibold items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-full text-[#A70B0B] pr-2">
                     <span className="">
@@ -710,21 +681,13 @@ export default async function ForYouMatches() {
                         />
                       </svg>
                     </span>
-                    {
-                      (parseFloat(ucmatch?.live_odds?.matchodds?.teama?.lay) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.lay)
-                        ? ucmatch?.live_odds?.matchodds?.teama?.lay
-                        : ucmatch?.live_odds?.matchodds?.teamb?.lay) > 0
-                        ? Math.round((parseFloat(ucmatch?.live_odds?.matchodds?.teama?.lay) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.lay)
-                          ? ucmatch?.live_odds?.matchodds?.teama?.lay
-                          : ucmatch?.live_odds?.matchodds?.teamb?.lay) * 100 - 100)
-                        : 0
-                    }
+                    {matchOddsCal(ucmatch)?.lay > 0 ? Math.round((matchOddsCal(ucmatch)?.lay) * 100 - 100) : 0}
                   </span>
                 </div>
               </div>
 
               <div className="border-t-[1px] border-[#E7F2F4]"></div>
-              <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-match-" + ucmatch?.match_number + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
+              <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-" + ucmatch?.subtitle + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
                 <div className="py-3 px-3">
                   <div className="flex justify-between items-center text-[14px]">
                     <div className="w-[50%]">
@@ -815,7 +778,7 @@ export default async function ForYouMatches() {
                   </Link>
                 </div>
                 {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                  <Link href={("/h2h/" + urlStringEncode(ucmatch?.teama?.name + "-vs-" + ucmatch?.teamb?.name) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
+                  <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title : ucmatch?.title) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
                     <div className="flex justify-end items-center space-x-2">
                       <Image
                         src="/assets/img/home/handshake.png"
@@ -852,12 +815,12 @@ export default async function ForYouMatches() {
                       </h4>
                     </Link>
                   </div>
-                  
+
                 </div>
               </div>
 
               <div className="border-t-[1px] border-[#E7F2F4]"></div>
-              <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-match-" + ucmatch?.match_number + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
+              <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-" + ucmatch?.subtitle + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
                 <div className="open-Performance-data">
                   <div className="py-2 pb-3">
                     <p className="text-[#586577] text-[13px] mb-4 font-medium">
@@ -956,7 +919,7 @@ export default async function ForYouMatches() {
                       <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                     </>}
                   {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                    <Link href={("/h2h/" + urlStringEncode(ucmatch?.teama?.name + "-vs-" + ucmatch?.teamb?.name) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
+                    <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title : ucmatch?.title) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
                       <div className="flex justify-end items-center space-x-2">
                         <Image
                           src="/assets/img/home/handshake.png"
@@ -977,7 +940,7 @@ export default async function ForYouMatches() {
 
                 <div className="flex items-center space-x-2 text-[13px]">
                   <span className={"text-[#586577] font-medium oddsTeam" + ucmatch.match_id}>
-                    {ucmatch?.[parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb'].short_name}
+                    {matchOddsCal(ucmatch)?.team}
                   </span>
                   <span className="flex font-semibold items-center bg-[#00a632] border-[1px] border-[#00a632] rounded-md text-[#ffffff] pr-2">
                     <span>
@@ -996,15 +959,7 @@ export default async function ForYouMatches() {
                         ></path>
                       </svg>
                     </span>
-                    {
-                      (parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back)
-                        ? ucmatch?.live_odds?.matchodds?.teama?.back
-                        : ucmatch?.live_odds?.matchodds?.teamb?.back) > 0
-                        ? Math.round((parseFloat(ucmatch?.live_odds?.matchodds?.teama?.back) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.back)
-                          ? ucmatch?.live_odds?.matchodds?.teama?.back
-                          : ucmatch?.live_odds?.matchodds?.teamb?.back) * 100 - 100)
-                        : 0
-                    }
+                    {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100) : 0}
                   </span>
                   <span className="flex font-semibold items-center bg-[#ea2323] border-[1px] border-[#ea2323] rounded-md text-[#ffffff] pr-2">
                     <span>
@@ -1023,15 +978,7 @@ export default async function ForYouMatches() {
                         ></path>
                       </svg>
                     </span>
-                    {
-                      (parseFloat(ucmatch?.live_odds?.matchodds?.teama?.lay) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.lay)
-                        ? ucmatch?.live_odds?.matchodds?.teama?.lay
-                        : ucmatch?.live_odds?.matchodds?.teamb?.lay) > 0
-                        ? Math.round((parseFloat(ucmatch?.live_odds?.matchodds?.teama?.lay) < parseFloat(ucmatch?.live_odds?.matchodds?.teamb?.lay)
-                          ? ucmatch?.live_odds?.matchodds?.teama?.lay
-                          : ucmatch?.live_odds?.matchodds?.teamb?.lay) * 100 - 100)
-                        : 0
-                    }
+                    {matchOddsCal(ucmatch)?.lay > 0 ? Math.round((matchOddsCal(ucmatch)?.lay) * 100 - 100) : 0}
                   </span>
                 </div>
               </div>
@@ -1069,7 +1016,7 @@ export default async function ForYouMatches() {
 
               <div className="py-3 px-3">
                 <div className="flex justify-between items-center text-[14px]">
-                  <Link className="w-[61%]" href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-match-" + cmatch?.match_number + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
+                  <Link className="w-[61%]" href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
                     <div className="">
                       <p className="text-[#586577] text-[13px] mb-4 font-medium">
                         {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
@@ -1128,7 +1075,7 @@ export default async function ForYouMatches() {
                   </Link>
                   <div className="h-[100px] border-l-[1px] border-[#e7f2f4]"></div>
 
-                  <Link className="w-[38%]" href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-match-" + cmatch?.match_number + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
+                  <Link className="w-[38%]" href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
                     <div className=" font-semibold flex flex-col items-center">
                       <Image
                         src="/assets/img/home/win.png"
@@ -1186,7 +1133,7 @@ export default async function ForYouMatches() {
                   </Link>
                 </div>
                 {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
-                  <Link href={("/h2h/" + urlStringEncode(cmatch?.teama?.name + "-vs-" + cmatch?.teamb?.name) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
+                  <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title : cmatch?.title) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
                     <div className="flex justify-end items-center space-x-2">
                       <Image
                         src="/assets/img/home/handshake.png"
@@ -1241,7 +1188,7 @@ export default async function ForYouMatches() {
               <div className="border-t-[1px] border-[#E7F2F4]"></div>
 
               <div className="open-Performance-data">
-                <Link href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-match-" + cmatch?.match_number + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
+                <Link href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
                   <div className="py-2 pb-3">
                     <p className="text-[#586577] text-[13px] mb-4 font-normal">
                       {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
@@ -1259,10 +1206,8 @@ export default async function ForYouMatches() {
                               loading="lazy"
                             />
                             <div>
-                              <span className="flex items-center gap-1">
-                                <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
-                                  {cmatch.teama.short_name}
-                                </span>
+                              <span className={`flex items-center gap-1 ${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
+                                {cmatch.teama.short_name}
                               </span>
                               <p className="flex items-end gap-2">
                                 <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#434c59]"}`}>
@@ -1288,18 +1233,17 @@ export default async function ForYouMatches() {
                                 loading="lazy"
                               />
                               <div>
-                                <span className="flex items-center gap-1">
-                                  <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
-                                    {cmatch.teamb.short_name}
-                                  </span>
+                                <span className={`flex items-center gap-1 ${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
+                                  {cmatch.teamb.short_name}
                                 </span>
+
                                 <p className="flex items-end gap-2">
                                   <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#434c59]"}`}>
                                     {cmatch.teamb.scores}
                                   </span>
 
                                   <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[12px] text-[black]" : "font-medium text-[#434c59]"}`}>
-                                    ({cmatch.teama.overs})
+                                    ({cmatch.teamb.overs})
                                   </span>
                                 </p>
                               </div>
@@ -1341,10 +1285,10 @@ export default async function ForYouMatches() {
                         </Link>
 
                         <div className=" h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
-                        
+
                       </>}
                     {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
-                      <Link href={("/h2h/" + urlStringEncode(cmatch?.teama?.name + "-vs-" + cmatch?.teamb?.name) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
+                      <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title : cmatch?.title) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
                         <div className=" flex justify-end items-center space-x-2">
                           <Image
                             src="/assets/img/home/handshake.png"

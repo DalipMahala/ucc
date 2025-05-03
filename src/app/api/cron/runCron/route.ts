@@ -21,6 +21,7 @@ import {
   PlayerStatsData
 } from "@/controller/cronController"; // Import from cron file
 import { NextRequest, NextResponse } from "next/server";
+import {PlayerSiteMap} from "@/controller/sitemapController";
 
 
 const functions: Record<string, any> = {
@@ -43,6 +44,7 @@ const functions: Record<string, any> = {
   "MatchCommentaryCompleted": MatchCommentaryCompleted,
   "MatchStatisticsCompleted":MatchStatisticsCompleted,
   "PlayerStatsData":PlayerStatsData,
+  "PlayerSiteMap":PlayerSiteMap,
 };
 
 export async function GET(req: NextRequest) {

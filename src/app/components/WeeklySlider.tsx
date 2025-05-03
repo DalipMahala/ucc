@@ -6,41 +6,41 @@ import Link from "next/link";
 import { urlStringEncode } from "../../utils/utility";
 import CountdownTimer from "./../components/countdownTimer";
 
-interface MatchItem{
-  match_info:any;
+interface MatchItem {
+  match_info: any;
 }
 
 const WeeklySlider = () => {
 
   const [featuredMatch, setFeaturedMatch] = useState([]);
-    const [loading, setLoading] = useState(true);
-  
-    useEffect(() => {
-      fetch("/api/match/featuredMatches", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
-        },
-        cache: "no-store",
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          
-          if (res.success) {
-  
-            const futuredM = res?.data?.map(({ match_info, ...rest }:MatchItem) => ({
-              ...match_info,
-              ...rest
-            }));
+  const [loading, setLoading] = useState(true);
 
-            setFeaturedMatch(futuredM);
-          }
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
-    }, []);
-  
+  useEffect(() => {
+    fetch("/api/match/featuredMatches", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+      },
+      cache: "no-store",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+
+        if (res.success) {
+
+          const futuredM = res?.data?.map(({ match_info, ...rest }: MatchItem) => ({
+            ...match_info,
+            ...rest
+          }));
+
+          setFeaturedMatch(futuredM);
+        }
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [slides, setSlides] = useState<any[]>([]); // Use state to store the slides
 
@@ -54,12 +54,13 @@ const WeeklySlider = () => {
         ],
         countdown: match?.date_start_ist,
         match: match?.competition?.title + " " + match?.competition?.season,
-        match_number: match?.match_number,
+        subtitle: match?.subtitle,
         title: match?.competition?.title,
         season: match?.competition?.season,
         match_id: match?.match_id,
         odds: match?.live_odds,
-        teamList: match
+        teamList: match,
+        cid: match?.competition?.cid,
       }));
       setSlides(transformedSlides); // Store the transformed data
     }
@@ -84,13 +85,12 @@ const WeeklySlider = () => {
           <div key={index} className="cust-slide w-full flex-shrink-0">
             <div className="rounded-lg p-4 mb-2 bg-[#ffffff]">
               <div className="flex items-center justify-between md:mb-4 mb-2">
-                <div className="flex items-center space-x-2 w-[45%]">
                   <div
-                    className="flex text-[12px] items-center text-[#0F55A5] rounded-full pr-3 font-semibold"
+                    className="flex space-x-2 w-[45%] text-[12px] items-center text-[#0F55A5] rounded-full pr-3 font-semibold"
                     style={{ gap: 3 }}
                   >
                     <div className="w-[8px] h-[8px] bg-[#0F55A5] rounded-full animate-blink"></div> FEATURED
-                  </div>
+                  
                 </div>
                 <div className="h-[20px] border-l-[1px] border-[#efefef]" />
                 <div className="flex items-center justify-end space-x-2 w-[50%] ">
@@ -98,7 +98,7 @@ const WeeklySlider = () => {
                     {slide?.teamList?.[parseFloat(slide?.odds?.matchodds?.teama?.back) < parseFloat(slide?.odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb']?.short_name}
                   </span>
                   <span className="flex font-semibold items-center md:bg-[#FAFFFC] bg-[#00a632] border-[1px] md:border-[#0B773C] border-[#00a632] md:rounded-full rounded-md md:text-[#0B773C] text-[#ffffff] pr-2">
-                    <span>
+                    
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -113,7 +113,7 @@ const WeeklySlider = () => {
                           d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18"
                         />
                       </svg>
-                    </span>
+                    
                     {
                       (parseFloat(slide?.odds?.matchodds?.teama?.back) < parseFloat(slide?.odds?.matchodds?.teamb?.back)
                         ? slide?.odds?.matchodds?.teama?.back
@@ -125,7 +125,7 @@ const WeeklySlider = () => {
                     }
                   </span>
                   <span className="flex font-semibold items-center md:bg-[#FFF7F7] bg-[#ea2323] border-[1px] md:border-[#A70B0B] border-[#ea2323]  md:rounded-full rounded-md md:text-[#A70B0B] text-[#ffffff] pr-2">
-                    <span>
+                    
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -140,7 +140,6 @@ const WeeklySlider = () => {
                           d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3"
                         />
                       </svg>
-                    </span>
                     {
                       (parseFloat(slide?.odds?.matchodds?.teama?.lay) < parseFloat(slide?.odds?.matchodds?.teamb?.lay)
                         ? slide?.odds?.matchodds?.teama?.lay
@@ -162,8 +161,8 @@ const WeeklySlider = () => {
                       slide?.teams?.[0].country +
                       "-vs-" +
                       slide?.teams?.[1].country +
-                      "-match-" +
-                      slide?.match_number +
+                      "-" +
+                      slide?.subtitle +
                       "-" +
                       slide?.title +
                       "-" +
@@ -180,7 +179,6 @@ const WeeklySlider = () => {
                           key={idx}
                           className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4"
                         >
-                          <div className="flex items-center space-x-2">
                             <Image
                               loading="lazy"
                               src={team.flag}
@@ -192,17 +190,16 @@ const WeeklySlider = () => {
                             <span className=" text-[#586577] font-medium text-[14px]">
                               {team.country}
                             </span>
-                          </div>
                         </div>
                       ))}
                     </div>
                     <div className=" h-[70px] border-l-[1px] border-[#efefef]"></div>
                     <div className="font-semibold w-[50%] text-center">
-                      {isSameDay(new Date(), slide.countdown ? new Date(slide.countdown): '') ? (
+                      {isSameDay(new Date(), slide.countdown ? new Date(slide.countdown) : '') ? (
                         <>
-                        <span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
-                        
-                        <CountdownTimer targetTime={slide.countdown} />
+                          <span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
+
+                          <CountdownTimer targetTime={slide.countdown} />
                         </>
 
                       ) : (
@@ -210,7 +207,7 @@ const WeeklySlider = () => {
 
                           {slide.countdown ? format(new Date(slide.countdown), "dd MMMM - EEEE") : ''}
                           <br />
-                          
+
                           <span className="text-[#144280] text-[14px] font-semibold">
                             {" "}
                             {slide.countdown ? format(new Date(slide.countdown), "hh:mm:aa") : ''}{" "}
@@ -225,138 +222,76 @@ const WeeklySlider = () => {
                 </Link>
               </div>
               <div className="border-t-[1px] border-[#E7F2F4]" />
-              <Link  href={
-                    "/moreinfo/" +
-                    urlStringEncode(
-                      slide?.teams?.[0].country +
-                      "-vs-" +
-                      slide?.teams?.[1].country +
-                      "-match-" +
-                      slide?.match_number +
-                      "-" +
-                      slide?.title +
-                      "-" +
-                      slide?.season
-                    ) +
-                    "/" +
-                    slide.match_id
-                  }>
-              <div className="mt-2">
-                <p className="text-[#909090] font-medium">{slide.match}</p>
-              </div>
+              <Link href={
+                "/series/" +
+                urlStringEncode(slide.match) +
+                "/" +
+                slide.cid
+              }>
+                <div className="mt-2">
+                  <p className="text-[#909090] font-medium">{slide.match}</p>
+                </div>
               </Link>
-             
+
             </div>
           </div>
         ))}
       </div>
 
       {slides.length > 1 && (
+        <div className="cust-slider-nav flex justify-between items-center relative py-[5px] px-[4px]">
 
-        <div className="cust-slider-nav flex justify-between items-center  relative py-[5px] px-[4px]">
+          {/* Prev Button */}
           <button
             onClick={handlePrevClick}
-            className="cust-prev-btn bg-[#ffffff] p-[7px] rounded-full " style={{ boxShadow: '2px 4px 5px 0px #D0CCF4' }}
+            className="cust-prev-btn bg-[#ffffff] p-[7px] rounded-full"
+            style={{ boxShadow: '2px 4px 5px 0px #D0CCF4' }}
           >
-            <span className="text-[20px] font-bold">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-3"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 19.5 8.25 12l7.5-7.5"
-                />
-              </svg>
-            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-3">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
           </button>
 
           {/* Dot Navigation */}
           <div className="flex justify-center space-x-2">
-            {slides.length > 0 && (
-              <>
-                {/* Dot 1: First slide */}
-                <span
-                  className={`dot w-[13px] h-[4px] rounded-full cursor-pointer ${activeIndex === 0 ? "bg-blue-500" : "bg-gray-400"
-                    }`}
-                  onClick={() => setActiveIndex(0)}
-                />
-                {/* Dot 2: Middle slide */}
-                <span
-                  className={`dot w-[13px] h-[4px] rounded-full cursor-pointer ${activeIndex === Math.floor(slides.length / 3)
-                      ? "bg-blue-500"
-                      : "bg-gray-400"
-                    }`}
-                  onClick={() =>
-                    setActiveIndex(Math.floor(slides.length / 3))
-                  }
-                />
+            {(() => {
+              const windowSize = 5;
+              let start = Math.max(0, activeIndex - Math.floor(windowSize / 2));
+              let end = start + windowSize;
 
+              if (end > slides.length) {
+                end = slides.length;
+                start = Math.max(0, end - windowSize);
+              }
 
-                <span
-                  className={`dot w-[13px] h-[4px] rounded-full cursor-pointer ${activeIndex === Math.floor(slides.length / 2)
-                      ? "bg-blue-500"
-                      : "bg-gray-400"
-                    }`}
-                  onClick={() =>
-                    setActiveIndex(Math.floor(slides.length / 2))
-                  }
-                />
-
-
-
-                <span
-                  className={`dot w-[13px] h-[4px] rounded-full cursor-pointer ${activeIndex === Math.floor(slides.length / 4)
-                      ? "bg-blue-500"
-                      : "bg-gray-400"
-                    }`}
-                  onClick={() =>
-                    setActiveIndex(Math.floor(slides.length / 4))
-                  }
-                />
-
-
-
-                {/* Dot 3: Last slide */}
-                <span
-                  className={`dot w-[13px] h-[4px] rounded-full cursor-pointer ${activeIndex === slides.length - 1
-                      ? "bg-blue-500"
-                      : "bg-gray-400"
-                    }`}
-                  onClick={() => setActiveIndex(slides.length - 1)}
-                />
-              </>
-            )}
+              return slides.slice(start, end).map((_, idx) => {
+                const realIndex = start + idx;
+                return (
+                  <span
+                    key={realIndex}
+                    className={`w-[13px] h-[4px] rounded-full cursor-pointer transition-all ${activeIndex === realIndex ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    onClick={() => setActiveIndex(realIndex)}
+                  />
+                );
+              });
+            })()}
           </div>
 
+          {/* Next Button */}
           <button
             onClick={handleNextClick}
-            className="cust-next-btn bg-[#ffffff] p-[7px] rounded-full " style={{ boxShadow: '2px 4px 5px 0px #D0CCF4' }}
+            className="cust-next-btn bg-[#ffffff] p-[7px] rounded-full"
+            style={{ boxShadow: '2px 4px 5px 0px #D0CCF4' }}
           >
-            <span className="text-[20px] font-bold">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-3"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-3">
+              <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
           </button>
+
         </div>
       )}
+
 
 
     </div>

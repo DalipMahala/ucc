@@ -1,4 +1,5 @@
 import React from 'react'
+import { notFound } from "next/navigation";
 import Layout from "@/app/components/Layout";
 import Overview from './playerComponents/Overview';
 import Banner from './playerComponents/Banner';
@@ -9,7 +10,7 @@ import { PlayerStats, PlayerAdvanceStats, Ranking, PlayerProfile } from "@/contr
 import { urlStringEncode} from "@/utils/utility";
 
 
-type Params = Promise<{ playerId: number; playerTap: string; }>
+type Params = Promise<{ playerId: number; playerTap: string; playerName: string;}>
 
 interface FrMatch {
     match_info: any;
@@ -21,30 +22,35 @@ export default async function page(props: { params: Params }) {
   const params = await props.params;
   const playerTab = params?.playerTap;
   const playerId = params?.playerId;
-
+  const playerName = params?.playerName;
+  
   const playerStats = await PlayerStats(playerId);
   const playerAdvanceStats = await PlayerAdvanceStats(playerId);
-  const playerProfile = await PlayerProfile(playerId);
+  const playerProfile = await PlayerProfile(playerId,playerName);
   const ranking = await Ranking();
-  const urlString = urlStringEncode(playerStats?.player?.first_name)+"/"+playerStats?.player?.pid;
-    //  console.log('params', playerStats);
+  const urlString = playerName+"/"+playerId;
+    //  console.log('params', playerProfile);
+
+  if (playerProfile.length <= 0) {
+      notFound();
+    }
 
 
-    let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/featuredMatches`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
-        },
-        cache: "no-store",
-      });
-      let featuredmatchArray = await response.json();
+    // let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/featuredMatches`, {
+    //     method: "GET",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+    //     },
+    //     cache: "no-store",
+    //   });
+    //   let featuredmatchArray = await response.json();
       
-      const filteredMatches = featuredmatchArray?.data?.map(({ match_info, ...rest }:FrMatch) => ({
-        ...match_info,
-        ...rest
-      }));
-      const featuredMatch = filteredMatches;
+    //   const filteredMatches = featuredmatchArray?.data?.map(({ match_info, ...rest }:FrMatch) => ({
+    //     ...match_info,
+    //     ...rest
+    //   }));
+    //   const featuredMatch = filteredMatches;
 
 
     return (

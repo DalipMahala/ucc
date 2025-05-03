@@ -8,6 +8,8 @@ import { urlStringEncode } from "../../../utils/utility";
 import { format, isSameDay } from "date-fns";
 import CountdownTimer from "@/app/components/countdownTimer";
 import PlayerImage from "@/app/components/PlayerImage";
+import SeriesListNews from "@/app/series/seriesComponents/SeriesListNews";
+import PLSeries from "@/app/components/popularSeries";
 
 interface Team {
   teamLast5match: any | null;
@@ -44,9 +46,10 @@ export default function Team({
 
   const captains = teamPlayers?.[0]?.captains;
   const teamData = teamPlayers?.[0]?.team;
-  const teamType = params?.teamType ? params?.teamType : captains?.[0]?.format_str;
+  const teamType = params?.teamType ? params?.teamType : captains?.[0]?.format_str ?? 'odi';
   const teamCaptains = captains.filter((captain: { format_str: string; }) => captain.format_str === teamType);
   const squads = teamPlayers?.[0]?.players?.[teamType];
+  const coach = teamData?.head_coach;
   // console.log("captain", coach);
 
   let total_match = teamDetails?.total_match_odi;
@@ -98,8 +101,9 @@ export default function Team({
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 my-4 px-2 lg:px-0">
       <div className="md:grid grid-cols-12 gap-4">
+      <div className="lg:col-span-8 md:col-span-7">
         <div className="lg:col-span-8 md:col-span-7">
-          <Banner teamDetails={teamDetails}></Banner>
+          <Banner teamDetails={teamDetails} teamType={teamType} coach={coach} teamCaptains={teamCaptains}></Banner>
 
           {captains.length > 0 &&
             <div id="tabs" className="mb-4">
@@ -350,8 +354,8 @@ export default function Team({
                         ucmatch?.teama?.short_name +
                         "-vs-" +
                         ucmatch?.teamb?.short_name +
-                        "-match-" +
-                        ucmatch?.match_number +
+                        "-" +
+                        ucmatch?.subtitle +
                         "-" +
                         ucmatch?.competition?.title
                       ) +
@@ -449,8 +453,8 @@ export default function Team({
                             ucmatch?.teama?.short_name +
                             "-vs-" +
                             ucmatch?.teamb?.short_name +
-                            "-match-" +
-                            ucmatch?.match_number +
+                            "-" +
+                            ucmatch?.subtitle +
                             "-" +
                             ucmatch?.competition?.title
                           ) +
@@ -525,8 +529,8 @@ export default function Team({
                         ucmatch?.teama?.short_name +
                         "-vs-" +
                         ucmatch?.teamb?.short_name +
-                        "-match-" +
-                        ucmatch?.match_number +
+                        "-" +
+                        ucmatch?.subtitle +
                         "-" +
                         ucmatch?.competition?.title
                       ) +
@@ -625,8 +629,8 @@ export default function Team({
                             ucmatch?.teama?.short_name +
                             "-vs-" +
                             ucmatch?.teamb?.short_name +
-                            "-match-" +
-                            ucmatch?.match_number +
+                            "-" +
+                            ucmatch?.subtitle +
                             "-" +
                             ucmatch?.competition?.title
                           ) +
@@ -921,6 +925,11 @@ export default function Team({
               </div>
             </div>
           </div>
+        </div>
+        </div>
+        <div className="lg:col-span-4 md:col-span-5">
+          <PLSeries />
+          <SeriesListNews></SeriesListNews>
         </div>
       </div>
     </section>

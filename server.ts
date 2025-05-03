@@ -1,121 +1,194 @@
-const WebSocket = require("ws");
+import { WebSocket } from "ws";
 import db from "./src/config/db";
-import fs from "fs";
-import path from "path";
-import s3 from './src/lib/aws'
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import s3 from './src/lib/aws'
 
 const BUCKET_NAME = 'uc-application';
+const LIFETIME_TOKEN = "7b58d13da34a07b0a047e129874fdbf4";
 
 class WebSocketService {
-  private socket: WebSocket | null = null;
-  ws: any;
-  retryCount: number = 0;
-  maxRetries: number = 10;
-  reconnectInterval: number = 5000;
+  private ws: WebSocket | null = null;
+  private retryCount: number = 0;
+  private maxRetries: number = Infinity; // Unlimited retries for lifetime token
+  private reconnectInterval: number = 5000;
+  private connectionTimeout: number = 30000; // 30 seconds connection timeout
+  private heartbeatInterval: NodeJS.Timeout | null = null;
+  private connectionTimeoutRef: NodeJS.Timeout | null = null;
 
-  async connect() {
-    try {
-      this.ws = new WebSocket(
-        "ws://webhook.entitysport.com:8087/connect?token=7b58d13da34a07b0a047e129874fdbf4"
-      );
-
-      this.ws.on("open", () => {
-        console.log("✅ WebSocket Connected");
-        this.retryCount = 0;
-      });
-
-      this.ws.on("message", async (data: string) => {
-        try {
-          const parsed = JSON.parse(data);
-          if (parsed.response) {
-            await this.processData(parsed.response);
-          }
-        } catch (err) {
-          console.error("Data processing error:", err);
-        }
-      });
-
-      this.ws.on("close", () => {
-        console.log("❌ WebSocket Disconnected");
-        this.reconnect();
-      });
-
-      this.ws.on("error", (err: any) => {
-        console.error("WebSocket Error:", err);
-        this.reconnect();
-      });
-    } catch (err) {
-      console.error("Connection error:", err);
-      this.reconnect();
-    }
+  constructor() {
+    this.connect();
   }
 
-  async processData(data: any) {
+  private connect() {
+    this.cleanup(); // Clean up previous connection if exists
 
-    const matchId = data.match_id;
-    console.log(`Data event ${data}`);
-    // Ball-by-ball data
-      if (data.ball_event) {
-        const query2 = `UPDATE match_info SET ball_event = '${data.ball_event}' WHERE match_id IN (${matchId})`;
+    console.log(`⌛ Connecting to WebSocket (attempt ${this.retryCount + 1})...`);
 
-        await db.query(query2);
-        console.log(`Data saved for event ${data.ball_event}`);
-      }
-
-    if (!data.match_id || !data.match_info) return;
-    console.log(
-      `Data ${data.match_id} saved for match ${data.match_info.title}`
+    this.ws = new WebSocket(
+      `ws://webhook.entitysport.com:8087/connect?token=${LIFETIME_TOKEN}`
     );
-    try {
-      // Match data
-      const matches = data;
+
+    // Set connection timeout
+    this.connectionTimeoutRef = setTimeout(() => {
+      if (this.ws?.readyState !== WebSocket.OPEN) {
+        console.warn('Connection timeout reached. Reconnecting...');
+        this.ws?.terminate();
+        this.scheduleReconnect();
+      }
+    }, this.connectionTimeout);
+
+    this.ws.on("open", () => {
+      this.retryCount = 0;
+      clearTimeout(this.connectionTimeoutRef!);
+      console.log("✅ WebSocket Connected");
       
+      // Start heartbeat
+      this.heartbeatInterval = setInterval(() => {
+        if (this.ws?.readyState === WebSocket.OPEN) {
+          this.ws.ping();
+        }
+      }, 30000); // Send ping every 30 seconds
+    });
 
-      const fileData = JSON.stringify(matches, null, 2);
-                const s3Key = `MatchData/match_${matchId}.json`;
-                const params:any = {
-                  Bucket: BUCKET_NAME,
-                  Key: s3Key,
-                  Body: fileData, 
-                  ContentType: 'application/json', 
-                };
-      
-                const command = new PutObjectCommand(params);
-                const s3Upload = await s3.send(command);
+    this.ws.on("pong", () => {
+      console.debug('🏓 WebSocket heartbeat acknowledged');
+    });
 
-     
-      const query = `
-                     INSERT INTO match_info (match_id, fileName, updated_date) 
-                      VALUES (${matchId}, '${s3Key}', NOW()) 
-                      ON DUPLICATE KEY UPDATE 
-                      fileName = VALUES(fileName),
-                      updated_date = NOW()`;
+    this.ws.on("message", async (data: string) => {
+      try {
+        const parsed = JSON.parse(data);
+        if (parsed.response) {
+          await this.processData(parsed.response);
+        }
+      } catch (err) {
+        console.error("Data processing error:", err);
+      }
+    });
 
-      //  const values =  [matchId, filePath ] ;
-      await db.query(query);
+    this.ws.on("close", (code, reason) => {
+      console.warn(`❌ WebSocket Disconnected (code: ${code}, reason: ${reason.toString()})`);
+      this.cleanup();
+      this.scheduleReconnect();
+    });
 
-        
-      console.log(`Data saved for match ${data.match_id}`);
-    } catch (err) {
-      console.error("Database error:", err);
+    this.ws.on("error", (err: Error) => {
+      console.error("WebSocket Error:", err.message);
+      if (err.message.includes("invalid token")) {
+        console.error("Permanent token error - check token validity");
+        process.exit(1); // Exit if token is truly invalid
+      }
+    });
+  }
+
+  private cleanup() {
+    if (this.heartbeatInterval) {
+      clearInterval(this.heartbeatInterval);
+      this.heartbeatInterval = null;
+    }
+    
+    if (this.connectionTimeoutRef) {
+      clearTimeout(this.connectionTimeoutRef);
+      this.connectionTimeoutRef = null;
+    }
+    
+    if (this.ws) {
+      this.ws.removeAllListeners();
+      if (this.ws.readyState === WebSocket.OPEN) {
+        this.ws.close();
+      }
+      this.ws = null;
     }
   }
 
-  reconnect() {
+  private scheduleReconnect() {
     if (this.retryCount >= this.maxRetries) {
-      console.log("Max reconnection attempts reached. Stopping retries.");
+      console.error("Max reconnection attempts reached. Restarting process...");
+      process.exit(1); // Let PM2 restart the service
       return;
     }
 
     this.retryCount++;
-    console.log(
-      `Reconnecting attempt ${this.retryCount}/${this.maxRetries}...`
+    const delay = Math.min(
+      this.reconnectInterval * Math.pow(1.5, this.retryCount),
+      60000 // Max 1 minute delay
     );
-    setTimeout(() => this.connect(), this.reconnectInterval);
+    
+    console.log(`⏳ Reconnecting in ${delay/1000} seconds...`);
+    setTimeout(() => this.connect(), delay);
+  }
+
+  private async processData(data: any) {
+    if (!data.match_id) return;
+
+    try {
+      const matchId = data.match_id;
+      
+      // Ball-by-ball data
+      if (data.ball_event) {
+        await db.query(
+          `UPDATE match_info SET ball_event = ? WHERE match_id = ?`,
+          [data.ball_event, matchId]
+        );
+        console.debug(`Ball event updated for match ${matchId}`);
+      }
+
+      // Match data
+      if (data.match_info) {
+        const s3Key = `MatchData/match_${matchId}.json`;
+        const fileData = JSON.stringify(data, null, 2);
+        
+        await this.uploadToS3(s3Key, fileData);
+        await this.updateMatchRecord(matchId, s3Key);
+        
+        console.log(`✅ Match data saved for ${data.match_info.title}`);
+      }
+    } catch (err) {
+      console.error("Data processing failed:", err);
+    }
+  }
+
+  private async uploadToS3(key: string, data: string) {
+    try {
+      await s3.send(
+        new PutObjectCommand({
+          Bucket: BUCKET_NAME,
+          Key: key,
+          Body: data,
+          ContentType: 'application/json',
+        })
+      );
+    } catch (err) {
+      console.error("S3 upload failed:", err);
+      throw err;
+    }
+  }
+
+  private async updateMatchRecord(matchId: number, fileName: string) {
+    await db.query(`
+      INSERT INTO match_info (match_id, fileName, updated_date) 
+      VALUES (?, ?, NOW()) 
+      ON DUPLICATE KEY UPDATE 
+        fileName = VALUES(fileName),
+        updated_date = NOW()`,
+      [matchId, fileName]
+    );
   }
 }
 
+// Handle process events
+process.on("SIGINT", () => {
+  console.log("Shutting down gracefully...");
+  process.exit(0);
+});
+
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err);
+  process.exit(1);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.error("Unhandled Rejection:", err);
+});
+
 // Start service
 const service = new WebSocketService();
-service.connect();

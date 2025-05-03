@@ -41,9 +41,10 @@ export default function Overview({
     ? matchPlaying11?.teama?.squads || []
     : matchPlaying11?.teamb?.squads || [];
  
+  const cmatch = seriesMatches?.resultMatch.reverse();
   const completedMatch = seriesMatches?.resultMatch?.filter(
     (m: any) => [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teams?.tid))
-  )?.[0] || null;
+  )?.reverse()?.[0] || null;
   
   const upcomingMatch = seriesMatches?.scheduledMatch?.filter(
     (m: any) => [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teams?.tid))
@@ -182,7 +183,7 @@ export default function Overview({
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-      <div id="tabs" className="my-4">
+      <div id="tabs" className="mt-4">
         <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
           <Link
             href={
@@ -251,7 +252,7 @@ export default function Overview({
               urlStringEncode(pointTables?.title + "-" + pointTables?.season) +
               "/" +
               pointTables?.cid +
-              "/stats/most-run"
+              "/stats/batting-most-run"
             }
           >
             <button className="font-medium py-2 px-3 whitespace-nowrap">
@@ -264,7 +265,7 @@ export default function Overview({
       <div id="tab-content">
         <div id="info" className="">
           <div className="md:grid grid-cols-12 gap-4">
-            <div className="lg:col-span-8 md:col-span-7">
+            <div className="lg:col-span-8 md:col-span-7 mt-4">
               <div className="rounded-lg bg-white mb-4">
                 <div className="p-4">
                   <h3 className="text-[15px] font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
@@ -331,6 +332,7 @@ export default function Overview({
                 {/* <!-- Featured Matches desktop view  --> */}
                 <div className="border-t-[1px] border-[#E4E9F0]"></div>
                 <div className="hidden lg:block">
+                <Link href={"/scorecard/" + urlStringEncode(completedMatch?.teama?.short_name + "-vs-" + completedMatch?.teamb?.short_name + "-" + completedMatch?.subtitle + "-" + completedMatch?.competition?.title + "-" + completedMatch?.competition?.season) + "/" + completedMatch.match_id}>
                   <div className="py-3 flex justify-between items-center">
                     <div className="flex space-x-2 font-medium	w-full">
                       <div className="flex items-center space-x-1 flex-col">
@@ -374,12 +376,12 @@ export default function Overview({
                       </div>
                     </div>
                   </div>
-
+                  </Link>
                   
                 </div>
 
                 {/* <!-- Featured Matches responsive view view  --> */}
-                
+                <Link href={"/scorecard/" + urlStringEncode(completedMatch?.teama?.short_name + "-vs-" + completedMatch?.teamb?.short_name + "-" + completedMatch?.subtitle + "-" + completedMatch?.competition?.title + "-" + completedMatch?.competition?.season) + "/" + completedMatch.match_id}>
                 <div className="lg:hidden">
                   <div className="py-4 px-3 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]">
                     <p className="text-[#909090] text-[12px] mb-4 font-normal">
@@ -431,7 +433,7 @@ export default function Overview({
                   </div>
 
                 </div>
-                
+                </Link>
               </div>
               }
               {upcomingMatch && 
@@ -442,6 +444,7 @@ export default function Overview({
 
                 {/* <!-- Featured Matches desktop view  --> */}
                 <div className="border-t-[1px] border-[#E4E9F0]"></div>
+                <Link href={"/moreinfo/" + urlStringEncode(upcomingMatch?.teama?.short_name + "-vs-" + upcomingMatch?.teamb?.short_name + "-" + upcomingMatch?.subtitle + "-" + upcomingMatch?.competition?.title + "-" + upcomingMatch?.competition?.season) + "/" + upcomingMatch.match_id}>
                 <div className="hidden lg:block">
                   
                   <div className="py-3 pb-0 flex justify-between items-center">
@@ -479,11 +482,12 @@ export default function Overview({
                     </div>
                   </div>
                 </div>
+                </Link>
 
                 {/* <!-- Featured Matches responsive view view  --> */}
 
                 <div className="lg:hidden">
-                  
+                <Link href={"/moreinfo/" + urlStringEncode(upcomingMatch?.teama?.short_name + "-vs-" + upcomingMatch?.teamb?.short_name + "-" + upcomingMatch?.subtitle + "-" + upcomingMatch?.competition?.title + "-" + upcomingMatch?.competition?.season) + "/" + upcomingMatch.match_id}>
                   <div className="py-4 px-3 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]">
                     <p className="text-[#909090] text-[12px] mb-4 font-normal">
                     {upcomingMatch?.subtitle} {upcomingMatch?.competition?.abbr}
@@ -524,6 +528,7 @@ export default function Overview({
                       </div>
                     </div>
                   </div>
+                  </Link>
                 </div>
               </div>
               }
@@ -578,7 +583,7 @@ export default function Overview({
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
-                          {rounds.standings?.map(
+                          {rounds.standings?.slice(0,4)?.map(
                             (point: any, index: number) => (
                               <tr key={index}>
                                 <td className="md:px-2 pl-[14px] py-3 w-[10px]">
@@ -665,6 +670,19 @@ export default function Overview({
                         </tbody>
                       </table>
                     </div>
+                    {rounds?.standings?.length > 4 &&
+                      <div className="px-4 text-center">
+                          <Link href={
+              "/series/" +
+              urlStringEncode(pointTables?.title + "-" + pointTables?.season) +
+              "/" +
+              pointTables?.cid +
+              "/points-table"
+            } className="px-8 bg-[#081736] font-semibold text-white py-2 rounded hover:bg-blue-700">
+                            View More
+                          </Link>
+                        </div>
+                      }
                   </div>
                 </div>
               ))}
@@ -794,15 +812,16 @@ export default function Overview({
 
               <div className="rounded-lg bg-[#ffffff] mb-4 p-4">
                 <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
-                  Kolkata knight Rider (Last 5 Matches)
+                  {teams?.title} (Last 5 Matches)
                 </h3>
 
                 {/* <!-- Featured Matches desktop view  --> */}
                 <div className="border-t-[1px] border-[#E4E9F0]"></div>
                 <div className="hidden lg:block">
                   {teamLast5match?.map((match: any, index: number) => (
-                    <React.Fragment key={index}>
+                    <Link key={index} href={"/scorecard/" + urlStringEncode(match?.teama?.short_name + "-vs-" + match?.teamb?.short_name + "-" + match?.subtitle + "-" + match?.competition?.title + "-" + match?.competition?.season) + "/" + match.match_id}>
                       <div className="py-3 flex justify-between items-center">
+                      
                         <div className="flex space-x-2 font-medium	w-full">
                           <div className="flex items-center space-x-1 flex-col">
                             <Image
@@ -858,11 +877,12 @@ export default function Overview({
                             </span>
                           </div>
                         </div>
+                        
                       </div>
                       {index < teamLast5match?.length - 1 && (
                         <div className="border-t-[1px] border-[#E4E9F0]"></div>
                       )}
-                    </React.Fragment>
+                    </Link>
                   ))}
                 </div>
 
@@ -939,6 +959,7 @@ export default function Overview({
                         className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]"
                         key={index}
                       >
+                        <Link href={"/player/"+urlStringEncode(player?.name)+"/"+player?.player_id}>
                         <div className="relative">
                           <PlayerImage
                             key={player?.player_id}
@@ -946,6 +967,20 @@ export default function Overview({
                             height={55}
                             width={55}
                             className="h-[55px] mx-auto rounded-full mb-2"
+                          />
+                          <Image
+                            loading="lazy"
+                            src={player?.role === "all"
+                              ? "/assets/img/player/bat-ball.png"
+                              : player?.role === "wk"
+                              ? "/assets/img/player/bat.png"
+                              : player?.role === "bat"
+                              ? "/assets/img/player/bat.png"
+                              : "/assets/img/player/ball.png"}
+                            className="h-[27px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
+                            width={27}
+                            height={27}
+                            alt="1"
                           />
                         </div>
                         <h3 className="text-[14px] font-medium text-gray-800">
@@ -963,6 +998,7 @@ export default function Overview({
                               : "Bowler"}
                           </p>
                         </div>
+                        </Link>
                       </div>
                     ))}
                   </div>
@@ -1014,7 +1050,7 @@ export default function Overview({
             </div>
 
             <div className="lg:col-span-4 md:col-span-5">
-              <div className="bg-white rounded-lg p-4 mb-4">
+              <div className="bg-white rounded-lg p-4 mb-4 hidden">
                 <div className="flex gap-1 items-center justify-between">
                   <div className="flex gap-1 items-center">
                     <div className="col-span-4 relative">
@@ -1066,265 +1102,75 @@ export default function Overview({
                   </h3>
                 </div>
                 <div className="bg-white rounded-lg px-4">
-                  <div className="border-b mb-4">
-                    <button
-                      className="w-full flex text-[14px] justify-between items-center pb-3 pt-4"
-                      onClick={() => toggleOpen("mostRuns")}
-                    >
-                      <span className="flex items-center font-medium text-[#394351]">
-                        Most Runs in IPL
-                      </span>
-                      <span className="transform transition-transform ">
-                        <Image
-                          src="/assets/img/arrow.png"
-                          className="h-[7px]"
-                          width={10}
-                          height={15}
-                          alt="arrow"
-                        />
-                      </span>
-                    </button>
-                    {open.mostRuns && (
-                      <div className="pl-8 py-2 space-y-2 font-normal text-[14px] text-[#51555E]">
-                        <p>Bangabandhu T20 C</p>
+                      <div className="border-b mb-4">
+                        <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) +"/" + pointTables?.cid +"/stats/batting-most-run"}
+                          className="w-full flex text-[14px] justify-between items-center pb-3 pt-4" >
+                          <span className="flex items-center font-medium text-[#394351]">
+                            Most Runs in IPL
+                          </span>
+                          
+                        </Link>
+                        
                       </div>
-                    )}
-                  </div>
 
-                  <div className="border-b mb-4">
-                    <button
-                      className="w-full flex text-[14px] justify-between items-center pb-3"
-                      onClick={() => toggleOpen("mostHundreds")}
-                    >
-                      <span className="flex items-center font-medium text-[#394351]">
-                        Most Hundreds in IPL
-                      </span>
-                      <span className="transform transition-transform ">
-                        <Image
-                          src="/assets/img/arrow.png"
-                          className="h-[7px]"
-                          width={10}
-                          height={15}
-                          alt="arrow"
-                        />
-                      </span>
-                    </button>
-                    {open.mostHundreds && (
-                      <div className="pl-8 py-2 space-y-2 font-normal text-[14px] text-[#51555E]">
-                        <p>Bangabandhu T20 C</p>
+                      <div className="border-b mb-4">
+                        <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) +"/" + pointTables?.cid+"/stats/batting-most-hundreds"}
+                          className="w-full flex text-[14px] justify-between items-center pb-3" >
+                          <span className="flex items-center font-medium text-[#394351]">
+                            Most Hundreds in IPL
+                          </span>
+                         
+                        </Link>
+                       
                       </div>
-                    )}
-                  </div>
 
-                  <div className="border-b mb-4">
-                    <button
-                      className="w-full flex text-[14px] justify-between items-center pb-3"
-                      onClick={() => toggleOpen("mostFifties")}
-                    >
-                      <span className="flex items-center font-medium text-[#394351]">
-                        Most Fifties in IPL
-                      </span>
-                      <span className="transform transition-transform ">
-                        <Image
-                          src="/assets/img/arrow.png"
-                          className="h-[7px]"
-                          width={10}
-                          height={15}
-                          alt="arrow"
-                        />
-                      </span>
-                    </button>
-                    {open.mostFifties && (
-                      <div className="pl-8 py-2 space-y-2 font-normal text-[14px] text-[#51555E]">
-                        <p className="flex items-center">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="size-3 text-[#1A80F8] mr-1"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                            />
-                          </svg>
-                          Bangabandhu T20 C
-                        </p>
-                        <p className="flex items-center">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="size-3 text-[#1A80F8] mr-1"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                            />
-                          </svg>
-                          Bangladesh Premier
-                        </p>
-                        <p className="flex items-center">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="size-3 text-[#1A80F8] mr-1"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                            />
-                          </svg>
-                          Bangladesh Tri-Series
-                        </p>
-                        <p className="flex items-center">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="size-3 text-[#1A80F8] mr-1"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                            />
-                          </svg>
-                          BCB Presidents Cup
-                        </p>
-                        <p className="flex items-center">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="size-3 text-[#1A80F8] mr-1"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                            />
-                          </svg>
-                          Dhaka Premier League
-                        </p>
+                      <div className="border-b mb-4">
+                        <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) +"/" + pointTables?.cid+"/stats/batting-most-fifties"}
+                          className="w-full flex text-[14px] justify-between items-center pb-3" >
+                          <span className="flex items-center font-medium text-[#394351]">
+                            Most Fifties in IPL
+                          </span>
+                         
+                        </Link>
+                       
                       </div>
-                    )}
-                  </div>
 
-                  <div className="border-b mb-4">
-                    <button
-                      className="w-full flex text-[14px] justify-between items-center pb-3"
-                      onClick={() => toggleOpen("mostDucks")}
-                    >
-                      <span className="flex items-center font-medium text-[#394351]">
-                        Most Ducks in IPL
-                      </span>
-                      <span className="transform transition-transform ">
-                        <Image
-                          src="/assets/img/arrow.png"
-                          className="h-[7px]"
-                          width={10}
-                          height={15}
-                          alt="arrow"
-                        />
-                      </span>
-                    </button>
-                    {open.mostDucks && (
-                      <div className="pl-8 py-2 space-y-2 font-normal text-[14px] text-[#51555E]">
-                        <p>Bangabandhu T20 C</p>
-                      </div>
-                    )}
-                  </div>
 
-                  <div className="border-b mb-4">
-                    <button
-                      className="w-full flex text-[14px] justify-between items-center pb-3"
-                      onClick={() => toggleOpen("highestBattingAverage")}
-                    >
-                      <span className="flex items-center font-medium text-[#394351]">
-                        Highest Batting Average in IPL
-                      </span>
-                      <span className="transform transition-transform ">
-                        <Image
-                          src="/assets/img/arrow.png"
-                          className="h-[7px]"
-                          width={10}
-                          height={15}
-                          alt="arrow"
-                        />
-                      </span>
-                    </button>
-                    {open.highestBattingAverage && (
-                      <div className="pl-8 py-2 space-y-2 font-normal text-[14px] text-[#51555E]">
-                        <p>Bangabandhu T20 C</p>
+                      <div className="border-b mb-4">
+                        <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) +"/" + pointTables?.cid+"/stats/batting-highest-average"}
+                          className="w-full flex text-[14px] justify-between items-center pb-3" >
+                          <span className="flex items-center font-medium text-[#394351]">
+                            Highest Batting Average in IPL
+                          </span>
+                         
+                        </Link>
+                        
                       </div>
-                    )}
-                  </div>
+                      
+                      <div className="border-b mb-4">
+                        <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) +"/" + pointTables?.cid+"/stats/bowling-most-wicket"}
+                          className="w-full flex text-[14px] justify-between items-center pb-3" >
+                          <span className="flex items-center font-medium text-[#394351]">
+                            Most Wickets in IPL
+                          </span>
+                          
+                        </Link>
+                        
+                      </div>
 
-                  <div className="border-b mb-4">
-                    <button
-                      className="w-full flex text-[14px] justify-between items-center pb-3"
-                      onClick={() => toggleOpen("highestScore")}
-                    >
-                      <span className="flex items-center font-medium text-[#394351]">
-                        Highest Individual Score in IPL
-                      </span>
-                      <span className="transform transition-transform ">
-                        <Image
-                          src="/assets/img/arrow.png"
-                          className="h-[7px]"
-                          width={10}
-                          height={15}
-                          alt="arrow"
-                        />
-                      </span>
-                    </button>
-                    {open.highestScore && (
-                      <div className="pl-8 py-2 space-y-2 font-normal text-[14px] text-[#51555E]">
-                        <p>Bangabandhu T20 C</p>
+                      <div className="border-b mb-4">
+                        <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) +"/" + pointTables?.cid+"/stats/bowling-best-average"}
+                          className="w-full flex text-[14px] justify-between items-center pb-3">
+                          <span className="flex items-center font-medium text-[#394351]">
+                            Highest Bowling Average in IPL
+                          </span>
+                         
+                        </Link>
+                        
                       </div>
-                    )}
-                  </div>
 
-                  <div className="mb-4">
-                    <button
-                      className="w-full flex text-[14px] justify-between items-center pb-3"
-                      onClick={() => toggleOpen("mostMatchesAsCaptain")}
-                    >
-                      <span className="flex items-center font-medium text-[#394351]">
-                        Most Matches as Captain in IPL
-                      </span>
-                      <span className="transform transition-transform ">
-                        <Image
-                          src="/assets/img/arrow.png"
-                          className="h-[7px]"
-                          width={10}
-                          height={15}
-                          alt="arrow"
-                        />
-                      </span>
-                    </button>
-                    {open.mostMatchesAsCaptain && (
-                      <div className="pl-8 py-2 space-y-2 font-normal text-[14px] text-[#51555E]">
-                        <p>Bangabandhu T20 C</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                  
+                    </div>
               </div>
 
               <PLSeries />

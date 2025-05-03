@@ -120,7 +120,7 @@ export default function Squads({
               urlStringEncode(pointTables?.title + "-" + pointTables?.season) +
               "/" +
               pointTables?.cid +
-              "/stats/most-run"
+              "/stats/batting-most-run"
             }
           >
             <button className="font-medium py-2 px-3 whitespace-nowrap">

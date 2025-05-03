@@ -8,12 +8,12 @@ import { urlStringEncode } from "../../utils/utility";
 interface Competition {
   cid: number;
   title: string;
+  season: string;
 }
 
 interface Country {
-  map: any;
-  name: string;
-  flag: string;
+  country_name: string;
+  country_code: string;
   competitions: Competition[];
 }
 
@@ -25,29 +25,52 @@ export default function CountriesList({ countries }: countries) {
   const [search, setSearch] = useState("");
   const [expanded, setExpanded] = useState<string | null>(null);
 
-  //   const filteredCountries = countries.filter((country:any) =>
-  //     country.country_name.toLowerCase().includes(search.toLowerCase())
-  //   );
-console.log(countries);
   const filteredCountries = countries
-    ?.map((country: any) => {
-      const filteredLeagues = country?.competitions?.filter((league: any) =>
-        league.title.toLowerCase().includes(search.toLowerCase())
+    ?.map((country: Country) => {
+      const countryNameMatch = country.country_name.toLowerCase().includes(search.toLowerCase());
+      
+      const filteredCompetitions = country.competitions?.filter((competition: Competition) => 
+        competition.title.toLowerCase().includes(search.toLowerCase())
       );
 
-      // Show country if its name matches OR if it has matching leagues
-      if (
-        country.country_name.toLowerCase().includes(search.toLowerCase()) ||
-        filteredLeagues.length > 0
-      ) {
-        return { ...country, competitions: filteredLeagues };
+      // If search is empty, show all countries with all competitions
+      if (search === "") {
+        return { ...country, competitions: country.competitions };
+      }
+
+      // If country name matches, show all its competitions
+      if (countryNameMatch) {
+        return { ...country, competitions: country.competitions };
+      }
+
+      // If competitions match, show country with only matching competitions
+      if (filteredCompetitions.length > 0) {
+        return { ...country, competitions: filteredCompetitions };
       }
 
       return null;
     })
     .filter(Boolean);
 
-
+  // Auto-expand countries that have matching competitions when searching
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    
+    // If search is not empty, expand all countries that have matching competitions
+    if (e.target.value.trim() !== "") {
+      const matchingCountries = filteredCountries
+        .filter((country: Country | null) => country !== null)
+        .map((country: Country) => country.country_name);
+      
+      // If only one country matches, expand it; otherwise expand all matching
+      if (matchingCountries.length === 1) {
+        setExpanded(matchingCountries[0]);
+      }
+    } else {
+      // If search is empty, collapse all
+      setExpanded(null);
+    }
+  };
 
   return (
     <>
@@ -65,73 +88,107 @@ console.log(countries);
               <input
                 className="font-medium text-[15px] outline-none"
                 type="text"
-                placeholder="Filter.."
+                placeholder="Filter countries or leagues..."
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={handleSearchChange}
               />
             </div>
             <div>
-              <Image loading="lazy"
+              <Image 
+                loading="lazy"
                 src="/assets/img/flag/search.png"
                 className="h-[14px]"
                 width={15}
                 height={15}
                 style={{ width: "15px", height: "15px" }}
-                alt=""
+                alt="Search"
               />
             </div>
           </form>
         </div>
 
         {/* Country Blocks */}
-
-        {filteredCountries?.map((country: any, index: number) => (
-          <div key={index} className="border-b mb-4">
-            <button className="w-full flex text-[14px] justify-between items-center pb-3" onClick={() =>
-              setExpanded(expanded === country.country_name ? null : country.country_name)
-            }>
-              <span className="flex items-center font-medium text-[#394351]">
-                <Image loading="lazy"
-                  src={`https://flagcdn.com/w320/${country.country_code.toLowerCase() === "wi" ? "kn" : country.country_code.toLowerCase() === "en" ? "gb" : country.country_code.toLowerCase()}.webp`}
-                  className="mr-3 rounded-full object-cover"
-                  width={20}
-                  height={20}
-                  style={{ width: "25px", height: "25px" }}
-                  alt={`${country.country_name} Flag`}
-                />
-                {country.country_name}
-              </span>
-              <span className="transform transition-transform">
-                <Image loading="lazy"
-                  src="/assets/img/arrow.png"
-                  className="h-[7px]"
-                  width={10}
-                  height={15}
-                  style={{ width: "auto", height: "auto" }}
-                  alt="Arrow"
-                />
-              </span>
-            </button>
-            {expanded === country.country_name && (
-              country?.competitions?.map((compt: any, index: number) => (
-                <div className="pl-8 py-2 space-y-2 font-normal  text-[13px] text-[#51555E]" key={index}>
-                  <div className="flex items-center gap-[2px]">
-                    <span>
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-3 text-[#1A80F8]">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
-                      </svg>
-                    </span>
-
-                    <Link className="hover:text-[#1a80f8]" href={"series/" + urlStringEncode(compt.title + "-" + compt.season) + "/" + compt.cid}>
-                      {" "}
-                      <p>{compt.title}</p>{" "}
-                    </Link>
-                  </div>
+        {filteredCountries?.length > 0 ? (
+          filteredCountries.map((country: any, index: number) => (
+            <div key={index} className="border-b mb-4">
+              <button 
+                className="w-full flex text-[14px] justify-between items-center pb-3" 
+                onClick={() =>
+                  setExpanded(expanded === country.country_name ? null : country.country_name)
+                }
+              >
+                <span className="flex items-center font-medium text-[#394351]">
+                  <Image 
+                    loading="lazy"
+                    src={`https://flagcdn.com/w320/${
+                      country.country_code.toLowerCase() === "wi" ? "kn" : 
+                      country.country_code.toLowerCase() === "en" ? "gb" : 
+                      country.country_code.toLowerCase()
+                    }.webp`}
+                    className="mr-3 rounded-full object-cover"
+                    width={20}
+                    height={20}
+                    style={{ width: "25px", height: "25px" }}
+                    alt={`${country.country_name} Flag`}
+                  />
+                  {country.country_name}
+                </span>
+                <span className={`transform transition-transform ${
+                  expanded === country.country_name ? "rotate-90" : ""
+                }`}>
+                  <Image 
+                    loading="lazy"
+                    src="/assets/img/arrow.png"
+                    className="h-[7px]"
+                    width={10}
+                    height={15}
+                    style={{ width: "auto", height: "auto" }}
+                    alt="Arrow"
+                  />
+                </span>
+              </button>
+              
+              {expanded === country.country_name && (
+                <div className="pl-8 py-2 space-y-2">
+                  {country.competitions?.length > 0 ? (
+                    country.competitions.map((compt: Competition, index: number) => (
+                      <div className="font-normal text-[13px] text-[#51555E]" key={index}>
+                        <div className="flex items-center gap-[2px]">
+                          <span>
+                            <svg 
+                              xmlns="http://www.w3.org/2000/svg" 
+                              fill="none" 
+                              viewBox="0 0 24 24" 
+                              strokeWidth="1.5" 
+                              stroke="currentColor" 
+                              className="size-3 text-[#1A80F8]"
+                            >
+                              <path 
+                                strokeLinecap="round" 
+                                strokeLinejoin="round" 
+                                d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" 
+                              />
+                            </svg>
+                          </span>
+                          <Link 
+                            className="hover:text-[#1a80f8]" 
+                            href={`series/${urlStringEncode(`${compt.title}-${compt.season}`)}/${compt.cid}`}
+                          >
+                            <p>{compt.title}</p>
+                          </Link>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-sm text-gray-500">No leagues found</p>
+                  )}
                 </div>
-              ))
-            )}
-          </div>
-        ))}
+              )}
+            </div>
+          ))
+        ) : (
+          <p className="py-4 text-center text-gray-500">No countries or leagues match your search</p>
+        )}
       </div>
     </>
   );

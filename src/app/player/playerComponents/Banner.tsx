@@ -28,41 +28,41 @@ export default function Banner({ playerStats, ranking }: Banner) {
     odiRank =
       playerRank?.batsmen?.odis?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
     testRank =
       playerRank?.batsmen?.tests?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
     t20Rank =
       playerRank?.batsmen?.t20s?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
   } else if (profile?.playing_role === "bowl") {
     odiRank =
       playerRank?.bowlers?.odis?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
     testRank =
       playerRank?.bowlers?.tests?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
     t20Rank =
       playerRank?.bowlers?.t20s?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
   } else if (profile?.playing_role === "all") {
     odiRank =
       playerRank?.["all-rounders"]?.odis?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
     testRank =
       playerRank?.["all-rounders"]?.tests?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
     t20Rank =
       playerRank?.["all-rounders"]?.t20s?.find(
         (item: { pid: number }) => Number(item.pid) === profile?.pid
-      )?.rating ?? "";
+      )?.rank ?? "";
   }
 
     return (

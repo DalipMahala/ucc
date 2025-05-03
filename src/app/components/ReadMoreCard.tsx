@@ -25,9 +25,9 @@ const ReadMoreCard = ({ title, content, wordLimit = 100, link }: ReadMoreCardPro
   return (
     <div className="">
       <h3 className="text-1xl font-semibold mb-1">{title}</h3>
-      <p className="text-gray-500 font-normal">
-        {isExpanded || !isLong ? content : truncated}
-      </p>
+      <p className="text-gray-500 font-normal"
+      dangerouslySetInnerHTML={{ __html: isExpanded || !isLong ? content : truncated }}
+      />
 
       {!isExpanded && isLong && (
         link ? (

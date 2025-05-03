@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
 
        // Fetch from database
     const [rows]: [any[], any] = await db.execute(
-      "SELECT * FROM match_info WHERE match_id = ?",[matchid]
+      "SELECT fileName, ball_event FROM match_info WHERE match_id = ?",[matchid]
     );
  
 
@@ -27,16 +27,22 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const filePath = rows[0].fileName;
+    const { fileName, ball_event } = rows[0];
 
-    const jsonArray = await getJsonFromS3( filePath as string);
+    const jsonArray = await getJsonFromS3( fileName as string);
+
 
       if (Array.isArray(jsonArray.live_odds) && jsonArray.live_odds.length === 0) {
         jsonArray.live_odds = {};
       }
 
+      
+    const responseData = {
+      ...jsonArray,
+      ball_event: ball_event
+    };
 
-    return NextResponse.json({ success: true, data: jsonArray});
+    return NextResponse.json({ success: true, data: responseData});
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json(

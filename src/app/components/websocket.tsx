@@ -83,8 +83,8 @@ class MatchWebSocket extends Component<object, MatchData> { // Changed from {} t
       ) {
         const match_status_note = updateStatusNoteDirect(data?.match_info);
         
-        const a = parseFloat(data?.live_odds?.matchodds?.teama?.back);
-        const b = parseFloat(data?.live_odds?.matchodds?.teamb?.back);
+        const a = parseFloat(data?.live_odds?.matchodds?.teama?.back || 0);
+        const b = parseFloat(data?.live_odds?.matchodds?.teamb?.back || 0);
         const lesserTeam = a < b 
           ? { matchId: data?.match_id,team: data?.match_info?.teama?.short_name, ...data?.live_odds?.matchodds?.teama } 
           : { matchId: data?.match_id,team: data?.match_info?.teamb?.short_name, ...data?.live_odds?.matchodds?.teamb };

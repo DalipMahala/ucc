@@ -509,7 +509,7 @@ export async function MatchCommentaryCompleted() {
   const CONCURRENT_LIMIT = 5;
   try {
     const matchQuery = `SELECT * FROM matches WHERE status = 2 and commentary = 1 and DATE(date_end_ist) BETWEEN DATE(NOW() - INTERVAL 15 DAY) AND DATE(NOW()) and latest_inning_number > 0 `;
-    // const matchQuery = `SELECT match_id, latest_inning_number FROM matches WHERE commentary = 1 and status = 3 and latest_inning_number > 0 `;
+    // const matchQuery = `SELECT match_id, latest_inning_number FROM matches WHERE commentary = 1 and status = 2 and latest_inning_number > 0 and match_id= 84159`;
     
     const [matchResults]: any = await db.query(matchQuery);
 
@@ -589,7 +589,7 @@ export async function MatchCommentaryCompleted() {
 export async function MatchStatistics() {
   try {
     // const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_statistics) or (status !=4 and date(date_start_ist) = date(now()))`;
-    const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_statistics) or (status = 3 and DATE(date_start_ist) BETWEEN DATE(NOW() - INTERVAL 1 DAY) AND DATE(NOW()))`;
+    const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_statistics) or (status = 2 and DATE(date_start_ist) BETWEEN DATE(NOW() - INTERVAL 1 DAY) AND DATE(NOW()))`;
     
     const [matchResults]: any = await db.query(matchQuery);
 
@@ -1529,9 +1529,9 @@ export async function InsertOrUpdatePlayers() {
           nationality: any;
         }) => [
           players.pid,
-          players.title,
-          players.short_name,
-          players.first_name,
+          players.title.replace(/'/g, ' '),
+          players.short_name.replace(/'/g, ' '),
+          players.first_name.replace(/'/g, ' '),
           players.last_name,
           players.middle_name,
           players.birthdate,

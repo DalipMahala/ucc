@@ -21,7 +21,8 @@ import {
   MatchStatistics,
   MatchCommentary,
   SeriesPointsTable,
-  SeriesPointsTableMatches
+  SeriesPointsTableMatches,
+  isValidMatch
 } from "@/controller/matchInfoController";
 
 import ChatComponent from "../components/websocket";
@@ -95,6 +96,12 @@ export default async function page(props: { params: Params }) {
   const matchTab = params.matchTab;
   const matchType = params.matchType;
   const matchTitle = params.matchTitle;
+  const urls = matchTab+"/"+matchid;
+  const isValid = await isValidMatch(matchid,urls);
+  if(!isValid){
+    notFound();
+  }
+
 
   const liveMatch = await MatcheInfo(matchid);
   const last10Match = await Last10Match(matchid);
@@ -106,7 +113,7 @@ export default async function page(props: { params: Params }) {
   const SeriesDetails = await seriesById(cid);
   const standings = SeriesDetails?.standing?.standings;
   const isPointTable = Array.isArray(standings) && standings.length > 0;
-  console.log('File',liveMatch);
+  
   let matchCommentary = "";
   if (
     liveMatch?.match_info?.status_str !== "Scheduled" &&
@@ -199,6 +206,7 @@ export default async function page(props: { params: Params }) {
             matchUrl={matchTab}
             seriesPointsTable={seriesPointsTable}
             seriesPointsTableMatches={seriesPointsTableMatches}
+            isPointTable={isPointTable}
           />
         ) : null
       ) : matchType === "moreinfo" ? (
@@ -242,6 +250,7 @@ export default async function page(props: { params: Params }) {
           matchUrl={matchTab}
           seriesPointsTable={seriesPointsTable}
           seriesPointsTableMatches={seriesPointsTableMatches}
+          isPointTable={isPointTable}
         />
       ) : null}
     </Layout>

@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   compress: true,
+  productionBrowserSourceMaps: true,
   experimental: {
     optimizeCss: true,
     scrollRestoration: true,
@@ -40,7 +41,7 @@ const nextConfig = {
       };
     }
     return config;
-  },
+  }
 };
 
 module.exports = nextConfig;

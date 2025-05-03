@@ -53,6 +53,7 @@ const FeatureNews = ({newsUrl}:url) => {
                     <div className="lg:grid grid-cols-12 gap-4" key={index}>
                       <div className="col-span-6 ">
                       {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
+                        <Link href={post?.link}>
                         <Image  loading="lazy" 
                           src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
                           style={{ boxShadow: 'rgb(180 179 179 / 29%) 0px 8px 16px' }}
@@ -61,9 +62,11 @@ const FeatureNews = ({newsUrl}:url) => {
                           alt={post?.title.rendered}
                           className="rounded-lg w-full h-48 object-cover mb-3"
                         />
+                        </Link>
                       )}
                       </div>
                       <div className="col-span-6">
+                      
                         <p className="text-gray-500 font-normal text-[13px] mb-2 flex items-center">
                           By{" "}
                           <span className="ml-2 pr-[1px]">
@@ -85,7 +88,7 @@ const FeatureNews = ({newsUrl}:url) => {
                               ></polygon>
                             </svg>
                           </span>{" "}
-                          {post._embedded?.author[0]?.name}{" "}
+                          <Link href={post?._embedded?.author[0]?.link}>{post._embedded?.author[0]?.name}{" "}</Link>
                           <span className="ml-2 pr-[1px]">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -110,12 +113,15 @@ const FeatureNews = ({newsUrl}:url) => {
                         >
                             
                         </h3>
-                        <h4 className="text-[12px] font-semibold mb-2"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered,10))}} >
+                        <Link href={post?.link}>
+                        <h2 className="text-[12px] font-semibold mb-2"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered,10))}} >
                               
-                              </h4>
+                              </h2>
+                              </Link>
                         <p className="text-gray-500 font-normal "  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.uagb_excerpt,30))}} >
                        
                         </p>
+                        
                         <Link href={post?.link}>
                           <p className="text-[#1A80F8] font-semibold flex items-center text-[13px] pt-2 underline">
                             Read more{" "}
@@ -146,25 +152,27 @@ const FeatureNews = ({newsUrl}:url) => {
                                              
                         
                          
-                        <Link href={post?.link}>
+                       
                           <div style={{ textShadow: 'rgb(0 0 0 / 4%) 1px 2px 3px' }} className="flex gap-3 my-5">
 
-                            
-                          {post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.thumbnail.source_url && (
+                          <Link href={post?.link}>
+                          {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.thumbnail?.source_url && (
                             <Image  loading="lazy" 
-                              src={post._embedded["wp:featuredmedia"]?.[0].media_details.sizes.thumbnail.source_url}
+                              src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.thumbnail?.source_url}
                               style={{ boxShadow: 'rgb(180 179 179 / 29%) 0px 8px 16px' }}
                               width={90}
                               height={90}
                               alt={post?.title.rendered}
                               className="rounded-lg h-[90px]" />
                             )}
-
+                          </Link>
 
                             <div>
-                              <h4 className="text-[12px] font-semibold mb-2"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered,15))}} >
+                            <Link href={post?.link}>
+                              <h2 className="text-[12px] font-semibold mb-2"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered,15))}} >
                               
-                              </h4>
+                              </h2>
+                              </Link>
                               <p className="text-gray-500 font-normal"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.uagb_excerpt, 25))}} >
                        
                         </p>
@@ -189,7 +197,7 @@ const FeatureNews = ({newsUrl}:url) => {
                                     ></polygon>
                                   </svg>
                                 </span>{" "}
-                                {post._embedded?.author[0]?.name}{" "}
+                                <Link href={post?._embedded?.author[0]?.link}>{post._embedded?.author[0]?.name}{" "}</Link>
                                 <span className="ml-2 pr-[1px]">
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -210,7 +218,7 @@ const FeatureNews = ({newsUrl}:url) => {
                               </p>
                             </div>
                           </div>
-                        </Link>
+                        
 
                         <div className="border-t-[1px] border-[#E7F2F4]"></div>
                        

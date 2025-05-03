@@ -31,6 +31,7 @@ interface H2hProps {
   teamBDetails: TeamData | null;
   urlStrings: string | null;
   completedMatch: MatchData[] | [];
+  allTeams: any;
 }
 
 export default function H2h({
@@ -38,13 +39,14 @@ export default function H2h({
   teamADetails,
   teamBDetails,
   urlStrings,
-  completedMatch
+  completedMatch,
+  allTeams
 }: H2hProps) {
   const [show, setShow] = useState(false);
   const [news, setNews] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+console.log(teamDetails);
   // Safe calculations with fallbacks
   const totalMatches = teamDetails?.teamAB_total_match || 0;
   const teamaWon = totalMatches > 0 ?
@@ -55,6 +57,17 @@ export default function H2h({
   // Safe URL parsing
   const matchType = urlStrings?.split('-').pop() || 'test';
   const urlWithoutMatchType = urlStrings?.split('-').slice(0, -1).join('-') || '';
+
+  let content = '';
+  if(matchType === 'test'){
+     content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. In Test cricket, both teams have faced off ${totalMatches} times. Out of these, ${teamADetails?.title} have won ${teamDetails?.teama_won_match}, ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match}, and ${teamDetails?.nr_match} matches ended in a draw.`
+  }else if(matchType === 'odi'){
+     content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. In ODIs, ${teamADetails?.title} and ${teamBDetails?.title} have met in ${totalMatches} matches, where ${teamADetails?.title} have won ${teamDetails?.teama_won_match} and ${teamBDetails?.title} have managed ${teamDetails?.teamb_won_match} wins, while ${teamDetails?.nr_match} match ended with no result.`
+  }else if(matchType === 't20'){
+     content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. When it comes to T20 internationals, out of ${totalMatches} clashes, ${teamADetails?.title} lead with ${teamDetails?.teama_won_match} wins, and ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match} matches so far.`
+  }else{
+     content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. When it comes to T20 internationals, out of ${totalMatches} clashes, ${teamADetails?.title} lead with ${teamDetails?.teama_won_match} wins, and ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match} matches so far.`
+  }
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -271,13 +284,13 @@ export default function H2h({
                   T20
                 </button>
               </Link>
-              <Link href={`${urlWithoutMatchType}-t20s`}>
+              {/* <Link href={`${urlWithoutMatchType}-t20s`}>
                 <button
                   className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${matchType === "t20wc" ? "bg-[#1A80F8] text-white" : ""} rounded-md`}
                 >
                   T20 WC
                 </button>
-              </Link>
+              </Link> */}
             </div>
           </div>
         }
@@ -294,18 +307,12 @@ export default function H2h({
 
                     <div className="mt-4">
                       <div className="mb-6">
-                        <p className="text-gray-700">
-                          {teamADetails.title} and {teamBDetails.title} have faced each other in {totalMatches} matches in {matchType.toUpperCase()}.
-                          Out of these {totalMatches} games, {teamADetails.title} have won {teamDetails.teama_won_match} whereas {teamBDetails.title} have won {teamDetails.teamb_won_match}...
-                          {teamDetails.teama_nr_match > 0 ? ` ${teamDetails.teama_nr_match} matches ended without a result.` : ''}
-
-                          <span className="text-[#1A80F8] pl-1 font-semibold underline cursor-pointer">
-                            Read more{" "}
-                          </span>
-
-
-
-                        </p>
+                      
+                        <ReadMoreCard
+                          title=""
+                          content={content}
+                          wordLimit={30}
+                        />
 
                       </div>
 

@@ -138,6 +138,7 @@ export default function IplBanner({
             </div>
 
             {result?.next?.title && (
+              <Link href={nextUrl}>
               <div className="flex items-center space-x-4">
                 <p className="text-sm">
                   {result?.next?.title}
@@ -155,6 +156,7 @@ export default function IplBanner({
                   />
                 </div>
               </div>
+              </Link>
             )}
           </div>
 

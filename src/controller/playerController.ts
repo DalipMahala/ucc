@@ -153,12 +153,12 @@ export async function Ranking() {
   return ranking;
 }
 
-export async function PlayerProfile(pid: number) {
+export async function PlayerProfile(pid: number,playerName: string) {
   if (!pid) {
     return { notFound: true };
   }
-  const CACHE_KEY = "players_profile_"+pid;
-  const CACHE_TTL = 6;
+  const CACHE_KEY = "players_profile_"+playerName+"_"+pid;
+  const CACHE_TTL = 600;
 
   const cachedData = await redis.get(CACHE_KEY);
   if (cachedData) {
@@ -167,7 +167,7 @@ export async function PlayerProfile(pid: number) {
   }
   
 
-  const data  = await db.execute('SELECT * FROM players WHERE pid = ?',[pid]);
+  const data  = await db.execute('SELECT * FROM players WHERE pid = ? and LOWER(REPLACE(title, " ", "-")) = ?',[pid,playerName]);
   const players = data[0] || [];
   if (data.length > 0) {
     await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(players));
@@ -175,4 +175,46 @@ export async function PlayerProfile(pid: number) {
   return players;
     
   
+}
+
+export async function AllPlayer() {
+
+  const CACHE_KEY = "Allplayers_profile";
+  const CACHE_TTL = 600;
+
+  const cachedData = await redis.get(CACHE_KEY);
+  if (cachedData) {
+    
+    return JSON.parse(cachedData);
+  }
+  
+
+  const data  = await db.execute('SELECT pid,title,created_date FROM players');
+  const players = data[0] || [];
+  if (data.length > 0) {
+    await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(players));
+  }
+  return players;
+    
+  
+}
+
+export async function getPlayerUrlsByIds(playerIds: string[]): Promise<Record<string, string>> {
+  if (!playerIds.length) return {};
+
+  const placeholders = playerIds.map(() => '?').join(',');
+  const [rows] = await db.execute(
+    `SELECT pid,title
+     FROM players WHERE pid IN (${placeholders})`,
+     playerIds
+  );
+
+  const result: Record<string, string> = {};
+  if (Array.isArray(rows)) {
+    for (const row of rows as any[]) {
+      result[row.pid] = row.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '')+"/"+row.pid;
+    }
+  }
+
+  return result;
 }

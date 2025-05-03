@@ -6,6 +6,7 @@ import Image from "next/image";
 import DOMPurify from "dompurify";
 import { truncateText } from "@/utils/utility";
 import { format } from "date-fns";
+import TabMenu from "./menu";
 
 interface News {
   urlString: string;
@@ -22,7 +23,7 @@ export default function News({ urlString, isPointTable }: News) {
         case "news":
           return "21";
         case "fantasy-cricket":
-          return "79";
+          return "80";
         case "ipl":
           return "3";
         case "pointstable2":
@@ -45,42 +46,7 @@ export default function News({ urlString, isPointTable }: News) {
   }, [catids]);
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-      <div id="tabs" className="my-4">
-        <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
-          <Link href={urlString}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap ">
-              Overview
-            </button>
-          </Link>
-          <Link href={urlString + "/schedule-results"}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap ">
-              Schedule & Results
-            </button>
-          </Link>
-          <Link href={urlString + "/squads"}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap ">
-              Squads
-            </button>
-          </Link>
-          {isPointTable &&
-          <Link href={urlString + "/points-table"}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
-              Points Table
-            </button>
-          </Link>
-          }
-          <Link href={urlString + "/news"}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md">
-              News
-            </button>
-          </Link>
-          <Link href={urlString + "/stats/most-run"}>
-            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap">
-              Stats
-            </button>
-          </Link>
-        </div>
-      </div>
+      <TabMenu urlString={urlString} isPointTable={isPointTable}/>
 
       <div className="tab-content-container">
         <div
@@ -90,8 +56,10 @@ export default function News({ urlString, isPointTable }: News) {
           <div className="rounded-lg py-4 px-4 bg-[#ffffff] mb-4">
             {news.slice(0, 1)?.map((post: any, index: number) => (
               <div className="lg:grid grid-cols-12 gap-4" key={index}>
+               
                 <div className="col-span-6 ">
                   {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
+                     <Link href={post?.link}>
                     <Image  loading="lazy" 
                     style={{ boxShadow: 'rgb(180 179 179 / 29%) 0px 8px 16px' }}
                       src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
@@ -100,9 +68,12 @@ export default function News({ urlString, isPointTable }: News) {
                       alt={post?.title.rendered}
                       className="rounded-lg w-full h-48 object-cover mb-3"
                     />
+                    </Link>
                   )}
                 </div>
+               
                 <div className="col-span-6">
+                
                   <p className="text-gray-500 font-normal text-[13px] mb-2 flex items-center">
                     By{" "}
                     <span className="ml-2 pr-[1px]">
@@ -124,7 +95,7 @@ export default function News({ urlString, isPointTable }: News) {
                         ></polygon>
                       </svg>
                     </span>{" "}
-                    {post._embedded?.author[0]?.name}{" "}
+                    <Link href={post?._embedded?.author[0]?.link}>{post._embedded?.author[0]?.name}{" "}</Link>
                     <span className="ml-2 pr-[1px]">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -147,15 +118,18 @@ export default function News({ urlString, isPointTable }: News) {
                     className="text-1xl font-semibold mb-1"
                     style={{ lineHeight: "21px" }}
                   ></h3>
+                  <Link href={post?.link}>
                   <h4 className="text-[12px] font-semibold mb-2"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered,20))}} >
                                                 
                                                 </h4>
+                                                </Link>
                   <p
                     className="text-gray-500 font-normal"
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(post?.uagb_excerpt),
                     }}
                   ></p>
+                  
                   <Link href={post?.link}>
                     <p className="text-[#1A80F8] font-semibold flex items-center text-[13px] pt-2 underline">
                       Read more{" "}
@@ -182,10 +156,11 @@ export default function News({ urlString, isPointTable }: News) {
             <div className="lg:grid grid-cols-12 gap-4">
               {news.slice(1, 7)?.map((post: any, index: number) => (
                 <div className="col-span-6" key={index}>
-                  <Link href={post?.link}>
                     <div className="flex gap-3 my-5" style={{ textShadow: 'rgb(0 0 0 / 4%) 1px 2px 3px' }}>
+                    <Link className="" href={post?.link}>
                       {post._embedded["wp:featuredmedia"]?.[0]?.media_details
                         .sizes.thumbnail.source_url && (
+                          
                         <Image  loading="lazy" 
                           src={
                             post._embedded["wp:featuredmedia"]?.[0]
@@ -197,16 +172,20 @@ export default function News({ urlString, isPointTable }: News) {
                           className="rounded-lg h-[90px]"
                           style={{ boxShadow: 'rgb(180 179 179 / 29%) 0px 8px 16px' }}
                         />
+                        
                       )}
+                      </Link>
                       <div>
-                        <h4
+                      <Link href={post?.link}>
+                        <h2
                           className="text-[12px] font-semibold mb-2"
                           dangerouslySetInnerHTML={{
                             __html: DOMPurify.sanitize(
                               truncateText(post?.title.rendered, 20)
                             ),
                           }}
-                        ></h4>
+                        ></h2>
+                        </Link>
                         <p className="text-[11px] text-gray-500 flex items-center">
                           By{" "}
                           <span className="ml-2 pr-[1px]">
@@ -228,7 +207,7 @@ export default function News({ urlString, isPointTable }: News) {
                               ></polygon>
                             </svg>
                           </span>{" "}
-                          {post._embedded?.author[0]?.name}{" "}
+                          <Link href={post?._embedded?.author[0]?.link}>{post._embedded?.author[0]?.name}{" "}</Link>
                           <span className="ml-2 pr-[1px]">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -249,7 +228,7 @@ export default function News({ urlString, isPointTable }: News) {
                         </p>
                       </div>
                     </div>
-                  </Link>
+               
 
                   <div className="border-t-[1px] border-[#E7F2F4]"></div>
                 </div>

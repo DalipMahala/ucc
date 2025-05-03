@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from "@/app/components/Layout";
 import H2h from './h2h';
+import H2hipl from './h2hipl';
 import { H2hDetails, getTeamId, h2hMatch } from "@/controller/h2hController";
 import { TeamDetails, isIPLTeamDetails } from "@/controller/teamController";
 import { notFound } from 'next/navigation';
@@ -37,8 +38,20 @@ export default async function Page(props: { params: Params }) {
   const teama_id = await getTeamId(teamA);
   const teamb_id = await getTeamId(teamB);
   const cid = await isIPLTeamDetails(teama_id,2025);
+  let allTeams:any = [];
   if(cid !== null && matchType === 't20'){
     tblName = 'h2h_ipl'
+    allTeams = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/series/SeriesTeams`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+      },
+      body: JSON.stringify({ cid: cid}),
+      cache: "no-store",
+    });
+   allTeams = await allTeams.json();
+
     }else{
       tblName = 'h2h'; 
     }
@@ -47,14 +60,16 @@ export default async function Page(props: { params: Params }) {
   let completedMatch = await h2hMatch(matchType,teama_id,teamb_id);
   const teamADetails = await TeamDetails(teamDetails?.teama_id);
   const teamBDetails = await TeamDetails(teamDetails?.teamb_id);
-  // console.log(teamA);
+  // console.log("matchType",matchType);
  
 
     return (
         <Layout>
-            
-        <H2h teamDetails={teamDetails} teamADetails={teamADetails} teamBDetails={teamBDetails} urlStrings={urlString} completedMatch={completedMatch}></H2h>
-
+        {(cid != null && matchType === 't20') ? (
+            <H2hipl teamDetails={teamDetails} teamADetails={teamADetails} teamBDetails={teamBDetails} urlStrings={urlString} completedMatch={completedMatch} allTeams={allTeams} />
+        ):(
+        <H2h teamDetails={teamDetails} teamADetails={teamADetails} teamBDetails={teamBDetails} urlStrings={urlString} completedMatch={completedMatch} allTeams={undefined} />
+        )}
         </Layout>
     )
 }
