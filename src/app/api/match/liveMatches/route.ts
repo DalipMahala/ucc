@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
 
     const cachedData = await redis.get(CACHE_KEY);
     if (cachedData) {
-      console.log("coming from cache live_matches");
+      // console.log("coming from cache live_matches");
       return NextResponse.json({ success: true, data: JSON.parse(cachedData) });
     }
    

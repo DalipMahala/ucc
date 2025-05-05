@@ -81,7 +81,6 @@ type Params = Promise<{ matchType: string }>;
 export default async function Home(props: { params: Params }) {
 
 
-  console.log("btn", props);
   const open = null;
   let activeTabValue = "info1";
 

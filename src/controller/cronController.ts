@@ -1194,7 +1194,85 @@ export async function CompetitionMatches() {
     console.error("Error executing function:", error);
   }
 }
+export async function CompetitionSquads() {
+  try {
+    const competitionsQuery = `SELECT cid FROM competitions WHERE cid not in (SELECT cid FROM competition_squads) or (date(dateend) >= date(now()) and status = 'result') or status = 'live'`;
+   
+    const [competitionsResults]: any = await db.query(
+      competitionsQuery
+    );
 
+    if (!competitionsResults.length) {
+      console.log("No match IDs found.");
+      return;
+    }
+
+    // console.log(matchResults);
+
+    // ✅ Limit concurrent API calls (e.g., 5 at a time)
+    const limit = pLimit(5);
+
+    const apiCalls = competitionsResults.map((row: { cid: any }) =>
+      limit(async () => {
+        try {
+          const API_URL = `https://rest.entitysport.com/exchange/competitions/${row.cid}/squads?token=7b58d13da34a07b0a047e129874fdbf4&per_page=100`;
+
+          const data = await httpGet(API_URL);
+          const matches = data?.response || [];
+          const totalPages = data?.response?.total_pages || 0;
+
+          if (totalPages > 1) {
+            await delay(200);
+
+            // Create an array of promises to fetch all pages in parallel
+            const requests = Array.from({ length: totalPages }, (_, i) =>
+              httpGet(`${API_URL}&paged=${i + 1}`)
+            );
+
+            // Fetch all pages simultaneously
+            const results = await Promise.all(requests);
+
+            // Collect all match data
+            results.forEach((pagedata) => {
+              matches.push(...(pagedata?.response || []));
+            });
+          }
+
+          const serieses = matches;
+          const cid = row.cid;
+
+          const fileData = JSON.stringify(serieses, null, 2);
+          const s3Key = `CompetitionSquadsData/competition_squad_${cid}.json`;
+          const params:any = {
+            Bucket: BUCKET_NAME,
+            Key: s3Key,
+            Body: fileData, 
+            ContentType: 'application/json', 
+          };
+
+          const command = new PutObjectCommand(params);
+          const s3Upload = await s3.send(command);
+          
+          const query = `
+                        INSERT INTO competition_squads ( cid, fileName)
+                        VALUES (${cid}, '${s3Key}') 
+                        ON DUPLICATE KEY UPDATE 
+                        cid = ${cid},
+                        fileName = '${s3Key}',
+                        updated_date = NOW()`;
+          // console.log(`Data saved to`, query);
+          //  const values =  [matchId, filePath ] ;
+          await db.query(query);
+        } catch (error) {
+          console.error(`Failed to fetch cid ${row.cid}:`, error);
+          return null;
+        }
+      })
+    );
+  } catch (error) {
+    console.error("Error executing function:", error);
+  }
+}
 export async function CompetitionsStats() {
   try {
     const competitionsQuery = `SELECT cid FROM competitions WHERE date(dateend) >= date(now()) and status = 'result' or status = 'live'`;

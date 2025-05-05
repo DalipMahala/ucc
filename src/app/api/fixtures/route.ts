@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
     const cachedData = await redis.get(CACHE_KEY);
     if (cachedData) {
-      console.log("Returning cached fixtures matches");
+      // console.log("Returning cached fixtures matches");
       return NextResponse.json({ 
         success: true, 
         data: JSON.parse(cachedData) 

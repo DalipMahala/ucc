@@ -175,7 +175,7 @@ export default function MoreInfo({
         sameVenueteamBScores.length
       : 0;
 
-  console.log("playing11", teama11Players);
+  // console.log("playing11", teama11Players);
 
   const [openHeading, setOpenHeading] = useState<number | null>(null);
 

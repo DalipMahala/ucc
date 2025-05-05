@@ -24,7 +24,7 @@ export async function generateMetadata(props: {
   const teama = matchInfo?.teama;
   const teamb = matchInfo?.teamb;
   const imageUrl = `https://uccricket.live/api/og-image?title=${encodeURIComponent(`${teama?.short_name} vs ${teamb?.short_name} Live Score`)}&format=webp`;
-  console.log(liveMatch);
+  // console.log(liveMatch);
 
   return {
     title: `${teama?.short_name} vs ${teamb?.short_name} Live Score: ${matchInfo?.subtitle}, ${matchInfo?.competition?.abbr}`,

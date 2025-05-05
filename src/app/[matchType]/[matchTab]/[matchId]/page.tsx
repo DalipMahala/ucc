@@ -26,7 +26,7 @@ export async function generateMetadata(props: {
   const imageUrl = `https://uccricket.live/api/og-image?title=${encodeURIComponent(
     `${teama?.short_name} vs ${teamb?.short_name} Live Score`
   )}&format=webp`;
-  console.log(params);
+  // console.log(params);
 
   const robots = "nofollow, noindex";
   const other = {

@@ -70,7 +70,7 @@ export default function Scorecard({
   //console.log("partnership",players.find((p: { player_id: number; }) => p.player_id === 77)?.name );
   
   if(matchLiveData !== undefined && matchLiveData?.match_id == match_id && matchLiveData?.scorecard?.innings[tabIndex] !== undefined && matchLiveData?.scorecard?.innings[tabIndex] !== ''){
-    console.log(tabIndex, "new",matchLiveData);    
+    // console.log(tabIndex, "new",matchLiveData);    
     matchData = matchLiveData;
     matchscorecard = matchLiveData?.scorecard?.innings;
     matchinning = matchLiveData?.scorecard?.innings[tabIndex];
@@ -97,7 +97,7 @@ export default function Scorecard({
       
       return [...new Set(allIds)]; // Deduplicate
     };
-    console.log("ids",getAllPlayerIds());
+    // console.log("ids",getAllPlayerIds());
     const fetchPlayerUrls = async () => {
       const ids = getAllPlayerIds();
       if (ids.length === 0) return;

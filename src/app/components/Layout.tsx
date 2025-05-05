@@ -13,6 +13,7 @@ const Layout = ({ children  }: LayoutProps) => {
   const [loading, setLoading] = useState(false);
   const [delayedLoading, setDelayedLoading] = useState(false); // Delayed loader state
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     setLoading(false); // Stop loader when page changes
@@ -43,6 +44,19 @@ const Layout = ({ children  }: LayoutProps) => {
       }
     }
   };
+
+  useEffect(() => {
+    // Handle back/forward navigation
+    const handlePopstate = () => {
+      router.refresh(); // Ensures client and server states match
+    };
+
+    window.addEventListener('popstate', handlePopstate);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopstate);
+    };
+  }, [router]);
  
 
   return (
