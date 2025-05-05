@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { getTimeLeft } from "@/utils/timerUtils";
 
 const CountdownTimer = ({ targetTime }: { targetTime: string }) => {
-//   const [timeLeft, setTimeLeft] = useState(getTimeLeft(targetTime));
+  //   const [timeLeft, setTimeLeft] = useState(getTimeLeft(targetTime));
   const [timeLeft, setTimeLeft] = useState<{ hours: number; minutes: number; seconds: number; isFinished: boolean } | null>(null);
 
   useEffect(() => {
@@ -41,10 +41,25 @@ const CountdownTimer = ({ targetTime }: { targetTime: string }) => {
       {timeLeft.isFinished ? (
         "Time's up!"
       ) : (
-        <span>
-           {timeLeft.hours}h : {timeLeft.minutes}m : {timeLeft.seconds}s
-           {/* {timeLeft.hours}h : {timeLeft.minutes}m  */}
-        </span>
+        <div className="flex gap-1 items-start justify-center">
+          <p className="flex flex-col">
+            <span>{timeLeft.hours} </span>
+            <span className="text-[11px] font-normal">Hrs</span>
+          </p>
+:
+          <p className="flex flex-col">
+            <span>{timeLeft.minutes} </span>
+            <span className="text-[11px] font-normal">Min</span>
+          </p>
+:
+          <p className="flex flex-col">
+            <span>{timeLeft.seconds} </span>
+            <span className="text-[11px] font-normal">Sec</span>
+          </p>
+          
+         
+          {/* {timeLeft.hours}h : {timeLeft.minutes}m  */}
+        </div>
       )}
     </div>
   );

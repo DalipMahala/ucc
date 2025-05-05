@@ -756,7 +756,7 @@ export default async function ForYouMatches() {
 
                     {/* <div className="h-[100px] border-l-[1px] border-[#efefef]"></div> */}
 
-                    <div className="w-[50%] font-semibold text-center">
+                    <div className="w-[50%] font-semibold text-center flex justify-end">
                       <div className="text-[#144280]">
                         <div className=" font-medium text-center">
 

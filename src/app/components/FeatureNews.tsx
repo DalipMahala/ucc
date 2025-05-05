@@ -135,11 +135,11 @@ const FeatureNews = ({ newsUrl }: url) => {
                       
 <div>
                         <Link href={post?.link}>
-                          <h2 className="md:text-1xl text-[14px] font-semibold mb-1" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post?.title.rendered) }} >
+                          <h2 className="md:text-1xl text-[14px] font-semibold mb-1" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered, 10)) }} >
 
                           </h2>
                         </Link>
-                        <p className=" text-gray-500 font-normal hidden md:block" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.uagb_excerpt, 25)) }} >
+                        <p className=" text-gray-500 font-normal hidden md:block" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.uagb_excerpt, 20)) }} >
 
                         </p>
 

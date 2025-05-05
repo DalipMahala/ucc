@@ -361,7 +361,8 @@ const MatchTime = ({ date, isMobile }: MatchTimeProps) => {
   const isToday = isSameDay(new Date(), new Date(date));
   
   return (
-    <div className={`font-medium text-center ${isMobile ? '' : 'w-[50%]'}`}>
+    <div className={`font-medium text-center  ${isMobile ? '' : 'w-[50%] flex justify-end'}`}>
+      <div className="">
       {isToday ? (
         <>
           <span className="text-[13px] font-normal text-[#a45b09]">Start in</span> 
@@ -373,6 +374,7 @@ const MatchTime = ({ date, isMobile }: MatchTimeProps) => {
           {format(new Date(date), "hh:mm:aa")}
         </p>
       )}
+      </div>
     </div>
   );
 };
