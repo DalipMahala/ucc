@@ -138,7 +138,7 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
 
                             <div className="font-semibold text-end w-[50%]">
                               <div className="text-[#144280]">
-                                <div className=" font-semibold text-end">
+                                <div className=" font-medium text-end">
 
                                   <p className="text-[#2F335C] text-[14px]">
                                     {format(new Date(series.datestart), "dd MMMM")} -

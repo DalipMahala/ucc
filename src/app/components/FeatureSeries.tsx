@@ -144,7 +144,7 @@ const SeriesSection = ({ series, match }: SeriesSectionProps) => (
     <div className="flex items-center justify-center py-4">
       <div className="flex items-center space-x-4 w-full">
         <div className="flex-grow h-0.5 bg-gray-300"></div>
-        <h2 className="md:text-[24px] text-[18px] text-black font-bold whitespace-nowrap">
+        <h2 className="md:text-[24px] text-[18px] text-black font-bold whitespace-nowrap uppercase">
           {series.title} {series.season}
         </h2>
         <div className="flex-grow h-0.5 bg-gray-300"></div>
@@ -244,7 +244,7 @@ const MatchHeader = ({ match, isMobile = false }: MatchHeaderProps) => {
         </div>
         <div>
           {isMobile ? (
-            <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+            <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
               {match.competition.title}
             </h4>
           ) : (
@@ -346,7 +346,7 @@ const TeamDisplay = ({ team, isMobile }: TeamDisplayProps) => (
       alt={team.name}
       loading="lazy"
     />
-    <span className={`text-[${isMobile ? '#5e5e5e' : '#1F2937'}] font-semibold text-[14px]`}>
+    <span className={`text-[${isMobile ? '#5e5e5e' : '#1F2937'}] md:font-semibold font-medium text-[14px]`}>
       {team.name}
     </span>
   </div>
@@ -397,15 +397,15 @@ const MatchFooter = ({ match, series, isMobile = false }: MatchFooterProps) => {
         {series.total_teams > 2 && (
           <>
             <Link href={`/series/${urlStringEncode(`${series.title}-${series.season}`)}/${series.cid}/points-table`}>
-              <p className={`${isMobile ? 'text-[#586577] text-[13px]' : 'text-[#909090]'} font-medium`}>
+              <p className={`${isMobile ? 'text-[#909090] md:text-[13px] text-[11px] ' : 'text-[#909090]'} font-medium`}>
                 Points Table
               </p>
             </Link>
-            <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+            <div className="h-[20px] border-l-[1px] md:mx-5 mx-3 border-[#d0d3d7]"></div>
           </>
         )}
         <Link href={`/series/${urlStringEncode(`${series.title}-${series.season}`)}/${series.cid}/schedule-results/schedule`}>
-          <p className={`${isMobile ? 'text-[#586577] text-[13px]' : 'text-[#909090]'} font-medium`}>
+          <p className={`${isMobile ? 'text-[#909090] md:text-[13px] text-[11px] ' : 'text-[#909090]'} font-medium`}>
             Schedule
           </p>
         </Link>
@@ -421,7 +421,7 @@ const MatchFooter = ({ match, series, isMobile = false }: MatchFooterProps) => {
               loading="lazy"
               className={isMobile ? "h-[15px]" : ""}
             />
-            <span className={`text-[#586577] ${isMobile ? 'text-[13px]' : 'text-[#909090]'} font-medium`}>
+            <span className={`text-[#909090] ${isMobile ? 'md:text-[13px] text-[11px]' : 'text-[#909090]'} font-medium`}>
               H2H
             </span>
           </div>
@@ -433,8 +433,8 @@ const MatchFooter = ({ match, series, isMobile = false }: MatchFooterProps) => {
 };
 
 const TeamStatusIndicatorMobile = ({ teamA }: { teamA: string }) => (
-  <div className="flex items-center space-x-2 text-[13px]">
-    <span className="text-[#586577] font-medium">{teamA}</span>
+  <div className="flex items-center space-x-2 md:text-[13px] text-[11px]">
+    <span className="text-[#909090] font-medium">{teamA}</span>
     <StatusBadgeMobile type="up" value="0" />
     <StatusBadgeMobile type="down" value="0" />
   </div>
@@ -446,14 +446,15 @@ interface StatusBadgeMobileProps {
 }
 
 const StatusBadgeMobile = ({ type, value }: StatusBadgeMobileProps) => {
-  const bgColor = type === 'up' ? 'bg-[#00a632]' : 'bg-[#ea2323]';
+  const bgColor = type === 'up' ? 'bg-[#ffffff]' : 'bg-[#ffffff]';
   const borderColor = type === 'up' ? 'border-[#00a632]' : 'border-[#ea2323]';
+  const Color = type === 'up' ? 'text-[#0B773C]' : 'text-[#ea2323]';
   const iconPath = type === 'up' 
     ? "M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" 
     : "M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3";
 
   return (
-    <span className={`flex items-center ${bgColor} border-[1px] ${borderColor} rounded-md text-[#ffffff] pr-2`}>
+    <span className={`flex items-center ${bgColor} border-[1px] ${borderColor} rounded-md ${Color} pr-2`}>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-[14px] w-[17px]">
         <path strokeLinecap="round" strokeLinejoin="round" d={iconPath} />
       </svg>

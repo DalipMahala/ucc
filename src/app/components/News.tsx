@@ -86,9 +86,9 @@ const News = () => {
                     <Link href={post?.link}>
                       <Image loading="lazy"
                         src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
-                        style={{ boxShadow: 'rgb(180 179 179 / 29%) 0px 8px 16px' }}
-                        width={300}
-                        height={300}
+                        
+                        width={1000}
+                        height={1000}
                         alt={post?.title.rendered}
                         className="rounded-lg w-full h-48 object-cover mb-3"
                       />
@@ -188,16 +188,16 @@ const News = () => {
                       {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.thumbnail?.source_url && (
                         <Image loading="lazy"
                           src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.thumbnail?.source_url}
-                          style={{ boxShadow: 'rgb(180 179 179 / 29%) 0px 8px 16px' }}
-                          width={90}
-                          height={90}
+                          
+                          width={1000}
+                          height={1000}
                           alt={post?.title.rendered}
-                          className="rounded-lg h-[90px] w-[90px]" />
+                          className="rounded-lg h-[80px] w-[90px]" />
                       )}
                     </Link>
                     <div className="w-[75%]">
                       <Link className="" href={post?.link}>
-                        <h2 className="text-[13px] font-semibold mb-2" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered, 20)) }} >
+                        <h2 className="text-[13px] font-semibold mb-2" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered, 10)) }} >
 
                         </h2>
                       </Link>

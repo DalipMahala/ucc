@@ -56,9 +56,9 @@ const FeatureNews = ({ newsUrl }: url) => {
                       <Link href={post?.link}>
                         <Image loading="lazy"
                           src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
-                          style={{ boxShadow: 'rgb(180 179 179 / 29%) 0px 8px 16px' }}
-                          width={300}
-                          height={300}
+                          
+                          width={1000}
+                          height={1000}
                           alt={post?.title.rendered}
                           className="rounded-lg w-full h-48 object-cover mb-3"
                         />
@@ -155,7 +155,7 @@ const FeatureNews = ({ newsUrl }: url) => {
 
                     <div className="flex gap-3 my-5">
 
-                      <Link href={post?.link} className="w-[15%]">
+                      <Link href={post?.link} className="md:w-[15%] w-[25%]">
                         {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.thumbnail?.source_url && (
                           <Image loading="lazy"
                             src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.thumbnail?.source_url}
@@ -167,7 +167,7 @@ const FeatureNews = ({ newsUrl }: url) => {
                         )}
                       </Link>
 
-                      <div className="w-[85%]">
+                      <div className="md:w-[85%] w-[75%]">
 
                       <p className="text-gray-500 font-normal text-[12px] mb-2 flex items-center">
                           By{" "}
@@ -211,11 +211,11 @@ const FeatureNews = ({ newsUrl }: url) => {
                         </p>
 
                         <Link href={post?.link}>
-                          <h2 className="md:text-1xl text-[13px] font-semibold mb-1" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered, 15)) }} >
+                          <h2 className="md:text-1xl text-[13px] font-semibold mb-1" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post?.title.rendered) }} >
 
                           </h2>
                         </Link>
-                        <p className=" text-gray-500 font-normal" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.uagb_excerpt, 25)) }} >
+                        <p className=" text-gray-500 font-normal hidden md:block" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.uagb_excerpt, 25)) }} >
 
                         </p>
                         
