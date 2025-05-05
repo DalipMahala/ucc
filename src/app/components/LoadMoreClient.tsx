@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { urlStringEncode } from "../../utils/utility";
@@ -9,7 +9,6 @@ import PlayerImage from "./PlayerImage";
 
 interface MatchItem {
     game_state_str: string;
-    man_of_the_match: any;
     live_odds: any;
     man_of_the_match_pname: string;
     match_number: string;
@@ -53,7 +52,11 @@ interface MatchItem {
     result_type: number;
     title: string;
     short_title: string;
-  
+    man_of_the_match: {
+      pid: any;
+      name: string;
+    }
+    
   }
 
 interface CompletedMatchesProps {
@@ -68,6 +71,33 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
   };
 
   const visibleMatches = completedMatch.slice(0, visibleCount);
+
+  const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
+        
+    useEffect(() => {
+      const getAllPlayerIds = () => {
+        const allIds = [
+          ...completedMatch.map((item: {
+            man_of_the_match: any
+}) => item?.man_of_the_match?.pid),
+        ];
+        return [...new Set(allIds)]; // Deduplicate
+      };
+      
+      const fetchPlayerUrls = async () => {
+        const ids = getAllPlayerIds();
+        if (ids.length === 0) return;
+        const res = await fetch('/api/player-urls', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+          body: JSON.stringify({ ids }),
+        });
+        const data = await res.json();
+        setPlayerUrls(data);
+      };
+  
+      fetchPlayerUrls();
+    }, [completedMatch]);
 
   return (
    <React.Fragment>
@@ -187,9 +217,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                       <Link
                         href={
                           "/player/" +
-                          urlStringEncode(cmatch?.man_of_the_match?.name) +
-                          "/" +
-                          cmatch?.man_of_the_match?.pid
+                          playerUrls[cmatch?.man_of_the_match?.pid]
                         }>
                         <div className="flex flex-col items-center">
 
@@ -395,9 +423,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                       <Link
                         href={
                           "/player/" +
-                          urlStringEncode(cmatch?.man_of_the_match?.name) +
-                          "/" +
-                          cmatch?.man_of_the_match?.pid
+                          playerUrls[cmatch?.man_of_the_match?.pid]
                         }>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2" >

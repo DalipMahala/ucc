@@ -351,7 +351,7 @@ export async function InsertOrUpdateMatches() {
 
 export async function MatchInfo() {
   try {
-    const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_info) or (status !=4 and DATE(date_start_ist) BETWEEN DATE(NOW() - INTERVAL 1 DAY) AND DATE(NOW())  and commentary = 1)`;
+    const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_info) or (DATE(date_start_ist) BETWEEN DATE(NOW() - INTERVAL 1 DAY) AND DATE(NOW())  and commentary = 1)`;
     // const matchQuery = `SELECT match_id FROM matches where match_id in (87729)`;
 
     // const matchQuery = `SELECT match_id FROM matches where status in (1,3)`;
@@ -588,8 +588,8 @@ export async function MatchCommentaryCompleted() {
 
 export async function MatchStatistics() {
   try {
-    // const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_statistics) or (status !=4 and date(date_start_ist) = date(now()))`;
-    const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_statistics) or (status = 2 and DATE(date_start_ist) BETWEEN DATE(NOW() - INTERVAL 1 DAY) AND DATE(NOW()))`;
+    const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_statistics) or (status !=4 and date(date_start_ist) = date(now()))`;
+    // const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_statistics) or (status = 2 and DATE(date_start_ist) BETWEEN DATE(NOW() - INTERVAL 1 DAY) AND DATE(NOW()))`;
     
     const [matchResults]: any = await db.query(matchQuery);
 

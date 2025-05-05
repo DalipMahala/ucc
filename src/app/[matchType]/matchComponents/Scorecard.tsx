@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from "next/image";
 import Link from 'next/link';
 import eventEmitter from "@/utils/eventEmitter";
@@ -82,8 +82,36 @@ export default function Scorecard({
     
   }
 
-  
-  
+  const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
+        
+  useEffect(() => {
+    const getAllPlayerIds = () => {
+      // Safely get IDs from each potentially undefined array
+      const allIds = [
+        ...(batsman?.map((item: { batsman_id: any; }) => item?.batsman_id) || []),
+        ...(bowlers?.map((item: { bowler_id: any; }) => item?.bowler_id) || []),
+        ...(yetTobat?.map((item: { player_id: any; }) => item?.player_id) || []),
+        ...(fows?.map((item: { batsman_id: any; }) => item?.batsman_id) || []),
+        ...(partnership?.batsmen?.map((item: { batsman_id: any; }) => item?.batsman_id) || []),
+      ].filter(Boolean); // Remove any undefined/null IDs
+      
+      return [...new Set(allIds)]; // Deduplicate
+    };
+    console.log("ids",getAllPlayerIds());
+    const fetchPlayerUrls = async () => {
+      const ids = getAllPlayerIds();
+      if (ids.length === 0) return;
+      const res = await fetch('/api/player-urls', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+        body: JSON.stringify({ ids }),
+      });
+      const data = await res.json();
+      setPlayerUrls(data);
+    };
+
+    fetchPlayerUrls();
+  }, [batsman, bowlers, yetTobat, fows, partnership]);
 
   
 
@@ -180,7 +208,7 @@ export default function Scorecard({
                       {batsman?.map((batsman:any, index: number) => (
                         <tr className="border-b" key={index}>
                           <td className="md:px-4 py-2 font-medium text-[#000000]">
-                            <Link href={"/player/"+urlStringEncode(batsman.name)+"/"+batsman.batsman_id} className='flex gap-1 md:items-center md:flex-row flex-col relative'>
+                            <Link href={"/player/"+playerUrls[batsman.batsman_id]} className='flex gap-1 md:items-center md:flex-row flex-col relative'>
                               {" "}
                               <p className='flex gap-1 items-center'>
                               {batsman.name}
@@ -257,7 +285,7 @@ export default function Scorecard({
                         {bowlers?.map((bowlers:any, index: number) => (
                         <tr  key={index}>
                           <td className="px-4 py-3 font-medium text-[#000000]">
-                            <Link href={"/player/"+urlStringEncode(bowlers.name)+"/"+bowlers.bowler_id} className=''>{bowlers.name} </Link>
+                            <Link href={"/player/"+playerUrls[bowlers.bowler_id]} className=''>{bowlers.name} </Link>
                           </td>
                           <td className="md:px-4 pl-[14px] py-3 text-[#000000] font-semibold">{bowlers.overs} </td>
                           <td className="md:px-4 pl-[14px] py-3">{bowlers.maidens} </td>
@@ -290,7 +318,7 @@ export default function Scorecard({
                       {fows?.map((fows:any, index: number) => (
                         <tr className="border-b"  key={index}>
                           <td className="px-4 py-3 font-medium text-[#000000]">
-                            <Link href={"/player/"+urlStringEncode(fows.name)+"/"+fows.batsman_id} className=''>  {fows.name} </Link>
+                            <Link href={"/player/"+playerUrls[fows.batsman_id]} className=''>  {fows.name} </Link>
                           </td>
                           <td className="px-4 py-3 text-[#000000] font-semibold">{fows.score_at_dismissal} </td>
                           <td className="px-4 py-3">{fows.overs_at_dismissal}</td>
@@ -321,7 +349,7 @@ export default function Scorecard({
                   <div className="w-full ">
                     <p className="text-[13px] text-[#586577]">{partnership.order}{partnership.order === 1?("st"):partnership.order === 2?("nd"):partnership.order === 3?("rd"):("th")} Wicket</p>
                     <div className="flex md:flex-row flex-col md:gap-2">
-                      <Link href={"/player/"+urlStringEncode(players.find((p: { player_id: number; }) => p.player_id === partnership.batsmen[0].batsman_id)?.name)+"/"+partnership.batsmen[0].batsman_id} className=''>  {players.find((p: { player_id: number; }) => p.player_id === partnership.batsmen[0].batsman_id)?.name} </Link>
+                      <Link href={"/player/"+playerUrls[partnership.batsmen[0].batsman_id]} className=''>  {players.find((p: { player_id: number; }) => p.player_id === partnership.batsmen[0].batsman_id)?.name} </Link>
                       <p>
                         <span>{partnership.batsmen[0].runs} </span>
                         <span className="text-[13px] text-[#586577]">({partnership.batsmen[0].balls_faced})</span>
@@ -340,7 +368,7 @@ export default function Scorecard({
                     </div>
                   </div>
                   <div className=" w-full flex md:flex-row flex-col md:gap-2 items-end md:items-center  justify-end">
-                    <Link href={"/player/"+urlStringEncode(players.find((p: { player_id: number; }) => p.player_id === partnership.batsmen[1].batsman_id)?.name)+"/"+partnership.batsmen[1].batsman_id} className=''>
+                    <Link href={"/player/"+playerUrls[partnership.batsmen[1].batsman_id]} className=''>
                      <p className='text-end'>{players.find((p: { player_id: number; }) => p.player_id === partnership.batsmen[1].batsman_id)?.name}</p> </Link>
                     <p className='text-end'>
                     {partnership.batsmen[1].runs} <span className="text-[#586577]">({partnership.batsmen[1].balls_faced})</span>
@@ -364,7 +392,7 @@ export default function Scorecard({
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <div className="">
                   {yetTobat?.map((yetTobat:any, index: number) => (
-                    <Link href={"/player/"+urlStringEncode(yetTobat.name)+"/"+yetTobat.player_id} className=''  key={index}>
+                    <Link href={"/player/"+playerUrls[yetTobat.player_id]} className=''  key={index}>
                       <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
                         <div style={{ width: '40px', height: '40px' }}>
                          <PlayerImage key={yetTobat?.player_id} player_id={yetTobat.player_id} width={35} height={35} className="rounded-lg"  />

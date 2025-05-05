@@ -88,7 +88,7 @@ export default function LiveResult({
     0
   );
   // const players = matchStates?.players;
-
+const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_inning_number);
   if (
     matchLiveData !== undefined &&
     matchLiveData?.match_id == match_id &&
@@ -102,7 +102,7 @@ export default function LiveResult({
     players = matchLiveData?.players;
     matchinning = matchLiveData?.live?.live_inning;
     commentaries = matchLiveData?.live?.commentaries;
-    scorecard = matchLiveData?.scorecard?.innings.find((inning: { number: number; }) => inning.number === 2);
+    scorecard = matchLiveData?.scorecard?.innings.find((inning: { number: number; }) => inning.number === latestInning);
     batsman = matchinfo.batsmen;
     bowlers = matchinning.bowlers;
     fows = matchinning.fows;
@@ -310,6 +310,7 @@ export default function LiveResult({
       const numberPart = parseInt(filter.replace(/\D/g, ""), 10);
       fetchCommentary(numberPart);
       setVisibleCount(20);
+      setLatestInning(numberPart);
     }
   }, [filter]);
 
@@ -368,6 +369,32 @@ export default function LiveResult({
     };
   }, [filter]);
 
+  const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
+        
+    useEffect(() => {
+      const getAllPlayerIds = () => {
+        const allIds = [
+          matchinfo?.bowlers?.[0]?.bowler_id,
+          batsman?.[0]?.batsman_id,
+          batsman?.[1]?.batsman_id,
+        ];
+        return [...new Set(allIds)]; // Deduplicate
+      };
+      const fetchPlayerUrls = async () => {
+        const ids = getAllPlayerIds();
+        if (ids.length === 0) return;
+        const res = await fetch('/api/player-urls', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+          body: JSON.stringify({ ids }),
+        });
+        const data = await res.json();
+        setPlayerUrls(data);
+      };
+  
+      fetchPlayerUrls();
+    }, []);
+
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
@@ -384,13 +411,7 @@ export default function LiveResult({
                       <div className="flex items-center justify-between">
                         <Link className="w-[43%]"
                           href={
-                            "/player/" +
-                            urlStringEncode(
-                                batsman?.[0]?.name
-                              
-                            ) +
-                            "/" +
-                            batsman?.[0]?.batsman_id
+                            "/player/" +playerUrls[batsman?.[0]?.batsman_id]
                           }
                         >
                           <div className="flex items-center gap-3">
@@ -446,11 +467,7 @@ export default function LiveResult({
                         <Link className="w-[43%] flex justify-end"
                           href={
                             "/player/" +
-                            urlStringEncode(
-                                batsman?.[1]?.name
-                            ) +
-                            "/" +
-                            batsman?.[1]?.batsman_id
+                            playerUrls[batsman?.[1]?.batsman_id]
                           }
                         >
                           <div className="flex items-center justify-end flex-row-reverse gap-3">
@@ -503,11 +520,7 @@ export default function LiveResult({
                     <Link
                       href={
                         "/player/" +
-                        urlStringEncode(
-                            matchinfo?.bowlers?.[0]?.name
-                        ) +
-                        "/" +
-                        matchinfo?.bowlers?.[0]?.bowler_id
+                        playerUrls[matchinfo?.bowlers?.[0]?.bowler_id]
                       }
                     >
                       <div className="flex items-center gap-3">
@@ -553,12 +566,7 @@ export default function LiveResult({
                     <Link
                       href={
                         "/player/" +
-                        urlStringEncode(
-                            matchinfo?.bowlers?.[0]?.name
-                          
-                        ) +
-                        "/" +
-                        matchinfo?.bowlers?.[0]?.bowler_id
+                        playerUrls[matchinfo?.bowlers?.[0]?.bowler_id]
                       }
                     >
                       <div className="flex items-center justify-between gap-3 font-medium mx-auto w-[100%]">

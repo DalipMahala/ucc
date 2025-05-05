@@ -67,6 +67,31 @@ export default function Squads({
           events.role === "all"
       );
 
+      const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
+      
+        useEffect(() => {
+          const getAllPlayerIds = () => {
+            const allIds = [
+              ...teamASquad.map((item: { player_id: any; }) => item.player_id),
+              ...teamBSquad.map((item: { player_id: any; }) => item.player_id),
+            ];
+            return [...new Set(allIds)]; // Deduplicate
+          };
+         
+          const fetchPlayerUrls = async () => {
+            const ids = getAllPlayerIds();
+            if (ids.length === 0) return;
+            const res = await fetch('/api/player-urls', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+              body: JSON.stringify({ ids }),
+            });
+            const data = await res.json();
+            setPlayerUrls(data);
+          };
+      
+          fetchPlayerUrls();
+        }, [teamASquad, teamBSquad]);
      
 
     return (
@@ -144,7 +169,7 @@ export default function Squads({
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                                 {teamASquadBatsmen?.map((squads:any, index:number) => (
-                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(squads?.name)+"/"+squads?.player_id}  key={index}>
+                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+playerUrls[squads?.player_id]}  key={index}>
                                                     <div className="text-center p-4">
                                                         <div className="relative">
                                                         <PlayerImage key={squads?.player_id} player_id={squads?.player_id} width={47} height={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
@@ -172,7 +197,7 @@ export default function Squads({
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                             {teamASquadBowler?.map((bowler:any, index:number) => (
-                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(bowler?.name)+"/"+bowler?.player_id}  key={index}>
+                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+playerUrls[bowler?.player_id]}  key={index}>
                                                     <div className="text-center p-4">
                                                         <div className="relative">
                                                         <PlayerImage key={bowler?.player_id} player_id={bowler?.player_id} width={47} height={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
@@ -200,7 +225,7 @@ export default function Squads({
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                             {teamASquadAll?.map((allrounder:any, index:number) => (
-                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(allrounder?.name)+"/"+allrounder?.player_id}  key={index}>
+                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+playerUrls[allrounder?.player_id]}  key={index}>
                                                     <div className="text-center p-4">
                                                         <div className="relative">
                                                         <PlayerImage key={allrounder?.player_id} player_id={allrounder?.player_id} width={47} height={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
@@ -250,7 +275,7 @@ export default function Squads({
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                                 {teamBSquadBatsmen?.map((squads:any, index:number) => (
-                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(squads?.name)+"/"+squads?.player_id}  key={index}>
+                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+playerUrls[squads?.player_id]}  key={index}>
                                                     <div className="text-center p-4">
                                                         <div className="relative">
                                                         <PlayerImage key={squads?.player_id} player_id={squads?.player_id} width={47} height={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
@@ -277,7 +302,7 @@ export default function Squads({
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                             {teamBSquadBowler?.map((bowler:any, index:number) => (
-                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(bowler?.name)+"/"+bowler?.player_id}  key={index}>
+                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+playerUrls[bowler?.player_id]}  key={index}>
                                                     <div className="text-center p-4">
                                                         <div className="relative">
                                                         <PlayerImage key={bowler?.player_id} player_id={bowler?.player_id} width={47} height={47} className="w-[47] h-[47] mx-auto rounded-full mb-2" />
@@ -304,7 +329,7 @@ export default function Squads({
                                             </h2>
                                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                             {teamBSquadAll?.map((allrounder:any, index:number) => (
-                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+urlStringEncode(allrounder.name)+"/"+allrounder.player_id}  key={index}>
+                                                <Link className='border-[1px] border-[##E2E2E2] rounded-md' href={"/player/"+playerUrls[allrounder.player_id]}  key={index}>
                                                     <div className="text-center p-4 rounded-md ">
                                                         <div className="relative">
                                                         <PlayerImage key={allrounder?.player_id} player_id={allrounder?.player_id} width={47} height={47} className="w-[47] h-[47] mx-auto rounded-full mb-2" />

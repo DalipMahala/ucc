@@ -71,12 +71,14 @@ const handleTeamSelect = (team: any, type: 'A' | 'B') => {
   } else {
     setSelectedTeamB(team);
   }
+  const clean = (str?: string) => str ? str.replace(/\s/g, '').replace(/\u00A0/g, '').trim() : '';
+  const teamAId:string = type === 'A' ? team?.abbr : selectedTeamA?.abbr;
+  const teamBId:string = type === 'B' ? team?.abbr : selectedTeamB?.abbr;
 
-  const teamAId = type === 'A' ? team?.title : selectedTeamA?.title;
-  const teamBId = type === 'B' ? team?.title : selectedTeamB?.title;
-
-  if (teamAId && teamBId) {
-    const url = urlStringEncode(`/${teamAId}-vs-${teamBId}-head-to-head-in-t20`);
+  const teamA = clean(teamAId);
+  const teamB = clean(teamBId);
+  if (teamA && teamB) {
+    const url = urlStringEncode(`${teamA}-vs-${teamB}-head-to-head-in-t20`);
     router.push(url);
   }
 };

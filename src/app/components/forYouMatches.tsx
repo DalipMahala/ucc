@@ -52,6 +52,9 @@ interface MatchItem {
   match_info: any;
 
 }
+interface PlayerUrlResponse {
+  [key: string]: string;
+}
 
 function updateStatusNoteDirect(matchInfo: any) {
   if (!matchInfo?.status_note) return;
@@ -94,6 +97,29 @@ export default async function ForYouMatches() {
   const upcomingMatch1 = forYouMatch?.filter((item: { commentary: number, status: number }) => Number(item.commentary) === 1 && item.status === 1);
   const liveMatch1 = forYouMatch?.filter((item: { commentary: number, status: number }) => Number(item.commentary) === 1 && item.status === 3);
 
+  const getAllPlayerIds = () => {
+    const allIds = [
+      ...completedMatch1.map((item: {
+        man_of_the_match: any; pid: any }) => item?.man_of_the_match?.pid),
+    ];
+    return [...new Set(allIds)]; // Deduplicate
+  };
+
+  const ids = getAllPlayerIds();
+  let playerUrls: PlayerUrlResponse = {};
+
+  if (ids.length > 0) {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/player-urls`, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+      },
+      cache: 'no-store', // Ensure fresh data
+      body: JSON.stringify({ ids }),
+    });
+    playerUrls = await res.json();
+  }
   return (
     <React.Fragment>
       <div className="liveMatch1">
@@ -1095,9 +1121,7 @@ export default async function ForYouMatches() {
                       <Link className="w-[45%]"
                         href={
                           "/player/" +
-                          urlStringEncode(cmatch?.man_of_the_match?.name) +
-                          "/" +
-                          cmatch?.man_of_the_match?.pid
+                          playerUrls[cmatch?.man_of_the_match?.pid]
                         }>
                         <div className="flex flex-col items-center">
 
@@ -1309,9 +1333,7 @@ export default async function ForYouMatches() {
                       <Link
                         href={
                           "/player/" +
-                          urlStringEncode(cmatch?.man_of_the_match?.name) +
-                          "/" +
-                          cmatch?.man_of_the_match?.pid
+                          playerUrls[cmatch?.man_of_the_match?.pid]
                         }>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2" >
