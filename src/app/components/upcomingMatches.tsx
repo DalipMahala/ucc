@@ -276,18 +276,19 @@ export default async function UpcomingMatches() {
             </div>
 
             {/* Mobile */}
+
             <div className="lg:hidden rounded-lg p-4 mb-4 bg-[#ffffff] performance-section relative hover:shadow-lg">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
                   <div
-                    className="flex text-[12px] items-center uppercase text-[#A45B09] rounded-full font-semibold"
+                    className="flex text-[13px] items-center uppercase text-[#A45B09] rounded-full font-semibold"
                     style={{ gap: "2px" }}
                   >
                     <div className="w-[6px] h-[6px] bg-[#A45B09] rounded-full"></div> {ucmatch.status_str}
                   </div>
                   <div>
                     <Link href={"/series/" + urlStringEncode(ucmatch.competition.title + "-" + ucmatch.competition.season) + "/" + ucmatch.competition.cid}  >
-                      <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                      <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                         {truncateText(ucmatch.competition.title, 3)} -{" "}
                         {ucmatch.competition.season}
                       </h4>
@@ -301,7 +302,7 @@ export default async function UpcomingMatches() {
               <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-" + ucmatch?.subtitle + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
                 <div className="open-Performance-data">
                   <div className="py-2 pb-3">
-                    <p className="text-[#586577] text-[13px] mb-4 font-medium">
+                    <p className="text-[#586577] text-[12px] mb-4 font-medium">
                       {ucmatch.subtitle}, {ucmatch.format_str}, {ucmatch.venue.location}
                     </p>
                     <div className="flex justify-between items-center text-[14px]">
@@ -346,7 +347,7 @@ export default async function UpcomingMatches() {
                         </div>
                       </div>
 
-                      <div className="h-[100px] border-l-[1px] border-[#f2fafd]"></div>
+                      
 
                       <div className="w-[80%] font-semibold text-center">
                         <div className="text-[#144280] mt-1">
@@ -389,7 +390,7 @@ export default async function UpcomingMatches() {
                   {ucmatch?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.competition?.cid + "/points-table"}>
-                        <p className="pr-[10px] text-[#909090] text-[13px] font-medium">
+                        <p className="pr-[10px] text-[#909090] text-[11px] font-medium">
                           Points Table
                         </p>
                       </Link>
@@ -407,7 +408,7 @@ export default async function UpcomingMatches() {
                           alt=""
                           loading="lazy"
                         />
-                        <span className="text-[#586577] text-[13px] font-medium">
+                        <span className="text-[#909090] text-[11px] font-medium">
                           H2H
                         </span>
                       </div>
@@ -415,11 +416,11 @@ export default async function UpcomingMatches() {
                   }
                 </div>
 
-                <div className="flex items-center space-x-2 text-[13px]">
-                  <span className={"text-[#586577] font-medium oddsTeam" + ucmatch.match_id}>
+                <div className="flex items-center space-x-2 text-[11px]">
+                  <span className={"text-[#909090] font-medium oddsTeam" + ucmatch.match_id}>
                     {matchOddsCal(ucmatch)?.team}
                   </span>
-                  <span className="flex font-semibold items-center bg-[#00a632] border-[1px] border-[#00a632] rounded-md text-[#ffffff] pr-2">
+                  <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-md text-[#0B773C] pr-2">
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -438,7 +439,7 @@ export default async function UpcomingMatches() {
                     </span>
                     {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100)  : 0}
                   </span>
-                  <span className="flex font-semibold items-center bg-[#ea2323] border-[1px] border-[#ea2323] rounded-md text-[#ffffff] pr-2">
+                  <span className="flex items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B] rounded-md text-[#A70B0B] pr-2">
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

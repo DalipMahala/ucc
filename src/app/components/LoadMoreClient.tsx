@@ -251,15 +251,15 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
                   <div
-                    className="flex text-[12px] items-center text-[#0B773C] rounded-full uppercase font-semibold"
+                    className="flex text-[13px] items-center text-[#0B773C] rounded-full uppercase font-semibold"
                     style={{ gap: "2px" }}
                   >
                     <div className="w-[6px] h-[6px] bg-[#0B773C] rounded-full"></div> {cmatch.status_str}
                   </div>
                   <div>
                     <Link href={"/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) + "/" + cmatch.competition.cid}  >
-                      <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                        {truncateText(cmatch.competition.title, 2)} -{" "}
+                      <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                        {truncateText(cmatch.competition.title, 3)} -{" "}
                         {cmatch.competition.season}
                       </h4>
                     </Link>
@@ -273,11 +273,11 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
               <div className="open-Performance-data">
                 <Link href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
                   <div className="py-2 pb-3">
-                    <p className="text-[#586577] text-[13px] mb-4 font-normal">
+                    <p className="text-[#586577] text-[11px] mb-4 font-normal">
                       {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
                     </p>
                     <div className="flex justify-between items-center text-[14px]">
-                      <div className="w-[100%]">
+                      <div className="">
                         <div className="items-center space-x-2 font-medium md:w-full mb-4">
                           <div className="flex items-center space-x-2">
                             <Image
@@ -290,16 +290,16 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                             />
                             <div>
                               <span className="flex items-center gap-1">
-                                <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
+                                <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-medium text-[14px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
                                   {cmatch.teama.short_name}
                                 </span>
                               </span>
                               <p className="flex items-end gap-2">
-                                <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#434c59]"}`}>
+                                <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[#434c59]"}`}>
                                   {cmatch.teama.scores}
                                 </span>
 
-                                <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[12px] text-[black]" : "text-[#586577] text-[12px] font-normal"}`}>
+                                <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-[#909090] text-[12px] font-normal"}`}>
                                   ({cmatch.teama.overs})
                                 </span>
                               </p>
@@ -319,16 +319,16 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                               />
                               <div>
                                 <span className="flex items-center gap-1">
-                                  <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
+                                  <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-medium text-[14px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
                                     {cmatch.teamb.short_name}
                                   </span>
                                 </span>
                                 <p className="flex items-end gap-2">
-                                  <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#434c59]"}`}>
+                                  <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[#434c59]"}`}>
                                     {cmatch.teamb.scores}
                                   </span>
 
-                                  <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[12px] text-[black]" : "font-medium text-[#434c59]"}`}>
+                                  <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-[#909090] text-[12px] font-normal"}`}>
                                     ({cmatch.teamb.overs})
                                   </span>
                                 </p>
@@ -338,18 +338,17 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                         </div>
                       </div>
 
-                      <div className="h-[100px] border-l-[1px] border-[#f2fafd]"></div>
 
                       <div className=" w-[50%] font-semibold flex flex-col items-center">
                         <Image
                           src="/assets/img/home/win.png"
-                          width={30}
+                          width={26}
                           height={30}
-                          style={{ width: "30px", height: "30px" }}
+                          style={{ width: "26px", height: "30px" }}
                           alt=""
                           loading="lazy"
                         />
-                        <p className="text-[#0B773C] font-semibold mt-1 text-[13px] w-[75%] text-center">
+                        <p className="text-[#0B773C] font-semibold mt-1 text-[13px] w-[60%] text-center">
                           {cmatch.result}
                         </p>
                       </div>
@@ -364,17 +363,17 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                     {cmatch?.competition?.total_teams > 2 &&
                       <>
                         <Link href={"/series/" + urlStringEncode(cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.competition?.cid + "/points-table"}>
-                          <p className=" text-[#586577] text-[13px] font-medium">
+                          <p className="pr-[10px]  text-[#909090] text-[11px] font-medium">
                             {" "}
                             Points Table
                           </p>
                         </Link>
 
-                        <div className=" h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                        
                       </>}
                     {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
                       <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title : cmatch?.title) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
-                        <div className="flex justify-end items-center space-x-2">
+                        <div className="pl-[10px] border-l-[1px] border-[#d0d3d7] flex justify-end items-center space-x-2">
                           <Image
                             src="/assets/img/home/handshake.png"
                             className="h-[15px]"
@@ -384,7 +383,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                             alt=""
                             loading="lazy"
                           />
-                          <span className="text-[#586577] text-[13px] font-medium">
+                          <span className=" text-[#909090] text-[11px] font-medium">
                             H2H
                           </span>
                         </div>
@@ -403,12 +402,12 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2" >
                             <PlayerImage key={cmatch?.man_of_the_match?.pid} player_id={cmatch?.man_of_the_match?.pid}
-                              height={22}
-                              width={22}
+                              height={32}
+                              width={32}
 
                               className="rounded-full" />
                             <div className="text-center">
-                              <p className=" font-semibold">{truncateText(cmatch?.man_of_the_match?.name, 1)}</p>
+                              <p className=" font-semibold">{cmatch?.man_of_the_match?.name}</p>
                               <p className="text-[11px]">Man of the match </p>
                             </div>
                           </div>
