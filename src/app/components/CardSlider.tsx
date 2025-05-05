@@ -141,9 +141,9 @@ export default function Slider() {
                   width={200} 
                   height={30} 
                 />
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/100 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/100 to-transparent rounded-b-lg" />
                 
-                <p className="absolute bottom-2 left-0 right-0 text-white font-semibold px-2 text-[14px] md:text-[13px]">
+                <p className="absolute bottom-2 left-0 right-0 text-white font-semibold px-2 text-[14px] md:text-[13px] text-center">
                   {textLimit(image.title,40)}
                 </p>
               </Link>

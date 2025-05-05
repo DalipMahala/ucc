@@ -128,7 +128,7 @@ export default function CountriesList({ countries }: countries) {
                     className="mr-3 rounded-full object-cover"
                     width={20}
                     height={20}
-                    style={{ width: "25px", height: "25px" }}
+                    style={{ width: "20px", height: "20px" }}
                     alt={`${country.country_name} Flag`}
                   />
                   {country.country_name}

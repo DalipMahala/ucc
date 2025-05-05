@@ -86,7 +86,7 @@ const WeeklySlider = () => {
             <div className="rounded-lg p-4 mb-2 bg-[#ffffff]">
               <div className="flex items-center justify-between md:mb-4 mb-2">
                   <div
-                    className="flex space-x-2 w-[45%] text-[12px] items-center text-[#0F55A5] rounded-full pr-3 font-semibold"
+                    className="flex space-x-2 w-[45%] text-[13px] items-center text-[#0F55A5] rounded-full pr-3 font-semibold"
                     style={{ gap: 3 }}
                   >
                     <div className="w-[8px] h-[8px] bg-[#0F55A5] rounded-full animate-blink"></div> FEATURED
@@ -94,10 +94,10 @@ const WeeklySlider = () => {
                 </div>
                 <div className="h-[20px] border-l-[1px] border-[#efefef]" />
                 <div className="flex items-center justify-end space-x-2 w-[50%] ">
-                  <span className="text-[11px] text-[#1F2937] font-semibold ">
+                  <span className="text-[13px] text-[#1F2937] font-medium">
                     {slide?.teamList?.[parseFloat(slide?.odds?.matchodds?.teama?.back) < parseFloat(slide?.odds?.matchodds?.teamb?.back) ? 'teama' : 'teamb']?.short_name}
                   </span>
-                  <span className="flex font-semibold items-center md:bg-[#FAFFFC] bg-[#00a632] border-[1px] md:border-[#0B773C] border-[#00a632] md:rounded-full rounded-md md:text-[#0B773C] text-[#ffffff] pr-2">
+                  <span className="flex  items-center md:bg-[#FAFFFC] bg-[#00a632] border-[1px] md:border-[#0B773C] border-[#00a632] md:rounded-full rounded-md md:text-[#0B773C] text-[#ffffff] pr-2">
                     
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +124,7 @@ const WeeklySlider = () => {
                         : 0
                     }
                   </span>
-                  <span className="flex font-semibold items-center md:bg-[#FFF7F7] bg-[#ea2323] border-[1px] md:border-[#A70B0B] border-[#ea2323]  md:rounded-full rounded-md md:text-[#A70B0B] text-[#ffffff] pr-2">
+                  <span className="flex items-center md:bg-[#FFF7F7] bg-[#ea2323] border-[1px] md:border-[#A70B0B] border-[#ea2323]  md:rounded-full rounded-md md:text-[#A70B0B] text-[#ffffff] pr-2">
                     
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -187,7 +187,7 @@ const WeeklySlider = () => {
                               width={25}
                               height={25}
                             />
-                            <span className=" text-[#586577] font-medium text-[14px]">
+                            <span className=" text-[#5e5e5e] font-medium text-[14px]">
                               {team.country}
                             </span>
                         </div>

@@ -38,17 +38,15 @@ export default function TabbedSection({
     }
   }, [activeTab, loadedTabs]);
 
-
   return (
     <div className="tab-section">
       {/* Tab Buttons (same as before) */}
       <div className="tabs ml-[-8px] w-[104.2%] md:ml-[0] md:w-auto mb-3 md:my-4">
-        <div className="flex justify-between md:justify-start text-[13px] md:space-x-8 space-x-4 md:p-2 pt-[2px] pb-2 px-2 md:bg-[#ffffff] md:text-[#000000] text-[#ffffff] bg-[#081736] md:rounded-lg overflow-auto relative overflow-x-auto">
-          
+        <div className="flex justify-between md:justify-start text-1xl md:space-x-8 space-x-4 md:p-2 pt-[2px] pb-2 px-2 md:bg-[#ffffff] md:text-[#1f2937] text-[#ffffff] bg-[#081736] md:rounded-lg overflow-auto relative overflow-x-auto">
           
           <button
             onClick={() => setActiveTab("live")}
-            className={`font-semibold py-2 md:px-5 px-4 whitespace-nowrap uppercase ${
+            className={`font-medium py-2 md:px-5 px-4 whitespace-nowrap  ${
               activeTab === "live"
                 ? "md:bg-[#1A80F8] bg-[#081736] md:bottom-0 border-b-[2px] border-[#ffffff] text-white"
                 : ""
@@ -59,7 +57,7 @@ export default function TabbedSection({
 
           <button
             onClick={() => setActiveTab("for-you")}
-            className={`font-semibold py-2 md:px-5 px-4 whitespace-nowrap uppercase ${
+            className={`font-medium py-2 md:px-5 px-4 whitespace-nowrap  ${
               activeTab === "for-you"
                 ? "md:bg-[#1A80F8] bg-[#081736] md:bottom-0 border-b-[2px] border-[#ffffff] text-white"
                 : ""
@@ -70,7 +68,7 @@ export default function TabbedSection({
 
           <button
             onClick={() => setActiveTab("completed")}
-            className={`font-semibold py-2 md:px-5 px-4 whitespace-nowrap uppercase ${
+            className={`font-medium py-2 md:px-5 px-4 whitespace-nowrap  ${
               activeTab === "completed"
                 ? "md:bg-[#1A80F8] bg-[#081736] md:bottom-0 border-b-[2px] border-[#ffffff] text-white"
                 : ""
@@ -81,7 +79,7 @@ export default function TabbedSection({
 
           <button
             onClick={() => setActiveTab("upcoming")}
-            className={`font-semibold py-2 md:px-5 px-4 whitespace-nowrap uppercase ${
+            className={`font-medium py-2 md:px-5 px-4 whitespace-nowrap  ${
               activeTab === "upcoming"
                 ? "md:bg-[#1A80F8] bg-[#081736] md:bottom-0 border-b-[2px] border-[#ffffff] text-white"
                 : ""

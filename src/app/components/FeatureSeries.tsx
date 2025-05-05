@@ -249,7 +249,7 @@ const MatchHeader = ({ match, isMobile = false }: MatchHeaderProps) => {
             </h4>
           ) : (
             <Link href={`/series/${urlStringEncode(`${match.competition.title}-${match.competition.season}`)}/${match.competition.cid}`}>
-              <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+              <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                 {match.competition.title}
               </h4>
             </Link>
@@ -270,7 +270,7 @@ const MatchHeader = ({ match, isMobile = false }: MatchHeaderProps) => {
 
 const TeamStatusIndicator = ({ teamA }: { teamA: string }) => (
   <div className="flex items-center space-x-2">
-    <span className="text-[11px] text-[#1F2937] font-semibold">{teamA}</span>
+    <span className="text-[#1F2937] text-[13px] font-medium">{teamA}</span>
     <StatusBadge type="up" value="0" />
     <StatusBadge type="down" value="0" />
   </div>
@@ -312,7 +312,7 @@ const MatchContent = ({ match, isMobile = false }: MatchContentProps) => {
   return (
     <Link href={matchUrl}>
       <div className={`${isMobile ? 'py-2 pb-3' : 'py-4 px-3'}`}>
-        <p className="text-[#586577] text-[13px] mb-4 font-medium">
+        <p className="text-[#586577] text-[12px] mb-4 font-medium">
           {match.subtitle}, {match.venue.name} {match.venue.location}, {match.venue.country}
         </p>
         <div className="flex justify-between items-center text-[14px]">
@@ -320,7 +320,7 @@ const MatchContent = ({ match, isMobile = false }: MatchContentProps) => {
             <TeamDisplay team={match.teama} isMobile={isMobile} />
             <TeamDisplay team={match.teamb} isMobile={isMobile} />
           </div>
-          <div className="h-[100px] border-l-[1px] border-[#E7F2F4]"></div>
+          {/* <div className="h-[100px] border-l-[1px] border-[#E7F2F4]"></div> */}
           <MatchTime date={match.date_start_ist} isMobile={isMobile} />
         </div>
       </div>
@@ -346,7 +346,7 @@ const TeamDisplay = ({ team, isMobile }: TeamDisplayProps) => (
       alt={team.name}
       loading="lazy"
     />
-    <span className={`text-[${isMobile ? '#5e5e5e' : '#586577'}] font-medium text-[14px]`}>
+    <span className={`text-[${isMobile ? '#5e5e5e' : '#1F2937'}] font-semibold text-[14px]`}>
       {team.name}
     </span>
   </div>
@@ -421,7 +421,7 @@ const MatchFooter = ({ match, series, isMobile = false }: MatchFooterProps) => {
               loading="lazy"
               className={isMobile ? "h-[15px]" : ""}
             />
-            <span className={`text-[#586577] ${isMobile ? 'text-[13px]' : ''} font-medium`}>
+            <span className={`text-[#586577] ${isMobile ? 'text-[13px]' : 'text-[#909090]'} font-medium`}>
               H2H
             </span>
           </div>

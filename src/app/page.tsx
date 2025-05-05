@@ -12,7 +12,7 @@ import { urlStringEncode } from "../utils/utility";
 import { Ranking } from "@/controller/playerController";
 import News from "@/app/components/News";
 import FeatureSeries from "@/app/components/FeatureSeries";
-import { GetCountryCompitition, FeaturedSeries} from "@/controller/homeController";
+import { GetCountryCompitition, FeaturedSeries } from "@/controller/homeController";
 import type { Metadata } from "next";
 import CountriesList from "./components/CountriesList";
 import PLSeries from "./components/popularSeries";
@@ -81,7 +81,7 @@ type Params = Promise<{ matchType: string }>;
 export default async function Home(props: { params: Params }) {
 
 
-  console.log("btn",props);
+  console.log("btn", props);
   const open = null;
   let activeTabValue = "info1";
 
@@ -93,9 +93,9 @@ export default async function Home(props: { params: Params }) {
   const featuredSeries1 = await FeaturedSeries();
   const featuredSeries = featuredSeries1.reverse();
   // const  matchData = ChatComponent();
-   const countryCompitition = await GetCountryCompitition();
+  const countryCompitition = await GetCountryCompitition();
 
-  
+
   return (
     <Layout>
       <ChatComponent></ChatComponent>
@@ -103,7 +103,7 @@ export default async function Home(props: { params: Params }) {
 
         <div className="md:grid grid-cols-12 gap-4">
           <div className="lg:col-span-8 md:col-span-7">
-          <TabbedSection
+            <TabbedSection
               forYouMatches={<ForYouMatches />}
               liveMatches={<LiveMatches />}
               upcomingMatches={<UpcomingMatches />}
@@ -113,7 +113,7 @@ export default async function Home(props: { params: Params }) {
           </div>
 
           <div className="lg:col-span-4 md:col-span-5">
-            
+
             <div className="md:h-[260px]">
               <WeeklySlider />
             </div>

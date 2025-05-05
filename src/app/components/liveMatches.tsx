@@ -68,10 +68,10 @@ function matchOddsCal(data: any) {
 
   const a = parseFloat(data?.live_odds?.matchodds?.teama?.back || 0);
   const b = parseFloat(data?.live_odds?.matchodds?.teamb?.back || 0);
-  const lesserTeam = a < b 
-    ? { matchId: data?.match_id,team: data?.teama?.short_name, ...data?.live_odds?.matchodds?.teama } 
-    : { matchId: data?.match_id,team: data?.teamb?.short_name, ...data?.live_odds?.matchodds?.teamb };
-    return lesserTeam;
+  const lesserTeam = a < b
+    ? { matchId: data?.match_id, team: data?.teama?.short_name, ...data?.live_odds?.matchodds?.teama }
+    : { matchId: data?.match_id, team: data?.teamb?.short_name, ...data?.live_odds?.matchodds?.teamb };
+  return lesserTeam;
 }
 export default async function LiveMatches() {
   let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/liveMatches`, {
@@ -99,6 +99,9 @@ export default async function LiveMatches() {
       <div>
         {liveMatch?.map((items) => (
           <div key={items.match_id}>
+
+            {/* desktop view */}
+
             <div
 
               data-key={items.match_id}
@@ -109,7 +112,7 @@ export default async function LiveMatches() {
 
                 <div className="flex items-center space-x-2 w-[75%]">
                   <div
-                    className="flex items-center text-[12px] text-[#A70B0B] rounded-full pr-3 uppercase font-semibold"
+                    className="flex items-center text-[13px] text-[#A70B0B] rounded-full pr-3 uppercase font-semibold"
                     style={{ gap: "3px" }}
                   >
                     <span className="rounded-full">
@@ -136,20 +139,20 @@ export default async function LiveMatches() {
                     {items?.game_state_str === 'Play Ongoing' ? items?.status_str : items?.game_state_str}
                   </div>
                   <div>
-                  <Link href={ "/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) +  "/" +  items.competition.cid  }  >
-                    <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
-                      {items.competition.title} - {" "}
-                      {items.competition.season}
-                    </h4>
+                    <Link href={"/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) + "/" + items.competition.cid}  >
+                      <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                        {items.competition.title} - {" "}
+                        {items.competition.season}
+                      </h4>
                     </Link>
                   </div>
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <span className={"text-[11px] text-[#1F2937] font-semibold oddsTeam" + items.match_id}>
+                  <span className={"text-[13px] font-medium oddsTeam" + items.match_id}>
                     {matchOddsCal(items)?.team}
                   </span>
-                  <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
+                  <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
                     <span className="">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -167,11 +170,11 @@ export default async function LiveMatches() {
                       </svg>
                     </span>
                     <span className={"oddback" + items.match_id}>
-                    {matchOddsCal(items)?.back > 0 ? Math.round((matchOddsCal(items)?.back) * 100 - 100)  : 0}
+                      {matchOddsCal(items)?.back > 0 ? Math.round((matchOddsCal(items)?.back) * 100 - 100) : 0}
                       {/* {items?.live_odds?.matchodds?.teama?.back > 0  ? Math.round((items?.live_odds?.matchodds?.teama?.back)*100-100) : 0} */}
                     </span>
                   </span>
-                  <span className="flex font-semibold items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-full text-[#A70B0B] pr-2">
+                  <span className="flex items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-full text-[#A70B0B] pr-2">
                     <span className="">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -189,7 +192,7 @@ export default async function LiveMatches() {
                       </svg>
                     </span>
                     <span className={"oddlay" + items.match_id}>
-                    {matchOddsCal(items)?.lay > 0 ? Math.round((matchOddsCal(items)?.lay) * 100 - 100)  : 0}
+                      {matchOddsCal(items)?.lay > 0 ? Math.round((matchOddsCal(items)?.lay) * 100 - 100) : 0}
                       {/* {items?.live_odds?.matchodds?.teama?.lay > 0 ? Math.round((items?.live_odds?.matchodds?.teama?.lay)*100-100) : 0} */}
                     </span>
                   </span>
@@ -203,7 +206,7 @@ export default async function LiveMatches() {
                 <Link href={"/live-score/" + urlStringEncode(items?.teama?.short_name + "-vs-" + items?.teamb?.short_name + "-" + items?.subtitle + "-" + items?.competition?.title + "-" + items?.competition?.season) + "/" + items.match_id}>
                   <div className="flex justify-between items-center text-[14px]">
                     <div className="w-[55%]">
-                      <p className="text-[#586577] text-[13px] mb-4 font-medium">
+                      <p className="text-[#586577] text-[12px] mb-4 font-medium">
                         {items.subtitle}, {items.format_str}, {items.venue.location}
                       </p>
                       <div className="flex items-center space-x-2 font-medium md:w-full mb-4">
@@ -217,13 +220,13 @@ export default async function LiveMatches() {
                             alt={items.teama.short_name}
                             loading="lazy"
                           />
-                          <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
+                          <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#909090] font-semibold text-[14px]"}`}>
                             {items.teama.short_name} -{" "}
                           </span>
                         </div>
                         <p
                           className={
-                            "flex items-end gap-[4px] match" +
+                            "flex items-baseline gap-[4px] match" +
                             items.match_id +
                             "-" +
                             items.teama.team_id
@@ -232,21 +235,21 @@ export default async function LiveMatches() {
                           {items.teama.scores === undefined ||
                             items.teama.scores === null ||
                             items.teama.scores === "" ? (
-                            <span className="text-[14px] font-medium text-[#586577]">
+                            <span className="text-[14px] font-semibold">
                               {" "}
                               (Yet to bat){" "}
                             </span>
                           ) : (
                             <>
-                              <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
+                              <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : " font-semibold text-[14px]"}`}>
                                 {items.teama.scores ?? 0}
                               </span>
-                              <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[12px] text-[black]" : "text-[12px] text-[#586577]"}`}>
+                              <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[13px] text-[black]" : "text-[#909090] text-[13px]"}`}>
                                 {" "}
                                 ({items.teama.overs ?? 0}){" "}
                               </span>
                               {(items.teama.team_id === items?.live?.live_inning?.batting_team_id) &&
-                                <Image loading="lazy" src="/assets/img/home/bat.png" width={14} height={14} className="h-[12px] mb-[3px]" alt="bat" />
+                                <Image loading="lazy" src="/assets/img/home/bat.png" width={12} height={12} className="h-[12px] mb-[3px]" alt="bat" />
                               }
                             </>
                           )}
@@ -264,13 +267,13 @@ export default async function LiveMatches() {
                               alt={items.teamb.short_name}
                               loading="lazy"
                             />
-                            <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
+                            <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#909090] font-semibold text-[14px]"}`}>
                               {items.teamb.short_name} -
                             </span>
                           </div>
                           <p
                             className={
-                              "flex items-end  gap-[4px] match" +
+                              "flex items-baseline gap-[4px] match" +
                               items.match_id +
                               "-" +
                               items.teamb.team_id
@@ -279,21 +282,21 @@ export default async function LiveMatches() {
                             {items.teamb.scores === undefined ||
                               items.teamb.scores === null ||
                               items.teamb.scores === "" ? (
-                              <span className="font-medium text-[14px] text-[#586577]">
+                              <span className="text-[14px] font-semibold">
                                 {" "}
                                 (Yet to bat){" "}
                               </span>
                             ) : (
                               <>
-                                <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
+                                <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[14px]"}`}>
                                   {items.teamb.scores ?? 0}
                                 </span>
-                                <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[12px] text-[black]" : "text-[12px] text-[#586577]"}`}>
+                                <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[13px] text-[black]" : "text-[#909090] text-[13px]"}`}>
                                   {" "}
                                   ({items.teamb.overs ?? 0}){" "}
                                 </span>
                                 {(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) &&
-                                  <Image loading="lazy" src="/assets/img/home/bat.png" width={14} height={14} className="h-[12px] mb-[3px]" alt="bat" />
+                                  <Image loading="lazy" src="/assets/img/home/bat.png" width={12} height={12} className="h-[12px] mb-[3px]" alt="bat" />
                                 }
                               </>
                             )}
@@ -302,9 +305,9 @@ export default async function LiveMatches() {
                       </div>
                     </div>
 
-                    <div className="h-[100px] border-l-[1px] border-[#efefef]"></div>
+                    {/* <div className="h-[100px] border-l-[1px] border-[#efefef]"></div> */}
 
-                    <div className="w-[38%] font-semibold text-center">
+                    <div className="w-[38%] font-medium text-center">
                       <p
                         className={
                           "text-[#2F335C] text-[14px] statusNote" +
@@ -329,7 +332,7 @@ export default async function LiveMatches() {
                   {items?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(items?.competition?.title + "-" + items?.competition?.season) + "/" + items.competition?.cid + "/points-table"}>
-                        <p className=" text-[#909090] font-semibold">
+                        <p className="  text-[#909090] font-medium">
                           {" "}
                           Points Table
                         </p>
@@ -338,7 +341,7 @@ export default async function LiveMatches() {
                     </>
                   }
                   <Link href={"/series/" + urlStringEncode(items?.competition?.title + "-" + items?.competition?.season) + "/" + items?.competition?.cid + "/schedule-results/schedule"}>
-                    <p className="text-[#909090] font-semibold">
+                    <p className=" text-[#909090] font-medium">
                       Schedule
                     </p>
                   </Link>
@@ -354,7 +357,7 @@ export default async function LiveMatches() {
                         alt=""
                         loading="lazy"
                       />
-                      <span className="text-[#586577] font-semibold">
+                      <span className=" text-[#909090] font-medium">
                         H2H
                       </span>
                     </div>
@@ -368,7 +371,7 @@ export default async function LiveMatches() {
             <div className="lg:hidden rounded-lg p-4 mb-4 bg-[#ffffff] performance-section relative hover:shadow-lg">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
-                  <div className="flex gap-[2px] items-center text-[#ea2323] rounded-full font-semibold uppercase text-[12px]">
+                  <div className="flex gap-[2px] items-center text-[#ea2323] rounded-full font-semibold uppercase text-[13px]">
                     <span className="rounded-full">
                       <svg className="h-[7px] w-[7px]">
                         <circle
@@ -393,14 +396,14 @@ export default async function LiveMatches() {
                     {items.game_state_str === 'Play Ongoing' ? items.status_str : items.game_state_str}
                   </div>
                   <div>
-                  <Link href={ "/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) +  "/" +  items.competition.cid  }  >
-                    <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                      {truncateText(items.competition.title, 5)} -{" "}
-                      {items.competition.season}
-                    </h4>
+                    <Link href={"/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) + "/" + items.competition.cid}  >
+                      <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                        {truncateText(items.competition.title, 5)} -{" "}
+                        {items.competition.season}
+                      </h4>
                     </Link>
                   </div>
-                  
+
                 </div>
               </div>
 
@@ -518,7 +521,7 @@ export default async function LiveMatches() {
                         </div>
                       </div>
 
-                      <div className="h-[100px] border-l-[1px] border-[#f2fafd]"></div>
+                      {/* <div className="h-[100px] border-l-[1px] border-[#f2fafd]"></div> */}
 
                       <div className="w-[44%] font-semibold text-center">
                         <p className={"mt-1 mx-2 text-[#2F335C] text-[14px]  statusNote" +
@@ -590,7 +593,7 @@ export default async function LiveMatches() {
                         </svg>
                       </span>
                       <span className={"oddback" + items.match_id}>
-                      {matchOddsCal(items)?.back > 0 ? Math.round((matchOddsCal(items)?.back) * 100 - 100)  : 0}
+                        {matchOddsCal(items)?.back > 0 ? Math.round((matchOddsCal(items)?.back) * 100 - 100) : 0}
                         {/* {items?.live_odds?.matchodds?.teama?.back > 0  ? Math.round((items?.live_odds?.matchodds?.teama?.back)*100-100) : 0} */}
                       </span>
                     </span>
@@ -612,7 +615,7 @@ export default async function LiveMatches() {
                         </svg>
                       </span>
                       <span className={"oddlay" + items.match_id}>
-                      {matchOddsCal(items)?.lay > 0 ? Math.round((matchOddsCal(items)?.lay) * 100 - 100)  : 0}
+                        {matchOddsCal(items)?.lay > 0 ? Math.round((matchOddsCal(items)?.lay) * 100 - 100) : 0}
                         {/* {items?.live_odds?.matchodds?.teama?.lay > 0  ? Math.round((items?.live_odds?.matchodds?.teama?.lay)*100-100) : 0} */}
                       </span>
                     </span>
