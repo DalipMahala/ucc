@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap'); */
 
 
 
@@ -14,13 +14,115 @@
 }
 
 
+
+
+
+@font-face {
+  font-family: 'Noto Sans Disp Blk';
+  src: url('./fonts/NotoSansDisplay-Black.woff2') format('woff2'),
+    url('./fonts/NotoSansDisplay-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans Disp';
+  src: url('./fonts/NotoSansDisplay-Bold.woff2') format('woff2'),
+    url('./fonts/NotoSansDisplay-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans Disp';
+  src: url('./fonts/NotoSansDisplay-Light.woff2') format('woff2'),
+    url('./fonts/NotoSansDisplay-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans Disp SemBd';
+  src: url('./fonts/NotoSansDisplay-SemiBold.woff2') format('woff2'),
+    url('./fonts/NotoSansDisplay-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans Disp Med';
+  src: url('./fonts/NotoSansDisplay-Medium.woff2') format('woff2'),
+    url('./fonts/NotoSansDisplay-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans Disp';
+  src: url('./fonts/NotoSansDisplay-Regular.woff2') format('woff2'),
+    url('./fonts/NotoSansDisplay-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans Disp';
+  src: url('./fonts/NotoSansDisplay-Thin.woff2') format('woff2'),
+    url('./fonts/NotoSansDisplay-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+
+
+
+
+
+
+
 body {
-  font-family: "Noto Sans Display", sans-serif;
+  font-family: 'Noto Sans Disp';
   font-size: 13px;
   background-color: #ECF2FD;
   color: #1f2937;
+ 
 }
 
+.font-light{
+  font-family: 'Noto Sans Disp !important';
+  font-weight: 300 !important;
+}
+
+.font-normal{
+  font-family: 'Noto Sans Disp' !important;
+  font-weight: 400 !important;
+
+}
+
+
+.font-medium{
+  font-family: 'Noto Sans Disp Med' !important;
+  font-weight: 500 !important;
+}
+
+.font-semibold{
+  font-family: 'Noto Sans Disp SemBd' !important;
+  font-weight: 600 !important;
+}
+
+.font-bold{
+  font-family: 'Noto Sans Disp' !important;
+  font-weight: bold !important;
+}
 
 
 
@@ -62,7 +164,7 @@ h6 {
   color: #FFBD71;
   font-size: 24px;
   font-weight: 600;
-  
+
 }
 
 
@@ -226,7 +328,7 @@ h6 {
   align-items: center;
   justify-content: center;
   border-radius: 17px;
-font-size: 27px;
+  font-size: 27px;
   width: 100%;
   height: 60px;
   animation: phoneblinkFour 2s ease-in;
@@ -262,7 +364,7 @@ font-size: 27px;
   align-items: center;
   justify-content: center;
   border-radius: 17px;
-font-size: 27px;
+  font-size: 27px;
   width: 100%;
   height: 60px;
   animation: phoneblinkSix 2s ease-in;
@@ -332,8 +434,8 @@ font-size: 27px;
 
 
 
-.scheduled-timer .banner-timer div{
-font-size: 17px;
+.scheduled-timer .banner-timer div {
+  font-size: 17px;
 }
 
 

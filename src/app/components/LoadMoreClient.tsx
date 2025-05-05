@@ -146,7 +146,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                             alt={cmatch.teama.short_name}
                             loading="lazy"
                           />
-                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#909090] font-semibold text-[14px]"}`}>
+                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
                             {cmatch.teama.short_name} -{" "}
                           </span>
                         </div>
@@ -154,7 +154,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                           <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : " font-semibold text-[14px]"}`}>
                             {cmatch.teama.scores}
                           </span>
-                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-[#909090] text-[13px]"}`}>
+                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
                             {" "}
                             ({cmatch.teama.overs})
                           </span>
@@ -172,7 +172,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                               alt={cmatch.teamb.short_name}
                               loading="lazy"
                             />
-                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#909090] font-semibold text-[14px]"}`}>
+                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
                               {cmatch.teamb.short_name} -{" "}
                             </span>
                           </div>
@@ -180,7 +180,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                             <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[14px] font-semibold "}`}>
                               {cmatch.teamb.scores}
                             </span>
-                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-[#909090] text-[13px]"}`}>
+                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
                               ({cmatch.teamb.overs})
                             </span>
                           </p>
@@ -238,7 +238,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                   {cmatch?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.competition?.cid + "/points-table"}>
-                        <p className="  text-[#909090] font-medium">
+                        <p className="  text-[#757A82] font-medium">
                           {" "}
                           Points Table
                         </p>
@@ -246,7 +246,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                       <div className=" h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                     </>}
                   <Link href={"/series/" + urlStringEncode(cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch?.competition?.cid + "/schedule-results/schedule"}>
-                    <p className=" text-[#909090] font-medium">
+                    <p className=" text-[#757A82] font-medium">
                       Schedule
                     </p>
                   </Link>
@@ -262,7 +262,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                         alt=""
                         loading="lazy"
                       />
-                      <span className=" text-[#909090] font-medium">
+                      <span className=" text-[#757A82] font-medium">
                         H2H
                       </span>
                     </div>
@@ -327,7 +327,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                                   {cmatch.teama.scores}
                                 </span>
 
-                                <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-[#909090] text-[12px] font-normal"}`}>
+                                <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-[#757A82] text-[12px] font-normal"}`}>
                                   ({cmatch.teama.overs})
                                 </span>
                               </p>
@@ -356,7 +356,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                                     {cmatch.teamb.scores}
                                   </span>
 
-                                  <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-[#909090] text-[12px] font-normal"}`}>
+                                  <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-[#757A82] text-[12px] font-normal"}`}>
                                     ({cmatch.teamb.overs})
                                   </span>
                                 </p>
@@ -391,7 +391,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                     {cmatch?.competition?.total_teams > 2 &&
                       <>
                         <Link href={"/series/" + urlStringEncode(cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.competition?.cid + "/points-table"}>
-                          <p className="pr-[10px]  text-[#909090] text-[11px] font-medium">
+                          <p className="pr-[10px]  text-[#757A82] text-[11px] font-medium">
                             {" "}
                             Points Table
                           </p>
@@ -411,7 +411,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                             alt=""
                             loading="lazy"
                           />
-                          <span className=" text-[#909090] text-[11px] font-medium">
+                          <span className=" text-[#757A82] text-[11px] font-medium">
                             H2H
                           </span>
                         </div>

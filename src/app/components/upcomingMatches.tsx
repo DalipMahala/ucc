@@ -242,7 +242,7 @@ export default async function UpcomingMatches() {
                   {ucmatch?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.competition?.cid + "/points-table"}>
-                        <p className="  text-[#909090] font-medium">
+                        <p className="  text-[#757A82] font-medium">
                           {" "}
                           Points Table
                         </p>
@@ -250,7 +250,7 @@ export default async function UpcomingMatches() {
                       <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                     </>}
                   <Link href={"/series/" + urlStringEncode(ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch?.competition?.cid + "/schedule-results/schedule"}>
-                    <p className=" text-[#909090] font-medium">
+                    <p className=" text-[#757A82] font-medium">
                       Schedule
                     </p>
                   </Link>
@@ -266,7 +266,7 @@ export default async function UpcomingMatches() {
                         alt=""
                         loading="lazy"
                       />
-                      <span className=" text-[#909090] font-medium">
+                      <span className=" text-[#757A82] font-medium">
                         H2H
                       </span>
                     </div>
@@ -390,7 +390,7 @@ export default async function UpcomingMatches() {
                   {ucmatch?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.competition?.cid + "/points-table"}>
-                        <p className="pr-[10px] text-[#909090] text-[11px] font-medium">
+                        <p className="pr-[10px] text-[#757A82] text-[11px] font-medium">
                           Points Table
                         </p>
                       </Link>
@@ -408,7 +408,7 @@ export default async function UpcomingMatches() {
                           alt=""
                           loading="lazy"
                         />
-                        <span className="text-[#909090] text-[11px] font-medium">
+                        <span className="text-[#757A82] text-[11px] font-medium">
                           H2H
                         </span>
                       </div>
@@ -417,7 +417,7 @@ export default async function UpcomingMatches() {
                 </div>
 
                 <div className="flex items-center space-x-2 text-[11px]">
-                  <span className={"text-[#909090] font-medium oddsTeam" + ucmatch.match_id}>
+                  <span className={"text-[#757A82] font-medium oddsTeam" + ucmatch.match_id}>
                     {matchOddsCal(ucmatch)?.team}
                   </span>
                   <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-md text-[#0B773C] pr-2">

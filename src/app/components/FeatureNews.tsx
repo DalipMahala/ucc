@@ -65,31 +65,28 @@ const FeatureNews = ({ newsUrl }: url) => {
                       </Link>
                     )}
                   </div>
-                  <div className="col-span-6">
+                  <div className="col-span-6 flex flex-col justify-between">
 
-                    <p className="text-gray-500 font-normal text-[13px] mb-2 flex items-center">
-                      By{" "}
-                      <span className="ml-2 pr-[1px]">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          x="0px"
-                          y="0px"
-                          width="15"
-                          height="15"
-                          viewBox="0 0 48 48"
-                        >
-                          <polygon
-                            fill="#42a5f5"
-                            points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"
-                          ></polygon>
-                          <polygon
-                            fill="#fff"
-                            points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"
-                          ></polygon>
-                        </svg>
-                      </span>{" "}
-                      <Link href={post?._embedded?.author[0]?.link}>{post._embedded?.author[0]?.name}{" "}</Link>
-                      <span className="ml-2 pr-[1px]">
+                   <div>
+                    <h3
+                      className="text-1xl font-semibold mb-1"
+                      style={{ lineHeight: "21px" }}
+                    >
+
+                    </h3>
+                    <Link href={post?.link}>
+                      <h2 className="text-[18px] font-semibold mb-2 leading-[24px]" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered, 8)) }} >
+
+                      </h2>
+                    </Link>
+                    <p className="text-gray-500 font-normal " dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.uagb_excerpt, 35)) }} >
+
+                    </p>
+                    </div>
+                    <p className="text-gray-500 font-normal text-[13px] mb-2 flex gap-2 items-center">
+                  
+                  
+                      <span className="">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -105,42 +102,8 @@ const FeatureNews = ({ newsUrl }: url) => {
                           />
                         </svg>
                       </span>{" "}
-                      {format(new Date(post?.modified), "dd MMM, yyyy")}
+                    <span>  {format(new Date(post?.modified), "dd MMM, yyyy")} </span>
                     </p>
-                    <h3
-                      className="text-1xl font-semibold mb-1"
-                      style={{ lineHeight: "21px" }}
-                    >
-
-                    </h3>
-                    <Link href={post?.link}>
-                      <h2 className="text-1xl font-semibold mb-2" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered, 12)) }} >
-
-                      </h2>
-                    </Link>
-                    <p className="text-gray-500 font-normal " dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.uagb_excerpt, 30)) }} >
-
-                    </p>
-
-                    <Link href={post?.link}>
-                      <p className="text-[#1A80F8] font-semibold flex items-center text-[13px] pt-2 underline">
-                        Read more{" "}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className="size-3 ml-2"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                          />
-                        </svg>
-                      </p>
-                    </Link>
                   </div>
                 </div>
               ))}
@@ -167,31 +130,23 @@ const FeatureNews = ({ newsUrl }: url) => {
                         )}
                       </Link>
 
-                      <div className="md:w-[85%] w-[75%]">
+                      <div className="md:w-[85%] w-[75%] flex flex-col justify-between">
 
-                      <p className="text-gray-500 font-normal text-[12px] mb-2 flex items-center">
-                          By{" "}
-                          <span className="ml-2 pr-[1px]">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              x="0px"
-                              y="0px"
-                              width="15"
-                              height="15"
-                              viewBox="0 0 48 48"
-                            >
-                              <polygon
-                                fill="#42a5f5"
-                                points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"
-                              ></polygon>
-                              <polygon
-                                fill="#fff"
-                                points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"
-                              ></polygon>
-                            </svg>
-                          </span>{" "}
-                          <Link href={post?._embedded?.author[0]?.link}>{post._embedded?.author[0]?.name}{" "}</Link>
-                          <span className="ml-2 pr-[1px]">
+                      
+<div>
+                        <Link href={post?.link}>
+                          <h2 className="md:text-1xl text-[14px] font-semibold mb-1" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post?.title.rendered) }} >
+
+                          </h2>
+                        </Link>
+                        <p className=" text-gray-500 font-normal hidden md:block" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.uagb_excerpt, 25)) }} >
+
+                        </p>
+
+                        </div>
+                        <p className="text-gray-500 font-normal text-[12px] flex gap-2 items-center">
+                         
+                          <span className="">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
@@ -207,16 +162,7 @@ const FeatureNews = ({ newsUrl }: url) => {
                               ></path>
                             </svg>
                           </span>{" "}
-                          {format(new Date(post?.modified), "dd MMM, yyyy")}
-                        </p>
-
-                        <Link href={post?.link}>
-                          <h2 className="md:text-1xl text-[13px] font-semibold mb-1" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post?.title.rendered) }} >
-
-                          </h2>
-                        </Link>
-                        <p className=" text-gray-500 font-normal hidden md:block" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.uagb_excerpt, 25)) }} >
-
+                        <span>  {format(new Date(post?.modified), "dd MMM, yyyy")} </span>
                         </p>
                         
                       </div>

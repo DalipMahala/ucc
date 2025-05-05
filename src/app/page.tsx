@@ -112,14 +112,14 @@ export default async function Home(props: { params: Params }) {
             <News></News>
           </div>
 
-          <div className="lg:col-span-4 md:col-span-5">
+          <div className="lg:col-span-4 md:col-span-5 relative">
 
             <div className="md:h-[260px]">
               <WeeklySlider />
             </div>
 
             <PLSeries />
-            <div>
+            <div className="sticky top-[93px]">
               <CountriesList countries={countryCompitition}></CountriesList>
             </div>
           </div>
@@ -158,7 +158,7 @@ export default async function Home(props: { params: Params }) {
                           alt={team?.team}
                           priority
                         />
-                        <p className="font-semibold">{team?.team}</p>
+                        <p className="font-semibold text-[14px]">{team?.team}</p>
                       </div>
                     </Link>
                   </div>

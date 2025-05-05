@@ -397,7 +397,7 @@ const MatchFooter = ({ match, series, isMobile = false }: MatchFooterProps) => {
         {series.total_teams > 2 && (
           <>
             <Link href={`/series/${urlStringEncode(`${series.title}-${series.season}`)}/${series.cid}/points-table`}>
-              <p className={`${isMobile ? 'text-[#909090] md:text-[13px] text-[11px] ' : 'text-[#909090]'} font-medium`}>
+              <p className={`${isMobile ? 'text-[#757A82] md:text-[13px] text-[11px] ' : 'text-[#757A82]'} font-medium`}>
                 Points Table
               </p>
             </Link>
@@ -405,7 +405,7 @@ const MatchFooter = ({ match, series, isMobile = false }: MatchFooterProps) => {
           </>
         )}
         <Link href={`/series/${urlStringEncode(`${series.title}-${series.season}`)}/${series.cid}/schedule-results/schedule`}>
-          <p className={`${isMobile ? 'text-[#909090] md:text-[13px] text-[11px] ' : 'text-[#909090]'} font-medium`}>
+          <p className={`${isMobile ? 'text-[#757A82] md:text-[13px] text-[11px] ' : 'text-[#757A82]'} font-medium`}>
             Schedule
           </p>
         </Link>
@@ -421,7 +421,7 @@ const MatchFooter = ({ match, series, isMobile = false }: MatchFooterProps) => {
               loading="lazy"
               className={isMobile ? "h-[15px]" : ""}
             />
-            <span className={`text-[#909090] ${isMobile ? 'md:text-[13px] text-[11px]' : 'text-[#909090]'} font-medium`}>
+            <span className={`text-[#757A82] ${isMobile ? 'md:text-[13px] text-[11px]' : 'text-[#757A82]'} font-medium`}>
               H2H
             </span>
           </div>
@@ -434,7 +434,7 @@ const MatchFooter = ({ match, series, isMobile = false }: MatchFooterProps) => {
 
 const TeamStatusIndicatorMobile = ({ teamA }: { teamA: string }) => (
   <div className="flex items-center space-x-2 md:text-[13px] text-[11px]">
-    <span className="text-[#909090] font-medium">{teamA}</span>
+    <span className="text-[#757A82] font-medium">{teamA}</span>
     <StatusBadgeMobile type="up" value="0" />
     <StatusBadgeMobile type="down" value="0" />
   </div>

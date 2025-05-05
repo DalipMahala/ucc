@@ -240,7 +240,7 @@ export default async function ForYouMatches() {
                             alt={items?.teama?.short_name}
                             loading="lazy"
                           />
-                          <span className={`${(items?.teama?.team_id === items?.live?.live_inning?.batting_team_id) ? "ont-semibold text-[14px] text-[black]" : "text-[#909090] font-semibold text-[14px]"}`}>
+                          <span className={`${(items?.teama?.team_id === items?.live?.live_inning?.batting_team_id) ? "ont-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
                             {items.teama.short_name} -{" "}
                           </span>
                         </div>
@@ -264,7 +264,7 @@ export default async function ForYouMatches() {
                               <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : " font-semibold text-[14px]"}`}>
                                 {items.teama.scores}
                               </span>
-                              <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[13px] text-[black]" : "text-[#909090] text-[13px]"}`}>
+                              <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
                                 {" "}
                                 ({items.teama.overs}){" "}
                               </span>
@@ -284,7 +284,7 @@ export default async function ForYouMatches() {
                               alt={items?.teamb?.short_name ?? "team"}
                               loading="lazy"
                             />
-                            <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#909090] font-semibold text-[14px]"}`}>
+                            <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
                               {items.teamb.short_name} -
                             </span>
                           </div>
@@ -308,7 +308,7 @@ export default async function ForYouMatches() {
                                 <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[14px]"}`}>
                                   {items.teamb.scores}
                                 </span>
-                                <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "text-[13px] text-[black]" : "text-[#909090] text-[13px]"}`}>
+                                <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
                                   {" "}
                                   ({items.teamb.overs}){" "}
                                 </span>
@@ -346,7 +346,7 @@ export default async function ForYouMatches() {
                   {items?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(items?.competition?.title + "-" + items?.competition?.season) + "/" + items.competition?.cid + "/points-table"}>
-                        <p className=" text-[#909090] font-medium">
+                        <p className=" text-[#757A82] font-medium">
                           {" "}
                           Points Table
                         </p>
@@ -355,7 +355,7 @@ export default async function ForYouMatches() {
                     </>
                   }
                   <Link href={"/series/" + urlStringEncode(items?.competition?.title + "-" + items?.competition?.season) + "/" + items?.competition?.cid + "/schedule-results/schedule"}>
-                    <p className="text-[#909090] font-medium">
+                    <p className="text-[#757A82] font-medium">
                       Schedule
                     </p>
                   </Link>
@@ -371,7 +371,7 @@ export default async function ForYouMatches() {
                         alt=""
                         loading="lazy"
                       />
-                      <span className="text-[#909090] font-medium">
+                      <span className="text-[#757A82] font-medium">
                         H2H
                       </span>
                     </div>
@@ -467,7 +467,7 @@ export default async function ForYouMatches() {
                                     <span className="font-semibold text-[#1F2937] text-[14px]">
                                       {items.teama.scores}
                                     </span>
-                                    <span className="text-[#909090] text-[12px] font-normal">
+                                    <span className="text-[#757A82] text-[12px] font-normal">
                                       {" "}
                                       ({items.teama.overs}){" "}
                                     </span>
@@ -514,7 +514,7 @@ export default async function ForYouMatches() {
                                       <span className="font-semibold text-[#1F2937] text-[14px]">
                                         {items.teamb.scores}
                                       </span>
-                                      <span className="text-[#909090] text-[12px] font-normal">
+                                      <span className="text-[#757A82] text-[12px] font-normal">
                                         {" "}
                                         ({items.teamb.overs}){" "}
                                       </span>
@@ -551,7 +551,7 @@ export default async function ForYouMatches() {
                     {items?.competition?.total_teams > 2 &&
                       <>
                         <Link href={"/series/" + urlStringEncode(items?.competition?.title + "-" + items?.competition?.season) + "/" + items.competition?.cid + "/points-table"}>
-                          <p className="pr-[10px] text-[#909090] text-[11px] font-medium">
+                          <p className="pr-[10px] text-[#757A82] text-[11px] font-medium">
                             {" "}
                             Points Table
                           </p>
@@ -571,7 +571,7 @@ export default async function ForYouMatches() {
                             alt=""
                             loading="lazy"
                           />
-                          <span className="text-[#909090] text-[11px] font-medium">
+                          <span className="text-[#757A82] text-[11px] font-medium">
                             H2H
                           </span>
                         </div>
@@ -580,7 +580,7 @@ export default async function ForYouMatches() {
                   </div>
 
                   <div className="flex items-center space-x-2 text-[11px]">
-                    <span className={"text-[#909090] font-medium oddsTeam" + items.match_id}>
+                    <span className={"text-[#757A82] font-medium oddsTeam" + items.match_id}>
                       {matchOddsCal(items)?.team}
                     </span>
                     <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-md text-[#0B773C] pr-2">
@@ -789,7 +789,7 @@ export default async function ForYouMatches() {
                   {ucmatch?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.competition?.cid + "/points-table"}>
-                        <p className="  text-[#909090] font-medium">
+                        <p className="  text-[#757A82] font-medium">
                           {" "}
                           Points Table
                         </p>
@@ -797,7 +797,7 @@ export default async function ForYouMatches() {
                       <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                     </>}
                   <Link href={"/series/" + urlStringEncode(ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch?.competition?.cid + "/schedule-results/schedule"}>
-                    <p className=" text-[#909090] font-medium">
+                    <p className=" text-[#757A82] font-medium">
                       Schedule
                     </p>
                   </Link>
@@ -813,7 +813,7 @@ export default async function ForYouMatches() {
                         alt=""
                         loading="lazy"
                       />
-                      <span className=" text-[#909090] font-medium">
+                      <span className=" text-[#757A82] font-medium">
                         H2H
                       </span>
                     </div>
@@ -937,7 +937,7 @@ export default async function ForYouMatches() {
                   {ucmatch?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.competition?.cid + "/points-table"}>
-                        <p className="pr-[10px] text-[#909090] text-[11px] font-medium">
+                        <p className="pr-[10px] text-[#757A82] text-[11px] font-medium">
                           Points Table
                         </p>
                       </Link>
@@ -955,7 +955,7 @@ export default async function ForYouMatches() {
                           alt=""
                           loading="lazy"
                         />
-                        <span className="text-[#909090] text-[11px] font-medium">
+                        <span className="text-[#757A82] text-[11px] font-medium">
                           H2H
                         </span>
                       </div>
@@ -964,7 +964,7 @@ export default async function ForYouMatches() {
                 </div>
 
                 <div className="flex items-center space-x-2 text-[11px]">
-                  <span className={"text-[#909090] font-medium oddsTeam" + ucmatch.match_id}>
+                  <span className={"text-[#757A82] font-medium oddsTeam" + ucmatch.match_id}>
                     {matchOddsCal(ucmatch)?.team}
                   </span>
                   <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-md text-[#0B773C] pr-2">
@@ -1056,7 +1056,7 @@ export default async function ForYouMatches() {
                             alt={cmatch.teama.short_name}
                             loading="lazy"
                           />
-                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#909090] font-semibold text-[14px]"}`}>
+                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
                             {cmatch.teama.short_name} -{" "}
                           </span>
                         </div>
@@ -1064,7 +1064,7 @@ export default async function ForYouMatches() {
                           <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[14px]"}`}>
                             {cmatch.teama.scores}
                           </span>
-                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-[#909090] text-[13px]"}`}>
+                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
                             {" "}
                             ({cmatch.teama.overs})
                           </span>
@@ -1082,7 +1082,7 @@ export default async function ForYouMatches() {
                               alt={cmatch.teamb.short_name}
                               loading="lazy"
                             />
-                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#909090] font-semibold text-[14px]"}`}>
+                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
                               {cmatch.teamb.short_name} -{" "}
                             </span>
                           </div>
@@ -1090,7 +1090,7 @@ export default async function ForYouMatches() {
                             <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[14px] font-semibold "}`}>
                               {cmatch.teamb.scores}
                             </span>
-                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-[#909090] text-[13px]"}`}>
+                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
                               ({cmatch.teamb.overs})
                             </span>
                           </p>
@@ -1142,7 +1142,7 @@ export default async function ForYouMatches() {
                   {cmatch?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.competition?.cid + "/points-table"}>
-                        <p className="  text-[#909090] font-medium">
+                        <p className="  text-[#757A82] font-medium">
                           {" "}
                           Points Table
                         </p>
@@ -1150,7 +1150,7 @@ export default async function ForYouMatches() {
                       <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                     </>}
                   <Link href={"/series/" + urlStringEncode(cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch?.competition?.cid + "/schedule-results/schedule"}>
-                    <p className=" text-[#909090] font-medium">
+                    <p className=" text-[#757A82] font-medium">
                       Schedule
                     </p>
                   </Link>
@@ -1166,7 +1166,7 @@ export default async function ForYouMatches() {
                         alt=""
                         loading="lazy"
                       />
-                      <span className=" text-[#909090] font-medium">
+                      <span className=" text-[#757A82] font-medium">
                         H2H
                       </span>
                     </div>
@@ -1237,7 +1237,7 @@ export default async function ForYouMatches() {
                                   {cmatch.teama.scores}
                                 </span>
 
-                                <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-[#909090] text-[12px] font-normal"}`}>
+                                <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-[#757A82] text-[12px] font-normal"}`}>
                                   ({cmatch.teama.overs})
                                 </span>
                               </p>
@@ -1265,7 +1265,7 @@ export default async function ForYouMatches() {
                                     {cmatch.teamb.scores}
                                   </span>
 
-                                  <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-[#909090] text-[12px] font-normal"}`}>
+                                  <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-[#757A82] text-[12px] font-normal"}`}>
                                     ({cmatch.teamb.overs})
                                   </span>
                                 </p>
@@ -1301,7 +1301,7 @@ export default async function ForYouMatches() {
                     {cmatch?.competition?.total_teams > 2 &&
                       <>
                         <Link href={"/series/" + urlStringEncode(cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.competition?.cid + "/points-table"}>
-                          <p className=" pr-[10px]  text-[#909090] text-[11px] font-medium">
+                          <p className=" pr-[10px]  text-[#757A82] text-[11px] font-medium">
                             {" "}
                             Points Table
                           </p>
@@ -1321,7 +1321,7 @@ export default async function ForYouMatches() {
                             alt=""
                             loading="lazy"
                           />
-                          <span className="text-[#909090] text-[11px] font-medium">
+                          <span className="text-[#757A82] text-[11px] font-medium">
                             H2H
                           </span>
                         </div>
