@@ -346,7 +346,7 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
   useEffect(() => {
     const interval = setInterval(() => {
       if (loaderRef.current) {
-        console.log("Loader Ref Found:", loaderRef.current);
+        // console.log("Loader Ref Found:", loaderRef.current);
         if (observerRef.current) observerRef.current.disconnect();
         observerRef.current = new IntersectionObserver(
           (entries) => {
@@ -360,7 +360,7 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
         observerRef.current.observe(loaderRef.current);
         clearInterval(interval);
       } else {
-        console.log("Waiting for loaderRef...");
+        // console.log("Waiting for loaderRef...");
       }
     }, 100); // Check every 100ms
     return () => {

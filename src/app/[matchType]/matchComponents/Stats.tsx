@@ -61,7 +61,7 @@ export default async function Stats({
     const statType = renderStatus();
     const statsMatch =  await MatcheStats(cid, statType);
     const matchStats= statsMatch.stats;
-    console.log("renderStatus",statType);
+    // console.log("renderStatus",statType);
     return (
         <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
             <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable}/>

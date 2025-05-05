@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 
     const cachedData = await redis.get(CACHE_KEY);
     if (cachedData) {
-      console.log("coming from cache completed matches");
+      // console.log("coming from cache completed matches");
       return NextResponse.json({ success: true, data: JSON.parse(cachedData) });
     }
 
@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
     if (!fileName) {
       return NextResponse.json({ error: "File not found in database" }, { status: 404 });
     }
-    console.log('Fetching file from S3:', fileName);  // Log fileName to debug
+    // console.log('Fetching file from S3:', fileName);  // Log fileName to debug
     try {
       const parsedData = await getJsonFromS3( fileName as string);
     const matchInfo = parsedData || {};

@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 
     const cachedData = await redis.get(CACHE_KEY);
     if (cachedData) {
-      console.log("coming from cache upcoming_matches");
+      // console.log("coming from cache upcoming_matches");
       return NextResponse.json({ success: true, data: JSON.parse(cachedData) });
     }
     const query =
@@ -48,7 +48,7 @@ export async function GET(req: NextRequest) {
     // return allMatches;
     const updatedJson = allMatches.map(obj => Object.fromEntries(Object.entries(obj).map(([k, v]) => [["live_odds","live"].includes(k) && Array.isArray(v) && v.length === 0 ? k : k, (["live_odds","live"].includes(k) && Array.isArray(v) && v.length === 0) ? {} : v])));
     if (rows.length > 0) {
-      console.log("coming from api upcoming_matches");
+      // console.log("coming from api upcoming_matches");
       await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(updatedJson));
     }
 

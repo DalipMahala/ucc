@@ -367,7 +367,7 @@ export default function Live({
   useEffect(() => {
     const interval = setInterval(() => {
       if (loaderRef.current) {
-        console.log("Loader Ref Found:", loaderRef.current);
+        // console.log("Loader Ref Found:", loaderRef.current);
         if (observerRef.current) observerRef.current.disconnect();
         observerRef.current = new IntersectionObserver(
           (entries) => {
@@ -381,7 +381,7 @@ export default function Live({
         observerRef.current.observe(loaderRef.current);
         clearInterval(interval);
       } else {
-        console.log("Waiting for loaderRef...");
+        // console.log("Waiting for loaderRef...");
       }
     }, 100); // Check every 100ms
     return () => {
