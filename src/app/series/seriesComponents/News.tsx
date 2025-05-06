@@ -58,11 +58,12 @@ export default function News({ urlString, isPointTable }: News) {
               <div className="lg:grid grid-cols-12 gap-4" key={index}>
                
                 <div className="col-span-6 ">
-                  {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
+                  {post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium_large.source_url && (
                      <Link href={post?.link}>
-                    <Image  loading="lazy" 
+                    <Image  priority
                     style={{ boxShadow: 'rgb(180 179 179 / 29%) 0px 8px 16px' }}
-                      src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
+                      // src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
+                      src={post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium_large.source_url}
                       width={300}
                       height={300}
                       alt={post?.title.rendered}
@@ -159,12 +160,12 @@ export default function News({ urlString, isPointTable }: News) {
                     <div className="flex gap-3 my-5" style={{ textShadow: 'rgb(0 0 0 / 4%) 1px 2px 3px' }}>
                     <Link className="" href={post?.link}>
                       {post._embedded["wp:featuredmedia"]?.[0]?.media_details
-                        .sizes.thumbnail.source_url && (
+                        .sizes.medium.source_url && (
                           
                         <Image  loading="lazy" 
                           src={
                             post._embedded["wp:featuredmedia"]?.[0]
-                              .media_details.sizes.thumbnail.source_url
+                              .media_details.sizes.medium.source_url
                           }
                           width={90}
                           height={90}

@@ -105,51 +105,51 @@ export default function Overview({
   let completedMatch = featureSeries?.filter(
     (item: { status: number }) => Number(item.status) === 2
   );
-  completedMatch = [...completedMatch]?.reverse();
-  let upcomingMatch = featureSeries.filter(
+  completedMatch = completedMatch ? [...completedMatch]?.reverse() : [];
+  let upcomingMatch = featureSeries?.filter(
     (item: { status: number }) => Number(item.status) === 1
   );
-  let liveMatch = featureSeries.filter(
+  let liveMatch = featureSeries?.filter(
     (item: { status: number }) => Number(item.status) === 3
   );
 
   let selectedMatches = [];
 
   if (
-    liveMatch.length > 0 &&
-    completedMatch.length > 0 &&
-    upcomingMatch.length > 0
+    liveMatch?.length > 0 &&
+    completedMatch?.length > 0 &&
+    upcomingMatch?.length > 0
   ) {
     selectedMatches = [
-      ...liveMatch.slice(0, 1),
-      ...completedMatch.slice(0, 1),
-      ...upcomingMatch.slice(0, 1),
+      ...liveMatch?.slice(0, 1),
+      ...completedMatch?.slice(0, 1),
+      ...upcomingMatch?.slice(0, 1),
     ];
   }
   else if (
-    liveMatch.length === 0 &&
-    completedMatch.length > 0 &&
-    upcomingMatch.length > 0
+    liveMatch?.length === 0 &&
+    completedMatch?.length > 0 &&
+    upcomingMatch?.length > 0
   ) {
     selectedMatches = [
-      ...completedMatch.slice(0, 1),
-      ...upcomingMatch.slice(0, 2),
+      ...completedMatch?.slice(0, 1),
+      ...upcomingMatch?.slice(0, 2),
     ];
   }
   else if (
-    liveMatch.length === 0 &&
-    completedMatch.length === 0 &&
-    upcomingMatch.length > 0
+    liveMatch?.length === 0 &&
+    completedMatch?.length === 0 &&
+    upcomingMatch?.length > 0
   ) {
-    selectedMatches = upcomingMatch.slice(0, 3);
+    selectedMatches = upcomingMatch?.slice(0, 3);
   }
   else {
-    if (liveMatch.length > 0) {
-      selectedMatches = liveMatch.slice(0, 3);
-    } else if (completedMatch.length > 0) {
-      selectedMatches = completedMatch.slice(0, 3);
-    } else if (upcomingMatch.length > 0) {
-      selectedMatches = upcomingMatch.slice(0, 3);
+    if (liveMatch?.length > 0) {
+      selectedMatches = liveMatch?.slice(0, 3);
+    } else if (completedMatch?.length > 0) {
+      selectedMatches = completedMatch?.slice(0, 3);
+    } else if (upcomingMatch?.length > 0) {
+      selectedMatches = upcomingMatch?.slice(0, 3);
     }
   }
   // console.log("completedMatch", seriesKeystats?.mostRuns?.stats);

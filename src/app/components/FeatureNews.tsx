@@ -52,11 +52,11 @@ const FeatureNews = ({ newsUrl }: url) => {
               {news.slice(0, 1)?.map((post: any, index: number) => (
                 <div className="lg:grid grid-cols-12 gap-4" key={index}>
                   <div className="col-span-6 ">
-                    {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
+                    {post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium_large.source_url && (
                       <Link href={post?.link}>
-                        <Image loading="lazy"
-                          src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
-                          
+                        <Image priority
+                          // src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
+                          src={post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium_large.source_url}
                           width={1000}
                           height={1000}
                           alt={post?.title.rendered}
@@ -119,9 +119,9 @@ const FeatureNews = ({ newsUrl }: url) => {
                     <div className="flex gap-3 my-5">
 
                       <Link href={post?.link} className="md:w-[15%] w-[25%]">
-                        {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.thumbnail?.source_url && (
+                        {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url && (
                           <Image loading="lazy"
-                            src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.thumbnail?.source_url}
+                            src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url}
 
                             width={90}
                             height={90}

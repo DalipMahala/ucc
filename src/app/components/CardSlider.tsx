@@ -134,10 +134,10 @@ export default function Slider() {
             >
               <Link href={image.link}>
                 <Image 
-                  loading="lazy" 
+                  priority
                   src={image.image} 
                   alt={image.title} 
-                  className="rounded-lg w-full" 
+                  className="rounded-lg w-full h-auto" 
                   width={200} 
                   height={30} 
                 />

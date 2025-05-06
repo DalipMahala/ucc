@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
     }
 
     const query =
-      "SELECT mi.fileName FROM match_info mi JOIN ( SELECT match_id FROM matches WHERE commentary = 1 and status in (2,4) and DATE(date_end_ist) >= DATE(NOW() - INTERVAL 2 DAY) ORDER BY updated_date DESC) m ON mi.match_id = m.match_id";
+      "SELECT mi.fileName FROM match_info mi JOIN ( SELECT match_id FROM matches WHERE commentary = 1 and status in (2,4) and DATE(date_end_ist) >= DATE(NOW() - INTERVAL 1 DAY) ORDER BY updated_date DESC) m ON mi.match_id = m.match_id";
     const [rows] = await db.query<any[]>(query);
 
     if (!rows || rows.length === 0) {

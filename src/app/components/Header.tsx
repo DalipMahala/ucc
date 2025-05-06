@@ -75,7 +75,6 @@ const Header = () => {
       </div>
 
       <header className={`bg-[#081736] lg:px-0 px-3 sticky top-0 z-[999] ${isMoreInfoPage ? 'hidden md:block' : 'block'}`}>
-       
         <div className="lg:w-[1000px] w-full mx-auto text-white md:py-5 pt-3 pb-3 flex items-center md:justify-between justify-center">
           <div>
             <Link href="/">

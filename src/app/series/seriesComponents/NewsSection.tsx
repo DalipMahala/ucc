@@ -27,10 +27,11 @@ export default function NewsSection({ urlString }: News) {
           className="col-span-6 border-r-[1px] border-[#E7F2F4] pr-[16px]"
           key={index}
         >
-          {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
+          {post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium_large.source_url && (
             <Link href={post?.link}>
-            <Image  loading="lazy" 
-              src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
+            <Image  priority
+              // src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
+              src={post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium_large.source_url}
               width={300}
               height={300}
               alt={post?.title.rendered}
@@ -113,10 +114,10 @@ export default function NewsSection({ urlString }: News) {
           <div className="flex gap-3 my-3">
           <Link href={post?.link} className="w-[60%]">
             {post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes
-              .thumbnail.source_url && (
+              .medium.source_url && (
                 <Image  loading="lazy" 
                   src={post._embedded["wp:featuredmedia"]?.[0].media_details.sizes
-                    .thumbnail.source_url}
+                    .medium.source_url}
                   width={90}
                   height={90}
                   alt={post?.title.rendered}

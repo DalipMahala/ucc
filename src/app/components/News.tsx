@@ -82,13 +82,14 @@ const News = () => {
             {news.slice(0, 1)?.map((post: any, index: number) => (
               <div className="lg:grid grid-cols-12 gap-4" key={index}>
                 <div className="col-span-6 ">
-                  {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
+                  {post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium_large.source_url && (
                     <Link href={post?.link}>
-                      <Image loading="lazy"
-                        src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
+                      <Image priority
+                        // src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
+                        src={post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium_large.source_url}
 
-                        width={1000}
-                        height={1000}
+                        width={800}
+                        height={600}
                         alt={post?.title.rendered}
                         className="rounded-lg w-full h-48 object-cover"
                       />
@@ -149,12 +150,11 @@ const News = () => {
 
                   <div className="flex gap-3 mb-4 ">
                     <Link className="w-[25%]" href={post?.link}>
-                      {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.thumbnail?.source_url && (
-                        <Image loading="lazy"
-                          src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.thumbnail?.source_url}
-
-                          width={1000}
-                          height={1000}
+                      {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url && (
+                        <Image priority
+                          src={post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium.source_url}
+                          width={800}
+                          height={600}
                           alt={post?.title.rendered}
                           className="rounded-lg h-[80px] w-[90px]" />
                       )}
@@ -202,7 +202,7 @@ const News = () => {
 
             <Link href={"https://uccricket.live/" + activeTab}>
               <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
-                More from News{" "}
+                More from {activeTab}{" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

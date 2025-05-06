@@ -5,6 +5,7 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     scrollRestoration: true,
+    gzipSize: true,
     // Remove unsupported options
   },
   images: {
@@ -15,6 +16,7 @@ const nextConfig = {
       "fantasykhiladi.com",
       "flagcdn.com",
     ],
+    loader: 'default',
     minimumCacheTTL: 60,
   },
   webpack: (config: { optimization: any; }, { isServer }: any) => {
