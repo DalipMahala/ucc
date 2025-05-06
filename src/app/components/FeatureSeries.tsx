@@ -82,9 +82,9 @@ export default function FeatureSeries({ featuredSeries }: FeatureSeriesProps) {
 
             const result = await response.json();
             const items = result?.data?.items || [];
-            
+
             // Find first active (1) or completed (3) match
-            const filteredItem = items.find((item: MatchData) => 
+            const filteredItem = items.find((item: MatchData) =>
               item.status === 1 || item.status === 3
             );
 
@@ -179,7 +179,7 @@ const SeriesNavigation = ({ series, totalTeams }: SeriesNavigationProps) => (
       <button className="font-medium py-2 md:px-5 px-2 bg-[#1A80F8] text-white rounded-md whitespace-nowrap">
         <span>Fixtures</span>
       </button>
-      
+
       {totalTeams > 2 && (
         <Link href={`/series/${urlStringEncode(`${series.title}-${series.season}`)}/${series.cid}/points-table`}>
           <button className="font-medium py-2 px-3 whitespace-nowrap">
@@ -187,13 +187,13 @@ const SeriesNavigation = ({ series, totalTeams }: SeriesNavigationProps) => (
           </button>
         </Link>
       )}
-      
+
       <Link href={`/series/${urlStringEncode(`${series.title}-${series.season}`)}/${series.cid}/stats/batting-most-run`}>
         <button className="font-medium py-2 px-3 whitespace-nowrap">
           Stats
         </button>
       </Link>
-      
+
       <Link href={`/series/${urlStringEncode(`${series.title}-${series.season}`)}/${series.cid}/squads`}>
         <button className="font-medium py-2 px-3 whitespace-nowrap">
           Squads
@@ -235,7 +235,7 @@ interface MatchHeaderProps {
 
 const MatchHeader = ({ match, isMobile = false }: MatchHeaderProps) => {
   const statusColor = match.status === 3 ? "text-[#A70B0B]" : "text-[#A45B09]";
-  
+
   return (
     <div className={`flex items-center justify-between ${isMobile ? 'mb-2' : 'mb-4'}`}>
       <div className="flex items-center space-x-2">
@@ -285,8 +285,8 @@ const StatusBadge = ({ type, value }: StatusBadgeProps) => {
   const bgColor = type === 'up' ? 'bg-[#FAFFFC]' : 'bg-[#FFF7F7]';
   const borderColor = type === 'up' ? 'border-[#0B773C]' : 'border-[#A70B0B]';
   const textColor = type === 'up' ? 'text-[#0B773C]' : 'text-[#A70B0B]';
-  const iconPath = type === 'up' 
-    ? "M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" 
+  const iconPath = type === 'up'
+    ? "M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18"
     : "M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3";
 
   return (
@@ -359,21 +359,21 @@ interface MatchTimeProps {
 
 const MatchTime = ({ date, isMobile }: MatchTimeProps) => {
   const isToday = isSameDay(new Date(), new Date(date));
-  
+
   return (
     <div className={`font-medium text-center  ${isMobile ? '' : 'w-[50%] flex justify-end'}`}>
       <div className="">
-      {isToday ? (
-        <>
-          <span className="text-[13px] font-normal text-[#a45b09]">Start in</span> 
-          <CountdownTimer targetTime={date} />
-        </>
-      ) : (
-        <p className={`text-[#2F335C] ${isMobile ? 'font-medium mt-1 text-[13px]' : 'text-[14px]'}`}>
-          {format(new Date(date), "dd MMMM - EEEE")}, <br /> 
-          {format(new Date(date), "hh:mm:aa")}
-        </p>
-      )}
+        {isToday ? (
+          <>
+            <span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
+            <CountdownTimer targetTime={date} />
+          </>
+        ) : (
+          <p className={`text-[#2F335C] ${isMobile ? 'font-medium mt-1 text-[13px]' : 'text-[14px]'}`}>
+            {format(new Date(date), "dd MMMM - EEEE")}, <br />
+            {format(new Date(date), "hh:mm:aa")}
+          </p>
+        )}
       </div>
     </div>
   );
@@ -388,8 +388,8 @@ interface MatchFooterProps {
 const MatchFooter = ({ match, series, isMobile = false }: MatchFooterProps) => {
   const showH2H = ['T20I', 'T20', 'Test', 'Odi'].includes(match.format_str);
   const h2hUrl = `/h2h/${urlStringEncode(
-    match.competition.title === 'Indian Premier League' 
-      ? match.short_title || match.competition.title 
+    match.competition.title === 'Indian Premier League'
+      ? match.short_title || match.competition.title
       : match.competition.title
   )}-head-to-head-in-${match.format_str}`.toLowerCase();
 
@@ -415,14 +415,16 @@ const MatchFooter = ({ match, series, isMobile = false }: MatchFooterProps) => {
       {showH2H && (
         <Link href={h2hUrl}>
           <div className="flex justify-end items-center space-x-2">
-            <Image
-              src="/assets/img/home/handshake.png"
-              width={isMobile ? 17 : 25}
-              height={isMobile ? 17 : 25}
-              alt="Head to Head"
-              loading="lazy"
-              className={isMobile ? "h-[15px]" : ""}
-            />
+            <div className="relative w-[25px] h-[25px]">
+              <Image
+                src="/assets/img/home/handshake.png"
+                alt="Head to Head"
+                fill
+                className="object-contain"
+                loading="lazy"
+              />
+            </div>
+
             <span className={`text-[#757A82] ${isMobile ? 'md:text-[13px] text-[11px]' : 'text-[#757A82]'} font-medium`}>
               H2H
             </span>
@@ -451,8 +453,8 @@ const StatusBadgeMobile = ({ type, value }: StatusBadgeMobileProps) => {
   const bgColor = type === 'up' ? 'bg-[#ffffff]' : 'bg-[#ffffff]';
   const borderColor = type === 'up' ? 'border-[#00a632]' : 'border-[#ea2323]';
   const Color = type === 'up' ? 'text-[#0B773C]' : 'text-[#ea2323]';
-  const iconPath = type === 'up' 
-    ? "M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" 
+  const iconPath = type === 'up'
+    ? "M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18"
     : "M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3";
 
   return (
