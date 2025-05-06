@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {textLimit} from "@/utils/utility";
+import { textLimit } from "@/utils/utility";
 
 interface Story {
   title: string;
@@ -130,24 +130,27 @@ export default function Slider() {
             <div
               key={index}
               className="md:w-1/5 w-1/2 flex-shrink-0 relative"
-              style={{ minWidth: '20%' }}
+              style={{ minWidth: '20%', aspectRatio: '3/4' }}
             >
               <Link href={image.link}>
-                <Image 
-                  priority
-                  src={image.image} 
-                  alt={image.title} 
-                  className="rounded-lg w-full h-auto" 
-                  width={200} 
-                  height={30} 
-                />
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/100 to-transparent rounded-b-lg" />
-                
-                <p className="absolute bottom-2 left-0 right-0 text-white font-semibold px-2 text-[14px] text-center">
-                  {textLimit(image.title,40)}
-                </p>
+                <div className="relative w-full h-full">
+                  <Image
+                    src={image.image}
+                    alt={image.title}
+                    fill
+                    sizes="(min-width: 768px) 20vw, 50vw"
+                    className="rounded-lg object-cover"
+                    priority
+                  />
+
+                  <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/100 to-transparent rounded-b-lg" />
+                  <p className="absolute bottom-2 left-0 right-0 text-white font-semibold px-2 text-[14px] text-center">
+                    {textLimit(image.title, 40)}
+                  </p>
+                </div>
               </Link>
             </div>
+
           ))}
         </div>
 
