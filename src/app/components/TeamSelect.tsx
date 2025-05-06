@@ -22,7 +22,7 @@ export default function TeamSelect({ selectedTeam, onChange, teams, label }: Tea
   return (
       <Listbox value={selectedTeam} onChange={onChange}>
         <div className="relative mt-1">
-          <Listbox.Button className="relative w-full cursor-pointer">
+          <Listbox.Button className="relative w-full cursor-pointer outline-none">
             <span className="flex items-center">
               {selectedTeam && (
                 <Image

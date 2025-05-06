@@ -119,14 +119,11 @@ console.log(teamDetails);
 
     return (
       <div className="md:col-span-6 col-span-12 cust-tp-pera-card" key={index}>
-        <div className="rounded-lg max-w-md w-full p-4 border-[1px]" style={{
-          background: 'linear-gradient(to bottom, #ecf2fd, #ffffff)',
-
-        }}>
-          <div className="flex justify-between items-center pb-1">
-            <h2 className="text-[13px]  font-semibold">{parsedMatch.subtitle || 'Match'}</h2>
+        <div className="rounded-lg max-w-md w-full p-4 border-[1px] bg-[#f2f7ff]">
+          <div className="flex flex-col pb-1">
+            <h2 className="text-1xl font-semibold">{parsedMatch.subtitle || 'Match'}</h2>
             {parsedMatch.date && (
-              <p className="text-[#A45B09] font-medium">
+              <p className="text-[#7B4C09] font-medium">
                 {format(new Date(parsedMatch.date), "dd MMMM yyyy")}
               </p>
             )}
@@ -144,7 +141,7 @@ console.log(teamDetails);
                     alt={parsedMatch.teamA.short_name || "Team A"}
                   />
                 )}
-                <span className="text-[#586577] font-medium text-[14px]">{parsedMatch.teamA?.short_name || 'Team A'}</span>
+                <span className="text-[#757A82]">{parsedMatch.teamA?.short_name || 'Team A'}</span>
               </div>
               <div className="mt-1">
                 <p className="text-1xl font-semibold">{parsedMatch.teamA?.scores || '0'}</p>
@@ -165,7 +162,7 @@ console.log(teamDetails);
                     alt={parsedMatch.teamB.short_name || "Team B"}
                   />
                 )}
-                <span className="text-[#586577] font-medium text-[14px]">{parsedMatch.teamB?.short_name || 'Team B'}</span>
+                <span className="text-[#757A82]">{parsedMatch.teamB?.short_name || 'Team B'}</span>
               </div>
             </div>
           </div>
@@ -238,7 +235,7 @@ console.log(teamDetails);
 
 
               <div className="w-[25%] flex items-center gap-3 text-[#8192B4] font-normal justify-end">
-                <p className="text-[#BDCCECA8] md:text-[19px] text-[14px] md:mx-3 mx-0 font-semibold uppercase">
+                <p className="text-[#BDCCECA8] md:mx-3 mx-0 md:text-[19px] text-[14px] font-semibold uppercase">
                   {teamBDetails.abbr || 'Team B'}
                 </p>
                 {teamBDetails.logo_url && (
@@ -262,24 +259,24 @@ console.log(teamDetails);
       <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
         {teamADetails?.type !== 'club' &&
           <div id="tabs" className="mb-4">
-            <div className="flex text-[13px] md:space-x-8 space-x-5 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+            <div className="flex text-1xl md:space-x-8 space-x-5 p-2 bg-[#ffffff] rounded-lg overflow-auto">
               <Link href={`${urlWithoutMatchType}-test`}>
                 <button
-                  className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${matchType === "test" ? "bg-[#1A80F8] text-white" : ""} rounded-md`}
+                  className={`font-medium py-2 px-5 whitespace-nowrap ${matchType === "test" ? "bg-[#1A80F8] text-white" : ""} rounded-md`}
                 >
                   Test
                 </button>
               </Link>
               <Link href={`${urlWithoutMatchType}-odi`}>
                 <button
-                  className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${matchType === "odi" ? "bg-[#1A80F8] text-white" : ""} rounded-md`}
+                  className={`font-medium py-2 px-5 whitespace-nowrap ${matchType === "odi" ? "bg-[#1A80F8] text-white" : ""} rounded-md`}
                 >
                   ODI
                 </button>
               </Link>
               <Link href={`${urlWithoutMatchType}-t20`}>
                 <button
-                  className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${matchType === "t20" ? "bg-[#1A80F8] text-white" : ""} rounded-md`}
+                  className={`font-medium py-2 px-5 whitespace-nowrap ${matchType === "t20" ? "bg-[#1A80F8] text-white" : ""} rounded-md`}
                 >
                   T20
                 </button>
