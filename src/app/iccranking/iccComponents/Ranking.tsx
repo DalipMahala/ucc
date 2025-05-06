@@ -51,10 +51,10 @@ interface Team {
 
         <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
             <div id="tabs" className="my-4">
-                <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+                <div className="flex text-[15px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
                     <Link href="/iccranking/man/team/odis">
                     <button
-                        className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${iccRankingName === 'man' ? "bg-[#1A80F8] text-white rounded-md" :""} `}
+                        className={`font-medium py-2 px-5 whitespace-nowrap ${iccRankingName === 'man' ? "bg-[#1A80F8] text-white rounded-md" :""} `}
                     >
                         Man
                     </button>
@@ -62,7 +62,7 @@ interface Team {
 
                     <Link href="/iccranking/woman/team/odis">
                     <button
-                        className={`font-semibold uppercase py-2 px-5 whitespace-nowrap ${iccRankingName === 'woman' ? "bg-[#1A80F8] text-white rounded-md" :""} `}
+                        className={`font-medium py-2 px-5 whitespace-nowrap ${iccRankingName === 'woman' ? "bg-[#1A80F8] text-white rounded-md" :""} `}
                     >
                         Woman
                     </button>

@@ -37,10 +37,10 @@ export default function MatchTabs({
     <div id="tabs" className="my-4">
       <div 
         ref={tabsRef}
-        className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-x-auto scrollbar-hide"
+        className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-x-auto scrollbar-hide"
       >
         <Link href={`/moreinfo/${matchUrl}/${match_id}`}>
-          <button className={`uppercase font-semibold py-2 px-3 whitespace-nowrap rounded-md ${
+          <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md ${
             activeTab === 'moreinfo' ? 'bg-[#1A80F8] text-white active-tab' : ''
           }`}>
             More Info
@@ -48,7 +48,7 @@ export default function MatchTabs({
         </Link>
 
         <Link href={`/live-score/${matchUrl}/${match_id}`}>
-          <button className={`uppercase font-semibold py-2 px-3 whitespace-nowrap rounded-md ${
+          <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md ${
             activeTab === 'live-score' ? 'bg-[#1A80F8] text-white active-tab' : ''
           }`}>
             Live
@@ -56,7 +56,7 @@ export default function MatchTabs({
         </Link>
 
         <Link href={`/scorecard/${matchUrl}/${match_id}`}>
-          <button className={`uppercase font-semibold py-2 px-3 whitespace-nowrap rounded-md ${
+          <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md ${
             activeTab === 'scorecard' ? 'bg-[#1A80F8] text-white active-tab' : ''
           }`}>
             Scorecard
@@ -64,7 +64,7 @@ export default function MatchTabs({
         </Link>
 
         <Link href={`/squad/${matchUrl}/${match_id}`}>
-          <button className={`uppercase font-semibold py-2 px-3 whitespace-nowrap rounded-md ${
+          <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md ${
             activeTab === 'squad' ? 'bg-[#1A80F8] text-white active-tab' : ''
           }`}>
             Squad
@@ -77,7 +77,7 @@ export default function MatchTabs({
               `${matchDetails?.competition?.title}-${matchDetails?.competition?.season}`
             )}/${matchDetails?.competition?.cid}/points-table`}
           >
-            <button className={`uppercase font-semibold py-2 px-3 whitespace-nowrap rounded-md ${
+            <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md ${
               activeTab === 'points-table' ? 'bg-[#1A80F8] text-white active-tab' : ''
             }`}>
               Points Table
@@ -90,7 +90,7 @@ export default function MatchTabs({
             `${matchDetails?.competition?.title}-${matchDetails?.competition?.season}`
           )}/${matchDetails?.competition?.cid}/stats/batting-most-run`}
         >
-          <button className={`uppercase font-semibold py-2 px-3 whitespace-nowrap rounded-md ${
+          <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md ${
             activeTab === 'stats' ? 'bg-[#1A80F8] text-white active-tab' : ''
           }`}>
             Stats

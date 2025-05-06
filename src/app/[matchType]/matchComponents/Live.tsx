@@ -426,6 +426,8 @@ export default function Live({
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
 
 
+{/* desktop start */}
+
       <div className="flex rounded-lg bg-white p-4 md:hidden gap-4  whitespace-nowrap overflow-auto ">
 
         {/* This Over Section */}
@@ -488,7 +490,7 @@ export default function Live({
 
       </div>
 
-
+{/* desktop end */}
 
       <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable}/>
       {updatedCommentaries && updatedCommentaries.length > 0 ? (
@@ -518,7 +520,7 @@ export default function Live({
                               />
                             </div>
                             <div className="font-medium">
-                              <h2 className="md:text-[15px] text-[14px] text-[#586577]">
+                              <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
                                 {getPlayerNameByPid(
                                   players,
                                   batsman?.[0]?.batsman_id
@@ -526,16 +528,16 @@ export default function Live({
                               </h2>
                               <p className="md:text-[15px] text-[14px] flex items-center">
                                 {batsman?.[0].runs}{" "}
-                                <span className="md:text-[13px] text-[12px] text-[#586577] px-1">
+                                <span className="md:text-[13px] text-[12px] text-[#757A82] px-1">
                                   ({batsman?.[0]?.balls_faced})
                                 </span>
                                 {/* {batsman?.[0]?.batsman_id ==
                                   currPartnership?.batsmen?.[0]?.batsman_id ? ( */}
                                   <Image
                                     src="/assets/img/home/bat.png"
-                                    className="h-[14px]"
-                                    width={14}
-                                    height={14}
+                                    className="h-[13px]"
+                                    width={12}
+                                    height={13}
                                     alt=""
                                     loading="lazy"
                                   />
@@ -575,7 +577,7 @@ export default function Live({
                               />
                             </div>
                             <div className="font-medium text-end">
-                              <h2 className="md:text-[15px] text-[14px] text-[#586577]">
+                              <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
                                 {getPlayerNameByPid(
                                   players,
                                   batsman?.[1]?.batsman_id
@@ -583,16 +585,16 @@ export default function Live({
                               </h2>
                               <p className="md:text-[15px] text-[14px] flex items-center justify-end">
                                 {batsman?.[1]?.runs}{" "}
-                                <span className="md:text-[13px] text-[12px] text-[#586577] pl-1">
+                                <span className="md:text-[13px] text-[12px] text-[#757A82] pl-1">
                                   ({batsman?.[1]?.balls_faced})
                                 </span>
                                 {batsman?.[0]?.batsman_id ==
                                   currPartnership?.batsman?.[1]?.batsman_id ? (
                                   <Image
                                     src="/assets/img/home/bat.png"
-                                    className="h-[14px]"
-                                    width={14}
-                                    height={14}
+                                    className="h-[13px]"
+                                    width={12}
+                                    height={13}
                                     alt=""
                                     loading="lazy"
                                   />
@@ -637,7 +639,7 @@ export default function Live({
                           <p />
                         </div>
                         <div className="font-medium">
-                          <h2 className="md:text-[15px] text-[14px] text-[#586577]">
+                          <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
                             {getPlayerNameByPid(
                               players,
                               matchinfo?.bowlers?.[0]?.bowler_id
@@ -646,7 +648,7 @@ export default function Live({
                           <p className="md:text-[15px] text-[14px] flex items-center">
                             {matchinfo?.bowlers?.[0]?.wickets}-
                             {matchinfo?.bowlers?.[0]?.runs_conceded}{" "}
-                            <span className="md:text-[13px] text-[12px] text-[#586577] pt-[4px] px-1">
+                            <span className="md:text-[13px] text-[12px] text-[#757A82] pt-[4px] px-1">
                               ({matchinfo?.bowlers?.[0]?.overs})
                             </span>
                           </p>
@@ -684,7 +686,7 @@ export default function Live({
                             loading="lazy"
                           />
                           </div>
-                          <h2 className="md:text-[15px] text-[14px] text-[#586577] pl-[10px]">
+                          <h2 className="md:text-[15px] text-[14px] text-[#757A82] pl-[10px]">
                             {getPlayerNameByPid(
                               players,
                               matchinfo?.bowlers?.[0]?.bowler_id
@@ -695,7 +697,7 @@ export default function Live({
                         <p className="md:text-[15px] text-[14px] flex items-center justify-end w-[50%]">
                           {matchinfo?.bowlers?.[0]?.wickets}-
                           {matchinfo?.bowlers?.[0]?.runs_conceded}{" "}
-                          <span className="md:text-[13px] text-[12px] text-[#586577] pt-[4px] px-1">
+                          <span className="md:text-[13px] text-[12px] text-[#757A82] pt-[4px] px-1">
                             ({matchinfo?.bowlers?.[0]?.overs})
                           </span>
                         </p>
@@ -716,7 +718,7 @@ export default function Live({
                                  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-700">
                     {/* Last Over Section */}
                     <div className="flex items-center gap-2   ">
-                      <span className="font-medium text-[#586577]">
+                      <span className="font-medium text-[#757A82]">
                         Last Over:
                       </span>
                       <div className="flex gap-1">
@@ -742,7 +744,7 @@ export default function Live({
                     </div>
                     {/* This Over Section */}
                     <div className="flex items-center gap-2">
-                      <span className="font-medium text-[#586577]">
+                      <span className="font-medium text-[#757A82]">
                         This Over:
                       </span>
                       <div className="flex gap-1">
@@ -1005,7 +1007,7 @@ export default function Live({
                             </div>
                             <div className="text-[14px] font-normal text-[#3992f4]">
                               {comment?.over}{" "}
-                              <span className="text-[#586577] font-medium text-[13px]  text-white">
+                              <span className=" font-medium text-[13px]  text-white">
                                 End Of Over
                               </span>
                             </div>
@@ -1110,9 +1112,9 @@ export default function Live({
                                     <PlayerImage
                                       key={comment?.wicket_batsman_id}
                                       player_id={comment?.wicket_batsman_id}
-                                      height={40}
-                                      width={40}
-                                      className="rounded-lg md:mr-4 mr-2 "
+                                      height={71}
+                                      width={71}
+                                      className="h-[71px] w-[71px] rounded-lg md:mr-4 mr-2 "
                                     />
 
                                     <div>

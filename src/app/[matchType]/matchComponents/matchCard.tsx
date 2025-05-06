@@ -5,7 +5,7 @@ interface MatchCardProps {
   }
 export default function MatchCard({ teamA, teamB }:MatchCardProps) {
     return (
-        <div className="relative w-16 h-16 rounded-md overflow-hidden border border-gray-300">
+        <div className="relative w-[73px] h-[73px] rounded-md overflow-hidden border border-gray-300">
           {/* Diagonal Split */}
           <div className="absolute inset-0">
             <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">

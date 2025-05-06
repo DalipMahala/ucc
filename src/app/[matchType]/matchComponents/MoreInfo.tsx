@@ -263,22 +263,22 @@ export default function MoreInfo({
                           <MatchCard teamA={matchData?.match_info?.teama?.logo_url} teamB={matchData?.match_info?.teamb?.logo_url} />
                         </div>
                         <div>
-                          <p className="text-[14px] text-[#586577] font-bold mb-1">
+                          <p className="text-[16px] text-[#757A82] font-medium mb-1">
                             {matchData?.match_info?.subtitle}
                           </p>
-                          <p className="text-[15px] text-[#272B47] font-medium mb-2">
+                          <p className="text-[16px] text-[#272B47] font-medium mb-2">
                             {matchData?.match_info?.competition?.title}
                           </p>
                         </div>
                       </div>
                       <div className="text-start">
                         <p className="text-[14px] mb-1 text-[#272B47] font-medium">
-                          <span className="text-[14px] text-[#586577]">
+                          <span className="text-[14px] text-[#757A82]">
                             Date : </span>
                           {matchData?.match_info?.date_start_ist}
                         </p>
                         <p className="text-[14px] text-[#272B47] font-medium">
-                          <span className="text-[14px] text-[#586577]">
+                          <span className="text-[14px] text-[#757A82]">
                             Toss :  </span>{" "}
                           {matchData?.match_info?.toss?.text}
                         </p>
@@ -289,9 +289,9 @@ export default function MoreInfo({
 
                 <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                   <div>
-                    <h3 className="text-[15px] font-semibold  pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
+                    <h3 className="text-[15px] font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
                       Recent Performance{" "}
-                      <span className="text-[#5C6081]"> (Last 5 match) </span>
+                      <span className="text-[#757A82]"> (Last 5 match) </span>
                     </h3>
                     <div className="border-t-[1px] border-[#E4E9F0]" />
                     <div className="md:px-2">
@@ -397,7 +397,7 @@ export default function MoreInfo({
                                                   height={25}
                                                   alt={items.teama.short_name}
                                                 />
-                                                <span className="text-[#5C6081]">
+                                                <span className="text-[#757A82]">
                                                   {items.teama.short_name}
                                                 </span>
                                               </div>
@@ -414,7 +414,7 @@ export default function MoreInfo({
                                             <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                               <p>{items.teamb.scores}</p>
                                               <div className="flex items-center space-x-1">
-                                                <span className="text-[#5C6081]">
+                                                <span className="text-[#757A82]">
                                                   {items.teamb.short_name}
                                                 </span>
                                                 <Image
@@ -435,7 +435,7 @@ export default function MoreInfo({
                                             <p className="font-medium">
                                               {items.subtitle}
                                             </p>
-                                            <p className="text-[#5C6081] font-normal">
+                                            <p className="text-[#757A82] font-normal">
                                               {items.short_title}
                                             </p>
                                           </div>
@@ -913,7 +913,7 @@ export default function MoreInfo({
                                   />
                                   <p className="mx-2 text-1xl font-semibold">
                                     {matchData?.match_info?.teama?.short_name}
-                                    <span className="text-[13px] text-[#5C6081] font-medium block">
+                                    <span className="text-[13px] text-[#9094b6] font-medium block">
                                       vs all teams
                                     </span>
                                   </p>
@@ -922,7 +922,7 @@ export default function MoreInfo({
                                 <div className="font-bold flex items-center">
                                   <p className="mx-2 text-1xl font-semibold text-right">
                                     {matchData?.match_info?.teamb?.short_name}
-                                    <span className="text-[13px] text-[#5C6081] font-medium block">
+                                    <span className="text-[13px] text-[#9094b6] font-medium block">
                                       vs all teams
                                     </span>
                                   </p>
@@ -947,7 +947,7 @@ export default function MoreInfo({
                                 </p>
                               </div>
                               <div className=" font-semibold text-center w-full">
-                                <p className="text-[#586577] font-normal">
+                                <p className="text-[#73758B] font-normal">
                                   Matches Played
                                 </p>
                               </div>
@@ -965,7 +965,7 @@ export default function MoreInfo({
                                 </p>
                               </div>
                               <div className=" font-semibold text-center w-full">
-                                <p className="text-[#586577] font-normal">
+                                <p className="text-[#73758B] font-normal">
                                   Win
                                 </p>
                               </div>
@@ -983,7 +983,7 @@ export default function MoreInfo({
                                 </p>
                               </div>
                               <div className=" font-semibold text-center w-full">
-                                <p className="text-[#586577] font-normal">
+                                <p className="text-[#73758B] font-normal">
                                   Avg Score
                                 </p>
                               </div>
@@ -1001,7 +1001,7 @@ export default function MoreInfo({
                                 </p>
                               </div>
                               <div className=" font-semibold text-center w-full">
-                                <p className="text-[#586577] font-normal">
+                                <p className="text-[#73758B] font-normal">
                                   Highest Score
                                 </p>
                               </div>
@@ -1019,7 +1019,7 @@ export default function MoreInfo({
                                 </p>
                               </div>
                               <div className=" font-semibold text-center w-full">
-                                <p className="text-[#586577] font-normal">
+                                <p className="text-[#73758B] font-normal">
                                   Lowest Score
                                 </p>
                               </div>
@@ -1060,7 +1060,7 @@ export default function MoreInfo({
                                     />
                                     <p className="mx-2 text-1xl font-semibold">
                                       {matchData?.match_info?.teama?.short_name}
-                                      <span className="text-[13px] text-[#5C6081] font-medium block">
+                                      <span className="text-[13px] text-[#9094b6] font-medium block">
                                         vs all teams
                                       </span>
                                     </p>
@@ -1069,7 +1069,7 @@ export default function MoreInfo({
                                   <div className="font-bold flex items-center">
                                     <p className="mx-2 text-1xl font-semibold text-right">
                                       {matchData?.match_info?.teamb?.short_name}
-                                      <span className="text-[13px] text-[#5C6081] font-medium block">
+                                      <span className="text-[13px] text-[#9094b6] font-medium block">
                                         vs all teams
                                       </span>
                                     </p>
@@ -1096,7 +1096,7 @@ export default function MoreInfo({
                                   </p>
                                 </div>
                                 <div className=" font-semibold text-center w-full">
-                                  <p className="text-[#586577] font-normal">
+                                  <p className="text-[#73758B] font-normal">
                                     Matches Played
                                   </p>
                                 </div>
@@ -1114,7 +1114,7 @@ export default function MoreInfo({
                                   </p>
                                 </div>
                                 <div className=" font-semibold text-center w-full">
-                                  <p className="text-[#586577] font-normal">
+                                  <p className="text-[#73758B] font-normal">
                                     Win
                                   </p>
                                 </div>
@@ -1132,7 +1132,7 @@ export default function MoreInfo({
                                   </p>
                                 </div>
                                 <div className=" font-semibold text-center w-full">
-                                  <p className="text-[#586577] font-normal">
+                                  <p className="text-[#73758B] font-normal">
                                     Avg Score
                                   </p>
                                 </div>
@@ -1150,7 +1150,7 @@ export default function MoreInfo({
                                   </p>
                                 </div>
                                 <div className=" font-semibold text-center w-full">
-                                  <p className="text-[#586577] font-normal">
+                                  <p className="text-[#73758B] font-normal">
                                     Highest Score
                                   </p>
                                 </div>
@@ -1168,7 +1168,7 @@ export default function MoreInfo({
                                   </p>
                                 </div>
                                 <div className=" font-semibold text-center w-full">
-                                  <p className="text-[#586577] font-normal">
+                                  <p className="text-[#73758B] font-normal">
                                     Lowest Score
                                   </p>
                                 </div>
@@ -1186,6 +1186,8 @@ export default function MoreInfo({
                     </div>
                   </div>
                 </div>
+
+
                 <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                   <div className="relative">
                     <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
@@ -1292,6 +1294,9 @@ export default function MoreInfo({
                     </div>
                   </div>
                 </div>
+
+
+
                 <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                   <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Venue Stats
@@ -1508,6 +1513,7 @@ export default function MoreInfo({
                     </div>
                   </div>
                 </div>
+
                 <div className="rounded-lg bg-[#ffffff] my-4 md:hidden">
                   <div className="p-4">
                     <div className="flex space-x-2">
@@ -1555,10 +1561,10 @@ export default function MoreInfo({
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <div className="py-2 flex justify-between items-center">
                     <div className="w-[20%]">
-                      <p className="mx-2 font-semibold">On-field Umpire :</p>
+                      <p className="mx-2 font-medium">On-field Umpire :</p>
                     </div>
                     <div className="w-[80%]">
-                      <p className="mx-2 text-[#586577] font-medium ">
+                      <p className="mx-2 text-[#586577] font-medium">
                         {matchData?.match_info?.umpires}
                       </p>
                     </div>
@@ -1577,7 +1583,7 @@ export default function MoreInfo({
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <div className="py-2 pb-0 flex justify-between items-center">
                     <div className="">
-                      <p className="mx-2 font-semibold">Referee :</p>
+                      <p className="mx-2 font-medium">Referee :</p>
                     </div>
                     <div className="">
                       <p className="mx-2 text-[#586577] font-medium ">
@@ -1771,7 +1777,7 @@ export default function MoreInfo({
                                     ? player.role_str
                                     : ""}{" "}
                                 </h2>
-                                <p className="text-[#5C6081] font-normal">
+                                <p className="text-[#757A82] font-normal">
                                   {player.role}
                                 </p>
                               </div>
@@ -1809,7 +1815,7 @@ export default function MoreInfo({
                                     ? player.role_str
                                     : ""}{" "}
                                 </h2>
-                                <p className="text-[#5C6081] font-normal">
+                                <p className="text-[#757A82] font-normal">
                                   {player.role}
                                 </p>
                               </div>
@@ -1826,7 +1832,7 @@ export default function MoreInfo({
                       <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
                       <h3 className="text-1xl font-semibold mb-3">
                         Pace vs Spin on Venue{" "}
-                        <span className="text-[#5C6081]">
+                        <span className="text-[#757A82]">
                           {" "}
                           &nbsp;(Last 10 matches){" "}
                         </span>

@@ -120,11 +120,11 @@ export default function Scorecard({
     <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable}/>
     <div id="tab-content">
       <div id="scorecard" className="tab-content cust-box-click-container">
-        <div className="flex items-center gap-3 md:mb-4 mb-2 md:pb-0 pb-2 font-medium text-[13px] whitespace-nowrap overflow-auto">
+        <div className="flex items-center gap-4 md:mb-4 mb-2 md:pb-0 pb-2 font-medium text-[14px] whitespace-nowrap overflow-auto">
           {
           matchscorecard?.map((scorecard:any, index: number) => (
             <button key={index}
-            className={`cust-box-click-button ${openHeading === index ? "bg-[#081736] text-white" : "bg-[#ffffff] text-[#6A7586]" }  font-medium border-[1px] border-[#E5E8EA] px-5 py-1 rounded-full`}
+            className={`cust-box-click-button leading-[22px] ${openHeading === index ? "bg-[#081736] text-white" : "bg-[#ffffff] text-[#6A7586]" }  font-medium px-5 py-1 rounded-full`}
             onClick={() => handleToggle(index)} >
            <span>{scorecard['short_name']}</span>
          </button>
@@ -161,41 +161,41 @@ export default function Scorecard({
                         <tr>
                           <th
                             scope="col"
-                            className="md:px-4 px-2 py-2 font-medium text-[#000000]"
+                            className="md:px-4 px-2 py-2 font-medium text-gray-700"
                           >
                             Batter
                           </th>
                           <th
                             scope="col"
-                            className="md:px-4 py-2 font-medium text-[#000000] hidden md:block"
+                            className="md:px-4 py-2 font-medium text-gray-700 hidden md:block"
                           ></th>
                           <th
                             scope="col"
-                            className="md:px-4 px-2 py-2 font-medium text-[#000000]"
+                            className="md:px-4 px-2 py-2 font-medium text-gray-700"
                           >
                             R
                           </th>
                           <th
                             scope="col"
-                            className="md:px-4 px-2 py-2 font-medium text-[#000000]"
+                            className="md:px-4 px-2 py-2 font-medium text-gray-700"
                           >
                             B
                           </th>
                           <th
                             scope="col"
-                            className="md:px-4 px-2 py-2 font-medium text-[#000000]"
+                            className="md:px-4 px-2 py-2 font-medium text-gray-700"
                           >
                             4s
                           </th>
                           <th
                             scope="col"
-                            className="md:px-4 px-2 py-2 font-medium text-[#000000]"
+                            className="md:px-4 px-2 py-2 font-medium text-gray-700"
                           >
                             6s
                           </th>
                           <th
                             scope="col"
-                            className="md:px-4 px-2 py-2 font-medium text-[#000000]"
+                            className="md:px-4 px-2 py-2 font-medium text-gray-700"
                           >
                             SR
                           </th>
@@ -207,7 +207,7 @@ export default function Scorecard({
                         
                       {batsman?.map((batsman:any, index: number) => (
                         <tr className="border-b" key={index}>
-                          <td className="md:px-4 py-2 font-medium text-[#000000]">
+                          <td className="md:px-4 py-2 font-medium text-gray-800">
                             <Link href={"/player/"+playerUrls[batsman.batsman_id]} className='flex gap-1 md:items-center md:flex-row flex-col relative'>
                               {" "}
                               <p className='flex gap-1 items-center'>
@@ -225,7 +225,7 @@ export default function Scorecard({
                           <td className="md:px-4 py-2 hidden md:block text-[13px] text-[#586577] capitalize">
                           {batsman.how_out}
                           </td>
-                          <td className="md:px-4 py-2 font-semibold text-[#000000]">
+                          <td className="md:px-4 py-2 font-medium text-gray-800">
                           {batsman.runs}
                           </td>
                           <td className="md:px-4 py-2">{batsman.balls_faced}</td>
@@ -247,7 +247,7 @@ export default function Scorecard({
                       <span className="font-medium text-[#000000]">Extras: </span>
                       <span className="text-sm text-[#586577]">
                         {" "}
-                        <span className="font-medium text-[#000000]"> {matchinning?.extra_runs?.total}</span> (B {matchinning?.extra_runs?.byes},
+                        <span className="font-medium text-[#000000]"> {matchinning?.extra_runs?.total} </span> (B {matchinning?.extra_runs?.byes},
                         Lb {matchinning?.extra_runs?.legbyes}, W {matchinning?.extra_runs?.wides}, Nb {matchinning?.extra_runs?.noballs}, P {matchinning?.extra_runs?.penalty})
                       </span>
                     </p>
@@ -261,7 +261,7 @@ export default function Scorecard({
                 <div>
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm text-left text-[#586577] whitespace-nowrap">
-                      <thead className="bg-blue-50 text-[#000000] ">
+                      <thead className="bg-blue-50 text-gray-700 ">
                         <tr>
                           <th className="px-4 py-3 font-medium">Bowling</th>
                           <th className="md:px-4 pl-[14px] py-3 font-medium">
@@ -284,10 +284,10 @@ export default function Scorecard({
                       <tbody className="divide-y divide-gray-200">
                         {bowlers?.map((bowlers:any, index: number) => (
                         <tr  key={index}>
-                          <td className="px-4 py-3 font-medium text-[#000000]">
+                          <td className="px-4 py-3 font-medium text-gray-800">
                             <Link href={"/player/"+playerUrls[bowlers.bowler_id]} className=''>{bowlers.name} </Link>
                           </td>
-                          <td className="md:px-4 pl-[14px] py-3 text-[#000000] font-semibold">{bowlers.overs} </td>
+                          <td className="md:px-4 pl-[14px] py-3 font-medium text-gray-800">{bowlers.overs} </td>
                           <td className="md:px-4 pl-[14px] py-3">{bowlers.maidens} </td>
                           <td className="md:px-4 pl-[14px] py-3">{bowlers.runs_conceded} </td>
                           <td className="md:px-4 pl-[14px] py-3">{bowlers.wickets} </td>
@@ -307,7 +307,7 @@ export default function Scorecard({
                 <div>
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm text-left text-[#586577]">
-                      <thead className="bg-blue-50 text-[#000000]">
+                      <thead className="bg-blue-50 text-gray-700">
                         <tr>
                           <th className="px-4 py-3 font-medium">Batter</th>
                           <th className="px-4 py-3 font-medium">Score</th>
@@ -317,10 +317,10 @@ export default function Scorecard({
                       <tbody>
                       {fows?.map((fows:any, index: number) => (
                         <tr className="border-b"  key={index}>
-                          <td className="px-4 py-3 font-medium text-[#000000]">
+                          <td className="px-4 py-3 font-medium text-gray-800">
                             <Link href={"/player/"+playerUrls[fows.batsman_id]} className=''>  {fows.name} </Link>
                           </td>
-                          <td className="px-4 py-3 text-[#000000] font-semibold">{fows.score_at_dismissal} </td>
+                          <td className="px-4 py-3 font-medium text-gray-800">{fows.score_at_dismissal} </td>
                           <td className="px-4 py-3">{fows.overs_at_dismissal}</td>
                         </tr>
                       ))}
@@ -335,7 +335,7 @@ export default function Scorecard({
                 <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                   Partnership
                 </h3>
-                <div className="flex justify-between items-center bg-blue-50 text-[#000000] text-sm px-4 py-3 font-medium">
+                <div className="flex justify-between items-center bg-blue-50 text-gray-700 text-sm px-4 py-3 font-medium">
                   <div>Batter 1</div>
                   <div>Batter 2</div>
                 </div>
@@ -347,22 +347,22 @@ export default function Scorecard({
                   <div key={index}>
                 <div className="text-sm flex items-center justify-between font-medium px-2 py-3">
                   <div className="w-full ">
-                    <p className="text-[13px] text-[#586577]">{partnership.order}{partnership.order === 1?("st"):partnership.order === 2?("nd"):partnership.order === 3?("rd"):("th")} Wicket</p>
+                    <p className="text-[13px] text-[#757A82]">{partnership.order}{partnership.order === 1?("st"):partnership.order === 2?("nd"):partnership.order === 3?("rd"):("th")} Wicket</p>
                     <div className="flex md:flex-row flex-col md:gap-2">
                       <Link href={"/player/"+playerUrls[partnership.batsmen[0].batsman_id]} className=''>  {players.find((p: { player_id: number; }) => p.player_id === partnership.batsmen[0].batsman_id)?.name} </Link>
                       <p>
                         <span>{partnership.batsmen[0].runs} </span>
-                        <span className="text-[13px] text-[#586577]">({partnership.batsmen[0].balls_faced})</span>
+                        <span className="text-[13px] text-[#757A82]">({partnership.batsmen[0].balls_faced})</span>
                       </p>
                     </div>
                   </div>
                   <div className=" w-full">
                     <p className="mb-1 text-center">
-                    {partnership.runs} <span className="text-[#586577]">({partnership.balls_faced})</span>
+                    {partnership.runs} <span className="text-[#757A82]">({partnership.balls_faced})</span>
                     </p>
-                    <div className="bg-[#F63636] w-[75px] mx-auto h-[4px]">
+                    <div className="bg-[#B7132B] w-[75px] mx-auto h-[4px]">
                       <div
-                        className="bg-[#13B76D] h-[4px]"
+                        className="bg-[#13b76dbd] h-[4px]"
                         style={{ width: `${playerA_percent}%` }}
                       />
                     </div>
@@ -371,7 +371,7 @@ export default function Scorecard({
                     <Link href={"/player/"+playerUrls[partnership.batsmen[1].batsman_id]} className=''>
                      <p className='text-end'>{players.find((p: { player_id: number; }) => p.player_id === partnership.batsmen[1].batsman_id)?.name}</p> </Link>
                     <p className='text-end'>
-                    {partnership.batsmen[1].runs} <span className="text-[#586577]">({partnership.batsmen[1].balls_faced})</span>
+                    {partnership.batsmen[1].runs} <span className="text-[#757A82]">({partnership.batsmen[1].balls_faced})</span>
                     </p>
                   </div>
                 </div>
@@ -399,7 +399,7 @@ export default function Scorecard({
                         </div>
                         <div className="font-medium">
                           <h2 className="text-[15px]">{yetTobat.name} </h2>
-                          <p className="text-[#586577] font-normal">Avg 7.34</p>
+                          <p className="text-[#757A82] font-normal">Avg 7.34</p>
                         </div>
                       </div>
                     </Link>

@@ -425,7 +425,7 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                               />
                             </div>
                             <div className="font-medium">
-                              <h2 className="md:text-[15px] text-[14px] text-[#586577]">
+                              <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
                                 {getPlayerNameByPid(
                                   players,
                                   batsman?.[0]?.batsman_id
@@ -433,16 +433,16 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                               </h2>
                               <p className="md:text-[15px] text-[14px] flex items-center">
                                 {batsman?.[0].runs}{" "}
-                                <span className="md:text-[13px] text-[12px] text-[#586577] px-1">
+                                <span className="md:text-[13px] text-[12px] text-[#757A82] px-1">
                                   ({batsman?.[0]?.balls_faced})
                                 </span>
                                 {batsman?.[0]?.batsman_id ==
                                   currPartnership?.batsmen?.[0]?.batsman_id ? (
                                   <Image
                                     src="/assets/img/home/bat.png"
-                                    className="h-[14px]"
-                                    width={14}
-                                    height={14}
+                                    className="h-[13px]"
+                                    width={12}
+                                    height={13}
                                     alt=""
                                     loading="lazy"
                                   />
@@ -481,7 +481,7 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                               />
                             </div>
                             <div className="font-medium text-end">
-                              <h2 className="md:text-[15px] text-[14px] text-[#586577]">
+                              <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
                                 {getPlayerNameByPid(
                                   players,
                                   batsman?.[1]?.batsman_id
@@ -489,7 +489,7 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                               </h2>
                               <p className="md:text-[15px] text-[14px] flex items-center justify-end">
                                 {batsman?.[1]?.runs}{" "}
-                                <span className="md:text-[13px] text-[12px] text-[#586577] pl-1">
+                                <span className="md:text-[13px] text-[12px] text-[#757A82] pl-1">
                                   ({batsman?.[1]?.balls_faced})
                                 </span>
                                 {batsman?.[0]?.batsman_id ==
@@ -543,7 +543,7 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                           <p />
                         </div>
                         <div className="font-medium">
-                          <h2 className="md:text-[15px] text-[14px] text-[#586577]">
+                          <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
                             {getPlayerNameByPid(
                               players,
                               matchinfo?.bowlers?.[0]?.bowler_id
@@ -552,7 +552,7 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                           <p className="md:text-[15px] text-[14px] flex items-center">
                             {matchinfo?.bowlers?.[0]?.wickets}-
                             {matchinfo?.bowlers?.[0]?.runs_conceded}{" "}
-                            <span className="md:text-[13px] text-[12px] text-[#586577] pt-[4px] px-1">
+                            <span className="md:text-[13px] text-[12px] text-[#757A82] pt-[4px] px-1">
                               ({matchinfo?.bowlers?.[0]?.overs})
                             </span>
                           </p>
