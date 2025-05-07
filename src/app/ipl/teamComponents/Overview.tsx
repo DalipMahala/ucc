@@ -31,6 +31,11 @@ export default function Overview({
   venueDetails
 }: teamview) {
 
+  const [isMounted, setIsMounted] = useState(false);
+    useEffect(() => {
+      setIsMounted(true);
+    }, []);
+
   const teams = teamPlayers[0]?.team || {};
   const captain = teamPlayers[0]?.captains?.[0] || null;
   const players = teamPlayers[0]?.players?.["t20"] || [];
@@ -177,7 +182,7 @@ export default function Overview({
     fetchHtml();
   }, [cid]);
   // console.log("statsMatch", standings);
-  if (!teams?.tid || !pointTables?.season || !completedMatch || !standings || !teamLast5match || !seriesStats) {
+  if (!isMounted || !teams?.tid || !pointTables?.season || !completedMatch || !standings || !teamLast5match || !seriesStats) {
     return <div className="p-4 text-center">Loading team data...</div>;
   }
 
@@ -332,7 +337,8 @@ export default function Overview({
                 {/* <!-- Featured Matches desktop view  --> */}
                 <div className="border-t-[1px] border-[#E4E9F0]"></div>
                 <div className="hidden lg:block">
-                <Link href={"/scorecard/" + urlStringEncode(completedMatch?.teama?.short_name + "-vs-" + completedMatch?.teamb?.short_name + "-" + completedMatch?.subtitle + "-" + completedMatch?.competition?.title + "-" + completedMatch?.competition?.season) + "/" + completedMatch.match_id}>
+                <Link href={"/scorecard/" + urlStringEncode(completedMatch?.teama?.short_name + "-vs-" + completedMatch?.teamb?.short_name + "-" + completedMatch?.subtitle + "-" + completedMatch?.competition?.title + "-" + completedMatch?.competition?.season) + "/" + completedMatch.match_id} passHref
+    legacyBehavior>
                   <div className="py-3 flex justify-between items-center">
                     <div className="flex space-x-2 font-medium	w-full">
                       <div className="flex items-center space-x-1 flex-col">

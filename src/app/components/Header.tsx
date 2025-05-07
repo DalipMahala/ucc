@@ -75,10 +75,16 @@ const Header = () => {
       </div>
 
       <header className={`bg-[#081736] lg:px-0 px-3 sticky top-0 z-[999] ${isMoreInfoPage ? 'hidden md:block' : 'block'}`}>
+      <link
+        rel="preload"
+        as="image"
+        href="/assets/img/logo.webp"
+        fetchPriority="high"
+      />
         <div className="lg:w-[1000px] w-full mx-auto text-white md:py-5 pt-3 pb-3 flex items-center md:justify-between justify-center">
           <div>
             <Link href="/">
-              <Image priority fetchPriority="high" className="h-[39px] w-[173px]" src="/assets/img/logo.png" alt="logo" width={150} height={50} />
+              <img fetchPriority="high" className="h-[39px] w-[173px]" src="/assets/img/logo.webp" alt="logo" width={150} height={50} decoding="async" loading="eager"/>
             </Link>
           </div>
 

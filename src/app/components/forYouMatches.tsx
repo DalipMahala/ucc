@@ -1102,6 +1102,7 @@ export default async function ForYouMatches() {
 
                   <Link className="w-[38%]" href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
                     <div className=" font-semibold flex flex-col items-center">
+                    {(cmatch?.result_type === 1 || cmatch?.result_type === 2) &&
                       <Image
                         src="/assets/img/home/win.png"
                         width={30}
@@ -1110,6 +1111,7 @@ export default async function ForYouMatches() {
                         alt=""
                         loading="lazy"
                       />
+                    }
                       <p className="text-[#0B773C] text-[15px] w-[75%] text-center">
                         {cmatch.result}
                       </p>
@@ -1278,6 +1280,7 @@ export default async function ForYouMatches() {
                      
 
                       <div className=" w-[50%] font-semibold flex flex-col items-center">
+                      {(cmatch?.result_type === 1 || cmatch?.result_type === 2) &&
                         <Image
                           src="/assets/img/home/win.png"
                           width={26}
@@ -1286,6 +1289,7 @@ export default async function ForYouMatches() {
                           alt=""
                           loading="lazy"
                         />
+                      }
                         <p className="text-[#0B773C] font-semibold mt-1 text-[13px] w-[60%] text-center">
                           {cmatch.result}
                         </p>

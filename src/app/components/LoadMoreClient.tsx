@@ -368,6 +368,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
 
 
                       <div className=" w-[50%] font-semibold flex flex-col items-center">
+                      {(cmatch?.result_type === 1 || cmatch?.result_type === 2) &&
                         <Image
                           src="/assets/img/home/win.png"
                           width={26}
@@ -376,6 +377,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                           alt=""
                           loading="lazy"
                         />
+                      }
                         <p className="text-[#0B773C] font-semibold mt-1 text-[13px] w-[60%] text-center">
                           {cmatch.result}
                         </p>

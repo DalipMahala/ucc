@@ -12,6 +12,7 @@ import IplBanner from "./teamComponents/iplBanner";
 import Overview from "./teamComponents/Overview";
 import Squads from "./teamComponents/Squad";
 import ScheduleResults from "./teamComponents/ScheduleResults";
+import { notFound } from "next/navigation";
 
 type Params = Promise<{ year: string; teamType: string; teamName: string; teamId: number; }>;
 
@@ -24,6 +25,13 @@ export default async function page(props: { params: Params }) {
   
  
   const teamDetails = await TeamDetails(teamId);
+  if (teamDetails){
+    if (!teamDetails || teamName?.toLowerCase() !== teamDetails?.abbr?.toLowerCase() || teamId?.toString() !== teamDetails?.tid?.toString()) {
+      notFound();
+    }
+}else{
+  notFound();
+}
   const teamPlayers = await TeamPlayersById(teamId);
   const teamLast5match = await TeamLast5match(teamId, 2);
   const teamUpcomingMatch = await TeamLast5match(teamId, 1);
@@ -40,7 +48,7 @@ export default async function page(props: { params: Params }) {
     matcheInfo = await MatcheInfo(matchid);
   }
   // console.log("scheduledMatch", seriesMatches?.scheduledMatch.length);
-  // console.log("resultMatch", seriesMatches?.resultMatch.length);
+
   return (
     <Layout>
       <IplBanner cid={cid} params={params} teamPlayers={teamPlayers} venueDetails={venueDetails}></IplBanner>
