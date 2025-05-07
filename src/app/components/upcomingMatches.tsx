@@ -350,9 +350,9 @@ export default async function UpcomingMatches() {
                       
 
                       <div className="w-[80%] font-semibold text-center">
-                        <div className="text-[#144280] mt-1">
+                        <div className="text-[#144280]">
                           <div
-                            className="flex space-x-1 justify-center countdown"
+                            className="flex space-x-1 justify-end countdown"
                             data-time="28800"
                           >
                             {/* <!-- 08:00:00 = 8 * 60 * 60 = 28800 seconds --> */}

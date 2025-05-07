@@ -207,8 +207,8 @@ export default function Scorecard({
                         
                       {batsman?.map((batsman:any, index: number) => (
                         <tr className="border-b" key={index}>
-                          <td className="md:px-4 py-2 font-medium text-gray-800">
-                            <Link href={"/player/"+playerUrls[batsman.batsman_id]} className='flex gap-1 md:items-center md:flex-row flex-col relative'>
+                          <td className="px-2 md:px-4 py-2 font-medium text-gray-800">
+                            <Link href={"/player/"+playerUrls[batsman.batsman_id]} className='flex md:items-center md:flex-row flex-col relative'>
                               {" "}
                               <p className='flex gap-1 items-center'>
                               {batsman.name}
@@ -216,26 +216,26 @@ export default function Scorecard({
                                 batsman.position === "striker"? (<Image  loading="lazy"  src="/assets/img/home/bat.png" width={12} height={12} className="h-[13px]" alt="" />) : ` `
                               }
                               </p>
-                              <p className="md:hidden text-[#586577] text-[11px] font-normal">
+                              <p className="md:hidden text-[#757A82] text-[11px] font-normal">
                               {batsman.how_out}
                               
                               </p>
                             </Link>
                           </td>
-                          <td className="md:px-4 py-2 hidden md:block text-[13px] text-[#586577] capitalize">
+                          <td className="px-2 md:px-4 py-2 hidden md:block text-[13px] text-[#757A82] capitalize">
                           {batsman.how_out}
                           </td>
-                          <td className="md:px-4 py-2 font-medium text-gray-800">
+                          <td className="px-2 md:px-4 py-2 font-medium text-gray-800">
                           {batsman.runs}
                           </td>
-                          <td className="md:px-4 py-2">{batsman.balls_faced}</td>
-                          <td className="md:px-4 py-2 text-center md:text-start">
+                          <td className="px-2 md:px-4 py-2">{batsman.balls_faced}</td>
+                          <td className="px-2 md:px-4 py-2 text-center md:text-start">
                           {batsman.fours}
                           </td>
-                          <td className="md:px-4 py-2 text-center md:text-start">
+                          <td className="px-2 md:px-4 py-2 text-center md:text-start">
                           {batsman.sixes}
                           </td>
-                          <td className="md:px-4 py-2">{batsman.strike_rate}</td>
+                          <td className="px-2 md:px-4 py-2">{batsman.strike_rate}</td>
                         </tr>
                        ))} 
                         

@@ -33,10 +33,10 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                 {teamPlayers?.map((teamslist: any, index: number) => (
                   <button
                     key={index}
-                    className={`team-btn px-2 mb-1 py-3 w-full font-medium flex items-center ${
+                    className={`team-btn px-2 mb-1 py-3 w-full font-medium flex items-center border-b-[1px] ${
                       activeTab === "tab"+index
                         ? "text-[#394351] bg-[#eaeaea] rounded-md"
-                        : "text-[#394351] bg-[#ffffff] rounded-md"
+                        : "text-[#394351] bg-[#ffffff] "
                     }`}
                     onClick={() => setActiveTab("tab" + index)}
                   >
@@ -102,9 +102,9 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                                 
                                 <Image  loading="lazy" 
                                   src="/assets/img/player/bat.png"
-                                  className="h-[27px] absolute md:right-2 right-[25px] bottom-0 bg-white rounded-full p-[4px]"
-                                  width={27}
-                                  height={27}
+                                  className="h-[23px] absolute md:right-[17px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
+                                  width={20}
+                                  height={20}
                                   alt={squads.short_name}
                                 />
                               </div>
@@ -147,9 +147,9 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                               <PlayerImage key={bowler?.pid} player_id={ bowler?.pid} height={47} width={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
                                 <Image  loading="lazy" 
                                   src="/assets/img/player/ball.png"
-                                  className="h-[24px] absolute md:right-2 right-[25px] bottom-0 bg-white rounded-full p-[4px]"
-                                  width={24}
-                                  height={24}
+                                  className="h-[19px] w-[19px] absolute md:right-[19px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
+                                  width={19}
+                                  height={19}
                                   alt={bowler.short_name}
                                 />
                               </div>
@@ -184,9 +184,9 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                               <PlayerImage key={allrounder?.pid}  player_id={ allrounder?.pid} height={47} width={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
                                 <Image  loading="lazy" 
                                   src="/assets/img/player/bat-ball.png"
-                                  className="h-[27px] absolute md:right-2 right-[25px] bottom-0 bg-white rounded-full p-[4px]"
-                                  width={27}
-                                  height={27}
+                                  className="h-[23px] md:w-[23px] w-[23px] absolute md:right-[15px] right-[32px] bottom-0 bg-white rounded-full p-[4px]"
+                                  width={23}
+                                  height={23}
                                   alt={allrounder.short_name}
                                 />
                               </div>

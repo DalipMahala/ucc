@@ -88,8 +88,8 @@ const News = () => {
                         // src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
                         src={post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium_large.source_url}
 
-                        width={800}
-                        height={600}
+                        width={1000}
+                        height={1000}
                         alt={post?.title.rendered}
                         className="rounded-lg w-full h-48 object-cover"
                       />
@@ -146,20 +146,20 @@ const News = () => {
             <div className="lg:grid grid-cols-12 gap-4 mt-5">
               {news.slice(1, 9)?.map((post: any, index: number) => (
 
-                <div className="col-span-6" key={index}>
+                <div className="col-span-6 border-t-[1px] border-[#E7F2F4]" key={index}>
 
-                  <div className="flex gap-3 mb-4 ">
-                    <Link className="w-[25%]" href={post?.link}>
+                  <div className="flex gap-3 mt-4 ">
+                    <Link className="w-[45%]" href={post?.link}>
                       {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url && (
                         <Image priority
                           src={post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium.source_url}
                           width={800}
                           height={600}
                           alt={post?.title.rendered}
-                          className="rounded-lg h-[80px] w-[90px]" />
+                          className="rounded-lg h-[90px] w-[100%]" />
                       )}
                     </Link>
-                    <div className="w-[75%] flex flex-col justify-between">
+                    <div className="w-[55%] flex flex-col justify-between">
                       <Link className="" href={post?.link}>
                         <h2 className="text-[14px] font-semibold mb-2" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered, 8)) }} >
 
@@ -189,11 +189,6 @@ const News = () => {
                     </div>
                   </div>
 
-
-                  <div className="border-t-[1px] border-[#E7F2F4]"></div>
-
-
-
                 </div>
 
 
@@ -201,7 +196,7 @@ const News = () => {
             </div>
 
             <Link href={"https://uccricket.live/" + activeTab}>
-              <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
+              <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-8 underline">
                 More from {activeTab}{" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

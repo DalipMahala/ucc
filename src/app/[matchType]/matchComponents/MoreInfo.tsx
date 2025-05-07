@@ -475,7 +475,7 @@ export default function MoreInfo({
                                               height={25}
                                               alt={items.teama.short_name}
                                             />
-                                            <span className="text-[#5C6081]">
+                                            <span className="text-[#757A82]">
                                               {items.teama.short_name}
                                             </span>
                                           </div>
@@ -492,7 +492,7 @@ export default function MoreInfo({
                                               height={25}
                                               alt={items.teamb.short_name}
                                             />
-                                            <span className="text-[#5C6081]">
+                                            <span className="text-[#757A82]">
                                               {items.teamb.short_name}
                                             </span>
                                           </div>
@@ -504,7 +504,7 @@ export default function MoreInfo({
                                     <div className="flex items-center space-x-4">
                                       <div className="text-right leading-6">
                                         <p className="font-medium"> {items.subtitle}</p>
-                                        <p className="text-[#5C6081] font-normal">
+                                        <p className="text-[#757A82] font-normal">
                                           {items.short_title}
                                         </p>
                                       </div>
@@ -710,7 +710,7 @@ export default function MoreInfo({
                                               height={25}
                                               alt={items.teama.short_name}
                                             />
-                                            <span className="text-[#5C6081]">
+                                            <span className="text-[#757A82]">
                                               {items.teama.short_name}
                                             </span>
                                           </div>
@@ -728,7 +728,7 @@ export default function MoreInfo({
                                               height={25}
                                               alt={items.teamb.short_name}
                                             />
-                                            <span className="text-[#5C6081]">
+                                            <span className="text-[#757A82]">
                                               {items.teamb.short_name}
                                             </span>
                                           </div>
@@ -740,7 +740,7 @@ export default function MoreInfo({
                                     <div className="flex items-center space-x-4">
                                       <div className="text-right leading-6">
                                         <p className="font-medium"> {items.subtitle}</p>
-                                        <p className="text-[#5C6081] font-normal">
+                                        <p className="text-[#757A82] font-normal">
                                           {items.short_title}
                                         </p>
                                       </div>
@@ -1560,10 +1560,10 @@ export default function MoreInfo({
                   </h3>
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <div className="py-2 flex justify-between items-center">
-                    <div className="w-[20%]">
+                    <div className="md:w-[20%] w-[40%]">
                       <p className="mx-2 font-medium">On-field Umpire :</p>
                     </div>
-                    <div className="w-[80%]">
+                    <div className="md:w-[80%] w-[60%]">
                       <p className="mx-2 text-[#586577] font-medium">
                         {matchData?.match_info?.umpires}
                       </p>

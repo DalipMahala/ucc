@@ -106,13 +106,13 @@ export default function NewsSection({ urlString }: News) {
                       className="rounded-lg h-[77px] w-[auto]" />
                   )}
               </Link>
-              <div className="w-[60%]">
+              <div className="w-[60%] flex justify-between flex-col">
                 <Link href={post?.link}>
                   <h2
                     className="text-[13px] font-semibold mb-2"
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(
-                        truncateText(post?.title.rendered, 12)
+                        truncateText(post?.title.rendered, 6)
                       ),
                     }}
                   ></h2>

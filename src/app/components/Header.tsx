@@ -127,12 +127,12 @@ const Header = () => {
 
             <div
               className="group relative"
-              onMouseEnter={() => !isClicked && toggleDropdown(true)}
-              onMouseLeave={() => {
-                if (!isMouseOverDropdown && !isClicked) {
-                  toggleDropdown(false);
-                }
-              }}
+              // onMouseEnter={() => !isClicked && toggleDropdown(true)}
+              // onMouseLeave={() => {
+              //   if (!isMouseOverDropdown && !isClicked) {
+              //     toggleDropdown(false);
+              //   }
+              // }}
             >
               <div
                 onClick={() => toggleDropdown(!isDropdownOpen, !isDropdownOpen)} // 👈 Toggle on click

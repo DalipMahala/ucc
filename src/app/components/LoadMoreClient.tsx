@@ -305,7 +305,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                       {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
                     </p>
                     <div className="flex justify-between items-center text-[14px]">
-                      <div className="">
+                      <div className="w-[68%]">
                         <div className="items-center space-x-2 font-medium md:w-full mb-4">
                           <div className="flex items-center space-x-2">
                             <Image
@@ -334,6 +334,8 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                             </div>
                           </div>
                         </div>
+
+
                         <div className="">
                           <div className="flex items-center space-x-2 font-medium md:w-full">
                             <div className="flex items-center space-x-2">

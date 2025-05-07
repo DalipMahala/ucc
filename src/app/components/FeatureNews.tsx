@@ -60,7 +60,7 @@ const FeatureNews = ({ newsUrl }: url) => {
                           width={1000}
                           height={1000}
                           alt={post?.title.rendered}
-                          className="rounded-lg w-full h-48 object-cover mb-3"
+                          className="rounded-lg w-full h-48 object-cover"
                         />
                       </Link>
                     )}
@@ -108,7 +108,7 @@ const FeatureNews = ({ newsUrl }: url) => {
                 </div>
               ))}
 
-              <div className="lg:grid grid-cols-12 gap-4">
+              <div className="lg:grid grid-cols-12 gap-4 mt-8">
                 {news.slice(1, 4)?.map((post: any, index: number) => (
 
                   <div className="col-span-12" key={index}>
@@ -116,21 +116,21 @@ const FeatureNews = ({ newsUrl }: url) => {
 
 
 
-                    <div className="flex gap-3 my-5">
+                    <div className="flex gap-3 mb-5">
 
-                      <Link href={post?.link} className="md:w-[15%] w-[25%]">
+                      <Link href={post?.link} className="md:w-[30%] w-[25%]">
                         {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url && (
                           <Image loading="lazy"
                             src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url}
 
-                            width={90}
-                            height={90}
+                            width={1000}
+                            height={1000}
                             alt={post?.title.rendered}
-                            className="rounded-lg h-[96px] w-[96px]" />
+                            className="rounded-lg h-[98px] w-[100%]" />
                         )}
                       </Link>
 
-                      <div className="md:w-[85%] w-[75%] flex flex-col justify-between">
+                      <div className="md:w-[70%] w-[75%] flex flex-col justify-between">
 
                       
 <div>

@@ -552,7 +552,7 @@ export default function Live({
                           <p className="md:text-[18px] font-semibold text-[17px] text-[#13b76dbd]">
                             {currPartnership?.runs}{" "}
 
-                            <span className="md:text-[15px] font-normal text-[11px] pl-[2px] text-black">
+                            <span className="md:text-[15px] font-medium text-[13px] pl-[2px] text-black">
                               ({currPartnership?.balls})
                             </span>
                           </p>
@@ -694,10 +694,10 @@ export default function Live({
                           </h2>
                         
                         </div>
-                        <p className="md:text-[15px] text-[14px] flex items-center justify-end w-[50%]">
-                          {matchinfo?.bowlers?.[0]?.wickets}-
-                          {matchinfo?.bowlers?.[0]?.runs_conceded}{" "}
-                          <span className="md:text-[13px] text-[12px] text-[#757A82] pt-[4px] px-1">
+                        <p className="md:text-[15px] text-[14px] flex items-baseline justify-end w-[50%]">
+                        <span>  {matchinfo?.bowlers?.[0]?.wickets}-
+                          {matchinfo?.bowlers?.[0]?.runs_conceded} {" "} </span>
+                          <span className="md:text-[13px] text-[12px] text-[#757A82] px-1">
                             ({matchinfo?.bowlers?.[0]?.overs})
                           </span>
                         </p>
@@ -1114,7 +1114,7 @@ export default function Live({
                                       player_id={comment?.wicket_batsman_id}
                                       height={71}
                                       width={71}
-                                      className="h-[71px] w-[71px] rounded-lg md:mr-4 mr-2 "
+                                      className="md:h-[71px] h-[40px]  md:w-[71px] w-[40px]  rounded-lg md:mr-4 mr-2 "
                                     />
 
                                     <div>
