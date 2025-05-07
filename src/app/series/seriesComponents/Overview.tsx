@@ -155,7 +155,7 @@ export default function Overview({
   // console.log("completedMatch", seriesKeystats?.mostRuns?.stats);
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-     <TabMenu urlString={urlString} isPointTable={isPointTable}/>
+      <TabMenu urlString={urlString} isPointTable={isPointTable} />
 
       <div id="tab-content">
         <div id="info" className="tab-content ">
@@ -170,14 +170,14 @@ export default function Overview({
                   {/* Responsive Grid Section */}
                   <div className="grid gap-2 grid-cols-1 pt-3 px-2">
                     <div className="flex items-center">
-                      <h2 className="font-text-[13px] font-medium text-[#586577] md:w-[15%] w-[25%]">Series :</h2>
-                      <p className="text-[13px] font-medium">
+                      <h2 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Series :</h2>
+                      <p className="text-[14px] font-medium">
                         {seriesInfo?.title} {seriesInfo?.season}{" "}
                       </p>
                     </div>
                     <div className="flex items-center">
-                      <h2 className="text-[13px] font-medium text-[#586577] md:w-[15%] w-[25%]">Duration :</h2>
-                      <p className="text-[13px] font-medium">
+                      <h2 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Duration :</h2>
+                      <p className="text-[14px] font-medium">
                         {seriesInfo?.datestart
                           ? format(new Date(seriesInfo?.datestart), "dd MMM")
                           : ""}{" "}
@@ -188,15 +188,15 @@ export default function Overview({
                       </p>
                     </div>
                     <div className="flex items-center">
-                      <h2 className="text-[13px] font-medium text-[#586577] md:w-[15%] w-[25%]">Format :</h2>
-                      <p className="text-[13px] font-medium">
+                      <h2 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Format :</h2>
+                      <p className="text-[14px] font-medium">
                         {" "}
                         {seriesInfo?.game_format?.toUpperCase()}
                       </p>
                     </div>
                     <div className="flex items-center">
-                      <h2 className="text-[13px] font-medium text-[#586577] md:w-[15%] w-[25%]">Teams :</h2>
-                      <p className="text-[13px] font-medium">
+                      <h2 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Teams :</h2>
+                      <p className="text-[14px] font-medium">
                         {seriesInfo?.total_teams} (Teams)
                       </p>
                     </div>
@@ -226,26 +226,66 @@ export default function Overview({
                                 height={30}
                                 alt={matches?.teama?.short_name}
                               />
-                              <span className="text-[#586577] font-medium text-[14px]">{matches?.teama?.short_name}</span>
+                              <span className="text-[#757A82]">{matches?.teama?.short_name}</span>
 
                             </div>
                             <div className="mt-1">
                               <p className="text-1xl font-semibold">{matches?.teama?.scores}</p>
-                              <p className="text-[#586577]">({matches?.teama?.overs})</p>
+                              <p className="text-[#757A82]">({matches?.teama?.overs})</p>
                             </div>
                           </div>
+
+
                           <div className=" font-semibold text-center w-full">
                             <p className="text-[#3D4DCF] text-[14px]">{matches?.result}</p>
-                            <p className="text-[#909090] text-[12px] font-normal">
+                            <p className="text-[#757A82] text-[12px] font-normal">
                               {matches?.subtitle}
                             </p>
                           </div>
+
+
                           <div className="flex space-x-2 font-medium justify-end w-full">
                             <div className="mt-1 text-end">
                               <p className="text-1xl font-semibold">{matches?.teamb?.scores}</p>
                               <p className="text-[#586577]">({matches?.teamb?.overs})</p>
                             </div>
-                              <div className="flex items-center space-x-1 flex-col font-medium">
+                            <div className="flex items-center space-x-1 flex-col font-medium">
+                              <Image
+                                loading="lazy"
+                                src={matches?.teamb?.logo_url}
+                                className="h-[30px] rounded-full"
+                                width={30}
+                                height={30}
+                                alt={matches?.teamb?.short_name}
+                              />
+                              <span className="text-[#757A82]">{matches?.teamb?.short_name}</span>
+                            </div>
+                          </div>
+                        </Link>
+                      }{matches?.status === 1 &&
+                        <Link href={"/moreinfo/" + urlStringEncode(matches?.teama?.short_name + "-vs-" + matches?.teamb?.short_name + "-" + matches?.subtitle + "-" + matches?.competition?.title + "-" + matches?.competition?.season) + "/" + matches.match_id}>
+                          <div className="py-3 flex justify-between items-center">
+                            <div className="flex space-x-2 font-medium	w-full">
+                              <div className="flex items-center space-x-1 flex-row">
+                                <Image
+                                  loading="lazy"
+                                  src={matches?.teama?.logo_url}
+                                  className="h-[30px] rounded-full"
+                                  width={30}
+                                  height={30}
+                                  alt={matches?.teama?.short_name}
+                                />
+                                <span className="text-[#757A82]">{matches?.teama?.short_name}</span>
+                              </div>
+                            </div>
+                            <div className=" font-semibold text-center w-full">
+                              <p className="text-[#414143] text-[14px]">{matches?.subtitle} on</p>
+                              <p className="text-[#757A82] text-[12px] font-normal">
+                                {matches?.date_start_ist}
+                              </p>
+                            </div>
+                            <div className="flex space-x-2 font-medium justify-end w-full">
+                              <div className="flex items-center gap-1 flex-row-reverse font-medium">
                                 <Image
                                   loading="lazy"
                                   src={matches?.teamb?.logo_url}
@@ -254,44 +294,8 @@ export default function Overview({
                                   height={30}
                                   alt={matches?.teamb?.short_name}
                                 />
-                                <span className="text-[#586577] font-medium text-[14px]">{matches?.teamb?.short_name}</span>
+                                <span className="text-[#757A82]">{matches?.teamb?.short_name}</span>
                               </div>
-                          </div>
-                        </Link>
-                      }{matches?.status === 1 &&
-                        <Link href={"/moreinfo/" + urlStringEncode(matches?.teama?.short_name + "-vs-" + matches?.teamb?.short_name + "-" + matches?.subtitle + "-" + matches?.competition?.title + "-" + matches?.competition?.season) + "/" + matches.match_id}>
-                          <div className="py-3 flex justify-between items-center">
-                            <div className="flex space-x-2 font-medium	w-full">
-                                <div className="flex items-center space-x-1 flex-row">
-                                  <Image
-                                    loading="lazy"
-                                    src={matches?.teama?.logo_url}
-                                    className="h-[30px] rounded-full"
-                                    width={30}
-                                    height={30}
-                                    alt={matches?.teama?.short_name}
-                                  />
-                                  <span className="text-[#586577] font-medium text-[14px]">{matches?.teama?.short_name}</span>
-                                </div>
-                            </div>
-                            <div className=" font-semibold text-center w-full">
-                              <p className="text-[#2F335C] text-[14px]">{matches?.subtitle} on</p>
-                              <p className="text-[#909090] text-[12px] font-normal">
-                                {matches?.date_start_ist}
-                              </p>
-                            </div>
-                            <div className="flex space-x-2 font-medium justify-end w-full">
-                                <div className="flex items-center gap-1 flex-row-reverse font-medium">
-                                  <Image
-                                    loading="lazy"
-                                    src={matches?.teamb?.logo_url}
-                                    className="h-[30px] rounded-full"
-                                    width={30}
-                                    height={30}
-                                    alt={matches?.teamb?.short_name}
-                                  />
-                                  <span className="text-[#586577] font-medium text-[14px]">{matches?.teamb?.short_name}</span>
-                                </div>
                             </div>
                           </div>
                         </Link>
@@ -314,34 +318,34 @@ export default function Overview({
                             <div className="flex justify-between items-center">
                               <div className="w-[50%]">
                                 <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full mb-3">
-                                    <div className="flex items-center space-x-1 flex-col">
-                                      <Image
-                                        loading="lazy"
-                                        src={matches?.teama?.logo_url}
-                                        className="h-[25px] w-[25px] rounded-full"
-                                        width={25}
-                                        height={25}
-                                        alt={matches?.teama?.short_name}
-                                      />
-                                      <span className="text-[#586577] font-medium">{matches?.teama?.short_name}</span>
-                                    </div>
+                                  <div className="flex items-center space-x-1 flex-col">
+                                    <Image
+                                      loading="lazy"
+                                      src={matches?.teama?.logo_url}
+                                      className="h-[25px] w-[25px] rounded-full"
+                                      width={25}
+                                      height={25}
+                                      alt={matches?.teama?.short_name}
+                                    />
+                                    <span className="text-[#586577] font-medium">{matches?.teama?.short_name}</span>
+                                  </div>
                                   <div className="flex items-center gap-2 mt-1">
                                     <p className="text-1xl font-semibold">{matches?.teama?.scores}</p>
                                     <p className="text-[#586577] font-medium text-[13px]">({matches?.teama?.overs})</p>
                                   </div>
                                 </div>
                                 <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full">
-                                    <div className="flex items-center space-x-1 flex-col">
-                                      <Image
-                                        loading="lazy"
-                                        src={matches?.teamb?.logo_url}
-                                        className="h-[25px] w-[25px] rounded-full"
-                                        width={25}
-                                        height={25}
-                                        alt={matches?.teamb?.short_name}
-                                      />
-                                      <span className="text-[#586577] font-medium">{matches?.teamb?.short_name}</span>
-                                    </div>
+                                  <div className="flex items-center space-x-1 flex-col">
+                                    <Image
+                                      loading="lazy"
+                                      src={matches?.teamb?.logo_url}
+                                      className="h-[25px] w-[25px] rounded-full"
+                                      width={25}
+                                      height={25}
+                                      alt={matches?.teamb?.short_name}
+                                    />
+                                    <span className="text-[#586577] font-medium">{matches?.teamb?.short_name}</span>
+                                  </div>
                                   <div className="flex items-center gap-2 mt-1">
                                     <p className="text-1xl font-semibold">{matches?.teamb?.scores}</p>
                                     <p className="text-[#586577] font-medium">({matches?.teamb?.overs})</p>
@@ -364,30 +368,30 @@ export default function Overview({
                             <div className="flex justify-between items-center">
                               <div className="w-[50%]">
                                 <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full mb-3">
-                                    <div className="flex items-center space-x-1 ">
-                                      <Image
-                                        loading="lazy"
-                                        src={matches?.teama?.logo_url}
-                                        className="h-[25px] w-[25px] rounded-full"
-                                        width={25}
-                                        height={25}
-                                        alt={matches?.teama?.short_name}
-                                      />
-                                      <span className="text-[#586577] font-medium text-[14px]">{matches?.teama?.short_name}</span>
-                                    </div>
+                                  <div className="flex items-center space-x-1 ">
+                                    <Image
+                                      loading="lazy"
+                                      src={matches?.teama?.logo_url}
+                                      className="h-[25px] w-[25px] rounded-full"
+                                      width={25}
+                                      height={25}
+                                      alt={matches?.teama?.short_name}
+                                    />
+                                    <span className="text-[#586577] font-medium text-[14px]">{matches?.teama?.short_name}</span>
+                                  </div>
                                 </div>
                                 <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full">
-                                    <div className="flex items-center space-x-1 ">
-                                      <Image
-                                        loading="lazy"
-                                        src={matches?.teamb?.logo_url}
-                                        className="h-[25px] w-[25px] rounded-full"
-                                        width={25}
-                                        height={25}
-                                        alt={matches?.teamb?.short_name}
-                                      />
-                                      <span className="text-[#586577] font-medium text-[14px]">{matches?.teamb?.short_name}</span>
-                                    </div>
+                                  <div className="flex items-center space-x-1 ">
+                                    <Image
+                                      loading="lazy"
+                                      src={matches?.teamb?.logo_url}
+                                      className="h-[25px] w-[25px] rounded-full"
+                                      width={25}
+                                      height={25}
+                                      alt={matches?.teamb?.short_name}
+                                    />
+                                    <span className="text-[#586577] font-medium text-[14px]">{matches?.teamb?.short_name}</span>
+                                  </div>
                                 </div>
                               </div>
                               <div className="h-[60px] border-l-[1px] border-[#d0d3d7]" />
@@ -455,7 +459,7 @@ export default function Overview({
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-gray-200">
-                            {rounds.standings?.slice(0,4).map(
+                            {rounds.standings?.slice(0, 4).map(
                               (point: any, index: number) => (
                                 <tr className="hover:bg-[#fffae5]" key={index}>
                                   <td className="md:px-2 pl-[14px] py-3 w-[10px]">
@@ -522,8 +526,8 @@ export default function Overview({
                                         ?.map((item: string, index: number) => (
                                           <span
                                             className={`${item === "W"
-                                                ? "bg-[#13B76D]"
-                                                : "bg-[#F63636]"
+                                              ? "bg-[#13B76D]"
+                                              : "bg-[#F63636]"
                                               } text-white text-[13px] px-[4px] py-[0px] rounded`}
                                             key={index}
                                           >
@@ -537,13 +541,13 @@ export default function Overview({
                                 </tr>
                               )
                             )}
-                            
+
                           </tbody>
                         </table>
                       </div>
                       {rounds?.standings?.length > 4 &&
-                      <div className="px-4 text-center">
-                          <Link href={urlString+"/points-table"} className="px-8 bg-[#081736] font-semibold text-white py-2 rounded hover:bg-blue-700">
+                        <div className="px-4 text-center">
+                          <Link href={urlString + "/points-table"} className="px-8 bg-[#081736] font-semibold text-white py-2 rounded hover:bg-blue-700">
                             View More
                           </Link>
                         </div>
@@ -592,38 +596,38 @@ export default function Overview({
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-gray-200">
-                            {seriesKeystats?.mostRuns?.stats?.slice(0,3)?.map((player:any, index:number) =>(
-                            
-                            <tr className={index === 0 ? "bg-[#FB7E02] text-white" : ""} key={index}>
-                              <td className="md:px-3 pl-[14px] py-3">
-                                <div className="flex items-center gap-[5px] md:w-[240px] w-[185px]">
-                                  <div>
-                                  <PlayerImage
-                                      key={player?.player?.pid}
+                            {seriesKeystats?.mostRuns?.stats?.slice(0, 3)?.map((player: any, index: number) => (
+
+                              <tr className={index === 0 ? "bg-[#FB7E02] text-white" : ""} key={index}>
+                                <td className="md:px-3 pl-[14px] py-3">
+                                  <div className="flex items-center gap-[5px] md:w-[240px] w-[185px]">
+                                    <div>
+                                      <PlayerImage
+                                        key={player?.player?.pid}
                                         player_id={player?.player?.pid}
                                         height={33}
                                         width={33}
                                         className="h-[33px] w-[33px] rounded-lg"
                                       />
-                                   
-                                  </div>
-                                  <Link href={"/player/"+urlStringEncode(player?.player?.title)+"/"+player?.player?.pid}>
-                                    <div>
-                                      <p className="font-medium">{player?.player?.short_name}</p>
-                                      <p className="text-[12px]">{player?.team?.abbr}</p>
+
                                     </div>
-                                  </Link>
-                                </div>
-                              </td>
-                              <td className="md:px-2 pl-[14px] py-3">{player?.matches}</td>
-                              <td className="md:px-2 pl-[14px] py-3">{player?.runs}</td>
-                              <td className="md:px-2 pl-[14px] py-3">{player?.highest}</td>
-                              {/* <td className="md:px-2 pl-[14px] py-3">{player?.average}</td> */}
-                              <td className="md:px-2 pl-[14px] py-3">{player?.strike}</td>
-                              <td className="md:px-2 pl-[14px] py-3">{player?.run6}</td>
-                            </tr>
+                                    <Link href={"/player/" + urlStringEncode(player?.player?.title) + "/" + player?.player?.pid}>
+                                      <div>
+                                        <p className="font-medium">{player?.player?.short_name}</p>
+                                        <p className="text-[12px]">{player?.team?.abbr}</p>
+                                      </div>
+                                    </Link>
+                                  </div>
+                                </td>
+                                <td className="md:px-2 pl-[14px] py-3">{player?.matches}</td>
+                                <td className="md:px-2 pl-[14px] py-3">{player?.runs}</td>
+                                <td className="md:px-2 pl-[14px] py-3">{player?.highest}</td>
+                                {/* <td className="md:px-2 pl-[14px] py-3">{player?.average}</td> */}
+                                <td className="md:px-2 pl-[14px] py-3">{player?.strike}</td>
+                                <td className="md:px-2 pl-[14px] py-3">{player?.run6}</td>
+                              </tr>
                             ))}
-                           
+
                           </tbody>
                         </table>
                       </div>
@@ -666,37 +670,37 @@ export default function Overview({
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-gray-200">
-                          {seriesKeystats?.topWickets?.stats?.slice(0,3)?.map((player:any, index:number) =>(
-                            <tr className={index === 0 ? "bg-[#9E26BC] text-white" : ""} key={index}>
-                              <td className="px-3 py-3">
-                                <div className="flex items-center gap-[5px] md:w-[240px] w-[185px]">
-                                  <div>
-                                  <PlayerImage
-                                      key={player?.player?.pid}
+                            {seriesKeystats?.topWickets?.stats?.slice(0, 3)?.map((player: any, index: number) => (
+                              <tr className={index === 0 ? "bg-[#9E26BC] text-white" : ""} key={index}>
+                                <td className="px-3 py-3">
+                                  <div className="flex items-center gap-[5px] md:w-[240px] w-[185px]">
+                                    <div>
+                                      <PlayerImage
+                                        key={player?.player?.pid}
                                         player_id={player?.player?.pid}
                                         height={33}
                                         width={33}
                                         className="h-[33px] w-[33px] rounded-lg"
                                       />
-                                  
-                                  </div>
-                                  <Link href={"/player/"+urlStringEncode(player?.player?.title)+"/"+player?.player?.pid}>
-                                    <div>
-                                    <p className="font-medium">{player?.player?.short_name}</p>
-                                    <p className="text-[12px]">{player?.team?.abbr}</p>
+
                                     </div>
-                                  </Link>
-                                </div>
-                              </td>
-                              <td className="md:px-2 pl-[14px] py-3">{player?.matches}</td>
-                              <td className="md:px-2 pl-[14px] py-3">{player?.overs}</td>
-                              <td className="md:px-2 pl-[14px] py-3">{player?.wickets}</td>
-                              {/* <td className="md:px-2 pl-[14px] py-3">{player?.average}</td> */}
-                              <td className="md:px-2 pl-[14px] py-3">{player?.econ}</td>
-                              <td className="md:px-2 pl-[14px] py-3">{player?.wicket5i}</td>
-                            </tr>
-                          ))}
-                           
+                                    <Link href={"/player/" + urlStringEncode(player?.player?.title) + "/" + player?.player?.pid}>
+                                      <div>
+                                        <p className="font-medium">{player?.player?.short_name}</p>
+                                        <p className="text-[12px]">{player?.team?.abbr}</p>
+                                      </div>
+                                    </Link>
+                                  </div>
+                                </td>
+                                <td className="md:px-2 pl-[14px] py-3">{player?.matches}</td>
+                                <td className="md:px-2 pl-[14px] py-3">{player?.overs}</td>
+                                <td className="md:px-2 pl-[14px] py-3">{player?.wickets}</td>
+                                {/* <td className="md:px-2 pl-[14px] py-3">{player?.average}</td> */}
+                                <td className="md:px-2 pl-[14px] py-3">{player?.econ}</td>
+                                <td className="md:px-2 pl-[14px] py-3">{player?.wicket5i}</td>
+                              </tr>
+                            ))}
+
                           </tbody>
                         </table>
                       </div>
@@ -710,7 +714,7 @@ export default function Overview({
                     Key Stats
                   </h3>
                 </div>
-                <Link href={urlString+"/stats/batting-most-run"}>
+                <Link href={urlString + "/stats/batting-most-run"}>
                   <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
                     View More{" "}
                     <svg
@@ -745,24 +749,24 @@ export default function Overview({
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                          <p className="mb-2 font-medium text-[#3e3e3e]">Most Runs</p>
+                          <p className="mb-2 font-medium">Most Runs</p>
 
                           <PlayerImage
-                           key={seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid}
+                            key={seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid}
                             player_id={seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid}
                             height={45}
                             width={45}
                             className="rounded-full h-[45px]"
                           />
 
-                          <h3 className="mt-2 text-[14px] font-semibold text-gray-800">
+                          <h3 className="mt-2 text-[14px] font-semibold">
                             {seriesKeystats?.mostRuns?.stats?.[0]?.player?.short_name}
                           </h3>
-                          <p className="text-[#586577]">
+                          <p className="text-[#757A82]">
                             {seriesKeystats?.mostRuns?.stats?.[0]?.team?.abbr}
                           </p>
                           <div className="flex items-center gap-2 mt-2">
-                            <p className="text-[16px] font-semibold">
+                            <p className="text-[18px] font-semibold">
                               {seriesKeystats?.mostRuns?.stats?.[0]?.runs}
                             </p>
                             <p className="text-gray-600 text-sm">Runs</p>
@@ -784,22 +788,22 @@ export default function Overview({
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                          <p className="mb-2 font-medium text-[#3e3e3e]">Highest Strike</p>
+                          <p className="mb-2 font-medium">Highest Strike</p>
                           <PlayerImage
-                          key={seriesKeystats?.highStrike?.stats?.[0]?.player?.pid}
+                            key={seriesKeystats?.highStrike?.stats?.[0]?.player?.pid}
                             player_id={seriesKeystats?.highStrike?.stats?.[0]?.player?.pid}
                             height={45}
                             width={45}
                             className="rounded-full h-[45px]"
                           />
-                          <h3 className="mt-2 text-[14px] font-semibold text-gray-800">
+                          <h3 className="mt-2 text-[14px] font-semibold">
                             {seriesKeystats?.highStrike?.stats?.[0]?.player?.short_name}
                           </h3>
-                          <p className="text-[#586577]">
+                          <p className="text-[#757A82]">
                             {seriesKeystats?.highStrike?.stats?.[0]?.team?.abbr}
                           </p>
-                          <div className="flex items-center gap-2 mt-2">
-                            <p className="text-[16px] font-semibold">
+                          <div className="flex items-center mt-2">
+                            <p className="text-[18px] font-semibold">
                               {seriesKeystats?.highStrike?.stats?.[0]?.strike}
                             </p>
                             <p className="text-gray-600 text-sm"></p>
@@ -821,22 +825,22 @@ export default function Overview({
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                          <p className="mb-2 font-medium text-[#3e3e3e]">Most Wickets</p>
+                          <p className="mb-2 font-medium">Most Wickets</p>
                           <PlayerImage
-                          key={seriesKeystats?.topWickets?.stats?.[0]?.player?.pid}
+                            key={seriesKeystats?.topWickets?.stats?.[0]?.player?.pid}
                             player_id={seriesKeystats?.topWickets?.stats?.[0]?.player?.pid}
                             height={45}
                             width={45}
                             className="rounded-full h-[45px]"
                           />
-                          <h3 className="mt-2 text-[14px] font-semibold text-gray-800">
+                          <h3 className="mt-2 text-[14px] font-semibold">
                             {seriesKeystats?.topWickets?.stats?.[0]?.player?.short_name}
                           </h3>
-                          <p className="text-[#586577]">
+                          <p className="text-[#757A82]">
                             {seriesKeystats?.topWickets?.stats?.[0]?.team?.abbr}
                           </p>
                           <div className="flex items-center gap-2 mt-2">
-                            <p className="text-[16px] font-semibold">
+                            <p className="text-[18px] font-semibold">
                               {seriesKeystats?.topWickets?.stats?.[0]?.wickets}
                             </p>
                             <p className="text-gray-600 text-sm">Wickets</p>
@@ -858,22 +862,22 @@ export default function Overview({
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                          <p className="mb-2 font-medium text-[#3e3e3e]">Best Figures</p>
+                          <p className="mb-2 font-medium">Best Figures</p>
                           <PlayerImage
-                          key={seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid}
+                            key={seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid}
                             player_id={seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid}
                             height={45}
                             width={45}
                             className="rounded-full h-[45px]"
                           />
-                          <h3 className="mt-2 text-[14px] font-semibold text-gray-800">
+                          <h3 className="mt-2 text-[14px] font-semibold">
                             {seriesKeystats?.bestBowling?.stats?.[0]?.player?.short_name}
                           </h3>
-                          <p className="text-[#586577]">
+                          <p className="text-[#757A82]">
                             {seriesKeystats?.bestBowling?.stats?.[0]?.team?.abbr}
-                          </p>  
-                          <div className="flex items-center gap-2 mt-2">
-                            <p className="text-[16px] font-semibold">
+                          </p>
+                          <div className="flex items-center mt-2">
+                            <p className="text-[18px] font-semibold">
                               {seriesKeystats?.bestBowling?.stats?.[0]?.bestmatch}
                             </p>
                           </div>
@@ -883,7 +887,7 @@ export default function Overview({
                   )}
                 </div>
               </div>
-            
+
               <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
                 <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                   Team Name
@@ -919,26 +923,26 @@ export default function Overview({
                   ))}
                 </div>
               </div>
-             
+
               <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
-              <ReadMoreCard
-                                        title={seriesInfo?.title+" "+seriesInfo?.season+" – Overview"}
-                                        content = {
-                                          "The " + (seriesInfo?.title ? seriesInfo.title : "") + " " + 
-                                          (seriesInfo?.season ? seriesInfo.season : "") + 
-                                          " is one of the biggest cricket events of the year. It started on " + 
-                                          (seriesInfo?.datestart ? format(new Date(seriesInfo.datestart), 'dd MMM yyyy') : "[start date not available]") + 
-                                          " and will end on " + 
-                                          (seriesInfo?.dateend ? format(new Date(seriesInfo.dateend), 'dd MMM yyyy') : "[end date not available]") + 
-                                          ". The matches are being played in the "+[...new Set(seriesInfo?.venue_list.map((venue: { country: any; }) => venue.country))]+".<br/>This tournament has "+seriesInfo?.total_teams+" teams playing "+seriesInfo?.total_matches+" exciting "+seriesInfo?.game_format.toUpperCase()+" matches. Fans all over the world are enjoying the close matches, amazing sixes, and great bowling spells.\n\n"
-                                          +"<br/><strong>Featured Teams</strong><br/>"+
-                                          " Top cricketing "+(["ODI", "TEST", "T20I"].includes(seriesInfo?.game_format?.toUpperCase()) ? 'nations' : 'domestic') + " like "+[...new Set(seriesInfo?.teams.map((teams: { abbr: any; }) => teams.abbr))]+" and more are part of this global contest."+
-                                           "<br/><strong>Host Nations/City</strong><br/>"+
-                                           seriesInfo?.title+" is being played in: "+
-                                           [...new Set(seriesInfo?.venue_list.map((venue: { country: any; }) => venue.country))]
-                                        }
-                                        wordLimit={35} 
-                                    />
+                <ReadMoreCard
+                  title={seriesInfo?.title + " " + seriesInfo?.season + " – Overview"}
+                  content={
+                    "The " + (seriesInfo?.title ? seriesInfo.title : "") + " " +
+                    (seriesInfo?.season ? seriesInfo.season : "") +
+                    " is one of the biggest cricket events of the year. It started on " +
+                    (seriesInfo?.datestart ? format(new Date(seriesInfo.datestart), 'dd MMM yyyy') : "[start date not available]") +
+                    " and will end on " +
+                    (seriesInfo?.dateend ? format(new Date(seriesInfo.dateend), 'dd MMM yyyy') : "[end date not available]") +
+                    ". The matches are being played in the " + [...new Set(seriesInfo?.venue_list.map((venue: { country: any; }) => venue.country))] + ".<br/>This tournament has " + seriesInfo?.total_teams + " teams playing " + seriesInfo?.total_matches + " exciting " + seriesInfo?.game_format.toUpperCase() + " matches. Fans all over the world are enjoying the close matches, amazing sixes, and great bowling spells.\n\n"
+                    + "<br/><strong>Featured Teams</strong><br/>" +
+                    " Top cricketing " + (["ODI", "TEST", "T20I"].includes(seriesInfo?.game_format?.toUpperCase()) ? 'nations' : 'domestic') + " like " + [...new Set(seriesInfo?.teams.map((teams: { abbr: any; }) => teams.abbr))] + " and more are part of this global contest." +
+                    "<br/><strong>Host Nations/City</strong><br/>" +
+                    seriesInfo?.title + " is being played in: " +
+                    [...new Set(seriesInfo?.venue_list.map((venue: { country: any; }) => venue.country))]
+                  }
+                  wordLimit={35}
+                />
                 {pageHtml && typeof pageHtml === "string" ? (
                   <div dangerouslySetInnerHTML={{ __html: pageHtml }} />
                 ) : ("")}
@@ -948,13 +952,12 @@ export default function Overview({
                   News
                 </h3>
                 <div className="border-t-[1px] border-[#E4E9F0]" />
-
                 <NewsSection urlString={""}></NewsSection>
               </div>
             </div>
             <div className="lg:col-span-4 md:col-span-5">
 
-              <WeeklySlider/>
+              <WeeklySlider />
 
               {seriesInfo?.title === "Indian Premier League" && (
                 <>
@@ -966,73 +969,73 @@ export default function Overview({
                     </div>
                     <div className="bg-white rounded-lg px-4">
                       <div className="border-b mb-4">
-                        <Link href={urlString+"/stats/batting-most-run"}
+                        <Link href={urlString + "/stats/batting-most-run"}
                           className="w-full flex text-[14px] justify-between items-center pb-3 pt-4" >
                           <span className="flex items-center font-medium text-[#394351]">
                             Most Runs in IPL
                           </span>
-                          
+
                         </Link>
-                        
+
                       </div>
 
                       <div className="border-b mb-4">
-                        <Link href={urlString+"/stats/batting-most-hundreds"}
+                        <Link href={urlString + "/stats/batting-most-hundreds"}
                           className="w-full flex text-[14px] justify-between items-center pb-3" >
                           <span className="flex items-center font-medium text-[#394351]">
                             Most Hundreds in IPL
                           </span>
-                         
+
                         </Link>
-                       
+
                       </div>
 
                       <div className="border-b mb-4">
-                        <Link href={urlString+"/stats/batting-most-fifties"}
+                        <Link href={urlString + "/stats/batting-most-fifties"}
                           className="w-full flex text-[14px] justify-between items-center pb-3" >
                           <span className="flex items-center font-medium text-[#394351]">
                             Most Fifties in IPL
                           </span>
-                         
+
                         </Link>
-                       
+
                       </div>
 
 
                       <div className="border-b mb-4">
-                        <Link href={urlString+"/stats/batting-highest-average"}
+                        <Link href={urlString + "/stats/batting-highest-average"}
                           className="w-full flex text-[14px] justify-between items-center pb-3" >
                           <span className="flex items-center font-medium text-[#394351]">
                             Highest Batting Average in IPL
                           </span>
-                         
+
                         </Link>
-                        
+
                       </div>
-                      
+
                       <div className="border-b mb-4">
-                        <Link href={urlString+"/stats/bowling-most-wicket"}
+                        <Link href={urlString + "/stats/bowling-most-wicket"}
                           className="w-full flex text-[14px] justify-between items-center pb-3" >
                           <span className="flex items-center font-medium text-[#394351]">
                             Most Wickets in IPL
                           </span>
-                          
+
                         </Link>
-                        
+
                       </div>
 
                       <div className="border-b mb-4">
-                        <Link href={urlString+"/stats/bowling-best-average"}
+                        <Link href={urlString + "/stats/bowling-best-average"}
                           className="w-full flex text-[14px] justify-between items-center pb-3">
                           <span className="flex items-center font-medium text-[#394351]">
                             Highest Bowling Average in IPL
                           </span>
-                         
+
                         </Link>
-                        
+
                       </div>
 
-                  
+
                     </div>
                   </div>
                   <PLSeries />

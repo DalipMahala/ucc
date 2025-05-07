@@ -31,42 +31,42 @@ export default function TabMenu({ urlString, isPointTable }: { urlString: string
     <div id="tabs" className="mt-4 mb-4">
       <div 
         ref={tabsRef}
-        className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-x-auto scrollbar-hide"
+        className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-x-auto scrollbar-hide"
       >
         <Link href={urlString}>
-          <button className={`font-semibold py-2 px-3 whitespace-nowrap rounded-md uppercase ${activeTab === 'overview' ? 'bg-[#1A80F8] text-white active-tab' : ''}`}>
+          <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md  ${activeTab === 'overview' ? 'bg-[#1A80F8] text-white active-tab' : ''}`}>
             Overview
           </button>
         </Link>
         
         <Link href={`${urlString}/schedule-results`}>
-          <button className={`font-semibold py-2 px-3 whitespace-nowrap rounded-md uppercase ${activeTab === 'schedule' ? 'bg-[#1A80F8] text-white active-tab' : ''}`}>
+          <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md  ${activeTab === 'schedule' ? 'bg-[#1A80F8] text-white active-tab' : ''}`}>
             Schedule & Results
           </button>
         </Link>
         
         <Link href={`${urlString}/squads`}>
-          <button className={`font-semibold py-2 px-3 whitespace-nowrap rounded-md uppercase ${activeTab === 'squads' ? 'bg-[#1A80F8] text-white active-tab' : ''}`}>
+          <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md  ${activeTab === 'squads' ? 'bg-[#1A80F8] text-white active-tab' : ''}`}>
             Squads
           </button>
         </Link>
         
         {isPointTable && (
           <Link href={`${urlString}/points-table`}>
-            <button className={`font-semibold py-2 px-3 whitespace-nowrap rounded-md uppercase ${activeTab === 'points' ? 'bg-[#1A80F8] text-white active-tab' : ''}`}>
+            <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md  ${activeTab === 'points' ? 'bg-[#1A80F8] text-white active-tab' : ''}`}>
               Points Table
             </button>
           </Link>
         )}
         
         <Link href={`${urlString}/news`}>
-          <button className={`font-semibold py-2 px-3 whitespace-nowrap rounded-md uppercase ${activeTab === 'news' ? 'bg-[#1A80F8] text-white active-tab' : ''}`}>
+          <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md  ${activeTab === 'news' ? 'bg-[#1A80F8] text-white active-tab' : ''}`}>
             News
           </button>
         </Link>
         
         <Link href={`${urlString}/stats/batting-most-run`}>
-          <button className={`font-semibold py-2 px-3 whitespace-nowrap rounded-md uppercase ${activeTab === 'stats' ? 'bg-[#1A80F8] text-white active-tab' : ''}`}>
+          <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md  ${activeTab === 'stats' ? 'bg-[#1A80F8] text-white active-tab' : ''}`}>
             Stats
           </button>
         </Link>

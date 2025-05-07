@@ -212,7 +212,7 @@ export default function ScheduleResults({
                               {items.status_str}
                             </div>
                             <div>
-                              <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                              <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                                 {items.competition.title} -{" "}
                                 {items.competition.season}
                               </h4>
@@ -289,8 +289,8 @@ export default function ScheduleResults({
                             }
                           >
                             <div className="flex justify-between items-center text-[14px]">
-                              <div className="">
-                                <p className="text-[#586577] text-[13px] mb-4 font-medium">
+                              <div className="w-[55%]">
+                                <p className="text-[#586577] text-[12px] mb-4 font-medium">
                                   {items.subtitle} ,{items.format_str}, {items.venue.location}
                                 </p>
                                 <div className="flex items-center space-x-2 font-medium md:w-full mb-4">
@@ -302,7 +302,7 @@ export default function ScheduleResults({
                                       height={30}
                                       alt={items.teama.short_name}
                                     />
-                                    <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
+                                    <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
                                       {items.teama.short_name} -{" "}
                                     </span>
                                   </div>
@@ -317,21 +317,21 @@ export default function ScheduleResults({
                                     {items.teama.scores === undefined ||
                                       items.teama.scores === null ||
                                       items.teama.scores === "" ? (
-                                      <span className="font-semibold">
+                                      <span className="text-[14px] font-semibold">
                                         {" "}
                                         (Yet to bat){" "}
                                       </span>
                                     ) : (
                                       <>
-                                        <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
+                                        <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : " font-semibold text-[14px]"}`}>
                                           {items.teama.scores}
                                         </span>
-                                        <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[12px] text-[black]" : "text-[12px] text-[#586577]"}`}>
+                                        <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
                                           {" "}
                                           ({items.teama.overs}){" "}
                                         </span>
                                         {(items.teama.team_id === items?.live?.live_inning?.batting_team_id) &&
-                                          <Image loading="lazy" src="/assets/img/home/bat.png" width={14} height={14} className="h-[12px] mb-[3px]" alt="bat" />
+                                          <Image loading="lazy" src="/assets/img/home/bat.png" width={12} height={12} className="h-[12px] mb-[3px]" alt="bat" />
                                         }
                                       </>
                                     )}
@@ -348,7 +348,7 @@ export default function ScheduleResults({
                                         height={30}
                                         alt={items.teamb.short_name}
                                       />
-                                      <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
+                                      <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
                                         {items.teamb.short_name} -
                                       </span>
                                     </div>
@@ -363,21 +363,21 @@ export default function ScheduleResults({
                                       {items.teamb.scores === undefined ||
                                         items.teamb.scores === null ||
                                         items.teamb.scores === "" ? (
-                                        <span className="font-medium text-[14px] text-[#586577]">
+                                        <span className="text-[14px] font-semibold">
                                           {" "}
                                           (Yet to bat){" "}
                                         </span>
                                       ) : (
                                         <>
-                                          <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
+                                          <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[14px]"}`}>
                                             {items.teamb.scores}
                                           </span>
-                                          <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[12px] text-[black]" : "text-[12px] text-[#586577]"}`}>
+                                          <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ?" text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
                                             {" "}
                                             ({items.teamb.overs}){" "}
                                           </span>
                                           {(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) &&
-                                            <Image loading="lazy" src="/assets/img/home/bat.png" width={14} height={14} className="h-[12px] mb-[3px]" alt="bat" />
+                                            <Image loading="lazy" src="/assets/img/home/bat.png" width={12} height={12} className="h-[12px] mb-[3px]" alt="bat" />
                                           }
                                         </>
                                       )}
@@ -386,7 +386,7 @@ export default function ScheduleResults({
                                 </div>
                               </div>
 
-                              <div className="w-[38%] font-semibold text-center">
+                              <div className="w-[38%] font-medium text-center">
                                 <p
                                   className={
                                     "text-[#2F335C] text-[14px] statusNote" +
@@ -414,7 +414,7 @@ export default function ScheduleResults({
                                   href=
                                   {urlString + "/points-table"}
                                 >
-                                  <p className=" text-[#909090] font-semibold">
+                                  <p className=" text-[#757A82] font-medium">
                                     {" "}
                                     Points Table
                                   </p>
@@ -431,7 +431,7 @@ export default function ScheduleResults({
                           {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
                             <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title : items?.title) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
 
-                              <div className="flex mt-2 justify-end items-center space-x-2">
+                              <div className="flex justify-end items-center space-x-2">
                                 <Image loading="lazy"
                                   src="/assets/img/home/handshake.png"
                                   width={25}
@@ -439,7 +439,7 @@ export default function ScheduleResults({
                                   alt=""
                                   style={{ width: "25px", height: "25px" }}
                                 />
-                                <span className="text-[#586577] text-[13px] font-semibold">
+                                <span className="text-[#757A82] font-medium">
                                   H2H
                                 </span>
                               </div>
@@ -725,14 +725,14 @@ export default function ScheduleResults({
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center space-x-2">
                             <div
-                              className="flex items-center text-[12px] text-[#00a632] rounded-full pr-3 uppercase  font-semibold"
+                              className="flex items-center text-[13px] text-[#0B773C] rounded-full pr-3 uppercase  font-semibold"
                               style={{ gap: "3px" }}
                             >
-                              <span className="rounded-full">●</span>{" "}
+                             <div className="w-[8px] h-[8px] bg-[#0B773C] rounded-full"></div>{" "}
                               {cmatch.status_str}
                             </div>
                             <div>
-                              <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                              <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                                 {cmatch.competition.title} -{" "}
                                 {cmatch.competition.season}
                               </h4>
@@ -764,7 +764,7 @@ export default function ScheduleResults({
                               }
                             >
                               <div className="">
-                                <p className="text-[#586577] text-[13px] mb-4 font-medium">
+                                <p className="text-[#586577] text-[12px] mb-4 font-medium">
                                   {cmatch.subtitle} ,{cmatch.format_str}, {cmatch.venue.location}
                                 </p>
                                 <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
@@ -776,15 +776,15 @@ export default function ScheduleResults({
                                       height={30}
                                       alt={cmatch.teama.short_name}
                                     />
-                                    <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
+                                    <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
                                       {cmatch.teama.short_name} -{" "}
                                     </span>
                                   </div>
                                   <p>
-                                    <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
+                                    <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : " font-semibold text-[14px]"}`}>
                                       {cmatch.teama.scores}  {" "}
                                     </span>
-                                    <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[12px] text-[black]" : "font-medium text-[#586577]"}`}>
+                                    <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
                                       {" "}
                                       ({cmatch.teama.overs})
                                     </span>
@@ -801,15 +801,15 @@ export default function ScheduleResults({
                                         height={30}
                                         alt={cmatch.teamb.short_name}
                                       />
-                                      <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#586577] font-medium text-[14px]"}`}>
+                                      <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
                                         {cmatch.teamb.short_name} -{" "}
                                       </span>
                                     </div>
                                     <p>
-                                      <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#586577]"}`}>
+                                      <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[14px] font-semibold "}`}>
                                         {cmatch.teamb.scores}{" "}
                                       </span>
-                                      <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[12px] text-[black]" : "font-medium text-[#586577]"}`}>
+                                      <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
                                         ({cmatch.teamb.overs})
                                       </span>
                                     </p>
@@ -843,7 +843,7 @@ export default function ScheduleResults({
                                   style={{ width: "30px", height: "30px" }}
                                   alt=""
                                 />
-                                <p className="text-[#00a632] text-[14px] w-[75%] text-center">
+                                <p className="text-[#0B773C] text-[15px] w-[75%] text-center">
                                   {cmatch.result}
                                 </p>
                               </div>
@@ -858,8 +858,8 @@ export default function ScheduleResults({
                                 height={40}
                                 alt=""
                               />
-                              <p className="font-semibold">{cmatch?.man_of_the_match?.name}</p>
-                              <p>Man of the match</p>
+                              <p className="text-[14px] font-semibold">{cmatch?.man_of_the_match?.name}</p>
+                              <p className="text-[14px]">Man of the match</p>
                             </div>
                           </div>
                         </div>
@@ -873,7 +873,7 @@ export default function ScheduleResults({
                                   href=
                                   {urlString + "/points-table"}
                                 >
-                                  <p className=" text-[#909090] font-semibold">
+                                  <p className=" text-[#757A82] font-medium">
                                     {" "}
                                     Points Table
                                   </p>
@@ -898,7 +898,7 @@ export default function ScheduleResults({
                                   style={{ width: "25px", height: "25px" }}
                                   alt=""
                                 />
-                                <span className="text-[#909090] font-semibold">
+                                <span className="text-[#757A82] font-medium">
                                   H2H
                                 </span>
                               </div>
@@ -1100,21 +1100,21 @@ export default function ScheduleResults({
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center space-x-2">
                             <div
-                              className="flex items-center text-[12px] text-[#A45B09] rounded-full pr-3 uppercase font-semibold"
+                              className="flex items-center text-[13px] text-[#A45B09] rounded-full pr-3 uppercase font-semibold"
                               style={{ gap: "3px" }}
                             >
                               <div className="w-[8px] h-[8px] bg-[#A45B09] rounded-full animate-blink"></div>{" "}
                               {ucmatch.status_str}
                             </div>
                             <div>
-                              <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                              <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                                 {ucmatch.competition.title} -{" "}
                                 {ucmatch.competition.season}
                               </h4>
                             </div>
                           </div>
                           <div className="hidden items-center space-x-2">
-                            <span className="text-[11px] text-[#1F2937] font-semibold oddsTeam">AUS</span>
+                            <span className="text-[13px] font-medium text-[#1F2937] oddsTeam">AUS</span>
                             <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
                               <span className="">
                                 <svg
@@ -1178,7 +1178,7 @@ export default function ScheduleResults({
                           <div className="py-3 px-3">
                             <div className="flex justify-between items-center text-[14px]">
                               <div className="w-[50%]">
-                                <p className="text-[#586577] text-[13px] mb-4 font-medium">
+                                <p className="text-[#586577] text-[12px] mb-4 font-medium">
                                   {ucmatch.subtitle} ,{ucmatch.format_str}, {ucmatch.venue.location}
                                 </p>
                                 <div className="flex items-center space-x-2 font-medium x md:w-full mb-4">
@@ -1190,7 +1190,7 @@ export default function ScheduleResults({
                                       height={30}
                                       alt={ucmatch.teama.short_name}
                                     />
-                                    <span className="text-[#586577] font-medium text-[14px]">
+                                    <span className="font-semibold text-[14px]">
                                       {ucmatch?.teama?.name}
                                     </span>
                                   </div>
@@ -1206,7 +1206,7 @@ export default function ScheduleResults({
                                         height={30}
                                         alt={ucmatch.teamb.short_name}
                                       />
-                                      <span className="text-[#586577] font-medium text-[14px]">
+                                      <span className="font-semibold text-[14px]">
                                         {ucmatch?.teamb?.name}
                                       </span>
                                     </div>
@@ -1214,9 +1214,9 @@ export default function ScheduleResults({
                                 </div>
                               </div>
 
-                              <div className="h-[100px] border-l-[1px] border-[#efefef]"></div>
+                              {/* <div className="h-[100px] border-l-[1px] border-[#efefef]"></div> */}
 
-                              <div className="w-[50%] font-semibold text-center">
+                              <div className="w-[50%] font-semibold text-center flex justify-end">
                                 <div className="text-[#144280]">
                                   <div className=" font-medium text-center">
                                     {isSameDay(
@@ -1259,7 +1259,7 @@ export default function ScheduleResults({
                                 <Link
                                   href={urlString + "/points-table"}
                                 >
-                                  <p className=" text-[#909090] font-semibold">
+                                  <p className=" text-[#757A82] font-medium">
                                     {" "}
                                     Points Table
                                   </p>
@@ -1284,7 +1284,7 @@ export default function ScheduleResults({
                                   alt=""
                                   style={{ width: "25px", height: "25px" }}
                                 />
-                                <span className="text-[#909090] font-semibold">
+                                <span className="text-[#757A82] font-medium">
                                   H2H
                                 </span>
                               </div>

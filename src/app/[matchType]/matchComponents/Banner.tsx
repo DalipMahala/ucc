@@ -21,15 +21,15 @@ interface BallEventData {
 
 const TeamShortName = ({ teamData, teamId }: { teamData: any, teamId: number }) => {
   // Find the team with matching ID
-  const team = teamData.teama.team_id === teamId 
+  const team = teamData.teama.team_id === teamId
     ? teamData.teama
-    : teamData.teamb.team_id === teamId 
-      ? teamData.teamb 
+    : teamData.teamb.team_id === teamId
+      ? teamData.teamb
       : null;
 
   if (!team) {
     return <span>Team not found</span>;
-  }else{
+  } else {
     return team.short_name;
   }
 }
@@ -124,7 +124,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
                 </svg>
-                
+
                 {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "dd MMM yyyy") : ""}
               </div>
             </div>
@@ -138,8 +138,6 @@ export default function Banner({ matchData, match_id }: Banner) {
                 </Link>
 
                 {seriesName}, {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "dd MMM yyyy") : ""}
-
-
 
               </div>
             </div>
@@ -168,18 +166,18 @@ export default function Banner({ matchData, match_id }: Banner) {
                   ) : ("")}
                   <div className="flex md:flex-col md:items-start items-center md:gap-0 gap-2">
                     <p
-                      className={`${(liveMatch?.match_info?.teama?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] font-semibold md:text-[17px]" : "text-[#BDCCECA8] md:text-[17px]  text-[14px] font-medium uppercase"}`}>
+                      className={`${(liveMatch?.match_info?.teama?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] md:text-[17px] lg:text-[19px] text-[14px] font-semibold uppercase" : "text-[#BDCCECA8] md:text-[17px] lg:text-[19px] text-[14px] font-semibold uppercase"}`}>
                       {liveMatch?.match_info?.teama?.short_name}
                     </p>
                     <p
-                      className={`${(liveMatch?.match_info?.teama?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] font-semibold md:text-[20px]" : "text-[#BDCCECA8] md:text-[20px] text-[16px] font-semibold uppercase"}
+                      className={`${(liveMatch?.match_info?.teama?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] md:text-[17px]  capitalize lg:text-[18px] text-[16px] font-semibold" : "text-[#BDCCECA8] md:text-[17px]  capitalize lg:text-[18px] text-[16px] font-semibold"}
                       "matchinfo"${match_id}"-"${liveMatch?.match_info?.teama?.team_id}
                       `}
                     >
                       {inning1teamarun ? (
                         <>
                           {inning1teamarun}{" "}
-                          <span className={`${(liveMatch?.match_info?.teama?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] font-semibold md:text-[16px]" : "text-[#BDCCECA8]  text-[16px] font-medium uppercase"}`}>
+                          <span className={`${(liveMatch?.match_info?.teama?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff]  text-[13px] font-medium" : "text-[#BDCCECA8]  text-[13px] font-medium"}`}>
                             ({inning1teamaOver})
                           </span>
                         </>
@@ -207,7 +205,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
                 <div className="text-[#8192B4] font-normal w-[30%] text-center md:my-0 my-4 flex gap-2 items-center justify-center">
                   <p className="text-[#00a632] lg:text-[22px] text-[16px] font-semibold uppercase">
-                    {updateStatusNoteDirect(liveMatch?.match_info)} 
+                    {updateStatusNoteDirect(liveMatch?.match_info)}
                     <Image
                       src="/assets/img/home/win.png"
                       width={28}
@@ -223,18 +221,18 @@ export default function Banner({ matchData, match_id }: Banner) {
 
                 <div className="flex gap-3 flex-row-reverse md:flex-row  items-center text-[#8192B4] font-normal w-[35%] justify-end">
                   <div className="flex md:flex-col md:items-end items-center md:gap-0 gap-2">
-                    <p className={`${(liveMatch?.match_info?.teamb?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] font-semibold md:text-[17px]" : "text-[#BDCCECA8] md:text-[17px]  text-[14px] font-medium uppercase"}`}>
+                    <p className={`${(liveMatch?.match_info?.teamb?.team_id === liveMatch?.match_info?.winning_team_id) ?  " text-[#ffffff] md:text-[17px] lg:text-[19px] text-[14px] font-semibold uppercase" : "text-[#BDCCECA8] md:text-[17px] lg:text-[19px] text-[14px] font-semibold uppercase"}`}>
                       {liveMatch?.match_info?.teamb?.short_name}
                     </p>
                     <p
-                      className={`${(liveMatch?.match_info?.teamb?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] font-semibold md:text-[20px]" : "text-[#BDCCECA8] md:text-[20px] text-[16px] font-semibold uppercase"}
+                      className={`${(liveMatch?.match_info?.teamb?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] md:text-[17px]  capitalize lg:text-[18px] text-[16px] font-semibold" : "text-[#BDCCECA8] md:text-[17px]  capitalize lg:text-[18px] text-[16px] font-semibold"}
                       "matchinfo"${match_id}"-"${liveMatch?.match_info?.teamb?.team_id}
                       `}
                     >
                       {inning1teambrun ? (
                         <>
                           {inning1teambrun}{" "}
-                          <span className={`${(liveMatch?.match_info?.teamb?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] font-semibold md:text-[16px]" : "text-[#BDCCECA8]  text-[16px] font-medium uppercase"}`}>
+                          <span className={`${(liveMatch?.match_info?.teamb?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff]  text-[13px] font-medium" : "text-[#BDCCECA8]  text-[13px] font-medium"}`}>
                             ({inning1teambOver})
                           </span>
                         </>
@@ -451,7 +449,7 @@ export default function Banner({ matchData, match_id }: Banner) {
           <div className="border-t-[1px] border-[#E4E9F01A]">
             <div className="lg:w-[1000px] mx-auto tracking-[1px]">
 
-{/* desktop */}
+              {/* desktop */}
 
               <div className="hidden md:block">
                 <div className="flex h-[168px] justify-between items-center">
@@ -476,7 +474,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                       </p>
 
                       <p
-                        className={`${(liveMatch?.match_info.teama.team_id === liveMatch?.live?.live_inning?.batting_team_id) ? "text-[#ffffff] md:text-[17px]  uppercase lg:text-[18px] text-[16px] font-semibold" : "text-[#BDCCECA8] md:text-[17px]  uppercase lg:text-[18px] text-[16px] font-semibold"}
+                        className={`${(liveMatch?.match_info.teama.team_id === liveMatch?.live?.live_inning?.batting_team_id) ? "text-[#ffffff] md:text-[17px]  capitalize lg:text-[18px] text-[16px] font-semibold" : "text-[#BDCCECA8] md:text-[17px]  capitalize lg:text-[18px] text-[16px] font-semibold"}
                      "matchinfo"${match_id}"-"${liveMatch?.match_info?.teama?.team_id}
                      `}
 
@@ -491,7 +489,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                           <>
                             {inning1teamarun}{" "}
                             {/* <span className="text-[16px] font-medium"> */}
-                            <span className={`${(liveMatch?.match_info.teama.team_id === liveMatch?.live?.live_inning?.batting_team_id) ? " text-[#ffffff]  text-[13px] font-medium uppercase" : "text-[#BDCCECA8]  text-[13px] font-medium uppercase"}`}>
+                            <span className={`${(liveMatch?.match_info.teama.team_id === liveMatch?.live?.live_inning?.batting_team_id) ? " text-[#ffffff]  text-[13px] font-medium " : "text-[#BDCCECA8]  text-[13px] font-medium "}`}>
                               ({inning1teamaOver})
                             </span>
                           </>
@@ -548,7 +546,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
                   <div className="flex gap-2 flex-row-reverse md:flex-row  items-center text-[#8192B4] font-normal w-full justify-end">
                     <div className="flex md:flex-col md:items-end items-center md:gap-0 gap-2">
-                      <p className={`${(liveMatch?.match_info.teamb.team_id === liveMatch?.live?.live_inning?.batting_team_id) ? "text-[#ffffff] md:text-[17px]  uppercase lg:text-[18px] text-[16px] font-semibold" : "text-[#BDCCECA8] md:text-[17px]  uppercase lg:text-[18px] text-[16px] font-semibold"}`}>
+                      <p className={`${(liveMatch?.match_info.teamb.team_id === liveMatch?.live?.live_inning?.batting_team_id) ? "text-[#ffffff] md:text-[17px]  uppercase lg:text-[19px] text-[16px] font-semibold" : "text-[#BDCCECA8] md:text-[17px]  uppercase lg:text-[19px] text-[16px] font-semibold"}`}>
                         {liveMatch?.match_info?.teamb?.short_name}
                       </p>
                       <p
@@ -567,7 +565,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                           <>
                             {inning1teambrun}{" "}
                             {/* <span className="text-[16px] font-medium"> */}
-                            <span className={`${(liveMatch?.match_info.teamb.team_id === liveMatch?.live?.live_inning?.batting_team_id) ?" text-[#ffffff] font-semibold md:text-[16px]" : "text-[#BDCCECA8]  text-[16px] font-medium uppercase"}`}>
+                            <span className={`${(liveMatch?.match_info.teamb.team_id === liveMatch?.live?.live_inning?.batting_team_id) ? " text-[#ffffff] font-semibold md:text-[16px]" : "text-[#BDCCECA8]  text-[16px] font-medium uppercase"}`}>
                               ({inning1teambOver})
                             </span>
                           </>
@@ -728,11 +726,11 @@ export default function Banner({ matchData, match_id }: Banner) {
             </div>
           </div>
           {!!liveMatch?.live?.live_score?.required_runrate &&
-          <div className="lg:hidden rounded-lg md:p-2 px-0 performance-section relative hover:shadow-lg">
-            <span className="flex items-center font-semibold text-[#b9b9b9] ">
-            {updateStatusNoteDirect(liveMatch?.match_info)} 
-            </span>
-          </div>
+            <div className="lg:hidden rounded-lg md:p-2 px-0 performance-section relative hover:shadow-lg">
+              <span className="flex items-center font-semibold text-[#b9b9b9] ">
+                {updateStatusNoteDirect(liveMatch?.match_info)}
+              </span>
+            </div>
           }
 
         </section>
@@ -758,7 +756,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
                 </svg>
-            
+
                 {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "dd MMM yyyy") : ""}
               </div>
             </div>
@@ -801,7 +799,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                     />
                   ) : (
                     "")}
-                  <p className="text-[#BDCCECA8] md:mx-3 mx-0 md:text-[22px] text-[14px] font-medium uppercase">
+                  <p className=" md:mx-3 mx-0  text-[#BDCCECA8] md:text-[17px] lg:text-[19px] text-[14px] font-semibold uppercase">
                     {liveMatch?.match_info?.teama?.short_name}
                   </p>
                 </div>
@@ -829,7 +827,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
 
                 <div className="flex flex-col md:flex-row md:items-center items-end text-[#8192B4] font-normal w-[35%] justify-end">
-                  <p className="text-[#BDCCECA8] md:block hidden md:text-[22px] text-[14px] md:mx-3 mx-0 font-medium uppercase">
+                  <p className="md:block hidden md:mx-3 mx-0 uppercase  text-[#BDCCECA8] md:text-[17px] lg:text-[19px] text-[14px] font-semibold">
                     {liveMatch?.match_info?.teamb?.short_name}
                   </p>
                   {liveMatch?.match_info?.teamb?.logo_url ? (

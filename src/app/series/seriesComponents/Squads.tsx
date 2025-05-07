@@ -33,10 +33,10 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                 {teamPlayers?.map((teamslist: any, index: number) => (
                   <button
                     key={index}
-                    className={`team-btn border-b px-2 mb-1 py-3 w-full font-medium flex items-center ${
+                    className={`team-btn px-2 mb-1 py-3 w-full font-medium flex items-center ${
                       activeTab === "tab"+index
                         ? "text-[#394351] bg-[#eaeaea] rounded-md"
-                        : "text-[#1c1c1c] bg-[#fcfcfc] rounded-md"
+                        : "text-[#394351] bg-[#ffffff] rounded-md"
                     }`}
                     onClick={() => setActiveTab("tab" + index)}
                   >
@@ -68,8 +68,6 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                       alt={teamslist?.team.abbr}
                       className="h-[45px] rounded-full"
                     />
-
-
 
                     <h1 className="text-[16px] font-semibold text-gray-800">
                       {teamslist?.team.abbr}{" "}
