@@ -26,7 +26,9 @@ interface Live {
 function getPlayerRecord(scoreCard: any, pid: number) {
   return scoreCard?.batsmen.find((batsman: { batsman_id: any; }) => Number(batsman.batsman_id) === pid);
 }
-
+function isDecimal(num:any) {
+  return num % 1 !== 0;
+}
 export default function Live({
   match_id,
   matchData,
@@ -180,7 +182,7 @@ export default function Live({
   // Merge new unique data into firstArray
   // console.log("newCommentary",commentaries);
   let updatedCommentaries = [...allCommentries];
-  // console.log("scorecard", getPlayerRecord(scorecard,144496)?.name);
+  console.log("thisOverRun", thisOverRun.length);
   if (newCommentary && Array.isArray(newCommentary)) {
     newCommentary.forEach(
       (newItem: { event_id: number; event: string; commentary: string; text: string }) => {
@@ -426,11 +428,12 @@ export default function Live({
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
 
 
-      {/* desktop start */}
+      {/* mobile start */}
 
       <div className="flex rounded-lg bg-white p-4 md:hidden gap-4  whitespace-nowrap overflow-auto ">
 
         {/* This Over Section */}
+        {thisOverRun.length > 0 &&
         <div className="flex items-center gap-2">
           <span className="font-medium text-[#586577]">
             This Over:
@@ -458,9 +461,10 @@ export default function Live({
             = {thisOvertotalRuns}
           </span>
         </div>
-
+        }
 
         {/* Last Over Section */}
+       
         <div className="flex items-center gap-2">
           <span className="font-medium text-[#586577]">
             Last Over:
@@ -490,7 +494,7 @@ export default function Live({
 
       </div>
 
-      {/* desktop end */}
+      {/* mobile end */}
 
       <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable} />
       {updatedCommentaries && updatedCommentaries.length > 0 ? (
@@ -743,6 +747,7 @@ export default function Live({
                       </span>
                     </div>
                     {/* This Over Section */}
+                   
                     <div className="flex items-center gap-2">
                       <span className="font-medium text-[#757A82]">
                         This Over:
@@ -770,6 +775,7 @@ export default function Live({
                         = {thisOvertotalRuns}
                       </span>
                     </div>
+                    
                   </div>
                 </div>
               </div>
@@ -1010,12 +1016,10 @@ export default function Live({
 
 
                               <div className="text-[14px] font-normal  ">
-                                {lastOverRun &&
-                                  lastOverRun?.map(
-                                    (lastOver: any, idx: number) => (
-                                      <span key={idx}>{lastOver.score} </span>
-                                    )
-                                  )}
+                             
+                                  {updatedCommentaries?.map((cruns:any, index:number) => (cruns?.event !== "overend" && Number(cruns?.over)+1 == Number(comment?.over)) ? (
+                                            <span key={index}>{cruns?.score} </span>
+                                  ):(""))}
                               </div>
 
                               <div className="text-[16px] font-semibold text-[#3992f4]">

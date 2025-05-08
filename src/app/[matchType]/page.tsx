@@ -124,7 +124,7 @@ export default async function page(props: { params: Params }) {
       liveMatch?.live?.live_inning_number
     );
   }
-  
+ 
 
   const teamascores = liveMatch?.match_info?.teama?.scores ?? "";
   const teambscores = liveMatch?.match_info?.teamb?.scores ?? "";
