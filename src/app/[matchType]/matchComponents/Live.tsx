@@ -23,7 +23,7 @@ interface Live {
   // matchLast:any | null;
 }
 
-function getPlayerRecord(scoreCard:any,pid:number){
+function getPlayerRecord(scoreCard: any, pid: number) {
   return scoreCard?.batsmen.find((batsman: { batsman_id: any; }) => Number(batsman.batsman_id) === pid);
 }
 
@@ -149,7 +149,7 @@ export default function Live({
     );
   }
 
-  
+
   if (commentaries) {
     commentaries = [...commentaries]?.reverse();
   }
@@ -184,12 +184,12 @@ export default function Live({
   if (newCommentary && Array.isArray(newCommentary)) {
     newCommentary.forEach(
       (newItem: { event_id: number; event: string; commentary: string; text: string }) => {
-        const index = updatedCommentaries.findIndex( (existingItem) => existingItem?.event_id === newItem?.event_id);
+        const index = updatedCommentaries.findIndex((existingItem) => existingItem?.event_id === newItem?.event_id);
 
         if (index !== -1) {
           //  Update existing item
           allCommentries[index] = { ...updatedCommentaries[index], ...newItem };
-         
+
         } else {
           //  Add new item if not found
           // updatedCommentaries.unshift(newItem);
@@ -198,7 +198,7 @@ export default function Live({
       }
     );
   }
-  
+
   let filteredCommentaries = [];
   // let updatedCommentaries = [...newCommentary, ...allCommentries];
   if (allCommentries.length !== updatedCommentaries.length) {
@@ -257,7 +257,7 @@ export default function Live({
   const errorMessage = updatedCommentaries[0]?.errorMessage;
 
   // const playerName = getPlayerNameByPid(players, 117226);
-  
+
   const numberOfSpans = 6 - thisOverRun?.length;
   const emptySpans = [];
   for (let i = 0; i < numberOfSpans; i++) {
@@ -396,37 +396,37 @@ export default function Live({
     ? { team: matchLiveData?.match_info?.teama?.short_name, ...matchLiveData?.live_odds?.matchodds?.teama }
     : { team: matchLiveData?.match_info?.teamb?.short_name, ...matchLiveData?.live_odds?.matchodds?.teamb };
 
-    const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
-            
-        useEffect(() => {
-          const getAllPlayerIds = () => {
-            const allIds = [
-              matchinfo?.bowlers?.[0]?.bowler_id,
-              batsman?.[0]?.batsman_id,
-              batsman?.[1]?.batsman_id,
-            ];
-            return [...new Set(allIds)]; // Deduplicate
-          };
-          const fetchPlayerUrls = async () => {
-            const ids = getAllPlayerIds();
-            if (ids.length === 0) return;
-            const res = await fetch('/api/player-urls', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
-              body: JSON.stringify({ ids }),
-            });
-            const data = await res.json();
-            setPlayerUrls(data);
-          };
-      
-          fetchPlayerUrls();
-        }, []);
+  const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const getAllPlayerIds = () => {
+      const allIds = [
+        matchinfo?.bowlers?.[0]?.bowler_id,
+        batsman?.[0]?.batsman_id,
+        batsman?.[1]?.batsman_id,
+      ];
+      return [...new Set(allIds)]; // Deduplicate
+    };
+    const fetchPlayerUrls = async () => {
+      const ids = getAllPlayerIds();
+      if (ids.length === 0) return;
+      const res = await fetch('/api/player-urls', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+        body: JSON.stringify({ ids }),
+      });
+      const data = await res.json();
+      setPlayerUrls(data);
+    };
+
+    fetchPlayerUrls();
+  }, []);
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
 
 
-{/* desktop start */}
+      {/* desktop start */}
 
       <div className="flex rounded-lg bg-white p-4 md:hidden gap-4  whitespace-nowrap overflow-auto ">
 
@@ -490,9 +490,9 @@ export default function Live({
 
       </div>
 
-{/* desktop end */}
+      {/* desktop end */}
 
-      <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable}/>
+      <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable} />
       {updatedCommentaries && updatedCommentaries.length > 0 ? (
         <div id="tab-content">
           <div id="live" className="tab-content ">
@@ -533,14 +533,14 @@ export default function Live({
                                 </span>
                                 {/* {batsman?.[0]?.batsman_id ==
                                   currPartnership?.batsmen?.[0]?.batsman_id ? ( */}
-                                  <Image
-                                    src="/assets/img/home/bat.png"
-                                    className="h-[13px]"
-                                    width={12}
-                                    height={13}
-                                    alt=""
-                                    loading="lazy"
-                                  />
+                                <Image
+                                  src="/assets/img/home/bat.png"
+                                  className="h-[13px]"
+                                  width={12}
+                                  height={13}
+                                  alt=""
+                                  loading="lazy"
+                                />
                                 {/* ) : (
                                   ""
                                 )} */}
@@ -669,22 +669,22 @@ export default function Live({
 
                       <div className="flex items-center justify-between gap-3 font-medium mx-auto w-[100%]">
                         <div className="flex ga-1 items-center  w-[50%]">
-                        <div className="relative">
-                        <PlayerImage
-                            key={matchinfo?.bowlers?.[0]?.bowler_id}
-                            player_id={matchinfo?.bowlers?.[0]?.bowler_id}
-                            height={40}
-                            width={40}
-                            className="rounded-lg"
-                          />
+                          <div className="relative">
+                            <PlayerImage
+                              key={matchinfo?.bowlers?.[0]?.bowler_id}
+                              player_id={matchinfo?.bowlers?.[0]?.bowler_id}
+                              height={40}
+                              width={40}
+                              className="rounded-lg"
+                            />
                             <Image
-                            src="/assets/img/player/ball.png"
-                            className="absolute -bottom-1.5 -right-0.5 h-[13px] bg-white rounded-full p-[2px]"
-                            width={13}
-                            height={13}
-                            alt=""
-                            loading="lazy"
-                          />
+                              src="/assets/img/player/ball.png"
+                              className="absolute -bottom-1.5 -right-0.5 h-[13px] bg-white rounded-full p-[2px]"
+                              width={13}
+                              height={13}
+                              alt=""
+                              loading="lazy"
+                            />
                           </div>
                           <h2 className="md:text-[15px] text-[14px] text-[#757A82] pl-[10px]">
                             {getPlayerNameByPid(
@@ -692,11 +692,11 @@ export default function Live({
                               matchinfo?.bowlers?.[0]?.bowler_id
                             )}
                           </h2>
-                        
+
                         </div>
                         <p className="md:text-[15px] text-[14px] flex items-baseline justify-end w-[50%]">
-                        <span>  {matchinfo?.bowlers?.[0]?.wickets}-
-                          {matchinfo?.bowlers?.[0]?.runs_conceded} {" "} </span>
+                          <span>  {matchinfo?.bowlers?.[0]?.wickets}-
+                            {matchinfo?.bowlers?.[0]?.runs_conceded} {" "} </span>
                           <span className="md:text-[13px] text-[12px] text-[#757A82] px-1">
                             ({matchinfo?.bowlers?.[0]?.overs})
                           </span>
@@ -705,7 +705,7 @@ export default function Live({
                       </div>
                     </Link>
                   </div>
-     
+
 
                 </div>
 
@@ -998,66 +998,80 @@ export default function Live({
                     ?.map((comment: any, index: number) =>
                       comment?.event === "overend" ? (
                         <div
-                          className="rounded-t-lg bg-[#081736] p-4 mt-6"
+                          className="rounded-t-lg bg-[#f8f8f8] mt-6" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
                           key={`over-${index}`}
                         >
-                          <div className="flex md:flex-row flex-col justify-between md:items-center gap-2">
+                          {/* <div className="flex md:flex-row flex-col justify-between md:items-center gap-2"> */}
 
-                            <div className="text-[14px] font-normal text-white">
-                              {matchinning.short_name} : {comment.score}
+                            <div className="flex justify-between p-4">
+                              <div className="text-[16px] font-semibold ">
+                                {matchinning.short_name} : {comment.score}
+                              </div>
+
+
+                              <div className="text-[14px] font-normal  ">
+                                {lastOverRun &&
+                                  lastOverRun?.map(
+                                    (lastOver: any, idx: number) => (
+                                      <span key={idx}>{lastOver.score} </span>
+                                    )
+                                  )}
+                              </div>
+
+                              <div className="text-[16px] font-semibold text-[#3992f4]">
+                                {comment?.over}{" "}
+                                <span className=" font-medium text-[13px]  ">
+                                  End Of Over
+                                </span>
+                              </div>
                             </div>
 
-                            <div className="text-[14px] font-normal text-[#3992f4]">
-                              {comment?.over}{" "}
-                              <span className=" font-medium text-[13px]  text-white">
-                                End Of Over
-                              </span>
+                            <div className="border-b-[1px] border-[#e7e7e7]"></div>
+
+
+                            <div className="flex justify-between p-4">
+                              <div className="text-[14px] font-normal flex gap-3">
+                                <div>
+                                  {getPlayerNameByPid(
+                                    players,
+                                    comment?.bats?.[0]?.batsman_id
+                                  )}
+                                  : {comment?.bats?.[0]?.runs}{" "}
+                                  <span className="text-[#3992f4]">
+                                    ({comment?.bats?.[0]?.balls_faced})
+                                  </span>
+                                  {" "}
+                                </div>
+                                |
+                                <div>
+
+                                  {" "}
+                                  {getPlayerNameByPid(
+                                    players,
+                                    comment?.bats?.[1]?.batsman_id
+                                  )}
+                                  : {comment?.bats?.[1]?.runs}{" "}
+                                  <span className="text-[#3992f4]">
+                                    ({comment?.bats?.[1]?.balls_faced})
+                                  </span>
+                                </div>
+                              </div>
+
+
+                              <div className="text-[14px] font-normal  ">
+                                {getPlayerNameByPid(
+                                  players,
+                                  comment?.bowls?.[0]?.bowler_id
+                                )}{" "}
+                                <span className="text-[#3992f4]">
+                                  {comment?.bowls?.[0]?.overs}-
+                                  {comment?.bowls?.[0]?.runs_conceded}-
+                                  {comment?.bowls?.[0]?.wickets}
+                                </span>
+                              </div>
+
                             </div>
 
-                            <div className="text-[14px] font-normal  text-white">
-                              {lastOverRun &&
-                                lastOverRun?.map(
-                                  (lastOver: any, idx: number) => (
-                                    <span key={idx}>{lastOver.score} </span>
-                                  )
-                                )}
-                            </div>
-
-                            <div className="text-[14px] font-normal  text-white">
-                              {getPlayerNameByPid(
-                                players,
-                                comment?.bats?.[0]?.batsman_id
-                              )}
-                              : {comment?.bats?.[0]?.runs}{" "}
-                              <span className="text-[#3992f4]">
-                                ({comment?.bats?.[0]?.balls_faced})
-                              </span>{" "}
-                              |{" "}
-                              {getPlayerNameByPid(
-                                players,
-                                comment?.bats?.[1]?.batsman_id
-                              )}
-                              : {comment?.bats?.[1]?.runs}{" "}
-                              <span className="text-[#3992f4]">
-                                ({comment?.bats?.[1]?.balls_faced})
-                              </span>
-                            </div>
-
-
-                            <div className="text-[14px] font-normal  text-white">
-                              {getPlayerNameByPid(
-                                players,
-                                comment?.bowls?.[0]?.bowler_id
-                              )}{" "}
-                              <span className="text-[#3992f4]">
-                                {comment?.bowls?.[0]?.overs}-
-                                {comment?.bowls?.[0]?.runs_conceded}-
-                                {comment?.bowls?.[0]?.wickets}
-                              </span>
-                            </div>
-
-                            
-                          </div>
                         </div>
                       ) : (
                         <div
@@ -1108,65 +1122,65 @@ export default function Live({
                             </div>
                           </div>
                           {comment?.wicket_batsman_id !== undefined ? (
-                              <div
-                                  className="text-white p-4 rounded-lg"
-                                  style={{
-                                    background:
-                                      "linear-gradient(90deg, #D20A5E 0%, #9C0C0C 100%)",
-                                  }}
-                                >
-                                <div className="md:flex items-center justify-between">
-                                  <div className="flex items-center">
-                                    <PlayerImage
-                                      key={comment?.wicket_batsman_id}
-                                      player_id={comment?.wicket_batsman_id}
-                                      height={71}
-                                      width={71}
-                                      className="md:h-[71px] h-[40px]  md:w-[71px] w-[40px]  rounded-lg md:mr-4 mr-2 "
-                                    />
+                            <div
+                              className="text-white p-4 rounded-lg"
+                              style={{
+                                background:
+                                  "linear-gradient(90deg, #D20A5E 0%, #9C0C0C 100%)",
+                              }}
+                            >
+                              <div className="md:flex items-center justify-between">
+                                <div className="flex items-center">
+                                  <PlayerImage
+                                    key={comment?.wicket_batsman_id}
+                                    player_id={comment?.wicket_batsman_id}
+                                    height={71}
+                                    width={71}
+                                    className="md:h-[71px] h-[40px]  md:w-[71px] w-[40px]  rounded-lg md:mr-4 mr-2 "
+                                  />
 
-                                    <div>
-                                      <h2 className="md:text-xl text-[16px] font-semibold flex gap-3">
-                                        <span>
-                                          {getPlayerNameByPid(
-                                            players,
-                                            comment?.wicket_batsman_id !==
-                                              undefined
-                                              ? JSON.parse(
-                                                comment?.wicket_batsman_id
-                                              )
-                                              : {}
-                                          )}
-                                        </span>{" "}
-                                        <span className="text-[#BFEF50] text-[14px]">
-                                          {comment?.batsman_runs}(
-                                          {comment?.batsman_balls})
-                                        </span>
-                                      </h2>
-                                      <p className="text-[14px] font-normal">
-                                        {comment?.how_out}{" "}
-                                      </p>
-                                    </div>
-                                  </div>
-                                  <div className="flex gap-4 justify-end">
-                                    <div>
-                                      <p className="md:text-1xl text-[14px] font-normal">
-                                        4s/6s
-                                      </p>
-                                      <p className="md:text-2xl text-[16px] font-semibold">
-                                      {getPlayerRecord(scorecard,Number(comment?.wicket_batsman_id))?.fours}/{getPlayerRecord(scorecard,Number(comment?.wicket_batsman_id))?.sixes}
-                                      </p>
-                                    </div>
-                                    <div className="text-end">
-                                      <p className="md:text-1xl text-[14px] font-normal">
-                                        SR
-                                      </p>
-                                      <p className="md:text-2xl text-[16px] font-semibold">
-                                      {getPlayerRecord(scorecard,Number(comment?.wicket_batsman_id))?.strike_rate}
-                                      </p>
-                                    </div>
+                                  <div>
+                                    <h2 className="md:text-xl text-[16px] font-semibold flex gap-3">
+                                      <span>
+                                        {getPlayerNameByPid(
+                                          players,
+                                          comment?.wicket_batsman_id !==
+                                            undefined
+                                            ? JSON.parse(
+                                              comment?.wicket_batsman_id
+                                            )
+                                            : {}
+                                        )}
+                                      </span>{" "}
+                                      <span className="text-[#BFEF50] text-[14px]">
+                                        {comment?.batsman_runs}(
+                                        {comment?.batsman_balls})
+                                      </span>
+                                    </h2>
+                                    <p className="text-[14px] font-normal">
+                                      {comment?.how_out}{" "}
+                                    </p>
                                   </div>
                                 </div>
+                                <div className="flex gap-4 justify-end">
+                                  <div>
+                                    <p className="md:text-1xl text-[14px] font-normal">
+                                      4s/6s
+                                    </p>
+                                    <p className="md:text-2xl text-[16px] font-semibold">
+                                      {getPlayerRecord(scorecard, Number(comment?.wicket_batsman_id))?.fours}/{getPlayerRecord(scorecard, Number(comment?.wicket_batsman_id))?.sixes}
+                                    </p>
+                                  </div>
+                                  <div className="text-end">
+                                    <p className="md:text-1xl text-[14px] font-normal">
+                                      SR
+                                    </p>
+                                    <p className="md:text-2xl text-[16px] font-semibold">
+                                      {getPlayerRecord(scorecard, Number(comment?.wicket_batsman_id))?.strike_rate}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           ) : (
                             ""
