@@ -112,7 +112,7 @@ export default function Squads({
 
                                 <button
                                     className={`team-btn  px-2 mb-1 py-3 w-full font-medium flex items-center ${activeTab === "tab1"
-                                            ? "text-[#394351] bg-[#eaeaea] rounded-md"
+                                            ? "text-[#1a80f8] bg-[#ecf2fd] rounded-md"
                                             : "text-[#394351] bg-[#ffffff] rounded-md"
                                         }`}
                                     onClick={() => setActiveTab("tab1")}
@@ -127,7 +127,7 @@ export default function Squads({
 
                                 <button
                                     className={`team-btn px-2 mb-1 py-3 w-full font-medium flex items-center ${activeTab === "tab2"
-                                            ? "text-[#394351] bg-[#eaeaea] rounded-md"
+                                            ? "text-[#1a80f8] bg-[#ecf2fd] rounded-md"
                                             : "text-[#394351] bg-[#ffffff] rounded-md"
                                         }`}
                                     onClick={() => setActiveTab("tab2")}

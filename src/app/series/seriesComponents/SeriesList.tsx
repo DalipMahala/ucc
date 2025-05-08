@@ -45,7 +45,7 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
           <div className="tab-section">
             <div className="tabs my-3 md:my-4">
               <div
-                className="flex text-[13px] md:space-x-8 space-x-6  p-2 bg-[#ffffff] rounded-lg overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
+                className="flex text-1xl md:space-x-8 space-x-6  p-2 bg-[#ffffff] rounded-lg overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
                               [&::-webkit-scrollbar-track]:bg-[#ecf2fd] 
                               [&::-webkit-scrollbar-thumb]:bg-[#ecf2fd] 
                                dark:[&::-webkit-scrollbar-track]:bg-neutral-[#ecf2fd] 
@@ -54,11 +54,11 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
                 {uniqueTypes?.map((item: any) => (
                   <button
                     key={item}
-                    className={`uppercase font-semibold py-2 md:px-5 px-3 whitespace-nowrap ${filter === item ? "bg-[#1A80F8] text-white" : ""
+                    className={`font-medium py-2 md:px-5 px-3 capitalize whitespace-nowrap ${filter === item ? "bg-[#1A80F8] text-white" : ""
                       } rounded-md`}
                     onClick={() => setFilter(item)}
                   >
-                    {item.toUpperCase()}
+                    {item}
                   </button>
                 ))}
               </div>
@@ -74,11 +74,11 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
                 {["All", ...statusTypes]?.map((item: any) => (
                   <button
                     key={item}
-                    className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA]  ${statusFilter === item ? "bg-[#1b2d51] text-white" : "bg-[#ffffff] text-[#6A7586]"
+                    className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] capitalize  ${statusFilter === item ? "bg-[#1b2d51] text-white" : "bg-[#ffffff] text-[#6A7586]"
                       } rounded-full`}
                     onClick={() => setStatusFilter(item)}
                   >
-                    {item.toUpperCase()}
+                    {item}
                   </button>
                 ))}
               </div>

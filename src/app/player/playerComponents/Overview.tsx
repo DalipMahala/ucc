@@ -166,7 +166,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
   const newsUrl = playerProfile[0]?.newUrl;
 
   const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
-        
+
   useEffect(() => {
     const getAllPlayerIds = () => {
       const allIds = [
@@ -174,7 +174,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
       ];
       return [...new Set(allIds)]; // Deduplicate
     };
-    
+
     const fetchPlayerUrls = async () => {
       const ids = getAllPlayerIds();
       if (ids.length === 0) return;
@@ -204,15 +204,15 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
 
 
                 <div id="tabs" className="my-4">
-                  <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+                  <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
                     <Link href={"/player/" + urlString}>
-                      <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
+                      <button className="font-medium py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
                       >
                         Overview
                       </button>
                     </Link>
                     <Link href={"/player/" + urlString + "/stats"}>
-                      <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap "
+                      <button className="font-medium py-2 px-3 whitespace-nowrap "
                       >
                         Stats
                       </button>
@@ -220,7 +220,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
 
                     <Link href={"/player/" + urlString + "/news"}>
                       <button
-                        className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
+                        className="font-medium py-2 px-3 whitespace-nowrap"
                       >
                         News
                       </button>
@@ -302,7 +302,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                           >
                             Full Name
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C] font-medium">
+                          <td className="px-6 py-2 text-[#2F335C]">
                             {profile?.first_name}
                           </td>
                         </tr>
@@ -313,7 +313,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                           >
                             Date of Birth
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C] font-medium">
+                          <td className="px-6 py-2 text-[#2F335C]">
                             {profile?.birthdate !== undefined && profile?.birthdate !== '' ? format(new Date(profile?.birthdate), "dd MMM yyyy") : ""}
                           </td>
                         </tr>
@@ -324,7 +324,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                           >
                             Age
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C] font-medium">
+                          <td className="px-6 py-2 text-[#2F335C]">
                             {profile?.birthdate !== undefined && profile?.birthdate !== '' ? getAgeDetails(profile?.birthdate) : ""}
                           </td>
                         </tr>
@@ -335,7 +335,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                           >
                             Nationality
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C] font-medium">{profile?.nationality}</td>
+                          <td className="px-6 py-2 text-[#2F335C]">{profile?.nationality}</td>
                         </tr>
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                           <th
@@ -344,7 +344,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                           >
                             Birth Place
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C] font-medium">
+                          <td className="px-6 py-2 text-[#2F335C]">
                             {profile?.birthplace}
                           </td>
                         </tr>
@@ -356,7 +356,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                           >
                             Role
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C] font-medium">{playerRole}</td>
+                          <td className="px-6 py-2 text-[#2F335C]">{playerRole}</td>
                         </tr>
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                           <th
@@ -365,7 +365,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                           >
                             Batting Style
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C] font-medium">
+                          <td className="px-6 py-2 text-[#2F335C]">
                             {profile?.batting_style}
                           </td>
                         </tr>
@@ -376,7 +376,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                           >
                             Bowling Style
                           </th>
-                          <td className="px-6 py-2 text-[#2F335C] font-medium">
+                          <td className="px-6 py-2 text-[#2F335C]">
                             {profile?.bowling_style}
                           </td>
                         </tr>
@@ -439,10 +439,12 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                       </button>
                     </div>
                   </div>
+
+
                   <div className={`cust-box-click-content cust-box-click-batting ${careerTab === 'cust-box-click-batting' ? "" : "hidden"}`}>
-                    <div className="rounded-lg p-4 bg-[#ffffff]">
+                    <div className="rounded-lg p-6 bg-[#ffffff]">
                       <div className="md:flex items-center justify-between">
-                        <h3 className="text-[13px] font-semibold text-[#586577] mb-2">
+                        <h3 className="text-1xl font-medium mb-2">
                           {profile?.first_name} Recent Form
                         </h3>
                         <div className="text-right">
@@ -527,12 +529,35 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                         </div>
                       </div>
 
+                      <div className='flex justify-between items-center mt-4 mb-2'>
+                        <h3 className="text-1xl font-medium ">
+                          {profile?.first_name} Career Stats
+                        </h3>
+                        <Link href={"/player/" + urlString + "/stats"} >
+                        
+                        <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
+                    View More{" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="size-3 ml-2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+                      />
+                    </svg>
+                  </div>
 
-                      <h3 className="text-[13px] font-semibold text-[#586577] mt-4 mb-2">
-                        {profile?.first_name} Career Stats
-                      </h3>
+                        </Link>
+                      </div>
                       <div className="border-t-[1px] border-[#E7F2F4]" />
-                      <h3 className="text-[13px] font-semibold text-[#2c323b] mt-2 mb-1">Batting</h3>
+                      <h3 className="text-[14px] font-semibold mt-2 mb-1">Batting</h3>
+
                       <div>
                         <div
                           className="relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
@@ -617,7 +642,9 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                           </table>
                         </div>
                       </div>
-                      <h3 className="text-[13px] font-semibold text-[#586577] mt-3 mb-1">Teams</h3>
+
+
+                      <h3 className="text-[14px] font-semibold mt-2 mb-1">Teams</h3>
                       <div className="mt-1">
                         <div className="grid md:grid-cols-5 grid-cols-2 gap-4">
                           {teamsPlayedFor?.map((teams: any, index: number) => (
@@ -646,6 +673,8 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                       </div>
                     </div>
                   </div>
+
+
                   <div className={`cust-box-click-content cust-box-click-batting ${careerTab === 'cust-box-click-bowling' ? "" : "hidden"}`}>
                     <div className="rounded-lg p-6 bg-[#ffffff]">
                       <div className="md:flex items-center justify-between">
@@ -734,12 +763,38 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                         </div>
                       </div>
 
+                      <div className='flex justify-between items-center mt-4 mb-2'>
+                        <h3 className="text-1xl font-medium">
+                          {profile?.first_name} Career Stats
+                        </h3>
 
-                      <h3 className="text-1xl font-medium mt-4 mb-2">
-                        {profile?.first_name} Career Stats
-                      </h3>
+                        <Link href={"/player/" + urlString + "/stats"} >
+                        
+                        <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
+                    View More{" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="size-3 ml-2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+                      />
+                    </svg>
+                  </div>
+                        
+                        </Link>
+
+                      </div>
+
+
                       <div className="border-t-[1px] border-[#E7F2F4]" />
-                      <h3 className="text-[14px] font-normal mt-2 mb-1">Bowling</h3>
+                      <h3 className="text-[14px] font-semibold mt-2 mb-1 ">Bowling</h3>
                       <div>
                         <div
                           className="relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
@@ -821,7 +876,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                           </table>
                         </div>
                       </div>
-                      <h3 className="text-[14px] font-normal mt-2 mb-1">Teams</h3>
+                      <h3 className="text-[14px] font-semibold mt-2 mb-1">Teams</h3>
                       <div className="mt-4">
                         <div className="grid md:grid-cols-5 grid-cols-2 gap-4">
                           {teamsPlayedFor?.map((teams: any, index: number) => (
@@ -855,7 +910,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
 
                 <div className="pt-4 mb-2">
                   <h3 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8]">
-                    Debut &amp; Last Matches
+                    Debut Matches
                   </h3>
                 </div>
                 {playerDebutData.length > 0 &&
@@ -871,7 +926,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                               >
                                 {debut.format_str}
                               </th>
-                              <td className="px-6 py-2 text-[#2F335C] font-medium">
+                              <td className="px-6 py-2 text-[#2F335C] ">
                                 <p className="text-[#217AF7]">
                                   {debut.match_title}, {format(new Date(debut.match_date), "dd MMM yyyy")}
                                 </p>
@@ -948,7 +1003,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
 
                   </div>
                 }
-                
+
                 {newsUrl !== undefined && newsUrl !== null && newsUrl !== "" ?
                   <PlayerNews newsUrl={newsUrl}></PlayerNews> : ""
                 }
@@ -956,8 +1011,8 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                 <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
 
                   <ReadMoreCard
-                    title={"About "+profile?.first_name}
-                    content={profile?.first_name+" is a stylish "+playerRole+" known for his 360-degree shot-making. Born in "+profile?.birthplace+", SKY made his international debut for India in 2021 and quickly became a key T20I player. He plays domestic cricket for Mumbai and represents Mumbai Indians in the IPL."}
+                    title={"About " + profile?.first_name}
+                    content={profile?.first_name + " is a stylish " + playerRole + " known for his 360-degree shot-making. Born in " + profile?.birthplace + ", SKY made his international debut for India in 2021 and quickly became a key T20I player. He plays domestic cricket for Mumbai and represents Mumbai Indians in the IPL."}
                     wordLimit={10} // 💥 Dynamic!
                   />
 

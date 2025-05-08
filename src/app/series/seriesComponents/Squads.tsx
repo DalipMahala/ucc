@@ -86,7 +86,7 @@ export default function Squad({ urlString, seriesInfo,isPointTable }: Squad) {
       <div id="squads" className="tab-content">
         <div className="py-2 mb-2">
           <h3 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8]">
-            {seriesName} Squads
+            {seriesName} All Team Squads
           </h3>
         </div>
         <div className="md:grid grid-cols-12 gap-4">
@@ -96,9 +96,9 @@ export default function Squad({ urlString, seriesInfo,isPointTable }: Squad) {
                 {squads?.map((teamslist: any, index: number) => (
                   <button
                     key={index}
-                    className={`team-btn px-2 mb-1 py-3 w-full font-medium flex items-center border-b-[1px] ${
+                    className={`team-btn px-2 mb-1 py-3 w-full font-medium hover:text-[#1a80f8] hover:bg-[#ecf2fd] flex items-center border-b-[1px] ${
                       activeTab === "tab"+index
-                        ? "text-[#394351] bg-[#eaeaea] rounded-md"
+                        ? "text-[#1a80f8] bg-[#ecf2fd] rounded-md"
                         : "text-[#394351] bg-[#ffffff] "
                     }`}
                     onClick={() => setActiveTab("tab" + index)}

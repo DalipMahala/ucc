@@ -55,15 +55,15 @@ export default function Stats({urlString, playerAdvanceStats}: Stats) {
         <section className="lg:w-[1000px] md:mx-auto my-5 mx-2">
             <div className="">
                 <div id="tabs" className="my-4">
-                    <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+                    <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
                         <Link href={"/player/"+urlString}>
-                            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
+                            <button className="font-medium py-2 px-3 whitespace-nowrap"
                             >
                                 Overview
                             </button>
                         </Link>
                         <Link href={"/player/"+urlString+"/stats"}>
-                            <button className="font-semibold uppercase py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
+                            <button className="font-medium py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md"
                             >
                                 Stats
                             </button>
@@ -71,7 +71,7 @@ export default function Stats({urlString, playerAdvanceStats}: Stats) {
 
                         <Link href={"/player/"+urlString+"/news"}>
                             <button
-                                className="font-semibold uppercase py-2 px-3 whitespace-nowrap"
+                                className="font-medium py-2 px-3 whitespace-nowrap"
                             >
                                 News
                             </button>
@@ -88,9 +88,9 @@ export default function Stats({urlString, playerAdvanceStats}: Stats) {
                 <div id="tab-content">
                     <div id="stats">
                         <div className="cust-box-click-container">
-                            <h2 className="text-[18px] mb-[1px] font-semibold">{playerAdvanceStats?.player?.title}</h2>
+                            <h2 className="text-[20px] font-semibold">{playerAdvanceStats?.player?.title}</h2>
                             <div className="md:flex justify-between items-center mb-3">
-                                <h3 className=" font-medium pl-[7px] border-l-[3px] border-[#229ED3]">
+                                <h3 className="text-[13px] font-medium pl-[7px] border-l-[3px] border-[#229ED3]">
                                     Vs Team stats
                                 </h3>
                                 <div className="flex gap-3 items-center md:justify-center md:mt-0 mt-4">

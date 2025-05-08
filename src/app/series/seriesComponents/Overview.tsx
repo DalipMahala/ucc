@@ -154,34 +154,34 @@ export default function Overview({
   }
 
   const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
-  
-    useEffect(() => {
-      const getAllPlayerIds = () => {
-        const allIds = [
-          ...seriesKeystats?.mostRuns?.stats?.slice(0, 3).map((item: { player: any; player_id: any; }) => item?.player?.pid),
-          ...seriesKeystats?.topWickets?.stats?.slice(0, 3).map((item: { player: any; player_id: any; }) => item?.player?.pid),
-          seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid,
-          seriesKeystats?.highStrike?.stats?.[0]?.player?.pid,
-          seriesKeystats?.topWickets?.stats?.[0]?.player?.pid,
-          seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid
-        ];
-        return [...new Set(allIds)]; // Deduplicate
-      };
-     
-      const fetchPlayerUrls = async () => {
-        const ids = getAllPlayerIds();
-        if (ids.length === 0) return;
-        const res = await fetch('/api/player-urls', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
-          body: JSON.stringify({ ids }),
-        });
-        const data = await res.json();
-        setPlayerUrls(data);
-      };
-  
-      fetchPlayerUrls();
-    }, [seriesKeystats?.mostRuns?.stats?.slice(0, 3), seriesKeystats?.topWickets?.stats?.slice(0, 3)]);
+
+  useEffect(() => {
+    const getAllPlayerIds = () => {
+      const allIds = [
+        ...seriesKeystats?.mostRuns?.stats?.slice(0, 3).map((item: { player: any; player_id: any; }) => item?.player?.pid),
+        ...seriesKeystats?.topWickets?.stats?.slice(0, 3).map((item: { player: any; player_id: any; }) => item?.player?.pid),
+        seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid,
+        seriesKeystats?.highStrike?.stats?.[0]?.player?.pid,
+        seriesKeystats?.topWickets?.stats?.[0]?.player?.pid,
+        seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid
+      ];
+      return [...new Set(allIds)]; // Deduplicate
+    };
+
+    const fetchPlayerUrls = async () => {
+      const ids = getAllPlayerIds();
+      if (ids.length === 0) return;
+      const res = await fetch('/api/player-urls', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+        body: JSON.stringify({ ids }),
+      });
+      const data = await res.json();
+      setPlayerUrls(data);
+    };
+
+    fetchPlayerUrls();
+  }, [seriesKeystats?.mostRuns?.stats?.slice(0, 3), seriesKeystats?.topWickets?.stats?.slice(0, 3)]);
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
@@ -189,7 +189,7 @@ export default function Overview({
 
       <div id="tab-content">
         <div id="info" className="tab-content ">
-          <div className="md:grid grid-cols-12 gap-4">
+          <div className="md:grid grid-cols-12 gap-4 mb-4">
             <div className="lg:col-span-8 md:col-span-7 mt-4">
               <div className="rounded-lg bg-white">
                 <div className="p-4">
@@ -650,7 +650,7 @@ export default function Overview({
                                   </div>
                                 </td>
                                 <td className="md:px-2 pl-[14px] py-3">{player?.matches}</td>
-                                <td className="md:px-2 pl-[14px] py-3">{player?.runs}</td>
+                                <td className="md:px-2 pl-[14px] py-3 font-semibold">{player?.runs}</td>
                                 <td className="md:px-2 pl-[14px] py-3">{player?.highest}</td>
                                 {/* <td className="md:px-2 pl-[14px] py-3">{player?.average}</td> */}
                                 <td className="md:px-2 pl-[14px] py-3">{player?.strike}</td>
@@ -724,7 +724,7 @@ export default function Overview({
                                 </td>
                                 <td className="md:px-2 pl-[14px] py-3">{player?.matches}</td>
                                 <td className="md:px-2 pl-[14px] py-3">{player?.overs}</td>
-                                <td className="md:px-2 pl-[14px] py-3">{player?.wickets}</td>
+                                <td className="md:px-2 pl-[14px] py-3 font-semibold">{player?.wickets}</td>
                                 {/* <td className="md:px-2 pl-[14px] py-3">{player?.average}</td> */}
                                 <td className="md:px-2 pl-[14px] py-3">{player?.econ}</td>
                                 <td className="md:px-2 pl-[14px] py-3">{player?.wicket5i}</td>
@@ -961,7 +961,7 @@ export default function Overview({
                   <div dangerouslySetInnerHTML={{ __html: pageHtml }} />
                 ) : ("")}
               </div>
-              <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
+              <div className="rounded-lg bg-[#ffffff] p-4">
                 <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                   News
                 </h3>
@@ -1055,8 +1055,9 @@ export default function Overview({
                   <PLSeries />
                 </>
               )}
-
-              <FantasyTips />
+              <div className="sticky top-[82px]">
+                <FantasyTips />
+              </div>
             </div>
           </div>
         </div>

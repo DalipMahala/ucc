@@ -94,7 +94,7 @@ export default function NewsSection({ urlString }: News) {
           <React.Fragment key={index}>
 
             <div className="flex gap-3 my-3">
-              <Link href={post?.link} className="w-[30%]">
+              <Link href={post?.link} className="w-[45%]">
                 {post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes
                   .medium.source_url && (
                     <Image loading="lazy"
@@ -106,13 +106,15 @@ export default function NewsSection({ urlString }: News) {
                       className="rounded-lg h-[77px] w-[auto]" />
                   )}
               </Link>
-              <div className="w-[60%] flex justify-between flex-col">
+
+              
+              <div className="w-[55%] flex justify-between flex-col">
                 <Link href={post?.link}>
                   <h2
                     className="text-[13px] font-semibold mb-2"
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(
-                        truncateText(post?.title.rendered, 6)
+                        truncateText(post?.title.rendered, 5)
                       ),
                     }}
                   ></h2>
@@ -139,7 +141,9 @@ export default function NewsSection({ urlString }: News) {
                 </p>
               </div>
             </div>
+
             <div className="border-t-[1px] border-[#E7F2F4]" />
+            
           </React.Fragment>
         ))}
       </div>
