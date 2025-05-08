@@ -115,7 +115,7 @@ export default async function PointsTable({ urlString, seriesInfo, isPointTable 
                                                     <tr className="hover:bg-[#fffae5]" key={index}>
                                                         <td className="md:px-2 pl-[14px] py-3 w-[10px]">{index + 1}</td>
                                                         <td className="md:px-2 pl-[14px] py-3 text-[#217AF7]">
-                                                            <Link href={"/team/" + urlStringEncode(point?.team.title) + "/" + point?.team.tid}>
+                                                            <Link href={"/team/" + urlStringEncode(point?.team.abbr) + "/" + point?.team.tid}>
                                                                 <div className="flex items-center gap-[5px] w-[120px]">
                                                                     <div>
                                                                         <Image loading="lazy"

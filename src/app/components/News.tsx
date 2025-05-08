@@ -28,7 +28,7 @@ const News = () => {
           return "112";
         case "pitch-report":
           return "197";
-        case "prediction":
+        case "match-prediction":
           return "180";
         default:
           return "21";
@@ -71,7 +71,7 @@ const News = () => {
           <button className={`font-medium py-2 px-3 whitespace-nowrap ${activeTab === 'pitch-report' ? 'bg-[#1A80F8] text-white rounded-md' : ''}  `} onClick={() => handleTabClick('pitch-report')}>
             Pitch Report
           </button>
-          <button className={`font-medium py-2 px-3 whitespace-nowrap ${activeTab === 'prediction' ? 'bg-[#1A80F8] text-white rounded-md' : ''}  `} onClick={() => handleTabClick('prediction')}>
+          <button className={`font-medium py-2 px-3 whitespace-nowrap ${activeTab === 'match-prediction' ? 'bg-[#1A80F8] text-white rounded-md' : ''}  `} onClick={() => handleTabClick('match-prediction')}>
             Prediction
           </button>
         </div>
@@ -195,7 +195,7 @@ const News = () => {
               ))}
             </div>
 
-            <Link href={"https://uccricket.live/" + activeTab}>
+            <Link href={"https://uccricket.live/" + activeTab+"/"}>
               <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-8 underline">
                 More from {activeTab}{" "}
                 <svg

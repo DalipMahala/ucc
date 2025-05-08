@@ -179,7 +179,7 @@ const FeatureNews = ({ newsUrl }: url) => {
                 ))}
               </div>
 
-              <Link href={"https://uccricket.live/" + activeTab}>
+              <Link href={"https://uccricket.live/" + activeTab+"/"}>
                 <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
                   More from News{" "}
                   <svg

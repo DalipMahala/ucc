@@ -13,7 +13,6 @@ import Stats from './seriesComponents/Stats';
 import SeriesList from './seriesComponents/SeriesList';
 import { liveSeries, seriesById, AllSeriesList } from "@/controller/homeController";
 import { SeriesKeyStats, SeriesMatches } from "@/controller/matchInfoController";
-import { TeamPlayers } from "@/controller/teamController";
 
 type Params = Promise<{ seriesName: string; seriesId: number; seriesTap: string; seriesStatsType: string }>
 interface FrMatch {
@@ -34,9 +33,6 @@ export default async function page(props: { params: Params }) {
   const seriesKeystats =  await SeriesKeyStats(seriesId);
   const seriesMatches =  await SeriesMatches(seriesId);
 
-  const teamIds = SeriesDetails?.teams?.map((series: any) => series.tid) || [];
-   
-  const teamPlayers =  await TeamPlayers(teamIds);
   const tournamentsList = await AllSeriesList();
   
 
@@ -54,7 +50,7 @@ export default async function page(props: { params: Params }) {
 
           {seriesTab === ""  || seriesTab === undefined && <Overview  seriesInfo={SeriesDetails} seriesKeystats={seriesKeystats} urlString={urlString} isPointTable={isPointTable}/>}
           {seriesTab === "schedule-results" && <ScheduleResults seriesId={seriesId} seriesMatches={seriesMatches} urlString={urlString} statsType={statsType} isPointTable={isPointTable}/>}
-          {seriesTab === "squads" && <Squads teamPlayers={teamPlayers}  seriesInfo={SeriesDetails} urlString={urlString} isPointTable={isPointTable}/>}
+          {seriesTab === "squads" && <Squads seriesInfo={SeriesDetails} urlString={urlString} isPointTable={isPointTable}/>}
           {seriesTab === "points-table" && <PointsTable seriesInfo={SeriesDetails} urlString={urlString} isPointTable={isPointTable} />}
           {seriesTab === "news" && <News  urlString={urlString} isPointTable={isPointTable}/>}
           {seriesTab === "stats" && <Stats seriesId={seriesId} urlString={urlString} statsType={statsType} isPointTable={isPointTable} seriesInfo={SeriesDetails}/>}

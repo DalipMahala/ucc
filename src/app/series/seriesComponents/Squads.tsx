@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { urlStringEncode} from "@/utils/utility";
@@ -8,15 +8,78 @@ import TabMenu from "./menu";
 
 interface Squad {
   urlString: string;
-  teamPlayers: any;
   seriesInfo: any;
   isPointTable:boolean;
 }
-export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable }: Squad) {
+interface Player {
+  pid: number; 
+}
+
+interface Team {
+  players?: Player[]; 
+}
+export default function Squad({ urlString, seriesInfo,isPointTable }: Squad) {
   const [activeTab, setActiveTab] = useState("tab0");
   const seriesName = seriesInfo?.abbr;
   const seriesFormat = seriesInfo?.game_format;
   const uniqueFormats: any[] = [...new Set(seriesInfo?.rounds.map((round:any) => round.match_format))];
+ const cid = seriesInfo.cid;
+  const [squads, setSquads] = useState([]);
+    const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    async function fetchSquads() {
+      try {
+        const response = await fetch("/api/series/SeriesSquads", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+          },
+          body: JSON.stringify({ cid: seriesInfo.cid }),
+        });
+        if (!response.ok) {
+          console.error(
+            `Error: API returned ${response.status} for CID ${cid}`
+          );
+          return null; // Skip failed requests
+        }
+
+        const result = await response.json();
+        let items = result?.data?.squads || [];
+        setSquads(items);
+      } catch (error) {
+        console.error("Error fetching matches:", error);
+      }
+    }
+        fetchSquads()
+    }, [cid]);
+  
+  const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
+        
+  useEffect(() => {
+    const getAllPlayerIds = (squads: Team[]) => {
+      const allIds = [
+        ...squads.flatMap(team => 
+          team?.players?.map((player: { pid: any; }) => player.pid)
+        )];
+      return [...new Set(allIds)]; // Deduplicate
+    };
+    const fetchPlayerUrls = async () => {
+      const ids = getAllPlayerIds(squads);
+      if (ids.length === 0) return;
+      const res = await fetch('/api/player-urls', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+        body: JSON.stringify({ ids }),
+      });
+      const data = await res.json();
+      setPlayerUrls(data);
+    };
+
+    fetchPlayerUrls();
+  }, [squads]);
+ 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
       <TabMenu urlString={urlString} isPointTable={isPointTable}/>
@@ -30,7 +93,7 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
           <div className="lg:col-span-4 md:col-span-5">
             <div className="rounded-lg p-2 mb-4 bg-[#ffffff]">
               <div id="team-buttons" className="">
-                {teamPlayers?.map((teamslist: any, index: number) => (
+                {squads?.map((teamslist: any, index: number) => (
                   <button
                     key={index}
                     className={`team-btn px-2 mb-1 py-3 w-full font-medium flex items-center border-b-[1px] ${
@@ -55,7 +118,7 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
           </div>
 
           <div className="lg:col-span-8 md:col-span-7">
-          {teamPlayers?.map((teamslist: any, index: number) => (
+          {squads?.map((teamslist: any, index: number) => (
             
             activeTab === "tab"+index && (
               <div id="south-team" className="team-content " key={index}>
@@ -72,7 +135,7 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                     <h1 className="text-[16px] font-semibold text-gray-800">
                       {teamslist?.team.abbr}{" "}
                       <span className="text-gray-500">
-                        ({uniqueFormats.flatMap((format) => teamslist?.players[format] ?? [])?.length} players)
+                        ({teamslist?.players?.length} players)
                       </span>
                     </h1>
                   </div>
@@ -85,14 +148,12 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                         Batsman
                       </h2>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        {uniqueFormats.flatMap((format) => teamslist?.players[format] ?? [])?.map((squads: any, index: number) => (
+                        {teamslist?.players?.map((squads: any, index: number) => (
                             (squads.playing_role === 'bat' || squads.playing_role === 'wk') &&
                           <Link className="rounded-md border-[1px] border-[##E2E2E2]"
                             href={
                               "/player/" +
-                              urlStringEncode(squads?.title) +
-                              "/" +
-                              squads?.pid
+                              playerUrls[squads?.pid]
                             }
                             key={index}
                           >
@@ -131,14 +192,12 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                         Bowler
                       </h2>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                      {uniqueFormats.flatMap((format) => teamslist?.players[format] ?? [])?.map((bowler: any, index: number) => (
+                      {teamslist?.players?.map((bowler: any, index: number) => (
                             bowler.playing_role === 'bowl' &&
                           <Link className="rounded-md border-[1px] border-[##E2E2E2]"
                             href={
                               "/player/" +
-                              urlStringEncode(bowler?.title) +
-                              "/" +
-                              bowler?.pid
+                              playerUrls[bowler?.pid]
                             }
                             key={index}
                           >
@@ -168,14 +227,12 @@ export default function Squad({ urlString, teamPlayers, seriesInfo,isPointTable 
                         All-Rounder
                       </h2>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                      {uniqueFormats.flatMap((format) => teamslist?.players[format] ?? [])?.map((allrounder: any, index: number) => (
+                      {teamslist?.players?.map((allrounder: any, index: number) => (
                         allrounder.playing_role === 'all' &&
                           <Link className="rounded-md border-[1px] border-[##E2E2E2]"
                             href={
                               "/player/" +
-                              urlStringEncode(allrounder?.title) +
-                              "/" +
-                              allrounder?.pid
+                              playerUrls[allrounder?.pid]
                             }
                             key={index}
                           >
