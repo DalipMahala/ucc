@@ -1002,15 +1002,18 @@ export default function Live({
                           key={`over-${index}`}
                         >
                           <div className="flex md:flex-row flex-col justify-between md:items-center gap-2">
+
                             <div className="text-[14px] font-normal text-white">
                               {matchinning.short_name} : {comment.score}
                             </div>
+
                             <div className="text-[14px] font-normal text-[#3992f4]">
                               {comment?.over}{" "}
                               <span className=" font-medium text-[13px]  text-white">
                                 End Of Over
                               </span>
                             </div>
+
                             <div className="text-[14px] font-normal  text-white">
                               {lastOverRun &&
                                 lastOverRun?.map(
@@ -1019,6 +1022,7 @@ export default function Live({
                                   )
                                 )}
                             </div>
+
                             <div className="text-[14px] font-normal  text-white">
                               {getPlayerNameByPid(
                                 players,
@@ -1038,6 +1042,8 @@ export default function Live({
                                 ({comment?.bats?.[1]?.balls_faced})
                               </span>
                             </div>
+
+
                             <div className="text-[14px] font-normal  text-white">
                               {getPlayerNameByPid(
                                 players,
@@ -1049,6 +1055,8 @@ export default function Live({
                                 {comment?.bowls?.[0]?.wickets}
                               </span>
                             </div>
+
+                            
                           </div>
                         </div>
                       ) : (

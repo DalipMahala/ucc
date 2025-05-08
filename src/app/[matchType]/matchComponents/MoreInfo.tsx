@@ -1573,7 +1573,7 @@ export default function MoreInfo({
                     <div className="md:w-[20%] w-[40%]">
                       <p className="mx-2 font-medium">On-field Umpire :</p>
                     </div>
-                    <div className="md:w-[80%] w-[60%]">
+                    <div className="md:w-[80%] w-[60%] text-end">
                       <p className="mx-2 text-[#586577] font-medium">
                         {matchData?.match_info?.umpires}
                       </p>
