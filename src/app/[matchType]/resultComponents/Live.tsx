@@ -663,12 +663,9 @@ export default function LiveResult({
 
 
                             <div className="text-[14px] font-normal ">
-                              {lastOverRun &&
-                                lastOverRun?.map(
-                                  (lastOver: any, idx: number) => (
-                                    <span key={idx}>{lastOver.score} </span>
-                                  )
-                                )}
+                            {updatedCommentaries?.map((cruns:any, index:number) => (cruns?.event !== "overend" && Number(cruns?.over)+1 == Number(comment?.over)) ? (
+                                            <span key={index}>{cruns?.score} </span>
+                                  ):(""))}
                             </div>
 
                             <div className="text-[14px] font-normal  text-[#3992f4]">
