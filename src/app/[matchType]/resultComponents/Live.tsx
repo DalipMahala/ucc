@@ -23,7 +23,7 @@ interface Live {
   // matchLast:any | null;
 }
 
-function getPlayerRecord(scoreCard:any,pid:number){
+function getPlayerRecord(scoreCard: any, pid: number) {
   return scoreCard?.batsmen.find((batsman: { batsman_id: any; }) => Number(batsman.batsman_id) === pid);
 }
 export default function LiveResult({
@@ -50,7 +50,7 @@ export default function LiveResult({
   // let matchInningbatsmen = matchCommentary?.commentaries[6]?.bowlers?.bowls?.overs;
 
   // let commentaries = matchInningCommentaries;
- 
+
 
   // console.log("LiveOdds", matchOdds?.oddsEvent);
   let teamwinpercentage = matchLiveData?.teamwinpercentage;
@@ -88,7 +88,7 @@ export default function LiveResult({
     0
   );
   // const players = matchStates?.players;
-const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_inning_number);
+  const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_inning_number);
   if (
     matchLiveData !== undefined &&
     matchLiveData?.match_id == match_id &&
@@ -370,35 +370,35 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
   }, [filter]);
 
   const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
-        
-    useEffect(() => {
-      const getAllPlayerIds = () => {
-        const allIds = [
-          matchinfo?.bowlers?.[0]?.bowler_id,
-          batsman?.[0]?.batsman_id,
-          batsman?.[1]?.batsman_id,
-        ];
-        return [...new Set(allIds)]; // Deduplicate
-      };
-      const fetchPlayerUrls = async () => {
-        const ids = getAllPlayerIds();
-        if (ids.length === 0) return;
-        const res = await fetch('/api/player-urls', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
-          body: JSON.stringify({ ids }),
-        });
-        const data = await res.json();
-        setPlayerUrls(data);
-      };
-  
-      fetchPlayerUrls();
-    }, []);
+
+  useEffect(() => {
+    const getAllPlayerIds = () => {
+      const allIds = [
+        matchinfo?.bowlers?.[0]?.bowler_id,
+        batsman?.[0]?.batsman_id,
+        batsman?.[1]?.batsman_id,
+      ];
+      return [...new Set(allIds)]; // Deduplicate
+    };
+    const fetchPlayerUrls = async () => {
+      const ids = getAllPlayerIds();
+      if (ids.length === 0) return;
+      const res = await fetch('/api/player-urls', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+        body: JSON.stringify({ ids }),
+      });
+      const data = await res.json();
+      setPlayerUrls(data);
+    };
+
+    fetchPlayerUrls();
+  }, []);
 
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-       <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable}/>
+      <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable} />
       {updatedCommentaries && updatedCommentaries.length > 0 ? (
         <div id="tab-content">
           <div id="live" className="tab-content ">
@@ -411,7 +411,7 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                       <div className="flex items-center justify-between">
                         <Link className="w-[43%]"
                           href={
-                            "/player/" +playerUrls[batsman?.[0]?.batsman_id]
+                            "/player/" + playerUrls[batsman?.[0]?.batsman_id]
                           }
                         >
                           <div className="flex items-center gap-3">
@@ -571,17 +571,17 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                     >
                       <div className="flex items-center justify-between gap-3 font-medium mx-auto w-[100%]">
 
-                        
-                          <div className="flex ga-1 items-center  w-[50%]">
-                            <div className="relative">
+
+                        <div className="flex ga-1 items-center  w-[50%]">
+                          <div className="relative">
                             <PlayerImage
-                                key={matchinfo?.bowlers?.[0]?.bowler_id}
-                                player_id={matchinfo?.bowlers?.[0]?.bowler_id}
-                                height={40}
-                                width={40}
-                                className="rounded-lg"
-                              />
-                               <Image
+                              key={matchinfo?.bowlers?.[0]?.bowler_id}
+                              player_id={matchinfo?.bowlers?.[0]?.bowler_id}
+                              height={40}
+                              width={40}
+                              className="rounded-lg"
+                            />
+                            <Image
                               src="/assets/img/player/ball.png"
                               className="absolute -bottom-1.5 -right-0.5 h-[13px] bg-white rounded-full p-[2px]"
                               width={13}
@@ -589,24 +589,24 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                               alt=""
                               loading="lazy"
                             />
-                            </div>
-                            <h2 className="md:text-[15px] text-[14px] text-[#586577] pl-[10px]">
-                              {getPlayerNameByPid(
-                                players,
-                                matchinfo?.bowlers?.[0]?.bowler_id
-                              )}
-                            </h2>
-
-                           
                           </div>
-                          <p className="md:text-[15px] text-[14px] flex items-center justify-end w-[50%]">
-                            {matchinfo?.bowlers?.[0]?.wickets}-
-                            {matchinfo?.bowlers?.[0]?.runs_conceded}{" "}
-                            <span className="md:text-[13px] text-[12px] text-[#586577] pt-[4px] px-1">
-                              ({matchinfo?.bowlers?.[0]?.overs})
-                            </span>
-                          </p>
-                        
+                          <h2 className="md:text-[15px] text-[14px] text-[#586577] pl-[10px]">
+                            {getPlayerNameByPid(
+                              players,
+                              matchinfo?.bowlers?.[0]?.bowler_id
+                            )}
+                          </h2>
+
+
+                        </div>
+                        <p className="md:text-[15px] text-[14px] flex items-center justify-end w-[50%]">
+                          {matchinfo?.bowlers?.[0]?.wickets}-
+                          {matchinfo?.bowlers?.[0]?.runs_conceded}{" "}
+                          <span className="md:text-[13px] text-[12px] text-[#586577] pt-[4px] px-1">
+                            ({matchinfo?.bowlers?.[0]?.overs})
+                          </span>
+                        </p>
+
                       </div>
                     </Link>
                   </div>
@@ -626,8 +626,8 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                     <button
                       key={item}
                       className={`cust-box-click-button px-5 py-1 rounded-full font-medium ${filter === item
-                          ? "bg-[#081736] text-[#ffffff]"
-                          : "bg-[#ffffff] text-[#6A7586]"
+                        ? "bg-[#081736] text-[#ffffff]"
+                        : "bg-[#ffffff] text-[#6A7586]"
                         }`}
                       onClick={() => setFilter(item)}
                     >
@@ -650,20 +650,19 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                     ?.map((comment: any, index: number) =>
                       comment?.event === "overend" ? (
                         <div
-                          className="rounded-t-lg bg-[#081736] p-4 mt-6"
+                          className="rounded-t-lg bg-[#f8f8f8] mt-6"  style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
                           key={`over-${index}`}
                         >
-                          <div className="flex md:flex-row flex-col justify-between md:items-center gap-2">
-                            <div className="text-[14px] font-normal  text-white">
+                          {/* <div className="flex md:flex-row flex-col justify-between md:items-center gap-2"> */}
+
+                          <div className="flex justify-between p-4">
+
+                            <div className="text-[14px] font-normal  ">
                               {matchinning.short_name} : {comment.score}
                             </div>
-                            <div className="text-[14px] font-normal  text-[#3992f4]">
-                              {comment?.over}{" "}
-                              <span className="text-[#586577] font-medium text-[13px]  text-white">
-                                End Of Over
-                              </span>
-                            </div>
-                            <div className="text-[14px] font-normal text-white">
+
+
+                            <div className="text-[14px] font-normal ">
                               {lastOverRun &&
                                 lastOverRun?.map(
                                   (lastOver: any, idx: number) => (
@@ -671,7 +670,20 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                                   )
                                 )}
                             </div>
-                            <div className="text-[14px] font-normal  text-white">
+
+                            <div className="text-[14px] font-normal  text-[#3992f4]">
+                              {comment?.over}{" "}
+                              <span className="text-[#586577] font-medium text-[13px]  text-white">
+                                End Of Over
+                              </span>
+                            </div>
+
+                          </div>
+
+                          <div className="border-b-[1px] border-[#e7e7e7]"></div>
+
+                          <div className="flex justify-between p-4">
+                            <div className="text-[14px] font-normal  ">
                               {getPlayerNameByPid(
                                 players,
                                 comment?.bats?.[0]?.batsman_id
@@ -690,7 +702,9 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                                 ({comment?.bats?.[1]?.balls_faced})
                               </span>
                             </div>
-                            <div className="text-[14px] font-normal  text-white">
+
+
+                            <div className="text-[14px] font-normal  ">
                               {getPlayerNameByPid(
                                 players,
                                 comment?.bowls?.[0]?.bowler_id
@@ -701,7 +715,9 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                                 {comment?.bowls?.[0]?.wickets}
                               </span>
                             </div>
+
                           </div>
+
                         </div>
                       ) : (
                         <div
@@ -719,12 +735,12 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                               </p>
                               <p
                                 className={`text-[16px] font-semibold px-[11px] py-[2px] rounded-lg ${comment?.run == 6
-                                    ? "bg-[#13b76dbd] text-white"
-                                    : comment?.run == 4
-                                      ? "bg-orange-500 text-white"
-                                      : comment?.score == "w"
-                                        ? "bg-red-500 text-white"
-                                        : " text-white bg-[#bec2d3]"
+                                  ? "bg-[#13b76dbd] text-white"
+                                  : comment?.run == 4
+                                    ? "bg-orange-500 text-white"
+                                    : comment?.score == "w"
+                                      ? "bg-red-500 text-white"
+                                      : " text-white bg-[#bec2d3]"
                                   }`}
                               >
                                 {comment?.score}
@@ -799,7 +815,7 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                                         4s/6s
                                       </p>
                                       <p className="md:text-2xl text-[16px] font-semibold">
-                                      {getPlayerRecord(scorecard,Number(comment?.wicket_batsman_id))?.fours}/{getPlayerRecord(scorecard,Number(comment?.wicket_batsman_id))?.sixes}
+                                        {getPlayerRecord(scorecard, Number(comment?.wicket_batsman_id))?.fours}/{getPlayerRecord(scorecard, Number(comment?.wicket_batsman_id))?.sixes}
                                       </p>
                                     </div>
                                     <div className="text-end">
@@ -807,7 +823,7 @@ const [latestInning, setLatestInning] = useState(matchLiveData?.live?.live_innin
                                         SR
                                       </p>
                                       <p className="md:text-2xl text-[16px] font-semibold">
-                                      {getPlayerRecord(scorecard,Number(comment?.wicket_batsman_id))?.strike_rate}
+                                        {getPlayerRecord(scorecard, Number(comment?.wicket_batsman_id))?.strike_rate}
                                       </p>
                                     </div>
                                   </div>
