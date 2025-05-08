@@ -19,6 +19,9 @@ interface FrMatch {
   match_info: any;
   // Other properties you expect in each match object
 }
+interface Match {
+  status: number;
+}
 export default async function page(props: { params: Params }) {
 
   const params = await props.params;
@@ -31,7 +34,7 @@ export default async function page(props: { params: Params }) {
   const SeriesDetails = await seriesById(seriesId);
   const urlString = "/series/"+seriesName+"/"+seriesId;
   const seriesKeystats =  await SeriesKeyStats(seriesId);
-  const seriesMatches =  await SeriesMatches(seriesId);
+  // const seriesMatches =  await SeriesMatches(seriesId);
 
   const tournamentsList = await AllSeriesList();
   
@@ -40,6 +43,30 @@ export default async function page(props: { params: Params }) {
   const isPointTable = Array.isArray(standings) && standings.length > 0;
   //  console.log('teamIds', seriesMatches);
 
+  let seriesMatchesList = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/series/SeriesMatches`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+    },
+    cache: "no-store",
+    body: JSON.stringify({ cid: seriesId }),
+  });
+  const allMatches = await seriesMatchesList.json();
+
+  const categorizedMatches: {
+    scheduledMatch: Match[];
+    resultMatch: Match[];
+    liveMatch: Match[];
+  } = { scheduledMatch: [], resultMatch: [], liveMatch: [] };
+  
+  allMatches?.data?.forEach((match: { status: number }) => {
+    if (match.status === 1) categorizedMatches.scheduledMatch.push(match);
+    else if (match.status === 2) categorizedMatches.resultMatch.push(match);
+    else if (match.status === 3) categorizedMatches.liveMatch.push(match);
+  });
+
+  const seriesMatches = categorizedMatches;
   return (
     <Layout>
           {seriesName === '' || seriesName === undefined ? (

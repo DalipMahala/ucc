@@ -41,9 +41,8 @@ export default function Scorecard({
     eventEmitter.on("matchLiveData", handleMatchData);
     // eventEmitter.removeListener("matchData", handleMatchData);
     
- 
-  
-  const [openHeading, setOpenHeading] = useState<number>(0);
+    let matchscorecard = matchLiveData?.scorecard?.innings;
+  const [openHeading, setOpenHeading] = useState<number>(matchscorecard.length ? matchscorecard.length-1 : 0);
   
     const handleToggle = (index: number) => {
       // console.log("toggle",index);
@@ -52,7 +51,7 @@ export default function Scorecard({
   const tabIndex = openHeading;
 
 
-  let matchscorecard = matchLiveData?.scorecard?.innings;
+  
   let matchinning = matchLiveData?.scorecard?.innings[tabIndex];
   let batsman = matchinning?.batsmen;
   let bowlers = matchinning?.bowlers;

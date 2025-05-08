@@ -9,6 +9,7 @@ import { format, isSameDay } from "date-fns";
 import CountdownTimer from "../../components/countdownTimer";
 import FantasyTips from "@/app/components/FantasyTips";
 import TabMenu from "./menu";
+import PlayerImage from "@/app/components/PlayerImage";
 
 interface ScheduleResults {
   urlString: string;
@@ -848,19 +849,23 @@ export default function ScheduleResults({
                                 </p>
                               </div>
                             </Link>
-
-                            <div className="h-[100px] border-l-[1px] border-[#efefef] hidden"></div>
-
-                            <div className="hidden flex-col items-center">
-                              <Image loading="lazy"
-                                src="/assets/img/default.png"
-                                width={40}
-                                height={40}
-                                alt=""
-                              />
+                            {(cmatch.man_of_the_match && !Array.isArray(cmatch.man_of_the_match)) &&
+                            <>
+                            <div className="h-[100px] border-l-[1px] border-[#efefef] "></div>
+                            <Link 
+                        href={
+                          "/player/" +
+                          urlStringEncode(cmatch?.man_of_the_match?.name)+"/"+cmatch?.man_of_the_match?.pid
+                        }>
+                            <div className="flex flex-col items-center">
+                              <PlayerImage key={cmatch?.man_of_the_match?.pid} player_id={cmatch?.man_of_the_match?.pid} height={40} width={40} className="rounded-full" />
+                            
                               <p className="text-[14px] font-semibold">{cmatch?.man_of_the_match?.name}</p>
                               <p className="text-[14px]">Man of the match</p>
                             </div>
+                            </Link>
+                            </>
+                            }
                           </div>
                         </div>
                         <div className="border-t-[1px] border-[#E7F2F4]"></div>
