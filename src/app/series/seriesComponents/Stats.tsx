@@ -12,6 +12,9 @@ interface Stats {
     isPointTable: boolean;
     seriesInfo: any;
 }
+interface PlayerUrlResponse {
+    [key: string]: string;
+  }
 
 async function fetchHtml(seriesId: number) {
     if (!seriesId || seriesId === 0) return '';
@@ -117,7 +120,31 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
     const statsName = renderStatusName();
     const statsMatch = await MatcheStats(seriesId, statType);
     const matchStats = statsMatch?.stats;
-    // console.log("renderStatus",matchStats);
+
+    const getAllPlayerIds = () => {
+        const allIds = [
+          ...matchStats.map((item: {
+            player: any; pid: any }) => item?.player?.pid),
+        ];
+        return [...new Set(allIds)]; // Deduplicate
+      };
+    
+      const ids = getAllPlayerIds();
+      let playerUrls: PlayerUrlResponse = {};
+    
+      if (ids.length > 0) {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/player-urls`, {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+          },
+          cache: 'no-store', // Ensure fresh data
+          body: JSON.stringify({ ids }),
+        });
+        playerUrls = await res.json();
+      }
+    // console.log("renderStatus",playerUrls);
 
     return (
         <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
@@ -292,7 +319,7 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
                                                                 <tr key={index}>
                                                                     <td className="md:px-2 pl-[14px] py-3 w-[10px]">{index + 1}</td>
                                                                     <td className="md:px-2 py-3 text-[#217AF7]">
-                                                                        <Link href={"/player/" + urlStringEncode(stats?.player?.first_name) + "/" + stats?.player?.pid}> {stats?.player?.short_name}</Link>
+                                                                        <Link href={"/player/" + playerUrls[stats?.player?.pid]}> {stats?.player?.short_name}</Link>
                                                                     </td>
                                                                     <td className="md:px-2 pl-[14px] py-3">{stats?.matches}</td>
                                                                     <td className="md:px-2 pl-[14px] py-3">{stats?.innings}</td>
@@ -351,7 +378,7 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
                                                                 <tr key={index}>
                                                                     <td className="md:px-2 pl-[14px] py-3 w-[10px]">{index + 1}</td>
                                                                     <td className="md:px-2 py-3 text-[#217AF7]">
-                                                                        <Link href={"/player/" + urlStringEncode(stats?.player?.first_name) + "/" + stats?.player?.pid}> {stats?.player?.short_name}</Link>
+                                                                        <Link href={"/player/" + playerUrls[stats?.player?.pid]}> {stats?.player?.short_name}</Link>
                                                                     </td>
                                                                     <td className="md:px-2 pl-[14px] py-3">{stats?.matches}</td>
                                                                     <td className="md:px-2 pl-[14px] py-3">{stats?.innings}</td>

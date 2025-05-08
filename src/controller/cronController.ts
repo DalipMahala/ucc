@@ -1117,8 +1117,8 @@ export async function CompetitionInfo() {
 
 export async function CompetitionMatches() {
   try {
-    // const competitionsQuery = `SELECT cid FROM competitions WHERE cid not in (SELECT cid FROM competition_matches) or (date(dateend) >= date(now()) and status = 'result') or status = 'live'`;
-    const competitionsQuery = `SELECT cid FROM competitions WHERE cid =129425`;
+    const competitionsQuery = `SELECT cid FROM competitions WHERE cid not in (SELECT cid FROM competition_matches) or (date(dateend) >= date(now()) and status = 'result') or status = 'live'`;
+    // const competitionsQuery = `SELECT cid FROM competitions WHERE cid =129425`;
    
     const [competitionsResults]: any = await db.query(
       competitionsQuery

@@ -152,7 +152,37 @@ export default function Overview({
       selectedMatches = upcomingMatch?.slice(0, 3);
     }
   }
-  // console.log("completedMatch", seriesKeystats?.mostRuns?.stats);
+
+  const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
+  
+    useEffect(() => {
+      const getAllPlayerIds = () => {
+        const allIds = [
+          ...seriesKeystats?.mostRuns?.stats?.slice(0, 3).map((item: { player: any; player_id: any; }) => item?.player?.pid),
+          ...seriesKeystats?.topWickets?.stats?.slice(0, 3).map((item: { player: any; player_id: any; }) => item?.player?.pid),
+          seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid,
+          seriesKeystats?.highStrike?.stats?.[0]?.player?.pid,
+          seriesKeystats?.topWickets?.stats?.[0]?.player?.pid,
+          seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid
+        ];
+        return [...new Set(allIds)]; // Deduplicate
+      };
+     
+      const fetchPlayerUrls = async () => {
+        const ids = getAllPlayerIds();
+        if (ids.length === 0) return;
+        const res = await fetch('/api/player-urls', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+          body: JSON.stringify({ ids }),
+        });
+        const data = await res.json();
+        setPlayerUrls(data);
+      };
+  
+      fetchPlayerUrls();
+    }, [seriesKeystats?.mostRuns?.stats?.slice(0, 3), seriesKeystats?.topWickets?.stats?.slice(0, 3)]);
+
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
       <TabMenu urlString={urlString} isPointTable={isPointTable} />
@@ -611,7 +641,7 @@ export default function Overview({
                                       />
 
                                     </div>
-                                    <Link href={"/player/" + urlStringEncode(player?.player?.title) + "/" + player?.player?.pid}>
+                                    <Link href={"/player/" + playerUrls[player?.player?.pid]}>
                                       <div>
                                         <p className="font-medium">{player?.player?.short_name}</p>
                                         <p className="text-[12px]">{player?.team?.abbr}</p>
@@ -684,7 +714,7 @@ export default function Overview({
                                       />
 
                                     </div>
-                                    <Link href={"/player/" + urlStringEncode(player?.player?.title) + "/" + player?.player?.pid}>
+                                    <Link href={"/player/" + playerUrls[player?.player?.pid]}>
                                       <div>
                                         <p className="font-medium">{player?.player?.short_name}</p>
                                         <p className="text-[12px]">{player?.team?.abbr}</p>
@@ -741,11 +771,7 @@ export default function Overview({
                       <Link
                         href={
                           "/player/" +
-                          urlStringEncode(
-                            seriesKeystats?.mostRuns?.stats?.[0]?.player?.first_name
-                          ) +
-                          "/" +
-                          seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid
+                          playerUrls[seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid]
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
@@ -780,11 +806,7 @@ export default function Overview({
                       <Link
                         href={
                           "/player/" +
-                          urlStringEncode(
-                            seriesKeystats?.highStrike?.stats?.[0]?.player?.first_name
-                          ) +
-                          "/" +
-                          seriesKeystats?.highStrike?.stats?.[0]?.player?.pid
+                          playerUrls[seriesKeystats?.highStrike?.stats?.[0]?.player?.pid]
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
@@ -817,11 +839,7 @@ export default function Overview({
                       <Link
                         href={
                           "/player/" +
-                          urlStringEncode(
-                            seriesKeystats?.topWickets?.stats?.[0]?.player?.first_name
-                          ) +
-                          "/" +
-                          seriesKeystats?.topWickets?.stats?.[0]?.player?.pid
+                          playerUrls[seriesKeystats?.topWickets?.stats?.[0]?.player?.pid]
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
@@ -854,11 +872,7 @@ export default function Overview({
                       <Link
                         href={
                           "/player/" +
-                          urlStringEncode(
-                            seriesKeystats?.bestBowling?.stats?.[0]?.player?.first_name
-                          ) +
-                          "/" +
-                          seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid
+                          playerUrls[seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid]
                         }
                       >
                         <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
@@ -898,7 +912,7 @@ export default function Overview({
                     <Link
                       href={
                         "/team/" +
-                        urlStringEncode(teams.alt_name) +
+                        urlStringEncode(teams.abbr) +
                         "/" +
                         teams.tid
                       }
