@@ -706,7 +706,7 @@ export async function MatchStatisticsCompleted() {
 
 export async function Last10MatchData() {
   try {
-    const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_advance)`;
+    const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_advance) or (status = 2 and DATE(date_start_ist) BETWEEN DATE(NOW() - INTERVAL 1 DAY) AND DATE(NOW()))`;
     
     const [matchResults]: any = await db.query(matchQuery);
 

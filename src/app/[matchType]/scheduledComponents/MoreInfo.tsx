@@ -58,34 +58,51 @@ export default function MoreInfo({
 
   const matchlistA = matchLast?.items?.teama_last10_match;
   const matchlistB = matchLast?.items?.teamb_last10_match;
+  const matchlistASameVenue = matchLast?.items?.teama_last10_match_same_venue;
+  const matchlistBSameVenue = matchLast?.items?.teamb_last10_match_same_venue;
   const matchlistAB = matchLast?.items?.teama_vs_teamb_last10_match ?? "";
-  const matchlistSameVenue = matchLast?.items?.teama_vs_teamb_last10_match_same_venue ?? "";
+  const matchlistSameVenue =
+    matchLast?.items?.teama_vs_teamb_last10_match_same_venue ?? "";
   const matchVenueStats = matchLast?.items?.venue_stats ?? "";
-  // console.log("test1",matchVenueStats?.average_score_for_venue?.[0]?.avgruns);
+
   let teamaWinMatch = 0;
   let teambWinMatch = 0;
   const matchPlayed = matchlistAB.length;
-  matchlistAB?.map((items: { winning_team_id: any }) =>
-    items.winning_team_id === teama_id
-      ? teamaWinMatch++
-      : items.winning_team_id === teamb_id
+  const matchPlayedA = matchlistA.length;
+  const matchPlayedB = matchlistB.length;
+
+  if (Array.isArray(matchlistA) && matchlistA.length > 0) {
+    matchlistA?.map((items: { winning_team_id: any }) =>
+      items.winning_team_id === teama_id
+        ? teamaWinMatch++
+        : ""
+    );
+  }
+
+  if (Array.isArray(matchlistB) && matchlistB.length > 0) {
+    matchlistB?.map((items: { winning_team_id: any }) =>
+      items.winning_team_id === teamb_id
         ? teambWinMatch++
         : ""
-  );
+    );
+  }
 
   const teamaWinper =
-    teamaWinMatch > 0 ? (teamaWinMatch / matchPlayed) * 100 : 0;
+    teamaWinMatch > 0 ? (teamaWinMatch / matchPlayedA) * 100 : 0;
   const teambWinper =
-    teambWinMatch > 0 ? (teambWinMatch / matchPlayed) * 100 : 0;
+    teambWinMatch > 0 ? (teambWinMatch / matchPlayedB) * 100 : 0;
 
   let teamAScores: any = [];
-  if (Array.isArray(matchlistAB) && matchlistAB.length > 0) {
-    teamAScores = matchlistAB?.map(
-      (match: { teama: { scores: string } }) => {
-        const score = match?.teama?.scores?.split("/")[0]; // Get the runs before "/"
-        return parseInt(score, 10) || 0; // Convert to a number
-      }
-    );
+
+
+  if (Array.isArray(matchlistA) && matchlistA.length > 0) {
+    teamAScores = matchlistA?.map((match:any) => {
+      const team = match?.teama?.team_id === teama_id ? match?.teama : 
+                   match?.teamb?.team_id === teama_id ? match?.teamb : 
+                   null;
+      const score =  team?.scores?.split('/')[0];
+      return parseInt(score, 10) || 0;
+    });
   }
 
   const highestScoreTeamA = (teamAScores?.length ?? 0) > 0 ? Math.max(...teamAScores) : 0;
@@ -97,13 +114,15 @@ export default function MoreInfo({
       : 0;
 
   let teamBScores: any = [];
-  if (Array.isArray(matchlistAB) && matchlistAB.length > 0) {
-    teamBScores = matchlistAB?.map(
-      (match: { teamb: { scores: string } }) => {
-        const score = match?.teamb?.scores?.split("/")[0]; // Get the runs before "/"
-        return parseInt(score, 10) || 0; // Convert to a number
-      }
-    );
+
+  if (Array.isArray(matchlistB) && matchlistB.length > 0) {
+    teamBScores = matchlistB?.map((match:any) => {
+      const team = match?.teama?.team_id === teamb_id ? match?.teama : 
+                   match?.teamb?.team_id === teamb_id ? match?.teamb : 
+                   null;
+      const score =  team?.scores?.split('/')[0];
+      return parseInt(score, 10) || 0;
+    });
   }
   const highestScoreTeamB = (teamBScores?.length ?? 0) > 0 ? Math.max(...teamBScores) : 0;
   const lowestScoreTeamB = (teamBScores?.length ?? 0) > 0 ? Math.min(...teamBScores) : 0;
@@ -116,33 +135,42 @@ export default function MoreInfo({
   let sameVenueteamaWinMatch = 0;
   let sameVenueteambWinMatch = 0;
   const sameVenuematchPlayed = matchlistSameVenue.length;
-  if (Array.isArray(matchlistSameVenue) && matchlistSameVenue.length > 0) {
-    matchlistSameVenue?.map((items: { winning_team_id: any }) =>
+  const sameVenuematchPlayedA = matchlistASameVenue.length;
+  const sameVenuematchPlayedB = matchlistBSameVenue.length;
+  if (Array.isArray(matchlistASameVenue) && matchlistASameVenue.length > 0) {
+    matchlistASameVenue?.map((items: { winning_team_id: any }) =>
       items.winning_team_id === teama_id
         ? sameVenueteamaWinMatch++
-        : items.winning_team_id === teamb_id
-          ? sameVenueteambWinMatch++
-          : ""
+        :  ""
+    );
+  }
+  if (Array.isArray(matchlistBSameVenue) && matchlistBSameVenue.length > 0) {
+    matchlistBSameVenue?.map((items: { winning_team_id: any }) =>
+      items.winning_team_id === teamb_id
+        ? sameVenueteambWinMatch++
+        :  ""
     );
   }
 
   const sameVenueteamaWinper =
-    sameVenuematchPlayed > 0
-      ? (sameVenueteamaWinMatch / sameVenuematchPlayed) * 100
+    sameVenuematchPlayedA > 0
+      ? (sameVenueteamaWinMatch / sameVenuematchPlayedA) * 100
       : 0;
   const sameVenueteambWinper =
-    sameVenuematchPlayed > 0
-      ? (sameVenueteambWinMatch / sameVenuematchPlayed) * 100
+    sameVenuematchPlayedB > 0
+      ? (sameVenueteambWinMatch / sameVenuematchPlayedB) * 100
       : 0;
 
   let sameVenueteamAScores: any = '';
-  if (Array.isArray(matchlistSameVenue) && matchlistSameVenue.length > 0) {
-    sameVenueteamAScores = matchlistSameVenue?.map(
-      (match: { teama: { scores: string } }) => {
-        const score = match?.teama?.scores?.split("/")[0]; // Get the runs before "/"
-        return parseInt(score, 10); // Convert to a number
-      }
-    );
+
+  if (Array.isArray(matchlistASameVenue) && matchlistASameVenue.length > 0) {
+    sameVenueteamAScores = matchlistASameVenue?.map((match:any) => {
+      const team = match?.teama?.team_id === teama_id ? match?.teama : 
+                   match?.teamb?.team_id === teama_id ? match?.teamb : 
+                   null;
+      const score =  team?.scores?.split('/')[0];
+      return parseInt(score, 10) || 0;
+    });
   }
 
   const sameVenuehighestScoreTeamA =
@@ -158,13 +186,15 @@ export default function MoreInfo({
 
 
   let sameVenueteamBScores: any = '';
-  if (Array.isArray(matchlistSameVenue) && matchlistSameVenue.length > 0) {
-    sameVenueteamBScores = matchlistSameVenue?.map(
-      (match: { teamb: { scores: string } }) => {
-        const score = match?.teamb?.scores?.split("/")[0]; // Get the runs before "/"
-        return parseInt(score, 10); // Convert to a number
-      }
-    );
+
+  if (Array.isArray(matchlistBSameVenue) && matchlistBSameVenue.length > 0) {
+    sameVenueteamBScores = matchlistBSameVenue?.map((match:any) => {
+      const team = match?.teama?.team_id === teamb_id ? match?.teama : 
+                   match?.teamb?.team_id === teamb_id ? match?.teamb : 
+                   null;
+      const score =  team?.scores?.split('/')[0];
+      return parseInt(score, 10) || 0;
+    });
   }
   const sameVenuehighestScoreTeamB =
     (sameVenueteamBScores?.length ?? 0) > 0 ? Math.max(...sameVenueteamBScores) : 0;
@@ -958,7 +988,7 @@ export default function MoreInfo({
                           <div className="py-2 flex justify-between items-center">
                             <div className="font-medium text-[#586577] w-full">
                               <p className="mx-2 font-semibold uppercase">
-                                {matchPlayed}
+                                {matchPlayedA}
                               </p>
                             </div>
                             <div className=" font-semibold text-center w-full">
@@ -968,7 +998,7 @@ export default function MoreInfo({
                             </div>
                             <div className="font-medium text-right w-full">
                               <p className="text-[#586577] font-medium">
-                                {matchPlayed}
+                                {matchPlayedB}
                               </p>
                             </div>
                           </div>
@@ -1097,7 +1127,7 @@ export default function MoreInfo({
                             <div className="py-2 flex justify-between items-center">
                               <div className="font-medium text-[#586577] w-full">
                                 <p className="mx-2 font-semibold uppercase">
-                                  {sameVenuematchPlayed}
+                                  {sameVenuematchPlayedA}
                                 </p>
                               </div>
                               <div className=" font-semibold text-center w-full">
@@ -1107,7 +1137,7 @@ export default function MoreInfo({
                               </div>
                               <div className="font-medium text-right w-full">
                                 <p className="text-[#586577] font-medium">
-                                  {sameVenuematchPlayed}
+                                  {sameVenuematchPlayedB}
                                 </p>
                               </div>
                             </div>
