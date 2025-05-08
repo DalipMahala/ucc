@@ -244,6 +244,12 @@ export default function MoreInfo({
 
     fetchPlayerUrls();
   }, [teama11Players, teamb11Players]);
+
+  const a = parseFloat(matchData?.live_odds?.matchodds?.teama?.back || 0);
+  const b = parseFloat(matchData?.live_odds?.matchodds?.teamb?.back || 0);
+  const lesserTeam = a < b
+    ? { team: matchData?.match_info?.teama?.short_name, ...matchData?.live_odds?.matchodds?.teama }
+    : { team: matchData?.match_info?.teamb?.short_name, ...matchData?.live_odds?.matchodds?.teamb };
   return (
     <>
       <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
@@ -1683,30 +1689,38 @@ export default function MoreInfo({
                         <div className="cust-box-click-content">
                           <div className="flex justify-between items-center border-t-[1px] pt-2">
                             <div className="text-1xl font-medium">
-                              {matchData?.match_info?.teama?.short_name}
+                            {lesserTeam?.team}
                             </div>
                             <div className="flex items-center gap-2">
                               <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
-                                {matchData?.live_odds?.matchodds?.teama
-                                  ?.back !== null &&
-                                  matchData?.live_odds?.matchodds?.teama
-                                    ?.back !== undefined &&
-                                  matchData?.live_odds?.matchodds?.teama
-                                    ?.back !== ""
-                                  ? Math.round((matchData?.live_odds?.matchodds?.teama
-                                    ?.back) * 100 - 100)
-                                  : 0}
+                              {lesserTeam
+                              ?.back !== null &&
+                              lesserTeam
+                                ?.back !== undefined &&
+                              lesserTeam
+                                ?.back !== ""
+                              ? Math.round(
+                                lesserTeam
+                                  ?.back *
+                                100 -
+                                100
+                              )
+                              : 0}
                               </p>
                               <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">
-                                {matchData?.live_odds?.matchodds?.teama
-                                  ?.lay !== null &&
-                                  matchData?.live_odds?.matchodds?.teama
-                                    ?.lay !== undefined &&
-                                  matchData?.live_odds?.matchodds?.teama
-                                    ?.lay !== ""
-                                  ? Math.round((matchData?.live_odds?.matchodds?.teama
-                                    ?.lay) * 100 - 100)
-                                  : 0}
+                              {lesserTeam
+                              ?.lay !== null &&
+                              lesserTeam
+                                ?.lay !== undefined &&
+                              lesserTeam
+                                ?.lay !== ""
+                              ? Math.round(
+                                lesserTeam
+                                  ?.lay *
+                                100 -
+                                100
+                              )
+                              : 0}
                               </p>
                             </div>
                           </div>
@@ -1782,7 +1796,17 @@ export default function MoreInfo({
                                     : ""}{" "}
                                 </h2>
                                 <p className="text-[#757A82] font-normal">
-                                  {player.role}
+                                  {
+                                    player.role !== "" 
+                                      ? player.role === 'wk' 
+                                        ? 'Wicket Keeper' 
+                                        : player.role === 'bat' 
+                                          ? 'Batsman' 
+                                          : player.role === 'bowl' 
+                                            ? 'Bowler' 
+                                            : 'All Rounder'
+                                      : ""
+                                  }
                                 </p>
                               </div>
                             </div>
@@ -1820,7 +1844,17 @@ export default function MoreInfo({
                                     : ""}{" "}
                                 </h2>
                                 <p className="text-[#757A82] font-normal">
-                                  {player.role}
+                                {
+                                    player.role !== "" 
+                                      ? player.role === 'wk' 
+                                        ? 'Wicket Keeper' 
+                                        : player.role === 'bat' 
+                                          ? 'Batsman' 
+                                          : player.role === 'bowl' 
+                                            ? 'Bowler' 
+                                            : 'All Rounder'
+                                      : ""
+                                  }
                                 </p>
                               </div>
                             </div>

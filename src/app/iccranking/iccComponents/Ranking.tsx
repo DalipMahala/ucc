@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image';
 import Link from 'next/link'
 import { urlStringEncode } from "@/utils/utility";
@@ -43,7 +43,31 @@ interface Team {
         rankData = ranking?.[arrayName]?.['all-rounders']?.[arrayType];
     }
       
-    // console.log('Team',rankData);
+    const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
+      
+    useEffect(() => {
+      const getAllPlayerIds = () => {
+        const allIds = [
+          ...rankData?.map((item: { pid: any; }) => item?.pid),
+        ];
+        return [...new Set(allIds)]; // Deduplicate
+      };
+      
+      const fetchPlayerUrls = async () => {
+        const ids = getAllPlayerIds();
+        if (ids.length === 0) return;
+        const res = await fetch('/api/player-urls', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+          body: JSON.stringify({ ids }),
+        });
+        const data = await res.json();
+        setPlayerUrls(data);
+      };
+  
+      fetchPlayerUrls();
+    }, [rankData]);
+    // console.log('Team',playerUrls);
   
   
     return (
@@ -141,7 +165,7 @@ interface Team {
                             background: "linear-gradient(90deg, #3C1492 0%, #6D1E93 100%)"
                           }}        key={index}  >
                             {iccRankingType !=='team' ?
-                          <Link href={"/player/"+urlStringEncode(rankDetails.player)+"/"+rankDetails.pid}>
+                          <Link href={"/player/"+playerUrls[rankDetails.pid]}>
                           <div className="flex items-center">
                            
                             <PlayerImage key={rankDetails?.pid} player_id={ rankDetails.pid} height={48} width={48} className="w-12 h-12 rounded-lg mr-3" />
@@ -192,7 +216,7 @@ interface Team {
                                 <td className="px-1">-</td>
                                 {iccRankingType !=='team' &&
                                 <td className="py-2 px-3 font-medium text-[#3d3d3d]">
-                                <Link href={"/player/"+urlStringEncode(rankDetails.player)+"/"+rankDetails.pid}> {rankDetails.player} </Link> </td>
+                                <Link href={"/player/"+playerUrls[rankDetails.pid]}> {rankDetails.player} </Link> </td>
                                 }
                                 <td className="py-2 px-3">{rankDetails.team}</td>
                                 <td className="py-2 px-3 font-semibold">{rankDetails.rating}</td>

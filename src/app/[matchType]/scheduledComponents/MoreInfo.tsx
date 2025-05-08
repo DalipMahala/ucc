@@ -1687,7 +1687,17 @@ export default function MoreInfo({
                                 {player.role_str !== "" ? player.role_str : ""}{" "}
                               </h2>
                               <p className="text-[#757A82] font-normal">
-                                {player.role}
+                              {
+                                    player.role !== "" 
+                                      ? player.role === 'wk' 
+                                        ? 'Wicket Keeper' 
+                                        : player.role === 'bat' 
+                                          ? 'Batsman' 
+                                          : player.role === 'bowl' 
+                                            ? 'Bowler' 
+                                            : 'All Rounder'
+                                      : ""
+                                  }
                               </p>
                             </div>
                           </div>
@@ -1717,7 +1727,17 @@ export default function MoreInfo({
                                 {player.role_str !== "" ? player.role_str : ""}{" "}
                               </h2>
                               <p className="text-[#757A82] font-normal">
-                                {player.role}
+                              {
+                                    player.role !== "" 
+                                      ? player.role === 'wk' 
+                                        ? 'Wicket Keeper' 
+                                        : player.role === 'bat' 
+                                          ? 'Batsman' 
+                                          : player.role === 'bowl' 
+                                            ? 'Bowler' 
+                                            : 'All Rounder'
+                                      : ""
+                                  }
                               </p>
                             </div>
                           </div>

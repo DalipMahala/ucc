@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
 import { format } from "date-fns";
@@ -165,6 +165,30 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
   }
   const newsUrl = playerProfile[0]?.newUrl;
 
+  const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
+        
+  useEffect(() => {
+    const getAllPlayerIds = () => {
+      const allIds = [
+        ...topPlayer?.map((item: { pid: any; }) => item?.pid),
+      ];
+      return [...new Set(allIds)]; // Deduplicate
+    };
+    
+    const fetchPlayerUrls = async () => {
+      const ids = getAllPlayerIds();
+      if (ids.length === 0) return;
+      const res = await fetch('/api/player-urls', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+        body: JSON.stringify({ ids }),
+      });
+      const data = await res.json();
+      setPlayerUrls(data);
+    };
+
+    fetchPlayerUrls();
+  }, [topPlayer]);
 
   return (
     <section className="lg:w-[1000px] md:mx-auto mx-2">
@@ -896,7 +920,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                     <div className={`grid md:grid-cols-4 grid-cols-2 gap-4 `}>
                       {topPlayer?.slice(0, 4)?.map((players: any, index: number) => (
                         <div className="col-span-1 bg-white p-4 rounded-lg border-[1px] border-[#ebebeb] " key={index}>
-                          <Link href={"/player/" + urlStringEncode(players?.player) + "/" + players?.pid}>
+                          <Link href={"/player/" + playerUrls[players?.pid]}>
                             <div className="text-center">
                               <div className="flex justify-center mb-2">
                                 <div className="relative">
