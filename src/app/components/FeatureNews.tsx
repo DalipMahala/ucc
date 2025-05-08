@@ -75,7 +75,7 @@ const FeatureNews = ({ newsUrl }: url) => {
 
                     </h3>
                     <Link href={post?.link}>
-                      <h2 className="text-[18px] font-semibold mb-2 leading-[24px]" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered, 8)) }} >
+                      <h2 className="text-[18px] font-semibold mb-2 leading-[24px] hover:text-[#1a80f8]" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered, 8)) }} >
 
                       </h2>
                     </Link>
@@ -135,7 +135,7 @@ const FeatureNews = ({ newsUrl }: url) => {
                       
 <div>
                         <Link href={post?.link}>
-                          <h2 className="md:text-1xl text-[14px] font-semibold mb-1" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered, 10)) }} >
+                          <h2 className="md:text-1xl text-[14px] font-semibold mb-1 hover:text-[#1a80f8]" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered, 10)) }} >
 
                           </h2>
                         </Link>

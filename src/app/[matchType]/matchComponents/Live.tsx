@@ -867,11 +867,11 @@ export default function Live({
                     {activeTab === "tab2" && (
                       <div className="cust-box-click-content">
                         {matchOdds?.oddsEvent !== undefined ? (<div className="flex justify-between items-center border-t-[1px] py-2">
-                          <div className="text-[14px] font-medium">
+                          <div className="text-[14px] font-medium ">
                             {matchOdds?.oddsEvent?.team}
                           </div>
-                          <div className="flex items-center gap-2">
-                            <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
+                          <div className="flex items-center gap-2 ">
+                            <p className="py-1 px-4 bg-orange-500 rounded-md text-white w-[47px] text-center">
                               {matchOdds?.oddsEvent
                                 ?.back !== null &&
                                 matchOdds?.oddsEvent
@@ -886,7 +886,7 @@ export default function Live({
                                 )
                                 : 0}
                             </p>
-                            <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">
+                            <p className="py-1 px-4 bg-[#00a632] rounded-md text-white w-[47px] text-center">
                               {matchOdds?.oddsEvent
                                 ?.lay !== null &&
                                 matchOdds?.oddsEvent
@@ -946,8 +946,8 @@ export default function Live({
                           <div className="flex justify-between items-center border-t-[1px] pt-2">
                             <div className="text-[14px] font-medium">NAM-W</div>
                             <div className="flex items-center gap-2">
-                              <p className="py-1 px-4 bg-orange-500 rounded-md text-white">38</p>
-                              <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">38</p></div>
+                              <p className="py-1 px-4 bg-orange-500 rounded-md text-white w-[47px]">38</p>
+                              <p className="py-1 px-4 bg-[#00a632] rounded-md text-white w-[47px]">38</p></div>
                           </div>
                           {/* <div className="flex justify-between items-center border-t-[1px] pt-2">
                             <div className="text-[14px] font-medium">NAM-W</div>

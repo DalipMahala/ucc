@@ -6,6 +6,7 @@ import { urlStringEncode } from "@/utils/utility";
 import MatchCard from "./matchCard";
 import PlayerImage from "@/app/components/PlayerImage";
 import MatchTabs from "./Menu";
+import { format, isSameDay } from "date-fns";
 
 interface MatchInfo {
   match_id: number;
@@ -329,14 +330,14 @@ export default function MoreInfo({
                                     items.winning_team_id === teama_id ? (
                                       <span
                                         key={items.match_id}
-                                        className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded"
+                                        className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center"
                                       >
                                         W
                                       </span>
                                     ) : (
                                       <span
                                         key={items.match_id}
-                                        className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded"
+                                        className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center"
                                       >
                                         L
                                       </span>
@@ -444,11 +445,11 @@ export default function MoreInfo({
                                           <div className="text-center">
                                             {items.winning_team_id ===
                                               teama_id ? (
-                                              <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
+                                              <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center inline-block">
                                                 W
                                               </span>
                                             ) : (
-                                              <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded">
+                                              <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center inline-block">
                                                 L
                                               </span>
                                             )}
@@ -512,11 +513,11 @@ export default function MoreInfo({
                                         <div className="text-center">
                                           {items.winning_team_id ===
                                             teama_id ? (
-                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
+                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center">
                                               W
                                             </span>
                                           ) : (
-                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded">
+                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center">
                                               L
                                             </span>
                                           )}
@@ -565,14 +566,14 @@ export default function MoreInfo({
                                       items.winning_team_id === teamb_id ? (
                                         <span
                                           key={items.match_id}
-                                          className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded"
+                                          className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center"
                                         >
                                           W
                                         </span>
                                       ) : (
                                         <span
                                           key={items.match_id}
-                                          className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded"
+                                          className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center"
                                         >
                                           L
                                         </span>
@@ -678,11 +679,11 @@ export default function MoreInfo({
                                           <div className="text-center">
                                             {items.winning_team_id ===
                                               teamb_id ? (
-                                              <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
+                                              <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center inline-block">
                                                 W
                                               </span>
                                             ) : (
-                                              <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded">
+                                              <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center inline-block">
                                                 L
                                               </span>
                                             )}
@@ -748,11 +749,11 @@ export default function MoreInfo({
                                         <div className="text-center">
                                           {items.winning_team_id ===
                                             teamb_id ? (
-                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
+                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center">
                                               W
                                             </span>
                                           ) : (
-                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded">
+                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center">
                                               L
                                             </span>
                                           )}
@@ -1190,9 +1191,12 @@ export default function MoreInfo({
 
                 <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                   <div className="relative">
+                    <div className="flex justify-between items-center">
                     <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                       Weather Condition
                     </h3>
+                    <p className="text-[12px]"><span> Last Updated : </span> <span>{format(new Date(), "dd MMM, yyyy")}</span></p>
+                    </div>
                     <div className="border-t-[1px] border-[#E4E9F0]" />
                     <div className="flex lg:grid md:grid-cols-12 justify-between md:gap-4 items-center py-3">
                       <div className="col-span-3">

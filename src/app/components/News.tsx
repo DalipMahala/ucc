@@ -106,7 +106,7 @@ const News = () => {
 
                       </h3>
                       <Link href={post?.link}>
-                        <h2 className="text-[18px] font-semibold mb-2 leading-[24px]" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title?.rendered, 10)) }} >
+                        <h2 className="text-[18px] font-semibold mb-2 leading-[24px] hover:text-[#1a80f8]" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title?.rendered, 10)) }} >
 
                         </h2>
                       </Link>
@@ -161,7 +161,7 @@ const News = () => {
                     </Link>
                     <div className="w-[55%] flex flex-col justify-between">
                       <Link className="" href={post?.link}>
-                        <h2 className="text-[14px] font-semibold mb-2" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered, 8)) }} >
+                        <h2 className="text-[14px] font-semibold mb-2 hover:text-[#1a80f8]" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered, 8)) }} >
 
                         </h2>
                       </Link>

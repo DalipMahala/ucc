@@ -3,9 +3,10 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { urlStringEncode} from "@/utils/utility";
+import { urlStringEncode } from "@/utils/utility";
 import PlayerImage from "@/app/components/PlayerImage";
 import MatchTabs from "./../matchComponents/Menu";
+import { format, isSameDay } from "date-fns";
 interface MatchInfo {
   match_id: number;
 
@@ -28,22 +29,22 @@ export default function MoreInfo({
   const matchDetails = matchData?.match_info;
 
   const playing11 = matchData?.["match-playing11"];
-//   const teama11Players = [
-//     ...(playing11?.teama?.squads.filter(
-//       (player: { playing11: string }) => player.playing11 === "true"
-//     ) || []),
-//   ];
-//   const teamb11Players = [
-//     ...(playing11?.teamb?.squads.filter(
-//       (player: { playing11: string }) => player.playing11 === "true"
-//     ) || []),
-//   ];
+  //   const teama11Players = [
+  //     ...(playing11?.teama?.squads.filter(
+  //       (player: { playing11: string }) => player.playing11 === "true"
+  //     ) || []),
+  //   ];
+  //   const teamb11Players = [
+  //     ...(playing11?.teamb?.squads.filter(
+  //       (player: { playing11: string }) => player.playing11 === "true"
+  //     ) || []),
+  //   ];
   const teama11Players = (() => {
     const allPlayers = playing11?.teama?.squads || [];
     const truePlayers = allPlayers.filter(
       (player: { playing11: string }) => player.playing11 === "true"
     );
-  
+
     return truePlayers.length > 0 ? truePlayers : allPlayers;
   })();
   const teamb11Players = (() => {
@@ -51,15 +52,15 @@ export default function MoreInfo({
     const truePlayers = allPlayers.filter(
       (player: { playing11: string }) => player.playing11 === "true"
     );
-  
+
     return truePlayers.length > 0 ? truePlayers : allPlayers;
   })();
-  
+
   const matchlistA = matchLast?.items?.teama_last10_match;
   const matchlistB = matchLast?.items?.teamb_last10_match;
   const matchlistAB = matchLast?.items?.teama_vs_teamb_last10_match ?? "";
-  const matchlistSameVenue =  matchLast?.items?.teama_vs_teamb_last10_match_same_venue ?? "";
-  const matchVenueStats =  matchLast?.items?.venue_stats ?? "";
+  const matchlistSameVenue = matchLast?.items?.teama_vs_teamb_last10_match_same_venue ?? "";
+  const matchVenueStats = matchLast?.items?.venue_stats ?? "";
   // console.log("test1",matchVenueStats?.average_score_for_venue?.[0]?.avgruns);
   let teamaWinMatch = 0;
   let teambWinMatch = 0;
@@ -68,8 +69,8 @@ export default function MoreInfo({
     items.winning_team_id === teama_id
       ? teamaWinMatch++
       : items.winning_team_id === teamb_id
-      ? teambWinMatch++
-      : ""
+        ? teambWinMatch++
+        : ""
   );
 
   const teamaWinper =
@@ -86,30 +87,30 @@ export default function MoreInfo({
       }
     );
   }
- 
+
   const highestScoreTeamA = (teamAScores?.length ?? 0) > 0 ? Math.max(...teamAScores) : 0;
-  const lowestScoreTeamA =  (teamAScores?.length ?? 0) > 0 ? Math.min(...teamAScores) : 0;
+  const lowestScoreTeamA = (teamAScores?.length ?? 0) > 0 ? Math.min(...teamAScores) : 0;
   const averageScoreTeamA =
     teamAScores?.length > 0
       ? teamAScores.reduce((sum: any, score: any) => sum + score, 0) /
-        teamAScores.length
+      teamAScores.length
       : 0;
 
   let teamBScores: any = [];
-      if (Array.isArray(matchlistAB) && matchlistAB.length > 0) {
-      teamBScores = matchlistAB?.map(
-        (match: { teamb: { scores: string } }) => {
-          const score = match?.teamb?.scores?.split("/")[0]; // Get the runs before "/"
-          return parseInt(score, 10) || 0; // Convert to a number
-        }
-      );
-    }
+  if (Array.isArray(matchlistAB) && matchlistAB.length > 0) {
+    teamBScores = matchlistAB?.map(
+      (match: { teamb: { scores: string } }) => {
+        const score = match?.teamb?.scores?.split("/")[0]; // Get the runs before "/"
+        return parseInt(score, 10) || 0; // Convert to a number
+      }
+    );
+  }
   const highestScoreTeamB = (teamBScores?.length ?? 0) > 0 ? Math.max(...teamBScores) : 0;
   const lowestScoreTeamB = (teamBScores?.length ?? 0) > 0 ? Math.min(...teamBScores) : 0;
   const averageScoreTeamB =
     teamBScores?.length > 0
       ? teamBScores.reduce((sum: any, score: any) => sum + score, 0) /
-        teamBScores.length
+      teamBScores.length
       : 0;
 
   let sameVenueteamaWinMatch = 0;
@@ -120,8 +121,8 @@ export default function MoreInfo({
       items.winning_team_id === teama_id
         ? sameVenueteamaWinMatch++
         : items.winning_team_id === teamb_id
-        ? sameVenueteambWinMatch++
-        : ""
+          ? sameVenueteambWinMatch++
+          : ""
     );
   }
 
@@ -134,16 +135,16 @@ export default function MoreInfo({
       ? (sameVenueteambWinMatch / sameVenuematchPlayed) * 100
       : 0;
 
-  let sameVenueteamAScores : any = '';
+  let sameVenueteamAScores: any = '';
   if (Array.isArray(matchlistSameVenue) && matchlistSameVenue.length > 0) {
-     sameVenueteamAScores = matchlistSameVenue?.map(
+    sameVenueteamAScores = matchlistSameVenue?.map(
       (match: { teama: { scores: string } }) => {
         const score = match?.teama?.scores?.split("/")[0]; // Get the runs before "/"
         return parseInt(score, 10); // Convert to a number
       }
     );
   }
-  
+
   const sameVenuehighestScoreTeamA =
     (sameVenueteamAScores?.length ?? 0) > 0 ? Math.max(...sameVenueteamAScores) : 0;
   const sameVenuelowestScoreTeamA =
@@ -152,13 +153,13 @@ export default function MoreInfo({
   const sameVenueaverageScoreTeamA =
     sameVenueteamAScores?.length > 0
       ? sameVenueteamAScores.reduce((sum: any, score: any) => sum + score, 0) /
-        sameVenueteamAScores.length
+      sameVenueteamAScores.length
       : 0;
 
 
-      let sameVenueteamBScores : any = '';
+  let sameVenueteamBScores: any = '';
   if (Array.isArray(matchlistSameVenue) && matchlistSameVenue.length > 0) {
-     sameVenueteamBScores = matchlistSameVenue?.map(
+    sameVenueteamBScores = matchlistSameVenue?.map(
       (match: { teamb: { scores: string } }) => {
         const score = match?.teamb?.scores?.split("/")[0]; // Get the runs before "/"
         return parseInt(score, 10); // Convert to a number
@@ -172,7 +173,7 @@ export default function MoreInfo({
   const sameVenueaverageScoreTeamB =
     sameVenueteamBScores?.length > 0
       ? sameVenueteamBScores.reduce((sum: any, score: any) => sum + score, 0) /
-        sameVenueteamBScores.length
+      sameVenueteamBScores.length
       : 0;
 
   // console.log("playing11", teama11Players);
@@ -211,61 +212,61 @@ export default function MoreInfo({
     ? { team: matchData?.match_info?.teama?.short_name, ...matchData?.live_odds?.matchodds?.teama }
     : { team: matchData?.match_info?.teamb?.short_name, ...matchData?.live_odds?.matchodds?.teamb };
 
-     const [matchUrls, setMatchUrls] = useState<Record<string, string>>({});
-    
-      useEffect(() => {
-        const getAllMatchIds = () => {
-          const allIds = [
-            ...matchlistA.map((item: { match_id: any; }) => item.match_id),
-            ...matchlistB.map((item: { match_id: any; }) => item.match_id),
-            ...matchlistAB.map((item: { match_id: any; }) => item.match_id),
-          ];
-          return [...new Set(allIds)]; // Deduplicate
-        };
-        
-        const fetchMatchUrls = async () => {
-          const ids = getAllMatchIds();
-          if (ids.length === 0) return;
-          const res = await fetch('/api/match-urls', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
-            body: JSON.stringify({ ids }),
-          });
-          const data = await res.json();
-          setMatchUrls(data);
-        };
-    
-        fetchMatchUrls();
-      }, [matchlistA, matchlistB, matchlistAB]);
+  const [matchUrls, setMatchUrls] = useState<Record<string, string>>({});
 
-      const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
-      
-        useEffect(() => {
-          const getAllPlayerIds = () => {
-            const allIds = [
-              ...teama11Players.map((item: { player_id: any; }) => item.player_id),
-              ...teamb11Players.map((item: { player_id: any; }) => item.player_id),
-            ];
-            return [...new Set(allIds)]; // Deduplicate
-          };
-         
-          const fetchPlayerUrls = async () => {
-            const ids = getAllPlayerIds();
-            if (ids.length === 0) return;
-            const res = await fetch('/api/player-urls', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
-              body: JSON.stringify({ ids }),
-            });
-            const data = await res.json();
-            setPlayerUrls(data);
-          };
-      
-          fetchPlayerUrls();
-        }, [teama11Players, teamb11Players]);
+  useEffect(() => {
+    const getAllMatchIds = () => {
+      const allIds = [
+        ...matchlistA.map((item: { match_id: any; }) => item.match_id),
+        ...matchlistB.map((item: { match_id: any; }) => item.match_id),
+        ...matchlistAB.map((item: { match_id: any; }) => item.match_id),
+      ];
+      return [...new Set(allIds)]; // Deduplicate
+    };
+
+    const fetchMatchUrls = async () => {
+      const ids = getAllMatchIds();
+      if (ids.length === 0) return;
+      const res = await fetch('/api/match-urls', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+        body: JSON.stringify({ ids }),
+      });
+      const data = await res.json();
+      setMatchUrls(data);
+    };
+
+    fetchMatchUrls();
+  }, [matchlistA, matchlistB, matchlistAB]);
+
+  const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const getAllPlayerIds = () => {
+      const allIds = [
+        ...teama11Players.map((item: { player_id: any; }) => item.player_id),
+        ...teamb11Players.map((item: { player_id: any; }) => item.player_id),
+      ];
+      return [...new Set(allIds)]; // Deduplicate
+    };
+
+    const fetchPlayerUrls = async () => {
+      const ids = getAllPlayerIds();
+      if (ids.length === 0) return;
+      const res = await fetch('/api/player-urls', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+        body: JSON.stringify({ ids }),
+      });
+      const data = await res.json();
+      setPlayerUrls(data);
+    };
+
+    fetchPlayerUrls();
+  }, [teama11Players, teamb11Players]);
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-      <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable}/>
+      <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable} />
 
       <div id="tab-content">
         <div id="info">
@@ -289,13 +290,13 @@ export default function MoreInfo({
                     <div>
                       <h2 className="text-[15px] font-medium">Date :</h2>
                       <p className="font-normal text-[#586577]">
-                      {matchData?.match_info?.date_start_ist}
+                        {matchData?.match_info?.date_start_ist}
                       </p>
                     </div>
                     <div>
                       <h2 className="text-[15px] font-medium">Stadium :</h2>
                       <p className="font-normal text-[#586577]">
-                      {matchData?.match_info?.venue?.name}, {matchData?.match_info?.venue?.location}
+                        {matchData?.match_info?.venue?.name}, {matchData?.match_info?.venue?.location}
                       </p>
                     </div>
                   </div>
@@ -313,7 +314,7 @@ export default function MoreInfo({
                         On-field Umpire :
                       </h2>
                       <p className="font-normal text-[#586577]">
-                      {matchData?.match_info?.umpires}
+                        {matchData?.match_info?.umpires}
                       </p>
                     </div>
                     <div>
@@ -337,21 +338,21 @@ export default function MoreInfo({
                         className="flex items-center justify-between my-3"
                         onClick={() => handleToggle(1)}
                       >
-                       
-                          <div className="flex items-center space-x-3">
-                            <div>
-                              <Image  loading="lazy" 
-                                src={matchData?.match_info?.teama?.logo_url}
-                                className="h-[25px] rounded-full"
-                                width={25}
-                                height={20}
-                                alt={matchData?.match_info?.teama?.name}
-                              />
-                            </div>
-                            <h3 className="text-1xl font-medium">
-                              {matchData?.match_info?.teama?.name}
-                            </h3>
+
+                        <div className="flex items-center space-x-3">
+                          <div>
+                            <Image loading="lazy"
+                              src={matchData?.match_info?.teama?.logo_url}
+                              className="h-[25px] rounded-full"
+                              width={25}
+                              height={20}
+                              alt={matchData?.match_info?.teama?.name}
+                            />
                           </div>
+                          <h3 className="text-1xl font-medium">
+                            {matchData?.match_info?.teama?.name}
+                          </h3>
+                        </div>
                         <div>
                           <div className="ml-auto flex gap-1 items-center">
                             {matchlistA
@@ -364,14 +365,14 @@ export default function MoreInfo({
                                   items.winning_team_id === teama_id ? (
                                     <span
                                       key={items.match_id}
-                                      className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded"
+                                      className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center"
                                     >
                                       W
                                     </span>
                                   ) : (
                                     <span
                                       key={items.match_id}
-                                      className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded"
+                                      className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center"
                                     >
                                       L
                                     </span>
@@ -380,9 +381,8 @@ export default function MoreInfo({
 
                             <span>
                               <button
-                                className={`transform transition-transform ${
-                                  openHeading === 1 ? "rotate-180" : "rotate-0"
-                                }`}
+                                className={`transform transition-transform ${openHeading === 1 ? "rotate-180" : "rotate-0"
+                                  }`}
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -418,12 +418,12 @@ export default function MoreInfo({
                                       className="whitespace-nowrap bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-[13px]"
                                       key={index}
                                     >
-                                      
+
                                       <td className="px-8 pl-0 py-1 ">
-                                      <Link className="w-full flex" href={"/scorecard/" + matchUrls[items.match_id]}>
+                                        <Link className="w-full flex" href={"/scorecard/" + matchUrls[items.match_id]}>
                                           <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                             <div className="flex items-center space-x-1">
-                                              <Image  loading="lazy" 
+                                              <Image loading="lazy"
                                                 src={items.teama.logo_url}
                                                 className="h-[24px] rounded-full"
                                                 width={25}
@@ -436,20 +436,20 @@ export default function MoreInfo({
                                             </div>
                                             <p>{items.teama.scores}</p>
                                           </div>
-                                          </Link>
+                                        </Link>
                                       </td>
                                       <td className="md:px-8 py-2 font-medium text-[#6A7586]">
                                         VS
                                       </td>
                                       <td className="md:px-8 py-2">
-                                      <Link className="w-full flex" href={"/scorecard/" + matchUrls[items.match_id]}>
+                                        <Link className="w-full flex" href={"/scorecard/" + matchUrls[items.match_id]}>
                                           <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                             <p>{items.teamb.scores}</p>
                                             <div className="flex items-center space-x-1">
                                               <span className="text-[#5C6081]">
                                                 {items.teamb.short_name}
                                               </span>
-                                              <Image  loading="lazy" 
+                                              <Image loading="lazy"
                                                 src={items.teamb.logo_url}
                                                 className="h-[24px]"
                                                 width={25}
@@ -458,9 +458,9 @@ export default function MoreInfo({
                                               />
                                             </div>
                                           </div>
-                                          </Link>
+                                        </Link>
                                       </td>
-                                      
+
                                       <td className="md:px-4 py-2">
                                         <div className="text-right leading-6">
                                           <p className="font-medium">
@@ -474,12 +474,12 @@ export default function MoreInfo({
                                       <td className="px-0 pr-0 py-1 text-[#2F335C]">
                                         <div className="text-center">
                                           {items.winning_team_id ===
-                                          teama_id ? (
-                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
+                                            teama_id ? (
+                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center inline-block">
                                               W
                                             </span>
                                           ) : (
-                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded">
+                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center inline-block">
                                               L
                                             </span>
                                           )}
@@ -492,72 +492,72 @@ export default function MoreInfo({
                           </div>
                           {/* responsive teame data  */}
                           <div className="lg:hidden block">
-                          {matchlistA
-                                  .slice(0, 5)
-                                  .map((items: any, index: number) => (
-                                    <Link className="flex justify-between items-center py-4 px-2 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]" key={index} href={"/scorecard/" + matchUrls[items.match_id]}>
-                              <div className="">
-                                  <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-3">
-                                    <div className="flex items-center space-x-1">
-                                      <Image  loading="lazy" 
-                                        src={items.teama.logo_url}
-                                        className="h-[18px] rounded-full"
-                                        width={25}
-                                        height={25}
-                                        alt={items.teama.short_name}
-                                      />
-                                      <span className="text-[#5C6081]">
-                                      {items.teama.short_name}
-                                      </span>
+                            {matchlistA
+                              .slice(0, 5)
+                              .map((items: any, index: number) => (
+                                <Link className="flex justify-between items-center py-4 px-2 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]" key={index} href={"/scorecard/" + matchUrls[items.match_id]}>
+                                  <div className="">
+                                    <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-3">
+                                      <div className="flex items-center space-x-1">
+                                        <Image loading="lazy"
+                                          src={items.teama.logo_url}
+                                          className="h-[18px] rounded-full"
+                                          width={25}
+                                          height={25}
+                                          alt={items.teama.short_name}
+                                        />
+                                        <span className="text-[#5C6081]">
+                                          {items.teama.short_name}
+                                        </span>
+                                      </div>
+                                      <p>{items.teama.scores}</p>
                                     </div>
-                                    <p>{items.teama.scores}</p>
-                                  </div>
 
-                                <div>
-                                  <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
-                                    <div className="flex items-center space-x-1">
-                                      <Image  loading="lazy" 
-                                        src={items.teamb.logo_url}
-                                        className="h-[18px]"
-                                        width={25}
-                                        height={25}
-                                        alt={items.teamb.short_name}
-                                      />
-                                      <span className="text-[#5C6081]">
-                                      {items.teamb.short_name}
-                                      </span>
+                                    <div>
+                                      <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
+                                        <div className="flex items-center space-x-1">
+                                          <Image loading="lazy"
+                                            src={items.teamb.logo_url}
+                                            className="h-[18px]"
+                                            width={25}
+                                            height={25}
+                                            alt={items.teamb.short_name}
+                                          />
+                                          <span className="text-[#5C6081]">
+                                            {items.teamb.short_name}
+                                          </span>
+                                        </div>
+                                        <p>{items.teamb.scores}</p>
+                                      </div>
                                     </div>
-                                    <p>{items.teamb.scores}</p>
                                   </div>
-                                </div>
-                              </div>
-                              <div className="hidden md:block h-[35px] border-l-[1px] border-[#d0d3d7]"></div>
-                              <div className="flex items-center space-x-4">
-                                <div className="text-right leading-6">
-                                  <p className="font-medium"> {items.subtitle}</p>
-                                  <p className="text-[#5C6081] font-normal">
-                                  {items.short_title}
-                                  </p>
-                                </div>
-                                <div>
-                                  <div className="text-center">
-                                  {items.winning_team_id ===
+                                  <div className="hidden md:block h-[35px] border-l-[1px] border-[#d0d3d7]"></div>
+                                  <div className="flex items-center space-x-4">
+                                    <div className="text-right leading-6">
+                                      <p className="font-medium"> {items.subtitle}</p>
+                                      <p className="text-[#5C6081] font-normal">
+                                        {items.short_title}
+                                      </p>
+                                    </div>
+                                    <div>
+                                      <div className="text-center">
+                                        {items.winning_team_id ===
                                           teama_id ? (
-                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
-                                              W
-                                            </span>
-                                          ) : (
-                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded">
-                                              L
-                                            </span>
-                                          )}
-                                           
+                                          <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center ">
+                                            W
+                                          </span>
+                                        ) : (
+                                          <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center ">
+                                            L
+                                          </span>
+                                        )}
+
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
-                            </Link>
-                                  ))}
-                            
+                                </Link>
+                              ))}
+
                           </div>
                         </div>
                       )}
@@ -569,20 +569,20 @@ export default function MoreInfo({
                           className="flex items-center justify-between my-3"
                           onClick={() => handleToggle(2)}
                         >
-                            <div className="flex items-center space-x-3">
-                              <div>
-                                <Image  loading="lazy" 
-                                  src={matchData?.match_info?.teamb?.logo_url}
-                                  width={25}
-                                  height={25}
-                                  alt={matchData?.match_info?.teamb?.name}
-                                  className="h-[25px] w-[25px] rounded-full"
-                                />
-                              </div>
-                              <h3 className="text-1xl font-medium">
-                                {matchData?.match_info?.teamb?.name}
-                              </h3>
+                          <div className="flex items-center space-x-3">
+                            <div>
+                              <Image loading="lazy"
+                                src={matchData?.match_info?.teamb?.logo_url}
+                                width={25}
+                                height={25}
+                                alt={matchData?.match_info?.teamb?.name}
+                                className="h-[25px] w-[25px] rounded-full"
+                              />
                             </div>
+                            <h3 className="text-1xl font-medium">
+                              {matchData?.match_info?.teamb?.name}
+                            </h3>
+                          </div>
                           <div>
                             <div className="ml-auto flex gap-1 items-center">
                               {matchlistB
@@ -595,14 +595,14 @@ export default function MoreInfo({
                                     items.winning_team_id === teamb_id ? (
                                       <span
                                         key={items.match_id}
-                                        className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded"
+                                        className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center"
                                       >
                                         W
                                       </span>
                                     ) : (
                                       <span
                                         key={items.match_id}
-                                        className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded"
+                                        className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center"
                                       >
                                         L
                                       </span>
@@ -610,11 +610,10 @@ export default function MoreInfo({
                                 )}
                               <span>
                                 <button
-                                  className={`transform transition-transform ${
-                                    openHeading === 2
+                                  className={`transform transition-transform ${openHeading === 2
                                       ? "rotate-180"
                                       : "rotate-0"
-                                  }`}
+                                    }`}
                                 >
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -650,12 +649,12 @@ export default function MoreInfo({
                                       className="whitespace-nowrap bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-[13px]"
                                       key={index}
                                     >
-                                     
+
                                       <td className="px-8 pl-0 py-1 ">
-                                      <Link className="w-full flex" href={"/scorecard/" + matchUrls[items.match_id]}>
+                                        <Link className="w-full flex" href={"/scorecard/" + matchUrls[items.match_id]}>
                                           <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                             <div className="flex items-center space-x-1">
-                                              <Image  loading="lazy" 
+                                              <Image loading="lazy"
                                                 src={items.teama.logo_url}
                                                 className="h-[24px] rounded-full"
                                                 width={25}
@@ -668,20 +667,20 @@ export default function MoreInfo({
                                             </div>
                                             <p>{items.teama.scores}</p>
                                           </div>
-                                          </Link>
+                                        </Link>
                                       </td>
                                       <td className="md:px-8 py-2 font-medium text-[#6A7586]">
                                         VS
                                       </td>
                                       <td className="md:px-8 py-2">
-                                      <Link className="w-full flex" href={"/scorecard/" + matchUrls[items.match_id]}>
+                                        <Link className="w-full flex" href={"/scorecard/" + matchUrls[items.match_id]}>
                                           <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                             <p>{items.teamb.scores}</p>
                                             <div className="flex items-center space-x-1">
                                               <span className="text-[#5C6081]">
                                                 {items.teamb.short_name}
                                               </span>
-                                              <Image  loading="lazy" 
+                                              <Image loading="lazy"
                                                 src={items.teamb.logo_url}
                                                 className="h-[24px]"
                                                 width={25}
@@ -690,9 +689,9 @@ export default function MoreInfo({
                                               />
                                             </div>
                                           </div>
-                                          </Link>
+                                        </Link>
                                       </td>
-                                      
+
                                       <td className="md:px-4 py-2">
                                         <div className="text-right leading-6">
                                           <p className="font-medium">
@@ -706,12 +705,12 @@ export default function MoreInfo({
                                       <td className="px-0 pr-0 py-1 text-[#2F335C]">
                                         <div className="text-center">
                                           {items.winning_team_id ===
-                                          teamb_id ? (
-                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
+                                            teamb_id ? (
+                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center inline-block">
                                               W
                                             </span>
                                           ) : (
-                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded">
+                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center inline-block">
                                               L
                                             </span>
                                           )}
@@ -724,71 +723,71 @@ export default function MoreInfo({
                           </div>
                           {/* responsive teame data  */}
                           <div className="lg:hidden block">
-                          {matchlistB
-                                  .slice(0, 5)
-                                  .map((items: any, index: number) => (
-                              <Link className="flex justify-between items-center py-4 px-2 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]" key={index} href={"/scorecard/" + matchUrls[items.match_id]}>
-                              <div className="">
-                                  <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-3">
-                                    <div className="flex items-center space-x-1">
-                                      <Image  loading="lazy" 
-                                        src={items.teama.logo_url}
-                                        className="h-[18px] rounded-full"
-                                        width={25}
-                                        height={25}
-                                        alt={items.teama.short_name}
-                                      />
-                                      <span className="text-[#5C6081]">
-                                      {items.teama.short_name}
-                                      </span>
+                            {matchlistB
+                              .slice(0, 5)
+                              .map((items: any, index: number) => (
+                                <Link className="flex justify-between items-center py-4 px-2 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]" key={index} href={"/scorecard/" + matchUrls[items.match_id]}>
+                                  <div className="">
+                                    <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-3">
+                                      <div className="flex items-center space-x-1">
+                                        <Image loading="lazy"
+                                          src={items.teama.logo_url}
+                                          className="h-[18px] rounded-full"
+                                          width={25}
+                                          height={25}
+                                          alt={items.teama.short_name}
+                                        />
+                                        <span className="text-[#5C6081]">
+                                          {items.teama.short_name}
+                                        </span>
+                                      </div>
+                                      <p>{items.teama.scores}</p>
                                     </div>
-                                    <p>{items.teama.scores}</p>
-                                  </div>
 
-                                <div>
-                                  <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
-                                    <div className="flex items-center space-x-1">
-                                      <Image  loading="lazy" 
-                                        src={items.teamb.logo_url}
-                                        className="h-[18px]"
-                                        width={25}
-                                        height={25}
-                                        alt={items.teamb.short_name}
-                                      />
-                                      <span className="text-[#5C6081]">
-                                      {items.teamb.short_name}
-                                      </span>
+                                    <div>
+                                      <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
+                                        <div className="flex items-center space-x-1">
+                                          <Image loading="lazy"
+                                            src={items.teamb.logo_url}
+                                            className="h-[18px]"
+                                            width={25}
+                                            height={25}
+                                            alt={items.teamb.short_name}
+                                          />
+                                          <span className="text-[#5C6081]">
+                                            {items.teamb.short_name}
+                                          </span>
+                                        </div>
+                                        <p>{items.teamb.scores}</p>
+                                      </div>
                                     </div>
-                                    <p>{items.teamb.scores}</p>
                                   </div>
-                                </div>
-                              </div>
-                              <div className="hidden md:block h-[35px] border-l-[1px] border-[#d0d3d7]"></div>
-                              <div className="flex items-center space-x-4">
-                                <div className="text-right leading-6">
-                                  <p className="font-medium"> {items.subtitle}</p>
-                                  <p className="text-[#5C6081] font-normal">
-                                  {items.short_title}
-                                  </p>
-                                </div>
-                                <div>
-                                  <div className="text-center">
-                                  {items.winning_team_id ===
+                                  <div className="hidden md:block h-[35px] border-l-[1px] border-[#d0d3d7]"></div>
+                                  <div className="flex items-center space-x-4">
+                                    <div className="text-right leading-6">
+                                      <p className="font-medium"> {items.subtitle}</p>
+                                      <p className="text-[#5C6081] font-normal">
+                                        {items.short_title}
+                                      </p>
+                                    </div>
+                                    <div>
+                                      <div className="text-center">
+                                        {items.winning_team_id ===
                                           teamb_id ? (
-                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
-                                              W
-                                            </span>
-                                          ) : (
-                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded">
-                                              L
-                                            </span>
-                                          )}
-                                           
+                                          <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center">
+                                            W
+                                          </span>
+                                        ) : (
+                                          <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center">
+                                            L
+                                          </span>
+                                        )}
+
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
-                              </Link>
-                                  ))}
+                                </Link>
+                              ))}
                           </div>
                         </div>
                       )}
@@ -804,20 +803,20 @@ export default function MoreInfo({
                   </h3>
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <div className="py-4 text-1xl flex justify-between items-center">
-                   
-                      <div className="font-bold uppercase flex items-center">
-                        <Image  loading="lazy" 
-                          className="h-[30px] w-[30px] rounded-full"
-                          src={matchData?.match_info?.teama?.logo_url}
-                          width={30}
-                          height={30}
-                          alt={matchData?.match_info?.teama?.short_name}
-                        />
-                        <p className="mx-2 font-semibold uppercase">
-                          {matchData?.match_info?.teama?.short_name}
-                        </p>
-                      </div>
-                
+
+                    <div className="font-bold uppercase flex items-center">
+                      <Image loading="lazy"
+                        className="h-[30px] w-[30px] rounded-full"
+                        src={matchData?.match_info?.teama?.logo_url}
+                        width={30}
+                        height={30}
+                        alt={matchData?.match_info?.teama?.short_name}
+                      />
+                      <p className="mx-2 font-semibold uppercase">
+                        {matchData?.match_info?.teama?.short_name}
+                      </p>
+                    </div>
+
                     <div className=" font-normal text-center">
                       <p className="text-[#D28505] text-[17px] font-semibold">
                         {teamaWinMatch}{" "}
@@ -826,20 +825,20 @@ export default function MoreInfo({
                         </span>
                       </p>
                     </div>
-                 
-                      <div className="font-bold uppercase flex items-center">
-                        <p className="mx-2 font-semibold uppercase">
-                          {matchData?.match_info?.teamb?.short_name}
-                        </p>
-                        <Image  loading="lazy" 
-                          className="h-[30px] w-[30px] rounded-full"
-                          src={matchData?.match_info?.teamb?.logo_url}
-                          width={30}
-                          height={30}
-                          alt={matchData?.match_info?.teamb?.short_name}
-                        />
-                      </div>
-                    
+
+                    <div className="font-bold uppercase flex items-center">
+                      <p className="mx-2 font-semibold uppercase">
+                        {matchData?.match_info?.teamb?.short_name}
+                      </p>
+                      <Image loading="lazy"
+                        className="h-[30px] w-[30px] rounded-full"
+                        src={matchData?.match_info?.teamb?.logo_url}
+                        width={30}
+                        height={30}
+                        alt={matchData?.match_info?.teamb?.short_name}
+                      />
+                    </div>
+
                   </div>
 
                   <div className="border-t-[1px] border-[#E4E9F0]" />
@@ -857,13 +856,13 @@ export default function MoreInfo({
                             {items.teama.scores}
                           </p>
                         </div>
-                      
-                      <div className=" font-semibold text-center w-[60%]">
-                        <p className="text-[#3D4DCF]">{items.status_note}</p>
-                        <p className="text-[#586577] font-medium">
-                          {items.subtitle}, {items.short_title}
-                        </p>
-                      </div>
+
+                        <div className=" font-semibold text-center w-[60%]">
+                          <p className="text-[#3D4DCF]">{items.status_note}</p>
+                          <p className="text-[#586577] font-medium">
+                            {items.subtitle}, {items.short_title}
+                          </p>
+                        </div>
                         <div className="font-medium text-right w-[20%]">
                           <p className="mx-2 font-semibold uppercase">
                             {items.teamb.short_name}
@@ -889,11 +888,10 @@ export default function MoreInfo({
                         onClick={(e) =>
                           handleProbabilityTab(e, "cust-box-click-firview")
                         }
-                        className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${
-                          activeTab === "cust-box-click-firview"
+                        className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${activeTab === "cust-box-click-firview"
                             ? "bg-[#081736] text-white"
                             : "bg-[#ffffff] text-[#6A7586]"
-                        }`}
+                          }`}
                       >
                         <span>Overall</span>
                       </button>
@@ -902,11 +900,10 @@ export default function MoreInfo({
                         onClick={(e) =>
                           handleProbabilityTab(e, "cust-box-click-oddsview")
                         }
-                        className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${
-                          activeTab === "cust-box-click-oddsview"
+                        className={` cust-box-click-button font-medium px-5 py-1 rounded-full ${activeTab === "cust-box-click-oddsview"
                             ? "bg-[#081736] text-white"
                             : "bg-[#ffffff] text-[#6A7586]"
-                        }`}
+                          }`}
                       >
                         <span>On Venue</span>
                       </button>
@@ -917,46 +914,45 @@ export default function MoreInfo({
 
                   <div>
                     <div
-                      className={`cust-box-click-content cust-box-click-firview mt-4 ${
-                        activeTab === "cust-box-click-firview" ? "" : "hidden"
-                      }`}
+                      className={`cust-box-click-content cust-box-click-firview mt-4 ${activeTab === "cust-box-click-firview" ? "" : "hidden"
+                        }`}
                     >
                       <div className="cust-box-click-content cust-box-click-overall1 mt-4">
                         <div>
                           <div className="py-4 flex justify-between items-center">
-                           
-                              <div className="font-bold flex items-center">
-                                <Image  loading="lazy" 
-                                  className="h-[30px] w-[30px] rounded-full"
-                                  src={matchData?.match_info?.teama?.logo_url}
-                                  width={30}
-                                  height={30}
-                                  alt={matchData?.match_info?.teama?.short_name}
-                                />
-                                <p className="mx-2 text-1xl font-semibold">
-                                  {matchData?.match_info?.teama?.short_name}
-                                  <span className="text-[13px] text-[#9094b6] font-medium block">
-                                    vs all teams
-                                  </span>
-                                </p>
-                              </div>
-                           
-                              <div className="font-bold flex items-center">
-                                <p className="mx-2 text-1xl font-semibold text-right">
-                                  {matchData?.match_info?.teamb?.short_name}
-                                  <span className="text-[13px] text-[#9094b6] font-medium block">
-                                    vs all teams
-                                  </span>
-                                </p>
-                                <Image  loading="lazy" 
-                                  className="h-[30px] w-[30px] rounded-full"
-                                  src={matchData?.match_info?.teamb?.logo_url}
-                                  width={30}
-                                  height={30}
-                                  alt={matchData?.match_info?.teamb?.short_name}
-                                />
-                              </div>
-                            
+
+                            <div className="font-bold flex items-center">
+                              <Image loading="lazy"
+                                className="h-[30px] w-[30px] rounded-full"
+                                src={matchData?.match_info?.teama?.logo_url}
+                                width={30}
+                                height={30}
+                                alt={matchData?.match_info?.teama?.short_name}
+                              />
+                              <p className="mx-2 text-1xl font-semibold">
+                                {matchData?.match_info?.teama?.short_name}
+                                <span className="text-[13px] text-[#9094b6] font-medium block">
+                                  vs all teams
+                                </span>
+                              </p>
+                            </div>
+
+                            <div className="font-bold flex items-center">
+                              <p className="mx-2 text-1xl font-semibold text-right">
+                                {matchData?.match_info?.teamb?.short_name}
+                                <span className="text-[13px] text-[#9094b6] font-medium block">
+                                  vs all teams
+                                </span>
+                              </p>
+                              <Image loading="lazy"
+                                className="h-[30px] w-[30px] rounded-full"
+                                src={matchData?.match_info?.teamb?.logo_url}
+                                width={30}
+                                height={30}
+                                alt={matchData?.match_info?.teamb?.short_name}
+                              />
+                            </div>
+
                           </div>
                           <div className="border-t-[1px] border-[#E4E9F0]" />
                           <div className="py-2 flex justify-between items-center">
@@ -980,7 +976,7 @@ export default function MoreInfo({
                           <div className="py-2 flex justify-between items-center">
                             <div className="font-medium text-[#586577] w-full">
                               <p className="mx-2 font-semibold text-[#439F76] uppercase">
-                              {teamaWinper.toFixed(2)}%
+                                {teamaWinper.toFixed(2)}%
                               </p>
                             </div>
                             <div className=" font-semibold text-center w-full">
@@ -988,7 +984,7 @@ export default function MoreInfo({
                             </div>
                             <div className="font-medium text-right w-full">
                               <p className="text-[#586577] font-medium">
-                              {teambWinper.toFixed(2)}%
+                                {teambWinper.toFixed(2)}%
                               </p>
                             </div>
                           </div>
@@ -1052,51 +1048,50 @@ export default function MoreInfo({
                     </div>
 
                     <div
-                      className={`cust-box-click-content cust-box-click-oddsview mt-4 ${
-                        activeTab === "cust-box-click-oddsview" ? "" : "hidden"
-                      }`}
+                      className={`cust-box-click-content cust-box-click-oddsview mt-4 ${activeTab === "cust-box-click-oddsview" ? "" : "hidden"
+                        }`}
                     >
                       <div className="cust-box-click-content cust-box-click-overall1 mt-4">
                         <div className="cust-box-click-content cust-box-click-overall1 mt-4">
                           <div>
                             <div className="py-4 flex justify-between items-center">
-                             
-                                <div className="font-bold flex items-center">
-                                  <Image  loading="lazy" 
-                                    className="h-[30px] w-[30px] rounded-full"
-                                    src={matchData?.match_info?.teama?.logo_url}
-                                    width={30}
-                                    height={30}
-                                    alt={
-                                      matchData?.match_info?.teama?.short_name
-                                    }
-                                  />
-                                  <p className="mx-2 text-1xl font-semibold">
-                                    {matchData?.match_info?.teama?.short_name}
-                                    <span className="text-[13px] text-[#9094b6] font-medium block">
-                                      vs all teams
-                                    </span>
-                                  </p>
-                                </div>
-                              
-                                <div className="font-bold flex items-center">
-                                  <p className="mx-2 text-1xl font-semibold text-right">
-                                    {matchData?.match_info?.teamb?.short_name}
-                                    <span className="text-[13px] text-[#9094b6] font-medium block">
-                                      vs all teams
-                                    </span>
-                                  </p>
-                                  <Image  loading="lazy" 
-                                    className="h-[30px] w-[30px] rounded-full"
-                                    src={matchData?.match_info?.teamb?.logo_url}
-                                    width={30}
-                                    height={30}
-                                    alt={
-                                      matchData?.match_info?.teamb?.short_name
-                                    }
-                                  />
-                                </div>
-                            
+
+                              <div className="font-bold flex items-center">
+                                <Image loading="lazy"
+                                  className="h-[30px] w-[30px] rounded-full"
+                                  src={matchData?.match_info?.teama?.logo_url}
+                                  width={30}
+                                  height={30}
+                                  alt={
+                                    matchData?.match_info?.teama?.short_name
+                                  }
+                                />
+                                <p className="mx-2 text-1xl font-semibold">
+                                  {matchData?.match_info?.teama?.short_name}
+                                  <span className="text-[13px] text-[#9094b6] font-medium block">
+                                    vs all teams
+                                  </span>
+                                </p>
+                              </div>
+
+                              <div className="font-bold flex items-center">
+                                <p className="mx-2 text-1xl font-semibold text-right">
+                                  {matchData?.match_info?.teamb?.short_name}
+                                  <span className="text-[13px] text-[#9094b6] font-medium block">
+                                    vs all teams
+                                  </span>
+                                </p>
+                                <Image loading="lazy"
+                                  className="h-[30px] w-[30px] rounded-full"
+                                  src={matchData?.match_info?.teamb?.logo_url}
+                                  width={30}
+                                  height={30}
+                                  alt={
+                                    matchData?.match_info?.teamb?.short_name
+                                  }
+                                />
+                              </div>
+
                             </div>
                             <div className="border-t-[1px] border-[#E4E9F0]" />
                             <div className="py-2 flex justify-between items-center">
@@ -1198,14 +1193,17 @@ export default function MoreInfo({
               </div>
               <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                 <div className="relative">
-                  <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
-                    Weather Condition
-                  </h3>
+                  <div className="flex justify-between items-center">
+                    <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                      Weather Condition
+                    </h3>
+                    <p className="text-[12px]"><span> Last Updated : </span> <span>{format(new Date(), "dd MMM, yyyy")}</span></p>
+                  </div>
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <div className="flex lg:grid md:grid-cols-12 justify-between md:gap-4 items-center py-3">
                     <div className="col-span-3">
                       <div>
-                        <Image  loading="lazy" 
+                        <Image loading="lazy"
                           src="/assets/img/weather.png"
                           className="md:h-[75px] h-[60px]"
                           width={75}
@@ -1230,7 +1228,7 @@ export default function MoreInfo({
                     <div className="col-span-3 text-[#616161] md:text-[13px] text-[11px]">
                       <div className="flex justify-between pb-1 items-center">
                         <div className="flex space-x-2 items-center">
-                          <Image  loading="lazy" 
+                          <Image loading="lazy"
                             src="/assets/img/w-1.png"
                             className="h-[16px]"
                             width={15}
@@ -1247,7 +1245,7 @@ export default function MoreInfo({
                       </div>
                       <div className="flex justify-between pb-1 space-x-2 items-center">
                         <div className="flex space-x-2 items-center">
-                          <Image  loading="lazy" 
+                          <Image loading="lazy"
                             src="/assets/img/w-2.png"
                             className="h-[16px]"
                             width={15}
@@ -1264,7 +1262,7 @@ export default function MoreInfo({
                       </div>
                       <div className="flex justify-between items-center">
                         <div className="flex space-x-2 items-center">
-                          <Image  loading="lazy" 
+                          <Image loading="lazy"
                             src="/assets/img/wind.png"
                             className="h-[16px]"
                             width={15}
@@ -1283,7 +1281,7 @@ export default function MoreInfo({
                   </div>
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <div className="flex space-x-2 pt-3 items-center">
-                    <Image  loading="lazy" 
+                    <Image loading="lazy"
                       src="/assets/img/map.png"
                       width={15}
                       height={15}
@@ -1305,18 +1303,18 @@ export default function MoreInfo({
                 {/* full screen view */}
                 <div className="lg:flex hidden justify-between items-center py-4">
                   <div className="col-span-1 relative">
-                  <div
-                        className="flex justify-center items-center w-[81px] h-[81px] rounded-full"
-                        style={{
-                          background:
-                            "conic-gradient(#3e436d 0 0%, #b7132b 0 "+matchVenueStats?.first_batting_match_won+"%, #13B76D 0 "+matchVenueStats?.first_bowling_match_won+"%)",
-                        }}
-                      >
-                        <div className="flex flex-col items-center w-[65px] h-[64px] p-4 rounded-full bg-white">
-                          {/* <p className="font-bold text-[18px]">8</p> */}
-                          <p className="text-[10px]"></p>
-                        </div>
+                    <div
+                      className="flex justify-center items-center w-[81px] h-[81px] rounded-full"
+                      style={{
+                        background:
+                          "conic-gradient(#3e436d 0 0%, #b7132b 0 " + matchVenueStats?.first_batting_match_won + "%, #13B76D 0 " + matchVenueStats?.first_bowling_match_won + "%)",
+                      }}
+                    >
+                      <div className="flex flex-col items-center w-[65px] h-[64px] p-4 rounded-full bg-white">
+                        {/* <p className="font-bold text-[18px]">8</p> */}
+                        <p className="text-[10px]"></p>
                       </div>
+                    </div>
                   </div>
                   <div className="col-span-1 relative">
                     <div className="pb-5">
@@ -1350,13 +1348,13 @@ export default function MoreInfo({
                     <div className="pb-5">
                       <p className="font-semibold">{matchVenueStats?.team_toss_win_choose_batting}%</p>
                       <p className="text-[13px] text-[#3E436D]">
-                      Toss Win First Bat
+                        Toss Win First Bat
                       </p>
                     </div>
                     <div className="">
                       <p className="font-semibold">{matchVenueStats?.team_toss_win_choose_fieldeding}%</p>
                       <p className="text-[13px] text-[#3E436D]">
-                      Toss Win FIrst Bowl
+                        Toss Win FIrst Bowl
                       </p>
                     </div>
                   </div>
@@ -1364,17 +1362,17 @@ export default function MoreInfo({
                     <div className="pb-5">
                       <p className="font-semibold">{matchVenueStats?.team_toss_win_choose_batting_match_won}%</p>
                       <p className="text-[13px] text-[#3E436D]">
-                      Toss Win First Bat Won
+                        Toss Win First Bat Won
                       </p>
                     </div>
                     <div className="">
                       <p className="font-semibold">{matchVenueStats?.team_toss_win_choose_fielding_match_won}%</p>
                       <p className="text-[13px] text-[#3E436D]">
-                      Toss Win First Bowl Won
+                        Toss Win First Bowl Won
                       </p>
                     </div>
                   </div>
-                  
+
                 </div>
                 {/* responsive screen view */}
                 <div className="lg:hidden">
@@ -1384,7 +1382,7 @@ export default function MoreInfo({
                         className="flex justify-center items-center w-[81px] h-[81px] rounded-full"
                         style={{
                           background:
-                            "conic-gradient(#3e436d 0 0%, #b7132b 0 "+matchVenueStats?.first_batting_match_won+"%, #13B76D 0 "+matchVenueStats?.first_bowling_match_won+"%)",
+                            "conic-gradient(#3e436d 0 0%, #b7132b 0 " + matchVenueStats?.first_batting_match_won + "%, #13B76D 0 " + matchVenueStats?.first_bowling_match_won + "%)",
                         }}
                       >
                         <div className="flex flex-col items-center w-[65px] h-[64px] p-4 rounded-full bg-white">
@@ -1399,7 +1397,7 @@ export default function MoreInfo({
                           Win Bat first{" "}
                         </p>
                         <p className="text-[#13B76D] font-semibold text-1xl">
-                        {matchVenueStats?.first_batting_match_won}%
+                          {matchVenueStats?.first_batting_match_won}%
                         </p>
                       </div>
                       <div className="flex items-center space-x-8">
@@ -1407,7 +1405,7 @@ export default function MoreInfo({
                           Win Bowl first{" "}
                         </p>
                         <p className="text-[#B7132B] font-semibold text-1xl">
-                        {matchVenueStats?.first_bowling_match_won}%
+                          {matchVenueStats?.first_bowling_match_won}%
                         </p>
                       </div>
                     </div>
@@ -1429,13 +1427,13 @@ export default function MoreInfo({
                   <div className="flex justify-between items-center py-2 mb-3 pb-3 border-b border-[#e4e9f0]">
                     <div className="flex flex-col items-start space-y-1">
                       <p className="text-[13px] text-[#3E436D]">
-                      Toss Win First Bat
+                        Toss Win First Bat
                       </p>
                       <p className="font-medium text-1xl">{matchVenueStats?.team_toss_win_choose_batting}</p>
                     </div>
                     <div className="flex flex-col items-end space-y-1">
                       <p className="text-[13px] text-[#3E436D]">
-                      Toss Win First Bowl
+                        Toss Win First Bowl
                       </p>
                       <p className="font-medium text-1xl">{matchVenueStats?.team_toss_win_choose_fieldeding}</p>
                     </div>
@@ -1443,13 +1441,13 @@ export default function MoreInfo({
                   <div className="flex justify-between items-center py-2 mb-3 pb-3 border-b border-[#e4e9f0]">
                     <div className="flex flex-col items-start space-y-1">
                       <p className="text-[13px] text-[#3E436D]">
-                      Toss Win First Bat Won
+                        Toss Win First Bat Won
                       </p>
                       <p className="font-medium text-1xl">{matchVenueStats?.team_toss_win_choose_batting_match_won}</p>
                     </div>
                     <div className="flex flex-col items-end space-y-1">
                       <p className="text-[13px] text-[#3E436D]">
-                      Toss Win First Bowl Won
+                        Toss Win First Bowl Won
                       </p>
                       <p className="font-medium text-1xl">{matchVenueStats?.team_toss_win_choose_fielding_match_won}</p>
                     </div>
@@ -1494,7 +1492,7 @@ export default function MoreInfo({
                   </div>
                 </div>
               </div>
-              
+
             </div>
             {/* right section */}
             <div className="lg:col-span-4 md:col-span-5">
@@ -1503,131 +1501,131 @@ export default function MoreInfo({
 
 
 
-{/* *********************************** */}
+              {/* *********************************** */}
 
 
-<div className="rounded-lg bg-[#ffffff]  mb-4 hidden md:block">
-                    <div className="p-4 cust-box-click-container">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex space-x-2">
-                          <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
-                          <h3 className="text-1xl font-semibold">Probability</h3>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <button
-                            className={`cust-box-click-button  font-medium ${activeOddTab === "tab1"
-                                ? "bg-[#081736] text-[#ffffff] "
-                                : "bg-[#ffffff] text-[#6A7586]"
-                              } px-5 py-1 rounded-full`}
-                            onClick={() => setActiveOddTab("tab1")}
-                          >
-                            <span>% View</span>
-                          </button>
-                          <button
-                            className={`cust-box-click-button font-medium ${activeOddTab === "tab2"
-                                ? "bg-[#081736] text-[#ffffff] "
-                                : "bg-[#ffffff] text-[#6A7586]"
-                              }  px-5 py-1 rounded-full`}
-                            onClick={() => setActiveOddTab("tab2")}
-                          >
-                            <span>Odds View</span>
-                          </button>
-                        </div>
-                      </div>
-                      {activeOddTab === "tab1" && (
-                        <div className="cust-box-click-content">
-                          <div>
-
-                            <div className="relative mt-4 h-[4px] bg-gray-200 overflow-hidden">
-                              <div
-                                className="absolute h-full bg-[#00a632]"
-                                style={{
-                                  width: `${teamwinpercentage?.team_a_win}%`,
-                                }}
-                              />
-                              <div
-                                className="absolute h-full bg-[#EB9D29]"
-                                style={{
-                                  width: `${teamwinpercentage?.draw}%`,
-                                  left: `${teamwinpercentage?.team_a_win}%`,
-                                }}
-                              ></div>
-                              <div
-                                className="absolute h-full bg-[#B7132B]"
-                                style={{
-                                  width: `${teamwinpercentage?.team_b_win}%`,
-                                  left: `${teamwinpercentage?.draw +
-                                    teamwinpercentage?.team_a_win
-                                    }%`,
-                                }}
-                              ></div>
-                            </div>
-                            <div className="flex justify-between mt-2 text-sm">
-                              <p className="text-[#00a632] font-medium">
-                                {matchDetails?.teama?.short_name}:{" "}
-                                {teamwinpercentage?.team_a_win}%
-                              </p>
-                              {teamwinpercentage?.draw > 0 ? (
-                                <p className="text-yellow-600 font-medium">
-                                  Drew: {teamwinpercentage?.draw}%
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                              <p className="text-red-600 font-medium">
-                                {matchDetails?.teamb?.short_name}:{" "}
-                                {teamwinpercentage?.team_b_win}%
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                      {activeOddTab === "tab2" && (
-                        <div className="cust-box-click-content">
-                          <div className="flex justify-between items-center border-t-[1px] pt-2">
-                            <div className="text-1xl font-medium">
-                            {lesserTeam?.team}
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
-                              {lesserTeam
-                                  ?.back !== null &&
-                                  lesserTeam
-                                    ?.back !== undefined &&
-                                  lesserTeam
-                                    ?.back !== ""
-                                  ? Math.round(
-                                    lesserTeam
-                                      ?.back *
-                                    100 -
-                                    100
-                                  )
-                                  : 0}
-                              </p>
-                              <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">
-                              {lesserTeam
-                                  ?.lay !== null &&
-                                  lesserTeam
-                                    ?.lay !== undefined &&
-                                  lesserTeam
-                                    ?.lay !== ""
-                                  ? Math.round(
-                                    lesserTeam
-                                      ?.lay *
-                                    100 -
-                                    100
-                                  )
-                                  : 0}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      )}
+              <div className="rounded-lg bg-[#ffffff]  mb-4 hidden md:block">
+                <div className="p-4 cust-box-click-container">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex space-x-2">
+                      <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
+                      <h3 className="text-1xl font-semibold">Probability</h3>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        className={`cust-box-click-button  font-medium ${activeOddTab === "tab1"
+                          ? "bg-[#081736] text-[#ffffff] "
+                          : "bg-[#ffffff] text-[#6A7586]"
+                          } px-5 py-1 rounded-full`}
+                        onClick={() => setActiveOddTab("tab1")}
+                      >
+                        <span>% View</span>
+                      </button>
+                      <button
+                        className={`cust-box-click-button font-medium ${activeOddTab === "tab2"
+                          ? "bg-[#081736] text-[#ffffff] "
+                          : "bg-[#ffffff] text-[#6A7586]"
+                          }  px-5 py-1 rounded-full`}
+                        onClick={() => setActiveOddTab("tab2")}
+                      >
+                        <span>Odds View</span>
+                      </button>
                     </div>
                   </div>
+                  {activeOddTab === "tab1" && (
+                    <div className="cust-box-click-content">
+                      <div>
+
+                        <div className="relative mt-4 h-[4px] bg-gray-200 overflow-hidden">
+                          <div
+                            className="absolute h-full bg-[#00a632]"
+                            style={{
+                              width: `${teamwinpercentage?.team_a_win}%`,
+                            }}
+                          />
+                          <div
+                            className="absolute h-full bg-[#EB9D29]"
+                            style={{
+                              width: `${teamwinpercentage?.draw}%`,
+                              left: `${teamwinpercentage?.team_a_win}%`,
+                            }}
+                          ></div>
+                          <div
+                            className="absolute h-full bg-[#B7132B]"
+                            style={{
+                              width: `${teamwinpercentage?.team_b_win}%`,
+                              left: `${teamwinpercentage?.draw +
+                                teamwinpercentage?.team_a_win
+                                }%`,
+                            }}
+                          ></div>
+                        </div>
+                        <div className="flex justify-between mt-2 text-sm">
+                          <p className="text-[#00a632] font-medium">
+                            {matchDetails?.teama?.short_name}:{" "}
+                            {teamwinpercentage?.team_a_win}%
+                          </p>
+                          {teamwinpercentage?.draw > 0 ? (
+                            <p className="text-yellow-600 font-medium">
+                              Drew: {teamwinpercentage?.draw}%
+                            </p>
+                          ) : (
+                            ""
+                          )}
+                          <p className="text-red-600 font-medium">
+                            {matchDetails?.teamb?.short_name}:{" "}
+                            {teamwinpercentage?.team_b_win}%
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {activeOddTab === "tab2" && (
+                    <div className="cust-box-click-content">
+                      <div className="flex justify-between items-center border-t-[1px] pt-2">
+                        <div className="text-1xl font-medium">
+                          {lesserTeam?.team}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
+                            {lesserTeam
+                              ?.back !== null &&
+                              lesserTeam
+                                ?.back !== undefined &&
+                              lesserTeam
+                                ?.back !== ""
+                              ? Math.round(
+                                lesserTeam
+                                  ?.back *
+                                100 -
+                                100
+                              )
+                              : 0}
+                          </p>
+                          <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">
+                            {lesserTeam
+                              ?.lay !== null &&
+                              lesserTeam
+                                ?.lay !== undefined &&
+                              lesserTeam
+                                ?.lay !== ""
+                              ? Math.round(
+                                lesserTeam
+                                  ?.lay *
+                                100 -
+                                100
+                              )
+                              : 0}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
 
 
-{/* *********************************** */}
+              {/* *********************************** */}
 
 
 
@@ -1645,11 +1643,10 @@ export default function MoreInfo({
                       onClick={(e) =>
                         handlePlaying11Tab(e, "cust-box-click-playing11")
                       }
-                      className={` cust-box-click-button font-medium px-12 py-1 rounded-full ${
-                        playing11Tab === "cust-box-click-playing11"
+                      className={` cust-box-click-button font-medium px-12 py-1 rounded-full ${playing11Tab === "cust-box-click-playing11"
                           ? "bg-[#081736] text-white"
                           : "bg-[#ffffff] text-[#6A7586]"
-                      }`}
+                        }`}
                     >
                       <span>{matchData?.match_info?.teama.short_name}</span>
                     </button>
@@ -1658,11 +1655,10 @@ export default function MoreInfo({
                       onClick={(e) =>
                         handlePlaying11Tab(e, "cust-box-click-playing12")
                       }
-                      className={` cust-box-click-button font-medium px-12 py-1 rounded-full ${
-                        playing11Tab === "cust-box-click-playing12"
+                      className={` cust-box-click-button font-medium px-12 py-1 rounded-full ${playing11Tab === "cust-box-click-playing12"
                           ? "bg-[#081736] text-white"
                           : "bg-[#ffffff] text-[#6A7586]"
-                      }`}
+                        }`}
                     >
                       <span>{matchData?.match_info?.teamb.short_name}</span>
                     </button>
@@ -1670,21 +1666,20 @@ export default function MoreInfo({
                   <div className="border-t-[1px] border-[#E4E9F0]" />
 
                   <div
-                    className={`cust-box-click-content cust-box-click-playing11 ${
-                      playing11Tab === "cust-box-click-playing11"
+                    className={`cust-box-click-content cust-box-click-playing11 ${playing11Tab === "cust-box-click-playing11"
                         ? ""
                         : "hidden"
-                    }`}
+                      }`}
                   >
                     <div>
-                      {teama11Players?.map((player:any, index:number) => (
-                        <Link key={index} href={"/player/"+playerUrls[player?.player_id]}>
+                      {teama11Players?.map((player: any, index: number) => (
+                        <Link key={index} href={"/player/" + playerUrls[player?.player_id]}>
                           <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
                             <div>
-                               <PlayerImage  key={player?.player_id} player_id={ player?.player_id} height={35} width={35} className="rounded-lg" />
-                                                              
+                              <PlayerImage key={player?.player_id} player_id={player?.player_id} height={35} width={35} className="rounded-lg" />
+
                             </div>
-                            
+
                             <div className="font-medium">
                               <h2 className="text-[15px]">
                                 {" "}
@@ -1702,19 +1697,18 @@ export default function MoreInfo({
                   </div>
 
                   <div
-                    className={`cust-box-click-content cust-box-click-playing12 ${
-                      playing11Tab === "cust-box-click-playing12"
+                    className={`cust-box-click-content cust-box-click-playing12 ${playing11Tab === "cust-box-click-playing12"
                         ? ""
                         : "hidden"
-                    }`}
+                      }`}
                   >
                     <div>
-                      {teamb11Players?.map((player:any, index:number) => (
-                        <Link key={index}  href={"/player/"+playerUrls[player?.player_id]}>
+                      {teamb11Players?.map((player: any, index: number) => (
+                        <Link key={index} href={"/player/" + playerUrls[player?.player_id]}>
                           <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
                             <div>
-                            <PlayerImage  key={player?.player_id} player_id={ player?.player_id} height={35} width={35} className="rounded-lg" />
-                               
+                              <PlayerImage key={player?.player_id} player_id={player?.player_id} height={35} width={35} className="rounded-lg" />
+
                             </div>
                             <div className="font-medium">
                               <h2 className="text-[15px]">

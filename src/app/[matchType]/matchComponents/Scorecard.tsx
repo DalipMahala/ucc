@@ -151,11 +151,7 @@ export default function Scorecard({
                   Batting
                 </h3>
                 <div>
-                  <div className=" overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
-                              [&::-webkit-scrollbar-track]:bg-gray-100 
-                              [&::-webkit-scrollbar-thumb]:bg-[#DFE9F6] 
-                               dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
-                                 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
+                  <div className="relative">
                     <table className="w-full text-sm text-left text-gray-600 whitespace-nowrap">
                       <thead className="bg-gray-100">
                         <tr>
@@ -208,9 +204,9 @@ export default function Scorecard({
                       {batsman?.map((batsman:any, index: number) => (
                         <tr className="border-b" key={index}>
                           <td className="px-2 md:px-4 py-2 font-medium text-gray-800">
-                            <Link href={"/player/"+playerUrls[batsman.batsman_id]} className='flex md:items-center md:flex-row flex-col relative'>
+                            <Link href={"/player/"+playerUrls[batsman.batsman_id]} className='flex md:items-center md:flex-row flex-col relative hover:text-[#1a80f8]'>
                               {" "}
-                              <p className='flex gap-1 items-center'>
+                              <p className={`flex gap-1 items-center ${batsman.position === "striker" ? "text-[#1a80f8]" : ""}`}> 
                               {batsman.name}
                               {
                                 batsman.position === "striker"? (<Image  loading="lazy"  src="/assets/img/home/bat.png" width={12} height={12} className="h-[13px]" alt="" />) : ` `
@@ -285,7 +281,7 @@ export default function Scorecard({
                         {bowlers?.map((bowlers:any, index: number) => (
                         <tr  key={index}>
                           <td className="px-4 py-3 font-medium text-gray-800">
-                            <Link href={"/player/"+playerUrls[bowlers.bowler_id]} className=''>{bowlers.name} </Link>
+                            <Link href={"/player/"+playerUrls[bowlers.bowler_id]} className='hover:text-[#1a80f8]'>{bowlers.name} </Link>
                           </td>
                           <td className="md:px-4 pl-[14px] py-3 font-medium text-gray-800">{bowlers.overs} </td>
                           <td className="md:px-4 pl-[14px] py-3">{bowlers.maidens} </td>
@@ -318,7 +314,7 @@ export default function Scorecard({
                       {fows?.map((fows:any, index: number) => (
                         <tr className="border-b"  key={index}>
                           <td className="px-4 py-3 font-medium text-gray-800">
-                            <Link href={"/player/"+playerUrls[fows.batsman_id]} className=''>  {fows.name} </Link>
+                            <Link href={"/player/"+playerUrls[fows.batsman_id]} className='hover:text-[#1a80f8]'>  {fows.name} </Link>
                           </td>
                           <td className="px-4 py-3 font-medium text-gray-800">{fows.score_at_dismissal} </td>
                           <td className="px-4 py-3">{fows.overs_at_dismissal}</td>
