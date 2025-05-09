@@ -182,7 +182,6 @@ export default function Live({
   // Merge new unique data into firstArray
   // console.log("newCommentary",commentaries);
   let updatedCommentaries = [...allCommentries];
-  console.log("thisOverRun", thisOverRun.length);
   if (newCommentary && Array.isArray(newCommentary)) {
     newCommentary.forEach(
       (newItem: { event_id: number; event: string; commentary: string; text: string }) => {
@@ -433,7 +432,7 @@ export default function Live({
       <div className="flex rounded-lg bg-white p-4 md:hidden gap-4  whitespace-nowrap overflow-auto ">
 
         {/* This Over Section */}
-        {thisOverRun.length > 0 &&
+        {/* {thisOverRun.length > 0 && */}
           <div className="flex items-center gap-2">
             <span className="font-medium text-[#586577]">
               This Over:
@@ -461,7 +460,7 @@ export default function Live({
               = {thisOvertotalRuns}
             </span>
           </div>
-        }
+        {/* } */}
 
         {/* Last Over Section */}
 

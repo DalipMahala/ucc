@@ -118,13 +118,13 @@ export default function LiveResult({
       (events: { event: string; over: any }) =>
         Number(events.over) === lastOver && events.event !== "overend"
     );
-    thisOvertotalRuns = thisOverRun.reduce(
+    thisOvertotalRuns = thisOverRun?.reduce(
       (accumulator: number, currentEvent: { run: number }) => {
         return accumulator + currentEvent.run;
       },
       0
     );
-    lastOvertotalRuns = lastOverRun.reduce(
+    lastOvertotalRuns = lastOverRun?.reduce(
       (accumulator: number, currentEvent: { run: number }) => {
         return accumulator + currentEvent.run;
       },
