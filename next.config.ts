@@ -5,7 +5,9 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     scrollRestoration: true,
+    optimizeServerReact: true,
     gzipSize: true,
+
     // Remove unsupported options
   },
   images: {
@@ -15,7 +17,9 @@ const nextConfig = {
       "uccricket.live",
       "fantasykhiladi.com",
       "flagcdn.com",
+      "13.202.213.65"
     ],
+    formats: ['image/avif', 'image/webp'],
     loader: 'default',
     minimumCacheTTL: 60,
   },

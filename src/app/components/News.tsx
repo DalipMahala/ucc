@@ -88,8 +88,8 @@ const News = () => {
                         // src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
                         src={post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium_large.source_url}
 
-                        width={1000}
-                        height={1000}
+                        width={360}
+                        height={192}
                         alt={post?.title.rendered}
                         className="rounded-lg w-full h-48 object-cover"
                       />

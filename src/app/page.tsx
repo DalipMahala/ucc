@@ -1,5 +1,3 @@
-
-export const dynamic = "force-dynamic";
 import Layout from "./components/Layout";
 import WeeklySlider from "./components/WeeklySlider";
 import CardSlider from "./components/CardSlider";
