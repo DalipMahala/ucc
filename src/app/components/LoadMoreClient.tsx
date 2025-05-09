@@ -252,7 +252,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                   </Link>
                 </div>
                 {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
-                  <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title : cmatch?.title) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
+                  <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title+ "-head-to-head-in-ipl" : cmatch?.title + "-head-to-head-in-" + cmatch?.format_str)).toLowerCase()}>
                     <div className="flex justify-end items-center space-x-2">
                       <Image
                         src="/assets/img/home/handshake.png"
@@ -404,7 +404,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                         
                       </>}
                     {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
-                      <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title : cmatch?.title) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
+                      <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title+ "-head-to-head-in-ipl" : cmatch?.title + "-head-to-head-in-" + cmatch?.format_str)).toLowerCase()}>
                         <div className="pl-[10px] border-l-[1px] border-[#d0d3d7] flex justify-end items-center space-x-2">
                           <Image
                             src="/assets/img/home/handshake.png"

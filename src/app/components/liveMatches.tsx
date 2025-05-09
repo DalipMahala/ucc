@@ -347,7 +347,7 @@ export default async function LiveMatches() {
                   </Link>
                 </div>
                 {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                  <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title : items?.title) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
+                  <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title+ "-head-to-head-in-ipl" : items?.title + "-head-to-head-in-" + items?.format_str)).toLowerCase()}>
                     <div className="flex justify-end items-center space-x-2">
                       <Image
                         src="/assets/img/home/handshake.png"
@@ -552,7 +552,7 @@ export default async function LiveMatches() {
                       </>
                     }
                     {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                      <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title : items?.title) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
+                      <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title+ "-head-to-head-in-ipl" : items?.title + "-head-to-head-in-" + items?.format_str)).toLowerCase()}>
                         
                         <div className="pl-[10px] border-l-[1px] border-[#d0d3d7] flex justify-end items-center space-x-2">
                           <Image

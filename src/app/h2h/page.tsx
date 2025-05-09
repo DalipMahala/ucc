@@ -39,7 +39,7 @@ export default async function Page(props: { params: Params }) {
   const teamb_id = await getTeamId(teamB);
   const cid = await isIPLTeamDetails(teama_id,2025);
   let allTeams:any = [];
-  if(cid !== null && matchType === 't20'){
+  if(cid !== null && matchType === 'ipl'){
     tblName = 'h2h_ipl'
     allTeams = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/series/SeriesTeams`, {
       method: "POST",
@@ -55,9 +55,9 @@ export default async function Page(props: { params: Params }) {
     }else{
       tblName = 'h2h'; 
     }
-   
-  const teamDetails = await H2hDetails(tblName,matchType,teama_id,teamb_id);
-  let completedMatch = await h2hMatch(matchType,teama_id,teamb_id);
+  const  matchFormate = matchType === 'ipl' ? 't20' : matchType; 
+  const teamDetails = await H2hDetails(tblName,matchFormate,teama_id,teamb_id);
+  let completedMatch = await h2hMatch(matchFormate,teama_id,teamb_id);
   const teamADetails = await TeamDetails(teamDetails?.teama_id);
   const teamBDetails = await TeamDetails(teamDetails?.teamb_id);
   // console.log("matchType",matchType);
@@ -65,7 +65,7 @@ export default async function Page(props: { params: Params }) {
 
     return (
         <Layout>
-        {(cid != null && matchType === 't20') ? (
+        {(cid != null && matchType === 'ipl') ? (
             <H2hipl teamDetails={teamDetails} teamADetails={teamADetails} teamBDetails={teamBDetails} urlStrings={urlString} completedMatch={completedMatch} allTeams={allTeams} />
         ):(
         <H2h teamDetails={teamDetails} teamADetails={teamADetails} teamBDetails={teamBDetails} urlStrings={urlString} completedMatch={completedMatch} allTeams={undefined} />

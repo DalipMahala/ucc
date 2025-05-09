@@ -256,7 +256,7 @@ export default async function UpcomingMatches() {
                   </Link>
                 </div>
                 {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                  <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title : ucmatch?.title) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
+                  <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title+ "-head-to-head-in-ipl" : ucmatch?.title + "-head-to-head-in-" + ucmatch?.format_str)).toLowerCase()}>
                     <div className="flex justify-end items-center space-x-2">
                       <Image
                         src="/assets/img/home/handshake.png"
@@ -397,7 +397,7 @@ export default async function UpcomingMatches() {
                       <div className="hidden md:block h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                     </>}
                   {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                    <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title : ucmatch?.title) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
+                    <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title+ "-head-to-head-in-ipl" : ucmatch?.title + "-head-to-head-in-" + ucmatch?.format_str)).toLowerCase()}>
                       <div className="pl-[10px] border-l-[1px] flex justify-end items-center space-x-2">
                         <Image
                           src="/assets/img/home/handshake.png"

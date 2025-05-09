@@ -430,7 +430,7 @@ export default function ScheduleResults({
                           </div>
 
                           {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                            <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title : items?.title) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
+                            <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title+ "-head-to-head-in-ipl" : items?.title + "-head-to-head-in-" + items?.format_str)).toLowerCase()}>
 
                               <div className="flex justify-end items-center space-x-2">
                                 <Image loading="lazy"
@@ -645,7 +645,7 @@ export default function ScheduleResults({
                                   <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                                 </>}
                               {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                                <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title : items?.title) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
+                                <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title+ "-head-to-head-in-ipl" : items?.title + "-head-to-head-in-" + items?.format_str)).toLowerCase()}>
 
                                   <div className="flex justify-end items-center space-x-2">
                                     <Image loading="lazy"
@@ -893,7 +893,7 @@ export default function ScheduleResults({
                           </div>
 
                           {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
-                            <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title : cmatch?.title) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
+                            <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title+ "-head-to-head-in-ipl" : cmatch?.title + "-head-to-head-in-" + cmatch?.format_str)).toLowerCase()}>
 
                               <div className="flex mt-2 justify-end items-center space-x-2">
                                 <Image loading="lazy"
@@ -1054,7 +1054,7 @@ export default function ScheduleResults({
                                   <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                                 </>}
                               {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
-                                <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title : cmatch?.title) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
+                                <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title+ "-head-to-head-in-ipl" : cmatch?.title + "-head-to-head-in-" + cmatch?.format_str)).toLowerCase()}>
 
                                   <div className="flex justify-end items-center space-x-2">
                                     <Image loading="lazy"
@@ -1279,7 +1279,7 @@ export default function ScheduleResults({
                           </div>
 
                           {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                            <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title : ucmatch?.title) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
+                            <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title+ "-head-to-head-in-ipl" : ucmatch?.title + "-head-to-head-in-" + ucmatch?.format_str)).toLowerCase()}>
 
                               <div className="flex mt-2 justify-end items-center space-x-2">
                                 <Image loading="lazy"
@@ -1432,7 +1432,7 @@ export default function ScheduleResults({
                                 <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                               </>}
                             {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                              <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title : ucmatch?.title) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
+                              <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title+ "-head-to-head-in-ipl" : ucmatch?.title + "-head-to-head-in-" + ucmatch?.format_str)).toLowerCase()}>
 
                                 <div className="flex justify-end items-center space-x-2">
                                   <Image loading="lazy"

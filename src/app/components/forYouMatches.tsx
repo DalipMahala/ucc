@@ -361,7 +361,7 @@ export default async function ForYouMatches() {
                   </Link>
                 </div>
                 {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                  <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title : items?.title) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
+                  <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title+ "-head-to-head-in-ipl" : items?.title + "-head-to-head-in-" + items?.format_str)).toLowerCase()}>
                     <div className="flex justify-end items-center space-x-2">
                       <Image
                         src="/assets/img/home/handshake.png"
@@ -560,7 +560,7 @@ export default async function ForYouMatches() {
                       </>
                     }
                     {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                      <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title : items?.title) + "-head-to-head-in-" + items?.format_str).toLowerCase()}>
+                      <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title+ "-head-to-head-in-ipl" : items?.title + "-head-to-head-in-" + items?.format_str)).toLowerCase()}>
                         <div className="pl-[10px] border-l-[1px] border-[#d0d3d7] flex justify-end items-center space-x-2">
                           <Image
                             src="/assets/img/home/handshake.png"
@@ -803,7 +803,7 @@ export default async function ForYouMatches() {
                   </Link>
                 </div>
                 {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                  <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title : ucmatch?.title) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
+                  <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title+ "-head-to-head-in-ipl" : ucmatch?.title + "-head-to-head-in-" + ucmatch?.format_str)).toLowerCase()}>
                     <div className="flex justify-end items-center space-x-2">
                       <Image
                         src="/assets/img/home/handshake.png"
@@ -944,7 +944,7 @@ export default async function ForYouMatches() {
                      
                     </>}
                   {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                    <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title : ucmatch?.title) + "-head-to-head-in-" + ucmatch?.format_str).toLowerCase()}>
+                    <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title+ "-head-to-head-in-ipl" : ucmatch?.title + "-head-to-head-in-" + ucmatch?.format_str)).toLowerCase()}>
                       <div className="pl-[10px] border-l-[1px] flex justify-end items-center space-x-2">
                         <Image
                           src="/assets/img/home/handshake.png"
@@ -1158,7 +1158,7 @@ export default async function ForYouMatches() {
                   </Link>
                 </div>
                 {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
-                  <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title : cmatch?.title) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
+                  <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title+ "-head-to-head-in-ipl" : cmatch?.title + "-head-to-head-in-" + cmatch?.format_str)).toLowerCase()}>
                     <div className="flex justify-end items-center space-x-2">
                       <Image
                         src="/assets/img/home/handshake.png"
@@ -1303,7 +1303,7 @@ export default async function ForYouMatches() {
 
                       </>}
                     {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
-                      <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title : cmatch?.title) + "-head-to-head-in-" + cmatch?.format_str).toLowerCase()}>
+                      <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title+ "-head-to-head-in-ipl" : cmatch?.title + "-head-to-head-in-" + cmatch?.format_str)).toLowerCase()}>
                         <div className="pl-[10px] border-l-[1px] border-[#d0d3d7] flex justify-end items-center space-x-2">
                           <Image
                             src="/assets/img/home/handshake.png"
