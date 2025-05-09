@@ -1,26 +1,70 @@
-import React from 'react'
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from 'next/link';
+import DOMPurify from "dompurify";
+import { format } from "date-fns";
+import { textLimit } from "@/utils/utility";
 
 function SeriesListNews() {
+    const [activeTab, setActiveTab] = useState("news");
+      const [catids, setCatids] = useState("21");
+      const [news, setNews] = useState([]);
+    
+      const handleTabClick = (tab: string) => {
+        const currentId = (() => {
+          switch (tab) {
+            case "news":
+              return "21";
+            case "fantasy-cricket":
+              return "80";
+            case "ipl":
+              return "3";
+            case "pointstable2":
+              return "112";
+            default:
+              return "21";
+          }
+        })(); // Call the function immediately
+    
+        setCatids(currentId); // Update category ID
+        setActiveTab(tab); // Update active tab
+      };
+      useEffect(() => {
+        fetch(
+          `https://uccricket.live/wp-json/wp/v2/posts?_embed&&categories=${catids}`
+        )
+          .then((res) => res.json())
+          .then((data) => setNews(data))
+          .catch((err) => console.error("Error fetching news:", err));
+      }, [catids]);
     return (
 
         <>
-             <div className="flex gap-3 my-4 p-4 bg-[#ffffff] rounded-lg ">
-                    <Link className="w-[45%]" href="">
-                     
+        {news.slice(0, 10)?.map((post: any, index: number) => (
+             <div className="flex gap-3 my-4 p-4 bg-[#ffffff] rounded-lg " key={index}>
+                    <Link className="w-[45%]" href={post?.link}>
+                    {post._embedded["wp:featuredmedia"]?.[0]?.media_details
+                        .sizes.medium.source_url && (
                         <Image priority
-                          src="/assets/img/flag/p-1.png"
+                          src=
+                          {post._embedded["wp:featuredmedia"]?.[0]
+                            .media_details.sizes.medium.source_url
+                        }
                           width={300}
                           height={144}
                           alt=""
                           className="rounded-lg h-[90px] w-[100%]" />
-                     
+                        )}
                     </Link>
                     <div className="w-[55%] flex flex-col justify-between">
-                      <Link className="" href="">
-                        <h2 className="text-[14px] font-semibold mb-2 hover:text-[#1a80f8]">
-                        Dharamshala Exit Plan for Players Amid India-Pakistan Tensions
+                      <Link className="" href={post?.link}>
+                        <h2 className="text-[14px] font-semibold mb-2 hover:text-[#1a80f8]" dangerouslySetInnerHTML={{
+                                                    __html: DOMPurify.sanitize(
+                                                        textLimit(post?.title.rendered,60)
+                                                    ),
+                                                  }}>
                         </h2>
                       </Link>
                       <p className="text-[12px] text-gray-500 flex gap-1 items-center">
@@ -40,10 +84,11 @@ function SeriesListNews() {
                             ></path>
                           </svg>
                         </span>{" "}
-                        09 May, 2025
+                        {format(new Date(post?.modified), "dd MMM, yyyy")}
                       </p>
                     </div>
                   </div>
+            ))}
 
         </>
     )

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Banner from "./Banner";
 import Image from "next/image";
@@ -98,6 +98,32 @@ export default function Team({
   const handleHomeRecordTabClick = (tab: React.SetStateAction<string>) => {
     setHomeRecordTab(tab);
   };
+
+  const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
+  
+    useEffect(() => {
+      const getAllPlayerIds = () => {
+        const allIds = [
+          ...squads.map((item: { pid: any; }) => item.pid),
+          ...teamCaptains.map((item: { pid: any; }) => item.pid),
+        ];
+        return [...new Set(allIds)]; // Deduplicate
+      };
+     
+      const fetchPlayerUrls = async () => {
+        const ids = getAllPlayerIds();
+        if (ids.length === 0) return;
+        const res = await fetch('/api/player-urls', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+          body: JSON.stringify({ ids }),
+        });
+        const data = await res.json();
+        setPlayerUrls(data);
+      };
+  
+      fetchPlayerUrls();
+    }, [squads, teamCaptains]);
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 my-4 px-2 lg:px-0">
       <div className="md:grid grid-cols-12 gap-4">
@@ -154,9 +180,7 @@ export default function Team({
                     <Link
                       href={
                         "/player/" +
-                        urlStringEncode(cap?.title) +
-                        "/" +
-                        cap?.pid
+                        playerUrls[cap?.pid]
                       }
                     >
                       <div className="flex items-center space-x-3">
@@ -199,7 +223,7 @@ export default function Team({
                   <div className="grid md:grid-cols-12 grid-cols-6 gap-4">
                     {squads?.map((squad: any, index: number) => (
                       <div key={index} className="col-span-3 cust-tp-pera-card text-center py-4 px-2 rounded-md border-[1px] border-[##E2E2E2]">
-                        <Link href={"/player/" + squad?.title + "/" + squad?.pid}>
+                        <Link href={"/player/" + playerUrls[squad?.pid]}>
                           <div className="relative">
                             <PlayerImage key={squad?.pid} player_id={squad?.pid} height={47} width={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
 
