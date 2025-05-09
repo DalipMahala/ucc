@@ -362,7 +362,9 @@ export default function ScheduleResults({
                                   "-" +
                                   items?.subtitle +
                                   "-" +
-                                  items?.competition?.title
+                                  items?.competition?.title+
+                                  "-" +
+                                  items?.competition?.season
                               ) +
                               "/" +
                               items.match_id
@@ -540,7 +542,9 @@ export default function ScheduleResults({
                                   "-" +
                                   items?.subtitle +
                                   "-" +
-                                  items?.competition?.title
+                                  items?.competition?.title+
+                                  "-" +
+                                  items?.competition?.season
                               ) +
                               "/" +
                               items.match_id
@@ -710,7 +714,9 @@ export default function ScheduleResults({
                                     "-" +
                                     cmatch?.subtitle +
                                     "-" +
-                                    cmatch?.competition?.title
+                                    cmatch?.competition?.title+
+                                    "-" +
+                                    cmatch?.competition?.season
                                 ) +
                                 "/" +
                                 cmatch.match_id
@@ -782,7 +788,9 @@ export default function ScheduleResults({
                                     "-" +
                                     cmatch?.subtitle +
                                     "-" +
-                                    cmatch?.competition?.title
+                                    cmatch?.competition?.title+
+                                    "-" +
+                                    cmatch?.competition?.season
                                 ) +
                                 "/" +
                                 cmatch.match_id
@@ -864,7 +872,9 @@ export default function ScheduleResults({
                                   "-" +
                                   cmatch?.subtitle +
                                   "-" +
-                                  cmatch?.competition?.title
+                                  cmatch?.competition?.title+
+                                  "-" +
+                                  cmatch?.competition?.season
                               ) +
                               "/" +
                               cmatch.match_id
@@ -1032,7 +1042,9 @@ export default function ScheduleResults({
                                 "-" +
                                 ucmatch?.subtitle +
                                 "-" +
-                                ucmatch?.competition?.title
+                                ucmatch?.competition?.title+
+                                "-" +
+                                ucmatch?.competition?.season
                             ) +
                             "/" +
                             ucmatch.match_id
@@ -1150,6 +1162,8 @@ export default function ScheduleResults({
                                 ucmatch?.teamb?.short_name +
                                 "-" +
                                 ucmatch?.subtitle +
+                                "-" +
+                                ucmatch?.competition?.title+
                                 "-" +
                                 ucmatch?.competition?.title
                             ) +
