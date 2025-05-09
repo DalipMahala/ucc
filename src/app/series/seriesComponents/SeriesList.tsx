@@ -207,7 +207,7 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
           <PLSeries />
           <div className="">
         
-              <h2 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8] mb-6 uppercase">Latest News</h2>
+              <h2 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8] mb-2 uppercase">Latest News</h2>
            
             <SeriesListNews></SeriesListNews>
           </div>
