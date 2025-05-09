@@ -32,9 +32,9 @@ export default function Overview({
 }: teamview) {
 
   const [isMounted, setIsMounted] = useState(false);
-    useEffect(() => {
-      setIsMounted(true);
-    }, []);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const teams = teamPlayers[0]?.team || {};
   const captain = teamPlayers[0]?.captains?.[0] || null;
@@ -42,15 +42,15 @@ export default function Overview({
   const standings = pointTables?.standing?.standings || [];
 
   const matchPlaying11 = matcheInfo?.['match-playing11'] || {};
-  const squads = matchPlaying11?.teama?.team_id === teams?.tid 
+  const squads = matchPlaying11?.teama?.team_id === teams?.tid
     ? matchPlaying11?.teama?.squads || []
     : matchPlaying11?.teamb?.squads || [];
- 
+
   const cmatch = seriesMatches?.resultMatch.reverse();
   const completedMatch = seriesMatches?.resultMatch?.filter(
     (m: any) => [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teams?.tid))
   )?.reverse()?.[0] || null;
-  
+
   const upcomingMatch = seriesMatches?.scheduledMatch?.filter(
     (m: any) => [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teams?.tid))
   )?.[0] || null;
@@ -130,7 +130,7 @@ export default function Overview({
     }
   }, [cid, statType]);
   // const matchStats= statsMatch?.stats;
-  
+
   const [open, setOpen] = useState({
     mostRuns: false,
     mostHundreds: false,
@@ -192,7 +192,7 @@ export default function Overview({
         <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
           <Link
             href={
-              "/ipl/"+pointTables?.season+"/" + urlStringEncode(teams?.title) + "/" + teams?.tid
+              "/ipl/" + pointTables?.season + "/" + urlStringEncode(teams?.abbr) + "/" + teams?.tid
             }
           >
             <button className="font-medium py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md">
@@ -201,8 +201,8 @@ export default function Overview({
           </Link>
           <Link
             href={
-              "/ipl/"+pointTables?.season+"/" +
-              urlStringEncode(teams?.title) +
+              "/ipl/" + pointTables?.season + "/" +
+              urlStringEncode(teams?.abbr) +
               "/" +
               teams?.tid +
               "/schedule-results"
@@ -214,8 +214,8 @@ export default function Overview({
           </Link>
           <Link
             href={
-              "/ipl/"+pointTables?.season+"/" +
-              urlStringEncode(teams?.title) +
+              "/ipl/" + pointTables?.season + "/" +
+              urlStringEncode(teams?.abbr) +
               "/" +
               teams?.tid +
               "/squads"
@@ -273,21 +273,21 @@ export default function Overview({
             <div className="lg:col-span-8 md:col-span-7 mt-4">
               <div className="rounded-lg bg-white mb-4">
                 <div className="p-4">
-                  <h3 className="text-[15px] font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                  <h2 className="text-[15px] font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Info
-                  </h3>
+                  </h2>
                   <div className="border-t border-[#E4E9F0]"></div>
 
                   {/* <!-- Responsive Grid Section --> */}
                   <div className="grid gap-2 grid-cols-1 py-3 px-2">
-                    <div className="flex items-center gap-16">
-                      <h2 className="font-normal text-[#586577]">Coach :</h2>
+                    <div className="flex items-center">
+                      <h3 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Coach :</h3>
                       <p className="text-[14px] font-medium">
                         {teams?.head_coach}{" "}
                       </p>
                     </div>
-                    <div className="flex items-center gap-12">
-                      <h2 className="font-normal text-[#586577]">Country :</h2>
+                    <div className="flex items-center">
+                      <h3 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Country :</h3>
                       <p className="text-[14px] font-medium flex gap-[3px]">
                         <Image
                           src="/assets/img/flag/17.png"
@@ -305,238 +305,238 @@ export default function Overview({
 
               <div className="rounded-lg bg-white">
                 <div className="p-4">
-                  <h3 className="text-[15px] font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                  <h2 className="text-[15px] font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Venue
-                  </h3>
+                  </h2>
                   <div className="border-t border-[#E4E9F0]"></div>
 
                   {/* <!-- Responsive Grid Section --> */}
                   <div className="grid gap-2 grid-cols-1 py-3 px-2">
-                    <div className="flex items-center gap-16">
-                      <h2 className="font-normal text-[#586577]">Name :</h2>
+                    <div className="flex items-center">
+                      <h3 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Name :</h3>
                       <p className="text-[14px] font-medium"> {venueDetails?.venue_name} </p>
                     </div>
-                    <div className="flex items-center gap-12">
-                      <h2 className="font-normal text-[#586577]">Capacity :</h2>
+                    <div className="flex items-center">
+                      <h3 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Capacity :</h3>
                       <p className="text-[14px] font-medium"> {venueDetails?.venue_capacity}</p>
                     </div>
 
-                    <div className="flex items-center gap-14">
-                      <h2 className="font-normal text-[#586577]">City :</h2>
+                    <div className="flex items-center">
+                      <h3 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">City :</h3>
                       <p className="text-[14px] font-medium"> {venueDetails?.venue_city}, {venueDetails?.venue_country}</p>
                     </div>
                   </div>
                 </div>
               </div>
-              {completedMatch && 
-              <div className="rounded-lg bg-[#ffffff] my-4 p-4">
-                <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
-                  Last Match Result
-                </h3>
+              {completedMatch &&
+                <div className="rounded-lg bg-[#ffffff] my-4 p-4">
+                  <h2 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                    Last Match Result
+                  </h2>
 
-                {/* <!-- Featured Matches desktop view  --> */}
-                <div className="border-t-[1px] border-[#E4E9F0]"></div>
-                <div className="hidden lg:block">
-                <Link href={"/scorecard/" + urlStringEncode(completedMatch?.teama?.short_name + "-vs-" + completedMatch?.teamb?.short_name + "-" + completedMatch?.subtitle + "-" + completedMatch?.competition?.title + "-" + completedMatch?.competition?.season) + "/" + completedMatch.match_id} passHref
-    legacyBehavior>
-                  <div className="py-3 flex justify-between items-center">
-                    <div className="flex space-x-2 font-medium	w-full">
-                      <div className="flex items-center space-x-1 flex-col">
-                        <Image
-                          src={completedMatch?.teama?.logo_url}
-                          className="h-[35px] rounded-full"
-                          width={35}
-                          height={35}
-                          alt={completedMatch?.teama?.short_name}
-                        />
-                        <span className="text-[#909090]">{completedMatch?.teama?.short_name}</span>
-                      </div>
-                      <div className="mt-1">
-                        <p className="text-1xl font-semibold">{completedMatch?.teama?.scores}</p>
-                        <p className="text-[#909090]">({completedMatch?.teama?.overs} overs)</p>
-                      </div>
-                    </div>
-
-                    <div className=" font-semibold text-center w-full">
-                      <p className="text-[#3D4DCF] text-[14px]">{completedMatch?.result}</p>
-                      <p className="text-[#909090] text-[12px] font-normal">
-                      {completedMatch?.subtitle} {completedMatch?.competition?.abbr}
-                      </p>
-                    </div>
-
-                    <div className="flex space-x-2 font-medium justify-end w-full">
-                      <div className="mt-1 text-end">
-                        <p className="text-1xl font-semibold">{completedMatch?.teamb?.scores}</p>
-                        <p className="text-[#909090]">({completedMatch?.teamb?.overs} overs)</p>
-                      </div>
-
-                      <div className="flex items-center space-x-1 flex-col font-medium">
-                        <Image
-                          src={completedMatch?.teamb?.logo_url}
-                          className="h-[35px] rounded-full"
-                          width={35}
-                          height={35}
-                          alt={completedMatch?.teamb?.short_name}
-                        />
-                        <span className="text-[#909090]">{completedMatch?.teamb?.short_name}</span>
-                      </div>
-                    </div>
-                  </div>
-                  </Link>
-                  
-                </div>
-
-                {/* <!-- Featured Matches responsive view view  --> */}
-                <Link href={"/scorecard/" + urlStringEncode(completedMatch?.teama?.short_name + "-vs-" + completedMatch?.teamb?.short_name + "-" + completedMatch?.subtitle + "-" + completedMatch?.competition?.title + "-" + completedMatch?.competition?.season) + "/" + completedMatch.match_id}>
-                <div className="lg:hidden">
-                  <div className="py-4 px-3 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]">
-                    <p className="text-[#909090] text-[12px] mb-4 font-normal">
-                    {completedMatch?.subtitle} {completedMatch?.competition?.abbr}
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <div className="">
-                        <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full mb-3">
+                  {/* <!-- Featured Matches desktop view  --> */}
+                  <div className="border-t-[1px] border-[#E4E9F0]"></div>
+                  <div className="hidden lg:block">
+                    <Link href={"/scorecard/" + urlStringEncode(completedMatch?.teama?.short_name + "-vs-" + completedMatch?.teamb?.short_name + "-" + completedMatch?.subtitle + "-" + completedMatch?.competition?.title + "-" + completedMatch?.competition?.season) + "/" + completedMatch.match_id} passHref
+                      legacyBehavior>
+                      <div className="py-3 flex justify-between items-center">
+                        <div className="flex space-x-2 font-medium	w-full">
                           <div className="flex items-center space-x-1 flex-col">
                             <Image
                               src={completedMatch?.teama?.logo_url}
-                              className="h-[25px] rounded-full"
-                              width={25}
-                              height={25}
+                              className="h-[35px] rounded-full"
+                              width={35}
+                              height={35}
                               alt={completedMatch?.teama?.short_name}
                             />
-                            <span className="text-[#909090]">{completedMatch?.teama?.short_name}</span>
+                            <span className="text-[#757A82]">{completedMatch?.teama?.short_name}</span>
                           </div>
-                          <div className="flex items-center gap-2 mt-1">
+                          <div className="mt-1">
                             <p className="text-1xl font-semibold">{completedMatch?.teama?.scores}</p>
-                            <p className="text-[#909090]">({completedMatch?.teama?.overs} overs)</p>
+                            <p className="text-[#757A82]">({completedMatch?.teama?.overs} overs)</p>
                           </div>
                         </div>
 
-                        <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full">
-                          <div className="flex items-center space-x-1 flex-col">
+                        <div className=" font-semibold text-center w-full">
+                          <p className="text-[#3D4DCF] text-[14px]">{completedMatch?.result}</p>
+                          <p className="text-[#757A82] text-[12px] font-normal">
+                            {completedMatch?.subtitle} {completedMatch?.competition?.abbr}
+                          </p>
+                        </div>
+
+                        <div className="flex space-x-2 font-medium justify-end w-full">
+                          <div className="mt-1 text-end">
+                            <p className="text-1xl font-semibold">{completedMatch?.teamb?.scores}</p>
+                            <p className="text-[#757A82]">({completedMatch?.teamb?.overs} overs)</p>
+                          </div>
+
+                          <div className="flex items-center space-x-1 flex-col font-medium">
                             <Image
                               src={completedMatch?.teamb?.logo_url}
-                              className="h-[25px] rounded-full"
-                              width={25}
-                              height={25}
+                              className="h-[35px] rounded-full"
+                              width={35}
+                              height={35}
                               alt={completedMatch?.teamb?.short_name}
                             />
-                            <span className="text-[#909090]">{completedMatch?.teamb?.short_name}</span>
+                            <span className="text-[#757A82]">{completedMatch?.teamb?.short_name}</span>
                           </div>
-                          <div className="flex items-center gap-2 mt-1">
-                            <p className="text-1xl font-semibold">{completedMatch?.teamb?.scores}</p>
-                            <p className="text-[#909090]">({completedMatch?.teamb?.overs} overs)</p>
+                        </div>
+                      </div>
+                    </Link>
+
+                  </div>
+
+                  {/* <!-- Featured Matches responsive view view  --> */}
+                  <Link href={"/scorecard/" + urlStringEncode(completedMatch?.teama?.short_name + "-vs-" + completedMatch?.teamb?.short_name + "-" + completedMatch?.subtitle + "-" + completedMatch?.competition?.title + "-" + completedMatch?.competition?.season) + "/" + completedMatch.match_id}>
+                    <div className="lg:hidden">
+                      <div className="py-4 px-3 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]">
+                        <p className="text-[#757A82] text-[12px] mb-4 font-normal">
+                          {completedMatch?.subtitle} {completedMatch?.competition?.abbr}
+                        </p>
+                        <div className="flex justify-between items-center">
+                          <div className="">
+                            <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full mb-3">
+                              <div className="flex items-center space-x-1 flex-col">
+                                <Image
+                                  src={completedMatch?.teama?.logo_url}
+                                  className="h-[25px] rounded-full"
+                                  width={25}
+                                  height={25}
+                                  alt={completedMatch?.teama?.short_name}
+                                />
+                                <span className="text-[#757A82]">{completedMatch?.teama?.short_name}</span>
+                              </div>
+                              <div className="flex items-center gap-2 mt-1">
+                                <p className="text-1xl font-semibold">{completedMatch?.teama?.scores}</p>
+                                <p className="text-[#757A82]">({completedMatch?.teama?.overs} overs)</p>
+                              </div>
+                            </div>
+
+                            <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full">
+                              <div className="flex items-center space-x-1 flex-col">
+                                <Image
+                                  src={completedMatch?.teamb?.logo_url}
+                                  className="h-[25px] rounded-full"
+                                  width={25}
+                                  height={25}
+                                  alt={completedMatch?.teamb?.short_name}
+                                />
+                                <span className="text-[#757A82]">{completedMatch?.teamb?.short_name}</span>
+                              </div>
+                              <div className="flex items-center gap-2 mt-1">
+                                <p className="text-1xl font-semibold">{completedMatch?.teamb?.scores}</p>
+                                <p className="text-[#757A82]">({completedMatch?.teamb?.overs} overs)</p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="h-[60px] border-l-[1px] border-[#d0d3d7]"></div>
+
+                          <div className=" font-semibold text-right">
+                            <p className="text-[#3D4DCF]">{completedMatch?.result}</p>
                           </div>
                         </div>
                       </div>
 
-                      <div className="h-[60px] border-l-[1px] border-[#d0d3d7]"></div>
-
-                      <div className=" font-semibold text-right">
-                        <p className="text-[#3D4DCF]">{completedMatch?.result}</p>
-                      </div>
                     </div>
-                  </div>
-
-                </div>
-                </Link>
-              </div>
-              }
-              {upcomingMatch && 
-              <div className="rounded-lg bg-[#ffffff] my-4 p-4">
-                <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
-                Upcoming Match
-                </h3>
-
-                {/* <!-- Featured Matches desktop view  --> */}
-                <div className="border-t-[1px] border-[#E4E9F0]"></div>
-                <Link href={"/moreinfo/" + urlStringEncode(upcomingMatch?.teama?.short_name + "-vs-" + upcomingMatch?.teamb?.short_name + "-" + upcomingMatch?.subtitle + "-" + upcomingMatch?.competition?.title + "-" + upcomingMatch?.competition?.season) + "/" + upcomingMatch.match_id}>
-                <div className="hidden lg:block">
-                  
-                  <div className="py-3 pb-0 flex justify-between items-center">
-                    <div className="flex space-x-2 font-medium	w-full">
-                      <div className="flex items-center space-x-1 flex-row">
-                        <Image
-                          src={upcomingMatch?.teama?.logo_url}
-                          className="h-[35px] rounded-full"
-                          width={35}
-                          height={35}
-                          alt={upcomingMatch?.teama?.short_name}
-                        />
-                        <span className="text-[#909090]">{upcomingMatch?.teama?.short_name}</span>
-                      </div>
-                    </div>
-
-                    <div className=" font-semibold text-center w-full">
-                      <p className="text-[#414143] text-[14px]">{upcomingMatch?.subtitle} {upcomingMatch?.competition?.abbr} on</p>
-                      <p className="text-[#909090] text-[12px] font-normal">
-                      {upcomingMatch?.date_start_ist}
-                      </p>
-                    </div>
-
-                    <div className="flex space-x-2 font-medium justify-end w-full">
-                      <div className="flex items-center gap-1 flex-row-reverse font-medium">
-                        <Image
-                          src={upcomingMatch?.teamb?.logo_url}
-                          className="h-[35px] rounded-full"
-                          width={35}
-                          height={35}
-                          alt={upcomingMatch?.teamb?.short_name}
-                        />
-                        <span className="text-[#909090]">{upcomingMatch?.teamb?.short_name}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                </Link>
-
-                {/* <!-- Featured Matches responsive view view  --> */}
-
-                <div className="lg:hidden">
-                <Link href={"/moreinfo/" + urlStringEncode(upcomingMatch?.teama?.short_name + "-vs-" + upcomingMatch?.teamb?.short_name + "-" + upcomingMatch?.subtitle + "-" + upcomingMatch?.competition?.title + "-" + upcomingMatch?.competition?.season) + "/" + upcomingMatch.match_id}>
-                  <div className="py-4 px-3 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]">
-                    <p className="text-[#909090] text-[12px] mb-4 font-normal">
-                    {upcomingMatch?.subtitle} {upcomingMatch?.competition?.abbr}
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <div className="">
-                        <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full mb-3">
-                          <div className="flex items-center space-x-1 ">
-                            <Image
-                              src={upcomingMatch?.teama?.logo_url}
-                              className="h-[25px] rounded-full"
-                              width={25}
-                              height={25}
-                              alt={upcomingMatch?.teama?.short_name}
-                            />
-                            <span className="text-[#909090]">{upcomingMatch?.teama?.short_name}</span>
-                          </div>
-                        </div>
-
-                        <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full">
-                          <div className="flex items-center space-x-1 ">
-                            <Image
-                              src={upcomingMatch?.teamb?.logo_url}
-                              className="h-[25px] rounded-full"
-                              width={25}
-                              height={25}
-                              alt={upcomingMatch?.teamb?.short_name}
-                            />
-                            <span className="text-[#909090]">{upcomingMatch?.teamb?.short_name}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="h-[60px] border-l-[1px] border-[#d0d3d7]"></div>
-
-                      <div className=" font-semibold text-right">
-                        <p className="text-[#414143]"> {upcomingMatch?.date_start_ist}</p>
-                      </div>
-                    </div>
-                  </div>
                   </Link>
                 </div>
-              </div>
+              }
+              {upcomingMatch &&
+                <div className="rounded-lg bg-[#ffffff] my-4 p-4">
+                  <h2 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                    Upcoming Match
+                  </h2>
+
+                  {/* <!-- Featured Matches desktop view  --> */}
+                  <div className="border-t-[1px] border-[#E4E9F0]"></div>
+                  <Link href={"/moreinfo/" + urlStringEncode(upcomingMatch?.teama?.short_name + "-vs-" + upcomingMatch?.teamb?.short_name + "-" + upcomingMatch?.subtitle + "-" + upcomingMatch?.competition?.title + "-" + upcomingMatch?.competition?.season) + "/" + upcomingMatch.match_id}>
+                    <div className="hidden lg:block">
+
+                      <div className="py-3 pb-0 flex justify-between items-center">
+                        <div className="flex space-x-2 font-medium	w-full">
+                          <div className="flex items-center space-x-1 flex-row">
+                            <Image
+                              src={upcomingMatch?.teama?.logo_url}
+                              className="h-[35px] rounded-full"
+                              width={35}
+                              height={35}
+                              alt={upcomingMatch?.teama?.short_name}
+                            />
+                            <span className="text-[#757A82]">{upcomingMatch?.teama?.short_name}</span>
+                          </div>
+                        </div>
+
+                        <div className=" font-semibold text-center w-full">
+                          <p className="text-[#414143] text-[14px]">{upcomingMatch?.subtitle} {upcomingMatch?.competition?.abbr} on</p>
+                          <p className="text-[#757A82] text-[12px] font-normal">
+                            {upcomingMatch?.date_start_ist}
+                          </p>
+                        </div>
+
+                        <div className="flex space-x-2 font-medium justify-end w-full">
+                          <div className="flex items-center gap-1 flex-row-reverse font-medium">
+                            <Image
+                              src={upcomingMatch?.teamb?.logo_url}
+                              className="h-[35px] rounded-full"
+                              width={35}
+                              height={35}
+                              alt={upcomingMatch?.teamb?.short_name}
+                            />
+                            <span className="text-[#757A82]">{upcomingMatch?.teamb?.short_name}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+
+                  {/* <!-- Featured Matches responsive view view  --> */}
+
+                  <div className="lg:hidden">
+                    <Link href={"/moreinfo/" + urlStringEncode(upcomingMatch?.teama?.short_name + "-vs-" + upcomingMatch?.teamb?.short_name + "-" + upcomingMatch?.subtitle + "-" + upcomingMatch?.competition?.title + "-" + upcomingMatch?.competition?.season) + "/" + upcomingMatch.match_id}>
+                      <div className="py-4 px-3 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]">
+                        <p className="text-[#757A82] text-[12px] mb-4 font-normal">
+                          {upcomingMatch?.subtitle} {upcomingMatch?.competition?.abbr}
+                        </p>
+                        <div className="flex justify-between items-center">
+                          <div className="">
+                            <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full mb-3">
+                              <div className="flex items-center space-x-1 ">
+                                <Image
+                                  src={upcomingMatch?.teama?.logo_url}
+                                  className="h-[25px] rounded-full"
+                                  width={25}
+                                  height={25}
+                                  alt={upcomingMatch?.teama?.short_name}
+                                />
+                                <span className="text-[#757A82]">{upcomingMatch?.teama?.short_name}</span>
+                              </div>
+                            </div>
+
+                            <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full">
+                              <div className="flex items-center space-x-1 ">
+                                <Image
+                                  src={upcomingMatch?.teamb?.logo_url}
+                                  className="h-[25px] rounded-full"
+                                  width={25}
+                                  height={25}
+                                  alt={upcomingMatch?.teamb?.short_name}
+                                />
+                                <span className="text-[#757A82]">{upcomingMatch?.teamb?.short_name}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="h-[60px] border-l-[1px] border-[#d0d3d7]"></div>
+
+                          <div className=" font-semibold text-right">
+                            <p className="text-[#414143]"> {upcomingMatch?.date_start_ist}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
               }
 
               {standings?.map((rounds: any, index: number) => (
@@ -589,7 +589,7 @@ export default function Overview({
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
-                          {rounds.standings?.slice(0,4)?.map(
+                          {rounds.standings?.slice(0, 4)?.map(
                             (point: any, index: number) => (
                               <tr key={index}>
                                 <td className="md:px-2 pl-[14px] py-3 w-[10px]">
@@ -598,7 +598,7 @@ export default function Overview({
                                 <td className="md:px-2 pl-[14px] py-3 text-[#217AF7]">
                                   <Link
                                     href={
-                                      "/ipl/"+pointTables?.season+"/" +
+                                      "/ipl/" + pointTables?.season + "/" +
                                       urlStringEncode(point?.team.title) +
                                       "/" +
                                       point?.team.tid
@@ -655,11 +655,11 @@ export default function Overview({
                                       .split(",")
                                       ?.map((item: string, index: number) => (
                                         <span
-                                          className={`${
-                                            item === "W"
-                                              ? "bg-[#13b76dbd]"
-                                              : "bg-[#f63636c2]"
-                                          } text-white text-[13px] px-[4px] py-[0px] rounded`}
+                                          className={`${item === "W"
+                                            ? "bg-[#13B76D]"
+                                            : item === "N" ? "bg-[#928d8d]" 
+                                            : "bg-[#F63636]"
+                                            } text-white text-[13px] px-[4px] py-[0px] rounded w-[24px] text-center`}
                                           key={index}
                                         >
                                           {" "}
@@ -667,7 +667,7 @@ export default function Overview({
                                         </span>
                                       ))}
 
-                                   
+
                                   </div>
                                 </td>
                               </tr>
@@ -677,30 +677,46 @@ export default function Overview({
                       </table>
                     </div>
                     {rounds?.standings?.length > 4 &&
-                      <div className="px-4 text-center">
-                          <Link href={
-              "/series/" +
-              urlStringEncode(pointTables?.title + "-" + pointTables?.season) +
-              "/" +
-              pointTables?.cid +
-              "/points-table"
-            } className="px-8 bg-[#081736] font-semibold text-white py-2 rounded hover:bg-blue-700">
-                            View More
-                          </Link>
-                        </div>
-                      }
+                      <div className="text-center">
+                        <Link href={
+                          "/series/" +
+                          urlStringEncode(pointTables?.title + "-" + pointTables?.season) +
+                          "/" +
+                          pointTables?.cid +
+                          "/points-table"
+                        } >
+                        <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline border-t-[1px] border-[#e5e7eb]">
+                            View More{" "}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="size-3 ml-2"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+                              />
+                            </svg>
+                          </div>
+                        </Link>
+                      </div>
+                    }
                   </div>
                 </div>
               ))}
 
               <div className="rounded-lg bg-[#ffffff] mb-2 p-4">
                 <div className="mb-3 flex justify-between items-center">
-                  <h3 className="text-1xl font-semibold pl-[7px] border-l-[3px] border-[#229ED3]">
+                  <h2 className="text-1xl font-semibold pl-[7px] border-l-[3px] border-[#229ED3]">
                     Top Player {pointTables?.season}
-                  </h3>
+                  </h2>
                   <div>
                     <select
-                      className="border-[1px] rounded-sm"
+                      className="border-[1px] rounded-md p-2"
                       onChange={handleSelectChange}
                       defaultValue="most-run"
                     >
@@ -788,10 +804,10 @@ export default function Overview({
                                     {stats?.player?.playing_role === "all"
                                       ? "All-Rounder"
                                       : stats?.player?.playing_role === "wk"
-                                      ? "Wiket-Keeper"
-                                      : stats?.player?.playing_role === "bat"
-                                      ? "Batsman"
-                                      : "Bowler"}
+                                        ? "Wiket-Keeper"
+                                        : stats?.player?.playing_role === "bat"
+                                          ? "Batsman"
+                                          : "Bowler"}
                                   </p>
                                 </div>
                               </div>
@@ -817,9 +833,9 @@ export default function Overview({
               </div>
 
               <div className="rounded-lg bg-[#ffffff] mb-4 p-4">
-                <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                <h2 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                   {teams?.title} (Last 5 Matches)
-                </h3>
+                </h2>
 
                 {/* <!-- Featured Matches desktop view  --> */}
                 <div className="border-t-[1px] border-[#E4E9F0]"></div>
@@ -827,7 +843,7 @@ export default function Overview({
                   {teamLast5match?.map((match: any, index: number) => (
                     <Link key={index} href={"/scorecard/" + urlStringEncode(match?.teama?.short_name + "-vs-" + match?.teamb?.short_name + "-" + match?.subtitle + "-" + match?.competition?.title + "-" + match?.competition?.season) + "/" + match.match_id}>
                       <div className="py-3 flex justify-between items-center">
-                      
+
                         <div className="flex space-x-2 font-medium	w-full">
                           <div className="flex items-center space-x-1 flex-col">
                             <Image
@@ -837,7 +853,7 @@ export default function Overview({
                               height={33}
                               alt="csk"
                             />
-                            <span className="text-[#909090]">
+                            <span className="text-[#757A82]">
                               {match?.teama?.short_name}
                             </span>
                           </div>
@@ -845,7 +861,7 @@ export default function Overview({
                             <p className="text-1xl font-semibold">
                               {match?.teama?.scores}
                             </p>
-                            <p className="text-[#909090]">
+                            <p className="text-[#757A82]">
                               ({match?.teama?.overs} overs)
                             </p>
                           </div>
@@ -855,7 +871,7 @@ export default function Overview({
                           <p className="text-[#3D4DCF] text-[14px]">
                             {match?.result}
                           </p>
-                          <p className="text-[#909090] text-[12px] font-normal">
+                          <p className="text-[#757A82] text-[12px] font-normal">
                             {match?.subtitle}, {match?.competition?.abbr}
                           </p>
                         </div>
@@ -865,7 +881,7 @@ export default function Overview({
                             <p className="text-1xl font-semibold">
                               {match?.teamb?.scores}
                             </p>
-                            <p className="text-[#909090]">
+                            <p className="text-[#757A82]">
                               ({match?.teamb?.overs} overs)
                             </p>
                           </div>
@@ -878,12 +894,12 @@ export default function Overview({
                               height={33}
                               alt="nz"
                             />
-                            <span className="text-[#909090]">
+                            <span className="text-[#757A82]">
                               {match?.teamb?.short_name}
                             </span>
                           </div>
                         </div>
-                        
+
                       </div>
                       {index < teamLast5match?.length - 1 && (
                         <div className="border-t-[1px] border-[#E4E9F0]"></div>
@@ -895,57 +911,57 @@ export default function Overview({
                 {/* <!-- Featured Matches responsive view view  --> */}
 
                 <div className="lg:hidden">
-                {teamLast5match?.map((match: any, index: number) => (
-                  <div className="py-4 px-3 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]" key={index}>
-                    <p className="text-[#909090] text-[12px] mb-4 font-normal">
-                    {match?.subtitle}, {match?.competition?.abbr}
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <div className="">
-                        <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full mb-3">
-                          <div className="flex items-center space-x-1 flex-col">
-                            <Image
-                              src={match?.teama?.logo_url}
-                              className="h-[25px] rounded-full"
-                              width={25}
-                              height={25}
-                              alt={match?.teama?.short_name}
-                            />
-                            <span className="text-[#909090]">{match?.teama?.short_name}</span>
+                  {teamLast5match?.map((match: any, index: number) => (
+                    <div className="py-4 px-3 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]" key={index}>
+                      <p className="text-[#757A82] text-[12px] mb-4 font-normal">
+                        {match?.subtitle}, {match?.competition?.abbr}
+                      </p>
+                      <div className="flex justify-between items-center">
+                        <div className="">
+                          <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full mb-3">
+                            <div className="flex items-center space-x-1 flex-col">
+                              <Image
+                                src={match?.teama?.logo_url}
+                                className="h-[25px] rounded-full"
+                                width={25}
+                                height={25}
+                                alt={match?.teama?.short_name}
+                              />
+                              <span className="text-[#757A82]">{match?.teama?.short_name}</span>
+                            </div>
+                            <div className="flex items-center gap-2 mt-1">
+                              <p className="text-1xl font-semibold">{match?.teama?.scores}</p>
+                              <p className="text-[#757A82]">({match?.teama?.overs} overs)</p>
+                            </div>
                           </div>
-                          <div className="flex items-center gap-2 mt-1">
-                            <p className="text-1xl font-semibold">{match?.teama?.scores}</p>
-                            <p className="text-[#909090]">({match?.teama?.overs} overs)</p>
+
+                          <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full">
+                            <div className="flex items-center space-x-1 flex-col">
+                              <Image
+                                src={match?.teamb?.logo_url}
+                                className="h-[25px] rounded-full"
+                                width={25}
+                                height={25}
+                                alt={match?.teamb?.short_name}
+                              />
+                              <span className="text-[#757A82]">{match?.teamb?.short_name}</span>
+                            </div>
+                            <div className="flex items-center gap-2 mt-1">
+                              <p className="text-1xl font-semibold">{match?.teamb?.scores}</p>
+                              <p className="text-[#757A82]">({match?.teamb?.overs} overs)</p>
+                            </div>
                           </div>
                         </div>
 
-                        <div className="flex space-x-2 items-start font-medium w-[162px] md:w-full">
-                          <div className="flex items-center space-x-1 flex-col">
-                            <Image
-                              src={match?.teamb?.logo_url}
-                              className="h-[25px] rounded-full"
-                              width={25}
-                              height={25}
-                              alt={match?.teamb?.short_name}
-                            />
-                            <span className="text-[#909090]">{match?.teamb?.short_name}</span>
-                          </div>
-                          <div className="flex items-center gap-2 mt-1">
-                            <p className="text-1xl font-semibold">{match?.teamb?.scores}</p>
-                            <p className="text-[#909090]">({match?.teamb?.overs} overs)</p>
-                          </div>
+                        <div className="h-[60px] border-l-[1px] border-[#d0d3d7]"></div>
+
+                        <div className=" font-semibold text-right">
+                          <p className="text-[#3D4DCF]">{match?.result}</p>
                         </div>
-                      </div>
-
-                      <div className="h-[60px] border-l-[1px] border-[#d0d3d7]"></div>
-
-                      <div className=" font-semibold text-right">
-                        <p className="text-[#3D4DCF]">{match?.result}</p>
                       </div>
                     </div>
-                  </div>
-                ))}
-                  
+                  ))}
+
                 </div>
               </div>
 
@@ -965,45 +981,45 @@ export default function Overview({
                         className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]"
                         key={index}
                       >
-                        <Link href={"/player/"+urlStringEncode(player?.name)+"/"+player?.player_id}>
-                        <div className="relative">
-                          <PlayerImage
-                            key={player?.player_id}
-                            player_id={player?.player_id}
-                            height={55}
-                            width={55}
-                            className="h-[55px] mx-auto rounded-full mb-2"
-                          />
-                          <Image
-                            loading="lazy"
-                            src={player?.role === "all"
-                              ? "/assets/img/player/bat-ball.png"
-                              : player?.role === "wk"
-                              ? "/assets/img/player/bat.png"
-                              : player?.role === "bat"
-                              ? "/assets/img/player/bat.png"
-                              : "/assets/img/player/ball.png"}
-                            className="h-[27px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
-                            width={27}
-                            height={27}
-                            alt="1"
-                          />
-                        </div>
-                        <h3 className="text-[14px] font-medium text-gray-800">
-                          {player?.name}
-                        </h3>
-                        <div className="flex gap-1 items-center justify-center">
-                          {/* <Image src="/assets/img/flag/b-2.png" className="h-[15px] rounded-full" width={15} height={15} alt="" /> */}
-                          <p className="text-xs text-gray-600">
-                            {player?.role === "all"
-                              ? "All-Rounder"
-                              : player?.role === "wk"
-                              ? "Wiket-Keeper"
-                              : player?.role === "bat"
-                              ? "Batsman"
-                              : "Bowler"}
-                          </p>
-                        </div>
+                        <Link href={"/player/" + urlStringEncode(player?.name) + "/" + player?.player_id}>
+                          <div className="relative">
+                            <PlayerImage
+                              key={player?.player_id}
+                              player_id={player?.player_id}
+                              height={55}
+                              width={55}
+                              className="h-[55px] mx-auto rounded-full mb-2"
+                            />
+                            <Image
+                              loading="lazy"
+                              src={player?.role === "all"
+                                ? "/assets/img/player/bat-ball.png"
+                                : player?.role === "wk"
+                                  ? "/assets/img/player/bat.png"
+                                  : player?.role === "bat"
+                                    ? "/assets/img/player/bat.png"
+                                    : "/assets/img/player/ball.png"}
+                              className="h-[27px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
+                              width={27}
+                              height={27}
+                              alt="1"
+                            />
+                          </div>
+                          <h3 className="text-[14px] font-medium text-gray-800">
+                            {player?.name}
+                          </h3>
+                          <div className="flex gap-1 items-center justify-center">
+                            {/* <Image src="/assets/img/flag/b-2.png" className="h-[15px] rounded-full" width={15} height={15} alt="" /> */}
+                            <p className="text-xs text-gray-600">
+                              {player?.role === "all"
+                                ? "All-Rounder"
+                                : player?.role === "wk"
+                                  ? "Wiket-Keeper"
+                                  : player?.role === "bat"
+                                    ? "Batsman"
+                                    : "Bowler"}
+                            </p>
+                          </div>
                         </Link>
                       </div>
                     ))}
@@ -1046,9 +1062,9 @@ export default function Overview({
                 )}
               </div>
               <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
-                <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                <h2 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                   News
-                </h3>
+                </h2>
                 <div className="border-t-[1px] border-[#E4E9F0]" />
 
                 <NewsSection urlString={""}></NewsSection>
@@ -1108,75 +1124,75 @@ export default function Overview({
                   </h3>
                 </div>
                 <div className="bg-white rounded-lg px-4">
-                      <div className="border-b mb-4">
-                        <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) +"/" + pointTables?.cid +"/stats/batting-most-run"}
-                          className="w-full flex text-[14px] justify-between items-center pb-3 pt-4" >
-                          <span className="flex items-center font-medium text-[#394351]">
-                            Most Runs in IPL
-                          </span>
-                          
-                        </Link>
-                        
-                      </div>
+                  <div className="border-b mb-4">
+                    <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) + "/" + pointTables?.cid + "/stats/batting-most-run"}
+                      className="w-full flex text-[14px] justify-between items-center pb-3 pt-4" >
+                      <span className="flex items-center font-medium text-[#394351]">
+                        Most Runs in IPL
+                      </span>
 
-                      <div className="border-b mb-4">
-                        <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) +"/" + pointTables?.cid+"/stats/batting-most-hundreds"}
-                          className="w-full flex text-[14px] justify-between items-center pb-3" >
-                          <span className="flex items-center font-medium text-[#394351]">
-                            Most Hundreds in IPL
-                          </span>
-                         
-                        </Link>
-                       
-                      </div>
+                    </Link>
 
-                      <div className="border-b mb-4">
-                        <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) +"/" + pointTables?.cid+"/stats/batting-most-fifties"}
-                          className="w-full flex text-[14px] justify-between items-center pb-3" >
-                          <span className="flex items-center font-medium text-[#394351]">
-                            Most Fifties in IPL
-                          </span>
-                         
-                        </Link>
-                       
-                      </div>
+                  </div>
+
+                  <div className="border-b mb-4">
+                    <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) + "/" + pointTables?.cid + "/stats/batting-most-hundreds"}
+                      className="w-full flex text-[14px] justify-between items-center pb-3" >
+                      <span className="flex items-center font-medium text-[#394351]">
+                        Most Hundreds in IPL
+                      </span>
+
+                    </Link>
+
+                  </div>
+
+                  <div className="border-b mb-4">
+                    <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) + "/" + pointTables?.cid + "/stats/batting-most-fifties"}
+                      className="w-full flex text-[14px] justify-between items-center pb-3" >
+                      <span className="flex items-center font-medium text-[#394351]">
+                        Most Fifties in IPL
+                      </span>
+
+                    </Link>
+
+                  </div>
 
 
-                      <div className="border-b mb-4">
-                        <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) +"/" + pointTables?.cid+"/stats/batting-highest-average"}
-                          className="w-full flex text-[14px] justify-between items-center pb-3" >
-                          <span className="flex items-center font-medium text-[#394351]">
-                            Highest Batting Average in IPL
-                          </span>
-                         
-                        </Link>
-                        
-                      </div>
-                      
-                      <div className="border-b mb-4">
-                        <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) +"/" + pointTables?.cid+"/stats/bowling-most-wicket"}
-                          className="w-full flex text-[14px] justify-between items-center pb-3" >
-                          <span className="flex items-center font-medium text-[#394351]">
-                            Most Wickets in IPL
-                          </span>
-                          
-                        </Link>
-                        
-                      </div>
+                  <div className="border-b mb-4">
+                    <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) + "/" + pointTables?.cid + "/stats/batting-highest-average"}
+                      className="w-full flex text-[14px] justify-between items-center pb-3" >
+                      <span className="flex items-center font-medium text-[#394351]">
+                        Highest Batting Average in IPL
+                      </span>
 
-                      <div className="border-b mb-4">
-                        <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) +"/" + pointTables?.cid+"/stats/bowling-best-average"}
-                          className="w-full flex text-[14px] justify-between items-center pb-3">
-                          <span className="flex items-center font-medium text-[#394351]">
-                            Highest Bowling Average in IPL
-                          </span>
-                         
-                        </Link>
-                        
-                      </div>
+                    </Link>
 
-                  
-                    </div>
+                  </div>
+
+                  <div className="border-b mb-4">
+                    <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) + "/" + pointTables?.cid + "/stats/bowling-most-wicket"}
+                      className="w-full flex text-[14px] justify-between items-center pb-3" >
+                      <span className="flex items-center font-medium text-[#394351]">
+                        Most Wickets in IPL
+                      </span>
+
+                    </Link>
+
+                  </div>
+
+                  <div className="border-b mb-4">
+                    <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) + "/" + pointTables?.cid + "/stats/bowling-best-average"}
+                      className="w-full flex text-[14px] justify-between items-center pb-3">
+                      <span className="flex items-center font-medium text-[#394351]">
+                        Highest Bowling Average in IPL
+                      </span>
+
+                    </Link>
+
+                  </div>
+
+
+                </div>
               </div>
 
               <PLSeries />

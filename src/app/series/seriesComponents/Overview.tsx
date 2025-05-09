@@ -557,8 +557,8 @@ export default function Overview({
                                           <span
                                             className={`${item === "W"
                                               ? "bg-[#13B76D]"
-                                              : item === "N" ? "bg-[#928d8d]" 
-                                              : "bg-[#F63636]"
+                                              : item === "N" ? "bg-[#928d8d]"
+                                                : "bg-[#F63636]"
                                               } text-white text-[13px] px-[4px] py-[0px] rounded w-[24px] text-center`}
                                             key={index}
                                           >
@@ -586,23 +586,23 @@ export default function Overview({
                         // </div>
 
                         <Link href={urlString + "/points-table"}>
-                         <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline border-t-[1px] border-[#e5e7eb]">
-                    View More{" "}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="size-3 ml-2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                  </div>
+                          <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline border-t-[1px] border-[#e5e7eb]">
+                            View More{" "}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="size-3 ml-2"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+                              />
+                            </svg>
+                          </div>
                         </Link>
                       }
                     </div>
