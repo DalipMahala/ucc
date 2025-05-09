@@ -153,8 +153,8 @@ const News = () => {
                       {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url && (
                         <Image priority
                           src={post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium.source_url}
-                          width={800}
-                          height={600}
+                          width={300}
+                          height={144}
                           alt={post?.title.rendered}
                           className="rounded-lg h-[90px] w-[100%]" />
                       )}

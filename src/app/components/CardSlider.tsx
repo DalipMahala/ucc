@@ -159,6 +159,7 @@ export default function Slider() {
           className="absolute top-1/2 left-4 transform -translate-y-1/2 md:bg-white bg-[#224ea4] md:text-[black] text-[white] bg-opacity-80 px-2 py-2 rounded-full"
           onClick={handlePrev}
           disabled={currentIndex === 0}
+          aria-label="Previous slide"
         >
           <span className="text-[20px] font-bold">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-3">
@@ -170,6 +171,7 @@ export default function Slider() {
           className="absolute top-1/2 right-4 transform -translate-y-1/2 md:bg-white bg-[#224ea4] md:text-[black] text-[white] bg-opacity-80 px-2 py-2 rounded-full"
           onClick={handleNext}
           disabled={currentIndex >= images.length - itemsPerPage}
+          aria-label="Next slide"
         >
           <span className="text-[20px] font-bold">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-3">

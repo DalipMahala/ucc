@@ -154,7 +154,7 @@ export default async function Home(props: { params: Params }) {
                           src={`${team?.logo_url}`}
                           width={20}
                           height={20}
-                          alt={team?.team}
+                          alt=""
                           priority
                         />
                         <p className="font-semibold text-[14px]">{team?.team}</p>

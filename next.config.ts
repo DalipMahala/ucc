@@ -19,8 +19,11 @@ const nextConfig = {
     loader: 'default',
     minimumCacheTTL: 60,
   },
-  webpack: (config: { optimization: any; }, { isServer }: any) => {
+  webpack: (config: {
+    devtool: string; optimization: any; 
+}, { isServer }: any) => {
     if (!isServer) {
+      config.devtool = 'hidden-source-map',
       config.optimization = {
         ...config.optimization,
         splitChunks: {

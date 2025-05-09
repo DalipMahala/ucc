@@ -255,13 +255,7 @@ const MatchHeader = ({ match, isMobile = false }: MatchHeaderProps) => {
             </Link>
           )}
         </div>
-        {isMobile && (
-          <span className="absolute right-[12px] top-[19px]">
-            <button className="arro-button">
-              <Image src="/assets/img/arrow.png" width={10} height={15} alt="" loading="lazy" />
-            </button>
-          </span>
-        )}
+        
       </div>
       {!isMobile && <TeamStatusIndicator teamA={match.teama.short_name} />}
     </div>
