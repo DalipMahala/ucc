@@ -297,7 +297,7 @@ export default function MoreInfo({
                           <MatchCard teamA={matchData?.match_info?.teama?.logo_url} teamB={matchData?.match_info?.teamb?.logo_url} />
                         </div>
                         <div>
-                          <p className="text-[16px] text-[#757A82] font-medium mb-1">
+                          <p className="text-[16px] text-[#757A82] font-medium mb-4">
                             {matchData?.match_info?.subtitle}
                           </p>
                           <p className="text-[16px] text-[#272B47] font-medium mb-2">
@@ -306,7 +306,7 @@ export default function MoreInfo({
                         </div>
                       </div>
                       <div className="text-start">
-                        <p className="text-[14px] mb-1 text-[#272B47] font-medium">
+                        <p className="text-[14px] mb-4 text-[#272B47] font-medium">
                           <span className="text-[14px] text-[#757A82]">
                             Date : </span>
                           {matchData?.match_info?.date_start_ist}

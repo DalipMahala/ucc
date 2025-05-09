@@ -60,7 +60,7 @@ export default function IplBanner({cid,params, teamPlayers, venueDetails}: Banne
                     className="h-[26px]"
                   />
                   <p className="bg-[#3d548736] px-4 py-1 rounded-full font-medium">
-                    {venueDetails?.win_years}
+                    {venueDetails?.win_years} {" "}
                   </p>
                 </div>
               }

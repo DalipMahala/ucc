@@ -336,7 +336,7 @@ export default function Overview({
 
                   {/* <!-- Featured Matches desktop view  --> */}
                   <div className="border-t-[1px] border-[#E4E9F0]"></div>
-                  <div className="hidden lg:block">
+                  <div className="hidden lg:block cursor-pointer">
                     <Link href={"/scorecard/" + urlStringEncode(completedMatch?.teama?.short_name + "-vs-" + completedMatch?.teamb?.short_name + "-" + completedMatch?.subtitle + "-" + completedMatch?.competition?.title + "-" + completedMatch?.competition?.season) + "/" + completedMatch.match_id} passHref
                       legacyBehavior>
                       <div className="py-3 flex justify-between items-center">

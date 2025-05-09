@@ -109,17 +109,17 @@ const Header = () => {
           </button>
 
           <nav id="menu" className="hidden lg:flex space-x-4 text-1xl">
-            <Link href="/" className="hover:text-yellow-400" prefetch={true}>
+            <Link href="/" className="hover:text-[#6aaefe]" prefetch={true}>
               Home
             </Link>
-            {/* <Link href="#" className="hover:text-yellow-400" prefetch={true}>
+            {/* <Link href="#" className="hover:text-[#6aaefe]" prefetch={true}>
               Fixtures
             </Link> */}
 
             <div className="flex items-center">
               <Link
                 href="/series"
-                className="hover:text-yellow-400 flex items-center"
+                className="hover:text-[#6aaefe] flex items-center"
               >
                 Series
               </Link>
@@ -136,7 +136,7 @@ const Header = () => {
             >
               <div
                 onClick={() => toggleDropdown(!isDropdownOpen, !isDropdownOpen)} // 👈 Toggle on click
-                className='hover:text-yellow-400 cursor-pointer absolute left-[-18px] h-[70px] w-[32px] top-[2px]'
+                className='hover:text-[#6aaefe] cursor-pointer absolute left-[-18px] h-[70px] w-[32px] top-[2px]'
               >
                 <svg
                   className="w-5 h-5 ml-1"
@@ -155,16 +155,16 @@ const Header = () => {
               </div>
             </div>
 
-            {/* <Link href="" className="hover:text-yellow-400" prefetch={true}>
+            {/* <Link href="" className="hover:text-[#6aaefe]" prefetch={true}>
               Teams
             </Link> */}
-            <Link href="/iccranking/man/team/odis" className="hover:text-yellow-400" prefetch={true}>
+            <Link href="/iccranking/man/team/odis" className="hover:text-[#6aaefe]" prefetch={true}>
               ICC Ranking
             </Link>
-            <Link href="https://uccricket.live/news/" className="hover:text-yellow-400" prefetch={true}>
+            <Link href="https://uccricket.live/news/" className="hover:text-[#6aaefe]" prefetch={true}>
               News
             </Link>
-            <Link href="https://uccricket.live/fantasy-cricket/dream11-prediction/" className="hover:text-yellow-400" prefetch={true}>
+            <Link href="https://uccricket.live/fantasy-cricket/dream11-prediction/" className="hover:text-[#6aaefe]" prefetch={true}>
               Fantasy Tips
             </Link>
           </nav>
@@ -192,7 +192,7 @@ const Header = () => {
             <div className="flex items-center lg:w-[1000px] w-full mx-auto relative">
               <button
                 onClick={handlePrev}
-                className={`text-yellow-400 text-xl ${currentIndex === 0 ? "opacity-50 cursor-not-allowed" : ""}`}
+                className={`text-[#6aaefe] text-xl p-2 bg-gray-700 rounded-full ${currentIndex === 0 ? "opacity-50 cursor-not-allowed" : ""}`}
                 disabled={currentIndex === 0}
               >
                 ❮
@@ -221,7 +221,7 @@ const Header = () => {
 
               <button
                 onClick={handleNext}
-                className={`text-yellow-400 text-xl ${currentIndex + itemsPerPage >= items.length ? "opacity-50 cursor-not-allowed" : ""
+                className={`text-[#6aaefe] text-xl p-2 bg-gray-700 rounded-full ${currentIndex + itemsPerPage >= items.length ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 disabled={currentIndex + itemsPerPage >= items.length}
               >

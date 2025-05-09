@@ -166,7 +166,7 @@ export default function Squads({
                       <div className="grid grid-cols-2 sm:grid-cols-6 gap-6">
                         {teamASquadBatsmen?.map(
                           (squads: any, index: number) => (
-                            <Link
+                            <Link className="rounded-md border-[1px] border-[##E2E2E2]"
                               href={
                                 "/player/" +
                                 urlStringEncode(squads?.name) +
@@ -175,7 +175,7 @@ export default function Squads({
                               }
                               key={index}
                             >
-                              <div className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]">
+                              <div className="text-center p-4 ">
                                 <div className="relative">
                                   <PlayerImage
                                     key={squads?.player_id}
@@ -194,7 +194,7 @@ export default function Squads({
                                     alt="1"
                                   />
                                 </div>
-                                <h3 className="text-sm font-semibold text-blue-500 ">
+                                <h3 className="text-sm font-semibold ">
                                   {squads.name}
                                 </h3>
                                 <p className="text-xs text-gray-600">Batsman</p>
@@ -211,7 +211,7 @@ export default function Squads({
                       </h2>
                       <div className="grid grid-cols-2 sm:grid-cols-6 gap-6">
                         {teamASquadBowler.length > 0 && teamASquadBowler?.map((bowler: any, index: number) => (
-                          <Link
+                          <Link className="rounded-md border-[1px] border-[##E2E2E2]"
                             href={
                               "/player/" +
                               urlStringEncode(bowler?.name) +
@@ -220,7 +220,7 @@ export default function Squads({
                             }
                             key={index}
                           >
-                            <div className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]">
+                            <div className="text-center p-4 ">
                               <div className="relative">
                                 <PlayerImage
                                   key={bowler?.player_id}
@@ -256,7 +256,7 @@ export default function Squads({
                       <div className="grid grid-cols-2 sm:grid-cols-6 gap-6">
                         {teamASquadAll.length > 0 && teamASquadAll?.map(
                           (allrounder: any, index: number) => (
-                            <Link
+                            <Link className="rounded-md border-[1px] border-[##E2E2E2]"
                               href={
                                 "/player/" +
                                 urlStringEncode(allrounder?.name) +
@@ -265,7 +265,7 @@ export default function Squads({
                               }
                               key={index}
                             >
-                              <div className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]">
+                              <div className="text-center p-4">
                                 <div className="relative">
                                   <PlayerImage
                                     key={allrounder?.player_id}
