@@ -132,9 +132,10 @@ export default function Squads({
       {players && (
         <div id="squads" className="tab-content">
           <div className="py-2 mb-2">
-            <h3 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8]">
-              {pointTables?.title} {pointTables?.season}
-            </h3>
+            <h2 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8] uppercase">
+              {/* {pointTables?.title} {teams.alt_name} {pointTables?.season} Squads */}
+              {teams.alt_name} {pointTables?.season} Squads
+            </h2>
           </div>
           <div className="md:grid grid-cols-12 gap-4">
             <div className="lg:col-span-12">
