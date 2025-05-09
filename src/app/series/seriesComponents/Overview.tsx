@@ -499,7 +499,7 @@ export default function Overview({
                                     <Link
                                       href={
                                         "/ipl/" + seriesInfo?.season + "/" +
-                                        urlStringEncode(point?.team.abbr) +
+                                        urlStringEncode(point?.team.title) +
                                         "/" +
                                         point?.team.tid
                                       } >
@@ -935,7 +935,7 @@ export default function Overview({
                     <Link
                       href={
                         "/team/" +
-                        urlStringEncode(teams.abbr) +
+                        urlStringEncode(teams.title) +
                         "/" +
                         teams.tid
                       }

@@ -13,6 +13,7 @@ import Overview from "./teamComponents/Overview";
 import Squads from "./teamComponents/Squad";
 import ScheduleResults from "./teamComponents/ScheduleResults";
 import { notFound } from "next/navigation";
+import { urlStringEncode } from "@/utils/utility";
 
 type Params = Promise<{ year: string; teamType: string; teamName: string; teamId: number; }>;
 
@@ -26,7 +27,7 @@ export default async function page(props: { params: Params }) {
  
   const teamDetails = await TeamDetails(teamId);
   if (teamDetails){
-    if (!teamDetails || teamName?.toLowerCase() !== teamDetails?.abbr?.toLowerCase() || teamId?.toString() !== teamDetails?.tid?.toString()) {
+    if (!teamDetails || teamName?.toLowerCase() !== urlStringEncode(teamDetails?.title)?.toLowerCase() || teamId?.toString() !== teamDetails?.tid?.toString()) {
       notFound();
     }
 }else{
