@@ -158,7 +158,7 @@ export default function NewsSection({ urlString }: News) {
       </div>
 <Link href="">
       
-      <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">More from News <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-3 ml-2"><path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"></path></svg></div>
+      <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">More from News <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-3 ml-2"><path strokeLinecap="round" strokeLinejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"></path></svg></div>
       </Link>
     </>
 

@@ -58,14 +58,14 @@ function page() {
           <div className="rounded-lg bg-[#ffffff] p-4">
             <div className='flex items-center justify-end gap-3 mb-3'>
               <span className='border-[1px] rounded-full border-[#c7c7c7] p-1'>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-4">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-4">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
 
               </span>
               <span className='border-[1px] rounded-full border-[#c7c7c7] p-1'>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-4">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-4">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                 </svg>
               </span>
             </div>
@@ -335,14 +335,14 @@ function page() {
 
             <div className='flex items-center justify-center gap-5 mt-14 text-[#3D4DCF] text-[15px]'>
 
-              <button className='flex items-center gap-2'><svg xmlns="http://www.w3.org/2000/svg" fill="#3D4DCF" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-3">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+              <button className='flex items-center gap-2'><svg xmlns="http://www.w3.org/2000/svg" fill="#3D4DCF" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-3">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
               </svg>
                 <span>   Previous </span></button>
 
               <button className='flex items-center gap-3'>
-                <span>  Next </span> <svg xmlns="http://www.w3.org/2000/svg" fill="#3D4DCF" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                <span>  Next </span> <svg xmlns="http://www.w3.org/2000/svg" fill="#3D4DCF" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-3">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                 </svg>
 
               </button>
