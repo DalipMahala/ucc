@@ -157,9 +157,9 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
                             <div className="lg:col-span-3 md:col-span-4">
                                 <div className="rounded-lg p-2 mb-4 bg-[#ffffff]">
                                     <div className="py-2 mb-2">
-                                        <h3 className="text-1xl font-semibold pl-[6px] border-l-[3px] border-[#1a80f8]">
+                                        <h2 className="text-1xl font-semibold pl-[6px] border-l-[3px] border-[#1a80f8]">
                                             Batting
-                                        </h3>
+                                        </h2>
                                     </div>
                                     <div id="team-buttons" className="">
                                         <Link href={urlString + "/stats/batting-most-run"}>

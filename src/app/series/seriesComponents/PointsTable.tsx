@@ -72,9 +72,9 @@ export default async function PointsTable({ urlString, seriesInfo, isPointTable 
                         </div>
                         {standings?.map((rounds: any, index: number) => (
                             <div className="rounded-lg bg-[#ffffff] mb-2 p-4" key={index}>
-                                <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
+                                <h2 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                                     {rounds?.round?.name}
-                                </h3>
+                                </h2>
                                 <div>
                                     <div
                                         className="overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[8px] 
@@ -140,7 +140,7 @@ export default async function PointsTable({ urlString, seriesInfo, isPointTable 
                                                         <td className="md:px-2 pl-[14px] py-3">
                                                             <div className="ml-auto flex gap-1 items-center">
                                                                 {point?.lastfivematchresult.split(",")?.map((item: string, index: number) => (
-                                                                    <span className={`${item === "W" ? "bg-[#13B76D]" : "bg-[#F63636]"} text-white text-[13px] px-[4px] py-[0px] rounded`} key={index}>
+                                                                    <span className={`${item === "W" ?  "bg-[#13B76D]"   : item === "N" ? "bg-[#928d8d]" : "bg-[#F63636]"} text-white text-[13px] px-[4px] py-[0px] rounded w-[24px] text-center`} key={index}>
                                                                         {item}
                                                                     </span>
                                                                 ))}

@@ -190,23 +190,23 @@ export default function Overview({
       <div id="tab-content">
         <div id="info" className="tab-content ">
           <div className="md:grid grid-cols-12 gap-4 mb-4">
-            <div className="lg:col-span-8 md:col-span-7 mt-4">
+            <div className="lg:col-span-8 md:col-span-7">
               <div className="rounded-lg bg-white">
                 <div className="p-4">
-                  <h3 className="text-[15px] font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                  <h2 className="text-[15px] font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Series Info
-                  </h3>
+                  </h2>
                   <div className="border-t border-[#E4E9F0]" />
                   {/* Responsive Grid Section */}
                   <div className="grid gap-2 grid-cols-1 pt-3 px-2">
                     <div className="flex items-center">
-                      <h2 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Series :</h2>
+                      <h3 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Series :</h3>
                       <p className="text-[14px] font-medium">
                         {seriesInfo?.title} {seriesInfo?.season}{" "}
                       </p>
                     </div>
                     <div className="flex items-center">
-                      <h2 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Duration :</h2>
+                      <h3 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Duration :</h3>
                       <p className="text-[14px] font-medium">
                         {seriesInfo?.datestart
                           ? format(new Date(seriesInfo?.datestart), "dd MMM")
@@ -218,14 +218,14 @@ export default function Overview({
                       </p>
                     </div>
                     <div className="flex items-center">
-                      <h2 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Format :</h2>
+                      <h3 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Format :</h3>
                       <p className="text-[14px] font-medium">
                         {" "}
                         {seriesInfo?.game_format?.toUpperCase()}
                       </p>
                     </div>
                     <div className="flex items-center">
-                      <h2 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Teams :</h2>
+                      <h3 className="text-[13px] font-normal text-[#586577] md:w-[15%] w-[25%]">Teams :</h3>
                       <p className="text-[14px] font-medium">
                         {seriesInfo?.total_teams} (Teams)
                       </p>
@@ -234,9 +234,9 @@ export default function Overview({
                 </div>
               </div>
               <div className="rounded-lg bg-[#ffffff] my-4 p-4">
-                <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                <h2 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                   Featured Matches
-                </h3>
+                </h2>
                 {/* Featured Matches desktop view  */}
                 <div className="hidden lg:block">
                   {selectedMatches?.map((matches: any, index: number) => (
@@ -267,7 +267,7 @@ export default function Overview({
 
 
                           <div className=" font-semibold text-center w-full">
-                            <p className="text-[#3D4DCF] text-[14px]">{matches?.result}</p>
+                            <h3 className="text-[#3D4DCF] text-[14px]">{matches?.result}</h3>
                             <p className="text-[#757A82] text-[12px] font-normal">
                               {matches?.subtitle}
                             </p>
@@ -309,7 +309,7 @@ export default function Overview({
                               </div>
                             </div>
                             <div className=" font-semibold text-center w-full">
-                              <p className="text-[#414143] text-[14px]">{matches?.subtitle} on</p>
+                              <h3 className="text-[#414143] text-[14px]">{matches?.subtitle} on</h3>
                               <p className="text-[#757A82] text-[12px] font-normal">
                                 {matches?.date_start_ist}
                               </p>
@@ -442,9 +442,9 @@ export default function Overview({
               {seriesInfo?.title === "Indian Premier League" &&
                 standings?.map((rounds: any, index: number) => (
                   <div className="rounded-lg bg-[#ffffff] mb-2 p-4" key={index}>
-                    <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
+                    <h2 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                       {rounds?.round?.name}
-                    </h3>
+                    </h2>
                     <div>
                       <div
                         className="overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[8px] 
@@ -557,8 +557,9 @@ export default function Overview({
                                           <span
                                             className={`${item === "W"
                                               ? "bg-[#13B76D]"
+                                              : item === "N" ? "bg-[#928d8d]" 
                                               : "bg-[#F63636]"
-                                              } text-white text-[13px] px-[4px] py-[0px] rounded`}
+                                              } text-white text-[13px] px-[4px] py-[0px] rounded w-[24px] text-center`}
                                             key={index}
                                           >
                                             {item}
@@ -576,11 +577,33 @@ export default function Overview({
                         </table>
                       </div>
                       {rounds?.standings?.length > 4 &&
-                        <div className="px-4 text-center">
-                          <Link href={urlString + "/points-table"} className="px-8 bg-[#081736] font-semibold text-white py-2 rounded hover:bg-blue-700">
-                            View More
-                          </Link>
-                        </div>
+                        // <div className="px-4 text-center pt-4 border-t-[1px] border-[#e5e7eb]">
+                        //   <Link href={urlString + "/points-table"} className="px-8 bg-[#081736] font-semibold text-white py-2 rounded hover:bg-blue-700">
+                        //     View More
+                        //   </Link>
+
+
+                        // </div>
+
+                        <Link href={urlString + "/points-table"}>
+                         <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline border-t-[1px] border-[#e5e7eb]">
+                    View More{" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="size-3 ml-2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+                      />
+                    </svg>
+                  </div>
+                        </Link>
                       }
                     </div>
                   </div>
@@ -588,9 +611,9 @@ export default function Overview({
               {seriesInfo?.title === "Indian Premier League" && (
                 <>
                   <div className="rounded-lg bg-[#ffffff] mb-4 p-4">
-                    <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
+                    <h2 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                       Orange Cap-Most Runs
-                    </h3>
+                    </h2>
                     <div>
                       <div
                         className="overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
@@ -664,9 +687,9 @@ export default function Overview({
                     </div>
                   </div>
                   <div className="rounded-lg bg-[#ffffff] mb-4 p-4">
-                    <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
+                    <h2 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                       Purple Cap-Most Wickets
-                    </h3>
+                    </h2>
                     <div>
                       <div
                         className="overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
@@ -903,9 +926,9 @@ export default function Overview({
               </div>
 
               <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
-                <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                <h2 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                   Team Name
-                </h3>
+                </h2>
                 <div className="border-t-[1px] border-[#E4E9F0]" />
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-5">
                   {seriesInfo?.teams?.map((teams: any, index: number) => (
@@ -931,7 +954,7 @@ export default function Overview({
                         ) : (
                           ""
                         )}
-                        <p className="font-medium">{teams?.abbr}</p>
+                        <h3 className="font-medium text-[13px]">{teams?.abbr}</h3>
                       </div>
                     </Link>
                   ))}
@@ -962,16 +985,23 @@ export default function Overview({
                 ) : ("")}
               </div>
               <div className="rounded-lg bg-[#ffffff] p-4">
-                <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                <h2 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                   News
-                </h3>
+                </h2>
                 <div className="border-t-[1px] border-[#E4E9F0]" />
                 <NewsSection urlString={""}></NewsSection>
               </div>
             </div>
+
+
+
             <div className="lg:col-span-4 md:col-span-5">
 
-              <WeeklySlider />
+              <div className="-mt-4">
+
+                <WeeklySlider />
+
+              </div>
 
               {seriesInfo?.title === "Indian Premier League" && (
                 <>
@@ -1055,6 +1085,8 @@ export default function Overview({
                   <PLSeries />
                 </>
               )}
+
+
               <div className="sticky top-[82px]">
                 <FantasyTips />
               </div>

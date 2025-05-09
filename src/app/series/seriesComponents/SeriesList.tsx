@@ -14,7 +14,7 @@ interface SeriesList {
 }
 export default function SeriesList({ tournamentsList }: SeriesList) {
 
-  
+
   const uniqueTypes = [
     ...new Set(
       tournamentsList?.map(
@@ -205,7 +205,12 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
 
         <div className="lg:col-span-4 md:col-span-5">
           <PLSeries />
-          <SeriesListNews></SeriesListNews>
+          <div className="">
+        
+              <h2 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8] mb-6 uppercase">Latest News</h2>
+           
+            <SeriesListNews></SeriesListNews>
+          </div>
         </div>
 
       </div>

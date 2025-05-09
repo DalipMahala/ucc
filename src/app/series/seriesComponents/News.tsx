@@ -64,8 +64,8 @@ export default function News({ urlString, isPointTable }: News) {
 
                         // src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
                         src={post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium_large.source_url}
-                        width={1000}
-                        height={1000}
+                        width={476}
+                        height={192}
                         alt={post?.title.rendered}
                         className="rounded-lg w-full h-48 object-cover mb-3"
                       />
@@ -76,14 +76,11 @@ export default function News({ urlString, isPointTable }: News) {
                 <div className="col-span-6 flex flex-col justify-between">
 
                   <div>
-                    <h3
-                      className="text-1xl font-semibold mb-1"
-                      style={{ lineHeight: "21px" }}
-                    ></h3>
+                   
                     <Link href={post?.link}>
-                      <h4 className="text-[18px] font-semibold mb-2" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered, 20)) }} >
+                      <h2 className="text-[18px] font-semibold mb-2 leading-[24px] hover:text-[#1a80f8]" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(post?.title.rendered, 20)) }} >
 
-                      </h4>
+                      </h2>
                     </Link>
                     <p
                       className="text-gray-500 font-normal"
@@ -133,10 +130,10 @@ export default function News({ urlString, isPointTable }: News) {
                               post._embedded["wp:featuredmedia"]?.[0]
                                 .media_details.sizes.medium.source_url
                             }
-                            width={1000}
-                            height={1000}
+                            width={139}
+                            height={90}
                             alt={post?.title.rendered}
-                            className="rounded-lg h-[90px]"
+                            className="rounded-lg h-[80px]"
                             
                           />
 
@@ -144,14 +141,14 @@ export default function News({ urlString, isPointTable }: News) {
                     </Link>
                     <div className="w-[70%] flex flex-col justify-between">
                       <Link href={post?.link}>
-                        <h2
-                          className="text-[15px] font-semibold mb-2"
+                        <h3
+                          className="text-[14px] font-semibold mb-2 hover:text-[#1a80f8]"
                           dangerouslySetInnerHTML={{
                             __html: DOMPurify.sanitize(
                               post?.title.rendered
                             ),
                           }}
-                        ></h2>
+                        ></h3>
                       </Link>
                       <p className="text-[13px] text-gray-500 flex items-center">
                        

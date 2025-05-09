@@ -85,9 +85,9 @@ export default function Squad({ urlString, seriesInfo,isPointTable }: Squad) {
       <TabMenu urlString={urlString} isPointTable={isPointTable}/>
       <div id="squads" className="tab-content">
         <div className="py-2 mb-2">
-          <h3 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8]">
+          <h2 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8]">
             {seriesName} All Team Squads
-          </h3>
+          </h2>
         </div>
         <div className="md:grid grid-cols-12 gap-4">
           <div className="lg:col-span-4 md:col-span-5">
@@ -132,21 +132,21 @@ export default function Squad({ urlString, seriesInfo,isPointTable }: Squad) {
                       className="h-[45px] rounded-full"
                     />
 
-                    <h1 className="text-[16px] font-semibold text-gray-800">
+                    <h2 className="text-[16px] font-semibold text-gray-800">
                       {teamslist?.team.abbr}{" "}
                       <span className="text-gray-500">
                         ({teamslist?.players?.length} players)
                       </span>
-                    </h1>
+                    </h2>
                   </div>
 
                   <div className='border-[#E4E9F0] border-b-[1px] w-full'></div>
                   
                   <div className="space-y-6 mt-3">
                     <div>
-                      <h2 className="text-1xl font-semibold pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
+                      <h3 className="text-1xl font-semibold pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
                         Batsman
-                      </h2>
+                      </h3>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                         {teamslist?.players?.map((squads: any, index: number) => (
                             (squads.playing_role === 'bat' || squads.playing_role === 'wk') &&
@@ -188,9 +188,9 @@ export default function Squad({ urlString, seriesInfo,isPointTable }: Squad) {
                     </div>
                     {/* Bowler Section */}
                     <div>
-                      <h2 className="text-1xl font-semibold pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
+                      <h3 className="text-1xl font-semibold pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
                         Bowler
-                      </h2>
+                      </h3>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                       {teamslist?.players?.map((bowler: any, index: number) => (
                             bowler.playing_role === 'bowl' &&
@@ -223,9 +223,9 @@ export default function Squad({ urlString, seriesInfo,isPointTable }: Squad) {
                     </div>
                     {/* All-Rounder Section */}
                     <div>
-                      <h2 className="text-1xl font-semibold pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
+                      <h3 className="text-1xl font-semibold pl-[5px] border-l-[3px] border-[#1a80f8] mb-4">
                         All-Rounder
-                      </h2>
+                      </h3>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                       {teamslist?.players?.map((allrounder: any, index: number) => (
                         allrounder.playing_role === 'all' &&

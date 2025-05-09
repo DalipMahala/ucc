@@ -55,18 +55,18 @@ export default function IplBanner({cid,params, teamPlayers, venueDetails}: Banne
                   <Image
                     src="/assets/img/home/win.png"
                     alt=""
-                    width={35}
-                    height={35}
-                    className="h-[35px]"
+                    width={26}
+                    height={30}
+                    className="h-[26px]"
                   />
                   <p className="bg-[#3d548736] px-4 py-1 rounded-full font-medium">
                     {venueDetails?.win_years}
                   </p>
                 </div>
               }
-                <h2 className="lg:text-2xl md:text-[17px] font-semibold">
+                <h1 className="lg:text-2xl md:text-[17px] font-semibold my-3">
                 {teams?.title}
-                </h2>
+                </h1>
                 <select className="border border-gray-500 rounded px-2 bg-[#0e2149]"  onChange={handleSelectChange} value={year}>
                   <option value="2022">2022</option>
                   <option value="2023">2023</option>

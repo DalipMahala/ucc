@@ -733,10 +733,10 @@ export default function ScheduleResults({
                               {cmatch.status_str}
                             </div>
                             <div>
-                              <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                              <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                                 {cmatch.competition.title} -{" "}
                                 {cmatch.competition.season}
-                              </h4>
+                              </h2>
                             </div>
                           </div>
 
@@ -1112,10 +1112,10 @@ export default function ScheduleResults({
                               {ucmatch.status_str}
                             </div>
                             <div>
-                              <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                              <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                                 {ucmatch.competition.title} -{" "}
                                 {ucmatch.competition.season}
-                              </h4>
+                              </h2>
                             </div>
                           </div>
                           <div className="hidden items-center space-x-2">

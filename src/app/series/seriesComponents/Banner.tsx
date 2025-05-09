@@ -115,9 +115,9 @@ export default function IplBanner({
                 height={100}
               />
               <div>
-                <h2 className="lg:text-2xl md:text-[17px] font-semibold">
+                <h1 className="lg:text-2xl md:text-[17px] font-semibold">
                   {seriesInfo?.title} {seriesInfo?.season}
-                </h2>
+                </h1>
                 <p className="lg:text-sm md:text-[14px] text-gray-300 mb-2 capitalize">
                   {seriesInfo?.game_format} - {seriesInfo?.total_matches} Matches -{" "}
                   {seriesInfo?.total_teams} Teams |{" "}
@@ -140,11 +140,11 @@ export default function IplBanner({
             {result?.next?.title && (
               <Link href={nextUrl}>
               <div className="flex items-center space-x-4">
-                <p className="text-sm">
+                <h2 className="text-sm">
                   {result?.next?.title}
                   <br />
                   {result?.next?.season}
-                </p>
+                </h2>
                 <div className="flex items-center justify-center w-12 h-12 rounded-full">
                   <Image
                     loading="lazy"
