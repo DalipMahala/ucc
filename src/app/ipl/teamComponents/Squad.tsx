@@ -49,7 +49,7 @@ export default function Squads({
               "/ipl/" +
               pointTables?.season +
               "/" +
-              urlStringEncode(teams?.abbr) +
+              urlStringEncode(teams?.title) +
               "/" +
               teams?.tid
             }
@@ -63,7 +63,7 @@ export default function Squads({
               "/ipl/" +
               pointTables?.season +
               "/" +
-              urlStringEncode(teams?.abbr) +
+              urlStringEncode(teams?.title) +
               "/" +
               teams?.tid +
               "/schedule-results"
@@ -78,7 +78,7 @@ export default function Squads({
               "/ipl/" +
               pointTables?.season +
               "/" +
-              urlStringEncode(teams?.abbr) +
+              urlStringEncode(teams?.title) +
               "/" +
               teams?.tid +
               "/squads"

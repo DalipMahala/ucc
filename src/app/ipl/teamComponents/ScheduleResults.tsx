@@ -119,7 +119,7 @@ export default function ScheduleResults({
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
       <div id="tabs" className="mt-4">
           <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
-          <Link href={"/ipl/"+pointTables?.season+"/"+urlStringEncode(teams?.abbr)+"/"+teams?.tid}>
+          <Link href={"/ipl/"+pointTables?.season+"/"+urlStringEncode(teams?.title)+"/"+teams?.tid}>
               <button
                
                 className="font-medium py-2 px-3 whitespace-nowrap"
@@ -127,7 +127,7 @@ export default function ScheduleResults({
                 Overview
               </button>
             </Link>
-            <Link href={"/ipl/"+pointTables?.season+"/"+urlStringEncode(teams?.abbr)+"/"+teams?.tid+"/schedule-results"}>
+            <Link href={"/ipl/"+pointTables?.season+"/"+urlStringEncode(teams?.title)+"/"+teams?.tid+"/schedule-results"}>
               <button
                
                 className="font-medium py-2 px-3 whitespace-nowrap  bg-[#1A80F8] text-white rounded-md"
@@ -136,7 +136,7 @@ export default function ScheduleResults({
 
               </button>
             </Link>
-            <Link href={"/ipl/"+pointTables?.season+"/"+urlStringEncode(teams?.abbr)+"/"+teams?.tid+"/squads"}>
+            <Link href={"/ipl/"+pointTables?.season+"/"+urlStringEncode(teams?.title)+"/"+teams?.tid+"/squads"}>
               <button
                 className="font-medium py-2 px-3 whitespace-nowrap"
               >

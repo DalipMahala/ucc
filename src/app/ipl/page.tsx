@@ -24,7 +24,7 @@ export default async function page(props: { params: Params }) {
   const teamId = params?.teamId;
   const teamType = params?.teamType;
   
- 
+
   const teamDetails = await TeamDetails(teamId);
   if (teamDetails){
     if (!teamDetails || teamName?.toLowerCase() !== urlStringEncode(teamDetails?.title)?.toLowerCase() || teamId?.toString() !== teamDetails?.tid?.toString()) {

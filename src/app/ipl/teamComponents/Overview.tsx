@@ -192,7 +192,7 @@ export default function Overview({
         <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
           <Link
             href={
-              "/ipl/" + pointTables?.season + "/" + urlStringEncode(teams?.abbr) + "/" + teams?.tid
+              "/ipl/" + pointTables?.season + "/" + urlStringEncode(teams?.title) + "/" + teams?.tid
             }
           >
             <button className="font-medium py-2 px-3 whitespace-nowrap bg-[#1A80F8] text-white rounded-md">
@@ -202,7 +202,7 @@ export default function Overview({
           <Link
             href={
               "/ipl/" + pointTables?.season + "/" +
-              urlStringEncode(teams?.abbr) +
+              urlStringEncode(teams?.title) +
               "/" +
               teams?.tid +
               "/schedule-results"
@@ -215,7 +215,7 @@ export default function Overview({
           <Link
             href={
               "/ipl/" + pointTables?.season + "/" +
-              urlStringEncode(teams?.abbr) +
+              urlStringEncode(teams?.title) +
               "/" +
               teams?.tid +
               "/squads"
