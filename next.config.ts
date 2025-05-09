@@ -3,11 +3,15 @@ const nextConfig = {
   compress: true,
   productionBrowserSourceMaps: true,
   experimental: {
+    optimizePackageImports: [
+      'lodash',
+      'date-fns',
+      'react-icons'
+    ],
     optimizeCss: true,
     scrollRestoration: true,
     optimizeServerReact: true,
     gzipSize: true,
-
     // Remove unsupported options
   },
   images: {
@@ -32,8 +36,7 @@ const nextConfig = {
         ...config.optimization,
         splitChunks: {
           chunks: 'all',
-          minSize: 20000,
-          maxSize: 200000,
+          maxSize: 244 * 1024,
           cacheGroups: {
             defaultVendors: {
               test: /[\\/]node_modules[\\/]/,

@@ -58,12 +58,14 @@ export default async function page(props: { params: Params }) {
     scheduledMatch: Match[];
     resultMatch: Match[];
     liveMatch: Match[];
-  } = { scheduledMatch: [], resultMatch: [], liveMatch: [] };
+    allMatch: Match[];
+  } = { scheduledMatch: [], resultMatch: [], liveMatch: [],allMatch: [] };
   
   allMatches?.data?.forEach((match: { status: number }) => {
     if (match.status === 1) categorizedMatches.scheduledMatch.push(match);
     else if (match.status === 2) categorizedMatches.resultMatch.push(match);
     else if (match.status === 3) categorizedMatches.liveMatch.push(match);
+    else categorizedMatches.allMatch.push(match);
   });
 
   const seriesMatches = categorizedMatches;

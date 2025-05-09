@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "cid is required" }, { status: 400 });
       }
 
-    const CACHE_KEY = "series_matches";
+    const CACHE_KEY = "series_matches_"+cid;
     const CACHE_TTL = 60;
 
     const cachedData = await redis.get(CACHE_KEY);
