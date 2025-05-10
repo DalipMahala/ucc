@@ -29,11 +29,11 @@ export default function NewsSection({ urlString }: News) {
           key={index}
         >
           <div className="col-span-6">
-            {post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium_large.source_url && (
+            {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium_large.source_url && (
               <Link href={post?.link}>
                 <Image priority
                   // src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
-                  src={post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium_large.source_url}
+                  src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium_large.source_url}
                   width={307}
                   height={192}
                   alt={post?.title.rendered}
@@ -100,11 +100,11 @@ export default function NewsSection({ urlString }: News) {
 
               <div className="flex gap-3 my-3">
                 <Link href={post?.link} className="w-[30%]">
-                  {post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes
-                    .medium.source_url && (
+                  {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes
+                    ?.medium?.source_url && (
                       <Image loading="lazy"
-                        src={post._embedded["wp:featuredmedia"]?.[0].media_details.sizes
-                          .medium.source_url}
+                        src={post._embedded["wp:featuredmedia"]?.[0].media_details?.sizes
+                          ?.medium?.source_url}
                         width={185}
                         height={89}
                         alt={post?.title.rendered}

@@ -41,7 +41,7 @@ export default async function page(props: { params: Params }) {
   const pointTables = await SeriesPointsTable(cid);
   const seriesMatches =  await SeriesMatches(cid);
   let matcheInfo = [];
-  if(seriesMatches?.scheduledMatch.length > 0){
+  if(seriesMatches?.scheduledMatch?.length > 0){
     const  matchid = seriesMatches?.scheduledMatch?.filter((m: { teama: { team_id: any; }; teamb: { team_id: any; }; }) => [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teamId)))?.[0]?.match_id;
     matcheInfo = await MatcheInfo(matchid);
   }else{

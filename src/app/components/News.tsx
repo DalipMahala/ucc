@@ -82,11 +82,11 @@ const News = () => {
             {news.slice(0, 1)?.map((post: any, index: number) => (
               <div className="lg:grid grid-cols-12 gap-4" key={index}>
                 <div className="col-span-6 ">
-                  {post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium_large.source_url && (
+                  {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium_large?.source_url && (
                     <Link href={post?.link}>
                       <Image priority
                         // src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
-                        src={post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium_large.source_url}
+                        src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium_large?.source_url}
 
                         width={360}
                         height={192}
@@ -152,7 +152,7 @@ const News = () => {
                     <Link className="w-[45%]" href={post?.link}>
                       {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url && (
                         <Image priority
-                          src={post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes.medium.source_url}
+                          src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url}
                           width={300}
                           height={144}
                           alt={post?.title.rendered}

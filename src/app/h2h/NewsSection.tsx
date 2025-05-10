@@ -65,12 +65,12 @@ export default function NewsSection({ urlString }: News) {
           
           <div className="flex gap-3 my-3">
           <Link href={post?.link}  className="w-[60%]">
-            {post._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes
-              .thumbnail.source_url && (
+            {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes
+              ?.thumbnail?.source_url && (
                 
                 <Image  loading="lazy" 
-                  src={post._embedded["wp:featuredmedia"]?.[0].media_details.sizes
-                    .thumbnail.source_url}
+                  src={post._embedded["wp:featuredmedia"]?.[0].media_details?.sizes
+                    ?.thumbnail?.source_url}
                   width={90}
                   height={90}
                   alt={post?.title.rendered}

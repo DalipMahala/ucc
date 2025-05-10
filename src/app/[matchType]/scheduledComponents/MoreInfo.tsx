@@ -71,19 +71,13 @@ export default function MoreInfo({
   const matchPlayedA = matchlistA.length;
   const matchPlayedB = matchlistB.length;
 
-  if (Array.isArray(matchlistA) && matchlistA.length > 0) {
-    matchlistA?.map((items: { winning_team_id: any }) =>
+  if (Array.isArray(matchlistAB) && matchlistAB.length > 0) {
+    matchlistAB?.slice(0,5).map((items: { winning_team_id: any }) =>
       items.winning_team_id === teama_id
         ? teamaWinMatch++
-        : ""
-    );
-  }
-
-  if (Array.isArray(matchlistB) && matchlistB.length > 0) {
-    matchlistB?.map((items: { winning_team_id: any }) =>
-      items.winning_team_id === teamb_id
-        ? teambWinMatch++
-        : ""
+        : items.winning_team_id === teamb_id
+          ? teambWinMatch++
+          : ""
     );
   }
 

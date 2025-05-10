@@ -46,7 +46,7 @@ export default function Overview({
     ? matchPlaying11?.teama?.squads || []
     : matchPlaying11?.teamb?.squads || [];
 
-  const cmatch = seriesMatches?.resultMatch.reverse();
+  const cmatch = seriesMatches?.resultMatch?.reverse();
   const completedMatch = seriesMatches?.resultMatch?.filter(
     (m: any) => [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teams?.tid))
   )?.reverse()?.[0] || null;

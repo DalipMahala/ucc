@@ -68,12 +68,12 @@ const PlayerNews = ({ newsUrl }: url) => {
                   <Link href={post?.link}>
                     <div className="flex gap-3 my-3">
                       {post._embedded["wp:featuredmedia"]?.[0]?.media_details
-                        .sizes.thumbnail.source_url && (
+                        ?.sizes?.thumbnail?.source_url && (
                         <Image
                           loading="lazy"
                           src={
                             post._embedded["wp:featuredmedia"]?.[0]
-                              .media_details.sizes.thumbnail.source_url
+                              .media_details?.sizes?.thumbnail?.source_url
                           }
                           width={77}
                           height={77}

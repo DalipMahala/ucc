@@ -46,11 +46,11 @@ function SeriesListNews() {
              <div className="flex gap-3 my-4 p-4 bg-[#ffffff] rounded-lg " key={index}>
                     <Link className="w-[45%]" href={post?.link}>
                     {post._embedded["wp:featuredmedia"]?.[0]?.media_details
-                        .sizes.medium.source_url && (
+                        ?.sizes?.medium?.source_url && (
                         <Image priority
                           src=
                           {post._embedded["wp:featuredmedia"]?.[0]
-                            .media_details.sizes.medium.source_url
+                            ?.media_details?.sizes?.medium?.source_url
                         }
                           width={300}
                           height={144}
