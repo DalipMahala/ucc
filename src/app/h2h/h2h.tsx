@@ -5,7 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { format } from "date-fns";
 import WeeklySlider from "@/app/components/WeeklySlider";
-import NewsSection from "./NewsSection";
+// import NewsSection from "./NewsSection";
+import NewsSection from "@/app/series/seriesComponents/NewsSection";
 import PLSeries from "@/app/components/popularSeries";
 import FantasyTips from "@/app/components/FantasyTips";
 import ReadMoreCard from "@/app/components/ReadMoreCard";
@@ -46,7 +47,7 @@ export default function H2h({
   const [news, setNews] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-console.log(teamDetails);
+  console.log(teamDetails);
   // Safe calculations with fallbacks
   const totalMatches = teamDetails?.teamAB_total_match || 0;
   const teamaWon = totalMatches > 0 ?
@@ -59,14 +60,14 @@ console.log(teamDetails);
   const urlWithoutMatchType = urlStrings?.split('-').slice(0, -1).join('-') || '';
 
   let content = '';
-  if(matchType === 'test'){
-     content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. In Test cricket, both teams have faced off ${totalMatches} times. Out of these, ${teamADetails?.title} have won ${teamDetails?.teama_won_match}, ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match}, and ${teamDetails?.nr_match} matches ended in a draw.`
-  }else if(matchType === 'odi'){
-     content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. In ODIs, ${teamADetails?.title} and ${teamBDetails?.title} have met in ${totalMatches} matches, where ${teamADetails?.title} have won ${teamDetails?.teama_won_match} and ${teamBDetails?.title} have managed ${teamDetails?.teamb_won_match} wins, while ${teamDetails?.nr_match} match ended with no result.`
-  }else if(matchType === 't20'){
-     content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. When it comes to T20 internationals, out of ${totalMatches} clashes, ${teamADetails?.title} lead with ${teamDetails?.teama_won_match} wins, and ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match} matches so far.`
-  }else{
-     content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. When it comes to T20 internationals, out of ${totalMatches} clashes, ${teamADetails?.title} lead with ${teamDetails?.teama_won_match} wins, and ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match} matches so far.`
+  if (matchType === 'test') {
+    content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. In Test cricket, both teams have faced off ${totalMatches} times. Out of these, ${teamADetails?.title} have won ${teamDetails?.teama_won_match}, ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match}, and ${teamDetails?.nr_match} matches ended in a draw.`
+  } else if (matchType === 'odi') {
+    content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. In ODIs, ${teamADetails?.title} and ${teamBDetails?.title} have met in ${totalMatches} matches, where ${teamADetails?.title} have won ${teamDetails?.teama_won_match} and ${teamBDetails?.title} have managed ${teamDetails?.teamb_won_match} wins, while ${teamDetails?.nr_match} match ended with no result.`
+  } else if (matchType === 't20') {
+    content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. When it comes to T20 internationals, out of ${totalMatches} clashes, ${teamADetails?.title} lead with ${teamDetails?.teama_won_match} wins, and ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match} matches so far.`
+  } else {
+    content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. When it comes to T20 internationals, out of ${totalMatches} clashes, ${teamADetails?.title} lead with ${teamDetails?.teama_won_match} wins, and ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match} matches so far.`
   }
 
   useEffect(() => {
@@ -304,7 +305,7 @@ console.log(teamDetails);
 
                     <div className="mt-4">
                       <div className="mb-6">
-                      
+
                         <ReadMoreCard
                           title=""
                           content={content}
@@ -616,27 +617,27 @@ console.log(teamDetails);
                 )}
 
                 <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
-                  <h3 className="text-1xl font-semibold mb-1">
+                  <h2 className="text-1xl font-semibold mb-1">
                     {teamADetails.title} vs {teamBDetails.title} 2025
-                  </h3>
+                  </h2>
 
-                  <ReadMoreCard
-                    title=""
-                    content="The biggest tournament in the cricketing circuit, the ICC
+                  <p className="text-gray-500 font-normal">
+                    The biggest tournament in the cricketing circuit, the ICC
                     T20 WORLD Cup is underway in the USAs and the West Indies.
                     The tournament received excellent response from the fans
                     worldwide The biggest tournament in the cricketing circuit, the ICC
                     T20 WORLD Cup is underway in the USAs and the West Indies.
                     The tournament received excellent response from the fans
-                    worldwide"
-                    wordLimit={30}
-                  />
+                    worldwide
+                  </p>
+
+
                 </div>
 
                 <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
-                  <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                  <h2 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                     News
-                  </h3>
+                  </h2>
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <NewsSection urlString="" />
                 </div>

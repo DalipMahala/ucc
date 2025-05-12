@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { format } from "date-fns";
 import WeeklySlider from "@/app/components/WeeklySlider";
-import NewsSection from "./NewsSection";
+import NewsSection from "@/app/series/seriesComponents/NewsSection";
 import PLSeries from "@/app/components/popularSeries";
 import FantasyTips from "@/app/components/FantasyTips";
 import ReadMoreCard from "@/app/components/ReadMoreCard";
@@ -652,17 +652,15 @@ const handleTeamSelect = (team: any, type: 'A' | 'B') => {
                     {teamADetails.title} vs {teamBDetails.title} 2025
                   </h3>
 
-                  <ReadMoreCard
-                    title=""
-                    content="The biggest tournament in the cricketing circuit, the ICC
+                  <p className="text-gray-500 font-normal">The biggest tournament in the cricketing circuit, the ICC
                     T20 WORLD Cup is underway in the USAs and the West Indies.
                     The tournament received excellent response from the fans
                     worldwide The biggest tournament in the cricketing circuit, the ICC
                     T20 WORLD Cup is underway in the USAs and the West Indies.
                     The tournament received excellent response from the fans
-                    worldwide"
-                    wordLimit={30}
-                  />
+                    worldwide</p>
+
+                 
                 </div>
 
                 <div className="rounded-lg bg-[#ffffff] p-4 mb-4">

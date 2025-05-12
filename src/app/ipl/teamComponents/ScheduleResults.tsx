@@ -11,7 +11,7 @@ import FantasyTips from "@/app/components/FantasyTips";
 
 interface ScheduleResults {
   seriesMatches: any;
-  seriesId:number;
+  seriesId: number;
   pointTables: any;
   teamPlayers: any;
   params: any;
@@ -25,243 +25,239 @@ export default function ScheduleResults({
 }: ScheduleResults) {
   const teamId = params?.teamId;
   const teams = teamPlayers[0]?.team;
-  
+
   let completedMatch = seriesMatches?.resultMatch?.filter((m: { teama: { team_id: any; }; teamb: { team_id: any; }; }) => [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teamId)));
   let liveMatch = seriesMatches?.liveMatch?.filter((m: { teama: { team_id: any; }; teamb: { team_id: any; }; }) => [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teamId)));
   let upcomingMatch = seriesMatches?.scheduledMatch?.filter((m: { teama: { team_id: any; }; teamb: { team_id: any; }; }) => [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teamId)));
   // console.log(liveMatch);
 
   useEffect(() => {
-      const elements = document.querySelectorAll("#all-tab, #live-tab, #completed-tab, #upcoming-tab");
-  
-      // Ensure elements exist before adding event listeners
-      if (elements.length === 0) {
-        console.error("Tabs not found in the DOM!");
-        return;
-      }
-  
-      function handleClick(event: Event) {
-        const target = event.target as HTMLElement;
-        console.log("Clicked ID:", target.id);
-  
-        // Remove active styles from all tabs
-        document.querySelectorAll("#all-tab, #live-tab, #completed-tab, #upcoming-tab").forEach((el) => {
-          el.classList.remove("bg-[#000000]", "text-white");
-          el.classList.add("bg-[#ffffff]");
-        });
-  
-        // Add active style to clicked tab
-        target.classList.add("bg-[#000000]", "text-white");
-          target.classList.remove("bg-[#ffffff]");
-  
-        // Hide all sections initially
-        document.querySelectorAll(".liveMatch, .completedMatch, .upcomingMatch").forEach((el) => {
-          el.classList.add("hidden");
-        });
-  
-        // Show only the relevant section
-        const sectionMap: Record<string, string> = {
-          "live-tab": ".liveMatch",
-          "completed-tab": ".completedMatch",
-          "upcoming-tab": ".upcomingMatch",
-          "all-tab": ".liveMatch, .completedMatch, .upcomingMatch",
-        };
-  
-        if (sectionMap[target.id]) {
-          document.querySelectorAll(sectionMap[target.id]).forEach((el) => el.classList.remove("hidden"));
-        }
-      }
-  
-      // Add event listeners
-      elements.forEach((element) => element.addEventListener("click", handleClick));
-  
-      // Cleanup function to remove event listeners when component unmounts
-      return () => {
-        elements.forEach((element) => element.removeEventListener("click", handleClick));
-      };
-    }, []); // Run only once when component mounts
-  
-    const [activeMainTab, setActiveMainTab] = useState("info1");
+    const elements = document.querySelectorAll("#all-tab, #live-tab, #completed-tab, #upcoming-tab");
 
-    const [pageHtml, setPageHtml] = useState<string>('');
-        useEffect(() => {
-            async function fetchMatches() {
-              if (!seriesId || seriesId === 0) return;
-        
-              try {
-                
-                  const response = await fetch(`/api/series/SeriesHtml`, {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                      "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
-                    },
-                    body: JSON.stringify({ cid: seriesId }), 
-                  });
-        
-                  if (!response.ok) {
-                    console.error(
-                      `Error: API returned ${response.status} for CID ${seriesId}`
-                    );
-                    return null; // Skip failed requests
-                  }
-                  
-                  const result = await response.json();
-                  let items = result?.data?.[0]?.matchViewHtml || '';
-                  setPageHtml(items);
-              } catch (error) {
-                console.error("Error fetching matches:", error);
-              }
-            }
-        
-            fetchMatches();
-          }, [seriesId]);
+    // Ensure elements exist before adding event listeners
+    if (elements.length === 0) {
+      console.error("Tabs not found in the DOM!");
+      return;
+    }
+
+    function handleClick(event: Event) {
+      const target = event.target as HTMLElement;
+      console.log("Clicked ID:", target.id);
+
+      // Remove active styles from all tabs
+      document.querySelectorAll("#all-tab, #live-tab, #completed-tab, #upcoming-tab").forEach((el) => {
+        el.classList.remove("bg-[#000000]", "text-white");
+        el.classList.add("bg-[#ffffff]");
+      });
+
+      // Add active style to clicked tab
+      target.classList.add("bg-[#000000]", "text-white");
+      target.classList.remove("bg-[#ffffff]");
+
+      // Hide all sections initially
+      document.querySelectorAll(".liveMatch, .completedMatch, .upcomingMatch").forEach((el) => {
+        el.classList.add("hidden");
+      });
+
+      // Show only the relevant section
+      const sectionMap: Record<string, string> = {
+        "live-tab": ".liveMatch",
+        "completed-tab": ".completedMatch",
+        "upcoming-tab": ".upcomingMatch",
+        "all-tab": ".liveMatch, .completedMatch, .upcomingMatch",
+      };
+
+      if (sectionMap[target.id]) {
+        document.querySelectorAll(sectionMap[target.id]).forEach((el) => el.classList.remove("hidden"));
+      }
+    }
+
+    // Add event listeners
+    elements.forEach((element) => element.addEventListener("click", handleClick));
+
+    // Cleanup function to remove event listeners when component unmounts
+    return () => {
+      elements.forEach((element) => element.removeEventListener("click", handleClick));
+    };
+  }, []); // Run only once when component mounts
+
+  const [activeMainTab, setActiveMainTab] = useState("info1");
+
+  const [pageHtml, setPageHtml] = useState<string>('');
+  useEffect(() => {
+    async function fetchMatches() {
+      if (!seriesId || seriesId === 0) return;
+
+      try {
+
+        const response = await fetch(`/api/series/SeriesHtml`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+          },
+          body: JSON.stringify({ cid: seriesId }),
+        });
+
+        if (!response.ok) {
+          console.error(
+            `Error: API returned ${response.status} for CID ${seriesId}`
+          );
+          return null; // Skip failed requests
+        }
+
+        const result = await response.json();
+        let items = result?.data?.[0]?.matchViewHtml || '';
+        setPageHtml(items);
+      } catch (error) {
+        console.error("Error fetching matches:", error);
+      }
+    }
+
+    fetchMatches();
+  }, [seriesId]);
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
       <div id="tabs" className="mt-4">
-          <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
-          <Link href={"/ipl/"+pointTables?.season+"/"+urlStringEncode(teams?.title)+"/"+teams?.tid}>
-              <button
-               
-                className="font-medium py-2 px-3 whitespace-nowrap"
-              >
-                Overview
-              </button>
-            </Link>
-            <Link href={"/ipl/"+pointTables?.season+"/"+urlStringEncode(teams?.title)+"/"+teams?.tid+"/schedule-results"}>
-              <button
-               
-                className="font-medium py-2 px-3 whitespace-nowrap  bg-[#1A80F8] text-white rounded-md"
-              >
-                Schedule & Results
+        <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+          <Link href={"/ipl/" + pointTables?.season + "/" + urlStringEncode(teams?.title) + "/" + teams?.tid}>
+            <button
 
-              </button>
-            </Link>
-            <Link href={"/ipl/"+pointTables?.season+"/"+urlStringEncode(teams?.title)+"/"+teams?.tid+"/squads"}>
-              <button
-                className="font-medium py-2 px-3 whitespace-nowrap"
-              >
-                Squads
-              </button>
-            </Link>
-            <Link
-              href={
-                "/series/" +
-                urlStringEncode(
-                  pointTables?.title +
-                    "-" +
-                    pointTables?.season
-                ) +
-                "/" +
-                pointTables?.cid +
-                "/points-table"
-              }
+              className="font-medium py-2 px-3 whitespace-nowrap"
             >
-              <button
-                className="font-medium py-2 px-3 whitespace-nowrap"
-              >
-                Points Table
-              </button>
-            </Link>
-            <Link
-              href={
-                "/series/" +
-                urlStringEncode(
-                  pointTables?.title +
-                    "-" +
-                    pointTables?.season
-                ) +
-                "/" +
-                pointTables?.cid +
-                "/news"
-              }
+              Overview
+            </button>
+          </Link>
+          <Link href={"/ipl/" + pointTables?.season + "/" + urlStringEncode(teams?.title) + "/" + teams?.tid + "/schedule-results"}>
+            <button
+
+              className="font-medium py-2 px-3 whitespace-nowrap  bg-[#1A80F8] text-white rounded-md"
             >
-              <button
-                className="font-medium py-2 px-3 whitespace-nowrap"
-              >
-                News
-              </button>
-            </Link>
-            <Link
-              href={
-                "/series/" +
-                urlStringEncode(
-                  pointTables?.title +
-                    "-" +
-                    pointTables?.season
-                ) +
-                "/" +
-                pointTables?.cid +
-                "/stats/batting-most-run"
-              }
+              Schedule & Results
+
+            </button>
+          </Link>
+          <Link href={"/ipl/" + pointTables?.season + "/" + urlStringEncode(teams?.title) + "/" + teams?.tid + "/squads"}>
+            <button
+              className="font-medium py-2 px-3 whitespace-nowrap"
             >
-              <button
-                className="font-medium py-2 px-3 whitespace-nowrap"
-              >
-                Stats
-              </button>
-            </Link>
-            
-          </div>
+              Squads
+            </button>
+          </Link>
+          <Link
+            href={
+              "/series/" +
+              urlStringEncode(
+                pointTables?.title +
+                "-" +
+                pointTables?.season
+              ) +
+              "/" +
+              pointTables?.cid +
+              "/points-table"
+            }
+          >
+            <button
+              className="font-medium py-2 px-3 whitespace-nowrap"
+            >
+              Points Table
+            </button>
+          </Link>
+          <Link
+            href={
+              "/series/" +
+              urlStringEncode(
+                pointTables?.title +
+                "-" +
+                pointTables?.season
+              ) +
+              "/" +
+              pointTables?.cid +
+              "/news"
+            }
+          >
+            <button
+              className="font-medium py-2 px-3 whitespace-nowrap"
+            >
+              News
+            </button>
+          </Link>
+          <Link
+            href={
+              "/series/" +
+              urlStringEncode(
+                pointTables?.title +
+                "-" +
+                pointTables?.season
+              ) +
+              "/" +
+              pointTables?.cid +
+              "/stats/batting-most-run"
+            }
+          >
+            <button
+              className="font-medium py-2 px-3 whitespace-nowrap"
+            >
+              Stats
+            </button>
+          </Link>
+
         </div>
+      </div>
       <div id="live" className="">
         <div className="md:grid grid-cols-12 gap-4">
           <div className="lg:col-span-8 md:col-span-7">
             <div className="rounded-lg my-4">
               <div className="flex space-x-4">
-              <button  id="all-tab"
-                      className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${
-                        activeMainTab === "info1"
-                          ? "bg-[#000000] text-white"
-                          : ""
+                <button id="all-tab"
+                  className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "info1"
+                      ? "bg-[#000000] text-white"
+                      : ""
+                    } rounded-full`}
+                >
+                  All
+                </button>
+                {liveMatch.length > 0 &&
+                  <button id="live-tab"
+                    className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "live1"
+                        ? "bg-[#000000] text-white"
+                        : ""
                       } rounded-full`}
-                    >
-                      All
-                    </button>
-                      {liveMatch.length > 0 &&
-                    <button id="live-tab"
-                      className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${
-                        activeMainTab === "live1"
-                          ? "bg-[#000000] text-white"
-                          : ""
+                  >
+                    Live
+                  </button>
+                }{completedMatch.length > 0 &&
+                  <button id="completed-tab"
+                    className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "finished1"
+                        ? "bg-[#000000] text-white"
+                        : ""
                       } rounded-full`}
-                    >
-                      Live
-                    </button>
-                  }{completedMatch.length > 0 &&
-                    <button  id="completed-tab"
-                      className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${
-                        activeMainTab === "finished1"
-                          ? "bg-[#000000] text-white"
-                          : ""
+                  >
+                    Finished
+                  </button>
+                }{upcomingMatch.length > 0 &&
+                  <button id="upcoming-tab"
+                    className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "scorecard1"
+                        ? "bg-[#000000] text-white"
+                        : ""
                       } rounded-full`}
-                    >
-                      Finished
-                    </button>
-                  }{upcomingMatch.length > 0 &&
-                    <button  id="upcoming-tab"
-                      className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${
-                        activeMainTab === "scorecard1"
-                          ? "bg-[#000000] text-white"
-                          : ""
-                      } rounded-full`}
-                    >
-                      Scheduled
-                    </button>
+                  >
+                    Scheduled
+                  </button>
                 }
               </div>
             </div>
             <div className="tab-content-container mt-4">
               <div
                 id="info1"
-                className={`tab-content ${
-                  activeMainTab === "info1" ? "" : "hidden"
-                }`}
+                className={`tab-content ${activeMainTab === "info1" ? "" : "hidden"
+                  }`}
               >
                 {/* <!-- live match desktop view start --> */}
+
                 <div className="liveMatch">
-                  {liveMatch && liveMatch?.map((items:any, index: number) => (
+                  {liveMatch && liveMatch?.map((items: any, index: number) => (
                     <div key={index}>
                       <div
                         data-key={items.match_id}
@@ -271,7 +267,7 @@ export default function ScheduleResults({
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center space-x-2">
                             <div
-                              className="flex items-center text-[#A70B0B] rounded-full pr-3  font-semibold"
+                              className="flex items-center text-[12px] text-[#A70B0B] rounded-full pr-3 uppercase font-semibold"
                               style={{ gap: "3px" }}
                             >
                               <span className="rounded-full">
@@ -296,7 +292,7 @@ export default function ScheduleResults({
                               {items.status_str}
                             </div>
                             <div>
-                              <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                              <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                                 {items.competition.title} -{" "}
                                 {items.competition.season}
                               </h4>
@@ -359,14 +355,14 @@ export default function ScheduleResults({
                               "/live-score/" +
                               urlStringEncode(
                                 items?.teama?.short_name +
-                                  "-vs-" +
-                                  items?.teamb?.short_name +
-                                  "-" +
-                                  items?.subtitle +
-                                  "-" +
-                                  items?.competition?.title+
-                                  "-" +
-                                  items?.competition?.season
+                                "-vs-" +
+                                items?.teamb?.short_name +
+                                "-" +
+                                items?.subtitle +
+                                "-" +
+                                items?.competition?.title +
+                                "-" +
+                                items?.competition?.season
                               ) +
                               "/" +
                               items.match_id
@@ -379,38 +375,38 @@ export default function ScheduleResults({
                                 </p>
                                 <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
                                   <div className="flex items-center space-x-2">
-                                    <Image  loading="lazy" 
+                                    <Image loading="lazy"
                                       src={items.teama.logo_url}
                                       className="h-[30px] rounded-full"
                                       width={30}
                                       height={30}
                                       alt={items.teama.short_name}
                                     />
-                                    <span className="text-[#909090] font-semibold">
+                                    <span className="text-[#757A82] font-semibold text-[14px]">
                                       {items.teama.short_name} -{" "}
                                     </span>
                                   </div>
                                   <p
                                     className={
-                                      "flex items-center gap-[1px] match" +
+                                      "flex items-center gap-[4px] match" +
                                       items.match_id +
                                       "-" +
                                       items.teama.team_id
                                     }
                                   >
                                     {items.teama.scores === undefined ||
-                                    items.teama.scores === null ||
-                                    items.teama.scores === "" ? (
-                                      <span className="font-semibold">
+                                      items.teama.scores === null ||
+                                      items.teama.scores === "" ? (
+                                      <span className="text-[14px] font-semibold">
                                         {" "}
                                         (Yet to bat){" "}
                                       </span>
                                     ) : (
                                       <>
-                                        <span className="font-semibold">
+                                        <span className=" font-semibold text-[14px]">
                                           {items.teama.scores}
                                         </span>
-                                        <span className="text-[#909090] text-[13px]">
+                                        <span className="text-[#757A82] text-[13px]">
                                           {" "}
                                           ({items.teama.overs}){" "}
                                         </span>
@@ -422,38 +418,38 @@ export default function ScheduleResults({
                                 <div>
                                   <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                     <div className="flex items-center space-x-2">
-                                      <Image  loading="lazy" 
+                                      <Image loading="lazy"
                                         src={items.teamb.logo_url}
                                         className="h-[30px]"
                                         width={30}
                                         height={30}
                                         alt={items.teamb.short_name}
                                       />
-                                      <span className="text-[#909090] font-semibold">
+                                      <span className="text-[#757A82] font-semibold text-[14px]">
                                         {items.teamb.short_name} -
                                       </span>
                                     </div>
                                     <p
                                       className={
-                                        "flex items-center gap-[1px] match" +
+                                        "flex items-center gap-[4px] match" +
                                         items.match_id +
                                         "-" +
                                         items.teamb.team_id
                                       }
                                     >
                                       {items.teamb.scores === undefined ||
-                                      items.teamb.scores === null ||
-                                      items.teamb.scores === "" ? (
-                                        <span className="font-semibold">
+                                        items.teamb.scores === null ||
+                                        items.teamb.scores === "" ? (
+                                        <span className="text-[14px] font-semibold">
                                           {" "}
                                           (Yet to bat){" "}
                                         </span>
                                       ) : (
                                         <>
-                                          <span className="font-semibold">
+                                          <span className="font-semibold text-[14px]">
                                             {items.teamb.scores}
                                           </span>
-                                          <span className="text-[#909090] text-[13px]">
+                                          <span className="text-[#757A82] text-[13px]">
                                             {" "}
                                             ({items.teamb.overs}){" "}
                                           </span>
@@ -464,7 +460,7 @@ export default function ScheduleResults({
                                 </div>
                               </div>
 
-                              <div className=" font-medium text-center">
+                              <div className="w-[38%] font-medium text-center">
                                 <p
                                   className={
                                     "text-[#2F335C] text-[14px] statusNote" +
@@ -482,7 +478,7 @@ export default function ScheduleResults({
                           </Link>
                         </div>
 
-                        
+
                       </div>
 
                       {/* mobile */}
@@ -520,7 +516,7 @@ export default function ScheduleResults({
                             </div>
                             <span className="absolute right-4 top-[19px]">
                               <button className="arro-button">
-                                <Image  loading="lazy" 
+                                <Image loading="lazy"
                                   src="/assets/img/arrow.png"
                                   className=""
                                   width={10}
@@ -539,14 +535,14 @@ export default function ScheduleResults({
                               "/live-score/" +
                               urlStringEncode(
                                 items?.teama?.short_name +
-                                  "-vs-" +
-                                  items?.teamb?.short_name +
-                                  "-" +
-                                  items?.subtitle +
-                                  "-" +
-                                  items?.competition?.title+
-                                  "-" +
-                                  items?.competition?.season
+                                "-vs-" +
+                                items?.teamb?.short_name +
+                                "-" +
+                                items?.subtitle +
+                                "-" +
+                                items?.competition?.title +
+                                "-" +
+                                items?.competition?.season
                               ) +
                               "/" +
                               items.match_id
@@ -560,7 +556,7 @@ export default function ScheduleResults({
                                 <div className="">
                                   <div className="items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
                                     <div className="flex items-center space-x-2">
-                                      <Image  loading="lazy" 
+                                      <Image loading="lazy"
                                         src={items.teama.logo_url}
                                         className="h-[30px] rounded-full"
                                         width={30}
@@ -572,7 +568,7 @@ export default function ScheduleResults({
                                           <span className="text-[#5e5e5e] font-medium">
                                             {items.teama.short_name}
                                           </span>
-                                          <Image  loading="lazy" 
+                                          <Image loading="lazy"
                                             src="/assets/img/home/bat.png"
                                             className="h-[15px]"
                                             width={30}
@@ -590,8 +586,8 @@ export default function ScheduleResults({
                                           }
                                         >
                                           {items.teama.scores === undefined ||
-                                          items.teama.scores === null ||
-                                          items.teama.scores === "" ? (
+                                            items.teama.scores === null ||
+                                            items.teama.scores === "" ? (
                                             <span className="font-semibold">
                                               {" "}
                                               (Yet to bat){" "}
@@ -615,7 +611,7 @@ export default function ScheduleResults({
                                   <div>
                                     <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                       <div className="flex items-center space-x-2">
-                                        <Image  loading="lazy" 
+                                        <Image loading="lazy"
                                           src={items.teamb.logo_url}
                                           className="h-[30px]"
                                           width={30}
@@ -635,8 +631,8 @@ export default function ScheduleResults({
                                             }
                                           >
                                             {items.teamb.scores === undefined ||
-                                            items.teamb.scores === null ||
-                                            items.teamb.scores === "" ? (
+                                              items.teamb.scores === null ||
+                                              items.teamb.scores === "" ? (
                                               <span className="font-semibold">
                                                 {" "}
                                                 (Yet to bat){" "}
@@ -673,7 +669,7 @@ export default function ScheduleResults({
                             </div>
                           </Link>
 
-                          
+
                         </div>
                       </div>
                     </div>
@@ -688,10 +684,10 @@ export default function ScheduleResults({
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center space-x-2">
                             <div
-                              className="flex items-center text-[#0B773C] rounded-full pr-3  font-semibold"
+                              className="flex items-center text-[13px] text-[#0B773C] rounded-full pr-3 uppercase  font-semibold"
                               style={{ gap: "3px" }}
                             >
-                              <span className="rounded-full">●</span>{" "}
+                              <div className="w-[8px] h-[8px] bg-[#0B773C] rounded-full"></div>{" "}
                               {cmatch.status_str}
                             </div>
                             <div>
@@ -701,7 +697,7 @@ export default function ScheduleResults({
                               </h4>
                             </div>
                           </div>
-                          
+
                         </div>
 
                         <div className="border-t-[1px] border-[#E7F2F4]"></div>
@@ -713,14 +709,14 @@ export default function ScheduleResults({
                                 "/scorecard/" +
                                 urlStringEncode(
                                   cmatch?.teama?.short_name +
-                                    "-vs-" +
-                                    cmatch?.teamb?.short_name +
-                                    "-" +
-                                    cmatch?.subtitle +
-                                    "-" +
-                                    cmatch?.competition?.title+
-                                    "-" +
-                                    cmatch?.competition?.season
+                                  "-vs-" +
+                                  cmatch?.teamb?.short_name +
+                                  "-" +
+                                  cmatch?.subtitle +
+                                  "-" +
+                                  cmatch?.competition?.title +
+                                  "-" +
+                                  cmatch?.competition?.season
                                 ) +
                                 "/" +
                                 cmatch.match_id
@@ -732,22 +728,22 @@ export default function ScheduleResults({
                                 </p>
                                 <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
                                   <div className="flex items-center space-x-2">
-                                    <Image  loading="lazy" 
+                                    <Image loading="lazy"
                                       src={cmatch.teama.logo_url}
                                       className="h-[30px] rounded-full"
                                       width={30}
                                       height={30}
                                       alt={cmatch.teama.short_name}
                                     />
-                                    <span className="text-[#909090] font-semibold">
+                                    <span className="text-[#757A82] font-semibold text-[14px]">
                                       {cmatch.teama.short_name} -{" "}
                                     </span>
                                   </div>
                                   <p>
-                                    <span className=" font-semibold">
+                                    <span className=" font-semibold text-[14px]">
                                       {cmatch.teama.scores}
                                     </span>
-                                    <span className="text-[#909090] text-[13px]">
+                                    <span className="text-[#757A82] text-[13px]">
                                       {" "}
                                       ({cmatch.teama.overs})
                                     </span>
@@ -757,22 +753,22 @@ export default function ScheduleResults({
                                 <div>
                                   <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                     <div className="flex items-center space-x-2">
-                                      <Image  loading="lazy" 
+                                      <Image loading="lazy"
                                         src={cmatch.teamb.logo_url}
                                         className="h-[30px]"
                                         width={30}
                                         height={30}
                                         alt={cmatch.teamb.short_name}
                                       />
-                                      <span className="text-[#909090] font-semibold">
+                                      <span className="text-[#757A82] font-semibold text-[14px]">
                                         {cmatch.teamb.short_name} -{" "}
                                       </span>
                                     </div>
                                     <p>
-                                      <span className=" font-semibold">
+                                      <span className=" text-[14px] font-semibold">
                                         {cmatch.teamb.scores}
                                       </span>
-                                      <span className="text-[#909090] text-[13px]">
+                                      <span className="text-[#757A82] text-[13px]">
                                         ({cmatch.teamb.overs})
                                       </span>
                                     </p>
@@ -780,35 +776,35 @@ export default function ScheduleResults({
                                 </div>
                               </div>
                             </Link>
-                            <div className="h-[100px] border-l-[1px] border-[#d0d3d7]"></div>
+                            <div className="h-[100px] border-l-[1px] border-[#efefef]"></div>
 
                             <Link
                               href={
                                 "/scorecard/" +
                                 urlStringEncode(
                                   cmatch?.teama?.short_name +
-                                    "-vs-" +
-                                    cmatch?.teamb?.short_name +
-                                    "-" +
-                                    cmatch?.subtitle +
-                                    "-" +
-                                    cmatch?.competition?.title+
-                                    "-" +
-                                    cmatch?.competition?.season
+                                  "-vs-" +
+                                  cmatch?.teamb?.short_name +
+                                  "-" +
+                                  cmatch?.subtitle +
+                                  "-" +
+                                  cmatch?.competition?.title +
+                                  "-" +
+                                  cmatch?.competition?.season
                                 ) +
                                 "/" +
                                 cmatch.match_id
                               }
                             >
                               <div className=" font-semibold flex flex-col items-center">
-                                <Image  loading="lazy" 
+                                <Image loading="lazy"
                                   src="/assets/img/home/win.png"
                                   width={30}
                                   height={30}
                                   style={{ width: "auto", height: "auto" }}
                                   alt=""
                                 />
-                                <p className="text-[#0B773C] text-1xl w-[75%] text-center">
+                                <p className="text-[#0B773C] text-[15px] w-[75%] text-center">
                                   {cmatch.result}
                                 </p>
                               </div>
@@ -817,19 +813,19 @@ export default function ScheduleResults({
                             <div className="h-[100px] border-l-[1px] border-[#d0d3d7] hidden"></div>
 
                             <div className="hidden flex-col items-center">
-                              <Image  loading="lazy" 
+                              <Image loading="lazy"
                                 src="/assets/img/default.png"
                                 width={40}
                                 height={40}
                                 alt=""
                               />
 
-                              <p className=" font-semibold">{cmatch?.man_of_the_match?.name}</p>
-                              <p>Man of the match</p>
+                              <p className="text-[14px] font-semibold">{cmatch?.man_of_the_match?.name}</p>
+                              <p className="text-[14px]">Man of the match</p>
                             </div>
                           </div>
                         </div>
-                        
+
                       </div>
                       {/* Mobile */}
 
@@ -851,7 +847,7 @@ export default function ScheduleResults({
                             </div>
                             <span className="absolute right-4 top-[19px]">
                               <button className="arro-button">
-                                <Image  loading="lazy" 
+                                <Image loading="lazy"
                                   src="/assets/img/arrow.png"
                                   className=""
                                   width={10}
@@ -871,14 +867,14 @@ export default function ScheduleResults({
                               "/scorecard/" +
                               urlStringEncode(
                                 cmatch?.teama?.short_name +
-                                  "-vs-" +
-                                  cmatch?.teamb?.short_name +
-                                  "-" +
-                                  cmatch?.subtitle +
-                                  "-" +
-                                  cmatch?.competition?.title+
-                                  "-" +
-                                  cmatch?.competition?.season
+                                "-vs-" +
+                                cmatch?.teamb?.short_name +
+                                "-" +
+                                cmatch?.subtitle +
+                                "-" +
+                                cmatch?.competition?.title +
+                                "-" +
+                                cmatch?.competition?.season
                               ) +
                               "/" +
                               cmatch.match_id
@@ -892,7 +888,7 @@ export default function ScheduleResults({
                                 <div className="">
                                   <div className="items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
                                     <div className="flex items-center space-x-2">
-                                      <Image  loading="lazy" 
+                                      <Image loading="lazy"
                                         src={cmatch.teama.logo_url}
                                         className="h-[30px] rounded-full"
                                         width={30}
@@ -920,7 +916,7 @@ export default function ScheduleResults({
                                   <div>
                                     <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                       <div className="flex items-center space-x-2">
-                                        <Image  loading="lazy" 
+                                        <Image loading="lazy"
                                           src={cmatch.teamb.logo_url}
                                           className="h-[30px] rounded-full"
                                           width={30}
@@ -951,7 +947,7 @@ export default function ScheduleResults({
                                 {/* <!-- <div className="h-[100px] border-l-[1px] border-[#d0d3d7]"></div> --> */}
 
                                 <div className=" font-semibold flex flex-col items-center">
-                                  <Image  loading="lazy" 
+                                  <Image loading="lazy"
                                     src="/assets/img/home/win.png"
                                     width={30}
                                     height={30}
@@ -966,7 +962,7 @@ export default function ScheduleResults({
                             </div>
                           </Link>
 
-                          
+
                         </div>
                       </div>
                     </div>
@@ -981,10 +977,10 @@ export default function ScheduleResults({
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center space-x-2">
                             <div
-                              className="flex items-center text-[#A45B09] rounded-full pr-3  font-semibold"
+                              className="flex items-center text-[13px] text-[#A45B09] rounded-full pr-3 uppercase font-semibold"
                               style={{ gap: "3px" }}
                             >
-                              <span className="rounded-full">●</span>{" "}
+                              <div className="w-[8px] h-[8px] bg-[#A45B09] rounded-full animate-blink"></div>{" "}
                               {ucmatch.status_str}
                             </div>
                             <div>
@@ -995,7 +991,7 @@ export default function ScheduleResults({
                             </div>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <span className="text-[13px] font-medium">AUS</span>
+                            <span className="text-[13px] font-medium text-[#1F2937]">AUS</span>
                             <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-full text-[#0B773C] pr-2">
                               <span className="">
                                 <svg
@@ -1043,14 +1039,14 @@ export default function ScheduleResults({
                             "/moreinfo/" +
                             urlStringEncode(
                               ucmatch?.teama?.short_name +
-                                "-vs-" +
-                                ucmatch?.teamb?.short_name +
-                                "-" +
-                                ucmatch?.subtitle +
-                                "-" +
-                                ucmatch?.competition?.title+
-                                "-" +
-                                ucmatch?.competition?.season
+                              "-vs-" +
+                              ucmatch?.teamb?.short_name +
+                              "-" +
+                              ucmatch?.subtitle +
+                              "-" +
+                              ucmatch?.competition?.title +
+                              "-" +
+                              ucmatch?.competition?.season
                             ) +
                             "/" +
                             ucmatch.match_id
@@ -1064,14 +1060,14 @@ export default function ScheduleResults({
                                 </p>
                                 <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
                                   <div className="flex items-center space-x-2">
-                                    <Image  loading="lazy" 
+                                    <Image loading="lazy"
                                       src={ucmatch.teama.logo_url}
                                       className="h-[30px] rounded-full"
                                       width={30}
                                       height={30}
                                       alt={ucmatch.teama.short_name}
                                     />
-                                    <span className="font-semibold">
+                                    <span className="font-semibold text-[14px]">
                                       {ucmatch.teama.short_name}
                                     </span>
                                   </div>
@@ -1080,14 +1076,14 @@ export default function ScheduleResults({
                                 <div>
                                   <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                     <div className="flex items-center space-x-2">
-                                      <Image  loading="lazy" 
+                                      <Image loading="lazy"
                                         src={ucmatch.teamb.logo_url}
                                         className="h-[30px]"
                                         width={30}
                                         height={30}
                                         alt={ucmatch.teamb.short_name}
                                       />
-                                      <span className="font-semibold">
+                                      <span className="font-semibold text-[14px]">
                                         {ucmatch.teamb.short_name}
                                       </span>
                                     </div>
@@ -1095,16 +1091,22 @@ export default function ScheduleResults({
                                 </div>
                               </div>
 
-                              <div className="font-semibold text-center">
+                              <div className="w-[50%] font-semibold text-center flex justify-end">
                                 <div className="text-[#144280]">
                                   <div className=" font-medium text-center">
                                     {isSameDay(
                                       new Date(),
                                       new Date(ucmatch.date_start_ist)
                                     ) ? (
-                                      <CountdownTimer
-                                        targetTime={ucmatch.date_start_ist}
-                                      />
+                                      <>
+
+                                        <span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
+
+                                        <CountdownTimer
+                                          targetTime={ucmatch.date_start_ist}
+
+                                        />
+                                      </>
                                     ) : (
                                       <p className="text-[#2F335C] text-[14px]">
                                         {format(
@@ -1124,7 +1126,7 @@ export default function ScheduleResults({
                             </div>
                           </div>
                         </Link>
-                       
+
                       </div>
 
                       {/* Mobile */}
@@ -1146,7 +1148,7 @@ export default function ScheduleResults({
                             </div>
                             <span className="absolute right-[12px] top-[19px]">
                               <button className="arro-button">
-                                <Image  loading="lazy" 
+                                <Image loading="lazy"
                                   src="/assets/img/arrow.png"
                                   className=""
                                   width={10}
@@ -1164,14 +1166,14 @@ export default function ScheduleResults({
                             "/moreinfo/" +
                             urlStringEncode(
                               ucmatch?.teama?.short_name +
-                                "-vs-" +
-                                ucmatch?.teamb?.short_name +
-                                "-" +
-                                ucmatch?.subtitle +
-                                "-" +
-                                ucmatch?.competition?.title+
-                                "-" +
-                                ucmatch?.competition?.title
+                              "-vs-" +
+                              ucmatch?.teamb?.short_name +
+                              "-" +
+                              ucmatch?.subtitle +
+                              "-" +
+                              ucmatch?.competition?.title +
+                              "-" +
+                              ucmatch?.competition?.title
                             ) +
                             "/" +
                             ucmatch.match_id
@@ -1186,7 +1188,7 @@ export default function ScheduleResults({
                                 <div>
                                   <div className="items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
                                     <div className="flex items-center space-x-2">
-                                      <Image  loading="lazy" 
+                                      <Image loading="lazy"
                                         src={ucmatch.teama.logo_url}
                                         className="h-[30px] rounded-full"
                                         width={30}
@@ -1204,7 +1206,7 @@ export default function ScheduleResults({
                                   </div>
                                   <div className="flex items-center space-x-2 font-medium w-[162px] md:w-full">
                                     <div className="flex items-center space-x-2">
-                                      <Image  loading="lazy" 
+                                      <Image loading="lazy"
                                         src={ucmatch.teamb.logo_url}
                                         className="h-[30px] rounded-full"
                                         width={30}
@@ -1222,28 +1224,28 @@ export default function ScheduleResults({
                                   </div>
                                 </div>
                                 <div className=" font-medium text-center">
-                                    {isSameDay(
-                                      new Date(),
-                                      new Date(ucmatch.date_start_ist)
-                                    ) ? (
-                                      <CountdownTimer
-                                        targetTime={ucmatch.date_start_ist}
-                                      />
-                                    ) : (
-                                      <p className="text-[#2F335C] text-[14px]">
-                                        {format(
-                                          new Date(ucmatch.date_start_ist),
-                                          "dd MMMM - EEEE"
-                                        )}
-                                        , <br />
-                                        {format(
-                                          new Date(ucmatch.date_start_ist),
-                                          "hh:mm:aa"
-                                        )}
-                                      </p>
-                                    )}
-                                  </div>
-                                
+                                  {isSameDay(
+                                    new Date(),
+                                    new Date(ucmatch.date_start_ist)
+                                  ) ? (
+                                    <CountdownTimer
+                                      targetTime={ucmatch.date_start_ist}
+                                    />
+                                  ) : (
+                                    <p className="text-[#2F335C] text-[14px]">
+                                      {format(
+                                        new Date(ucmatch.date_start_ist),
+                                        "dd MMMM - EEEE"
+                                      )}
+                                      , <br />
+                                      {format(
+                                        new Date(ucmatch.date_start_ist),
+                                        "hh:mm:aa"
+                                      )}
+                                    </p>
+                                  )}
+                                </div>
+
                               </div>
                             </div>
                           </div>
@@ -1252,11 +1254,11 @@ export default function ScheduleResults({
                         <div className="border-t-[1px] border-[#E7F2F4]"></div>
 
                         <div className="flex items-center justify-between space-x-5 mt-2">
-                         
+
 
                           <div className="flex items-center space-x-2 text-[11px]">
                             <span className="text-[#909090] font-medium">
-                            {ucmatch.teama.short_name}
+                              {ucmatch.teama.short_name}
                             </span>
                             <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-md text-[#0B773C] pr-2">
                               <span>
@@ -1275,7 +1277,7 @@ export default function ScheduleResults({
                                   ></path>
                                 </svg>
                               </span>
-                             0
+                              0
                             </span>
                             <span className="flex items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B] rounded-md text-[#A70B0B] pr-2">
                               <span>
@@ -1303,11 +1305,11 @@ export default function ScheduleResults({
                   ))}
                 </div>
 
-             
+
               </div>
             </div>
 
-            
+
           </div>
 
           <div className="lg:col-span-4 md:col-span-5">
@@ -1315,7 +1317,7 @@ export default function ScheduleResults({
               <div className="flex gap-1 items-center justify-between">
                 <div className="flex gap-1 items-center">
                   <div className="col-span-4 relative">
-                    <Image  loading="lazy" 
+                    <Image loading="lazy"
                       src="/assets/img/home/trofi.png"
                       className="h-[75px]"
                       width={75}
@@ -1354,8 +1356,8 @@ export default function ScheduleResults({
 
             <WeeklySlider />
 
-            <FantasyTips/>
-            
+            <FantasyTips />
+
           </div>
         </div>
       </div>

@@ -133,10 +133,10 @@ export default function Team({
 
           {captains.length > 0 &&
             <div id="tabs" className="mb-4">
-              <div className="flex text-[13px] space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
+              <div className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-auto">
                 {captains.map((cap: any, index: number) => (
                   <Link href={"/team/" + teamName + "/" + teama_id + "/" + cap.format_str} key={index}>
-                    <button className={`font-semibold uppercase py-2 px-3 whitespace-nowrap ${teamType === cap.format_str ? "bg-[#1A80F8]  text-white" : ""} rounded-md`}>
+                    <button className={`font-medium py-2 px-3 whitespace-nowrap ${teamType === cap.format_str ? "bg-[#1A80F8]  text-white" : ""} rounded-md`}>
                       {cap.format_str.toUpperCase()}
                     </button>
                   </Link>
@@ -194,7 +194,7 @@ export default function Team({
                           />
                         </div>
                         <div className="font-medium">
-                          <h2 className="text-[15px]">
+                          <h2 className="text-[15px] hover:text-[#1a80f8]">
                             {" "}
                             {cap?.title}{" "}
                             <span className="text-[#586577] text-[13px] font-medium">
@@ -228,7 +228,7 @@ export default function Team({
                             <PlayerImage key={squad?.pid} player_id={squad?.pid} height={47} width={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
 
                           </div>
-                          <h3 className="text-sm font-semibold text-gray-800">
+                          <h3 className="text-sm font-semibold text-gray-800 hover:text-[#1a80f8]">
                             {squad?.title}
                           </h3>
                           <p className="text-xs text-gray-600">{squad?.playing_role === 'bowl' ? "Bowler" : squad?.playing_role === 'bat' ? "batsman" : squad?.playing_role === 'wk' ? "Wicket Kiper" : "All-Rounder"}</p>
@@ -314,21 +314,21 @@ export default function Team({
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-2">
                       <div
-                        className="flex items-center text-[12px] text-[#A45B09] rounded-full pr-3 uppercase font-semibold"
+                        className="flex items-center text-[13px] text-[#A45B09] rounded-full pr-3 uppercase font-semibold"
                         style={{ gap: "3px" }}
                       >
                         <div className="w-[8px] h-[8px] bg-[#A45B09] rounded-full animate-blink"></div>{" "}
                         {ucmatch.status_str}
                       </div>
                       <div>
-                        <h4 className="text-[13px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                        <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                           {ucmatch.competition.title} -{" "}
                           {ucmatch.competition.season}
                         </h4>
                       </div>
                     </div>
                     <div className="items-center space-x-2 hidden">
-                      <span className="text-[11px] text-[#1F2937] font-semibold">AUS</span>
+                      <span className="text-[13px] font-medium text-[#1F2937]">AUS</span>
                       <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
                         <span className="">
                           <svg
@@ -404,7 +404,7 @@ export default function Team({
                                 height={30}
                                 alt={ucmatch.teama.short_name}
                               />
-                              <span className="text-[#586577] font-medium text-[14px]">
+                              <span className="font-semibold text-[14px]">
                                 {ucmatch.teama.short_name}
                               </span>
                             </div>
@@ -423,7 +423,7 @@ export default function Team({
                                   height={30}
                                   alt={ucmatch.teamb.short_name}
                                 />
-                                <span className="text-[#586577] font-medium text-[14px]">
+                                <span className="font-semibold text-[14px]">
                                   {ucmatch.teamb.short_name}
                                 </span>
                               </div>
@@ -431,9 +431,9 @@ export default function Team({
                           </div>
                         </div>
 
-                        <div className="h-[100px] border-l-[1px] border-[#efefef]"></div>
+                        {/* <div className="h-[100px] border-l-[1px] border-[#efefef]"></div> */}
 
-                        <div className="w-[50%] font-semibold text-center">
+                        <div className="w-[50%] font-semibold text-center flex justify-end">
                           <div className="text-[#144280]">
                             <div className=" font-medium text-center">
                               {isSameDay(
@@ -486,14 +486,14 @@ export default function Team({
                           ucmatch.match_id
                         }
                       >
-                        <p className=" text-[#909090] font-semibold">
+                        <p className=" text-[#757A82] font-medium">
                           {" "}
                           Points Table
                         </p>
                       </Link>
                       <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                       <Link href="#">
-                        <p className="text-[#909090] font-semibold">Schedule</p>
+                        <p className="text-[#757A82] font-medium">Schedule</p>
                       </Link>
                     </div>
 
@@ -507,7 +507,7 @@ export default function Team({
                           style={{ width: "25px", height: "25px" }}
                           alt=""
                         />
-                        <span className="text-[#909090] font-semibold">H2H</span>
+                        <span className="text-[#757A82] font-medium">H2H</span>
                       </div>
                     </Link>
                   </div>
@@ -773,14 +773,14 @@ export default function Team({
                             items.winning_team_id == teama_id ? (
                               <span
                                 key={items.match_id}
-                                className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded"
+                                className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center"
                               >
                                 W
                               </span>
                             ) : (
                               <span
                                 key={items.match_id}
-                                className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded"
+                                className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center"
                               >
                                 L
                               </span>
@@ -858,11 +858,11 @@ export default function Team({
                               <td className="px-0 pr-0 py-1 text-[#2F335C]">
                                 <div className="text-center">
                                   {items.winning_team_id == teama_id ? (
-                                    <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded">
+                                    <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center inline-block">
                                       W
                                     </span>
                                   ) : (
-                                    <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded">
+                                    <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center inline-block">
                                       L
                                     </span>
                                   )}

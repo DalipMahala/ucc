@@ -181,17 +181,17 @@ export default function Squads({
                                   <PlayerImage
                                     key={squads?.player_id}
                                     player_id={squads?.player_id}
-                                    width={80}
-                                    height={80}
-                                    className="w-16 h-16 mx-auto rounded-full mb-2"
+                                    width={47}
+                                    height={47}
+                                    className="w-[47px] h-[47px] mx-auto rounded-full mb-2"
                                   />
 
                                   <Image
                                     loading="lazy"
                                     src="/assets/img/player/bat.png"
-                                    className="h-[27px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
-                                    width={27}
-                                    height={27}
+                                    className="h-[23px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
+                                    width={23}
+                                    height={23}
                                     alt="1"
                                   />
                                 </div>
@@ -226,17 +226,17 @@ export default function Squads({
                                 <PlayerImage
                                   key={bowler?.player_id}
                                   player_id={bowler?.player_id}
-                                  width={80}
-                                  height={80}
-                                  className="w-16 h-16 mx-auto rounded-full mb-2"
+                                  width={47}
+                                  height={47}
+                                  className="w-[47px] h-[47px] mx-auto rounded-full mb-2"
                                 />
 
                                 <Image
                                   loading="lazy"
                                   src="/assets/img/player/ball.png"
-                                  className="h-[24px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
-                                  width={24}
-                                  height={24}
+                                  className="h-[20px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
+                                  width={20}
+                                  height={20}
                                   alt="1"
                                 />
                               </div>
@@ -271,16 +271,16 @@ export default function Squads({
                                   <PlayerImage
                                     key={allrounder?.player_id}
                                     player_id={allrounder?.player_id}
-                                    width={80}
-                                    height={80}
-                                    className="w-16 h-16 mx-auto rounded-full mb-2"
+                                    width={47}
+                                    height={47}
+                                    className="w-[47px] h-[47px] mx-auto rounded-full mb-2"
                                   />
                                   <Image
                                     loading="lazy"
                                     src="/assets/img/player/bat-ball.png"
-                                    className="h-[27px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
-                                    width={27}
-                                    height={27}
+                                    className="h-[23px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
+                                    width={23}
+                                    height={23}
                                     alt="1"
                                   />
                                 </div>

@@ -383,16 +383,18 @@ export default function Scorecard({
 
                 </div>
               </div>
-              {manOfTheMatch?.pid !== undefined &&
+
               <div className="lg:col-span-4 md:col-span-5">
+                {manOfTheMatch?.pid !== undefined &&
+
                   <div className="rounded-lg bg-[#ffffff] mb-4">
                     <div className="p-4"><a href="#">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3 md:py-3">
+                        <div className="flex items-center space-x-3 ">
                           <div>
 
                             <PlayerImage key={manOfTheMatch?.pid} player_id={manOfTheMatch?.pid} height={50} width={50} className="rounded-lg" />
-                            
+
                           </div>
                           <div className="font-medium">
                             <h2 className="text-1xl font-semibold hover:text-[#1a80f8]">{manOfTheMatch?.name}</h2>
@@ -408,45 +410,46 @@ export default function Scorecard({
                           loading="lazy"
                         />
                       </div>
-                    </a></div>
-                  </div>
-               </div>
-              }
-              {yetTobat?.length > 0 && yetTobat !== undefined ? (
-                <div className="lg:col-span-4 md:col-span-5">
-
-
-                  <div className="rounded-lg bg-[#ffffff]">
-                    <div className="p-4">
-                      <h2 className="text-1xl font-semibold pl-[7px] mb-3 border-l-[3px] border-[#229ED3]">
-                        Yet to bat
-                      </h2>
-                      <div className="border-t-[1px] border-[#E4E9F0]" />
-                      <div className="">
-                        {yetTobat?.map((yetTobat: any, index: number) => (
-                          <Link href={"/player/" + playerUrls[yetTobat.player_id]} className='' key={index}>
-                            <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
-                              <div style={{ width: '40px', height: '40px' }}>
-                                <PlayerImage key={yetTobat?.player_id} player_id={yetTobat.player_id} width={35} height={35} className="rounded-lg" />
-                              </div>
-                              <div className="font-medium">
-                                <h3 className="text-[15px] hover:text-[#1a80f8]">{yetTobat.name} </h3>
-                                <p className="text-[#757A82] font-normal">Avg:</p>
-                              </div>
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
+                    </a>
                     </div>
                   </div>
-                </div>
-              ) : ` `
-              }
+
+                }
+                {yetTobat?.length > 0 && yetTobat !== undefined ? (
+                  
+                    <div className="rounded-lg bg-[#ffffff]">
+                      <div className="p-4">
+                        <h2 className="text-1xl font-semibold pl-[7px] mb-3 border-l-[3px] border-[#229ED3]">
+                          Yet to bat
+                        </h2>
+                        <div className="border-t-[1px] border-[#E4E9F0]" />
+                        <div className="">
+                          {yetTobat?.map((yetTobat: any, index: number) => (
+                            <Link href={"/player/" + playerUrls[yetTobat.player_id]} className='' key={index}>
+                              <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
+                                <div style={{ width: '40px', height: '40px' }}>
+                                  <PlayerImage key={yetTobat?.player_id} player_id={yetTobat.player_id} width={35} height={35} className="rounded-lg" />
+                                </div>
+                                <div className="font-medium">
+                                  <h3 className="text-[15px] hover:text-[#1a80f8]">{yetTobat.name} </h3>
+                                  <p className="text-[#757A82] font-normal">Avg:</p>
+                                </div>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                 
+                ) : ` `
+                }
+
+              </div>
             </div>
           </div>
 
         </div>
       </div>
-    </div>
+    </div >
   )
 }
