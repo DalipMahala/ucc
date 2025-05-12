@@ -38,7 +38,7 @@ const jobs = [
   { schedule: "0 1 * * *", task: InsertOrUpdateTeams },
   { schedule: "0 2 * * *", task: TeamPlayersData },
   { schedule: "0 2 * * *", task: TeamMatches },
-  { schedule: "0 * * * *", task: PlayerStatsData },
+  { schedule: "* * * * *", task: PlayerStatsData },
   // { schedule: "0 2 * * *", task: InsertOrUpdatePlayers }
 ];
 

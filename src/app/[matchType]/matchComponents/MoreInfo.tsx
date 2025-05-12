@@ -52,6 +52,8 @@ export default function MoreInfo({
 
   let teamaWinMatch = 0;
   let teambWinMatch = 0;
+  let teamaWinMatchP = 0;
+  let teambWinMatchP = 0;
   const matchPlayed = matchlistAB.length;
   const matchPlayedA = matchlistA.length;
   const matchPlayedB = matchlistB.length;
@@ -66,10 +68,26 @@ export default function MoreInfo({
     );
   }
 
+  if (Array.isArray(matchlistA) && matchlistA.length > 0) {
+    matchlistA?.map((items: { winning_team_id: any }) =>
+      items.winning_team_id === teama_id
+        ? teamaWinMatchP++
+          : ""
+    );
+  }
+
+  if (Array.isArray(matchlistB) && matchlistB.length > 0) {
+    matchlistB?.map((items: { winning_team_id: any }) =>
+      items.winning_team_id === teamb_id
+        ? teambWinMatchP++
+        : ""
+    );
+  }
+
   const teamaWinper =
-    teamaWinMatch > 0 ? (teamaWinMatch / matchPlayedA) * 100 : 0;
+  teamaWinMatchP > 0 ? (teamaWinMatchP / matchPlayedA) * 100 : 0;
   const teambWinper =
-    teambWinMatch > 0 ? (teambWinMatch / matchPlayedB) * 100 : 0;
+    teambWinMatchP > 0 ? (teambWinMatchP / matchPlayedB) * 100 : 0;
 
   let teamAScores: any = [];
 

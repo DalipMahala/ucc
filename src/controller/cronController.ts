@@ -420,6 +420,77 @@ export async function MatchInfo() {
   }
 }
 
+export async function UpdateMatchInfo(matchId: number) {
+  if (!matchId) {
+    return { notFound: true };
+  }
+  try {
+   const matchQuery = `SELECT match_id FROM matches where match_id = ${matchId}`;
+
+    const [matchResults]: any = await db.query(matchQuery);
+
+    if (!matchResults.length) {
+      console.log("No match IDs found.");
+      return;
+    }
+
+    // console.log(matchResults);
+
+    // ✅ Limit concurrent API calls (e.g., 5 at a time)
+    const limit = pLimit(5);
+    let matchStatus = false;
+    const apiCalls = matchResults.map((row: { match_id: any }) =>
+      limit(async () => {
+        try {
+          const API_URL = `https://rest.entitysport.com/exchange/matches/${row.match_id}/info?token=7b58d13da34a07b0a047e129874fdbf4`;
+          const data = await httpGet(API_URL);
+          const matches = data.response;
+          const matchId = row.match_id;
+
+          if (matches?.match_info?.status === 2) {
+            matchStatus = true;
+          }
+
+          const fileData = JSON.stringify(matches, null, 2);
+          const s3Key = `MatchData/match_${matchId}.json`;
+          const params:any = {
+            Bucket: BUCKET_NAME,
+            Key: s3Key,
+            Body: fileData, 
+            ContentType: 'application/json', 
+          };
+
+          const command = new PutObjectCommand(params);
+          const s3Upload = await s3.send(command);
+          console.log(`File uploaded successfully to ${s3Upload}`);
+         
+          const query = `
+                        INSERT INTO match_info ( match_id, fileName)
+                        VALUES (${matchId}, '${s3Key}') 
+                        ON DUPLICATE KEY UPDATE 
+                        fileName = '${s3Key}',
+                        updated_date = NOW()`;
+
+          //  const values =  [matchId, filePath ] ;
+          await db.query(query);
+        } catch (error) {
+          console.error(`Failed to fetch match_id ${row.match_id}:`, error);
+          return null;
+        }
+      })
+    );
+    await Promise.all(apiCalls); // Ensure all API calls finish
+
+    // console.log(`Data saved. Match status:`, matchStatus);
+
+    // if (matchStatus) {
+    //   await InsertOrUpdateCompletedMatches();
+    // }
+  } catch (error) {
+    console.error("Error executing function:", error);
+  }
+}
+
 export async function MatchCommentary() {
   const API_TOKEN = "7b58d13da34a07b0a047e129874fdbf4";
   const CONCURRENT_LIMIT = 5;
@@ -706,7 +777,7 @@ export async function MatchStatisticsCompleted() {
 
 export async function Last10MatchData() {
   try {
-    const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_advance) or (status = 2 and DATE(date_start_ist) BETWEEN DATE(NOW() - INTERVAL 1 DAY) AND DATE(NOW()))`;
+    const matchQuery = `SELECT match_id FROM matches WHERE match_id not in (SELECT match_id FROM match_advance) or (status = 2 and DATE(date_start_ist) BETWEEN DATE(NOW() - INTERVAL 6 DAY) AND DATE(NOW()))`;
     
     const [matchResults]: any = await db.query(matchQuery);
 
@@ -1792,6 +1863,7 @@ export async function PlayerStatsData() {
       // Process the match
       await processCompletedPlayerStatsData(row.match_id);
       await PlayerAdvanceStatsData(row.match_id);
+      await UpdateMatchInfo(row.match_id);
       
 
       // Mark as completed
