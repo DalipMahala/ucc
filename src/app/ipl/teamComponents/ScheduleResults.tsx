@@ -46,11 +46,13 @@ export default function ScheduleResults({
   
         // Remove active styles from all tabs
         document.querySelectorAll("#all-tab, #live-tab, #completed-tab, #upcoming-tab").forEach((el) => {
-          el.classList.remove("bg-[#1A80F8]", "text-white");
+          el.classList.remove("bg-[#000000]", "text-white");
+          el.classList.add("bg-[#ffffff]");
         });
   
         // Add active style to clicked tab
-        target.classList.add("bg-[#1A80F8]", "text-white");
+        target.classList.add("bg-[#000000]", "text-white");
+          target.classList.remove("bg-[#ffffff]");
   
         // Hide all sections initially
         document.querySelectorAll(".liveMatch, .completedMatch, .upcomingMatch").forEach((el) => {
@@ -206,44 +208,44 @@ export default function ScheduleResults({
       <div id="live" className="">
         <div className="md:grid grid-cols-12 gap-4">
           <div className="lg:col-span-8 md:col-span-7">
-            <div className="rounded-lg bg-[#ffffff] p-4 mt-4">
+            <div className="rounded-lg my-4">
               <div className="flex space-x-4">
               <button  id="all-tab"
-                      className={`font-medium py-2 px-5 whitespace-nowrap ${
+                      className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${
                         activeMainTab === "info1"
-                          ? "bg-[#1A80F8] text-white"
+                          ? "bg-[#000000] text-white"
                           : ""
-                      } rounded-md`}
+                      } rounded-full`}
                     >
                       All
                     </button>
                       {liveMatch.length > 0 &&
                     <button id="live-tab"
-                      className={`font-medium py-2 px-5 whitespace-nowrap ${
+                      className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${
                         activeMainTab === "live1"
-                          ? "bg-[#1A80F8] text-white"
+                          ? "bg-[#000000] text-white"
                           : ""
-                      } rounded-md`}
+                      } rounded-full`}
                     >
                       Live
                     </button>
                   }{completedMatch.length > 0 &&
                     <button  id="completed-tab"
-                      className={`font-medium py-2 px-5 whitespace-nowrap ${
+                      className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${
                         activeMainTab === "finished1"
-                          ? "bg-[#1A80F8] text-white"
+                          ? "bg-[#000000] text-white"
                           : ""
-                      } rounded-md`}
+                      } rounded-full`}
                     >
                       Finished
                     </button>
                   }{upcomingMatch.length > 0 &&
                     <button  id="upcoming-tab"
-                      className={`font-medium py-2 px-5 whitespace-nowrap ${
+                      className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${
                         activeMainTab === "scorecard1"
-                          ? "bg-[#1A80F8] text-white"
+                          ? "bg-[#000000] text-white"
                           : ""
-                      } rounded-md`}
+                      } rounded-full`}
                     >
                       Scheduled
                     </button>
@@ -677,6 +679,8 @@ export default function ScheduleResults({
                     </div>
                   ))}
                 </div>
+
+
                 <div className="completedMatch">
                   {completedMatch && completedMatch?.map((cmatch: any, index: number) => (
                     <div key={index}>
@@ -968,6 +972,8 @@ export default function ScheduleResults({
                     </div>
                   ))}
                 </div>
+
+
                 <div className="upcomingMatch">
                   {upcomingMatch && upcomingMatch?.map((ucmatch: any, index: number) => (
                     <div key={index}>

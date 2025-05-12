@@ -420,18 +420,18 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
                               ) +
                               "<br/><br/>" +
                               (matchStats[1]?.player?.first_name ? 
-                                `<strong>Top Performers So Far</strong><br/>` +
-                                `<strong>${matchStats[1].player.first_name}</strong> – ${matchStats[1]?.matches || "N/A"} matches, ` +
+                                `<span class="text-[#1f2937] font-medium">Top Performers So Far</span><br/>` +
+                                `<span class="text-[#1f2937] font-medium">${matchStats[1].player.first_name}</span> – ${matchStats[1]?.matches || "N/A"} matches, ` +
                                 `${matchStats[1]?.wickets || "N/A"} wickets, Econ: ${matchStats[1]?.econ || "N/A"}<br/>` 
                                 : ""
                               ) +
                               (matchStats[2]?.player?.first_name ? 
-                                `<strong>${matchStats[2].player.first_name}</strong> – ${matchStats[2]?.matches || "N/A"} matches, ` +
+                                `<span class="text-[#1f2937] font-medium">${matchStats[2].player.first_name}</span> – ${matchStats[2]?.matches || "N/A"} matches, ` +
                                 `${matchStats[2]?.wickets || "N/A"} wickets, Econ: ${matchStats[2]?.econ || "N/A"}<br/>` 
                                 : ""
                               ) +
                               (matchStats[3]?.player?.first_name ? 
-                                `<strong>${matchStats[3].player.first_name}</strong> – ${matchStats[3]?.matches || "N/A"} matches, ` +
+                                `<span class="text-[#1f2937] font-medium">${matchStats[3].player.first_name}</span> – ${matchStats[3]?.matches || "N/A"} matches, ` +
                                 `${matchStats[3]?.wickets || "N/A"} wickets, Econ: ${matchStats[3]?.econ || "N/A"}<br/>` 
                                 : ""
                               ) +
@@ -441,7 +441,7 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
                                 : ""
                               )
                             }
-                            wordLimit={30}
+                            wordLimit={400}
                           />
                           : 
                           <ReadMoreCard
@@ -457,18 +457,18 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
                             ) +
                             "<br/><br/>" +
                             (matchStats[1]?.player?.first_name ? 
-                              `<strong>Top Performers So Far</strong><br/>` +
-                              `<strong>${matchStats[1].player.first_name}</strong> – ${matchStats[1]?.matches || "N/A"} matches, ` +
+                              `<span class="text-[#1f2937] font-medium">Top Performers So Far</span><br/>` +
+                              `<span class="text-[#1f2937] font-medium">${matchStats[1].player.first_name}</span> – ${matchStats[1]?.matches || "N/A"} matches, ` +
                               `${matchStats[1]?.runs || "N/A"} runs, Avg: ${matchStats[1]?.average || "N/A"}<br/>` 
                               : ""
                             ) +
                             (matchStats[2]?.player?.first_name ? 
-                              `<strong>${matchStats[2].player.first_name}</strong> – ${matchStats[2]?.matches || "N/A"} matches, ` +
+                              `<span class="text-[#1f2937] font-medium">${matchStats[2].player.first_name}</span> – ${matchStats[2]?.matches || "N/A"} matches, ` +
                               `${matchStats[2]?.runs || "N/A"} runs, Avg: ${matchStats[2]?.average || "N/A"}<br/>` 
                               : ""
                             ) +
                             (matchStats[3]?.player?.first_name ? 
-                              `<strong>${matchStats[3].player.first_name}</strong> – ${matchStats[3]?.matches || "N/A"} matches, ` +
+                              `<span class="text-[#1f2937] font-medium">${matchStats[3].player.first_name}</span> – ${matchStats[3]?.matches || "N/A"} matches, ` +
                               `${matchStats[3]?.runs || "N/A"} runs, Avg: ${matchStats[3]?.average || "N/A"}<br/>` 
                               : ""
                             ) +
@@ -478,7 +478,7 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
                               : ""
                             )
                           }
-                          wordLimit={30}
+                          wordLimit={400}
                         />
                                 }
                                         {pageHtml && typeof pageHtml === "string" ? (

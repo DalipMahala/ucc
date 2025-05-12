@@ -785,7 +785,7 @@ export default function Overview({
                                   />
                                 </div>
                                 <div>
-                                  <p className="text-[#3e3e3e] font-medium">
+                                  <p className="text-[#3e3e3e] font-medium hover:text-[#1a80f8]">
                                     <Link
                                       href={
                                         "/player/" +
@@ -999,13 +999,13 @@ export default function Overview({
                                   : player?.role === "bat"
                                     ? "/assets/img/player/bat.png"
                                     : "/assets/img/player/ball.png"}
-                              className="h-[27px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
-                              width={27}
-                              height={27}
+                              className="h-[23px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
+                              width={23}
+                              height={23}
                               alt="1"
                             />
                           </div>
-                          <h3 className="text-[14px] font-medium text-gray-800">
+                          <h3 className="text-[14px] font-medium text-gray-800 hover:text-[#1a80f8]">
                             {player?.name}
                           </h3>
                           <div className="flex gap-1 items-center justify-center">
@@ -1039,25 +1039,9 @@ export default function Overview({
                       The biggest tournament in the cricketing circuit, the ICC
                       T20 WORLD Cup is underway in the USAs and the West Indies.
                       The tournament received excellent response from the fans
-                      worldwide and the finals of the gran...
+                      worldwide and the finals of the gran
                     </p>
-                    <p className="text-[#1A80F8] font-semibold flex items-center text-[13px] pt-2 underline">
-                      Read more{" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="size-3 ml-2"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                        />
-                      </svg>
-                    </p>
+                    
                   </>
                 )}
               </div>
@@ -1124,10 +1108,10 @@ export default function Overview({
                   </h3>
                 </div>
                 <div className="bg-white rounded-lg px-4">
-                  <div className="border-b mb-4">
+                  <div className="border-b mb-4 ">
                     <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) + "/" + pointTables?.cid + "/stats/batting-most-run"}
                       className="w-full flex text-[14px] justify-between items-center pb-3 pt-4" >
-                      <span className="flex items-center font-medium text-[#394351]">
+                      <span className="flex items-center font-medium text-[#394351] hover:text-[#1a80f8]">
                         Most Runs in IPL
                       </span>
 
@@ -1138,7 +1122,7 @@ export default function Overview({
                   <div className="border-b mb-4">
                     <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) + "/" + pointTables?.cid + "/stats/batting-most-hundreds"}
                       className="w-full flex text-[14px] justify-between items-center pb-3" >
-                      <span className="flex items-center font-medium text-[#394351]">
+                      <span className="flex items-center font-medium text-[#394351] hover:text-[#1a80f8]">
                         Most Hundreds in IPL
                       </span>
 
@@ -1149,7 +1133,7 @@ export default function Overview({
                   <div className="border-b mb-4">
                     <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) + "/" + pointTables?.cid + "/stats/batting-most-fifties"}
                       className="w-full flex text-[14px] justify-between items-center pb-3" >
-                      <span className="flex items-center font-medium text-[#394351]">
+                      <span className="flex items-center font-medium text-[#394351] hover:text-[#1a80f8]">
                         Most Fifties in IPL
                       </span>
 
@@ -1161,7 +1145,7 @@ export default function Overview({
                   <div className="border-b mb-4">
                     <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) + "/" + pointTables?.cid + "/stats/batting-highest-average"}
                       className="w-full flex text-[14px] justify-between items-center pb-3" >
-                      <span className="flex items-center font-medium text-[#394351]">
+                      <span className="flex items-center font-medium text-[#394351] hover:text-[#1a80f8]">
                         Highest Batting Average in IPL
                       </span>
 
@@ -1172,7 +1156,7 @@ export default function Overview({
                   <div className="border-b mb-4">
                     <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) + "/" + pointTables?.cid + "/stats/bowling-most-wicket"}
                       className="w-full flex text-[14px] justify-between items-center pb-3" >
-                      <span className="flex items-center font-medium text-[#394351]">
+                      <span className="flex items-center font-medium text-[#394351] hover:text-[#1a80f8]">
                         Most Wickets in IPL
                       </span>
 
@@ -1183,7 +1167,7 @@ export default function Overview({
                   <div className="border-b mb-4">
                     <Link href={"/series/" + urlStringEncode(pointTables?.title + "-" + pointTables?.season) + "/" + pointTables?.cid + "/stats/bowling-best-average"}
                       className="w-full flex text-[14px] justify-between items-center pb-3">
-                      <span className="flex items-center font-medium text-[#394351]">
+                      <span className="flex items-center font-medium text-[#394351] hover:text-[#1a80f8]">
                         Highest Bowling Average in IPL
                       </span>
 
