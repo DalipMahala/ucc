@@ -30,6 +30,8 @@ const News = () => {
           return "197";
         case "match-prediction":
           return "180";
+        case "sports":
+          return "5";
         default:
           return "21";
       }
@@ -73,6 +75,9 @@ const News = () => {
           </button>
           <button className={`font-medium py-2 px-3 whitespace-nowrap ${activeTab === 'match-prediction' ? 'bg-[#1A80F8] text-white rounded-md' : ''}  `} onClick={() => handleTabClick('match-prediction')}>
             Prediction
+          </button>
+          <button className={`font-medium py-2 px-3 whitespace-nowrap ${activeTab === 'sports' ? 'bg-[#1A80F8] text-white rounded-md' : ''}  `} onClick={() => handleTabClick('sports')}>
+            Sports
           </button>
         </div>
       </div>
