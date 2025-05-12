@@ -1773,7 +1773,7 @@ export default function MoreInfo({
                 ) : (
                   manOfTheMatch?.pid !== undefined &&
                   <div className="rounded-lg bg-[#ffffff] mb-4">
-                    <div className="p-4"><a href="#">
+                    <div className="p-4"><Link href={"/player/"+playerUrls[manOfTheMatch?.pid]}>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3 md:py-3">
                           <div>
@@ -1794,7 +1794,7 @@ export default function MoreInfo({
                           loading="lazy"
                         />
                       </div>
-                    </a></div>
+                    </Link></div>
                   </div>
                   
                 )}
