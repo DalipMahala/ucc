@@ -617,6 +617,10 @@ export default function Banner({ matchData, match_id }: Banner) {
                     }
                   </div>
 
+                  <div>
+                   <span> SAP </span> need <span> 63 </span> runs in <span> 35 </span> remaining balls
+                  </div>
+
                 </div>
               </div>
 

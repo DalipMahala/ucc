@@ -59,7 +59,7 @@ export default async function PointsTable({ urlString, seriesInfo, isPointTable 
                     <div className="lg:col-span-8 md:col-span-7">
                         <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
                             <h2 className='text-1xl font-semibold mb-1'>{seriesInfo?.title + " " + seriesInfo?.season + " Points Table!"}</h2>
-                            <p className='text-gray-500 font-normal'>{"Welcome to the latest " + seriesInfo?.title + " " + seriesInfo?.season + " Points Table! Here's where you’ll find the most accurate and updated information on team standings, wins, losses, and qualification chances." +
+                            <p className='text-gray-700 font-normal'>{"Welcome to the latest " + seriesInfo?.title + " " + seriesInfo?.season + " Points Table! Here's where you’ll find the most accurate and updated information on team standings, wins, losses, and qualification chances." +
                                 "So far, " + standings[0]?.standings?.[0]?.team?.abbr + ", " + standings[0]?.standings?.[1]?.team?.abbr + ", and " + standings[0]?.standings?.[2]?.team?.abbr + " are leading the race with strong performances, while " + standings[0]?.standings?.[3]?.team?.abbr + " is still in the fight to enter the top 4." +
                                 "The points table is updated in real-time after every match – so you can track your favorite team’s progress all season long!"
                             }

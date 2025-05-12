@@ -1183,7 +1183,7 @@ export default function Live({
                                             : {}
                                         )}
                                       </span>{" "}
-                                      <span className="text-[#BFEF50] text-[18px] font-medium">
+                                      <span className="text-[#BFEF50] text-[18px] font-semibold">
                                         {comment?.batsman_runs} 
                                       <span className="text-[15px]"> ({comment?.batsman_balls}) </span>
                                       </span>

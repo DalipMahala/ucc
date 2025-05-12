@@ -621,7 +621,7 @@ export default function H2h({
                     {teamADetails.title} vs {teamBDetails.title} 2025
                   </h2>
 
-                  <p className="text-gray-500 font-normal">
+                  <p className="text-gray-700 font-normal">
                     The biggest tournament in the cricketing circuit, the ICC
                     T20 WORLD Cup is underway in the USAs and the West Indies.
                     The tournament received excellent response from the fans

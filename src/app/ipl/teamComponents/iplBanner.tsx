@@ -78,17 +78,17 @@ export default function IplBanner({cid,params, teamPlayers, venueDetails}: Banne
             {/* Right Section */}
             <div className="bg-[#3d548736] py-5 rounded-lg px-[30px] font-semibold">
               <div className="flex space-x-4 pb-[13px]">
-                <p className="text-[#92a3bb]">Owener :</p>
+                <p className="text-[#6aaefe]">Owener :</p>
                 <p>{teams?.team_owner}</p>
               </div>
               <div className="border-[1px] border-b border-[#3D5487]" />
               <div className="flex space-x-6 py-[13px]">
-                <p className="text-[#92a3bb]">Coach :</p>
+                <p className="text-[#6aaefe]">Coach :</p>
                 <p>{teams?.head_coach}</p>
               </div>
               <div className="border-[1px] border-b border-[#3D5487]" />
               <div className="flex space-x-4 pt-[13px]">
-                <p className="text-[#92a3bb]">Captain :</p>
+                <p className="text-[#6aaefe]">Captain :</p>
                 <p>{captain?.title}</p>
               </div>
             </div>
