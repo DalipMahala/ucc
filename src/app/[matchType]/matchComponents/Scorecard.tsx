@@ -384,11 +384,44 @@ export default function Scorecard({
               </div>
               {yetTobat?.length > 0 && yetTobat !== undefined ? (
                 <div className="lg:col-span-4 md:col-span-5">
+
+                  <div className="rounded-lg bg-[#ffffff] mb-4">
+                    <div className="p-4"><a href="#">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3 md:py-3">
+                          <div>
+
+                            <Image
+                              src="/assets/img/player/12.png"
+                              width={50}
+                              height={50}
+                              alt=""
+                              loading="lazy"
+                            />
+                          </div>
+                          <div className="font-medium">
+                            <h2 className="text-1xl font-semibold hover:text-[#1a80f8]">R Ashwin</h2>
+                            <p className="text-[#6A7586] font-normal"> Man of the match </p>
+                          </div>
+                        </div>
+                        <Image
+                          src="/assets/img/home/win.png"
+                          width={26}
+                          height={30}
+                          style={{ width: "26px", height: "30px" }}
+                          alt=""
+                          loading="lazy"
+                        />
+                      </div>
+                    </a></div>
+                  </div>
+
+
                   <div className="rounded-lg bg-[#ffffff]">
                     <div className="p-4">
-                      <h3 className="text-1xl font-semibold pl-[7px] mb-3 border-l-[3px] border-[#229ED3]">
+                      <h2 className="text-1xl font-semibold pl-[7px] mb-3 border-l-[3px] border-[#229ED3]">
                         Yet to bat
-                      </h3>
+                      </h2>
                       <div className="border-t-[1px] border-[#E4E9F0]" />
                       <div className="">
                         {yetTobat?.map((yetTobat: any, index: number) => (
@@ -398,7 +431,7 @@ export default function Scorecard({
                                 <PlayerImage key={yetTobat?.player_id} player_id={yetTobat.player_id} width={35} height={35} className="rounded-lg" />
                               </div>
                               <div className="font-medium">
-                                <h2 className="text-[15px]">{yetTobat.name} </h2>
+                                <h3 className="text-[15px] hover:text-[#1a80f8]">{yetTobat.name} </h3>
                                 <p className="text-[#757A82] font-normal">Avg:</p>
                               </div>
                             </div>

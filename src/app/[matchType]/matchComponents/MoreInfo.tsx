@@ -1630,163 +1630,159 @@ export default function MoreInfo({
 
                 {matchData?.match_info?.status_str !== 'Completed' ? (
 
-                  <div>
-
-                    <div className="rounded-lg bg-[#ffffff] mb-4">
-                      <div className="p-4"><a href="#">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3 md:py-3">
-                            <div>
-
-                              <Image
-                                src="/assets/img/player/12.png"
-                                width={50}
-                                height={50}
-                                alt=""
-                                loading="lazy"
-                              />
-                            </div>
-                            <div className="font-medium">
-                              <h2 className="text-1xl font-semibold">R Ashwin</h2>
-                              <p className="text-[#6A7586] font-normal"> Man of the match </p>
-                            </div>
-                          </div>
-                          <Image
-                            src="/assets/img/home/win.png"
-                            width={26}
-                            height={30}
-                            style={{ width: "26px", height: "30px" }}
-                            alt=""
-                            loading="lazy"
-                          />
+                  <div className="rounded-lg bg-[#ffffff]  mb-4 hidden md:block">
+                    <div className="p-4 cust-box-click-container">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex space-x-2">
+                          <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
+                          <h3 className="text-1xl font-semibold">Probability</h3>
                         </div>
-                      </a></div>
-                    </div>
-
-                    <div className="rounded-lg bg-[#ffffff]  mb-4 hidden md:block">
-                      <div className="p-4 cust-box-click-container">
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="flex space-x-2">
-                            <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
-                            <h3 className="text-1xl font-semibold">Probability</h3>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <button
-                              className={`cust-box-click-button  font-medium ${activeOddTab === "tab1"
-                                ? "bg-[#081736] text-[#ffffff] "
-                                : "bg-[#ffffff] text-[#6A7586]"
-                                } px-5 py-1 rounded-full`}
-                              onClick={() => setActiveOddTab("tab1")}
-                            >
-                              <span>% View</span>
-                            </button>
-                            <button
-                              className={`cust-box-click-button font-medium ${activeOddTab === "tab2"
-                                ? "bg-[#081736] text-[#ffffff] "
-                                : "bg-[#ffffff] text-[#6A7586]"
-                                }  px-5 py-1 rounded-full`}
-                              onClick={() => setActiveOddTab("tab2")}
-                            >
-                              <span>Odds View</span>
-                            </button>
-                          </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            className={`cust-box-click-button  font-medium ${activeOddTab === "tab1"
+                              ? "bg-[#081736] text-[#ffffff] "
+                              : "bg-[#ffffff] text-[#6A7586]"
+                              } px-5 py-1 rounded-full`}
+                            onClick={() => setActiveOddTab("tab1")}
+                          >
+                            <span>% View</span>
+                          </button>
+                          <button
+                            className={`cust-box-click-button font-medium ${activeOddTab === "tab2"
+                              ? "bg-[#081736] text-[#ffffff] "
+                              : "bg-[#ffffff] text-[#6A7586]"
+                              }  px-5 py-1 rounded-full`}
+                            onClick={() => setActiveOddTab("tab2")}
+                          >
+                            <span>Odds View</span>
+                          </button>
                         </div>
-                        {activeOddTab === "tab1" && (
-                          <div className="cust-box-click-content">
-                            <div>
-
-                              <div className="relative mt-4 h-[4px] bg-gray-200 overflow-hidden">
-                                <div
-                                  className="absolute h-full bg-[#13B76D]"
-                                  style={{
-                                    width: `${teamwinpercentage?.team_a_win}%`,
-                                  }}
-                                />
-                                <div
-                                  className="absolute h-full bg-[#EB9D29]"
-                                  style={{
-                                    width: `${teamwinpercentage?.draw}%`,
-                                    left: `${teamwinpercentage?.team_a_win}%`,
-                                  }}
-                                ></div>
-                                <div
-                                  className="absolute h-full bg-[#B7132B]"
-                                  style={{
-                                    width: `${teamwinpercentage?.team_b_win}%`,
-                                    left: `${teamwinpercentage?.draw +
-                                      teamwinpercentage?.team_a_win
-                                      }%`,
-                                  }}
-                                ></div>
-                              </div>
-                              <div className="flex justify-between mt-2 text-sm">
-                                <p className="text-green-600 font-medium">
-                                  {matchDetails?.teama?.short_name}:{" "}
-                                  {teamwinpercentage?.team_a_win}%
-                                </p>
-                                {teamwinpercentage?.draw > 0 ? (
-                                  <p className="text-yellow-600 font-medium">
-                                    Drew: {teamwinpercentage?.draw}%
-                                  </p>
-                                ) : (
-                                  ""
-                                )}
-                                <p className="text-red-600 font-medium">
-                                  {matchDetails?.teamb?.short_name}:{" "}
-                                  {teamwinpercentage?.team_b_win}%
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                        {activeOddTab === "tab2" && (
-                          <div className="cust-box-click-content">
-                            <div className="flex justify-between items-center border-t-[1px] pt-2">
-                              <div className="text-1xl font-medium">
-                                {lesserTeam?.team}
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
-                                  {lesserTeam
-                                    ?.back !== null &&
-                                    lesserTeam
-                                      ?.back !== undefined &&
-                                    lesserTeam
-                                      ?.back !== ""
-                                    ? Math.round(
-                                      lesserTeam
-                                        ?.back *
-                                      100 -
-                                      100
-                                    )
-                                    : 0}
-                                </p>
-                                <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">
-                                  {lesserTeam
-                                    ?.lay !== null &&
-                                    lesserTeam
-                                      ?.lay !== undefined &&
-                                    lesserTeam
-                                      ?.lay !== ""
-                                    ? Math.round(
-                                      lesserTeam
-                                        ?.lay *
-                                      100 -
-                                      100
-                                    )
-                                    : 0}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        )}
                       </div>
-                    </div>
+                      {activeOddTab === "tab1" && (
+                        <div className="cust-box-click-content">
+                          <div>
 
+                            <div className="relative mt-4 h-[4px] bg-gray-200 overflow-hidden">
+                              <div
+                                className="absolute h-full bg-[#13B76D]"
+                                style={{
+                                  width: `${teamwinpercentage?.team_a_win}%`,
+                                }}
+                              />
+                              <div
+                                className="absolute h-full bg-[#EB9D29]"
+                                style={{
+                                  width: `${teamwinpercentage?.draw}%`,
+                                  left: `${teamwinpercentage?.team_a_win}%`,
+                                }}
+                              ></div>
+                              <div
+                                className="absolute h-full bg-[#B7132B]"
+                                style={{
+                                  width: `${teamwinpercentage?.team_b_win}%`,
+                                  left: `${teamwinpercentage?.draw +
+                                    teamwinpercentage?.team_a_win
+                                    }%`,
+                                }}
+                              ></div>
+                            </div>
+                            <div className="flex justify-between mt-2 text-sm">
+                              <p className="text-green-600 font-medium">
+                                {matchDetails?.teama?.short_name}:{" "}
+                                {teamwinpercentage?.team_a_win}%
+                              </p>
+                              {teamwinpercentage?.draw > 0 ? (
+                                <p className="text-yellow-600 font-medium">
+                                  Drew: {teamwinpercentage?.draw}%
+                                </p>
+                              ) : (
+                                ""
+                              )}
+                              <p className="text-red-600 font-medium">
+                                {matchDetails?.teamb?.short_name}:{" "}
+                                {teamwinpercentage?.team_b_win}%
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      {activeOddTab === "tab2" && (
+                        <div className="cust-box-click-content">
+                          <div className="flex justify-between items-center border-t-[1px] pt-2">
+                            <div className="text-1xl font-medium">
+                              {lesserTeam?.team}
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <p className="py-1 px-4 bg-orange-500 rounded-md text-white">
+                                {lesserTeam
+                                  ?.back !== null &&
+                                  lesserTeam
+                                    ?.back !== undefined &&
+                                  lesserTeam
+                                    ?.back !== ""
+                                  ? Math.round(
+                                    lesserTeam
+                                      ?.back *
+                                    100 -
+                                    100
+                                  )
+                                  : 0}
+                              </p>
+                              <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">
+                                {lesserTeam
+                                  ?.lay !== null &&
+                                  lesserTeam
+                                    ?.lay !== undefined &&
+                                  lesserTeam
+                                    ?.lay !== ""
+                                  ? Math.round(
+                                    lesserTeam
+                                      ?.lay *
+                                    100 -
+                                    100
+                                  )
+                                  : 0}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
 
+
                 ) : (
-                  ""
+                  <div className="rounded-lg bg-[#ffffff] mb-4">
+                    <div className="p-4"><a href="#">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3 md:py-3">
+                          <div>
+
+                            <Image
+                              src="/assets/img/player/12.png"
+                              width={50}
+                              height={50}
+                              alt=""
+                              loading="lazy"
+                            />
+                          </div>
+                          <div className="font-medium">
+                            <h2 className="text-1xl font-semibold hover:text-[#1a80f8]">R Ashwin</h2>
+                            <p className="text-[#6A7586] font-normal"> Man of the match </p>
+                          </div>
+                        </div>
+                        <Image
+                          src="/assets/img/home/win.png"
+                          width={26}
+                          height={30}
+                          style={{ width: "26px", height: "30px" }}
+                          alt=""
+                          loading="lazy"
+                        />
+                      </div>
+                    </a></div>
+                  </div>
+                  
                 )}
 
 
@@ -1844,7 +1840,7 @@ export default function MoreInfo({
 
                               </div>
                               <div className="font-medium">
-                                <h2 className="text-[15px]">
+                                <h2 className="text-[15px] hover:text-[#1a80f8]">
                                   {" "}
                                   {player.name}{" "}
                                   {player.role_str !== ""
@@ -1892,7 +1888,7 @@ export default function MoreInfo({
 
                               </div>
                               <div className="font-medium">
-                                <h2 className="text-[15px]">
+                                <h2 className="text-[15px] hover:text-[#1a80f8]">
                                   {" "}
                                   {player.name}{" "}
                                   {player.role_str !== ""
