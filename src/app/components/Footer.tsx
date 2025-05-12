@@ -3,6 +3,7 @@
 import React from 'react'
 import Image from "next/image";
 import Link from "next/link";
+// import WordPressFooter from "@/app/components/WordPressFooter"
 
 const Footer = () => {
   return (
@@ -334,6 +335,8 @@ const Footer = () => {
         .
       </p>
     </div>
+    
+    {/* <WordPressFooter/> */}
   </footer>
   
   )

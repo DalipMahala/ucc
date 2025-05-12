@@ -716,7 +716,9 @@ export default function Live({
                             </span>
                           </p>
                           </div>
-                        <p><span>Last Wkt :</span> <span>Harshitha  <span> 33(38) </span></span></p>
+                          {(matchinning?.last_wicket?.name !== '' && matchinning?.last_wicket?.name !== undefined) && 
+                        <p><span>Last Wkt :</span> <span>{matchinning?.last_wicket?.name}  <span> {matchinning?.last_wicket?.runs}({matchinning?.last_wicket?.balls}) </span></span></p>
+                          }
                       </div>
 
                   </div>

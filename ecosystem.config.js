@@ -29,6 +29,7 @@ module.exports = {
       error_file: "./logs/ws-error.log",
       out_file: "./logs/ws-output.log",
       time: true,
+      cron_restart: "0 2 * * *",
       autorestart: true,
       restart_delay: 5000,
       max_restarts: 10,

@@ -29,6 +29,7 @@ export default function Scorecard({
 }: Scorecard) {
 
   const matchDetails = matchData?.match_info;
+  const manOfTheMatch = matchData?.man_of_the_match;
   const [matchLiveData, setmatchLiveData] = useState(matchData);
 
 
@@ -382,25 +383,19 @@ export default function Scorecard({
 
                 </div>
               </div>
-              {yetTobat?.length > 0 && yetTobat !== undefined ? (
-                <div className="lg:col-span-4 md:col-span-5">
-
+              {manOfTheMatch?.pid !== undefined &&
+              <div className="lg:col-span-4 md:col-span-5">
                   <div className="rounded-lg bg-[#ffffff] mb-4">
                     <div className="p-4"><a href="#">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3 md:py-3">
                           <div>
 
-                            <Image
-                              src="/assets/img/player/12.png"
-                              width={50}
-                              height={50}
-                              alt=""
-                              loading="lazy"
-                            />
+                            <PlayerImage key={manOfTheMatch?.pid} player_id={manOfTheMatch?.pid} height={50} width={50} className="rounded-lg" />
+                            
                           </div>
                           <div className="font-medium">
-                            <h2 className="text-1xl font-semibold hover:text-[#1a80f8]">R Ashwin</h2>
+                            <h2 className="text-1xl font-semibold hover:text-[#1a80f8]">{manOfTheMatch?.name}</h2>
                             <p className="text-[#6A7586] font-normal"> Man of the match </p>
                           </div>
                         </div>
@@ -415,6 +410,10 @@ export default function Scorecard({
                       </div>
                     </a></div>
                   </div>
+               </div>
+              }
+              {yetTobat?.length > 0 && yetTobat !== undefined ? (
+                <div className="lg:col-span-4 md:col-span-5">
 
 
                   <div className="rounded-lg bg-[#ffffff]">

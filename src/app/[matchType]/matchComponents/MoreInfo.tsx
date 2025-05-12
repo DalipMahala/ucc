@@ -15,7 +15,7 @@ interface MatchInfo {
 
   matchLast: any | null;
   matchUrl: string | null;
-  isPointTable: boolean;
+  isPointTable: boolean
 }
 
 export default function MoreInfo({
@@ -28,6 +28,7 @@ export default function MoreInfo({
   const teama_id = matchData?.match_info?.teama?.team_id;
   const teamb_id = matchData?.match_info?.teamb?.team_id;
   const matchDetails = matchData?.match_info;
+  const manOfTheMatch = matchData?.man_of_the_match;
   const playing11 = matchData?.["match-playing11"];
   const teama11Players = [
     ...(playing11?.teama?.squads.filter(
@@ -1752,22 +1753,17 @@ export default function MoreInfo({
 
 
                 ) : (
+                  manOfTheMatch?.pid !== undefined &&
                   <div className="rounded-lg bg-[#ffffff] mb-4">
                     <div className="p-4"><a href="#">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3 md:py-3">
                           <div>
-
-                            <Image
-                              src="/assets/img/player/12.png"
-                              width={50}
-                              height={50}
-                              alt=""
-                              loading="lazy"
-                            />
+                          
+                          <PlayerImage key={manOfTheMatch?.pid} player_id={manOfTheMatch?.pid} height={50} width={50} className="rounded-lg" />
                           </div>
                           <div className="font-medium">
-                            <h2 className="text-1xl font-semibold hover:text-[#1a80f8]">R Ashwin</h2>
+                            <h2 className="text-1xl font-semibold hover:text-[#1a80f8]">{manOfTheMatch?.name}</h2>
                             <p className="text-[#6A7586] font-normal"> Man of the match </p>
                           </div>
                         </div>
