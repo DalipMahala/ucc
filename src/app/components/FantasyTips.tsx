@@ -41,7 +41,7 @@ const FantasyTips = () => {
             <span className="text-[18px] leading-[22px] text-[#1A80F8] font-normal">  {index + 1 }. </span>
 
               <Link href={tips.link}>
-                <h3 className="text-[13px] font-semibold" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(tips.title.rendered, 15)) }}>
+                <h3 className="text-[13px] font-semibold hover:text-[#1a80f8]" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncateText(tips.title.rendered, 15)) }}>
 
                 </h3>
                 <p className="text-[#586577] pt-2">{((d => (d < 0 ? `in ${Math.ceil(-d / 3.6e6)}h` : d < 3.6e6 ? `${Math.floor(d / 6e4)} minutes ago` : d < 8.64e7 ? `${Math.floor(d / 3.6e6)} hrs ago` : `${Math.floor(d / 8.64e7)} day ago`))(Date.now() - new Date(tips.date_gmt).getTime()))}</p>

@@ -665,8 +665,8 @@ export default function Overview({
 
                                     </div>
                                     <Link href={"/player/" + playerUrls[player?.player?.pid]}>
-                                      <div>
-                                        <p className="font-medium">{player?.player?.short_name}</p>
+                                      <div className="">
+                                        <p className="font-medium hover:text-[#1a80f8]">{player?.player?.short_name}</p>
                                         <p className="text-[12px]">{player?.team?.abbr}</p>
                                       </div>
                                     </Link>
@@ -739,7 +739,7 @@ export default function Overview({
                                     </div>
                                     <Link href={"/player/" + playerUrls[player?.player?.pid]}>
                                       <div>
-                                        <p className="font-medium">{player?.player?.short_name}</p>
+                                        <p className="font-medium hover:text-[#1a80f8]">{player?.player?.short_name}</p>
                                         <p className="text-[12px]">{player?.team?.abbr}</p>
                                       </div>
                                     </Link>
@@ -768,7 +768,7 @@ export default function Overview({
                   </h3>
                 </div>
                 <Link href={urlString + "/stats/batting-most-run"}>
-                  <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
+                  <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px]  underline">
                     View More{" "}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -1015,7 +1015,7 @@ export default function Overview({
                       <div className="border-b mb-4">
                         <Link href={urlString + "/stats/batting-most-run"}
                           className="w-full flex text-[14px] justify-between items-center pb-3 pt-4" >
-                          <span className="flex items-center font-medium text-[#394351]">
+                          <span className="flex items-center font-medium text-[#394351] hover:text-[#1a80f8]">
                             Most Runs in IPL
                           </span>
 
@@ -1026,7 +1026,7 @@ export default function Overview({
                       <div className="border-b mb-4">
                         <Link href={urlString + "/stats/batting-most-hundreds"}
                           className="w-full flex text-[14px] justify-between items-center pb-3" >
-                          <span className="flex items-center font-medium text-[#394351]">
+                          <span className="flex items-center font-medium text-[#394351] hover:text-[#1a80f8]">
                             Most Hundreds in IPL
                           </span>
 
@@ -1037,7 +1037,7 @@ export default function Overview({
                       <div className="border-b mb-4">
                         <Link href={urlString + "/stats/batting-most-fifties"}
                           className="w-full flex text-[14px] justify-between items-center pb-3" >
-                          <span className="flex items-center font-medium text-[#394351]">
+                          <span className="flex items-center font-medium text-[#394351] hover:text-[#1a80f8]">
                             Most Fifties in IPL
                           </span>
 
@@ -1049,7 +1049,7 @@ export default function Overview({
                       <div className="border-b mb-4">
                         <Link href={urlString + "/stats/batting-highest-average"}
                           className="w-full flex text-[14px] justify-between items-center pb-3" >
-                          <span className="flex items-center font-medium text-[#394351]">
+                          <span className="flex items-center font-medium text-[#394351] hover:text-[#1a80f8]">
                             Highest Batting Average in IPL
                           </span>
 
@@ -1060,7 +1060,7 @@ export default function Overview({
                       <div className="border-b mb-4">
                         <Link href={urlString + "/stats/bowling-most-wicket"}
                           className="w-full flex text-[14px] justify-between items-center pb-3" >
-                          <span className="flex items-center font-medium text-[#394351]">
+                          <span className="flex items-center font-medium text-[#394351] hover:text-[#1a80f8]">
                             Most Wickets in IPL
                           </span>
 
@@ -1071,14 +1071,13 @@ export default function Overview({
                       <div className="border-b mb-4">
                         <Link href={urlString + "/stats/bowling-best-average"}
                           className="w-full flex text-[14px] justify-between items-center pb-3">
-                          <span className="flex items-center font-medium text-[#394351]">
+                          <span className="flex items-center font-medium text-[#394351] hover:text-[#1a80f8]">
                             Highest Bowling Average in IPL
                           </span>
 
                         </Link>
 
                       </div>
-
 
                     </div>
                   </div>

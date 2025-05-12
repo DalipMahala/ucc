@@ -796,9 +796,9 @@ export default function LiveResult({
                                               : {}
                                           )}
                                         </span>{" "}
-                                        <span className="text-[#BFEF50] text-[16px]">
+                                        <span className="text-[#BFEF50] text-[18px] font-medium">
                                           {comment?.batsman_runs} (
-                                          <span className="text-[#BFEF50] text-[14px]">{comment?.batsman_balls}) </span>
+                                          <span className="text-[#BFEF50] text-[15px]">{comment?.batsman_balls}) </span>
                                         </span>
                                       </h2>
                                       <p className="text-[14px] font-normal">

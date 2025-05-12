@@ -57,7 +57,7 @@ export default function PLSeries() {
                   className="rounded-full"
                 />
               </div>
-              <div className="font-medium text-[14px] text-[#363e49]">{series?.title}</div>
+              <div className="font-medium text-[14px] text-[#363e49] hover:text-[#1a80f8]">{series?.title}</div>
             </div>
           </Link>
         ))}
