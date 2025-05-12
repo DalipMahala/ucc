@@ -206,6 +206,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                 <div className="text-[#8192B4] font-normal w-[30%] text-center md:my-0 my-4 flex gap-2 items-center justify-center">
                   <p className="text-[#00a632] lg:text-[22px] text-[16px] font-semibold uppercase">
                     {updateStatusNoteDirect(liveMatch?.match_info)}
+                    {(liveMatch?.match_info?.result_type === 1 || liveMatch?.match_info?.result_type === 2) &&
                     <Image
                       src="/assets/img/home/win.png"
                       width={28}
@@ -215,6 +216,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                       alt=""
                       loading="lazy"
                     />
+                    }
                   </p>
                 </div>
 
@@ -395,7 +397,17 @@ export default function Banner({ matchData, match_id }: Banner) {
 
                 <div className="text-[#8192B4] font-normal text-center mt-9 mb-2 flex gap-2 items-center justify-center">
                   <p className="text-[#00a632] text-[14px] font-semibold uppercase">
-                    {updateStatusNoteDirect(liveMatch?.match_info)} 🏆
+                    {updateStatusNoteDirect(liveMatch?.match_info)} {(liveMatch?.match_info?.result_type === 1 || liveMatch?.match_info?.result_type === 2) && 
+                    <Image
+                    src="/assets/img/home/win.png"
+                    width={28}
+                    height={28}
+                    style={{ width: "28px", height: "28px" }}
+                    className="inline-block ml-2"
+                    alt=""
+                    loading="lazy"
+                  />
+                   }
                   </p>
                 </div>
 
@@ -618,7 +630,8 @@ export default function Banner({ matchData, match_id }: Banner) {
                   </div>
 
                   <div>
-                   <span> SAP </span> need <span> 63 </span> runs in <span> 35 </span> remaining balls
+                   {/* <span> SAP </span> need <span> 63 </span> runs in <span> 35 </span> remaining balls */}
+                   <span>{liveMatch?.match_info?.status_note}</span>
                   </div>
 
                 </div>
