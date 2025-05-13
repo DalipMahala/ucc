@@ -531,7 +531,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                   <div className="text-[#8192B4] font-normal w-full text-center md:my-0 my-4">
 
 
-                    <motion.div
+                    <motion.h1
                       key={ballEvent}
                       initial={{ scale: 0, opacity: 0, rotate: -15 }}
                       animate={{
@@ -551,7 +551,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                      ${ballEvent.toUpperCase() === 'WICKET' ? "animate-Out" : ""} `}
                     >
                       {ballEvent.toUpperCase() === 'FOUR' ? 4 : ballEvent.toUpperCase() === 'SIX' ? 6 : ballEvent.toUpperCase() === 'DOT' ? 0 : ballEvent}
-                    </motion.div>
+                    </motion.h1>
 
                   </div>
 

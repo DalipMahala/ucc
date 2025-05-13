@@ -433,33 +433,33 @@ export default function Live({
 
         {/* This Over Section */}
         {/* {thisOverRun.length > 0 && */}
-          <div className="flex items-center gap-2">
-            <span className="font-medium text-[#586577]">
-              This Over:
-            </span>
-            <div className="flex gap-1">
-              {thisOverRun?.map((thisOver: any, index: number) => (
-                <span
-                  className={`px-2 py-1 border rounded ${thisOver.score == 6
-                    ? "bg-[#13b76dbd] text-white"
-                    : thisOver.score == 4
-                      ? "bg-orange-500 text-white"
-                      : thisOver.score == "w"
-                        ? "bg-red-500 text-white"
-                        : "text-gray-700"
-                    }`}
-                  key={index}
-                >
-                  {thisOver.score}
-                </span>
-              ))}
+        <div className="flex items-center gap-2">
+          <span className="font-medium text-[#586577]">
+            This Over:
+          </span>
+          <div className="flex gap-1">
+            {thisOverRun?.map((thisOver: any, index: number) => (
+              <span
+                className={`px-2 py-1 border rounded ${thisOver.score == 6
+                  ? "bg-[#13b76dbd] text-white"
+                  : thisOver.score == 4
+                    ? "bg-orange-500 text-white"
+                    : thisOver.score == "w"
+                      ? "bg-red-500 text-white"
+                      : "text-gray-700"
+                  }`}
+                key={index}
+              >
+                {thisOver.score}
+              </span>
+            ))}
 
-              {emptySpans}
-            </div>
-            <span className="font-medium text-1xl text-[#6A7586]">
-              = {thisOvertotalRuns}
-            </span>
+            {emptySpans}
           </div>
+          <span className="font-medium text-1xl text-[#6A7586]">
+            = {thisOvertotalRuns}
+          </span>
+        </div>
         {/* } */}
 
         {/* Last Over Section */}
@@ -502,229 +502,228 @@ export default function Live({
             <div className="md:grid grid-cols-12 gap-4">
 
               <div className="lg:col-span-8 md:col-span-7 ">
-              <div className="rounded-lg bg-white p-4 mb-4">
+                <div className="rounded-lg bg-white p-4 mb-4">
                   <div className="mb-5 flex items-center justify-between">
-                    
-                     
-                        <Link className=""
+
+
+                    <Link className=""
+                      href={
+                        "/player/" +
+                        playerUrls[batsman?.[0]?.batsman_id]
+                      }
+                    >
+                      <div className="flex items-center gap-3">
+
+                        <PlayerImage
+                          key={batsman?.[0]?.batsman_id}
+                          player_id={batsman?.[0]?.batsman_id}
+                          height={40}
+                          width={40}
+                          className="rounded-lg"
+                        />
+
+                        <div className="font-medium">
+                          <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
+                            {getPlayerNameByPid(
+                              players,
+                              batsman?.[0]?.batsman_id
+                            )}{" "}
+                          </h2>
+                          <p className="md:text-[15px] text-[14px] flex items-center">
+                            {batsman?.[0].runs}{" "}
+                            <span className="md:text-[13px] text-[12px] text-[#757A82] px-1">
+                              ({batsman?.[0]?.balls_faced})
+                            </span>
+                            {/* {batsman?.[0]?.batsman_id ==
+                                  currPartnership?.batsmen?.[0]?.batsman_id ? ( */}
+                            <Image
+                              src="/assets/img/home/bat.png"
+                              className="h-[13px]"
+                              width={12}
+                              height={13}
+                              alt=""
+                              loading="lazy"
+                            />
+                            {/* ) : (
+                                  ""
+                                )} */}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+
+                    <div>+</div>
+
+                    <Link className=" flex justify-end md:pr-6 md:border-r-[1px] "
+                      href={
+                        "/player/" +
+                        playerUrls[batsman?.[1]?.batsman_id]
+                      }
+                    >
+                      <div className="flex items-center justify-end flex-row-reverse gap-3">
+
+                        <PlayerImage
+                          key={batsman?.[1]?.batsman_id}
+                          player_id={batsman?.[1]?.batsman_id}
+                          height={40}
+                          width={40}
+                          className="rounded-lg"
+                        />
+
+                        <div className="font-medium text-end">
+                          <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
+                            {getPlayerNameByPid(
+                              players,
+                              batsman?.[1]?.batsman_id
+                            )}
+                          </h2>
+                          <p className="md:text-[15px] text-[14px] flex items-center justify-end">
+                            {batsman?.[1]?.runs}{" "}
+                            <span className="md:text-[13px] text-[12px] text-[#757A82] pl-1">
+                              ({batsman?.[1]?.balls_faced})
+                            </span>
+                            {batsman?.[0]?.batsman_id ==
+                              currPartnership?.batsman?.[1]?.batsman_id ? (
+                              <Image
+                                src="/assets/img/home/bat.png"
+                                className="h-[13px]"
+                                width={12}
+                                height={13}
+                                alt=""
+                                loading="lazy"
+                              />
+                            ) : (
+                              ""
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+
+
+
+                    {/* bollwr */}
+
+                      <div className="hidden md:block rounded-lg bg-white">
+                        <Link
                           href={
                             "/player/" +
-                            playerUrls[batsman?.[0]?.batsman_id]
+                            playerUrls[matchinfo?.bowlers?.[0]?.bowler_id]
                           }
                         >
                           <div className="flex items-center gap-3">
-                            <div>
+                            <div className="relative">
                               <PlayerImage
-                                key={batsman?.[0]?.batsman_id}
-                                player_id={batsman?.[0]?.batsman_id}
+                                key={matchinfo?.bowlers?.[0]?.bowler_id}
+                                player_id={matchinfo?.bowlers?.[0]?.bowler_id}
                                 height={40}
                                 width={40}
                                 className="rounded-lg"
                               />
+                              <Image
+                                src="/assets/img/player/ball.png"
+                                className="absolute -bottom-1.5 -right-0.5 h-[13px] bg-white rounded-full p-[2px]"
+                                width={13}
+                                height={13}
+                                alt=""
+                                loading="lazy"
+                              />
+
                             </div>
                             <div className="font-medium">
                               <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
                                 {getPlayerNameByPid(
                                   players,
-                                  batsman?.[0]?.batsman_id
-                                )}{" "}
+                                  matchinfo?.bowlers?.[0]?.bowler_id
+                                )}
                               </h2>
                               <p className="md:text-[15px] text-[14px] flex items-center">
-                                {batsman?.[0].runs}{" "}
-                                <span className="md:text-[13px] text-[12px] text-[#757A82] px-1">
-                                  ({batsman?.[0]?.balls_faced})
+                                {matchinfo?.bowlers?.[0]?.wickets}-
+                                {matchinfo?.bowlers?.[0]?.runs_conceded}{" "}
+                                <span className="md:text-[13px] text-[12px] text-[#757A82] pt-[4px] px-1">
+                                  ({matchinfo?.bowlers?.[0]?.overs})
                                 </span>
-                                {/* {batsman?.[0]?.batsman_id ==
-                                  currPartnership?.batsmen?.[0]?.batsman_id ? ( */}
-                                <Image
-                                  src="/assets/img/home/bat.png"
-                                  className="h-[13px]"
-                                  width={12}
-                                  height={13}
-                                  alt=""
-                                  loading="lazy"
-                                />
-                                {/* ) : (
-                                  ""
-                                )} */}
                               </p>
                             </div>
                           </div>
                         </Link>
+                      </div>
 
-                        <div>+</div>
-                  
-                      <Link className=" flex justify-end pr-6 border-r-[1px] "
-                          href={
-                            "/player/" +
-                            playerUrls[batsman?.[1]?.batsman_id]
-                          }
-                        >
-                          <div className="flex items-center justify-end flex-row-reverse gap-3">
-                            <div>
+                  </div>
+
+
+                  {/* bollwr Mobile start */}
+
+                    <div className="md:hidden md:rounded-lg bg-white py-3 border-t-[1px] border-[#e7f2f4]">
+                      <Link
+                        href={
+                          "/player/" +
+                          playerUrls[matchinfo?.bowlers?.[0]?.bowler_id]
+                        }
+                      >
+                        <div className="flex items-center justify-between gap-3 font-medium mx-auto w-[100%]">
+                          <div className="flex ga-1 items-center  w-[50%]">
+                            <div className="relative">
                               <PlayerImage
-                                key={batsman?.[1]?.batsman_id}
-                                player_id={batsman?.[1]?.batsman_id}
+                                key={matchinfo?.bowlers?.[0]?.bowler_id}
+                                player_id={matchinfo?.bowlers?.[0]?.bowler_id}
                                 height={40}
                                 width={40}
                                 className="rounded-lg"
                               />
+                              <Image
+                                src="/assets/img/player/ball.png"
+                                className="absolute -bottom-1.5 -right-0.5 h-[13px] bg-white rounded-full p-[2px]"
+                                width={13}
+                                height={13}
+                                alt=""
+                                loading="lazy"
+                              />
                             </div>
-                            <div className="font-medium text-end">
-                              <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
-                                {getPlayerNameByPid(
-                                  players,
-                                  batsman?.[1]?.batsman_id
-                                )}
-                              </h2>
-                              <p className="md:text-[15px] text-[14px] flex items-center justify-end">
-                                {batsman?.[1]?.runs}{" "}
-                                <span className="md:text-[13px] text-[12px] text-[#757A82] pl-1">
-                                  ({batsman?.[1]?.balls_faced})
-                                </span>
-                                {batsman?.[0]?.batsman_id ==
-                                  currPartnership?.batsman?.[1]?.batsman_id ? (
-                                  <Image
-                                    src="/assets/img/home/bat.png"
-                                    className="h-[13px]"
-                                    width={12}
-                                    height={13}
-                                    alt=""
-                                    loading="lazy"
-                                  />
-                                ) : (
-                                  ""
-                                )}
-                              </p>
-                            </div>
+                            <h2 className="md:text-[15px] text-[14px] text-[#757A82] pl-[10px]">
+                              {getPlayerNameByPid(
+                                players,
+                                matchinfo?.bowlers?.[0]?.bowler_id
+                              )}
+                            </h2>
+
                           </div>
-                        </Link>
-                    
+                          <p className="md:text-[15px] text-[14px] flex items-baseline justify-end w-[50%]">
+                            <span>  {matchinfo?.bowlers?.[0]?.wickets}-
+                              {matchinfo?.bowlers?.[0]?.runs_conceded} {" "} </span>
+                            <span className="md:text-[13px] text-[12px] text-[#757A82] px-1">
+                              ({matchinfo?.bowlers?.[0]?.overs})
+                            </span>
+                          </p>
 
-                    
-                      {/* bollwr */}
-
-
-                      <div className="col-span-4 my-4 lg:my-0">
-                        <div className="hidden md:block rounded-lg bg-white">
-                          <Link
-                            href={
-                              "/player/" +
-                              playerUrls[matchinfo?.bowlers?.[0]?.bowler_id]
-                            }
-                          >
-                            <div className="flex items-center gap-3">
-                              <div className="relative">
-                                <PlayerImage
-                                  key={matchinfo?.bowlers?.[0]?.bowler_id}
-                                  player_id={matchinfo?.bowlers?.[0]?.bowler_id}
-                                  height={40}
-                                  width={40}
-                                  className="rounded-lg"
-                                />
-                                <Image
-                                  src="/assets/img/player/ball.png"
-                                  className="absolute -bottom-1.5 -right-0.5 h-[13px] bg-white rounded-full p-[2px]"
-                                  width={13}
-                                  height={13}
-                                  alt=""
-                                  loading="lazy"
-                                />
-                                <p />
-                              </div>
-                              <div className="font-medium">
-                                <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
-                                  {getPlayerNameByPid(
-                                    players,
-                                    matchinfo?.bowlers?.[0]?.bowler_id
-                                  )}
-                                </h2>
-                                <p className="md:text-[15px] text-[14px] flex items-center">
-                                  {matchinfo?.bowlers?.[0]?.wickets}-
-                                  {matchinfo?.bowlers?.[0]?.runs_conceded}{" "}
-                                  <span className="md:text-[13px] text-[12px] text-[#757A82] pt-[4px] px-1">
-                                    ({matchinfo?.bowlers?.[0]?.overs})
-                                  </span>
-                                </p>
-                              </div>
-                            </div>
-                          </Link>
                         </div>
+                      </Link>
+                    </div>
 
 
-                        <div className="md:hidden rounded-lg bg-white py-2 px-4 ">
-                          <Link
-                            href={
-                              "/player/" +
-                              playerUrls[matchinfo?.bowlers?.[0]?.bowler_id]
-                            }
-                          >
+                  {/* bollwr Mobile end */}
 
-
-                            <div className="flex items-center justify-between gap-3 font-medium mx-auto w-[100%]">
-                              <div className="flex ga-1 items-center  w-[50%]">
-                                <div className="relative">
-                                  <PlayerImage
-                                    key={matchinfo?.bowlers?.[0]?.bowler_id}
-                                    player_id={matchinfo?.bowlers?.[0]?.bowler_id}
-                                    height={40}
-                                    width={40}
-                                    className="rounded-lg"
-                                  />
-                                  <Image
-                                    src="/assets/img/player/ball.png"
-                                    className="absolute -bottom-1.5 -right-0.5 h-[13px] bg-white rounded-full p-[2px]"
-                                    width={13}
-                                    height={13}
-                                    alt=""
-                                    loading="lazy"
-                                  />
-                                </div>
-                                <h2 className="md:text-[15px] text-[14px] text-[#757A82] pl-[10px]">
-                                  {getPlayerNameByPid(
-                                    players,
-                                    matchinfo?.bowlers?.[0]?.bowler_id
-                                  )}
-                                </h2>
-
-                              </div>
-                              <p className="md:text-[15px] text-[14px] flex items-baseline justify-end w-[50%]">
-                                <span>  {matchinfo?.bowlers?.[0]?.wickets}-
-                                  {matchinfo?.bowlers?.[0]?.runs_conceded} {" "} </span>
-                                <span className="md:text-[13px] text-[12px] text-[#757A82] px-1">
-                                  ({matchinfo?.bowlers?.[0]?.overs})
-                                </span>
-                              </p>
-
-                            </div>
-                          </Link>
-                        </div>
-
-
-                      </div>
-
-                  </div>
 
                   <div className="flex gap-2 items-center justify-between pt-1 border-t-[1px] border-[#E7F2F4]">
                     <div className="flex gap-2 items-center">
-                        <p className="text-[14px] font-normal">Partnership :</p>
-                        <p className="md:text-[18px] font-semibold text-[17px] ">
-                          <span className="text-[#13b76dbd]">  {currPartnership?.runs} </span>
+                      <p className="text-[14px] font-normal">Partnership :</p>
+                      <p className="md:text-[18px] font-semibold text-[17px] ">
+                        <span className="text-[#13b76dbd]">  {currPartnership?.runs} </span>
 
-                            <span className="text-[13px] font-normal">
-                              ({currPartnership?.balls})
-                            </span>
-                          </p>
-                          </div>
-                          {(matchinning?.last_wicket?.name !== '' && matchinning?.last_wicket?.name !== undefined) && 
-                        <p><span>Last Wkt :</span> <span>{matchinning?.last_wicket?.name}  <span> {matchinning?.last_wicket?.runs}({matchinning?.last_wicket?.balls}) </span></span></p>
-                          }
-                      </div>
-
+                        <span className="text-[13px] font-normal">
+                          ({currPartnership?.balls})
+                        </span>
+                      </p>
+                    </div>
+                    {(matchinning?.last_wicket?.name !== '' && matchinning?.last_wicket?.name !== undefined) &&
+                      <p><span>Last Wkt :</span> <span>{matchinning?.last_wicket?.name}  <span> {matchinning?.last_wicket?.runs}({matchinning?.last_wicket?.balls}) </span></span></p>
+                    }
                   </div>
 
+                </div>
 
-                  {/* <div className="font-medium text-center ">
+
+                {/* <div className="font-medium text-center ">
                           <p className="md:text-[18px] font-semibold text-[17px] text-[#13b76dbd]">
                             {currPartnership?.runs}{" "}
 
@@ -737,7 +736,7 @@ export default function Live({
 
 
 
-            
+
 
 
 
@@ -814,7 +813,7 @@ export default function Live({
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex space-x-2">
                         <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
-                        <h3 className="text-1xl font-semibold">Probability</h3>
+                        <h2 className="text-1xl font-semibold">Probability</h2>
                       </div>
                       <div className="flex items-center gap-2">
                         <button
@@ -839,63 +838,63 @@ export default function Live({
                     </div>
                     {activeTab === "tab1" && (
                       <div className="cust-box-click-content">
-                        <div>
-                          <div className="flex justify-between items-center">
-                            <p className="font-semibol"></p>
-                            {remainingOvers < "0" ? (
-                              ""
-                            ) : (
-                              <p className="text-[#586577]">
-                                Overs left today:{" "}
-                                <span className="font-semibol text-black">
-                                  {remainingOvers}
-                                </span>
-                              </p>
-                            )}
-                          </div>
-                          <div className="relative mt-4 h-[4px] bg-gray-200 overflow-hidden">
-                            <div
-                              className="absolute h-full bg-[#13b76dbd]"
-                              style={{
-                                width: `${teamwinpercentage?.team_a_win}%`,
-                              }}
-                            />
-                            <div
-                              className="absolute h-full bg-[#EB9D29]"
-                              style={{
-                                width: `${teamwinpercentage?.draw}%`,
-                                left: `${teamwinpercentage?.team_a_win}%`,
-                              }}
-                            ></div>
-                            <div
-                              className="absolute h-full bg-[#B7132B]"
-                              style={{
-                                width: `${teamwinpercentage?.team_b_win}%`,
-                                left: `${teamwinpercentage?.draw +
-                                  teamwinpercentage?.team_a_win
-                                  }%`,
-                              }}
-                            ></div>
-                          </div>
-                          <div className="flex justify-between mt-2 text-sm">
-                            <p className="text-green-600 font-medium">
-                              {matchDetails?.teama?.short_name}:{" "}
-                              {teamwinpercentage?.team_a_win}%
+
+                        <div className="flex justify-between items-center">
+                          <p className="font-semibol"></p>
+                          {remainingOvers < "0" ? (
+                            ""
+                          ) : (
+                            <p className="text-[#586577]">
+                              Overs left today:{" "}
+                              <span className="font-semibol text-black">
+                                {remainingOvers}
+                              </span>
                             </p>
-                            {teamwinpercentage?.draw > 0 ? (
-                              <p className="text-yellow-600 font-medium">
-                                Drew: {teamwinpercentage?.draw}%
-                              </p>
-                            ) : (
-                              ""
-                            )}
-                            <p className="text-red-600 font-medium">
-                              {matchDetails?.teamb?.short_name}:{" "}
-                              {teamwinpercentage?.team_b_win}%
+                          )}
+                        </div>
+                        <div className="relative mt-4 h-[4px] bg-gray-200 overflow-hidden">
+                          <div
+                            className="absolute h-full bg-[#13b76dbd]"
+                            style={{
+                              width: `${teamwinpercentage?.team_a_win}%`,
+                            }}
+                          />
+                          <div
+                            className="absolute h-full bg-[#EB9D29]"
+                            style={{
+                              width: `${teamwinpercentage?.draw}%`,
+                              left: `${teamwinpercentage?.team_a_win}%`,
+                            }}
+                          ></div>
+                          <div
+                            className="absolute h-full bg-[#B7132B]"
+                            style={{
+                              width: `${teamwinpercentage?.team_b_win}%`,
+                              left: `${teamwinpercentage?.draw +
+                                teamwinpercentage?.team_a_win
+                                }%`,
+                            }}
+                          ></div>
+                        </div>
+                        <div className="flex justify-between mt-2 text-sm">
+                          <p className="text-green-600 font-medium">
+                            {matchDetails?.teama?.short_name}:{" "}
+                            {teamwinpercentage?.team_a_win}%
+                          </p>
+                          {teamwinpercentage?.draw > 0 ? (
+                            <p className="text-yellow-600 font-medium">
+                              Drew: {teamwinpercentage?.draw}%
                             </p>
-                          </div>
+                          ) : (
+                            ""
+                          )}
+                          <p className="text-red-600 font-medium">
+                            {matchDetails?.teamb?.short_name}:{" "}
+                            {teamwinpercentage?.team_b_win}%
+                          </p>
                         </div>
                       </div>
+
                     )}
                     {activeTab === "tab2" && (
                       <div className="cust-box-click-content">
@@ -975,20 +974,20 @@ export default function Live({
                           </div>
                         )}
 
-                        <div>
-                          <div className="flex justify-between items-center border-t-[1px] pt-2">
-                            <div className="text-[14px] font-medium">NAM-W</div>
-                            <div className="flex items-center gap-2">
-                              <p className="py-1 px-4 bg-orange-500 rounded-md text-white w-[47px]">38</p>
-                              <p className="py-1 px-4 bg-[#00a632] rounded-md text-white w-[47px]">38</p></div>
-                          </div>
-                          {/* <div className="flex justify-between items-center border-t-[1px] pt-2">
+
+                        <div className="flex justify-between items-center border-t-[1px] pt-2">
+                          <div className="text-[14px] font-medium">NAM-W</div>
+                          <div className="flex items-center gap-2">
+                            <p className="py-1 px-4 bg-orange-500 rounded-md text-white w-[47px]">38</p>
+                            <p className="py-1 px-4 bg-[#00a632] rounded-md text-white w-[47px]">38</p></div>
+                        </div>
+                        {/* <div className="flex justify-between items-center border-t-[1px] pt-2">
                             <div className="text-[14px] font-medium">NAM-W</div>
                             <div className="flex items-center gap-2">
                               <p className="py-1 px-4 bg-orange-500 rounded-md text-white">38</p>
                               <p className="py-1 px-4 bg-[#00a632] rounded-md text-white">38</p></div>
                           </div> */}
-                        </div>
+
 
                       </div>
 
@@ -1000,30 +999,30 @@ export default function Live({
               </div>
             </div>
             <div className="cust-box-click-container">
-              <div className="my-2">
-                <div className="flex gap-[10px] overflow-auto items-center py-2">
-                  <p className="font-medium text-[14px]">Commentary</p>
-                  {updatedFilterarray.map((item) => (
-                    <button
-                      key={item}
-                      className={`cust-box-click-button px-5 py-1 rounded-full font-medium ${filter === item
-                        ? "bg-[#081736] text-[#ffffff]"
-                        : "bg-[#ffffff] text-[#6A7586]"
-                        }`}
-                      onClick={() => setFilter(item)}
-                    >
-                      {item}
-                    </button>
-                  ))}
-                </div>
+
+              <div className="flex gap-[10px] overflow-auto items-center py-2 my-2">
+                <p className="font-medium text-[14px]">Commentary</p>
+                {updatedFilterarray.map((item) => (
+                  <button
+                    key={item}
+                    className={`cust-box-click-button px-5 py-1 rounded-full font-medium ${filter === item
+                      ? "bg-[#081736] text-[#ffffff]"
+                      : "bg-[#ffffff] text-[#6A7586]"
+                      }`}
+                    onClick={() => setFilter(item)}
+                  >
+                    {item}
+                  </button>
+                ))}
+
               </div>
 
               {errorMessage && errorMessage === "Record not found" ? (
-                <div className="bg-white p-4 rounded-md mb-8">
-                  <div className="text-[18px] text-center text-red-600 font-semibold">
-                    {updatedCommentaries[0]?.errorMessage}
-                  </div>
+
+                <div className="text-[18px] text-center text-red-600 font-semibold bg-white p-4 rounded-md mb-8">
+                  {updatedCommentaries[0]?.errorMessage}
                 </div>
+
               ) : (
                 <div className="cust-box-click-content mb-4" key="testMatch">
                   {updatedCommentaries
@@ -1060,7 +1059,7 @@ export default function Live({
                           <div className="border-b-[1px] border-[#e7e7e7]"></div>
 
 
-                          <div className="flex justify-between p-4">
+                          <div className="md:flex justify-between p-4">
                             <div className="text-[14px] font-normal flex gap-3">
                               <div>
                                 {getPlayerNameByPid(
@@ -1089,7 +1088,7 @@ export default function Live({
                             </div>
 
 
-                            <div className="text-[14px] font-normal  ">
+                            <div className="text-[14px] font-normal md:pt-0 pt-1 ">
                               {getPlayerNameByPid(
                                 players,
                                 comment?.bowls?.[0]?.bowler_id
@@ -1184,8 +1183,8 @@ export default function Live({
                                         )}
                                       </span>{" "}
                                       <span className="text-[#BFEF50] text-[18px] font-semibold">
-                                        {comment?.batsman_runs} 
-                                      <span className="text-[15px]"> ({comment?.batsman_balls}) </span>
+                                        {comment?.batsman_runs}
+                                        <span className="text-[15px]"> ({comment?.batsman_balls}) </span>
                                       </span>
                                     </h2>
                                     <p className="text-[14px] font-normal">

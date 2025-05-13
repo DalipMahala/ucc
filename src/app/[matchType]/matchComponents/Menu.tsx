@@ -37,7 +37,7 @@ export default function MatchTabs({
     <div id="tabs" className="my-4">
       <div 
         ref={tabsRef}
-        className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-x-auto scrollbar-hide"
+        className="flex text-1xl md:space-x-8 space-x-4 p-2 bg-[#ffffff] rounded-lg overflow-x-auto scrollbar-hide"
       >
         <Link href={`/moreinfo/${matchUrl}/${match_id}`}>
           <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md ${

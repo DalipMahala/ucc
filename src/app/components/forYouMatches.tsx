@@ -162,10 +162,10 @@ export default async function ForYouMatches() {
                   </div>
                   <div>
                     <Link href={"/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) + "/" + items.competition.cid}  >
-                      <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                      <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                         {items.competition.title} -{" "}
                         {items.competition.season}
-                      </h4>
+                      </h2>
                     </Link>
                   </div>
                 </div>
@@ -273,7 +273,7 @@ export default async function ForYouMatches() {
                         </p>
                       </div>
 
-                      <div>
+                      
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
@@ -316,7 +316,7 @@ export default async function ForYouMatches() {
                             )}
                           </p>
                         </div>
-                      </div>
+                     
                     </div>
 
                     {/* <div className="h-[100px] border-l-[1px] border-[#efefef]"></div> */}
@@ -411,10 +411,10 @@ export default async function ForYouMatches() {
                   </div>
                   <div>
                     <Link href={"/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) + "/" + items.competition.cid}  >
-                      <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                      <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                         {truncateText(items.competition.title, 5)} -{" "}
                         {items.competition.season}
-                      </h4>
+                      </h2>
                     </Link>
                   </div>
 
@@ -658,10 +658,10 @@ export default async function ForYouMatches() {
                   </div>
                   <div>
                     <Link href={"/series/" + urlStringEncode(ucmatch.competition.title + "-" + ucmatch.competition.season) + "/" + ucmatch.competition.cid}  >
-                      <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                      <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                         {ucmatch.competition.title} -{" "}
                         {ucmatch.competition.season}
-                      </h4>
+                      </h2>
                     </Link>
                   </div>
                 </div>
@@ -735,7 +735,7 @@ export default async function ForYouMatches() {
                         </div>
                       </div>
 
-                      <div>
+                    
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
@@ -751,7 +751,7 @@ export default async function ForYouMatches() {
                             </span>
                           </div>
                         </div>
-                      </div>
+                     
                     </div>
 
                     {/* <div className="h-[100px] border-l-[1px] border-[#efefef]"></div> */}
@@ -834,10 +834,10 @@ export default async function ForYouMatches() {
                   </div>
                   <div>
                     <Link href={"/series/" + urlStringEncode(ucmatch.competition.title + "-" + ucmatch.competition.season) + "/" + ucmatch.competition.cid}  >
-                      <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                      <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                         {truncateText(ucmatch.competition.title, 3)} -{" "}
                         {ucmatch.competition.season}
-                      </h4>
+                      </h2>
                     </Link>
                   </div>
 
@@ -1027,10 +1027,10 @@ export default async function ForYouMatches() {
                   </div>
                   <div>
                     <Link href={"/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) + "/" + cmatch.competition.cid}  >
-                      <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                      <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                         {cmatch.competition.title} -{" "}
                         {cmatch.competition.season}
-                      </h4>
+                      </h2>
                     </Link>
                   </div>
                 </div>
@@ -1071,7 +1071,7 @@ export default async function ForYouMatches() {
                         </p>
                       </div>
 
-                      <div>
+                    
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
@@ -1095,7 +1095,7 @@ export default async function ForYouMatches() {
                             </span>
                           </p>
                         </div>
-                      </div>
+                     
                     </div>
                   </Link>
                   <div className="h-[100px] border-l-[1px] border-[#e7f2f4]"></div>
@@ -1189,10 +1189,10 @@ export default async function ForYouMatches() {
                   </div>
                   <div>
                     <Link href={"/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) + "/" + cmatch.competition.cid}  >
-                      <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                      <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                         {truncateText(cmatch.competition.title, 2)} -{" "}
                         {cmatch.competition.season}
-                      </h4>
+                      </h2>
                     </Link>
                   </div>
                   

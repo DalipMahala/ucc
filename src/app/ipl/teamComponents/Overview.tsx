@@ -545,7 +545,7 @@ export default function Overview({
                     {rounds?.round?.name} {pointTables?.season}
                   </h3>
 
-                  <div>
+                  <div className="relative">
                     <div
                       className="overflow-x-auto  [&amp;::-webkit-scrollbar] [&amp;::-webkit-scrollbar]:h-[5px] 
                 [&amp;::-webkit-scrollbar-track]:bg-gray-100 
@@ -676,6 +676,11 @@ export default function Overview({
                         </tbody>
                       </table>
                     </div>
+
+{rounds?.standings?.length > 4 && (
+    <div className="absolute bottom-[33px] left-0 w-full h-10 bg-gradient-to-t from-white dark:from-neutral-900 to-transparent pointer-events-none z-10"></div>
+  )}
+
                     {rounds?.standings?.length > 4 &&
                       <div className="text-center">
                         <Link href={
@@ -685,7 +690,7 @@ export default function Overview({
                           pointTables?.cid +
                           "/points-table"
                         } >
-                        <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline border-t-[1px] border-[#e5e7eb]">
+                        <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
                             View More{" "}
                             <svg
                               xmlns="http://www.w3.org/2000/svg"

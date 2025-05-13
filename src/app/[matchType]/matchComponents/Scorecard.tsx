@@ -137,7 +137,7 @@ export default function Scorecard({
                 <div className="rounded-lg bg-[#ffffff] mb-4 p-4">
                   <div className="flex justify-between items-center text-[15px]">
                     <div className="">
-                      <p className="mx-2 font-semibold">Total Score</p>
+                      <h2 className="mx-2 font-semibold">Total Score</h2>
                     </div>
                     <div className="">
                       <p className="mx-2 font-semibold ">
@@ -148,9 +148,9 @@ export default function Scorecard({
                   </div>
                 </div>
                 <div className="rounded-lg bg-[#ffffff] mb-4 p-4">
-                  <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
+                  <h2 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Batting
-                  </h3>
+                  </h2>
                   <div>
                     <div className=" overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
                               [&::-webkit-scrollbar-track]:bg-gray-100 
@@ -257,9 +257,9 @@ export default function Scorecard({
                   </div>
                 </div>
                 <div className="rounded-lg bg-[#ffffff] mb-4 p-4">
-                  <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
+                  <h2 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Bowling
-                  </h3>
+                  </h2>
                   <div>
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm text-left text-[#586577] whitespace-nowrap">
@@ -303,9 +303,9 @@ export default function Scorecard({
                   </div>
                 </div>
                 <div className="rounded-lg bg-[#ffffff] mb-4 p-4">
-                  <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
+                  <h2 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Fall of Wickets
-                  </h3>
+                  </h2>
                   <div>
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm text-left text-[#586577]">
@@ -334,9 +334,9 @@ export default function Scorecard({
                 </div>
 
                 <div className="rounded-lg bg-[#ffffff] mb-4 p-4">
-                  <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
+                  <h2 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Partnership
-                  </h3>
+                  </h2>
                   <div className="flex justify-between items-center bg-blue-50 text-gray-700 text-sm px-4 py-3 font-medium">
                     <div>Batter 1</div>
                     <div>Batter 2</div>

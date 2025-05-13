@@ -74,26 +74,26 @@ export default function CountriesList({ countries }: countries) {
 
   return (
     <>
-      <div className="mb-2">
-        <h3 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8]">
+      
+        <h2 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8] mb-2 uppercase">
           Domestic Leagues
-        </h3>
-      </div>
+        </h2>
+     
 
       <div className="bg-white rounded-lg px-4">
         {/* Search Form */}
         <div className="py-2 mb-3">
           <form className="flex justify-between items-center border-2 p-1 px-3 rounded-lg">
-            <div>
+           
               <input
-                className="font-medium text-[15px] outline-none"
+                className="font-normal text-[15px] outline-none"
                 type="text"
                 placeholder="Filter countries or leagues..."
                 value={search}
                 onChange={handleSearchChange}
               />
-            </div>
-            <div>
+            
+           
               <Image 
                 loading="lazy"
                 src="/assets/img/flag/search.png"
@@ -103,7 +103,7 @@ export default function CountriesList({ countries }: countries) {
                 style={{ width: "15px", height: "15px" }}
                 alt="Search"
               />
-            </div>
+           
           </form>
         </div>
 
@@ -134,7 +134,7 @@ export default function CountriesList({ countries }: countries) {
                   {country.country_name}
                 </span>
                 <span className={`transform transition-transform ${
-                  expanded === country.country_name ? "rotate-90" : ""
+                  expanded === country.country_name ? "rotate-[180deg]" : ""
                 }`}>
                   <Image 
                     loading="lazy"
@@ -152,8 +152,8 @@ export default function CountriesList({ countries }: countries) {
                 <div className="pl-8 py-2 space-y-2">
                   {country.competitions?.length > 0 ? (
                     country.competitions.map((compt: Competition, index: number) => (
-                      <div className="font-normal text-[13px] text-[#51555E]" key={index}>
-                        <div className="flex items-center gap-[2px]">
+                      <div className="flex items-center gap-[2px] font-normal text-[13px] text-[#51555E]" key={index}>
+                       
                           <span>
                             <svg 
                               xmlns="http://www.w3.org/2000/svg" 
@@ -176,7 +176,7 @@ export default function CountriesList({ countries }: countries) {
                           >
                             <p>{compt.title}</p>
                           </Link>
-                        </div>
+                       
                       </div>
                     ))
                   ) : (

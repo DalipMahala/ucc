@@ -316,26 +316,26 @@ export default function MoreInfo({
             <div className="lg:col-span-8 md:col-span-7">
               <div className="rounded-lg bg-white">
                 <div className="p-4">
-                  <h3 className="text-[15px] font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                  <h2 className="text-[15px] font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Match Detail
-                  </h3>
+                  </h2>
                   <div className="border-t border-[#E4E9F0]" />
                   {/* Responsive Grid Section */}
                   <div className="grid md:gap-6 gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-3 px-2">
                     <div>
-                      <h2 className="text-[15px] font-medium">Series :</h2>
+                      <h3 className="text-[15px] font-medium">Series :</h3>
                       <p className="font-normal text-[#586577]">
                         {matchData?.match_info?.competition?.title}
                       </p>
                     </div>
                     <div>
-                      <h2 className="text-[15px] font-medium">Date :</h2>
+                      <h3 className="text-[15px] font-medium">Date :</h3>
                       <p className="font-normal text-[#586577]">
                         {matchData?.match_info?.date_start_ist}
                       </p>
                     </div>
                     <div>
-                      <h2 className="text-[15px] font-medium">Stadium :</h2>
+                      <h3 className="text-[15px] font-medium">Stadium :</h3>
                       <p className="font-normal text-[#586577]">
                         {matchData?.match_info?.venue?.name}, {matchData?.match_info?.venue?.location}
                       </p>
@@ -345,21 +345,21 @@ export default function MoreInfo({
                   {/* Responsive Grid Section */}
                   <div className="grid md:gap-6 gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-3 px-2">
                     <div>
-                      <h2 className="text-[15px] font-medium">
+                      <h3 className="text-[15px] font-medium">
                         Third Umpire :
-                      </h2>
+                      </h3>
                       <p className="font-normal text-[#586577]">{matchData?.match_info?.umpires}</p>
                     </div>
                     <div>
-                      <h2 className="text-[15px] font-medium">
+                      <h3 className="text-[15px] font-medium">
                         On-field Umpire :
-                      </h2>
+                      </h3>
                       <p className="font-normal text-[#586577]">
                         {matchData?.match_info?.umpires}
                       </p>
                     </div>
                     <div>
-                      <h2 className="text-[15px] font-medium">Referee :</h2>
+                      <h3 className="text-[15px] font-medium">Referee :</h3>
                       <p className="font-normal text-[#586577]">{matchData?.match_info?.referee}</p>
                     </div>
                   </div>
@@ -368,10 +368,10 @@ export default function MoreInfo({
 
               <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                 <div>
-                  <h3 className="text-[15px] font-semibold  pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
+                  <h2 className="text-[15px] font-semibold  pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
                     Recent Performance{" "}
                     <span className="text-[#757A82]"> (Last 5 match) </span>
-                  </h3>
+                  </h2>
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <div className="md:px-2">
                     <div className="performance-section">
@@ -839,9 +839,9 @@ export default function MoreInfo({
 
               <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                 <div key="mypage">
-                  <h3 className="text-1xl font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
+                  <h2 className="text-1xl font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
                     Head To Head (Last 5 matches)
-                  </h3>
+                  </h2>
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <div className="py-4 text-1xl flex justify-between items-center">
 
@@ -921,9 +921,9 @@ export default function MoreInfo({
               <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                 <div className="cust-box-click-container">
                   <div className="md:flex justify-between items-center  mb-3">
-                    <h3 className="text-1xl font-semibold pl-[7px] border-l-[3px] border-[#229ED3]">
+                    <h2 className="text-1xl font-semibold pl-[7px] border-l-[3px] border-[#229ED3]">
                       Team Comparison (Last 10 matches)
-                    </h3>
+                    </h2>
                     <div className="flex items-center md:justify-center justify-end md:mt-0 mt-4">
                       <button
                         onClick={(e) =>
@@ -1232,12 +1232,13 @@ export default function MoreInfo({
                   </div>
                 </div>
               </div>
+
               <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                 <div className="relative">
                   <div className="flex justify-between items-center">
-                    <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                    <h2 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                       Weather Condition
-                    </h3>
+                    </h2>
                     <p className="text-[12px]"><span> Last Updated : </span> <span>{format(new Date(), "dd MMM, yyyy")}</span></p>
                   </div>
                   <div className="border-t-[1px] border-[#E4E9F0]" />
@@ -1337,9 +1338,9 @@ export default function MoreInfo({
                 </div>
               </div>
               <div className="rounded-lg bg-[#ffffff] my-4 p-4">
-                <h3 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                <h2 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                   Venue Stats
-                </h3>
+                </h2>
                 <div className="border-t-[1px] border-[#E4E9F0]" />
                 {/* full screen view */}
                 <div className="lg:flex hidden justify-between items-center py-4">
@@ -1499,13 +1500,13 @@ export default function MoreInfo({
                 <div className="p-4">
                   <div className="flex space-x-2">
                     <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
-                    <h3 className="text-1xl font-semibold mb-3">
+                    <h2 className="text-1xl font-semibold mb-3">
                       Pace vs Spin on Venue{" "}
                       <span className="text-[#5C6081]">
                         {" "}
                         &nbsp;(Last 10 matches){" "}
                       </span>
-                    </h3>
+                    </h2>
                   </div>
                   <div className="w-full">
                     <div className="bg-[#B7132B] h-[4px] mr-2 mb-2">
@@ -1550,7 +1551,7 @@ export default function MoreInfo({
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex space-x-2">
                       <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
-                      <h3 className="text-1xl font-semibold">Probability</h3>
+                      <h2 className="text-1xl font-semibold">Probability</h2>
                     </div>
                     <div className="flex items-center gap-2">
                       <button
@@ -1675,9 +1676,9 @@ export default function MoreInfo({
 
               <div className="rounded-lg bg-[#ffffff]">
                 <div className="p-4 cust-box-click-container">
-                  <h3 className="text-1xl font-semibold pl-[7px] mb-3 border-l-[3px] border-[#229ED3]">
+                  <h2 className="text-1xl font-semibold pl-[7px] mb-3 border-l-[3px] border-[#229ED3]">
                     Playing XI
-                  </h3>
+                  </h2>
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <div className="flex items-center justify-around py-4">
                     <button

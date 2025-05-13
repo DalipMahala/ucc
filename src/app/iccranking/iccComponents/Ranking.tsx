@@ -177,7 +177,7 @@ export default function Team({ ranking, iccRankingName, iccRankingType, iccRanki
                               {iccRankingType !== 'team' ?
                                 <Link href={"/player/" + playerUrls[rankDetails.pid]}>
                                   <div className="flex items-center">
-
+                                    <p className='text-[24px] font-semibold text-[#ffffff] mr-3'>#1</p>
                                     <PlayerImage key={rankDetails?.pid} player_id={rankDetails.pid} height={48} width={48} className="w-12 h-12 rounded-lg mr-3" />
                                     <div>
                                       <h3 className="text-[14px] font-normal">{rankDetails.player}</h3>
@@ -187,6 +187,9 @@ export default function Team({ ranking, iccRankingName, iccRankingType, iccRanki
                                 :
                                 <Link href={"/team/" + urlStringEncode(rankDetails.team) + "/" + rankDetails.tid}>
                                   <div className="flex items-center">
+
+                                    <p className='text-[24px] font-semibold text-[#ffffff] mr-3'>#1</p>
+
                                     <Image loading="lazy"
                                       src={rankDetails.logo_url}
                                       width={48} height={48} alt="Player"

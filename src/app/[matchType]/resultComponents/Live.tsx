@@ -668,9 +668,9 @@ export default function LiveResult({
                                   ):(""))}
                             </div>
 
-                            <div className="text-[14px] font-normal  text-[#3992f4]">
+                            <div className="text-[16px] font-semibold text-[#3992f4]">
                               {comment?.over}{" "}
-                              <span className="text-[#586577] font-medium text-[13px]  text-white">
+                              <span className=" font-medium text-[13px]  ">
                                 End Of Over
                               </span>
                             </div>

@@ -29,7 +29,7 @@ interface MatchData {
   competition?: any;
   match_number?: string;
   match_id?: number;
-  
+
 }
 
 interface H2hProps {
@@ -54,34 +54,34 @@ export default function H2hipl({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const teamalist =  allTeams?.data?.filter((item: { tid: number }) => Number(item.tid) === teamADetails?.tid);
-  const teamblist =  allTeams?.data?.filter((item: { tid: number }) => Number(item.tid) === teamBDetails?.tid);
+  const teamalist = allTeams?.data?.filter((item: { tid: number }) => Number(item.tid) === teamADetails?.tid);
+  const teamblist = allTeams?.data?.filter((item: { tid: number }) => Number(item.tid) === teamBDetails?.tid);
 
-const [selectedTeamA, setSelectedTeamA] = useState<any>(teamalist[0]);
-const [selectedTeamB, setSelectedTeamB] = useState<any>(teamblist[0]);
+  const [selectedTeamA, setSelectedTeamA] = useState<any>(teamalist[0]);
+  const [selectedTeamB, setSelectedTeamB] = useState<any>(teamblist[0]);
 
-const teamAOptions = allTeams?.data?.filter((team: { tid: any; }) => team.tid !== selectedTeamB?.tid);
-const teamBOptions = allTeams?.data?.filter((team: { tid: any; }) => team.tid !== selectedTeamA?.tid);
+  const teamAOptions = allTeams?.data?.filter((team: { tid: any; }) => team.tid !== selectedTeamB?.tid);
+  const teamBOptions = allTeams?.data?.filter((team: { tid: any; }) => team.tid !== selectedTeamA?.tid);
 
-const router = useRouter();
+  const router = useRouter();
 
-const handleTeamSelect = (team: any, type: 'A' | 'B') => {
-  if (type === 'A') {
-    setSelectedTeamA(team);
-  } else {
-    setSelectedTeamB(team);
-  }
-  const clean = (str?: string) => str ? str.replace(/\s/g, '').replace(/\u00A0/g, '').trim() : '';
-  const teamAId:string = type === 'A' ? team?.abbr : selectedTeamA?.abbr;
-  const teamBId:string = type === 'B' ? team?.abbr : selectedTeamB?.abbr;
+  const handleTeamSelect = (team: any, type: 'A' | 'B') => {
+    if (type === 'A') {
+      setSelectedTeamA(team);
+    } else {
+      setSelectedTeamB(team);
+    }
+    const clean = (str?: string) => str ? str.replace(/\s/g, '').replace(/\u00A0/g, '').trim() : '';
+    const teamAId: string = type === 'A' ? team?.abbr : selectedTeamA?.abbr;
+    const teamBId: string = type === 'B' ? team?.abbr : selectedTeamB?.abbr;
 
-  const teamA = clean(teamAId);
-  const teamB = clean(teamBId);
-  if (teamA && teamB) {
-    const url = urlStringEncode(`${teamA}-vs-${teamB}-head-to-head-in-ipl`);
-    router.push(url);
-  }
-};
+    const teamA = clean(teamAId);
+    const teamB = clean(teamBId);
+    if (teamA && teamB) {
+      const url = urlStringEncode(`${teamA}-vs-${teamB}-head-to-head-in-ipl`);
+      router.push(url);
+    }
+  };
 
   // Safe calculations with fallbacks
   const totalMatches = teamDetails?.teamAB_total_match || 0;
@@ -95,14 +95,14 @@ const handleTeamSelect = (team: any, type: 'A' | 'B') => {
   const urlWithoutMatchType = urlStrings?.split('-').slice(0, -1).join('-') || '';
 
   let content = '';
-  if(matchType === 'test'){
-     content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. In Test cricket, both teams have faced off ${totalMatches} times. Out of these, ${teamADetails?.title} have won ${teamDetails.teama_won_match}, ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match}, and ${teamDetails?.nr_match} matches ended in a draw.`
-  }else if(matchType === 'odi'){
-     content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. In ODIs, ${teamADetails?.title} and ${teamBDetails?.title} have met in ${totalMatches} matches, where ${teamADetails?.title} have won ${teamDetails?.teama_won_match} and ${teamBDetails?.title} have managed ${teamDetails?.teamb_won_match} wins, while ${teamDetails?.nr_match} match ended with no result.`
-  }else if(matchType === 'ipl'){
-     content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. When it comes to IPL internationals, out of ${totalMatches} clashes, ${teamADetails?.title} lead with ${teamDetails?.teama_won_match} wins, and ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match} matches so far.`
-  }else{
-     content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. When it comes to T20 internationals, out of ${totalMatches} clashes, ${teamADetails?.title} lead with ${teamDetails?.teama_won_match} wins, and ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match} matches so far.`
+  if (matchType === 'test') {
+    content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. In Test cricket, both teams have faced off ${totalMatches} times. Out of these, ${teamADetails?.title} have won ${teamDetails.teama_won_match}, ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match}, and ${teamDetails?.nr_match} matches ended in a draw.`
+  } else if (matchType === 'odi') {
+    content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. In ODIs, ${teamADetails?.title} and ${teamBDetails?.title} have met in ${totalMatches} matches, where ${teamADetails?.title} have won ${teamDetails?.teama_won_match} and ${teamBDetails?.title} have managed ${teamDetails?.teamb_won_match} wins, while ${teamDetails?.nr_match} match ended with no result.`
+  } else if (matchType === 'ipl') {
+    content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. When it comes to IPL internationals, out of ${totalMatches} clashes, ${teamADetails?.title} lead with ${teamDetails?.teama_won_match} wins, and ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match} matches so far.`
+  } else {
+    content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. When it comes to T20 internationals, out of ${totalMatches} clashes, ${teamADetails?.title} lead with ${teamDetails?.teama_won_match} wins, and ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match} matches so far.`
   }
 
   useEffect(() => {
@@ -159,60 +159,60 @@ const handleTeamSelect = (team: any, type: 'A' | 'B') => {
     return (
       <div className="md:col-span-6 col-span-12 cust-tp-pera-card" key={index}>
         <Link href={"/scorecard/" + urlStringEncode(parsedMatch?.teamA?.short_name + "-vs-" + parsedMatch?.teamB?.short_name + "-" + parsedMatch?.subtitle + "-" + parsedMatch?.competition?.title + "-" + parsedMatch?.competition?.season) + "/" + parsedMatch.match_id}>
-        <div className="rounded-lg max-w-md w-full p-4 border-[1px] bg-[#f2f7ff]">
-          <div className="flex flex-col pb-1">
-            <h2 className="text-1xl font-semibold">{parsedMatch.subtitle || 'Match'}</h2>
-            {parsedMatch.date && (
-              <p className="text-[#7B4C09] font-medium">
-                {format(new Date(parsedMatch.date), "dd MMMM yyyy")}
+          <div className="rounded-lg max-w-md w-full p-4 border-[1px] bg-[#f2f7ff]">
+            <div className="flex flex-col pb-1">
+              <h2 className="text-1xl font-semibold">{parsedMatch.subtitle || 'Match'}</h2>
+              {parsedMatch.date && (
+                <p className="text-[#7B4C09] font-medium">
+                  {format(new Date(parsedMatch.date), "dd MMMM yyyy")}
+                </p>
+              )}
+            </div>
+            <div className="border-t-[1px] border-[#E4E9F0]" />
+            <div className="flex items-center justify-between py-3">
+              <div className="flex space-x-2">
+                <div className="flex items-center space-x-1 flex-col">
+                  {parsedMatch.teamA?.logo_url && (
+                    <Image
+                      src={parsedMatch.teamA.logo_url}
+                      className="h-[30px] w-[30px] rounded-full"
+                      width={30}
+                      height={30}
+                      alt={parsedMatch.teamA.short_name || "Team A"}
+                    />
+                  )}
+                  <span className="text-[#757A82]">{parsedMatch.teamA?.short_name || 'Team A'}</span>
+                </div>
+                <div className="mt-1">
+                  <p className="text-1xl font-semibold">{parsedMatch.teamA?.scores || '0'}</p>
+                </div>
+              </div>
+              <div className="text-gray-500 text-2xl font-semibold">↔</div>
+              <div className="flex space-x-2 justify-end">
+                <div className="mt-1 text-end">
+                  <p className="text-1xl font-semibold">{parsedMatch.teamB?.scores || '0'}</p>
+                </div>
+                <div className="flex items-center space-x-1 flex-col font-medium">
+                  {parsedMatch.teamB?.logo_url && (
+                    <Image
+                      src={parsedMatch.teamB.logo_url}
+                      className="h-[30px] w-[30px] rounded-full"
+                      width={30}
+                      height={30}
+                      alt={parsedMatch.teamB.short_name || "Team B"}
+                    />
+                  )}
+                  <span className="text-[#757A82]">{parsedMatch.teamB?.short_name || 'Team B'}</span>
+                </div>
+              </div>
+            </div>
+            <div className="border-t-[1px] border-[#E4E9F0]" />
+            <div className="text-center mt-3">
+              <p className="text-green-600 font-semibold">
+                {parsedMatch.result || 'Match result not available'}
               </p>
-            )}
-          </div>
-          <div className="border-t-[1px] border-[#E4E9F0]" />
-          <div className="flex items-center justify-between py-3">
-            <div className="flex space-x-2">
-              <div className="flex items-center space-x-1 flex-col">
-                {parsedMatch.teamA?.logo_url && (
-                  <Image
-                    src={parsedMatch.teamA.logo_url}
-                    className="h-[30px] w-[30px] rounded-full"
-                    width={30}
-                    height={30}
-                    alt={parsedMatch.teamA.short_name || "Team A"}
-                  />
-                )}
-                <span className="text-[#757A82]">{parsedMatch.teamA?.short_name || 'Team A'}</span>
-              </div>
-              <div className="mt-1">
-                <p className="text-1xl font-semibold">{parsedMatch.teamA?.scores || '0'}</p>
-              </div>
-            </div>
-            <div className="text-gray-500 text-2xl font-semibold">↔</div>
-            <div className="flex space-x-2 justify-end">
-              <div className="mt-1 text-end">
-                <p className="text-1xl font-semibold">{parsedMatch.teamB?.scores || '0'}</p>
-              </div>
-              <div className="flex items-center space-x-1 flex-col font-medium">
-                {parsedMatch.teamB?.logo_url && (
-                  <Image
-                    src={parsedMatch.teamB.logo_url}
-                    className="h-[30px] w-[30px] rounded-full"
-                    width={30}
-                    height={30}
-                    alt={parsedMatch.teamB.short_name || "Team B"}
-                  />
-                )}
-                <span className="text-[#757A82]">{parsedMatch.teamB?.short_name || 'Team B'}</span>
-              </div>
             </div>
           </div>
-          <div className="border-t-[1px] border-[#E4E9F0]" />
-          <div className="text-center mt-3">
-            <p className="text-green-600 font-semibold">
-              {parsedMatch.result || 'Match result not available'}
-            </p>
-          </div>
-        </div>
         </Link>
       </div>
     );
@@ -338,19 +338,14 @@ const handleTeamSelect = (team: any, type: 'A' | 'B') => {
               <div className="lg:col-span-8 md:col-span-7">
                 {teamDetails?.teamAB_total_match > 0 && (
                   <div className="rounded-lg bg-[#ffffff] p-4">
-                    <h3 className="text-[15px] font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
+                    <h2 className="text-[15px] font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
                       {teamADetails.title} vs {teamBDetails.title} Head to Head in {matchType.charAt(0).toUpperCase() + matchType.slice(1)} Records
-                    </h3>
+                    </h2>
                     <div className="border-t-[1px] border-[#E4E9F0]" />
 
                     <div className="mt-4">
                       <div className="mb-6">
-                      
-                        <ReadMoreCard
-                          title=""
-                          content={content}
-                          wordLimit={30}
-                        />
+                        <p>{content}</p>
 
                       </div>
 
@@ -359,11 +354,11 @@ const handleTeamSelect = (team: any, type: 'A' | 'B') => {
                         <div className="md:w-full w-[40%] relative">
                           <div className="border border-gray-300 rounded-md p-2 text-gray-700 md:w-[70%] w-full cursor-pointer ">
                             <TeamSelect
-                                selectedTeam={selectedTeamA}
-                                onChange={(team) => handleTeamSelect(team, 'A')}
-                                teams={teamAOptions || []}
-                                label="Team A"
-                              />
+                              selectedTeam={selectedTeamA}
+                              onChange={(team) => handleTeamSelect(team, 'A')}
+                              teams={teamAOptions || []}
+                              label="Team A"
+                            />
                           </div>
                         </div>
 
@@ -372,7 +367,7 @@ const handleTeamSelect = (team: any, type: 'A' | 'B') => {
                         <div className="md:w-full w-[40%] text-right">
                           <div className="relative flex justify-end">
                             <div className="border border-gray-300 rounded-md p-2 text-gray-700 md:w-[70%] w-full cursor-pointer">
-                            <TeamSelect
+                              <TeamSelect
                                 selectedTeam={selectedTeamB}
                                 onChange={(team) => handleTeamSelect(team, 'B')}
                                 teams={teamBOptions || []}
@@ -652,15 +647,19 @@ const handleTeamSelect = (team: any, type: 'A' | 'B') => {
                     {teamADetails.title} vs {teamBDetails.title} 2025
                   </h3>
 
-                  <p className="text-gray-700 font-normal">The biggest tournament in the cricketing circuit, the ICC
+                  <ReadMoreCard
+                    title=""
+                    content="The biggest tournament in the cricketing circuit, the ICC
                     T20 WORLD Cup is underway in the USAs and the West Indies.
                     The tournament received excellent response from the fans
                     worldwide The biggest tournament in the cricketing circuit, the ICC
                     T20 WORLD Cup is underway in the USAs and the West Indies.
                     The tournament received excellent response from the fans
-                    worldwide</p>
+                    worldwide"
+                    wordLimit={30}
+                  />
 
-                 
+
                 </div>
 
                 <div className="rounded-lg bg-[#ffffff] p-4 mb-4">

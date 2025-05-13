@@ -231,7 +231,7 @@ export default function Team({
                           <h3 className="text-sm font-semibold text-gray-800 hover:text-[#1a80f8]">
                             {squad?.title}
                           </h3>
-                          <p className="text-xs text-gray-600">{squad?.playing_role === 'bowl' ? "Bowler" : squad?.playing_role === 'bat' ? "batsman" : squad?.playing_role === 'wk' ? "Wicket Kiper" : "All-Rounder"}</p>
+                          <p className="text-xs text-gray-600">{squad?.playing_role === 'bowl' ? "Bowler" : squad?.playing_role === 'bat' ? "Batsman" : squad?.playing_role === 'wk' ? "Wicket Kiper" : "All-Rounder"}</p>
                         </Link>
                       </div>
                     ))}

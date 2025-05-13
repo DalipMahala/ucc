@@ -113,19 +113,20 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                     }`}
                   style={{ gap: "3px" }}
                 >
-                  <div
+                  <span
                     className={`w-[8px] h-[8px] rounded-full ${cmatch.status_str === "Cancelled" ? "bg-red-600" : "bg-[#0B773C]"
                       }`}
-                  ></div>
+                  >
+                  </span>
                   {cmatch.status_str}
                 </div>
 
                 <div>
                   <Link href={"/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) + "/" + cmatch.competition.cid}  >
-                    <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                    <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                       {cmatch.competition.title} -{" "}
                       {cmatch.competition.season}
-                    </h4>
+                    </h2>
                   </Link>
                 </div>
               </div>
@@ -134,8 +135,8 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
 
             <div className="border-t-[1px] border-[#E7F2F4]"></div>
 
-            <div className="py-3 px-3">
-              <div className="flex justify-between items-center text-[14px]">
+            
+              <div className="flex justify-between items-center text-[14px] py-3 px-3">
                 <Link href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
                   <div className="">
                     <p className="text-[#586577] text-[12px] mb-4 font-medium">
@@ -166,7 +167,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                       </p>
                     </div>
 
-                    <div>
+                    
                       <div className="flex items-center space-x-2 font-medium md:w-full">
                         <div className="flex items-center space-x-2">
                           <Image
@@ -190,7 +191,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                           </span>
                         </p>
                       </div>
-                    </div>
+                   
                   </div>
                 </Link>
 
@@ -235,7 +236,6 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                 }
               </div>
 
-            </div>
             <div className="border-t-[1px] border-[#E7F2F4]"></div>
 
             <div className="flex items-center justify-between space-x-5 mt-3">
@@ -291,10 +291,10 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                 </div>
                 <div>
                   <Link href={"/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) + "/" + cmatch.competition.cid}  >
-                    <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                    <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                       {truncateText(cmatch.competition.title, 3)} -{" "}
                       {cmatch.competition.season}
-                    </h4>
+                    </h2>
                   </Link>
                 </div>
 

@@ -92,9 +92,9 @@ export default function Slider() {
     <>
       <div className="flex justify-between items-center py-4">
         <div>
-          <h3 className="text-1xl font-semibold pl-[4px] border-l-[3px] border-[#2182F8]">
+          <h2 className="text-1xl font-semibold pl-[4px] border-l-[3px] border-[#2182F8]">
             Web Stories
-          </h3>
+          </h2>
         </div>
         <Link href="https://uccricket.live/web-stories/">
           <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">

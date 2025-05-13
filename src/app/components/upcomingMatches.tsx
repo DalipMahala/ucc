@@ -111,10 +111,10 @@ export default async function UpcomingMatches() {
                   </div>
                   <div>
                     <Link href={"/series/" + urlStringEncode(ucmatch.competition.title + "-" + ucmatch.competition.season) + "/" + ucmatch.competition.cid}  >
-                      <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                      <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                         {ucmatch.competition.title} -{" "}
                         {ucmatch.competition.season}
-                      </h4>
+                      </h2>
                     </Link>
                   </div>
                 </div>
@@ -166,8 +166,8 @@ export default async function UpcomingMatches() {
 
               <div className="border-t-[1px] border-[#E7F2F4]"></div>
               <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-" + ucmatch?.subtitle + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
-                <div className="py-3 px-3">
-                  <div className="flex justify-between items-center text-[14px]">
+                
+                  <div className="flex justify-between items-center text-[14px] py-3 px-3">
                     <div className="w-[50%]">
                       <p className="text-[#586577] text-[12px] mb-4 font-medium">
                         {ucmatch.subtitle}, {ucmatch.format_str}, {ucmatch.venue.location}
@@ -233,7 +233,7 @@ export default async function UpcomingMatches() {
                       </div>
                     </div>
                   </div>
-                </div>
+                
               </Link>
               <div className="border-t-[1px] border-[#E7F2F4]"></div>
 
@@ -288,10 +288,10 @@ export default async function UpcomingMatches() {
                   </div>
                   <div>
                     <Link href={"/series/" + urlStringEncode(ucmatch.competition.title + "-" + ucmatch.competition.season) + "/" + ucmatch.competition.cid}  >
-                      <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                      <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                         {truncateText(ucmatch.competition.title, 3)} -{" "}
                         {ucmatch.competition.season}
-                      </h4>
+                      </h2>
                     </Link>
                   </div>
                  

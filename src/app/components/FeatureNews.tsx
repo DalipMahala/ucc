@@ -65,7 +65,7 @@ const FeatureNews = ({ newsUrl }: url) => {
                       </Link>
                     )}
                   </div>
-                  <div className="col-span-6 flex flex-col justify-between">
+                  <div className="col-span-6 flex flex-col justify-between md:mt-0 mt-2">
 
                    <div>
                     <h3
@@ -118,7 +118,7 @@ const FeatureNews = ({ newsUrl }: url) => {
 
                     <div className="flex gap-3 mb-5">
 
-                      <Link href={post?.link} className="md:w-[30%] w-[25%]">
+                      <Link href={post?.link} className="md:w-[30%] w-[45%]">
                         {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url && (
                           <Image loading="lazy"
                             src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url}
@@ -126,11 +126,11 @@ const FeatureNews = ({ newsUrl }: url) => {
                             width={1000}
                             height={1000}
                             alt={post?.title.rendered}
-                            className="rounded-lg h-[98px] w-[100%]" />
+                            className="rounded-lg h-[98px] object-cover w-[100%]" />
                         )}
                       </Link>
 
-                      <div className="md:w-[70%] w-[75%] flex flex-col justify-between">
+                      <div className="md:w-[70%] w-[55%] flex flex-col justify-between">
 
                       
 <div>

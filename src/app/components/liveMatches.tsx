@@ -140,10 +140,10 @@ export default async function LiveMatches() {
                   </div>
                   <div>
                     <Link href={"/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) + "/" + items.competition.cid}  >
-                      <h4 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                      <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                         {items.competition.title} - {" "}
                         {items.competition.season}
-                      </h4>
+                      </h2>
                     </Link>
                   </div>
                 </div>
@@ -256,7 +256,6 @@ export default async function LiveMatches() {
                         </p>
                       </div>
 
-                      <div>
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
@@ -302,7 +301,7 @@ export default async function LiveMatches() {
                             )}
                           </p>
                         </div>
-                      </div>
+                     
                     </div>
 
                     {/* <div className="h-[100px] border-l-[1px] border-[#efefef]"></div> */}
@@ -397,10 +396,10 @@ export default async function LiveMatches() {
                   </div>
                   <div>
                     <Link href={"/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) + "/" + items.competition.cid}  >
-                      <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                      <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                         {truncateText(items.competition.title, 5)} -{" "}
                         {items.competition.season}
-                      </h4>
+                      </h2>
                     </Link>
                   </div>
 

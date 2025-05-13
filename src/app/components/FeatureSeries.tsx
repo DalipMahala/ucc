@@ -141,15 +141,15 @@ interface SeriesSectionProps {
 
 const SeriesSection = ({ series, match }: SeriesSectionProps) => (
   <React.Fragment>
-    <div className="flex items-center justify-center py-4">
-      <div className="flex items-center space-x-4 w-full">
+   
+      <div className="flex items-center space-x-4 w-full py-4">
         <div className="flex-grow h-0.5 bg-gray-300"></div>
-        <h2 className="md:text-[24px] text-[18px] text-black font-bold whitespace-nowrap uppercase">
+        <h1 className="md:text-[24px] text-[18px] text-black font-bold whitespace-nowrap uppercase">
           {series.title} {series.season}
-        </h2>
+        </h1>
         <div className="flex-grow h-0.5 bg-gray-300"></div>
       </div>
-    </div>
+    
 
     <div className="lg:grid grid-cols-12 gap-4">
       <div className="col-span-2"></div>
@@ -244,14 +244,14 @@ const MatchHeader = ({ match, isMobile = false }: MatchHeaderProps) => {
         </div>
         <div>
           {isMobile ? (
-            <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+            <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
               {match.competition.title}
-            </h4>
+            </h2>
           ) : (
             <Link href={`/series/${urlStringEncode(`${match.competition.title}-${match.competition.season}`)}/${match.competition.cid}`}>
-              <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+              <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                 {match.competition.title}
-              </h4>
+              </h2>
             </Link>
           )}
         </div>

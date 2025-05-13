@@ -30,12 +30,11 @@ export default function PLSeries() {
   // console.log("Popular", popularSeries);
   return (
     <div className=" pb-2 my-4">
-      <div className="py-2 ">
-        <h3 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8]">
+      
+        <h2 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8] my-2">
           POPULAR SERIES
-        </h3>
-      </div>
-      <div className="">
+        </h2>
+      
         {popularSeries?.map((series: any, index: number) => (
           <Link
             href={
@@ -47,7 +46,7 @@ export default function PLSeries() {
             key={index}
           >
             <div className="bg-[#ffffff] text-[14px] rounded-lg px-4 flex items-center space-x-3 py-3 mb-2">
-              <div>
+              
                 <Image
                   src={series?.logo ? series?.logo : "/assets/img/series/ipl.webp"}
                   width={25}
@@ -56,12 +55,12 @@ export default function PLSeries() {
                   loading="lazy"
                   className="rounded-full"
                 />
-              </div>
+              
               <div className="font-medium text-[14px] text-[#363e49] hover:text-[#1a80f8]">{series?.title}</div>
             </div>
           </Link>
         ))}
-      </div>
+    
     </div>
   );
 }

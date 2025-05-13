@@ -445,7 +445,7 @@ export default function Overview({
                     <h2 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                       {rounds?.round?.name}
                     </h2>
-                    <div>
+                    <div className="relative">
                       <div
                         className="overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[8px] 
                   [&::-webkit-scrollbar-track]:bg-gray-100 
@@ -576,17 +576,18 @@ export default function Overview({
                           </tbody>
                         </table>
                       </div>
+
+
+                      {rounds?.standings?.length > 4 && (
+                        <div className="absolute bottom-[33px] left-0 w-full h-10 bg-gradient-to-t from-white dark:from-neutral-900 to-transparent pointer-events-none z-10"></div>
+                      )}
+
+
                       {rounds?.standings?.length > 4 &&
-                        // <div className="px-4 text-center pt-4 border-t-[1px] border-[#e5e7eb]">
-                        //   <Link href={urlString + "/points-table"} className="px-8 bg-[#081736] font-semibold text-white py-2 rounded hover:bg-blue-700">
-                        //     View More
-                        //   </Link>
 
-
-                        // </div>
 
                         <Link href={urlString + "/points-table"}>
-                          <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline border-t-[1px] border-[#e5e7eb]">
+                          <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline ">
                             View More{" "}
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
