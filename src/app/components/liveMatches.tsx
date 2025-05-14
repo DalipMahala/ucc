@@ -256,52 +256,52 @@ export default async function LiveMatches() {
                         </p>
                       </div>
 
-                        <div className="flex items-center space-x-2 font-medium md:w-full">
-                          <div className="flex items-center space-x-2">
-                            <Image
-                              src={items.teamb.logo_url || '/assets/img/ring.png'}
-                              className="h-[30px]"
-                              width={30}
-                              height={30}
-                              alt={items.teamb.short_name}
-                              loading="lazy"
-                            />
-                            <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
-                              {items.teamb.short_name} -
-                            </span>
-                          </div>
-                          <p
-                            className={
-                              "flex items-baseline gap-[4px] match" +
-                              items.match_id +
-                              "-" +
-                              items.teamb.team_id
-                            }
-                          >
-                            {items.teamb.scores === undefined ||
-                              items.teamb.scores === null ||
-                              items.teamb.scores === "" ? (
-                              <span className="text-[14px] font-semibold">
-                                {" "}
-                                (Yet to bat){" "}
-                              </span>
-                            ) : (
-                              <>
-                                <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[14px]"}`}>
-                                  {items.teamb.scores ?? 0}
-                                </span>
-                                <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
-                                  {" "}
-                                  ({items.teamb.overs ?? 0}){" "}
-                                </span>
-                                {(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) &&
-                                  <Image loading="lazy" src="/assets/img/home/bat.png" width={12} height={12} className="h-[12px] mb-[3px]" alt="bat" />
-                                }
-                              </>
-                            )}
-                          </p>
+                      <div className="flex items-center space-x-2 font-medium md:w-full">
+                        <div className="flex items-center space-x-2">
+                          <Image
+                            src={items.teamb.logo_url || '/assets/img/ring.png'}
+                            className="h-[30px]"
+                            width={30}
+                            height={30}
+                            alt={items.teamb.short_name}
+                            loading="lazy"
+                          />
+                          <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
+                            {items.teamb.short_name} -
+                          </span>
                         </div>
-                     
+                        <p
+                          className={
+                            "flex items-baseline gap-[4px] match" +
+                            items.match_id +
+                            "-" +
+                            items.teamb.team_id
+                          }
+                        >
+                          {items.teamb.scores === undefined ||
+                            items.teamb.scores === null ||
+                            items.teamb.scores === "" ? (
+                            <span className="text-[14px] font-semibold">
+                              {" "}
+                              (Yet to bat){" "}
+                            </span>
+                          ) : (
+                            <>
+                              <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[14px]"}`}>
+                                {items.teamb.scores ?? 0}
+                              </span>
+                              <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
+                                {" "}
+                                ({items.teamb.overs ?? 0}){" "}
+                              </span>
+                              {(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) &&
+                                <Image loading="lazy" src="/assets/img/home/bat.png" width={12} height={12} className="h-[12px] mb-[3px]" alt="bat" />
+                              }
+                            </>
+                          )}
+                        </p>
+                      </div>
+
                     </div>
 
                     {/* <div className="h-[100px] border-l-[1px] border-[#efefef]"></div> */}
@@ -346,7 +346,7 @@ export default async function LiveMatches() {
                   </Link>
                 </div>
                 {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                  <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title+ "-head-to-head-in-ipl" : items?.title + "-head-to-head-in-" + items?.format_str)).toLowerCase()}>
+                  <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title + "-head-to-head-in-ipl" : items?.title + "-head-to-head-in-" + items?.format_str)).toLowerCase()}>
                     <div className="flex justify-end items-center space-x-2">
                       <Image
                         src="/assets/img/home/handshake.png"
@@ -370,7 +370,13 @@ export default async function LiveMatches() {
             <div className="lg:hidden rounded-lg p-4 mb-4 bg-[#ffffff] performance-section relative hover:shadow-lg">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
-                  <div className="flex gap-[2px] items-center text-[#ea2323] rounded-full font-semibold uppercase text-[13px]">
+                  <div
+  className={`flex gap-[2px] items-center text-[#ea2323] rounded-full font-semibold uppercase text-[13px] ${
+    (items.game_state_str === 'Rain Delay' || items.status_str === 'Rain Delay') ? 'w-[30%]' :
+    (items.game_state_str === 'Match Start Delay' || items.status_str === 'Match Start Delay') ? 'w-[50%]' :
+    ''
+  }`}
+>
                     <span className="rounded-full">
                       <svg className="h-[7px] w-[7px]">
                         <circle
@@ -394,14 +400,14 @@ export default async function LiveMatches() {
                     </span>
                     {items.game_state_str === 'Play Ongoing' ? items.status_str : items.game_state_str}
                   </div>
-                  <div>
+                  
                     <Link href={"/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) + "/" + items.competition.cid}  >
-                      <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                        {truncateText(items.competition.title, 5)} -{" "}
-                        {items.competition.season}
+                      <h2 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                       <span> {items.competition.title} </span> - 
+                       <span> {items.competition.season} </span>
                       </h2>
                     </Link>
-                  </div>
+                  
 
                 </div>
               </div>
@@ -523,7 +529,7 @@ export default async function LiveMatches() {
                       {/* <div className="h-[100px] border-l-[1px] border-[#f2fafd]"></div> */}
 
                       <div className="w-[44%] font-semibold text-center">
-                        <p className={"mt-1 mx-2 text-[#2F335C] text-[12px]  statusNote" + 
+                        <p className={"mt-1 mx-2 text-[#2F335C] text-[12px]  statusNote" +
                           items.match_id
                         }>
                           {/* {items.status_note} */}
@@ -551,8 +557,8 @@ export default async function LiveMatches() {
                       </>
                     }
                     {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                      <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title+ "-head-to-head-in-ipl" : items?.title + "-head-to-head-in-" + items?.format_str)).toLowerCase()}>
-                        
+                      <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title + "-head-to-head-in-ipl" : items?.title + "-head-to-head-in-" + items?.format_str)).toLowerCase()}>
+
                         <div className="pl-[10px] border-l-[1px] border-[#d0d3d7] flex justify-end items-center space-x-2">
                           <Image
                             src="/assets/img/home/handshake.png"

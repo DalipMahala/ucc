@@ -10,13 +10,10 @@
 }
 
 
-
-
-
 @font-face {
   font-family: 'Noto Sans Disp Blk';
-  src: url('./fonts/NotoSansDisplay-Black.woff2') format('woff2'),
-    url('./fonts/NotoSansDisplay-Black.woff') format('woff');
+  src: url('/fonts/NotoSansDisplay-Black.woff2') format('woff2'),
+    url('/fonts/NotoSansDisplay-Black.woff') format('woff');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -24,8 +21,8 @@
 
 @font-face {
   font-family: 'Noto Sans Disp';
-  src: url('./fonts/NotoSansDisplay-Bold.woff2') format('woff2'),
-    url('./fonts/NotoSansDisplay-Bold.woff') format('woff');
+  src: url('/fonts/NotoSansDisplay-Bold.woff2') format('woff2'),
+    url('/fonts/NotoSansDisplay-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -33,8 +30,8 @@
 
 @font-face {
   font-family: 'Noto Sans Disp';
-  src: url('./fonts/NotoSansDisplay-Light.woff2') format('woff2'),
-    url('./fonts/NotoSansDisplay-Light.woff') format('woff');
+  src: url('/fonts/NotoSansDisplay-Light.woff2') format('woff2'),
+    url('/fonts/NotoSansDisplay-Light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -42,8 +39,8 @@
 
 @font-face {
   font-family: 'Noto Sans Disp SemBd';
-  src: url('./fonts/NotoSansDisplay-SemiBold.woff2') format('woff2'),
-    url('./fonts/NotoSansDisplay-SemiBold.woff') format('woff');
+  src: url('/fonts/NotoSansDisplay-SemiBold.woff2') format('woff2'),
+    url('/fonts/NotoSansDisplay-SemiBold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -51,8 +48,8 @@
 
 @font-face {
   font-family: 'Noto Sans Disp Med';
-  src: url('./fonts/NotoSansDisplay-Medium.woff2') format('woff2'),
-    url('./fonts/NotoSansDisplay-Medium.woff') format('woff');
+  src: url('/fonts/NotoSansDisplay-Medium.woff2') format('woff2'),
+    url('/fonts/NotoSansDisplay-Medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -60,8 +57,8 @@
 
 @font-face {
   font-family: 'Noto Sans Disp';
-  src: url('./fonts/NotoSansDisplay-Regular.woff2') format('woff2'),
-    url('./fonts/NotoSansDisplay-Regular.woff') format('woff');
+  src: url('/fonts/NotoSansDisplay-Regular.woff2') format('woff2'),
+    url('/fonts/NotoSansDisplay-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -69,8 +66,8 @@
 
 @font-face {
   font-family: 'Noto Sans Disp';
-  src: url('./fonts/NotoSansDisplay-Thin.woff2') format('woff2'),
-    url('./fonts/NotoSansDisplay-Thin.woff') format('woff');
+  src: url('/fonts/NotoSansDisplay-Thin.woff2') format('woff2'),
+    url('/fonts/NotoSansDisplay-Thin.woff') format('woff');
   font-weight: 100;
   font-style: normal;
   font-display: swap;
