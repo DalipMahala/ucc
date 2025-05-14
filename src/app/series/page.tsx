@@ -69,8 +69,8 @@ export default async function page(props: { params: Params }) {
   const seriesMatches = categorizedMatches;
   return (
     <Layout>
-          {seriesName === '' || seriesName === undefined ? (
-          <SeriesList tournamentsList={tournamentsList}></SeriesList>
+          {seriesName === '' || seriesName === undefined || seriesName === 'international' || seriesName === 'women'  || seriesName === 'domestic'? (
+          <SeriesList tournamentsList={tournamentsList} tabName={seriesName}></SeriesList>
           ):(
             <>
           <Banner seriesData={liveSeriesData} seriesInfo={SeriesDetails}></Banner>

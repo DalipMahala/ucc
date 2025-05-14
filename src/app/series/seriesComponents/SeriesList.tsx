@@ -11,8 +11,9 @@ import PLSeries from "@/app/components/popularSeries";
 
 interface SeriesList {
   tournamentsList: any | null;
+  tabName: string | null;
 }
-export default function SeriesList({ tournamentsList }: SeriesList) {
+export default function SeriesList({ tournamentsList, tabName }: SeriesList) {
 
 
   const uniqueTypes = [
@@ -22,7 +23,8 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
       )
     ),
   ];
-  const [filter, setFilter] = useState(uniqueTypes[0]);
+  // const [filter, setFilter] = useState('All');
+  const filter = tabName ? tabName : "All";
   const statusTypes = [
     ...new Set(
       tournamentsList?.map(
@@ -31,9 +33,16 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
     ),
   ].reverse();
   const [statusFilter, setStatusFilter] = useState('All');
-  let seriesList = tournamentsList.filter(
+  let seriesList = tournamentsList;
+  if(filter !== 'All'){
+   seriesList = tournamentsList.filter(
     (item: { category: string, status: string }) => item.category === filter && (statusFilter === "All" || item.status === statusFilter)
   );
+  }else{
+    seriesList = tournamentsList.filter(
+      (item: { category: string, status: string }) => (statusFilter === "All" || item.status === statusFilter)
+    );
+  }
 
   seriesList = [...seriesList].sort((a, b) => ['live', 'fixture', 'result'].indexOf(a.status) - ['live', 'fixture', 'result'].indexOf(b.status) || new Date(a.datestart).getTime() - new Date(b.datestart).getTime());
 
@@ -51,15 +60,17 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
                                dark:[&::-webkit-scrollbar-track]:bg-neutral-[#ecf2fd] 
                                  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-[#ecf2fd]"
               >
-                {uniqueTypes?.map((item: any) => (
+                {["All", ...uniqueTypes]?.map((item: any) => (
+                  <Link key={item} href={item === 'All' ? "/series" : "/series/"+item.toLowerCase()}>
                   <button
-                    key={item}
+                    
                     className={`font-medium py-2 md:px-5 px-3 capitalize whitespace-nowrap ${filter === item ? "bg-[#1A80F8] text-white" : ""
                       } rounded-md`}
-                    onClick={() => setFilter(item)}
+                    
                   >
                     {item}
                   </button>
+                  </Link>
                 ))}
               </div>
             </div>

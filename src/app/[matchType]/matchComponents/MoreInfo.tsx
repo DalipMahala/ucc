@@ -1249,13 +1249,13 @@ export default function MoreInfo({
                         <div>
                           <Image
                             loading="lazy"
-                            src="/assets/img/weather.png"
+                            src={matchData?.match_info?.weather?.weather ? "/assets/img/weather/"+matchData?.match_info?.weather?.weather+".svg" : "/assets/img/weather/weather.png"}
                             className="md:h-[75px] h-[60px]"
                             width={75}
                             height={75}
                             alt=""
                           />
-                          <p className="text-1xl ml-2 font-semibold">Sunny</p>
+                          <p className="text-1xl ml-2 font-semibold">{matchData?.match_info?.weather?.weather}</p>
                         </div>
                       </div>
                       <div className="col-span-3">
