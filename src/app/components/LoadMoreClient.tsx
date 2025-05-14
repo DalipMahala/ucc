@@ -283,11 +283,16 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
           <div className="lg:hidden rounded-lg p-4 mb-4 bg-[#ffffff] performance-section relative">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center space-x-2">
+                 
                 <div
-                  className="flex text-[13px] items-center text-[#0B773C] rounded-full uppercase font-semibold"
+                 className={`flex text-[13px] items-center rounded-full uppercase font-semibold ${cmatch.status_str === "Cancelled" ? "text-red-600" : "text-[#0B773C]"
+                    }`}
                   style={{ gap: "2px" }}
                 >
-                  <div className="w-[6px] h-[6px] bg-[#0B773C] rounded-full"></div> {cmatch.status_str}
+                  <span
+                    className={`w-[8px] h-[8px] rounded-full ${cmatch.status_str === "Cancelled" ? "bg-red-600" : "bg-[#0B773C]"
+                      }`}
+                  > </span> {cmatch.status_str}
                 </div>
                 <div>
                   <Link href={"/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) + "/" + cmatch.competition.cid}  >

@@ -584,11 +584,11 @@ export default function MoreInfo({
                                       <div className="text-center">
                                         {items.winning_team_id ===
                                           teama_id ? (
-                                          <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center ">
+                                          <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center inline-block">
                                             W
                                           </span>
                                         ) : (
-                                          <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center ">
+                                          <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center inline-block">
                                             L
                                           </span>
                                         )}
@@ -1252,23 +1252,18 @@ export default function MoreInfo({
                           height={75}
                           alt=""
                         />
-                        <p className="text-1xl ml-2 font-semibold">{matchData?.match_info?.weather?.weather}</p>
+                        {/* <p className="text-1xl ml-2 font-semibold">{matchData?.match_info?.weather?.weather}</p> */}
+                        <p className="text-1xl ml-2 font-semibold capitalize">{matchData?.match_info?.weather?.weather_desc}</p>
                       </div>
                     </div>
-                    <div className="col-span-3">
-                      <div className="font-normal text-[#616161] mb-2">
-                        <p className="lg:relative lg:top-0 lg:right-0 lg:text-left lg:text-[13px] absolute top-[4px] right-0 text-right text-[10px]">
-                          {matchData?.match_info?.weather?.weather_desc}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="col-span-3">
+                    
+                    <div className="col-span-6 flex items-center justify-center">
                       <p className="font-bold	md:text-[28px] text-[24px]">
                         {matchData?.match_info?.weather?.temp}°C
                       </p>
                     </div>
                     <div className="col-span-3 text-[#616161] md:text-[13px] text-[11px]">
-                      <div className="flex justify-between pb-1 items-center">
+                      <div className="flex justify-between pb-[6px] items-center">
                         <div className="flex space-x-2 items-center">
                           <Image loading="lazy"
                             src="/assets/img/w-1.png"
@@ -1285,7 +1280,7 @@ export default function MoreInfo({
                           </span>
                         </div>
                       </div>
-                      <div className="flex justify-between pb-1 space-x-2 items-center">
+                      <div className="flex justify-between pb-[6px] space-x-2 items-center">
                         <div className="flex space-x-2 items-center">
                           <Image loading="lazy"
                             src="/assets/img/w-2.png"
@@ -1429,12 +1424,12 @@ export default function MoreInfo({
                       >
                         <div className="flex flex-col items-center w-[65px] h-[64px] p-4 rounded-full bg-white">
                           {/* <p className="font-bold text-[18px]">7</p> */}
-                          <p className="text-[10px]">Matches</p>
+                          {/* <p className="text-[10px]">Matches</p> */}
                         </div>
                       </div>
                     </div>
                     <div className="col-span-1 relative">
-                      <div className="flex items-center space-x-8 mb-4">
+                      <div className="flex items-center space-x-8 mb-4 justify-between">
                         <p className="text-[13px] text-[#3E436D]">
                           Win Bat first{" "}
                         </p>
@@ -1457,13 +1452,13 @@ export default function MoreInfo({
                       <p className="text-[13px] text-[#3E436D]">
                         Avg 1st Innings
                       </p>
-                      <p className="font-medium text-1xl">{matchVenueStats?.average_score_for_venue?.[0]?.avgruns}</p>
+                      <p className="font-medium text-1xl">{matchVenueStats?.average_score_for_venue?.[0]?.avgruns}%</p>
                     </div>
                     <div className="flex flex-col items-end space-y-1">
                       <p className="text-[13px] text-[#3E436D]">
                         Avg 2st Innings
                       </p>
-                      <p className="font-medium text-1xl">{matchVenueStats?.average_score_for_venue?.[1]?.avgruns}</p>
+                      <p className="font-medium text-1xl">{matchVenueStats?.average_score_for_venue?.[1]?.avgruns}%</p>
                     </div>
                   </div>
                   <div className="flex justify-between items-center py-2 mb-3 pb-3 border-b border-[#e4e9f0]">
@@ -1471,13 +1466,13 @@ export default function MoreInfo({
                       <p className="text-[13px] text-[#3E436D]">
                         Toss Win First Bat
                       </p>
-                      <p className="font-medium text-1xl">{matchVenueStats?.team_toss_win_choose_batting}</p>
+                      <p className="font-medium text-1xl">{matchVenueStats?.team_toss_win_choose_batting}%</p>
                     </div>
                     <div className="flex flex-col items-end space-y-1">
                       <p className="text-[13px] text-[#3E436D]">
                         Toss Win First Bowl
                       </p>
-                      <p className="font-medium text-1xl">{matchVenueStats?.team_toss_win_choose_fieldeding}</p>
+                      <p className="font-medium text-1xl">{matchVenueStats?.team_toss_win_choose_fieldeding}%</p>
                     </div>
                   </div>
                   <div className="flex justify-between items-center py-2 mb-3 pb-3 border-b border-[#e4e9f0]">
@@ -1485,13 +1480,13 @@ export default function MoreInfo({
                       <p className="text-[13px] text-[#3E436D]">
                         Toss Win First Bat Won
                       </p>
-                      <p className="font-medium text-1xl">{matchVenueStats?.team_toss_win_choose_batting_match_won}</p>
+                      <p className="font-medium text-1xl">{matchVenueStats?.team_toss_win_choose_batting_match_won}%</p>
                     </div>
                     <div className="flex flex-col items-end space-y-1">
                       <p className="text-[13px] text-[#3E436D]">
                         Toss Win First Bowl Won
                       </p>
-                      <p className="font-medium text-1xl">{matchVenueStats?.team_toss_win_choose_fielding_match_won}</p>
+                      <p className="font-medium text-1xl">{matchVenueStats?.team_toss_win_choose_fielding_match_won}%</p>
                     </div>
                   </div>
                 </div>

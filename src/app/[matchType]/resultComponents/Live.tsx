@@ -405,113 +405,163 @@ export default function LiveResult({
             <div className="md:grid grid-cols-12 gap-4">
 
               <div className="lg:col-span-12 md:col-span-7 lg:grid grid-cols-12 gap-4">
-                <div className="col-span-8">
-                  <div className="rounded-lg bg-white">
-                    <div className="p-4">
-                      <div className="flex items-center justify-between">
-                        <Link className="w-[43%]"
-                          href={
-                            "/player/" + playerUrls[batsman?.[0]?.batsman_id]
-                          }
-                        >
-                          <div className="flex items-center gap-3">
-                            <div>
-                              <PlayerImage
-                                key={batsman?.[0]?.batsman_id}
-                                player_id={batsman?.[0]?.batsman_id}
-                                height={40}
-                                width={40}
-                                className="rounded-lg"
-                              />
-                            </div>
-                            <div className="font-medium">
-                              <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
-                                {getPlayerNameByPid(
-                                  players,
-                                  batsman?.[0]?.batsman_id
-                                )}{" "}
-                              </h2>
-                              <p className="md:text-[15px] text-[14px] flex items-center">
-                                {batsman?.[0].runs}{" "}
-                                <span className="md:text-[13px] text-[12px] text-[#757A82] px-1">
-                                  ({batsman?.[0]?.balls_faced})
-                                </span>
-                                {batsman?.[0]?.batsman_id ==
-                                  currPartnership?.batsmen?.[0]?.batsman_id ? (
-                                  <Image
-                                    src="/assets/img/home/bat.png"
-                                    className="h-[13px]"
-                                    width={12}
-                                    height={13}
-                                    alt=""
-                                    loading="lazy"
-                                  />
-                                ) : (
-                                  ""
-                                )}
-                              </p>
-                            </div>
-                          </div>
-                        </Link>
-                        <div className="font-medium text-center w-[14%] ">
-                          <p className="md:text-[18px] text-[15px] text-[#13b76dbd]">
-                            {currPartnership?.runs}{" "}
-                            <span className="md:text-[15px] text-[13px] text-black">
-                              ({currPartnership?.balls})
-                            </span>
-                          </p>
-                          <p>P-ship</p>
+                <div className="col-span-8 p-4 rounded-lg bg-white">
+
+                  <div className="md:mb-0 mb-4 flex items-center justify-between">
+                    <Link className="w-[43%]"
+                      href={
+                        "/player/" + playerUrls[batsman?.[0]?.batsman_id]
+                      }
+                    >
+                      <div className="flex items-center gap-3">
+                        <div>
+                          <PlayerImage
+                            key={batsman?.[0]?.batsman_id}
+                            player_id={batsman?.[0]?.batsman_id}
+                            height={40}
+                            width={40}
+                            className="rounded-lg"
+                          />
                         </div>
-
-
-                        <Link className="w-[43%] flex justify-end"
-                          href={
-                            "/player/" +
-                            playerUrls[batsman?.[1]?.batsman_id]
-                          }
-                        >
-                          <div className="flex items-center justify-end flex-row-reverse gap-3">
-                            <div>
-                              <PlayerImage
-                                key={batsman?.[1]?.batsman_id}
-                                player_id={batsman?.[1]?.batsman_id}
-                                height={40}
-                                width={40}
-                                className="rounded-lg"
+                        <div className="font-medium">
+                          <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
+                            {getPlayerNameByPid(
+                              players,
+                              batsman?.[0]?.batsman_id
+                            )}{" "}
+                          </h2>
+                          <p className="md:text-[15px] text-[14px] flex items-center">
+                            {batsman?.[0].runs}{" "}
+                            <span className="md:text-[13px] text-[12px] text-[#757A82] px-1">
+                              ({batsman?.[0]?.balls_faced})
+                            </span>
+                            {batsman?.[0]?.batsman_id ==
+                              currPartnership?.batsmen?.[0]?.batsman_id ? (
+                              <Image
+                                src="/assets/img/home/bat.png"
+                                className="h-[13px]"
+                                width={12}
+                                height={13}
+                                alt=""
+                                loading="lazy"
                               />
-                            </div>
-                            <div className="font-medium text-end">
-                              <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
-                                {getPlayerNameByPid(
-                                  players,
-                                  batsman?.[1]?.batsman_id
-                                )}
-                              </h2>
-                              <p className="md:text-[15px] text-[14px] flex items-center justify-end">
-                                {batsman?.[1]?.runs}{" "}
-                                <span className="md:text-[13px] text-[12px] text-[#757A82] pl-1">
-                                  ({batsman?.[1]?.balls_faced})
-                                </span>
-                                {batsman?.[0]?.batsman_id ==
-                                  currPartnership?.batsman?.[1]?.batsman_id ? (
-                                  <Image
-                                    src="/assets/img/home/bat.png"
-                                    className="h-[14px]"
-                                    width={14}
-                                    height={14}
-                                    alt=""
-                                    loading="lazy"
-                                  />
-                                ) : (
-                                  ""
-                                )}
-                              </p>
-                            </div>
-                          </div>
-                        </Link>
+                            ) : (
+                              ""
+                            )}
+                          </p>
+                        </div>
                       </div>
+                    </Link>
+                    <div className="font-medium text-center w-[14%] ">
+                      <p className="md:text-[18px] text-[15px] text-[#13b76dbd]">
+                        {currPartnership?.runs}{" "}
+                        <span className="md:text-[15px] text-[13px] text-black">
+                          ({currPartnership?.balls})
+                        </span>
+                      </p>
+                      <p>P-ship</p>
                     </div>
+
+
+                    <Link className="w-[43%] flex justify-end"
+                      href={
+                        "/player/" +
+                        playerUrls[batsman?.[1]?.batsman_id]
+                      }
+                    >
+                      <div className="flex items-center justify-end flex-row-reverse gap-3">
+                        <div>
+                          <PlayerImage
+                            key={batsman?.[1]?.batsman_id}
+                            player_id={batsman?.[1]?.batsman_id}
+                            height={40}
+                            width={40}
+                            className="rounded-lg"
+                          />
+                        </div>
+                        <div className="font-medium text-end">
+                          <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
+                            {getPlayerNameByPid(
+                              players,
+                              batsman?.[1]?.batsman_id
+                            )}
+                          </h2>
+                          <p className="md:text-[15px] text-[14px] flex items-center justify-end">
+                            {batsman?.[1]?.runs}{" "}
+                            <span className="md:text-[13px] text-[12px] text-[#757A82] pl-1">
+                              ({batsman?.[1]?.balls_faced})
+                            </span>
+                            {batsman?.[0]?.batsman_id ==
+                              currPartnership?.batsman?.[1]?.batsman_id ? (
+                              <Image
+                                src="/assets/img/home/bat.png"
+                                className="h-[14px]"
+                                width={14}
+                                height={14}
+                                alt=""
+                                loading="lazy"
+                              />
+                            ) : (
+                              ""
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
                   </div>
+
+
+                  <div className="md:hidden bg-white mt-2 pt-2 border-t-[1px] border-[#e7f2f4]">
+                    <Link
+                      href={
+                        "/player/" +
+                        playerUrls[matchinfo?.bowlers?.[0]?.bowler_id]
+                      }
+                    >
+                      <div className="flex items-center justify-between gap-3 font-medium mx-auto w-[100%]">
+
+
+                        <div className="flex ga-1 items-center  w-[50%]">
+                          <div className="relative">
+                            <PlayerImage
+                              key={matchinfo?.bowlers?.[0]?.bowler_id}
+                              player_id={matchinfo?.bowlers?.[0]?.bowler_id}
+                              height={40}
+                              width={40}
+                              className="rounded-lg"
+                            />
+                            <Image
+                              src="/assets/img/player/ball.png"
+                              className="absolute -bottom-1.5 -right-0.5 h-[16px] bg-white rounded-full p-[2px]"
+                              width={16}
+                              height={16}
+                              alt=""
+                              loading="lazy"
+                            />
+                          </div>
+                          <h2 className="md:text-[15px] text-[14px] text-[#586577] pl-[10px]">
+                            {getPlayerNameByPid(
+                              players,
+                              matchinfo?.bowlers?.[0]?.bowler_id
+                            )}
+                          </h2>
+
+
+                        </div>
+                        <p className="md:text-[15px] text-[14px] flex items-center justify-end w-[50%]">
+                          {matchinfo?.bowlers?.[0]?.wickets}-
+                          {matchinfo?.bowlers?.[0]?.runs_conceded}{" "}
+                          <span className="md:text-[13px] text-[12px] text-[#586577] pt-[4px] px-1">
+                            ({matchinfo?.bowlers?.[0]?.overs})
+                          </span>
+                        </p>
+
+                      </div>
+                    </Link>
+                  </div>
+
+
+
                 </div>
 
 
@@ -560,58 +610,6 @@ export default function LiveResult({
                       </div>
                     </Link>
                   </div>
-
-
-                  <div className="md:hidden rounded-lg bg-white py-2 px-4">
-                    <Link
-                      href={
-                        "/player/" +
-                        playerUrls[matchinfo?.bowlers?.[0]?.bowler_id]
-                      }
-                    >
-                      <div className="flex items-center justify-between gap-3 font-medium mx-auto w-[100%]">
-
-
-                        <div className="flex ga-1 items-center  w-[50%]">
-                          <div className="relative">
-                            <PlayerImage
-                              key={matchinfo?.bowlers?.[0]?.bowler_id}
-                              player_id={matchinfo?.bowlers?.[0]?.bowler_id}
-                              height={40}
-                              width={40}
-                              className="rounded-lg"
-                            />
-                            <Image
-                              src="/assets/img/player/ball.png"
-                              className="absolute -bottom-1.5 -right-0.5 h-[13px] bg-white rounded-full p-[2px]"
-                              width={13}
-                              height={13}
-                              alt=""
-                              loading="lazy"
-                            />
-                          </div>
-                          <h2 className="md:text-[15px] text-[14px] text-[#586577] pl-[10px]">
-                            {getPlayerNameByPid(
-                              players,
-                              matchinfo?.bowlers?.[0]?.bowler_id
-                            )}
-                          </h2>
-
-
-                        </div>
-                        <p className="md:text-[15px] text-[14px] flex items-center justify-end w-[50%]">
-                          {matchinfo?.bowlers?.[0]?.wickets}-
-                          {matchinfo?.bowlers?.[0]?.runs_conceded}{" "}
-                          <span className="md:text-[13px] text-[12px] text-[#586577] pt-[4px] px-1">
-                            ({matchinfo?.bowlers?.[0]?.overs})
-                          </span>
-                        </p>
-
-                      </div>
-                    </Link>
-                  </div>
-
-
                 </div>
 
 
@@ -620,7 +618,8 @@ export default function LiveResult({
             </div>
             <div className="cust-box-click-container">
               <div className="my-2">
-                <div className="flex gap-[10px] overflow-auto items-center py-2">
+                <div className="flex gap-[10px] items-center py-2 my-2 overflow-x-auto [&::-webkit-scrollbar] md:[&::-webkit-scrollbar]:h-[5px] [&::-webkit-scrollbar]:h-[1px] 
+         [&::-webkit-scrollbar-track]:bg-gray-100  md:[&::-webkit-scrollbar-thumb]:bg-[#DFE9F6]  [&::-webkit-scrollbar-thumb]:bg-[#ecf2fd]  dark:[&::-webkit-scrollbar-track]:bg-neutral-700  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
                   <p className="font-medium text-[14px]">Commentary</p>
                   {updatedFilterarray.map((item) => (
                     <button
@@ -650,67 +649,81 @@ export default function LiveResult({
                     ?.map((comment: any, index: number) =>
                       comment?.event === "overend" ? (
                         <div
-                          className="rounded-t-lg bg-[#f8f8f8] mt-6"  style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
+                          className="rounded-t-lg bg-[#0e2149e0] mt-4 text-[#ffffff]" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
                           key={`over-${index}`}
                         >
                           {/* <div className="flex md:flex-row flex-col justify-between md:items-center gap-2"> */}
 
                           <div className="flex justify-between p-4">
 
+                            <div className="text-[16px] font-semibold text-[#ffffff] flex gap-2 items-center w-[50%]">
+                              <p>
+
+                                Over {comment?.over}
+                              </p>
+                              |
+                              <p>14 Runs</p>
+                            </div>
+
                             <div className="text-[14px] font-normal  ">
                               {matchinning.short_name} : {comment.score}
                             </div>
 
 
-                            <div className="text-[14px] font-normal ">
-                            {updatedCommentaries?.map((cruns:any, index:number) => (cruns?.event !== "overend" && Number(cruns?.over)+1 == Number(comment?.over)) ? (
-                                            <span key={index}>{cruns?.score} </span>
-                                  ):(""))}
-                            </div>
-
-                            <div className="text-[16px] font-semibold text-[#3992f4]">
-                              {comment?.over}{" "}
-                              <span className=" font-medium text-[13px]  ">
-                                End Of Over
-                              </span>
-                            </div>
-
                           </div>
+
+
+
+
+
+
 
                           <div className="border-b-[1px] border-[#e7e7e7]"></div>
 
                           <div className="flex justify-between p-4">
-                            <div className="text-[14px] font-normal  ">
-                              {getPlayerNameByPid(
-                                players,
-                                comment?.bats?.[0]?.batsman_id
-                              )}
-                              : {comment?.bats?.[0]?.runs}{" "}
-                              <span className="text-[#3992f4]">
-                                ({comment?.bats?.[0]?.balls_faced})
-                              </span>{" "}
-                              |{" "}
-                              {getPlayerNameByPid(
-                                players,
-                                comment?.bats?.[1]?.batsman_id
-                              )}
-                              : {comment?.bats?.[1]?.runs}{" "}
-                              <span className="text-[#3992f4]">
-                                ({comment?.bats?.[1]?.balls_faced})
-                              </span>
+                            <div className="text-[14px] font-normal flex gap-2 flex-col items-start w-[40%]">
+                              <div>
+                                {getPlayerNameByPid(
+                                  players,
+                                  comment?.bats?.[0]?.batsman_id
+                                )}
+                                : {comment?.bats?.[0]?.runs}{" "}
+                                <span className="text-[#ffffff]">
+                                  ({comment?.bats?.[0]?.balls_faced})
+                                </span>{" "}
+                              </div>
+
+                              <div>
+                                {getPlayerNameByPid(
+                                  players,
+                                  comment?.bats?.[1]?.batsman_id
+                                )}
+                                : {comment?.bats?.[1]?.runs}{" "}
+                                <span className="text-[#ffffff]">
+                                  ({comment?.bats?.[1]?.balls_faced})
+                                </span>
+                              </div>
                             </div>
 
+                            <div className="flex gap-2 flex-col items-end w-[60%]">
+                              <div className="text-[14px] font-normal md:pt-0 pt-1">
+                                {getPlayerNameByPid(
+                                  players,
+                                  comment?.bowls?.[0]?.bowler_id
+                                )}{" "}
+                                <span className="text-[#ffffff]">
+                                  {comment?.bowls?.[0]?.overs}-
+                                  {comment?.bowls?.[0]?.runs_conceded}-
+                                  {comment?.bowls?.[0]?.wickets}
+                                </span>
+                              </div>
 
-                            <div className="text-[14px] font-normal  ">
-                              {getPlayerNameByPid(
-                                players,
-                                comment?.bowls?.[0]?.bowler_id
-                              )}{" "}
-                              <span className="text-[#3992f4]">
-                                {comment?.bowls?.[0]?.overs}-
-                                {comment?.bowls?.[0]?.runs_conceded}-
-                                {comment?.bowls?.[0]?.wickets}
-                              </span>
+                              <div className="text-[14px] font-normal flex-row-reverse flex flex-wrap gap-1 items-center">
+                                {updatedCommentaries?.map((cruns: any, index: number) => (cruns?.event !== "overend" && Number(cruns?.over) + 1 == Number(comment?.over)) ? (
+                                  <span key={index}>{cruns?.score} </span>
+                                ) : (""))}
+                              </div>
+
                             </div>
 
                           </div>
@@ -773,14 +786,14 @@ export default function LiveResult({
                                     "linear-gradient(90deg, #D20A5E 0%, #9C0C0C 100%)",
                                 }}
                               >
-                                <div className="md:flex items-center justify-between">
+                                <div className="flex items-center justify-between">
                                   <div className="flex items-center">
                                     <PlayerImage
                                       key={comment?.wicket_batsman_id}
                                       player_id={comment?.wicket_batsman_id}
-                                      height={65}
-                                      width={65}
-                                      className="rounded-lg md:mr-4 mr-2 h-[65px] w-[65px]"
+                                      height={71}
+                                      width={71}
+                                      className="md:h-[71px] h-[40px]  md:w-[71px] w-[40px]  rounded-lg md:mr-4 mr-2"
                                     />
 
                                     <div>
