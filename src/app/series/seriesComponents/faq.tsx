@@ -6,9 +6,12 @@ interface faqs{
 }
 export default function FAQ({seriesInfo}:faqs) {
     const standings = seriesInfo?.standing?.standings;
+    const total_rounds = seriesInfo?.total_rounds;
   const [openIndex, setOpenIndex] = useState<number>(0); // First item open by default
 
-  const faqs = [
+  let faqs:any = [];
+  if(total_rounds == 1){
+   faqs = [
     {
       question: "What is NRR in Points Table?",
       answer: ["NRR (Net Run Rate) shows how strong a team is by comparing runs scored vs runs conceded. It's used to break ties when teams have same points."]
@@ -37,7 +40,30 @@ export default function FAQ({seriesInfo}:faqs) {
         answer: [`As of now, ${standings[0]?.standings?.[standings[0]?.standings.length - 1]?.team?.abbr} and ${standings[0]?.standings?.[standings[0]?.standings.length - 2]?.team?.abbr} are ranked lowest in the table.`]
       },
   ];
+  }else{
+    faqs = [
+      {
+        question: `Which teams are at the bottom of the table?`,
+        answer: ["As per current standings:",
+          Array.from({ length: total_rounds }, (_, i) => {
+            const index = i; 
+          return `In ${standings[index]?.round?.name}, the lowest-ranked team is  ${standings[index]?.standings?.[standings[0]?.standings.length - 1]?.team?.abbr} with ${standings[index]?.standings?.[0]?.points} points and a negative NRR of ${standings[index]?.standings?.[0]?.netrr}.`;
+        }).join(',')
+      ]
+      },
+        {
+          question: `Which team is on top right now - ${seriesInfo.abbr}?`,
+          answer: [
+            Array.from({ length: total_rounds }, (_, i) => {
+              const index = i; 
+                return `${standings[index]?.standings?.[0]?.team?.abbr} is leading ${standings[index]?.round?.name} with ${standings[index]?.standings?.[0]?.points} points and ${standings[index]?.standings?.[0]?.netrr} NRR. ${'\n'}`
+              })
+          ]
+        },
+        
+    ];
 
+  }
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? -1 : index); // Close if clicking the open one
   };
@@ -45,10 +71,10 @@ export default function FAQ({seriesInfo}:faqs) {
   return (
     <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
       <div>
-        <h2 className="text-1xl font-semibold mb-1">FAQs on IPL Points Table</h2>
+        <h2 className="text-1xl font-semibold mb-1">FAQs on {seriesInfo.abbr} Points Table</h2>
         <div className="border-t-[1px] border-[#E7F2F4]" />
         <div className="space-y-2 my-2">
-          {faqs.map((faq, index) => (
+          {faqs.map((faq:any, index:number) => (
             <div key={index}>
               <button
                 className="w-full text-left flex justify-between items-center px-4 py-2 transition"

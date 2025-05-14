@@ -45,6 +45,7 @@ async function fetchHtml(seriesId: number) {
 export default async function PointsTable({ urlString, seriesInfo, isPointTable }: PointsTable) {
 
     const standings = seriesInfo?.standing?.standings;
+    const total_rounds = seriesInfo?.total_rounds;
 
     const pageHtml = await fetchHtml(seriesInfo?.cid);
     return (
@@ -59,11 +60,26 @@ export default async function PointsTable({ urlString, seriesInfo, isPointTable 
                     <div className="lg:col-span-8 md:col-span-7">
                         <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
                             <h2 className='text-1xl font-semibold mb-1'>{seriesInfo?.title + " " + seriesInfo?.season + " Points Table!"}</h2>
+                            {total_rounds == 1 ? (
                             <p className='text-gray-700 font-normal'>{"Welcome to the latest " + seriesInfo?.title + " " + seriesInfo?.season + " Points Table! Here's where you’ll find the most accurate and updated information on team standings, wins, losses, and qualification chances." +
                                 "So far, " + standings[0]?.standings?.[0]?.team?.abbr + ", " + standings[0]?.standings?.[1]?.team?.abbr + ", and " + standings[0]?.standings?.[2]?.team?.abbr + " are leading the race with strong performances, while " + standings[0]?.standings?.[3]?.team?.abbr + " is still in the fight to enter the top 4." +
                                 "The points table is updated in real-time after every match – so you can track your favorite team’s progress all season long!"
                             }
                             </p>
+                            ):(
+                                standings?.map((rounds:any, index:number)=> (
+                                    <React.Fragment key={index}>                                    
+                                    <h3 className='text-1xl font-semibold mb-1'>{rounds?.round?.name}</h3>
+                                    <p className='text-gray-700 font-normal'>{"In " +rounds?.round?.name+", "+ rounds?.standings?.[0]?.team?.abbr  + " has dominated the group stage with an unbeaten run so far. On the other hand, " 
+                                        + rounds?.standings?.[1]?.team?.abbr + ", " + rounds?.standings?.[2]?.team?.abbr + ", and " + rounds?.standings?.[3]?.team?.abbr + " are battling closely, but only one may qualify depending on NRR."
+                                    }
+                                    </p>
+                                    </React.Fragment>
+
+                                ))
+                                
+                            )
+                        }
                             {pageHtml?.pointsTableHtml1 && typeof pageHtml?.pointsTableHtml1 === "string" ? (
                                 <div dangerouslySetInnerHTML={{ __html: pageHtml?.pointsTableHtml1 }} />
                             ) : ("")}

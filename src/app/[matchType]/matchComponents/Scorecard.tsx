@@ -19,6 +19,12 @@ interface Scorecard {
   matchUrl: string | null;
   isPointTable: boolean;
 }
+
+function getPlayerRecord(allplayers: any, pid: number) {
+  const pData =  allplayers?.find((player: { pid: number; }) => Number(player.pid) === pid);
+  const prole = pData?.playing_role === 'bowl' ? 'Bowler' : pData?.playing_role === 'bat' ? 'Batsman' : pData?.playing_role === 'wk' ? 'Wicket Keeper':'All Rounder';
+  return prole;
+}
 export default function Scorecard({
   match_id,
   matchData,
@@ -58,7 +64,7 @@ export default function Scorecard({
   let bowlers = matchinning?.bowlers;
   let fows = matchinning?.fows;
   let yetTobat = matchinning?.did_not_bat;
-
+  let allPlayers = matchLiveData?.players;
 
 
   const partnership = matchStates?.innings[tabIndex]?.statistics?.partnership;
@@ -67,7 +73,7 @@ export default function Scorecard({
 
   // const liveData = matchLiveData;
 
-  //console.log("partnership",players.find((p: { player_id: number; }) => p.player_id === 77)?.name );
+  // console.log("partnership",allPlayers );
 
   if (matchLiveData !== undefined && matchLiveData?.match_id == match_id && matchLiveData?.scorecard?.innings[tabIndex] !== undefined && matchLiveData?.scorecard?.innings[tabIndex] !== '') {
     // console.log(tabIndex, "new",matchLiveData);    
@@ -78,6 +84,7 @@ export default function Scorecard({
     bowlers = matchinning?.bowlers;
     fows = matchinning?.fows;
     yetTobat = matchinning?.did_not_bat;
+    allPlayers = matchLiveData?.players;
     // let currPartnership = matchinning.current_partnership;
 
   }
@@ -433,7 +440,7 @@ export default function Scorecard({
                                 </div>
                                 <div className="font-medium">
                                   <h3 className="text-[15px] hover:text-[#1a80f8]">{yetTobat.name} </h3>
-                                  <p className="text-[#757A82] font-normal">Avg:</p>
+                                  <p className="text-[#757A82] font-normal">{getPlayerRecord(allPlayers,Number(yetTobat.player_id))}</p>
                                 </div>
                               </div>
                             </Link>
