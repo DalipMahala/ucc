@@ -15,31 +15,44 @@ const WeeklySlider = () => {
   const [featuredMatch, setFeaturedMatch] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetch("/api/match/featuredMatches", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
-      },
-      cache: "no-store",
-    })
-      .then((res) => res.json())
-      .then((res) => {
+useEffect(() => {
+  const fetchFeaturedMatches = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch("/api/match/featuredMatches", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+        },
+        cache: "no-store",
+      });
 
-        if (res.success) {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-          const futuredM = res?.data?.map(({ match_info, ...rest }: MatchItem) => ({
-            ...match_info,
-            ...rest
-          }));
+      const data = await response.json();
 
-          setFeaturedMatch(futuredM);
-        }
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
+      if (data?.success && Array.isArray(data?.data)) {
+        const formattedMatches = data.data.map(({ match_info, ...rest }: MatchItem) => ({
+          ...match_info,
+          ...rest
+        }));
+        setFeaturedMatch(formattedMatches);
+      } else {
+        setFeaturedMatch([]); // Set empty array if no valid data
+      }
+    } catch (error) {
+      console.error("Failed to fetch featured matches:", error);
+      setFeaturedMatch([]); // Ensure state is cleared on error
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchFeaturedMatches();
+}, []);
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [slides, setSlides] = useState<any[]>([]); // Use state to store the slides

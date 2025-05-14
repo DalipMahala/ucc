@@ -96,7 +96,7 @@ const News = () => {
 
                         width={360}
                         height={192}
-                        alt={post?.title.rendered}
+                        alt="news"
                         className="rounded-lg w-full h-48 object-cover"
                       />
                     </Link>
@@ -155,7 +155,7 @@ const News = () => {
                           src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url}
                           width={300}
                           height={144}
-                          alt={post?.title.rendered}
+                          alt="news"
                           className="rounded-lg h-[90px] object-cover w-[100%]" />
                       )}
                     </Link>

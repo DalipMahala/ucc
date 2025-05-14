@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
       "SELECT mi.fileName FROM match_info mi JOIN ( SELECT match_id FROM matches where status in (1,3) and commentary= 1 and is_featured = 1 limit 5) m ON mi.match_id = m.match_id";
     const [rows] = await db.query<any[]>(query);
     if (!rows || !rows.length || rows.length === 0) {
-      return NextResponse.json({ success: false, data: [] }, { status: 404 });
+      return NextResponse.json({ success: true, data: [] });
     }
 
     let allMatches: any[] = [];
