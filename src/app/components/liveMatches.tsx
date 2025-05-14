@@ -371,12 +371,11 @@ export default async function LiveMatches() {
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
                   <div
-  className={`flex gap-[2px] items-center text-[#ea2323] rounded-full font-semibold uppercase text-[13px] ${
-    (items.game_state_str === 'Rain Delay' || items.status_str === 'Rain Delay') ? 'w-[30%]' :
-    (items.game_state_str === 'Match Start Delay' || items.status_str === 'Match Start Delay') ? 'w-[50%]' :
-    ''
-  }`}
->
+                    className={`flex gap-[2px] items-center text-[#ea2323] rounded-full font-semibold uppercase text-[13px] ${(items.game_state_str === 'Rain Delay' || items.status_str === 'Rain Delay') ? 'w-[30%]' :
+                        (items.game_state_str === 'Match Start Delay' || items.status_str === 'Match Start Delay') ? 'w-[50%]' :
+                          ''
+                      }`}
+                  >
                     <span className="rounded-full">
                       <svg className="h-[7px] w-[7px]">
                         <circle
@@ -400,14 +399,14 @@ export default async function LiveMatches() {
                     </span>
                     {items.game_state_str === 'Play Ongoing' ? items.status_str : items.game_state_str}
                   </div>
-                  
-                    <Link href={"/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) + "/" + items.competition.cid}  >
-                      <h2 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                       <span> {items.competition.title} </span> - 
-                       <span> {items.competition.season} </span>
-                      </h2>
-                    </Link>
-                  
+
+                  <Link href={"/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) + "/" + items.competition.cid}  >
+                    <h2 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                      <span> {items.competition.title} </span> -
+                      <span> {items.competition.season} </span>
+                    </h2>
+                  </Link>
+
 
                 </div>
               </div>

@@ -72,7 +72,7 @@ export default function MoreInfo({
     matchlistA?.map((items: { winning_team_id: any }) =>
       items.winning_team_id === teama_id
         ? teamaWinMatchP++
-          : ""
+        : ""
     );
   }
 
@@ -85,7 +85,7 @@ export default function MoreInfo({
   }
 
   const teamaWinper =
-  teamaWinMatchP > 0 ? (teamaWinMatchP / matchPlayedA) * 100 : 0;
+    teamaWinMatchP > 0 ? (teamaWinMatchP / matchPlayedA) * 100 : 0;
   const teambWinper =
     teambWinMatchP > 0 ? (teambWinMatchP / matchPlayedB) * 100 : 0;
 
@@ -310,7 +310,7 @@ export default function MoreInfo({
                           <MatchCard teamA={matchData?.match_info?.teama?.logo_url} teamB={matchData?.match_info?.teamb?.logo_url} />
                         </div>
                         <div>
-                          <p className="text-[16px] text-[#757A82] font-medium mb-4">
+                          <p className="text-[16px] text-[#757A82] font-medium md:mb-4">
                             {matchData?.match_info?.subtitle}
                           </p>
                           <p className="text-[16px] text-[#272B47] font-medium mb-2">
@@ -319,7 +319,7 @@ export default function MoreInfo({
                         </div>
                       </div>
                       <div className="text-start">
-                        <p className="text-[14px] mb-4 text-[#272B47] font-medium">
+                        <p className="text-[14px] md:mb-4 mb-1 text-[#272B47] font-medium">
                           <span className="text-[14px] text-[#757A82]">
                             Date : </span>
                           {matchData?.match_info?.date_start_ist}
@@ -421,6 +421,7 @@ export default function MoreInfo({
                         {openHeading === 1 && (
                           <div className="md:px-3 open-Performance-data">
                             {/* full screen teame data */}
+
                             <div className="overflow-x-auto lg:block hidden">
                               <table className="w-full text-left rtl:text-right">
                                 <tbody>
@@ -506,6 +507,7 @@ export default function MoreInfo({
                                 </tbody>
                               </table>
                             </div>
+
                             {/* responsive teame data  */}
                             <div className="lg:hidden block">
                               {matchlistA
@@ -559,11 +561,11 @@ export default function MoreInfo({
                                         <div className="text-center">
                                           {items.winning_team_id ===
                                             teama_id ? (
-                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center">
+                                            <span className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center inline-block">
                                               W
                                             </span>
                                           ) : (
-                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center">
+                                            <span className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center inline-block">
                                               L
                                             </span>
                                           )}
@@ -1249,29 +1251,30 @@ export default function MoreInfo({
                         <div>
                           <Image
                             loading="lazy"
-                            src={matchData?.match_info?.weather?.weather ? "/assets/img/weather/"+matchData?.match_info?.weather?.weather+".svg" : "/assets/img/weather/weather.png"}
+                            src={matchData?.match_info?.weather?.weather ? "/assets/img/weather/" + matchData?.match_info?.weather?.weather + ".svg" : "/assets/img/weather/weather.png"}
                             className="md:h-[75px] h-[60px]"
                             width={75}
                             height={75}
                             alt=""
                           />
-                          <p className="text-1xl ml-2 font-semibold">{matchData?.match_info?.weather?.weather}</p>
+                          {/* <p className="text-1xl ml-2 font-semibold">{matchData?.match_info?.weather?.weather}</p> */}
+                          <p className="text-1xl ml-2 font-semibold capitalize">{matchData?.match_info?.weather?.weather_desc}</p>
                         </div>
                       </div>
-                      <div className="col-span-3">
-                        <div className="font-normal text-[#616161] mb-2">
-                          <p className="lg:relative lg:top-0 lg:right-0 lg:text-left lg:text-[13px] absolute top-[4px] right-0 text-right text-[10px]">
-                            {matchData?.match_info?.weather?.weather_desc}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="col-span-3">
+                      {/* <div className="col-span-3 font-normal text-[#616161] mb-2">
+
+                        <p className="">
+                          {matchData?.match_info?.weather?.weather_desc}
+                        </p>
+
+                      </div> */}
+                      <div className="col-span-6 flex items-center justify-center">
                         <p className="font-bold	md:text-[28px] text-[24px]">
                           {matchData?.match_info?.weather?.temp}°C
                         </p>
                       </div>
                       <div className="col-span-3 text-[#616161] md:text-[13px] text-[11px]">
-                        <div className="flex justify-between pb-1 items-center">
+                        <div className="flex justify-between pb-[6px] items-center">
                           <div className="flex space-x-2 items-center">
                             <Image
                               loading="lazy"
@@ -1289,7 +1292,7 @@ export default function MoreInfo({
                             </span>
                           </div>
                         </div>
-                        <div className="flex justify-between pb-1 space-x-2 items-center">
+                        <div className="flex justify-between pb-[6px] space-x-2 items-center">
                           <div className="flex space-x-2 items-center">
                             <Image
                               loading="lazy"
@@ -1349,7 +1352,7 @@ export default function MoreInfo({
 
                 <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                   <h2
-                   className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                    className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Venue Stats
                   </h2>
                   <div className="border-t-[1px] border-[#E4E9F0]" />
@@ -1475,12 +1478,12 @@ export default function MoreInfo({
                         >
                           <div className="flex flex-col justify-center items-center w-[65px] h-[64px] p-4 rounded-full bg-white">
                             {/* <p className="font-bold text-[18px]">7</p> */}
-                            <p className="text-[10px]">Matches</p>
+                            {/* <p className="text-[10px]">Matches</p> */}
                           </div>
                         </div>
                       </div>
                       <div className="col-span-1 relative">
-                        <div className="flex items-center space-x-8 mb-4">
+                        <div className="flex items-center space-x-8 mb-4 justify-between">
                           <p className="text-[13px] text-[#586577]">
                             Win Bat first{" "}
                           </p>
@@ -1507,7 +1510,7 @@ export default function MoreInfo({
                           {
                             matchVenueStats?.average_score_for_venue?.[0]
                               ?.avgruns
-                          }
+                          }%
                         </p>
                       </div>
                       <div className="flex flex-col items-end space-y-1">
@@ -1518,7 +1521,7 @@ export default function MoreInfo({
                           {
                             matchVenueStats?.average_score_for_venue?.[1]
                               ?.avgruns
-                          }
+                          }%
                         </p>
                       </div>
                     </div>
@@ -1528,7 +1531,7 @@ export default function MoreInfo({
                           Toss Win First Bat
                         </p>
                         <p className="font-medium text-1xl">
-                          {matchVenueStats?.team_toss_win_choose_batting}
+                          {matchVenueStats?.team_toss_win_choose_batting}%
                         </p>
                       </div>
                       <div className="flex flex-col items-end space-y-1">
@@ -1536,7 +1539,7 @@ export default function MoreInfo({
                           Toss Win First Bowl
                         </p>
                         <p className="font-medium text-1xl">
-                          {matchVenueStats?.team_toss_win_choose_fieldeding}
+                          {matchVenueStats?.team_toss_win_choose_fieldeding}%
                         </p>
                       </div>
                     </div>
@@ -1548,7 +1551,7 @@ export default function MoreInfo({
                         <p className="font-medium text-1xl">
                           {
                             matchVenueStats?.team_toss_win_choose_batting_match_won
-                          }
+                          }%
                         </p>
                       </div>
                       <div className="flex flex-col items-end space-y-1">
@@ -1558,7 +1561,7 @@ export default function MoreInfo({
                         <p className="font-medium text-1xl">
                           {
                             matchVenueStats?.team_toss_win_choose_fielding_match_won
-                          }
+                          }%
                         </p>
                       </div>
                     </div>
@@ -1774,12 +1777,12 @@ export default function MoreInfo({
                 ) : (
                   manOfTheMatch?.pid !== undefined &&
                   <div className="rounded-lg bg-[#ffffff] mb-4">
-                    <div className="p-4"><Link href={"/player/"+playerUrls[manOfTheMatch?.pid]}>
+                    <div className="p-4"><Link href={"/player/" + playerUrls[manOfTheMatch?.pid]}>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3 md:py-3">
                           <div>
-                          
-                          <PlayerImage key={manOfTheMatch?.pid} player_id={manOfTheMatch?.pid} height={50} width={50} className="rounded-lg" />
+
+                            <PlayerImage key={manOfTheMatch?.pid} player_id={manOfTheMatch?.pid} height={50} width={50} className="rounded-lg" />
                           </div>
                           <div className="font-medium">
                             <h2 className="text-1xl font-semibold hover:text-[#1a80f8]">{manOfTheMatch?.name}</h2>
@@ -1797,7 +1800,7 @@ export default function MoreInfo({
                       </div>
                     </Link></div>
                   </div>
-                  
+
                 )}
 
 

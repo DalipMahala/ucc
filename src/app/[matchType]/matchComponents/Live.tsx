@@ -427,9 +427,12 @@ export default function Live({
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
 
 
+      <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable} />
+
       {/* mobile start */}
 
-      <div className="flex rounded-lg bg-white p-4 md:hidden gap-4  whitespace-nowrap overflow-auto ">
+      <div className="mb-4 flex rounded-lg bg-white p-4 md:hidden gap-4  whitespace-nowrap  overflow-x-auto [&::-webkit-scrollbar] md:[&::-webkit-scrollbar]:h-[5px] [&::-webkit-scrollbar]:h-[1px] 
+         [&::-webkit-scrollbar-track]:bg-gray-100  md:[&::-webkit-scrollbar-thumb]:bg-[#DFE9F6]  [&::-webkit-scrollbar-thumb]:bg-[#ecf2fd]  dark:[&::-webkit-scrollbar-track]:bg-neutral-700  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
 
         {/* This Over Section */}
         {/* {thisOverRun.length > 0 && */}
@@ -495,7 +498,6 @@ export default function Live({
 
       {/* mobile end */}
 
-      <MatchTabs matchUrl={matchUrl} match_id={match_id} matchDetails={matchDetails} isPointTable={isPointTable} />
       {updatedCommentaries && updatedCommentaries.length > 0 ? (
         <div id="tab-content">
           <div id="live" className="tab-content ">
@@ -604,109 +606,59 @@ export default function Live({
 
                     {/* bollwr */}
 
-                      <div className="hidden md:block rounded-lg bg-white">
-                        <Link
-                          href={
-                            "/player/" +
-                            playerUrls[matchinfo?.bowlers?.[0]?.bowler_id]
-                          }
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className="relative">
-                              <PlayerImage
-                                key={matchinfo?.bowlers?.[0]?.bowler_id}
-                                player_id={matchinfo?.bowlers?.[0]?.bowler_id}
-                                height={40}
-                                width={40}
-                                className="rounded-lg"
-                              />
-                              <Image
-                                src="/assets/img/player/ball.png"
-                                className="absolute -bottom-1.5 -right-0.5 h-[13px] bg-white rounded-full p-[2px]"
-                                width={13}
-                                height={13}
-                                alt=""
-                                loading="lazy"
-                              />
-
-                            </div>
-                            <div className="font-medium">
-                              <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
-                                {getPlayerNameByPid(
-                                  players,
-                                  matchinfo?.bowlers?.[0]?.bowler_id
-                                )}
-                              </h2>
-                              <p className="md:text-[15px] text-[14px] flex items-center">
-                                {matchinfo?.bowlers?.[0]?.wickets}-
-                                {matchinfo?.bowlers?.[0]?.runs_conceded}{" "}
-                                <span className="md:text-[13px] text-[12px] text-[#757A82] pt-[4px] px-1">
-                                  ({matchinfo?.bowlers?.[0]?.overs})
-                                </span>
-                              </p>
-                            </div>
-                          </div>
-                        </Link>
-                      </div>
-
-                  </div>
-
-
-                  {/* bollwr Mobile start */}
-
-                    <div className="md:hidden md:rounded-lg bg-white py-3 border-t-[1px] border-[#e7f2f4]">
+                    <div className="hidden md:block rounded-lg bg-white">
                       <Link
                         href={
                           "/player/" +
                           playerUrls[matchinfo?.bowlers?.[0]?.bowler_id]
                         }
                       >
-                        <div className="flex items-center justify-between gap-3 font-medium mx-auto w-[100%]">
-                          <div className="flex ga-1 items-center  w-[50%]">
-                            <div className="relative">
-                              <PlayerImage
-                                key={matchinfo?.bowlers?.[0]?.bowler_id}
-                                player_id={matchinfo?.bowlers?.[0]?.bowler_id}
-                                height={40}
-                                width={40}
-                                className="rounded-lg"
-                              />
-                              <Image
-                                src="/assets/img/player/ball.png"
-                                className="absolute -bottom-1.5 -right-0.5 h-[13px] bg-white rounded-full p-[2px]"
-                                width={13}
-                                height={13}
-                                alt=""
-                                loading="lazy"
-                              />
-                            </div>
-                            <h2 className="md:text-[15px] text-[14px] text-[#757A82] pl-[10px]">
+                        <div className="flex items-center gap-3">
+                          <div className="relative">
+                            <PlayerImage
+                              key={matchinfo?.bowlers?.[0]?.bowler_id}
+                              player_id={matchinfo?.bowlers?.[0]?.bowler_id}
+                              height={40}
+                              width={40}
+                              className="rounded-lg"
+                            />
+                            <Image
+                              src="/assets/img/player/ball.png"
+                              className="absolute -bottom-1.5 -right-0.5 h-[13px] bg-white rounded-full p-[2px]"
+                              width={13}
+                              height={13}
+                              alt=""
+                              loading="lazy"
+                            />
+
+                          </div>
+                          <div className="font-medium">
+                            <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
                               {getPlayerNameByPid(
                                 players,
                                 matchinfo?.bowlers?.[0]?.bowler_id
                               )}
                             </h2>
-
+                            <p className="md:text-[15px] text-[14px] flex items-center">
+                              {matchinfo?.bowlers?.[0]?.wickets}-
+                              {matchinfo?.bowlers?.[0]?.runs_conceded}{" "}
+                              <span className="md:text-[13px] text-[12px] text-[#757A82] pt-[4px] px-1">
+                                ({matchinfo?.bowlers?.[0]?.overs})
+                              </span>
+                            </p>
                           </div>
-                          <p className="md:text-[15px] text-[14px] flex items-baseline justify-end w-[50%]">
-                            <span>  {matchinfo?.bowlers?.[0]?.wickets}-
-                              {matchinfo?.bowlers?.[0]?.runs_conceded} {" "} </span>
-                            <span className="md:text-[13px] text-[12px] text-[#757A82] px-1">
-                              ({matchinfo?.bowlers?.[0]?.overs})
-                            </span>
-                          </p>
-
                         </div>
                       </Link>
                     </div>
 
+                  </div>
 
-                  {/* bollwr Mobile end */}
+
 
 
                   <div className="flex gap-2 items-center justify-between pt-1 border-t-[1px] border-[#E7F2F4]">
                     <div className="flex gap-2 items-center">
-                      <p className="text-[14px] font-normal">Partnership :</p>
+                      <p className="text-[14px] font-normal">P'ship :</p>
                       <p className="md:text-[18px] font-semibold text-[17px] ">
                         <span className="text-[#13b76dbd]">  {currPartnership?.runs} </span>
 
@@ -716,9 +668,63 @@ export default function Live({
                       </p>
                     </div>
                     {(matchinning?.last_wicket?.name !== '' && matchinning?.last_wicket?.name !== undefined) &&
-                      <p><span>Last Wkt :</span> <span>{matchinning?.last_wicket?.name}  <span> {matchinning?.last_wicket?.runs}({matchinning?.last_wicket?.balls}) </span></span></p>
+                      <p><span>Last Wkt :</span> <span className="font-semibold">{matchinning?.last_wicket?.name}  <span> {matchinning?.last_wicket?.runs}({matchinning?.last_wicket?.balls}) </span></span></p>
                     }
                   </div>
+
+
+
+                  {/* bollwr Mobile start */}
+
+                  <div className="md:hidden md:rounded-lg bg-white mt-2 py-2 border-t-[1px] border-[#e7f2f4]">
+                    <Link
+                      href={
+                        "/player/" +
+                        playerUrls[matchinfo?.bowlers?.[0]?.bowler_id]
+                      }
+                    >
+                      <div className="flex items-center justify-between gap-3 font-medium mx-auto w-[100%]">
+                        <div className="flex ga-1 items-center  w-[50%]">
+                          <div className="relative">
+                            <PlayerImage
+                              key={matchinfo?.bowlers?.[0]?.bowler_id}
+                              player_id={matchinfo?.bowlers?.[0]?.bowler_id}
+                              height={40}
+                              width={40}
+                              className="rounded-lg"
+                            />
+                            <Image
+                              src="/assets/img/player/ball.png"
+                              className="absolute -bottom-[6px] -right-[2px] h-[16px] bg-white rounded-full p-[2px]"
+                              width={16}
+                              height={16}
+                              alt=""
+                              loading="lazy"
+                            />
+                          </div>
+                          <h2 className="md:text-[15px] text-[14px] text-[#757A82] pl-[10px]">
+                            {getPlayerNameByPid(
+                              players,
+                              matchinfo?.bowlers?.[0]?.bowler_id
+                            )}
+                          </h2>
+
+                        </div>
+                        <p className="md:text-[15px] text-[14px] flex items-baseline justify-end w-[50%]">
+                          <span>  {matchinfo?.bowlers?.[0]?.wickets}-
+                            {matchinfo?.bowlers?.[0]?.runs_conceded} {" "} </span>
+                          <span className="md:text-[13px] text-[12px] text-[#757A82] px-1">
+                            ({matchinfo?.bowlers?.[0]?.overs})
+                          </span>
+                        </p>
+
+                      </div>
+                    </Link>
+                  </div>
+
+
+                  {/* bollwr Mobile end */}
+
 
                 </div>
 
@@ -997,10 +1003,12 @@ export default function Live({
 
                 </div>
               </div>
+
             </div>
             <div className="cust-box-click-container">
 
-              <div className="flex gap-[10px] overflow-auto items-center py-2 my-2">
+              <div className="flex gap-[10px] items-center py-2 my-2 overflow-x-auto [&::-webkit-scrollbar] md:[&::-webkit-scrollbar]:h-[5px] [&::-webkit-scrollbar]:h-[1px] 
+         [&::-webkit-scrollbar-track]:bg-gray-100  md:[&::-webkit-scrollbar-thumb]:bg-[#DFE9F6]  [&::-webkit-scrollbar-thumb]:bg-[#ecf2fd]  dark:[&::-webkit-scrollbar-track]:bg-neutral-700  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
                 <p className="font-medium text-[14px]">Commentary</p>
                 {updatedFilterarray.map((item) => (
                   <button
@@ -1029,80 +1037,165 @@ export default function Live({
                     ?.slice(0, visibleCount)
                     ?.map((comment: any, index: number) =>
                       comment?.event === "overend" ? (
-                        <div
-                          className="rounded-t-lg bg-[#f8f8f8] mt-6" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
-                          key={`over-${index}`}
-                        >
-                          {/* <div className="flex md:flex-row flex-col justify-between md:items-center gap-2"> */}
+                        <div>
+                          <div
+                            className="md:block hidden rounded-t-lg bg-[#f8f8f8] mt-4" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
+                            key={`over-${index}`}
+                          >
 
-                          <div className="flex justify-between p-4">
-                            <div className="text-[16px] font-semibold ">
-                              {matchinning.short_name} : {comment.score}
+                            <div className="flex justify-between p-4">
+                              <div className="text-[16px] font-semibold ">
+                                {matchinning.short_name} : {comment.score}
+                              </div>
+
+
+                              <div className="text-[14px] font-normal  ">
+
+                                {updatedCommentaries?.map((cruns: any, index: number) => (cruns?.event !== "overend" && Number(cruns?.over) + 1 == Number(comment?.over)) ? (
+                                  <span key={index}>{cruns?.score} </span>
+                                ) : (""))}
+                              </div>
+
+                              <div className="text-[16px] font-semibold text-[#3992f4]">
+                                {comment?.over}{" "}
+                                <span className=" font-medium text-[13px]  ">
+                                  End Of Over
+                                </span>
+                              </div>
                             </div>
 
+                            <div className="border-b-[1px] border-[#e7e7e7]"></div>
 
-                            <div className="text-[14px] font-normal  ">
+                            <div className="md:flex justify-between p-4">
+                              <div className="text-[14px] font-normal flex gap-3">
+                                <div>
+                                  {getPlayerNameByPid(
+                                    players,
+                                    comment?.bats?.[0]?.batsman_id
+                                  )}
+                                  : {comment?.bats?.[0]?.runs}{" "}
+                                  <span className="text-[#3992f4]">
+                                    ({comment?.bats?.[0]?.balls_faced})
+                                  </span>
+                                  {" "}
+                                </div>
+                                |
+                                <div>
 
-                              {updatedCommentaries?.map((cruns: any, index: number) => (cruns?.event !== "overend" && Number(cruns?.over) + 1 == Number(comment?.over)) ? (
-                                <span key={index}>{cruns?.score} </span>
-                              ) : (""))}
+                                  {" "}
+                                  {getPlayerNameByPid(
+                                    players,
+                                    comment?.bats?.[1]?.batsman_id
+                                  )}
+                                  : {comment?.bats?.[1]?.runs}{" "}
+                                  <span className="text-[#3992f4]">
+                                    ({comment?.bats?.[1]?.balls_faced})
+                                  </span>
+                                </div>
+                              </div>
+
+
+                              <div className="text-[14px] font-normal md:pt-0 pt-1 ">
+                                {getPlayerNameByPid(
+                                  players,
+                                  comment?.bowls?.[0]?.bowler_id
+                                )}{" "}
+                                <span className="text-[#3992f4]">
+                                  {comment?.bowls?.[0]?.overs}-
+                                  {comment?.bowls?.[0]?.runs_conceded}-
+                                  {comment?.bowls?.[0]?.wickets}
+                                </span>
+                              </div>
+
                             </div>
 
-                            <div className="text-[16px] font-semibold text-[#3992f4]">
-                              {comment?.over}{" "}
-                              <span className=" font-medium text-[13px]  ">
-                                End Of Over
-                              </span>
-                            </div>
                           </div>
 
-                          <div className="border-b-[1px] border-[#e7e7e7]"></div>
+                          <div
+                            className="md:hidden rounded-t-lg bg-[#0e2149e0] mt-4 text-[#ffffff]" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
+                            key={`over-${index}`}
+                          >
 
+                            <div className="flex justify-between p-4">
 
-                          <div className="md:flex justify-between p-4">
-                            <div className="text-[14px] font-normal flex gap-3">
-                              <div>
-                                {getPlayerNameByPid(
-                                  players,
-                                  comment?.bats?.[0]?.batsman_id
-                                )}
-                                : {comment?.bats?.[0]?.runs}{" "}
-                                <span className="text-[#3992f4]">
-                                  ({comment?.bats?.[0]?.balls_faced})
-                                </span>
-                                {" "}
+                              <div className="text-[16px] font-semibold text-[#ffffff] flex gap-2 items-center w-[50%]">
+                                <p>
+
+                                  Over {comment?.over}
+                                </p>
+                                |
+                                <p>14 Runs</p>
                               </div>
-                              |
-                              <div>
 
-                                {" "}
-                                {getPlayerNameByPid(
-                                  players,
-                                  comment?.bats?.[1]?.batsman_id
-                                )}
-                                : {comment?.bats?.[1]?.runs}{" "}
-                                <span className="text-[#3992f4]">
-                                  ({comment?.bats?.[1]?.balls_faced})
-                                </span>
+                              <div className="text-[16px] font-semibold ">
+                                {matchinning.short_name} : {comment.score}
                               </div>
+
                             </div>
 
+                            <div className="border-b-[1px] border-[#e7e7e7]"></div>
 
-                            <div className="text-[14px] font-normal md:pt-0 pt-1 ">
-                              {getPlayerNameByPid(
-                                players,
-                                comment?.bowls?.[0]?.bowler_id
-                              )}{" "}
-                              <span className="text-[#3992f4]">
-                                {comment?.bowls?.[0]?.overs}-
-                                {comment?.bowls?.[0]?.runs_conceded}-
-                                {comment?.bowls?.[0]?.wickets}
-                              </span>
+
+
+
+                            <div className="flex justify-between p-4">
+                              <div className="text-[14px] font-normal flex gap-2 flex-col items-start w-[40%]">
+                                <div>
+                                  {getPlayerNameByPid(
+                                    players,
+                                    comment?.bats?.[0]?.batsman_id
+                                  )}
+                                  : {comment?.bats?.[0]?.runs}{" "}
+                                  <span className="text-[#ffffff]">
+                                    ({comment?.bats?.[0]?.balls_faced})
+                                  </span>
+                                  {" "}
+                                </div>
+
+                                <div>
+
+                                  {" "}
+                                  {getPlayerNameByPid(
+                                    players,
+                                    comment?.bats?.[1]?.batsman_id
+                                  )}
+                                  : {comment?.bats?.[1]?.runs}{" "}
+                                  <span className="text-[#ffffff]">
+                                    ({comment?.bats?.[1]?.balls_faced})
+                                  </span>
+                                </div>
+
+                              </div>
+
+                              <div className="flex gap-2 flex-col items-end w-[60%]">
+                                <div className="text-[14px] font-normal md:pt-0 pt-1 ">
+                                  {getPlayerNameByPid(
+                                    players,
+                                    comment?.bowls?.[0]?.bowler_id
+                                  )}{" "}
+                                  <span className="text-[#ffffff]">
+                                    {comment?.bowls?.[0]?.overs}-
+                                    {comment?.bowls?.[0]?.runs_conceded}-
+                                    {comment?.bowls?.[0]?.wickets}
+                                  </span>
+                                </div>
+
+                                <div className="text-[14px] font-normal flex-row-reverse flex flex-wrap gap-1 items-center">
+
+                                  {updatedCommentaries?.map((cruns: any, index: number) => (cruns?.event !== "overend" && Number(cruns?.over) + 1 == Number(comment?.over)) ? (
+                                    <span key={index} className="px-2 rounded-full border-[1px] inline-block ">{cruns?.score} </span>
+                                  ) : (""))}
+                                </div>
+
+                              </div>
                             </div>
 
                           </div>
 
                         </div>
+
+
+
                       ) : (
                         <div
                           className="rounded-t-lg bg-white"
@@ -1159,7 +1252,7 @@ export default function Live({
                                   "linear-gradient(90deg, #D20A5E 0%, #9C0C0C 100%)",
                               }}
                             >
-                              <div className="md:flex items-center justify-between">
+                              <div className="flex items-center justify-between">
                                 <div className="flex items-center">
                                   <PlayerImage
                                     key={comment?.wicket_batsman_id}
