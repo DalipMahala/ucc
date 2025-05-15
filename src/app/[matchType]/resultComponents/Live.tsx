@@ -648,87 +648,161 @@ export default function LiveResult({
                     ?.slice(0, visibleCount)
                     ?.map((comment: any, index: number) =>
                       comment?.event === "overend" ? (
-                        <div
-                          className="rounded-t-lg bg-[#0e2149e0] mt-4 text-[#ffffff]" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
-                          key={`over-${index}`}
-                        >
-                          {/* <div className="flex md:flex-row flex-col justify-between md:items-center gap-2"> */}
+                        <div key={`over-${index}`}>
 
-                          <div className="flex justify-between p-4">
+                          <div
+                            className="hidden md:block rounded-t-lg bg-[#f8f8f8] mt-6" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
 
-                            <div className="text-[16px] font-semibold text-[#ffffff] flex gap-2 items-center w-[50%]">
-                              <p>
+                          >
+                            {/* <div className="flex md:flex-row flex-col justify-between md:items-center gap-2"> */}
 
-                                Over {comment?.over}
-                              </p>
-                              |
-                              <p>{comment?.runs}</p>
+                            <div className="flex justify-between p-4">
+
+                              <div className="text-[14px] font-normal  ">
+                                {matchinning.short_name} : {comment.score}
+                              </div>
+
+
+                              <div className="text-[14px] font-normal ">
+                                {updatedCommentaries?.map((cruns: any, index: number) => (cruns?.event !== "overend" && Number(cruns?.over) + 1 == Number(comment?.over)) ? (
+                                  <span key={index}>{cruns?.score} </span>
+                                ) : (""))}
+                              </div>
+
+                              <div className="text-[16px] font-semibold text-[#3992f4]">
+                                {comment?.over}{" "}
+                                <span className=" font-medium text-[13px]  ">
+                                  End Of Over
+                                </span>
+                              </div>
+
                             </div>
 
-                            <div className="text-[14px] font-normal  ">
-                              {matchinning.short_name} : {comment.score}
-                            </div>
+                            <div className="border-b-[1px] border-[#e7e7e7]"></div>
 
-
-                          </div>
-
-
-
-
-
-
-
-                          <div className="border-b-[1px] border-[#e7e7e7]"></div>
-
-                          <div className="flex justify-between p-4">
-                            <div className="text-[14px] font-normal flex gap-2 flex-col items-start w-[40%]">
-                              <div>
+                            <div className="flex justify-between p-4">
+                              <div className="text-[14px] font-normal  ">
                                 {getPlayerNameByPid(
                                   players,
                                   comment?.bats?.[0]?.batsman_id
                                 )}
                                 : {comment?.bats?.[0]?.runs}{" "}
-                                <span className="text-[#ffffff]">
+                                <span className="text-[#3992f4]">
                                   ({comment?.bats?.[0]?.balls_faced})
                                 </span>{" "}
-                              </div>
-
-                              <div>
+                                |{" "}
                                 {getPlayerNameByPid(
                                   players,
                                   comment?.bats?.[1]?.batsman_id
                                 )}
                                 : {comment?.bats?.[1]?.runs}{" "}
-                                <span className="text-[#ffffff]">
+                                <span className="text-[#3992f4]">
                                   ({comment?.bats?.[1]?.balls_faced})
                                 </span>
                               </div>
-                            </div>
 
-                            <div className="flex gap-2 flex-col items-end w-[60%]">
-                              <div className="text-[14px] font-normal md:pt-0 pt-1">
+
+                              <div className="text-[14px] font-normal  ">
                                 {getPlayerNameByPid(
                                   players,
                                   comment?.bowls?.[0]?.bowler_id
                                 )}{" "}
-                                <span className="text-[#ffffff]">
+                                <span className="text-[#3992f4]">
                                   {comment?.bowls?.[0]?.overs}-
                                   {comment?.bowls?.[0]?.runs_conceded}-
                                   {comment?.bowls?.[0]?.wickets}
                                 </span>
                               </div>
 
-                              <div className="text-[14px] font-normal flex-row-reverse flex flex-wrap gap-1 items-center">
-                                {updatedCommentaries?.map((cruns: any, index: number) => (cruns?.event !== "overend" && Number(cruns?.over) + 1 == Number(comment?.over)) ? (
-                                  <span key={index}>{cruns?.score} </span>
-                                ) : (""))}
+                            </div>
+
+                          </div>
+
+                          <div
+                            className="md:hidden rounded-t-lg bg-[#0e2149e0] mt-4 text-[#ffffff]" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
+
+                          >
+                            {/* <div className="flex md:flex-row flex-col justify-between md:items-center gap-2"> */}
+
+                            <div className="flex justify-between p-4">
+
+                              <div className="text-[16px] font-semibold text-[#ffffff] flex gap-2 items-center w-[50%]">
+                                <p>
+
+                                  Over {comment?.over}
+                                </p>
+                                |
+                                <p>{comment?.runs} Runs</p>
+                              </div>
+
+                              <div className="text-[14px] font-normal  ">
+                                {matchinning.short_name} : {comment.score}
+                              </div>
+
+
+                            </div>
+
+
+
+
+
+
+
+                            <div className="border-b-[1px] border-[#e7e7e7]"></div>
+
+                            <div className="flex justify-between p-4">
+                              <div className="text-[14px] font-normal flex gap-2 flex-col items-start w-[40%]">
+                                <div>
+                                  {getPlayerNameByPid(
+                                    players,
+                                    comment?.bats?.[0]?.batsman_id
+                                  )}
+                                  : {comment?.bats?.[0]?.runs}{" "}
+                                  <span className="text-[#ffffff]">
+                                    ({comment?.bats?.[0]?.balls_faced})
+                                  </span>{" "}
+                                </div>
+
+                                <div>
+                                  {getPlayerNameByPid(
+                                    players,
+                                    comment?.bats?.[1]?.batsman_id
+                                  )}
+                                  : {comment?.bats?.[1]?.runs}{" "}
+                                  <span className="text-[#ffffff]">
+                                    ({comment?.bats?.[1]?.balls_faced})
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="flex gap-2 flex-col items-end w-[60%]">
+                                <div className="text-[14px] font-normal md:pt-0 pt-1">
+                                  {getPlayerNameByPid(
+                                    players,
+                                    comment?.bowls?.[0]?.bowler_id
+                                  )}{" "}
+                                  <span className="text-[#ffffff]">
+                                    {comment?.bowls?.[0]?.overs}-
+                                    {comment?.bowls?.[0]?.runs_conceded}-
+                                    {comment?.bowls?.[0]?.wickets}
+                                  </span>
+                                </div>
+
+                                <div className="text-[14px] font-normal flex-row-reverse flex flex-wrap gap-1 items-center">
+                                  {updatedCommentaries?.map((cruns: any, index: number) => (cruns?.event !== "overend" && Number(cruns?.over) + 1 == Number(comment?.over)) ? (
+                                    <span key={index}>{cruns?.score} </span>
+                                  ) : (""))}
+                                </div>
+
                               </div>
 
                             </div>
 
                           </div>
 
+
                         </div>
+
                       ) : (
                         <div
                           className="rounded-t-lg bg-white"

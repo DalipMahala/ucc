@@ -1041,6 +1041,7 @@ export default function Live({
                     ?.map((comment: any, index: number) =>
                       comment?.event === "overend" ? (
                         <div key={`over-${index}`}>
+
                           <div
                             className="md:block hidden rounded-t-lg bg-[#f8f8f8] mt-4" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
                           >
@@ -1123,7 +1124,7 @@ export default function Live({
                                   Over {comment?.over}
                                 </p>
                                 |
-                                <p> {comment?.runs}</p>
+                                <p> {comment?.runs} Runs</p>
                               </div>
 
                               <div className="text-[16px] font-semibold ">
