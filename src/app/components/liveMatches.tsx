@@ -21,6 +21,7 @@ interface MatchItem {
   match_id: number;
   status_str: string;
   competition: {
+    abbr: string;
     total_teams: number;
     cid: string;
     title: string;
@@ -402,7 +403,7 @@ export default async function LiveMatches() {
 
                   <Link href={"/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) + "/" + items.competition.cid}  >
                     <h2 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                      <span> {items.competition.title} </span> -
+                      <span> {items.competition.abbr} </span> -
                       <span> {items.competition.season} </span>
                     </h2>
                   </Link>
