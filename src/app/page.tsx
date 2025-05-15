@@ -116,12 +116,13 @@ export default async function Home(props: { params: Params }) {
 
           <div className="lg:col-span-4 md:col-span-5 relative">
 
-            <div className="md:h-[260px]">
+            <div className="min-h-[260px]">
               <WeeklySlider />
             </div>
-
-            <PLSeries />
-            <div className="sticky top-[93px]">
+          
+              <PLSeries />
+          
+            <div className="sticky top-[93px] ">
               <CountriesList countries={countryCompitition}></CountriesList>
             </div>
           </div>
