@@ -1,5 +1,4 @@
 
-export const dynamic = 'force-static'
 import Layout from "./components/Layout";
 import WeeklySlider from "./components/WeeklySlider";
 import CardSlider from "./components/CardSlider";

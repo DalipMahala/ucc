@@ -658,7 +658,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                     <div className="flex gap-2 flex-row  uppercase items-center w-full">
                       <Image
                         className="lg:h-[42px] lg:w-[42px] h-[40px] w-[40px]"
-                        src={[liveMatch?.match_info?.teama, liveMatch?.match_info?.teamb].find(team => team?.team_id === liveMatch?.live?.live_inning?.batting_team_id)?.logo_url || null}
+                        src={[liveMatch?.match_info?.teama, liveMatch?.match_info?.teamb].find(team => team?.team_id === liveMatch?.live?.live_inning?.batting_team_id)?.logo_url}
                         width={30}
                         height={30}
                         alt="teams"
