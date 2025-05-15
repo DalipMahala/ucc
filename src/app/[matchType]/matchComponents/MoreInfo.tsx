@@ -363,7 +363,7 @@ export default function MoreInfo({
                               {matchData?.match_info?.teama?.name}
                             </h3>
                             <h3 className="md:hidden text-1xl font-medium">
-                              {matchData?.match_info?.teama?.name}
+                              {matchData?.match_info?.teama?.short_name}
                             </h3>
 
                           </div>
@@ -604,11 +604,11 @@ export default function MoreInfo({
                               </div>
 
                               <h3 className="md:block hidden text-1xl font-medium">
-                                {matchData?.match_info?.teamb?.name}
+                                {matchData?.match_info?.teamb?.name }
                               </h3>
                               
                               <h3 className="md:hidden text-1xl font-medium">
-                                {matchData?.match_info?.teamb?.name}
+                                {matchData?.match_info?.teamb?.short_name}
                               </h3>
 
                             </div>
