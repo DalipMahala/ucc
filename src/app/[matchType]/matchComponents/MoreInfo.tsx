@@ -349,7 +349,7 @@ export default function MoreInfo({
                         >
 
                           <div className="flex items-center space-x-3">
-                            <div>
+                            
                               <Image
                                 loading="lazy"
                                 src={matchData?.match_info?.teama?.logo_url}
@@ -358,10 +358,11 @@ export default function MoreInfo({
                                 height={20}
                                 alt={matchData?.match_info?.teama?.name}
                               />
-                            </div>
+                           
                             <h3 className="md:block hidden text-1xl font-medium">
                               {matchData?.match_info?.teama?.name}
                             </h3>
+
                             <h3 className="md:hidden text-1xl font-medium">
                               {matchData?.match_info?.teama?.short_name}
                             </h3>
@@ -592,7 +593,7 @@ export default function MoreInfo({
                             onClick={() => handleToggle(2)}
                           >
                             <div className="flex items-center space-x-3">
-                              <div>
+                              
                                 <Image
                                   loading="lazy"
                                   src={matchData?.match_info?.teamb?.logo_url}
@@ -601,7 +602,7 @@ export default function MoreInfo({
                                   alt={matchData?.match_info?.teamb?.name}
                                   className="h-[25px]"
                                 />
-                              </div>
+                             
 
                               <h3 className="md:block hidden text-1xl font-medium">
                                 {matchData?.match_info?.teamb?.name }

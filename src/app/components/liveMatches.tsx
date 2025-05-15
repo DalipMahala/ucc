@@ -373,7 +373,7 @@ export default async function LiveMatches() {
                 <div className="flex items-center space-x-2 mb-2 w-full">
                   <div
                     className={`flex gap-[2px] items-center text-[#ea2323] rounded-full font-semibold uppercase text-[13px] ${(items.game_state_str === 'Rain Delay' || items.status_str === 'Rain Delay') ? 'w-[23%]' :
-                        (items.game_state_str === 'Match Start Delay' || items.status_str === 'Match Start Delay') ? 'w-[50%]' :
+                        (items.game_state_str === 'Match Start Delay' || items.status_str === 'Match Start Delay') ? 'w-[36%]' :
                           ''
                       }`}
                   >
