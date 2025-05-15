@@ -1390,7 +1390,7 @@ export default function MoreInfo({
                     <div className="col-span-1 relative">
                       <div className="pb-5">
                         <p className="text-[#00a632] font-semibold">
-                          {matchVenueStats?.first_batting_match_won}%
+                          {!isNaN(matchVenueStats?.first_batting_match_won) ? matchVenueStats?.first_batting_match_won : 0}%
                         </p>
                         <p className="text-[13px] text-[#586577]">
                           Win Bat first{" "}
@@ -1398,7 +1398,7 @@ export default function MoreInfo({
                       </div>
                       <div className="">
                         <p className="text-[#B7132B] font-semibold">
-                          {matchVenueStats?.first_bowling_match_won}%
+                          {!isNaN(matchVenueStats?.first_bowling_match_won) ? matchVenueStats?.first_bowling_match_won : 0}%
                         </p>
                         <p className="text-[13px] text-[#586577]">
                           Win Bowl first{" "}
@@ -1409,8 +1409,8 @@ export default function MoreInfo({
                       <div className="pb-5">
                         <p className="font-semibold">
                           {
-                            matchVenueStats?.average_score_for_venue?.[0]
-                              ?.avgruns
+                            !isNaN(matchVenueStats?.average_score_for_venue?.[0]?.avgruns) ? matchVenueStats?.average_score_for_venue?.[0]
+                              ?.avgruns : 0
                           }
                         </p>
                         <p className="text-[13px] text-[#586577]">
@@ -1420,8 +1420,9 @@ export default function MoreInfo({
                       <div className="">
                         <p className="font-semibold">
                           {
-                            matchVenueStats?.average_score_for_venue?.[1]
-                              ?.avgruns
+                            !isNaN(matchVenueStats?.average_score_for_venue?.[1]
+                              ?.avgruns) ? matchVenueStats?.average_score_for_venue?.[1]
+                              ?.avgruns : 0
                           }
                         </p>
                         <p className="text-[13px] text-[#586577]">
@@ -1432,7 +1433,7 @@ export default function MoreInfo({
                     <div className="col-span-1 relative">
                       <div className="pb-5">
                         <p className="font-semibold">
-                          {matchVenueStats?.team_toss_win_choose_batting}%
+                          {!isNaN(matchVenueStats?.team_toss_win_choose_batting) ? matchVenueStats?.team_toss_win_choose_batting : 0}%
                         </p>
                         <p className="text-[13px] text-[#586577]">
                           Toss Win First Bat
@@ -1440,7 +1441,7 @@ export default function MoreInfo({
                       </div>
                       <div className="">
                         <p className="font-semibold">
-                          {matchVenueStats?.team_toss_win_choose_fieldeding}%
+                          {!isNaN(matchVenueStats?.team_toss_win_choose_fieldeding) ? matchVenueStats?.team_toss_win_choose_fieldeding : 0}%
                         </p>
                         <p className="text-[13px] text-[#586577]">
                           Toss Win FIrst Bowl
@@ -1451,7 +1452,7 @@ export default function MoreInfo({
                       <div className="pb-5">
                         <p className="font-semibold">
                           {
-                            matchVenueStats?.team_toss_win_choose_batting_match_won
+                            !isNaN(matchVenueStats?.team_toss_win_choose_batting_match_won) ? matchVenueStats?.team_toss_win_choose_batting_match_won : 0
                           }
                           %
                         </p>
@@ -1462,7 +1463,7 @@ export default function MoreInfo({
                       <div className="">
                         <p className="font-semibold">
                           {
-                            matchVenueStats?.team_toss_win_choose_fielding_match_won
+                            !isNaN(matchVenueStats?.team_toss_win_choose_fielding_match_won) ? matchVenueStats?.team_toss_win_choose_fielding_match_won : 0
                           }
                           %
                         </p>
@@ -1499,7 +1500,7 @@ export default function MoreInfo({
                             Win Bat first{" "}
                           </p>
                           <p className="text-[#00a632] font-semibold text-1xl">
-                            {matchVenueStats?.first_batting_match_won}%
+                            {!isNaN(matchVenueStats?.first_batting_match_won) ? matchVenueStats?.first_batting_match_won : 0 }%
                           </p>
                         </div>
                         <div className="flex items-center space-x-8">
@@ -1507,7 +1508,7 @@ export default function MoreInfo({
                             Win Bowl first{" "}
                           </p>
                           <p className="text-[#B7132B] font-semibold text-1xl">
-                            {matchVenueStats?.first_bowling_match_won}%
+                            {!isNaN(matchVenueStats?.first_bowling_match_won) ? matchVenueStats?.first_bowling_match_won : 0}%
                           </p>
                         </div>
                       </div>
@@ -1519,8 +1520,8 @@ export default function MoreInfo({
                         </p>
                         <p className="font-medium text-1xl">
                           {
-                            matchVenueStats?.average_score_for_venue?.[0]
-                              ?.avgruns
+                            !isNaN(matchVenueStats?.average_score_for_venue?.[0]?.avgruns) ? matchVenueStats?.average_score_for_venue?.[0]
+                              ?.avgruns : 0
                           }%
                         </p>
                       </div>
@@ -1530,8 +1531,8 @@ export default function MoreInfo({
                         </p>
                         <p className="font-medium text-1xl">
                           {
-                            matchVenueStats?.average_score_for_venue?.[1]
-                              ?.avgruns
+                            !isNaN(matchVenueStats?.average_score_for_venue?.[1]?.avgruns) ? matchVenueStats?.average_score_for_venue?.[1]
+                              ?.avgruns : 0
                           }%
                         </p>
                       </div>
@@ -1542,7 +1543,7 @@ export default function MoreInfo({
                           Toss Win First Bat
                         </p>
                         <p className="font-medium text-1xl">
-                          {matchVenueStats?.team_toss_win_choose_batting}%
+                          {!isNaN(matchVenueStats?.team_toss_win_choose_batting) ? matchVenueStats?.team_toss_win_choose_batting : 0}%
                         </p>
                       </div>
                       <div className="flex flex-col items-end space-y-1">
@@ -1550,7 +1551,7 @@ export default function MoreInfo({
                           Toss Win First Bowl
                         </p>
                         <p className="font-medium text-1xl">
-                          {matchVenueStats?.team_toss_win_choose_fieldeding}%
+                          {!isNaN(matchVenueStats?.team_toss_win_choose_fieldeding) ? matchVenueStats?.team_toss_win_choose_fieldeding : 0}%
                         </p>
                       </div>
                     </div>
@@ -1561,7 +1562,7 @@ export default function MoreInfo({
                         </p>
                         <p className="font-medium text-1xl">
                           {
-                            matchVenueStats?.team_toss_win_choose_batting_match_won
+                            !isNaN(matchVenueStats?.team_toss_win_choose_batting_match_won) ? matchVenueStats?.team_toss_win_choose_batting_match_won : 0
                           }%
                         </p>
                       </div>
@@ -1571,7 +1572,7 @@ export default function MoreInfo({
                         </p>
                         <p className="font-medium text-1xl">
                           {
-                            matchVenueStats?.team_toss_win_choose_fielding_match_won
+                            !isNaN(matchVenueStats?.team_toss_win_choose_fielding_match_won) ? matchVenueStats?.team_toss_win_choose_fielding_match_won : 0
                           }%
                         </p>
                       </div>
