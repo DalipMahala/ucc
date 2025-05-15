@@ -30,8 +30,6 @@ const News = () => {
           return "197";
         case "match-prediction":
           return "180";
-        case "sports":
-          return "5";
         default:
           return "21";
       }
@@ -77,9 +75,6 @@ const News = () => {
         <button className={`font-medium py-2 px-3 whitespace-nowrap ${activeTab === 'match-prediction' ? 'bg-[#1A80F8] text-white rounded-md' : ''}  `} onClick={() => handleTabClick('match-prediction')}>
           Prediction
         </button>
-        <button className={`font-medium py-2 px-3 whitespace-nowrap ${activeTab === 'sports' ? 'bg-[#1A80F8] text-white rounded-md' : ''}  `} onClick={() => handleTabClick('sports')}>
-          Sports
-        </button>
       </div>
 
       <div className="tab-content-container">
@@ -90,10 +85,12 @@ const News = () => {
                 <div className="col-span-6 lg:mb-0 mb-2">
                   {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium_large?.source_url && (
                     <Link href={post?.link}>
-                      <Image priority
+                      <Image 
+                      priority
+                      loading="eager"
                         // src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
                         src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium_large?.source_url}
-
+                        quality={75}
                         width={360}
                         height={192}
                         alt="news"
@@ -151,7 +148,7 @@ const News = () => {
                   <div className="flex gap-3 mt-4 ">
                     <Link className="w-[45%]" href={post?.link}>
                       {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url && (
-                        <Image priority
+                        <Image priority = {index < 2}
                           src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url}
                           width={300}
                           height={144}
