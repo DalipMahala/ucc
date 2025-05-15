@@ -21,6 +21,7 @@ interface MatchItem {
   match_id: number;
   status_str: string;
   competition: {
+    abbr: string;
     total_teams: number;
     cid: string;
     title: string;
@@ -289,7 +290,7 @@ export default async function UpcomingMatches() {
                   <div>
                     <Link href={"/series/" + urlStringEncode(ucmatch.competition.title + "-" + ucmatch.competition.season) + "/" + ucmatch.competition.cid}  >
                       <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                        {truncateText(ucmatch.competition.title, 3)} -{" "}
+                        {ucmatch.competition.abbr} -{" "}
                         {ucmatch.competition.season}
                       </h2>
                     </Link>

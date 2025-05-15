@@ -17,6 +17,7 @@ interface MatchItem {
   match_id: number;
   status_str: string;
   competition: {
+    abbr: string;
     total_teams: number;
     cid: string;
     title: string;
@@ -297,7 +298,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                 <div>
                   <Link href={"/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) + "/" + cmatch.competition.cid}  >
                     <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                      {truncateText(cmatch.competition.title, 3)} -{" "}
+                      {cmatch.competition.abbr} -{" "}
                       {cmatch.competition.season}
                     </h2>
                   </Link>

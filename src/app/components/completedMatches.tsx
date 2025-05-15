@@ -14,6 +14,7 @@ interface MatchItem {
   match_id: number;
   status_str: string;
   competition: {
+    abbr: string;
     total_teams: number;
     cid: string;
     title: string;

@@ -1190,7 +1190,7 @@ export default async function ForYouMatches() {
                   <div>
                     <Link href={"/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) + "/" + cmatch.competition.cid}  >
                       <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                        {truncateText(cmatch.competition.title, 2)} -{" "}
+                        {cmatch.competition.abbr} -{" "}
                         {cmatch.competition.season}
                       </h2>
                     </Link>

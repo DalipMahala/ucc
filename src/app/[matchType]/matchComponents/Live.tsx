@@ -668,7 +668,10 @@ export default function Live({
                       </p>
                     </div>
                     {(matchinning?.last_wicket?.name !== '' && matchinning?.last_wicket?.name !== undefined) &&
-                      <p><span>Last Wkt :</span> <span className="font-semibold">{matchinning?.last_wicket?.name}  <span> {matchinning?.last_wicket?.runs}({matchinning?.last_wicket?.balls}) </span></span></p>
+                      <p><span>Last Wkt :</span> <span className="font-semibold">{getPlayerNameByPid(
+                        players,
+                        Number(matchinning?.last_wicket?.batsman_id)
+                      )} <span> {matchinning?.last_wicket?.runs}({matchinning?.last_wicket?.balls}) </span></span></p>
                     }
                   </div>
 
@@ -1037,10 +1040,9 @@ export default function Live({
                     ?.slice(0, visibleCount)
                     ?.map((comment: any, index: number) =>
                       comment?.event === "overend" ? (
-                        <div>
+                        <div key={`over-${index}`}>
                           <div
                             className="md:block hidden rounded-t-lg bg-[#f8f8f8] mt-4" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
-                            key={`over-${index}`}
                           >
 
                             <div className="flex justify-between p-4">
@@ -1111,10 +1113,7 @@ export default function Live({
 
                           </div>
 
-                          <div
-                            className="md:hidden rounded-t-lg bg-[#0e2149e0] mt-4 text-[#ffffff]" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
-                            key={`over-${index}`}
-                          >
+                          <div className="md:hidden rounded-t-lg bg-[#0e2149e0] mt-4 text-[#ffffff]" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}  >
 
                             <div className="flex justify-between p-4">
 
@@ -1124,7 +1123,7 @@ export default function Live({
                                   Over {comment?.over}
                                 </p>
                                 |
-                                <p>14 Runs</p>
+                                <p> {comment?.runs}</p>
                               </div>
 
                               <div className="text-[16px] font-semibold ">

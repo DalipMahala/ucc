@@ -662,7 +662,7 @@ export default function LiveResult({
                                 Over {comment?.over}
                               </p>
                               |
-                              <p>14 Runs</p>
+                              <p>{comment?.runs}</p>
                             </div>
 
                             <div className="text-[14px] font-normal  ">
