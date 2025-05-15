@@ -2,6 +2,7 @@
 import dynamic from 'next/dynamic';
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import localFont from 'next/font/local'
 // import { WebSocketProvider } from "./components/WebSocketProvider";
 
 const geistSans = Geist({
@@ -24,6 +25,51 @@ const geistMono = Geist_Mono({
 // };
 
 
+const notoSansDisplay = localFont({
+  src: [
+    {
+      path: '../../public/fonts/NotoSansDisplay-Thin.woff2',
+      weight: '100',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/NotoSansDisplay-Light.woff2',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/NotoSansDisplay-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/NotoSansDisplay-Medium.woff2',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/NotoSansDisplay-SemiBold.woff2',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/NotoSansDisplay-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/NotoSansDisplay-Black.woff2',
+      weight: '900',
+      style: 'normal',
+    },
+  ],
+  display: 'swap',
+  variable: '--font-noto-sans-display',
+})
+
+
+
+
 
 export default function RootLayout({
   children,
@@ -33,7 +79,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={` ${notoSansDisplay.variable} font-sans   ${geistSans.variable} ${geistMono.variable} antialiased`} 
       >
         {/* {children} */}
         {/* <WebSocketProvider> */}

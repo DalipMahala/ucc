@@ -2,127 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-
-@font-face {
-  font-family: 'Noto Sans Disp Blk';
-  src: url('/fonts/NotoSansDisplay-Black.woff2') format('woff2'),
-    url('/fonts/NotoSansDisplay-Black.woff') format('woff');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Noto Sans Disp';
-  src: url('/fonts/NotoSansDisplay-Bold.woff2') format('woff2'),
-    url('/fonts/NotoSansDisplay-Bold.woff') format('woff');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Noto Sans Disp';
-  src: url('/fonts/NotoSansDisplay-Light.woff2') format('woff2'),
-    url('/fonts/NotoSansDisplay-Light.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Noto Sans Disp SemBd';
-  src: url('/fonts/NotoSansDisplay-SemiBold.woff2') format('woff2'),
-    url('/fonts/NotoSansDisplay-SemiBold.woff') format('woff');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Noto Sans Disp Med';
-  src: url('/fonts/NotoSansDisplay-Medium.woff2') format('woff2'),
-    url('/fonts/NotoSansDisplay-Medium.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Noto Sans Disp';
-  src: url('/fonts/NotoSansDisplay-Regular.woff2') format('woff2'),
-    url('/fonts/NotoSansDisplay-Regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Noto Sans Disp';
-  src: url('/fonts/NotoSansDisplay-Thin.woff2') format('woff2'),
-    url('/fonts/NotoSansDisplay-Thin.woff') format('woff');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-
-
-
-
-
 body {
-  font-family: 'Noto Sans Disp';
-  font-size: 13px;
-  background-color: #ECF2FD;
-  color: #1f2937;
- 
+  @apply font-sans text-[13px] bg-[#ECF2FD] text-gray-800;
 }
 
-.font-light{
-  font-family: 'Noto Sans Disp !important';
+.font-light {
   font-weight: 300 !important;
 }
 
-.font-normal{
-  font-family: 'Noto Sans Disp' !important;
+.font-normal {
   font-weight: 400 !important;
-
 }
 
-
-.font-medium{
-  font-family: 'Noto Sans Disp Med' !important;
+.font-medium {
   font-weight: 500 !important;
 }
 
-.font-semibold{
-  font-family: 'Noto Sans Disp SemBd' !important;
+.font-semibold {
   font-weight: 600 !important;
 }
 
-.font-bold{
-  font-family: 'Noto Sans Disp' !important;
+.font-bold {
   font-weight: bold !important;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 h1,
 h2,
@@ -139,7 +47,6 @@ h6 {
 
 .no-scroll {
   overflow: hidden;
-  /* Ensures the viewport height remains constant */
 }
 
 #mobile-menu {
@@ -147,172 +54,116 @@ h6 {
   height: 100vh;
 }
 
-
-
 .scheduled-timer div {
   color: #FFBD71;
   font-size: 24px;
   font-weight: 600;
-
 }
 
-
-
-/* slider */
-
-
+/* Slider Styles */
 #slider {
   width: 964px;
   gap: 1px;
 }
 
 .dot {
-
   background-color: #d1d5db;
-
 }
 
 .dot.active {
   background-color: #0F55A5;
 }
 
-
-
 .blinking {
-  -webkit-animation: blink 1s ease infinite;
-  -moz-animation: blink 1s ease infinite;
-  -ms-animation: blink 1s ease infinite;
-  -o-animation: blink 1s ease infinite;
   animation: blink 1s ease infinite;
 }
 
-/* #drop-slider {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-} */
-
-
-
 .animate-blinkFour {
-
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 17px;
-
   width: 100%;
   height: 121px;
   animation: blinkFour 2s ease-in;
 }
 
-
 @keyframes blinkFour {
   0% {
     background-color: transparent;
   }
-
   25% {
     background-color: #ff730f40;
   }
-
   50% {
     background-color: transparent;
   }
-
   75% {
     background-color: #ff730f40;
   }
-
-
   100% {
     background-color: transparent;
   }
 }
 
 .animate-blinkSix {
-
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 17px;
-
   width: 100%;
   height: 121px;
   animation: blinkSix 2s ease-in;
 }
 
-
 @keyframes blinkSix {
   0% {
     background-color: transparent;
   }
-
   25% {
     background-color: #3bf27566;
   }
-
   50% {
     background-color: transparent;
   }
-
   75% {
     background-color: #3bf27566;
   }
-
-
   100% {
     background-color: transparent;
   }
 }
 
-
-
 .animate-Out {
-
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 17px;
-
   width: 100%;
   height: 121px;
   animation: Out 2s ease-in;
 }
 
-
 @keyframes Out {
   0% {
     background-color: transparent;
   }
-
   25% {
     background-color: #f841416b;
   }
-
   50% {
     background-color: transparent;
   }
-
   75% {
     background-color: #f841416b;
   }
-
-
   100% {
     background-color: transparent;
   }
 }
 
-
-
-
-/* mobile LOve screen */
-
-
-
+/* Mobile Love Screen Animations */
 .phone-animate-blinkFour {
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -323,32 +174,25 @@ h6 {
   animation: phoneblinkFour 2s ease-in;
 }
 
-
 @keyframes phoneblinkFour {
   0% {
     background-color: transparent;
   }
-
   25% {
     background-color: #ff730f40;
   }
-
   50% {
     background-color: transparent;
   }
-
   75% {
     background-color: #ff730f40;
   }
-
-
   100% {
     background-color: transparent;
   }
 }
 
 .phone-animate-blinkSix {
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -359,147 +203,68 @@ h6 {
   animation: phoneblinkSix 2s ease-in;
 }
 
-
 @keyframes phoneblinkSix {
   0% {
     background-color: transparent;
   }
-
   25% {
     background-color: #3bf27566;
   }
-
   50% {
     background-color: transparent;
   }
-
   75% {
     background-color: #3bf27566;
   }
-
-
   100% {
     background-color: transparent;
   }
 }
 
-
-
 .phone-animate-Out {
-
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 17px;
-
   width: 100%;
   height: 60px;
   animation: phoneOut 2s ease-in;
 }
 
-
 @keyframes phoneOut {
   0% {
     background-color: transparent;
   }
-
   25% {
     background-color: #f841416b;
   }
-
   50% {
     background-color: transparent;
   }
-
   75% {
     background-color: #f841416b;
   }
-
-
   100% {
     background-color: transparent;
   }
 }
 
-
-
 .scheduled-timer .banner-timer div {
   font-size: 17px;
 }
 
-
-
-
-/* *********************************************** */
-
+/* Blinking Keyframes */
 @keyframes blink {
-
   from,
   to {
     opacity: 0;
   }
-
   50% {
     opacity: 1;
   }
 }
 
-@-moz-keyframes blink {
-
-  from,
-  to {
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes blink {
-
-  from,
-  to {
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
-@-ms-keyframes blink {
-
-  from,
-  to {
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
-@-o-keyframes blink {
-
-  from,
-  to {
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
-
-
-
-
-
-
-
-
+/* Media Queries */
 @media screen and (min-device-width: 320px) and (max-device-width: 768px) {
   #slider {
     width: 1082px;
@@ -508,12 +273,10 @@ h6 {
 }
 
 @media screen and (min-device-width: 768px) and (max-device-width: 820px) {
-
   #slider {
     width: 913px;
     gap: 1px;
   }
-
 }
 
 @media screen and (min-device-width: 820px) and (max-device-width: 992px) {
@@ -521,5 +284,4 @@ h6 {
     width: 954px;
     gap: 1px;
   }
-
 }
