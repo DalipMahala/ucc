@@ -78,6 +78,7 @@ interface MatchItem {
 
 type Params = Promise<{ matchType: string }>;
 
+
 export default async function Home(props: { params: Params }) {
 
 

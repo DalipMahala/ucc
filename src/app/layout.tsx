@@ -78,6 +78,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      
       <body
         className={` ${notoSansDisplay.variable} font-sans   ${geistSans.variable} ${geistMono.variable} antialiased`} 
       >

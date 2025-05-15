@@ -10,7 +10,7 @@ export function useWakeLock() {
       try {
         // Check if Wake Lock API is supported
         if ('wakeLock' in navigator) {
-          wakeLock = await (navigator as any).wakeLock.request('screen');
+          wakeLock = await (navigator as any).wakeLock?.request('screen');
           console.log('Screen Wake Lock active');
         }
       } catch (err) {

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import db from "@/config/db"; // Ensure correct import path for DB
 import redis from "@/config/redis";
 import fs from "fs";
+import {createGzipResponse} from "@/utils/zlibCompress";
 
 import getJsonFromS3 from '@/lib/s3-utils';
 
@@ -13,13 +14,13 @@ export async function GET(req: NextRequest) {
     const cachedData = await redis.get(CACHE_KEY);
     if (cachedData) {
       // console.log("coming from cache upcoming_matches");
-      return NextResponse.json({ success: true, data: JSON.parse(cachedData) });
+      return createGzipResponse({ success: true, data: JSON.parse(cachedData) });
     }
     const query =
       "SELECT mi.fileName FROM match_info mi JOIN ( SELECT match_id FROM matches where status in (1,3) and commentary= 1 and is_featured = 1 limit 5) m ON mi.match_id = m.match_id";
     const [rows] = await db.query<any[]>(query);
     if (!rows || !rows.length || rows.length === 0) {
-      return NextResponse.json({ success: true, data: [] });
+      return createGzipResponse({ success: true, data: [] });
     }
 
     let allMatches: any[] = [];
@@ -52,7 +53,7 @@ export async function GET(req: NextRequest) {
       await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(updatedJson));
     }
 
-    return NextResponse.json({ success: true, data: updatedJson });
+    return createGzipResponse({ success: true, data: updatedJson });
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json(

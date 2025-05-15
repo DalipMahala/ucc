@@ -80,13 +80,15 @@ export default function SportsNews() {
                 <div className="col-span-6 lg:mb-0 mb-2">
                   {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium_large?.source_url && (
                     <Link href={post?.link}>
-                      <Image priority
+                      <Image 
+                      priority={true}
+                      loading="eager"
                         // src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
                         src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium_large?.source_url}
-
+                        quality={75}
                         width={360}
                         height={192}
-                        alt={post?.title.rendered}
+                        alt="sports News"
                         className="rounded-lg w-full h-48 object-cover"
                       />
                     </Link>
@@ -141,7 +143,7 @@ export default function SportsNews() {
                   <div className="flex gap-3 mt-4 ">
                     <Link className="w-[45%]" href={post?.link}>
                       {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url && (
-                        <Image priority
+                        <Image priority = {index < 2}
                           src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url}
                           width={300}
                           height={144}

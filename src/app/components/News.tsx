@@ -6,7 +6,7 @@ import Image from "next/image";
 import DOMPurify from "dompurify";
 import { truncateText } from "@/utils/utility";
 import { format, isSameDay } from "date-fns";
-
+import Head from "next/head";
 // interface H2h {
 //   newsFeeds: any | null;
 // }
@@ -46,6 +46,7 @@ const News = () => {
       .catch((err) => console.error("Error fetching news:", err));
   }, [catids]);
   // console.log("id",news);
+
   return (
     <div className="tab-section">
 
@@ -86,7 +87,7 @@ const News = () => {
                   {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium_large?.source_url && (
                     <Link href={post?.link}>
                       <Image 
-                      priority
+                      priority={true}
                       loading="eager"
                         // src={post._embedded["wp:featuredmedia"]?.[0]?.source_url}
                         src={post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium_large?.source_url}

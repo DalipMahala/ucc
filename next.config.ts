@@ -12,6 +12,7 @@ const nextConfig = {
     scrollRestoration: true,
     optimizeServerReact: true,
     gzipSize: true,
+    legacyBrowserSupport: false,
     // Remove unsupported options
   },
   images: {
@@ -31,7 +32,7 @@ const nextConfig = {
     devtool: string; optimization: any; 
 }, { isServer }: any) => {
     if (!isServer) {
-      config.devtool = 'hidden-source-map',
+      config.devtool = 'source-map',
       config.optimization = {
         ...config.optimization,
         splitChunks: {

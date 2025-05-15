@@ -3,6 +3,7 @@ import db from "@/config/db"; // Ensure correct import path for DB
 import redis from "@/config/redis"; // Ensure correct import path for
 import fs from "fs";
 import getJsonFromS3 from '@/lib/s3-utils';
+import {createGzipResponse} from "@/utils/zlibCompress";
 
 export async function POST(req: NextRequest) {
   try {
@@ -20,7 +21,7 @@ export async function POST(req: NextRequest) {
     // Check Redis cache first
     const cachedData = await redis.get(CACHE_KEY);
     if (cachedData) {
-      return NextResponse.json({ success: true, data: JSON.parse(cachedData) });
+      return createGzipResponse({ success: true, data: JSON.parse(cachedData) });
     }
     
     // Fetch from database
@@ -28,7 +29,7 @@ export async function POST(req: NextRequest) {
     // const [rows]: [any[], any]  = await db.execute(`SELECT * FROM match_info WHERE match_id in (SELECT match_id FROM matches WHERE JSON_UNQUOTE(JSON_EXTRACT(competition, '$.cid')) = ${cid})`);
 
     if (rows.length === 0) {
-      return NextResponse.json(
+      return createGzipResponse(
         { success: true, data: [] }
       );
     }
@@ -43,7 +44,7 @@ export async function POST(req: NextRequest) {
       await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(competition));
     }
 
-    return NextResponse.json({ success: true, data: competition });
+    return createGzipResponse({ success: true, data: competition });
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json(
