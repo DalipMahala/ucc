@@ -789,8 +789,15 @@ export default function LiveResult({
                                 </div>
 
                                 <div className="text-[14px] font-normal flex-row-reverse flex flex-wrap gap-1 items-center">
-                                  {updatedCommentaries?.map((cruns: any, index: number) => (cruns?.event !== "overend" && Number(cruns?.over) + 1 == Number(comment?.over)) ? (
-                                    <span key={index}>{cruns?.score} </span>
+                                {updatedCommentaries?.map((cruns: any, index: number) => (cruns?.event !== "overend" && Number(cruns?.over) + 1 == Number(comment?.over)) ? (
+                                    <span key={index} className={`px-2 rounded-full border-[1px] inline-block ${cruns?.score == 6
+                                      ? "bg-[#13b76dbd] text-white"
+                                      : cruns?.score == 4
+                                        ? "bg-orange-500 text-white"
+                                        : cruns?.score == "w"
+                                          ? "bg-red-500 text-white"
+                                          : ""
+                                      }`}>{cruns?.score} </span>
                                   ) : (""))}
                                 </div>
 
