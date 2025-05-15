@@ -359,12 +359,16 @@ export default function MoreInfo({
                                 alt={matchData?.match_info?.teama?.name}
                               />
                             </div>
-                            <h3 className="text-1xl font-medium">
+                            <h3 className="md:block hidden text-1xl font-medium">
                               {matchData?.match_info?.teama?.name}
                             </h3>
+                            <h3 className="md:hidden text-1xl font-medium">
+                              {matchData?.match_info?.teama?.name}
+                            </h3>
+
                           </div>
 
-                          <div>
+                       
                             <div className="ml-auto flex gap-1 items-center">
                               {matchlistA && matchlistA
                                 .slice(0, 5)
@@ -414,7 +418,7 @@ export default function MoreInfo({
                                 </button>
                               </span>
                             </div>
-                          </div>
+                          
                         </div>
 
                         <div className="border-t-[1px] border-[#E4E9F0]" />
@@ -598,11 +602,17 @@ export default function MoreInfo({
                                   className="h-[25px]"
                                 />
                               </div>
-                              <h3 className="text-1xl font-medium">
+
+                              <h3 className="md:block hidden text-1xl font-medium">
                                 {matchData?.match_info?.teamb?.name}
                               </h3>
+                              
+                              <h3 className="md:hidden text-1xl font-medium">
+                                {matchData?.match_info?.teamb?.name}
+                              </h3>
+
                             </div>
-                            <div>
+                           
                               <div className="ml-auto flex gap-1 items-center">
                                 {matchlistB && matchlistB
                                   .slice(0, 5)
@@ -651,7 +661,7 @@ export default function MoreInfo({
                                   </button>
                                 </span>
                               </div>
-                            </div>
+                           
                           </div>
                           <div className="border-t-[1px] border-[#E4E9F0]" />
                         </div>
