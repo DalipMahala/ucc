@@ -104,10 +104,10 @@ export default async function UpcomingMatches() {
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-2">
                   <div
-                    className="flex items-center text-[13px] text-[#A45B09] rounded-full pr-3 uppercase font-semibold"
+                    className="flex items-center text-[13px] text-colorFirst rounded-full pr-3 uppercase font-semibold"
                     style={{ gap: "3px" }}
                   >
-                    <div className="w-[8px] h-[8px] bg-[#A45B09] rounded-full animate-blink"></div>{" "}
+                    <div className="w-[8px] h-[8px] bg-colorFirst rounded-full animate-blink"></div>{" "}
                     {ucmatch.status_str}
                   </div>
                   <div>
@@ -170,7 +170,7 @@ export default async function UpcomingMatches() {
                 
                   <div className="flex justify-between items-center text-[14px] py-3 px-3">
                     <div className="w-[50%]">
-                      <p className="text-[#586577] text-[12px] mb-4 font-medium">
+                      <p className="text-colorSecound text-[12px] mb-4 font-medium">
                         {ucmatch.subtitle}, {ucmatch.format_str}, {ucmatch.venue.location}
                       </p>
                       <div className="flex items-center space-x-2 font-medium x md:w-full mb-4">
@@ -216,7 +216,7 @@ export default async function UpcomingMatches() {
 
                           {isSameDay(new Date(), new Date(ucmatch.date_start_ist)) ? (
                             <>
-                              <span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
+                              <span className="text-[13px] font-normal text-colorFirst">Start in</span>
 
                               <CountdownTimer targetTime={ucmatch.date_start_ist} />
                             </>
@@ -282,10 +282,10 @@ export default async function UpcomingMatches() {
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
                   <div
-                    className="flex text-[13px] items-center uppercase text-[#A45B09] rounded-full font-semibold"
+                    className="flex text-[13px] items-center uppercase text-colorFirst rounded-full font-semibold"
                     style={{ gap: "2px" }}
                   >
-                    <div className="w-[6px] h-[6px] bg-[#A45B09] rounded-full"></div> {ucmatch.status_str}
+                    <div className="w-[6px] h-[6px] bg-colorFirst rounded-full"></div> {ucmatch.status_str}
                   </div>
                   <div>
                     <Link href={"/series/" + urlStringEncode(ucmatch.competition.title + "-" + ucmatch.competition.season) + "/" + ucmatch.competition.cid}  >
@@ -303,7 +303,7 @@ export default async function UpcomingMatches() {
               <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-" + ucmatch?.subtitle + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
                 <div className="open-Performance-data">
                   <div className="py-2 pb-3">
-                    <p className="text-[#586577] text-[12px] mb-4 font-medium">
+                    <p className="text-colorSecound text-[12px] mb-4 font-medium">
                       {ucmatch.subtitle}, {ucmatch.format_str}, {ucmatch.venue.location}
                     </p>
                     <div className="flex justify-between items-center text-[14px]">
@@ -361,7 +361,7 @@ export default async function UpcomingMatches() {
                               {isSameDay(new Date(), new Date(ucmatch.date_start_ist)) ? (
                                 <>
 
-                                  <span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
+                                  <span className="text-[13px] font-normal text-colorFirst">Start in</span>
                                   <CountdownTimer targetTime={ucmatch.date_start_ist} />
                                 </>
 

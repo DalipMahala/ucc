@@ -14,6 +14,12 @@ const config: Config = {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        primary: '#1a80f8',      // logo blue color
+        secondary: '#A70B0B',    // live red color
+        accent: '#0B773C',       // result green color
+        colorFirst: '#A45B09',   // Scheduled color
+        colorSecound: '#586577',  // 
+        colorThird: '#757A82'  //
       },
     },
   },
@@ -21,3 +27,4 @@ const config: Config = {
 }
 
 export default config
+
