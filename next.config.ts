@@ -1,3 +1,5 @@
+import { webpack } from "next/dist/compiled/webpack/webpack";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   compress: true,
@@ -12,7 +14,7 @@ const nextConfig = {
     scrollRestoration: true,
     optimizeServerReact: true,
     gzipSize: true,
-    legacyBrowserSupport: false,
+    // legacyBrowserSupport: false,
     // Remove unsupported options
   },
   images: {
@@ -29,10 +31,21 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
   webpack: (config: {
+    plugins: any;
     devtool: string; optimization: any; 
-}, { isServer }: any) => {
-    if (!isServer) {
-      config.devtool = 'source-map',
+}, { isServer, dev }: any) => {
+  if (!dev) {
+    config.plugins.push(
+      new webpack.IgnorePlugin({
+        // Ignore any modules related to dev tools
+        resourceRegExp: /dev-tools-indicator|error-overlay|inspector|next-logo/,
+      })
+    );
+  }
+  if (!isServer && !dev) {
+    config.devtool = 'source-map';
+  }
+
       config.optimization = {
         ...config.optimization,
         splitChunks: {
@@ -52,9 +65,15 @@ const nextConfig = {
           },
         },
       };
-    }
+    
     return config;
   }
 };
 
-module.exports = nextConfig;
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+module.exports = withBundleAnalyzer(nextConfig);
+
+// module.exports = nextConfig;

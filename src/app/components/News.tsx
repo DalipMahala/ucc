@@ -49,6 +49,10 @@ const News = () => {
 
   return (
     <div className="tab-section">
+         <Head>
+        <link rel="preconnect" href="https://uccricket.live" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://uccricket.live" />
+      </Head>
 
       <div className="my-4 flex text-1xl space-x-4 p-2 bg-[#ffffff] rounded-lg relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
          [&::-webkit-scrollbar-track]:bg-gray-100  md:[&::-webkit-scrollbar-thumb]:bg-[#DFE9F6]  [&::-webkit-scrollbar-thumb]:bg-[#c2d7ef]  dark:[&::-webkit-scrollbar-track]:bg-neutral-700  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">

@@ -1,20 +1,20 @@
-// import type { Metadata } from "next";
-import dynamic from 'next/dynamic';
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import localFont from 'next/font/local'
-// import { WebSocketProvider } from "./components/WebSocketProvider";
 
+// Optimized font loading - only load essential weights initially
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  // Only load these weights initially
+  weight: ['400', '600'], // Regular and SemiBold
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  weight: ['400', '600'], // Regular and SemiBold
 });
- 
 // export const metadata: Metadata = {
 //   title: "UC Cricket - Live Scores, IPL 2025, T20, ODI, Test News &amp; Stats",
 //   description: "Stay updated with UC Cricket live cricket scores, match schedules, news, stats, and videos on UcCricket.live. Follow all the action from IPL, T20 World Cup, and your favorite cricket tournaments.",
