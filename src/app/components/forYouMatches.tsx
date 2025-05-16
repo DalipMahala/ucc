@@ -134,7 +134,7 @@ export default async function ForYouMatches() {
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-2 w-[75%]">
                   <div
-                    className="flex items-center text-[13px] text-[#A70B0B] rounded-full pr-3 uppercase font-semibold"
+                    className="flex items-center text-[13px] text-secondary rounded-full pr-3 uppercase font-semibold"
                     style={{ gap: "3px" }}
                   >
                     <span className="rounded-full">
@@ -173,7 +173,7 @@ export default async function ForYouMatches() {
                   <span className={"text-[13px] font-medium oddsTeam" + items.match_id}>
                     {matchOddsCal(items)?.team}
                   </span>
-                  <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-full text-[#0B773C] pr-2">
+                  <span className="flex items-center bg-[#FAFFFC] border-[1px] border-accent rounded-full text-accent pr-2">
                     <span className="">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -195,7 +195,7 @@ export default async function ForYouMatches() {
                       {/* {items?.live_odds?.matchodds?.teama?.back > 0  ? Math.round((items?.live_odds?.matchodds?.teama?.back)*100-100) : 0} */}
                     </span>
                   </span>
-                  <span className="flex items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-full text-[#A70B0B] pr-2">
+                  <span className="flex items-center bg-[#FFF7F7] border-[1px] border-secondary  rounded-full text-secondary pr-2">
                     <span className="">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -220,13 +220,13 @@ export default async function ForYouMatches() {
                 </div>
               </div>
 
-              <div className="border-t-[1px] border-[#E7F2F4]"></div>
+              <div className="border-t-[1px] border-colorFourth"></div>
 
               <div className="py-3 px-3">
                 <Link href={"/live-score/" + urlStringEncode(items?.teama?.short_name + "-vs-" + items?.teamb?.short_name + "-" + items?.subtitle + "-" + items?.competition?.title + "-" + items?.competition?.season) + "/" + items?.match_id}>
                   <div className="flex justify-between items-center text-[14px]">
                     <div className="w-[55%]">
-                      <p className="text-[#586577] text-[12px] mb-4 font-medium">
+                      <p className="text-colorSecound text-[12px] mb-4 font-medium">
                         {items?.subtitle}, {items?.format_str}, {items?.venue?.location}
                       </p>
                       <div className="flex items-center space-x-2 font-medium md:w-full mb-4">
@@ -240,7 +240,7 @@ export default async function ForYouMatches() {
                             alt={items?.teama?.short_name}
                             loading="lazy"
                           />
-                          <span className={`${(items?.teama?.team_id === items?.live?.live_inning?.batting_team_id) ? "ont-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
+                          <span className={`${(items?.teama?.team_id === items?.live?.live_inning?.batting_team_id) ? "ont-semibold text-[14px] text-[black]" : "text-colorThird font-semibold text-[14px]"}`}>
                             {items.teama.short_name} -{" "}
                           </span>
                         </div>
@@ -264,7 +264,7 @@ export default async function ForYouMatches() {
                               <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : " font-semibold text-[14px]"}`}>
                                 {items.teama.scores}
                               </span>
-                              <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
+                              <span className={`${(items.teama.team_id === items?.live?.live_inning?.batting_team_id) ? " text-[13px] text-[black]" : "text-colorThird text-[13px]"}`}>
                                 {" "}
                                 ({items.teama.overs}){" "}
                               </span>
@@ -284,7 +284,7 @@ export default async function ForYouMatches() {
                               alt={items?.teamb?.short_name ?? "team"}
                               loading="lazy"
                             />
-                            <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
+                            <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "text-colorThird font-semibold text-[14px]"}`}>
                               {items.teamb.short_name} -
                             </span>
                           </div>
@@ -308,7 +308,7 @@ export default async function ForYouMatches() {
                                 <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[14px]"}`}>
                                   {items.teamb.scores}
                                 </span>
-                                <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
+                                <span className={`${(items.teamb.team_id === items?.live?.live_inning?.batting_team_id) ? "text-[13px] text-[black]" : "text-colorThird text-[13px]"}`}>
                                   {" "}
                                   ({items.teamb.overs}){" "}
                                 </span>
@@ -339,14 +339,14 @@ export default async function ForYouMatches() {
                 </Link>
               </div>
 
-              <div className="border-t-[1px] border-[#E7F2F4]"></div>
+              <div className="border-t-[1px] border-colorFourth"></div>
 
               <div className="flex items-center justify-between space-x-5 mt-3">
                 <div className="flex items-center">
                   {items?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(items?.competition?.title + "-" + items?.competition?.season) + "/" + items.competition?.cid + "/points-table"}>
-                        <p className=" text-[#757A82] font-medium">
+                        <p className=" text-colorThird font-medium">
                           {" "}
                           Points Table
                         </p>
@@ -355,7 +355,7 @@ export default async function ForYouMatches() {
                     </>
                   }
                   <Link href={"/series/" + urlStringEncode(items?.competition?.title + "-" + items?.competition?.season) + "/" + items?.competition?.cid + "/schedule-results/schedule"}>
-                    <p className="text-[#757A82] font-medium">
+                    <p className="text-colorThird font-medium">
                       Schedule
                     </p>
                   </Link>
@@ -371,7 +371,7 @@ export default async function ForYouMatches() {
                         alt=""
                         loading="lazy"
                       />
-                      <span className="text-[#757A82] font-medium">
+                      <span className="text-colorThird font-medium">
                         H2H
                       </span>
                     </div>
@@ -421,11 +421,11 @@ export default async function ForYouMatches() {
                 </div>
               </div>
 
-              <div className="border-t-[1px] border-[#E7F2F4]"></div>
+              <div className="border-t-[1px] border-colorFourth"></div>
               <div className="open-Performance-data">
                 <Link href={"/live-score/" + urlStringEncode(items?.teama?.short_name + "-vs-" + items?.teamb?.short_name + "-" + items?.subtitle + "-" + items?.competition?.title + "-" + items?.competition?.season) + "/" + items.match_id}>
                   <div className="py-2 pb-3">
-                    <p className="text-[#586577] text-[13px] mb-4 font-normal">
+                    <p className="text-colorSecound text-[13px] mb-4 font-normal">
                       {items.subtitle}, {items.format_str}, {items.venue.location}
                     </p>
                     <div className="flex justify-between items-center text-[14px]">
@@ -467,7 +467,7 @@ export default async function ForYouMatches() {
                                     <span className="font-semibold text-[#1F2937] text-[14px]">
                                       {items.teama.scores}
                                     </span>
-                                    <span className="text-[#757A82] text-[12px] font-normal">
+                                    <span className="text-colorThird text-[12px] font-normal">
                                       {" "}
                                       ({items.teama.overs}){" "}
                                     </span>
@@ -514,7 +514,7 @@ export default async function ForYouMatches() {
                                       <span className="font-semibold text-[#1F2937] text-[14px]">
                                         {items.teamb.scores}
                                       </span>
-                                      <span className="text-[#757A82] text-[12px] font-normal">
+                                      <span className="text-colorThird text-[12px] font-normal">
                                         {" "}
                                         ({items.teamb.overs}){" "}
                                       </span>
@@ -544,14 +544,14 @@ export default async function ForYouMatches() {
                   </div>
                 </Link>
 
-                <div className="border-t-[1px] border-[#E7F2F4]"></div>
+                <div className="border-t-[1px] border-colorFourth"></div>
 
                 <div className="flex items-center justify-between space-x-5 mt-2">
                   <div className="flex items-center">
                     {items?.competition?.total_teams > 2 &&
                       <>
                         <Link href={"/series/" + urlStringEncode(items?.competition?.title + "-" + items?.competition?.season) + "/" + items.competition?.cid + "/points-table"}>
-                          <p className="pr-[10px] text-[#757A82] text-[11px] font-medium">
+                          <p className="pr-[10px] text-colorThird text-[11px] font-medium">
                             {" "}
                             Points Table
                           </p>
@@ -571,7 +571,7 @@ export default async function ForYouMatches() {
                             alt=""
                             loading="lazy"
                           />
-                          <span className="text-[#757A82] text-[11px] font-medium">
+                          <span className="text-colorThird text-[11px] font-medium">
                             H2H
                           </span>
                         </div>
@@ -580,10 +580,10 @@ export default async function ForYouMatches() {
                   </div>
 
                   <div className="flex items-center space-x-2 text-[11px]">
-                    <span className={"text-[#757A82] font-medium oddsTeam" + items.match_id}>
+                    <span className={"text-colorThird font-medium oddsTeam" + items.match_id}>
                       {matchOddsCal(items)?.team}
                     </span>
-                    <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-md text-[#0B773C] pr-2">
+                    <span className="flex items-center bg-[#FAFFFC] border-[1px] border-accent rounded-md text-accent pr-2">
                       <span className="">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -605,7 +605,7 @@ export default async function ForYouMatches() {
                         {/* {items?.live_odds?.matchodds?.teama?.back > 0  ? Math.round((items?.live_odds?.matchodds?.teama?.back)*100-100) : 0} */}
                       </span>
                     </span>
-                    <span className="flex items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-md text-[#A70B0B] pr-2">
+                    <span className="flex items-center bg-[#FFF7F7] border-[1px] border-secondary  rounded-md text-secondary pr-2">
                       <span className="">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -650,10 +650,10 @@ export default async function ForYouMatches() {
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-2">
                   <div
-                    className="flex items-center text-[13px] text-[#A45B09] rounded-full pr-3 uppercase font-semibold"
+                    className="flex items-center text-[13px] text-colorFirst rounded-full pr-3 uppercase font-semibold"
                     style={{ gap: "3px" }}
                   >
-                    <div className="w-[8px] h-[8px] bg-[#A45B09] rounded-full animate-blink"></div>{" "}
+                    <div className="w-[8px] h-[8px] bg-colorFirst rounded-full animate-blink"></div>{" "}
                     {ucmatch.status_str}
                   </div>
                   <div>
@@ -670,7 +670,7 @@ export default async function ForYouMatches() {
                     {matchOddsCal(ucmatch)?.team}
                   </span>
 
-                  <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-full text-[#0B773C] pr-2">
+                  <span className="flex items-center bg-[#FAFFFC] border-[1px] border-accent rounded-full text-accent pr-2">
                     <span className="">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -689,7 +689,7 @@ export default async function ForYouMatches() {
                     </span>
                     {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100) : 0}
                   </span>
-                  <span className="flex items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-full text-[#A70B0B] pr-2">
+                  <span className="flex items-center bg-[#FFF7F7] border-[1px] border-secondary  rounded-full text-secondary pr-2">
                     <span className="">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -711,12 +711,12 @@ export default async function ForYouMatches() {
                 </div>
               </div>
 
-              <div className="border-t-[1px] border-[#E7F2F4]"></div>
+              <div className="border-t-[1px] border-colorFourth"></div>
               <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-" + ucmatch?.subtitle + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
                 <div className="py-3 px-3">
                   <div className="flex justify-between items-center text-[14px]">
                     <div className="w-[50%]">
-                      <p className="text-[#586577] text-[12px] mb-4 font-medium">
+                      <p className="text-colorSecound text-[12px] mb-4 font-medium">
                         {ucmatch.subtitle}, {ucmatch.format_str}, {ucmatch.venue.location}
                       </p>
                       <div className="flex items-center space-x-2 font-medium x md:w-full mb-4">
@@ -762,7 +762,7 @@ export default async function ForYouMatches() {
 
                           {isSameDay(new Date(), new Date(ucmatch.date_start_ist)) ? (
                             <>
-                              <span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
+                              <span className="text-[13px] font-normal text-colorFirst">Start in</span>
 
                               <CountdownTimer targetTime={ucmatch.date_start_ist} />
                             </>
@@ -782,14 +782,14 @@ export default async function ForYouMatches() {
                   </div>
                 </div>
               </Link>
-              <div className="border-t-[1px] border-[#E7F2F4]"></div>
+              <div className="border-t-[1px] border-colorFourth"></div>
 
               <div className="flex items-center justify-between space-x-5 mt-3">
                 <div className="flex items-center">
                   {ucmatch?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.competition?.cid + "/points-table"}>
-                        <p className="  text-[#757A82] font-medium">
+                        <p className="  text-colorThird font-medium">
                           {" "}
                           Points Table
                         </p>
@@ -797,7 +797,7 @@ export default async function ForYouMatches() {
                       <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                     </>}
                   <Link href={"/series/" + urlStringEncode(ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch?.competition?.cid + "/schedule-results/schedule"}>
-                    <p className=" text-[#757A82] font-medium">
+                    <p className=" text-colorThird font-medium">
                       Schedule
                     </p>
                   </Link>
@@ -813,7 +813,7 @@ export default async function ForYouMatches() {
                         alt=""
                         loading="lazy"
                       />
-                      <span className=" text-[#757A82] font-medium">
+                      <span className=" text-colorThird font-medium">
                         H2H
                       </span>
                     </div>
@@ -827,28 +827,28 @@ export default async function ForYouMatches() {
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
                   <div
-                    className="flex text-[13px] items-center uppercase text-[#A45B09] rounded-full font-semibold"
+                    className="flex text-[13px] items-center uppercase text-colorFirst rounded-full font-semibold"
                     style={{ gap: "2px" }}
                   >
-                    <div className="w-[6px] h-[6px] bg-[#A45B09] rounded-full"></div> {ucmatch.status_str}
+                    <div className="w-[6px] h-[6px] bg-colorFirst rounded-full"></div> {ucmatch.status_str}
                   </div>
-                  <div>
+                  
                     <Link href={"/series/" + urlStringEncode(ucmatch.competition.title + "-" + ucmatch.competition.season) + "/" + ucmatch.competition.cid}  >
                       <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                         {ucmatch.competition.abbr} -{" "}
                         {ucmatch.competition.season}
                       </h2>
                     </Link>
-                  </div>
+                  
 
                 </div>
               </div>
 
-              <div className="border-t-[1px] border-[#E7F2F4]"></div>
+              <div className="border-t-[1px] border-colorFourth"></div>
               <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-" + ucmatch?.subtitle + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
                 <div className="open-Performance-data">
                   <div className="py-2 pb-3">
-                    <p className="text-[#586577] text-[12px] mb-4 font-medium">
+                    <p className="text-colorSecound text-[12px] mb-4 font-medium">
                       {ucmatch.subtitle}, {ucmatch.format_str}, {ucmatch.venue.location}
                     </p>
                     <div className="flex justify-between items-center text-[14px]">
@@ -865,7 +865,7 @@ export default async function ForYouMatches() {
                             />
                             <div>
                               <span className="flex items-center gap-1">
-                                <span className="text-[#5e5e5e] font-medium">
+                                <span className=" font-medium">
                                   {ucmatch?.teama?.name}
                                 </span>
                               </span>
@@ -884,7 +884,7 @@ export default async function ForYouMatches() {
                             />
                             <div>
                               <span className="flex items-center gap-1">
-                                <span className="text-[#5e5e5e] font-medium">
+                                <span className=" font-medium">
                                   {ucmatch?.teamb?.name}
                                 </span>
                               </span>
@@ -906,7 +906,7 @@ export default async function ForYouMatches() {
                               {isSameDay(new Date(), new Date(ucmatch.date_start_ist)) ? (
                                 <>
 
-                                  <span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
+                                  <span className="text-[13px] font-normal text-colorFirst">Start in</span>
 
                                   <CountdownTimer targetTime={ucmatch.date_start_ist} />
                                 </>
@@ -930,14 +930,14 @@ export default async function ForYouMatches() {
                 </div>
               </Link>
 
-              <div className="border-t-[1px] border-[#E7F2F4]"></div>
+              <div className="border-t-[1px] border-colorFourth"></div>
 
               <div className="flex items-center justify-between space-x-5 mt-2">
                 <div className="flex items-center">
                   {ucmatch?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.competition?.cid + "/points-table"}>
-                        <p className="pr-[10px] text-[#757A82] text-[11px] font-medium">
+                        <p className="pr-[10px] text-colorThird text-[11px] font-medium">
                           Points Table
                         </p>
                       </Link>
@@ -955,7 +955,7 @@ export default async function ForYouMatches() {
                           alt=""
                           loading="lazy"
                         />
-                        <span className="text-[#757A82] text-[11px] font-medium">
+                        <span className="text-colorThird text-[11px] font-medium">
                           H2H
                         </span>
                       </div>
@@ -964,10 +964,10 @@ export default async function ForYouMatches() {
                 </div>
 
                 <div className="flex items-center space-x-2 text-[11px]">
-                  <span className={"text-[#757A82] font-medium oddsTeam" + ucmatch.match_id}>
+                  <span className={"text-colorThird font-medium oddsTeam" + ucmatch.match_id}>
                     {matchOddsCal(ucmatch)?.team}
                   </span>
-                  <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-md text-[#0B773C] pr-2">
+                  <span className="flex items-center bg-[#FAFFFC] border-[1px] border-accent rounded-md text-accent pr-2">
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -986,7 +986,7 @@ export default async function ForYouMatches() {
                     </span>
                     {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100) : 0}
                   </span>
-                  <span className="flex items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B] rounded-md text-[#A70B0B] pr-2">
+                  <span className="flex items-center bg-[#FFF7F7] border-[1px] border-secondary rounded-md text-secondary pr-2">
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1019,10 +1019,10 @@ export default async function ForYouMatches() {
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-2">
                   <div
-                    className="flex items-center text-[13px] text-[#0B773C] rounded-full pr-3 uppercase  font-semibold"
+                    className="flex items-center text-[13px] text-accent rounded-full pr-3 uppercase  font-semibold"
                     style={{ gap: "3px" }}
                   >
-                    <div className="w-[8px] h-[8px] bg-[#0B773C] rounded-full"></div>{" "}
+                    <div className="w-[8px] h-[8px] bg-accent rounded-full"></div>{" "}
                     {cmatch.status_str}
                   </div>
                   <div>
@@ -1037,13 +1037,13 @@ export default async function ForYouMatches() {
 
               </div>
 
-              <div className="border-t-[1px] border-[#E7F2F4]"></div>
+              <div className="border-t-[1px] border-colorFourth"></div>
 
               <div className="py-3 px-3">
                 <div className="flex justify-between items-center text-[14px]">
                   <Link className="w-[61%]" href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
                     <div className="">
-                      <p className="text-[#586577] text-[12px] mb-4 font-medium">
+                      <p className="text-colorSecound text-[12px] mb-4 font-medium">
                         {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
                       </p>
                       <div className="flex items-center space-x-2 font-medium md:w-full mb-4">
@@ -1056,7 +1056,7 @@ export default async function ForYouMatches() {
                             alt={cmatch.teama.short_name}
                             loading="lazy"
                           />
-                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
+                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-colorThird font-semibold text-[14px]"}`}>
                             {cmatch.teama.short_name} -{" "}
                           </span>
                         </div>
@@ -1064,7 +1064,7 @@ export default async function ForYouMatches() {
                           <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[14px]"}`}>
                             {cmatch.teama.scores}
                           </span>
-                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
+                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-colorThird text-[13px]"}`}>
                             {" "}
                             ({cmatch.teama.overs})
                           </span>
@@ -1082,7 +1082,7 @@ export default async function ForYouMatches() {
                               alt={cmatch.teamb.short_name}
                               loading="lazy"
                             />
-                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[#757A82] font-semibold text-[14px]"}`}>
+                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-colorThird font-semibold text-[14px]"}`}>
                               {cmatch.teamb.short_name} -{" "}
                             </span>
                           </div>
@@ -1090,7 +1090,7 @@ export default async function ForYouMatches() {
                             <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[14px] font-semibold "}`}>
                               {cmatch.teamb.scores}
                             </span>
-                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-[#757A82] text-[13px]"}`}>
+                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-colorThird text-[13px]"}`}>
                               ({cmatch.teamb.overs})
                             </span>
                           </p>
@@ -1098,7 +1098,7 @@ export default async function ForYouMatches() {
                      
                     </div>
                   </Link>
-                  <div className="h-[100px] border-l-[1px] border-[#e7f2f4]"></div>
+                  <div className="h-[100px] border-l-[1px] border-colorFourth"></div>
 
                   <Link className="w-[38%]" href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
                     <div className=" font-semibold flex flex-col items-center">
@@ -1112,14 +1112,14 @@ export default async function ForYouMatches() {
                         loading="lazy"
                       />
                     }
-                      <p className="text-[#0B773C] text-[15px] w-[75%] text-center">
+                      <p className="text-accent text-[15px] w-[75%] text-center">
                         {cmatch.result}
                       </p>
                     </div>
                   </Link>
                   {(cmatch.man_of_the_match && !Array.isArray(cmatch.man_of_the_match)) &&
                     <>
-                      <div className="h-[100px] border-l-[1px] border-[#e7f2f4]"></div>
+                      <div className="h-[100px] border-l-[1px] border-colorFourth"></div>
                       <Link className="w-[45%]"
                         href={
                           "/player/" +
@@ -1137,14 +1137,14 @@ export default async function ForYouMatches() {
                 </div>
 
               </div>
-              <div className="border-t-[1px] border-[#E7F2F4]"></div>
+              <div className="border-t-[1px] border-colorFourth"></div>
 
               <div className="flex items-center justify-between space-x-5 mt-3">
                 <div className="flex items-center">
                   {cmatch?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.competition?.cid + "/points-table"}>
-                        <p className="  text-[#757A82] font-medium">
+                        <p className="  text-colorThird font-medium">
                           {" "}
                           Points Table
                         </p>
@@ -1152,7 +1152,7 @@ export default async function ForYouMatches() {
                       <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                     </>}
                   <Link href={"/series/" + urlStringEncode(cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch?.competition?.cid + "/schedule-results/schedule"}>
-                    <p className=" text-[#757A82] font-medium">
+                    <p className=" text-colorThird font-medium">
                       Schedule
                     </p>
                   </Link>
@@ -1168,7 +1168,7 @@ export default async function ForYouMatches() {
                         alt=""
                         loading="lazy"
                       />
-                      <span className=" text-[#757A82] font-medium">
+                      <span className=" text-colorThird font-medium">
                         H2H
                       </span>
                     </div>
@@ -1182,10 +1182,10 @@ export default async function ForYouMatches() {
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
                   <div
-                    className="flex text-[13px] items-center text-[#0B773C] rounded-full uppercase font-semibold"
+                    className="flex text-[13px] items-center text-accent rounded-full uppercase font-semibold"
                     style={{ gap: "2px" }}
                   >
-                    <div className="w-[6px] h-[6px] bg-[#0B773C] rounded-full"></div> {cmatch.status_str}
+                    <div className="w-[6px] h-[6px] bg-accent rounded-full"></div> {cmatch.status_str}
                   </div>
                   <div>
                     <Link href={"/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) + "/" + cmatch.competition.cid}  >
@@ -1199,12 +1199,12 @@ export default async function ForYouMatches() {
                 </div>
               </div>
 
-              <div className="border-t-[1px] border-[#E7F2F4]"></div>
+              <div className="border-t-[1px] border-colorFourth"></div>
 
               <div className="open-Performance-data">
                 <Link href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
                   <div className="py-2 pb-3">
-                    <p className="text-[#586577] text-[11px] mb-4 font-normal">
+                    <p className="text-colorSecound text-[11px] mb-4 font-normal">
                       {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
                     </p>
                     <div className="flex justify-between items-center text-[14px]">
@@ -1228,7 +1228,7 @@ export default async function ForYouMatches() {
                                   {cmatch.teama.scores}
                                 </span>
 
-                                <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-[#757A82] text-[12px] font-normal"}`}>
+                                <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-colorThird text-[12px] font-normal"}`}>
                                   ({cmatch.teama.overs})
                                 </span>
                               </p>
@@ -1256,7 +1256,7 @@ export default async function ForYouMatches() {
                                     {cmatch.teamb.scores}
                                   </span>
 
-                                  <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-[#757A82] text-[12px] font-normal"}`}>
+                                  <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-colorThird text-[12px] font-normal"}`}>
                                     ({cmatch.teamb.overs})
                                   </span>
                                 </p>
@@ -1279,7 +1279,7 @@ export default async function ForYouMatches() {
                           loading="lazy"
                         />
                       }
-                        <p className="text-[#0B773C] font-semibold mt-1 text-[13px] w-[60%] text-center">
+                        <p className="text-accent font-semibold mt-1 text-[13px] w-[60%] text-center">
                           {cmatch.result}
                         </p>
                       </div>
@@ -1287,14 +1287,14 @@ export default async function ForYouMatches() {
                   </div>
                 </Link>
 
-                <div className="border-t-[1px] border-[#E7F2F4]"></div>
+                <div className="border-t-[1px] border-colorFourth"></div>
 
                 <div className="flex items-center justify-between space-x-5 mt-2">
                   <div className="flex items-center">
                     {cmatch?.competition?.total_teams > 2 &&
                       <>
                         <Link href={"/series/" + urlStringEncode(cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.competition?.cid + "/points-table"}>
-                          <p className=" pr-[10px]  text-[#757A82] text-[11px] font-medium">
+                          <p className=" pr-[10px]  text-colorThird text-[11px] font-medium">
                             {" "}
                             Points Table
                           </p>
@@ -1314,7 +1314,7 @@ export default async function ForYouMatches() {
                             alt=""
                             loading="lazy"
                           />
-                          <span className="text-[#757A82] text-[11px] font-medium">
+                          <span className="text-colorThird text-[11px] font-medium">
                             H2H
                           </span>
                         </div>

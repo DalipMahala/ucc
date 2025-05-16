@@ -19,7 +19,8 @@ const config: Config = {
         accent: '#0B773C',       // result green color
         colorFirst: '#A45B09',   // Scheduled color
         colorSecound: '#586577',  // 
-        colorThird: '#757A82'  //
+        colorThird: '#757A82',  //
+        colorFourth: '#E7F2F4'   // border line color
       },
     },
   },

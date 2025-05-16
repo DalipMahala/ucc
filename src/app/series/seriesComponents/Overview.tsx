@@ -426,8 +426,8 @@ export default function Overview({
                               </div>
                               <div className="h-[60px] border-l-[1px] border-[#d0d3d7]" />
                               <div className="w-[50%] font-semibold text-right">
-                                <p className="text-[#2F335C]">{matches?.subtitle} on </p>
-                                <p className="text-[#586577] text-[12px] font-normal">
+                                {/* <p className="text-[#2F335C]">{matches?.subtitle} on </p> */}
+                                <p className="text-[#2F335C]">
                                   {matches?.date_start_ist}
                                 </p>
                               </div>
@@ -438,7 +438,11 @@ export default function Overview({
                     </React.Fragment>
                   ))}
                 </div>
+
               </div>
+
+
+
               {seriesInfo?.title === "Indian Premier League" &&
                 standings?.map((rounds: any, index: number) => (
                   <div className="rounded-lg bg-[#ffffff] mb-2 p-4" key={index}>
@@ -798,16 +802,18 @@ export default function Overview({
                           playerUrls[seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid]
                         }
                       >
-                        <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                          <p className="mb-2 font-medium">Most Runs</p>
-
-                          <PlayerImage
-                            key={seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid}
-                            player_id={seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid}
-                            height={45}
-                            width={45}
-                            className="rounded-full h-[45px]"
-                          />
+                      
+                        <div className="rounded-lg bg-[#fefefe] text-center" style={{ boxShadow: '0px 0px 3px 0px #d8d8d8' }}>
+                          <p className="mb-2 font-medium border-b-[1px] border-colorFourth text-center py-2 ">Most Runs</p>
+                          <div className="flex justify-center">
+                            <PlayerImage
+                              key={seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid}
+                              player_id={seriesKeystats?.mostRuns?.stats?.[0]?.player?.pid}
+                              height={60}
+                              width={60}
+                              className="rounded-full h-[60px]"
+                            />
+                          </div>
 
                           <h3 className="mt-2 text-[14px] font-semibold">
                             {seriesKeystats?.mostRuns?.stats?.[0]?.player?.short_name}
@@ -815,13 +821,15 @@ export default function Overview({
                           <p className="text-[#757A82]">
                             {seriesKeystats?.mostRuns?.stats?.[0]?.team?.abbr}
                           </p>
-                          <div className="flex items-center gap-2 mt-2">
-                            <p className="text-[18px] font-semibold">
+                          <div className="flex items-center gap-2 mt-1 pb-1 justify-center border-t-[1px] border-colorFourth">
+                            <p className="text-[24px] font-semibold">
                               {seriesKeystats?.mostRuns?.stats?.[0]?.runs}
                             </p>
-                            <p className="text-gray-600 text-sm">Runs</p>
+                            <p className="text-gray-600 text-[13px]">Runs</p>
                           </div>
                         </div>
+
+
                       </Link>
                     </div>
                   )}
@@ -833,23 +841,25 @@ export default function Overview({
                           playerUrls[seriesKeystats?.highStrike?.stats?.[0]?.player?.pid]
                         }
                       >
-                        <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                          <p className="mb-2 font-medium">Highest Strike</p>
+                        <div className="rounded-lg bg-[#fefefe] text-center" style={{ boxShadow: '0px 0px 3px 0px #d8d8d8' }}>
+                          <p className="mb-2 font-medium border-b-[1px] border-colorFourth text-center py-2 ">Highest Strike</p>
+                          <div className="flex justify-center">
                           <PlayerImage
                             key={seriesKeystats?.highStrike?.stats?.[0]?.player?.pid}
                             player_id={seriesKeystats?.highStrike?.stats?.[0]?.player?.pid}
-                            height={45}
-                            width={45}
-                            className="rounded-full h-[45px]"
+                            height={60}
+                            width={60}
+                            className="rounded-full h-[60px]"
                           />
+                          </div>
                           <h3 className="mt-2 text-[14px] font-semibold">
                             {seriesKeystats?.highStrike?.stats?.[0]?.player?.short_name}
                           </h3>
                           <p className="text-[#757A82]">
                             {seriesKeystats?.highStrike?.stats?.[0]?.team?.abbr}
                           </p>
-                          <div className="flex items-center mt-2">
-                            <p className="text-[18px] font-semibold">
+                          <div className="flex items-center gap-2 mt-1 pb-1 justify-center border-t-[1px] border-colorFourth">
+                            <p className="text-[24px] font-semibold">
                               {seriesKeystats?.highStrike?.stats?.[0]?.strike}
                             </p>
                             <p className="text-gray-600 text-sm"></p>
@@ -858,6 +868,7 @@ export default function Overview({
                       </Link>
                     </div>
                   )}
+
                   {seriesKeystats?.topWickets?.stats?.[0]?.player?.short_name && (
                     <div className="col-span-1">
                       <Link
@@ -866,26 +877,28 @@ export default function Overview({
                           playerUrls[seriesKeystats?.topWickets?.stats?.[0]?.player?.pid]
                         }
                       >
-                        <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                          <p className="mb-2 font-medium">Most Wickets</p>
+                        <div className="rounded-lg bg-[#fefefe] text-center" style={{ boxShadow: '0px 0px 3px 0px #d8d8d8' }}>
+                          <p className="mb-2 font-medium border-b-[1px] border-colorFourth text-center py-2 ">Most Wickets</p>
+                          <div className="flex justify-center">
                           <PlayerImage
                             key={seriesKeystats?.topWickets?.stats?.[0]?.player?.pid}
                             player_id={seriesKeystats?.topWickets?.stats?.[0]?.player?.pid}
-                            height={45}
-                            width={45}
-                            className="rounded-full h-[45px]"
+                            height={60}
+                            width={60}
+                            className="rounded-full h-[60px]"
                           />
+                          </div>
                           <h3 className="mt-2 text-[14px] font-semibold">
                             {seriesKeystats?.topWickets?.stats?.[0]?.player?.short_name}
                           </h3>
                           <p className="text-[#757A82]">
                             {seriesKeystats?.topWickets?.stats?.[0]?.team?.abbr}
                           </p>
-                          <div className="flex items-center gap-2 mt-2">
-                            <p className="text-[18px] font-semibold">
+                          <div className="flex items-center gap-2 mt-1 pb-1 justify-center border-t-[1px] border-colorFourth">
+                            <p className="text-[24px] font-semibold">
                               {seriesKeystats?.topWickets?.stats?.[0]?.wickets}
                             </p>
-                            <p className="text-gray-600 text-sm">Wickets</p>
+                            <p className="text-gray-600 text-[13px]">Wickets</p>
                           </div>
                         </div>
                       </Link>
@@ -899,23 +912,25 @@ export default function Overview({
                           playerUrls[seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid]
                         }
                       >
-                        <div className="rounded-lg bg-[#ffffff] p-4 flex flex-col items-center">
-                          <p className="mb-2 font-medium">Best Figures</p>
+                        <div className="rounded-lg bg-[#fefefe] text-center" style={{ boxShadow: '0px 0px 3px 0px #d8d8d8' }}>
+                          <p className="mb-2 font-medium border-b-[1px] border-colorFourth text-center py-2 ">Best Figures</p>
+                          <div className="flex justify-center">
                           <PlayerImage
                             key={seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid}
                             player_id={seriesKeystats?.bestBowling?.stats?.[0]?.player?.pid}
-                            height={45}
-                            width={45}
-                            className="rounded-full h-[45px]"
+                            height={60}
+                            width={60}
+                            className="rounded-full h-[60px]"
                           />
+                          </div>
                           <h3 className="mt-2 text-[14px] font-semibold">
                             {seriesKeystats?.bestBowling?.stats?.[0]?.player?.short_name}
                           </h3>
                           <p className="text-[#757A82]">
                             {seriesKeystats?.bestBowling?.stats?.[0]?.team?.abbr}
                           </p>
-                          <div className="flex items-center mt-2">
-                            <p className="text-[18px] font-semibold">
+                          <div className="flex items-center gap-2 mt-1 pb-1 justify-center border-t-[1px] border-colorFourth">
+                            <p className="text-[24px] font-semibold">
                               {seriesKeystats?.bestBowling?.stats?.[0]?.bestmatch}
                             </p>
                           </div>
@@ -931,7 +946,7 @@ export default function Overview({
                   Team Name
                 </h2>
                 <div className="border-t-[1px] border-[#E4E9F0]" />
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-5">
+                <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-5">
                   {seriesInfo?.teams?.map((teams: any, index: number) => (
                     <Link
                       href={
@@ -998,7 +1013,7 @@ export default function Overview({
 
             <div className="lg:col-span-4 md:col-span-5">
 
-              <div className="-mt-4">
+              <div className="md:-mt-4">
 
                 <WeeklySlider />
 

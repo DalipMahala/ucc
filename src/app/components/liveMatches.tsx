@@ -207,6 +207,7 @@ export default async function LiveMatches() {
                 <Link href={"/live-score/" + urlStringEncode(items?.teama?.short_name + "-vs-" + items?.teamb?.short_name + "-" + items?.subtitle + "-" + items?.competition?.title + "-" + items?.competition?.season) + "/" + items.match_id}>
                   <div className="flex justify-between items-center text-[14px]">
                     <div className="w-[55%]">
+                      
                       <p className="text-colorSecound text-[12px] mb-4 font-medium">
                         {items.subtitle}, {items.format_str}, {items.venue.location}
                       </p>

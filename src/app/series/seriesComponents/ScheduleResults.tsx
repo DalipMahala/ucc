@@ -917,14 +917,14 @@ export default function ScheduleResults({
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center space-x-2">
                             <div
-                              className="flex text-[12px] items-center text-[#00a632] rounded-full uppercase font-semibold"
+                              className="flex text-[13px] items-center rounded-full uppercase font-semibold text-accent"
                               style={{ gap: "3px" }}
                             >
                               <div className="w-[6px] h-[6px] bg-[#00a632] rounded-full"></div> {" "}
                               {cmatch.status_str}
                             </div>
                             <div>
-                              <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                              <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                                 {cmatch.competition.title} -{" "}
                                 {cmatch.competition.season}
                               </h4>
@@ -955,7 +955,7 @@ export default function ScheduleResults({
                             }
                           >
                             <div className="py-2 pb-3">
-                              <p className="text-[#586577] text-[13px] mb-4 font-normal">
+                              <p className="text-colorSecound text-[11px] mb-4 font-normal">
                                 {cmatch.subtitle} ,{cmatch.format_str}, {cmatch.venue.location}
                               </p>
                               <div className="flex justify-between items-center text-[14px]">
@@ -971,16 +971,16 @@ export default function ScheduleResults({
                                       />
                                       <div>
                                         <span className="flex items-center gap-1">
-                                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
+                                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-medium text-[14px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
                                             {cmatch.teama.short_name}
                                           </span>
                                         </span>
                                         <p className="flex items-end gap-2">
-                                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#434c59]"}`}>
+                                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[#434c59]"}`}>
                                             {cmatch.teama.scores}
                                           </span>
 
-                                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[12px] text-[black]" : "text-[#586577] text-[12px] font-normal"}`}>
+                                          <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-colorThird text-[12px] font-normal"}`}>
                                             ({cmatch.teama.overs})
                                           </span>
                                         </p>
@@ -999,12 +999,12 @@ export default function ScheduleResults({
                                         />
                                         <div>
                                           <span className="flex items-center gap-1">
-                                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
+                                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-medium text-[14px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
                                               {cmatch.teamb.short_name}
                                             </span>
                                           </span>
                                           <p className="flex items-end gap-2">
-                                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[15px] text-[black]" : "font-medium text-[#434c59]"}`}>
+                                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[#434c59]"}`}>
                                               {cmatch.teamb.scores}
                                             </span>
 
@@ -1023,12 +1023,12 @@ export default function ScheduleResults({
                                 <div className=" w-[50%] font-semibold flex flex-col items-center">
                                   <Image loading="lazy"
                                     src="/assets/img/home/win.png"
-                                    width={30}
+                                    width={26}
                                     height={30}
-                                    style={{ width: "30px", height: "30px" }}
+                                    style={{ width: "26px", height: "30px" }}
                                     alt=""
                                   />
-                                  <p className="text-[#00a632] font-semibold mt-1 text-[13px] w-[75%] text-center">
+                                  <p className="text-accent font-semibold mt-1 text-[13px] w-[60%] text-center">
                                     {cmatch.result}
                                   </p>
                                 </div>
@@ -1045,18 +1045,18 @@ export default function ScheduleResults({
                                   <Link
                                     href={urlString + "/points-table"}
                                   >
-                                    <p className=" text-[#586577] text-[13px] font-medium">
+                                    <p className=" pr-[10px]  text-colorThird text-[11px] font-medium">
                                       {" "}
                                       Points Table
                                     </p>
                                   </Link>
 
-                                  <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                                 
                                 </>}
                               {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
                                 <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title+ "-head-to-head-in-ipl" : cmatch?.title + "-head-to-head-in-" + cmatch?.format_str)).toLowerCase()}>
 
-                                  <div className="flex justify-end items-center space-x-2">
+                                  <div className="pl-[10px] border-l-[1px] border-[#d0d3d7] flex justify-end items-center space-x-2">
                                     <Image loading="lazy"
                                       src="/assets/img/home/handshake.png"
                                       className="h-[17px] w-[17px]"
@@ -1065,7 +1065,7 @@ export default function ScheduleResults({
                                       style={{ width: "17px", height: "17px" }}
                                       alt=""
                                     />
-                                    <span className="text-[#586577] text-[13px] font-medium">
+                                    <span className="text-colorThird text-[11px] font-medium">
                                       H2H
                                     </span>
                                   </div>
@@ -1073,7 +1073,7 @@ export default function ScheduleResults({
                               }
                             </div>
 
-                            <div className="hidden md:flex items-center justify-between">
+                            <div className="flex items-center justify-between">
                               <div className="flex items-center gap-1">
                                 <Image loading="lazy"
                                   src="/assets/img/player-2.png"
@@ -1090,6 +1090,8 @@ export default function ScheduleResults({
                                 </div>
                               </div>
                             </div>
+
+
                           </div>
                         </div>
                       </div>
@@ -1303,14 +1305,14 @@ export default function ScheduleResults({
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center space-x-2">
                             <div
-                              className="flex text-[12px] items-center uppercase text-[#A45B09] rounded-full font-semibold"
+                              className="flex text-[13px] items-center uppercase text-colorFirst rounded-full font-semibold"
                               style={{ gap: "2px" }}
                             >
                               <div className="w-[6px] h-[6px] bg-[#A45B09] rounded-full"></div>{" "}
                               {ucmatch.status_str}
                             </div>
                             <div>
-                              <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                              <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                                 {ucmatch.competition.title} -{" "}
                                 {ucmatch.competition.season}
                               </h4>
@@ -1340,7 +1342,7 @@ export default function ScheduleResults({
                         >
                           <div className="open-Performance-data">
                             <div className="py-2 pb-3">
-                              <p className="text-[#586577] text-[13px] mb-4 font-medium">
+                              <p className="text-colorSecound text-[12px] mb-4 font-medium">
                                 {ucmatch.subtitle} ,{ucmatch.format_str}, {ucmatch.venue.location}
                               </p>
                               <div className="flex justify-between items-center text-[14px]">
@@ -1356,7 +1358,7 @@ export default function ScheduleResults({
                                       />
                                       <div>
                                         <span className="flex items-center gap-1">
-                                          <span className="text-[#5e5e5e] font-medium">
+                                          <span className="font-semibold text-[14px]">
                                             {ucmatch?.teama?.name}
                                           </span>
                                         </span>
@@ -1374,7 +1376,7 @@ export default function ScheduleResults({
                                       />
                                       <div>
                                         <span className="flex items-center gap-1">
-                                          <span className="text-[#5e5e5e] font-medium">
+                                          <span className="font-semibold text-[14px]">
                                             {ucmatch?.teamb?.name}
                                           </span>
                                         </span>
@@ -1384,14 +1386,13 @@ export default function ScheduleResults({
                                 </div>
 
 
-                                <div className="h-[100px] border-l-[1px] border-[#f2fafd]"></div>
 
                                 <div className="w-[80%] font-semibold text-center">
                                   {isSameDay(
                                     new Date(),
                                     new Date(ucmatch.date_start_ist)
                                   ) ? (
-                                    <><span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
+                                    <><span className="text-[13px] font-normal text-colorFirst">Start in</span>
                                       <CountdownTimer
                                         targetTime={ucmatch.date_start_ist}
                                       />
@@ -1425,16 +1426,16 @@ export default function ScheduleResults({
                                 <Link
                                   href={urlString + "/points-table"}
                                 >
-                                  <p className="text-[#586577] text-[13px] font-medium">
+                                  <p className="pr-[10px] text-colorThird text-[11px] font-medium">
                                     Points Table
                                   </p>
                                 </Link>
-                                <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
+                                
                               </>}
                             {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
                               <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title+ "-head-to-head-in-ipl" : ucmatch?.title + "-head-to-head-in-" + ucmatch?.format_str)).toLowerCase()}>
 
-                                <div className="flex justify-end items-center space-x-2">
+                                <div className="pl-[10px] border-l-[1px] flex justify-end items-center space-x-2">
                                   <Image loading="lazy"
                                     src="/assets/img/home/handshake.png"
                                     className="h-[17px] w-[17px]"
@@ -1443,7 +1444,7 @@ export default function ScheduleResults({
                                     style={{ width: "17px", height: "17px" }}
                                     alt=""
                                   />
-                                  <span className="text-[#586577] text-[13px] font-medium">
+                                  <span className="text-colorThird text-[11px] font-medium">
                                     H2H
                                   </span>
                                 </div>
@@ -1451,11 +1452,11 @@ export default function ScheduleResults({
                             }
                           </div>
 
-                          <div className="hidden items-center space-x-2 text-[13px]">
-                            <span className="text-[#586577] font-medium">
+                          <div className="flex items-center space-x-2 text-[11px]">
+                            <span className="text-colorThird font-medium">
                               {ucmatch.teama.short_name}
                             </span>
-                            <span className="flex font-semibold items-center bg-[#00a632] border-[1px] border-[#00a632] rounded-md text-[#ffffff] pr-2">
+                            <span className="flex items-center bg-[#FAFFFC] border-[1px] border-accent rounded-md text-accent pr-2">
                               <span>
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -1474,7 +1475,7 @@ export default function ScheduleResults({
                               </span>
                               0
                             </span>
-                            <span className="flex font-semibold items-center bg-[#ea2323] border-[1px] border-[#ea2323] rounded-md text-[#ffffff] pr-2">
+                            <span className="flex items-center bg-[#FFF7F7] border-[1px] border-secondary rounded-md text-secondary pr-2">
                               <span>
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"

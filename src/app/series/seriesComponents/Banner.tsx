@@ -183,10 +183,10 @@ export default function IplBanner({
                             alt={`series-${index + 1}`}
                             width={70}
                             height={70}
-                            className={`rounded-full ${
+                            className={` ${
                               isActive
-                                ? "w-[100px] h-[100px] border-[2px] border-[#539ff9] p-2 rounded-[20px] active-series"
-                                : "w-[70px] h-[70]"
+                                ? "w-[100px] h-[90px] border-[2px] border-[#539ff9] p-2 rounded-[10px] active-series"
+                                : "w-[70px] h-[70] rounded-full"
                             }`}
                           />
                         </Link>

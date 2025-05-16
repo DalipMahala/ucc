@@ -31,7 +31,10 @@ export default function TabMenu({ urlString, isPointTable }: { urlString: string
     <div id="tabs" className="mt-4 mb-4">
       <div 
         ref={tabsRef}
-        className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-x-auto scrollbar-hide"
+        className="flex text-1xl space-x-8 p-2 bg-[#ffffff] rounded-lg overflow-x-auto touch-auto scroll-smooth 
+  [&::-webkit-scrollbar]:h-[4px] [&::-webkit-scrollbar-track]:bg-gray-100 
+  md:[&::-webkit-scrollbar-thumb]:bg-[#DFE9F6] [&::-webkit-scrollbar-thumb]:bg-[#c2d7ef] 
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
       >
         <Link href={urlString}>
           <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md  ${activeTab === 'overview' ? 'bg-[#1A80F8] text-white active-tab' : ''}`}>

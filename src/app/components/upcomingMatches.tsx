@@ -143,7 +143,7 @@ export default async function UpcomingMatches() {
                     </span>
                     {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100)  : 0}
                   </span>
-                  <span className="flex items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-full text-[#A70B0B] pr-2">
+                  <span className="flex items-center bg-[#FFF7F7] border-[1px] border-secondary  rounded-full text-secondary pr-2">
                     <span className="">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -165,7 +165,7 @@ export default async function UpcomingMatches() {
                 </div>
               </div>
 
-              <div className="border-t-[1px] border-[#E7F2F4]"></div>
+              <div className="border-t-[1px] border-colorFourth"></div>
               <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-" + ucmatch?.subtitle + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
                 
                   <div className="flex justify-between items-center text-[14px] py-3 px-3">
@@ -236,14 +236,14 @@ export default async function UpcomingMatches() {
                   </div>
                 
               </Link>
-              <div className="border-t-[1px] border-[#E7F2F4]"></div>
+              <div className="border-t-[1px] border-colorFourth"></div>
 
               <div className="flex items-center justify-between space-x-5 mt-3">
                 <div className="flex items-center">
                   {ucmatch?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.competition?.cid + "/points-table"}>
-                        <p className="  text-[#757A82] font-medium">
+                        <p className="  text-colorThird font-medium">
                           {" "}
                           Points Table
                         </p>
@@ -251,7 +251,7 @@ export default async function UpcomingMatches() {
                       <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                     </>}
                   <Link href={"/series/" + urlStringEncode(ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch?.competition?.cid + "/schedule-results/schedule"}>
-                    <p className=" text-[#757A82] font-medium">
+                    <p className=" text-colorThird font-medium">
                       Schedule
                     </p>
                   </Link>
@@ -267,7 +267,7 @@ export default async function UpcomingMatches() {
                         alt=""
                         loading="lazy"
                       />
-                      <span className=" text-[#757A82] font-medium">
+                      <span className=" text-colorThird font-medium">
                         H2H
                       </span>
                     </div>
@@ -299,7 +299,7 @@ export default async function UpcomingMatches() {
                 </div>
               </div>
 
-              <div className="border-t-[1px] border-[#E7F2F4]"></div>
+              <div className="border-t-[1px] border-colorFourth"></div>
               <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-" + ucmatch?.subtitle + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
                 <div className="open-Performance-data">
                   <div className="py-2 pb-3">
@@ -320,7 +320,7 @@ export default async function UpcomingMatches() {
                             />
                             <div>
                               <span className="flex items-center gap-1">
-                                <span className="text-[#5e5e5e] font-medium">
+                                <span className="font-semibold text-[14px]">
                                   {ucmatch?.teama?.name}
                                 </span>
                               </span>
@@ -339,7 +339,7 @@ export default async function UpcomingMatches() {
                             />
                             <div>
                               <span className="flex items-center gap-1">
-                                <span className="text-[#5e5e5e] font-medium">
+                                <span className="font-semibold text-[14px]">
                                   {ucmatch?.teamb?.name}
                                 </span>
                               </span>
@@ -384,14 +384,14 @@ export default async function UpcomingMatches() {
                 </div>
               </Link>
 
-              <div className="border-t-[1px] border-[#E7F2F4]"></div>
+              <div className="border-t-[1px] border-colorFourth"></div>
 
               <div className="flex items-center justify-between space-x-5 mt-2">
                 <div className="flex items-center">
                   {ucmatch?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.competition?.cid + "/points-table"}>
-                        <p className="pr-[10px] text-[#757A82] text-[11px] font-medium">
+                        <p className="pr-[10px] text-colorThird text-[11px] font-medium">
                           Points Table
                         </p>
                       </Link>
@@ -409,7 +409,7 @@ export default async function UpcomingMatches() {
                           alt=""
                           loading="lazy"
                         />
-                        <span className="text-[#757A82] text-[11px] font-medium">
+                        <span className="text-colorThird text-[11px] font-medium">
                           H2H
                         </span>
                       </div>
@@ -418,10 +418,10 @@ export default async function UpcomingMatches() {
                 </div>
 
                 <div className="flex items-center space-x-2 text-[11px]">
-                  <span className={"text-[#757A82] font-medium oddsTeam" + ucmatch.match_id}>
+                  <span className={"text-colorThird font-medium oddsTeam" + ucmatch.match_id}>
                     {matchOddsCal(ucmatch)?.team}
                   </span>
-                  <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-md text-[#0B773C] pr-2">
+                  <span className="flex items-center bg-[#FAFFFC] border-[1px] border-accent rounded-md text-accent pr-2">
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -440,7 +440,7 @@ export default async function UpcomingMatches() {
                     </span>
                     {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100)  : 0}
                   </span>
-                  <span className="flex items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B] rounded-md text-[#A70B0B] pr-2">
+                  <span className="flex items-center bg-[#FFF7F7] border-[1px] border-secondary rounded-md text-secondary pr-2">
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { urlStringEncode } from "../../utils/utility";
 import { truncateText } from "@/utils/utility";
 import PlayerImage from "./PlayerImage";
+import { format, isSameDay } from "date-fns";
 
 interface MatchItem {
   game_state_str: string;
@@ -107,8 +108,8 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
           <div
             className="lg:block hidden rounded-lg p-4 mb-4 bg-[#ffffff] hover:shadow-lg"
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-2">
+            <div className="flex items-center justify-between mb-4 w-full">
+              <div className="flex items-center space-x-2 w-[70%]">
                 <div
                   className={`flex items-center text-[13px] rounded-full pr-3 uppercase font-semibold ${cmatch.status_str === "Cancelled" ? "text-red-600" : "text-accent"
                     }`}
@@ -131,6 +132,8 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                   </Link>
                 </div>
               </div>
+
+              <p className="w-[30%] text-colorSecound text-[12px] font-medium text-right">{format(new Date(), "dd MMM, yyyy")}, Wed, 2:30 PM IST</p>
 
             </div>
 
@@ -312,9 +315,14 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
             <div className="open-Performance-data">
               <Link href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
                 <div className="py-2 pb-3">
-                  <p className="text-colorSecound text-[11px] mb-4 font-normal">
+                  <div className="flex justify-between items-end mb-4 w-full">
+                  <p className="text-colorSecound text-[11px] font-normal w-[54%]">
                     {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
                   </p>
+                   <p className="text-colorSecound text-[11px] font-normal w-[46%] text-right">
+                    {format(new Date(), "dd MMM, yyyy")}, Wed, 2:30 PM IST
+                    </p>
+                  </div>
                   <div className="flex justify-between items-center text-[14px]">
                     <div className="w-[68%]">
                       <div className="items-center space-x-2 font-medium md:w-full mb-4">
@@ -406,7 +414,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                   {cmatch?.competition?.total_teams > 2 &&
                     <>
                       <Link href={"/series/" + urlStringEncode(cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.competition?.cid + "/points-table"}>
-                        <p className="pr-[10px]  text-colorThird text-[11px] font-medium">
+                        <p className="pr-[10px]  text-colorThird text-[13px] font-medium">
                           {" "}
                           Points Table
                         </p>
