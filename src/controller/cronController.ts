@@ -1641,7 +1641,7 @@ export async function InsertOrUpdatePlayers() {
     await delay(200);
 
     // Create an array of promises to fetch all pages in parallel
-    const requests = Array.from({ length: totalPages }, (_, i) =>
+    const requests = Array.from({ length: 100 }, (_, i) =>
       httpGet(`${API_URL}&paged=${i + 1}`)
     );
 
@@ -1684,7 +1684,7 @@ export async function InsertOrUpdatePlayers() {
           players.first_name.replace(/'/g, ' '),
           players.last_name,
           players.middle_name,
-          players.birthdate,
+          players.birthdate ? new Date(players.birthdate) : null,
           players.birthplace,
           players.country,
           players.logo_url,
@@ -1721,7 +1721,8 @@ export async function InsertOrUpdatePlayers() {
                 facebook_profile = VALUES(facebook_profile),
                 twitter_profile = VALUES(twitter_profile),
                 instagram_profile = VALUES(instagram_profile),
-                nationality = VALUES(nationality);
+                nationality = VALUES(nationality),
+                updated_date = now();
           `;
       // console.log("SQL Query:", query);
       // console.log("Values:", matches);

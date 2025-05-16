@@ -67,7 +67,27 @@ const nextConfig = {
       };
     
     return config;
-  }
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap/players/:page.xml',
+        destination: '/sitemap/players/:page',
+      },
+      {
+        source: '/sitemap/matches/:page.xml',
+        destination: '/sitemap/matches/:page',
+      },
+      {
+        source: '/sitemap/team/:page.xml',
+        destination: '/sitemap/team/:page',
+      },
+      {
+        source: '/sitemap.xml',
+        destination: '/sitemap',
+      },
+    ]
+  },
 };
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({

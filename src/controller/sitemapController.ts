@@ -53,3 +53,103 @@ export async function PlayerSiteMap() {
     throw error; // Re-throw for calling function to handle
   }
 }
+
+export async function fetchMatches(offset: number, limit: number) {
+  try {
+    const matchQuery = `SELECT id, match_url_short, updated_date FROM matches ORDER BY id asc LIMIT ${limit} OFFSET ${offset}`;
+ 
+    return await db.query(matchQuery);
+
+
+  } catch (error) {
+    console.error("Error in MatchInfo:", error);
+    throw error; // Re-throw for calling function to handle
+  }
+}
+export async function getAllSeries() {
+  try {
+    const seriesQuery = `SELECT cid, title, season, updated_date FROM competitions ORDER BY cid asc `;
+ 
+    const data =  await db.query(seriesQuery);
+    return data[0] || [];
+
+  } catch (error) {
+    console.error("Error in MatchInfo:", error);
+    throw error; // Re-throw for calling function to handle
+  }
+}
+export async function getAllPlayer(offset:number, limit:number) {
+  try {
+    const seriesQuery = `SELECT pid, title, updated_date FROM players ORDER BY pid asc LIMIT ${limit} OFFSET ${offset}`;
+ 
+    const data =  await db.query(seriesQuery);
+    return data[0] || [];
+
+  } catch (error) {
+    console.error("Error in MatchInfo:", error);
+    throw error; // Re-throw for calling function to handle
+  }
+}
+
+export async function getAllMatch(offset:number, limit:number) {
+  try {
+    const teamQuery = `SELECT id, match_id, match_url_full, match_url_short, JSON_UNQUOTE(JSON_EXTRACT(competition, '$.title')) as compitition, updated_date FROM matches where commentary = 1 ORDER BY id asc LIMIT ${limit} OFFSET ${offset}`;
+ 
+    const data =  await db.query(teamQuery);
+    return data[0] || [];
+
+  } catch (error) {
+    console.error("Error in Team:", error);
+    throw error; // Re-throw for calling function to handle
+  }
+}
+
+export async function getAllTeam(offset:number, limit:number) {
+  try {
+    const teamQuery = `SELECT tid, title, updated_date FROM teams ORDER BY tid asc LIMIT ${limit} OFFSET ${offset}`;
+ 
+    const data =  await db.query(teamQuery);
+    return data[0] || [];
+
+  } catch (error) {
+    console.error("Error in Team:", error);
+    throw error; // Re-throw for calling function to handle
+  }
+}
+
+export async function getPlayerCount(){
+  try {
+    const seriesQuery = `SELECT count(*) as total FROM players`;
+ 
+    const [rows]:any = await db.query(seriesQuery);
+    return rows[0]?.total;
+
+  } catch (error) {
+    console.error("Error in MatchInfo:", error);
+    throw error; // Re-throw for calling function to handle
+  }
+} 
+export async function getMatchCount(){
+  try {
+    const seriesQuery = `SELECT count(*) as total FROM matches where commentary = 1`;
+ 
+    const [rows]:any = await db.query(seriesQuery);
+    return rows[0]?.total;
+
+  } catch (error) {
+    console.error("Error in MatchInfo:", error);
+    throw error; // Re-throw for calling function to handle
+  }
+} 
+export async function getTeamCount(){
+  try {
+    const seriesQuery = `SELECT count(*) as total FROM teams`;
+ 
+    const [rows]:any = await db.query(seriesQuery);
+    return rows[0]?.total;
+
+  } catch (error) {
+    console.error("Error in MatchInfo:", error);
+    throw error; // Re-throw for calling function to handle
+  }
+}
