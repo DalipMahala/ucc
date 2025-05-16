@@ -412,7 +412,7 @@ export default async function ForYouMatches() {
                   <div>
                     <Link href={"/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) + "/" + items.competition.cid}  >
                       <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                        {truncateText(items.competition.title, 5)} -{" "}
+                        {items.competition.abbr} -{" "}
                         {items.competition.season}
                       </h2>
                     </Link>
@@ -835,7 +835,7 @@ export default async function ForYouMatches() {
                   <div>
                     <Link href={"/series/" + urlStringEncode(ucmatch.competition.title + "-" + ucmatch.competition.season) + "/" + ucmatch.competition.cid}  >
                       <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                        {truncateText(ucmatch.competition.title, 3)} -{" "}
+                        {ucmatch.competition.abbr} -{" "}
                         {ucmatch.competition.season}
                       </h2>
                     </Link>
