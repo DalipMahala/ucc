@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { MatcheStats } from "@/controller/matchInfoController";
 import { urlStringEncode } from "@/utils/utility";
 import ReadMoreCard from "@/app/components/ReadMoreCard";
-import TabMenu from "./../menu";
+import TabMenu from "./menu";
 
 interface Stats {
     urlString: string;
@@ -150,7 +150,7 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
     return (
         <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
 
-            <TabMenu urlString={urlString} isPointTable={isPointTable} status={status}/>
+            
             {matchStats !== undefined && matchStats !== null && matchStats !== '' ? (
                 <>
                     <div id="stats">

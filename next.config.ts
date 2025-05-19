@@ -14,6 +14,7 @@ const nextConfig = {
     scrollRestoration: true,
     optimizeServerReact: true,
     gzipSize: true,
+    esmExternals: true,
     // legacyBrowserSupport: false,
     // Remove unsupported options
   },
@@ -31,6 +32,7 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
   webpack: (config: {
+    resolve: any;
     plugins: any;
     devtool: string; optimization: any; 
 }, { isServer, dev }: any) => {
@@ -44,6 +46,10 @@ const nextConfig = {
   }
   if (!isServer && !dev) {
     config.devtool = 'source-map';
+    config.resolve.fallback = {
+      fs: false,
+      path: false,
+    };
   }
 
       config.optimization = {

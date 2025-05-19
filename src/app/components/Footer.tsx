@@ -3,6 +3,7 @@
 import React from 'react'
 import Image from "next/image";
 import Link from "next/link";
+import logoPlaceholder from 'public/assets/img/logo.webp';
 // import WordPressFooter from "@/app/components/WordPressFooter"
 
 const Footer = () => {
@@ -195,7 +196,8 @@ const Footer = () => {
       <hr className="border-gray-700 my-6" />
       <div className="flex flex-col md:flex-row justify-between items-center md:mx-4 md:gap-10 lg:mx-0">
         <div className="text-center mb-4 md:mb-0">
-          <Image priority  fetchPriority="high" src="/assets/img/logo.webp" className="h-[40px]" alt="" width={160} height={40}  decoding="async" loading="eager"/>
+          
+           <Image priority className="h-[40px] w-[173px]" src={logoPlaceholder} alt="UC Cricket Logo" width={150} height={50} placeholder="blur"/>
           <div className="flex space-x-4 mt-4">
             <a href="#">
               <Image priority src="/assets/img/store-1.png" alt="Google Play" className="h-[35px]" width={100} height={35}/>

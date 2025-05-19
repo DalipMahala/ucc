@@ -9,7 +9,8 @@ import ScheduleResults from './seriesComponents/ScheduleResults';
 import Squads from './seriesComponents/Squads';
 import PointsTable from './seriesComponents/PointsTable';
 import News from './seriesComponents/News';
-import Stats from './seriesComponents/Stats/page';
+import Stats from './seriesComponents/Stats';
+import StatsList from './seriesComponents/StatsList';
 import SeriesList from './seriesComponents/SeriesList';
 import { liveSeries, seriesById, AllSeriesList } from "@/controller/homeController";
 import { SeriesKeyStats, SeriesMatches } from "@/controller/matchInfoController";
@@ -86,7 +87,8 @@ export default async function page(props: { params: Params }) {
           {seriesTab === "squads" && <Squads seriesInfo={SeriesDetails} urlString={urlString} isPointTable={isPointTable} status={status}/>}
           {seriesTab === "points-table" && <PointsTable seriesInfo={SeriesDetails} urlString={urlString} isPointTable={isPointTable}  status={status}/>}
           {seriesTab === "news" && <News  urlString={urlString} isPointTable={isPointTable} status={status}/>}
-          {seriesTab === "stats" && <Stats seriesId={seriesId} urlString={urlString} isPointTable={isPointTable} seriesInfo={SeriesDetails} status={status}/>}
+          {seriesTab === "stats" && (statsType === '' || statsType === undefined) && <Stats seriesId={seriesId} urlString={urlString} isPointTable={isPointTable} seriesInfo={SeriesDetails} status={status}/>}
+          {seriesTab === "stats" && statsType !== '' && statsType !== undefined && <StatsList seriesId={seriesId} statsType={statsType} urlString={urlString} isPointTable={isPointTable} seriesInfo={SeriesDetails} status={status}/>}
           
           </>
           )
