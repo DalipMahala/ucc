@@ -122,9 +122,10 @@ export default async function Home(props: { params: Params }) {
             </div>
 
             <PLSeries />
-            <div className="sticky top-[93px]">
+            {/* sticky top-[93px] */}
+           
               <CountriesList countries={countryCompitition}></CountriesList>
-            </div>
+           
           </div>
         </div>
 
