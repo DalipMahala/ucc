@@ -41,7 +41,7 @@ export default async function page(props: { params: Params }) {
 
   const standings = SeriesDetails?.standing?.standings;
   const isPointTable = Array.isArray(standings) && standings.length > 0;
-  //  console.log('teamIds', seriesMatches);
+   
 
   let seriesMatchesList = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/series/SeriesMatches`, {
     method: "POST",
@@ -67,6 +67,12 @@ export default async function page(props: { params: Params }) {
   });
 
   const seriesMatches = categorizedMatches;
+  
+  let status = false;
+  if(seriesMatches?.resultMatch?.length > 0){
+    status = true;
+  }
+  // console.log('teamIds', );
   return (
     <Layout>
           {seriesName === '' || seriesName === undefined || seriesName === 'international' || seriesName === 'women'  || seriesName === 'domestic'? (
@@ -75,12 +81,12 @@ export default async function page(props: { params: Params }) {
             <>
           <Banner seriesData={liveSeriesData} seriesInfo={SeriesDetails}></Banner>
 
-          {seriesTab === ""  || seriesTab === undefined && <Overview  seriesInfo={SeriesDetails} seriesKeystats={seriesKeystats} urlString={urlString} isPointTable={isPointTable}/>}
-          {seriesTab === "schedule-results" && <ScheduleResults seriesId={seriesId} seriesMatches={seriesMatches} urlString={urlString} statsType={statsType} isPointTable={isPointTable}/>}
-          {seriesTab === "squads" && <Squads seriesInfo={SeriesDetails} urlString={urlString} isPointTable={isPointTable}/>}
-          {seriesTab === "points-table" && <PointsTable seriesInfo={SeriesDetails} urlString={urlString} isPointTable={isPointTable} />}
-          {seriesTab === "news" && <News  urlString={urlString} isPointTable={isPointTable}/>}
-          {seriesTab === "stats" && <Stats seriesId={seriesId} urlString={urlString} statsType={statsType} isPointTable={isPointTable} seriesInfo={SeriesDetails}/>}
+          {seriesTab === ""  || seriesTab === undefined && <Overview  seriesInfo={SeriesDetails} seriesKeystats={seriesKeystats} urlString={urlString} isPointTable={isPointTable} status={status}/>}
+          {seriesTab === "schedule-results" && <ScheduleResults seriesId={seriesId} seriesMatches={seriesMatches} urlString={urlString} statsType={statsType} isPointTable={isPointTable} status={status}/>}
+          {seriesTab === "squads" && <Squads seriesInfo={SeriesDetails} urlString={urlString} isPointTable={isPointTable} status={status}/>}
+          {seriesTab === "points-table" && <PointsTable seriesInfo={SeriesDetails} urlString={urlString} isPointTable={isPointTable}  status={status}/>}
+          {seriesTab === "news" && <News  urlString={urlString} isPointTable={isPointTable} status={status}/>}
+          {seriesTab === "stats" && <Stats seriesId={seriesId} urlString={urlString} statsType={statsType} isPointTable={isPointTable} seriesInfo={SeriesDetails} status={status}/>}
           
           </>
           )

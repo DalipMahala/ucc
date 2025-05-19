@@ -17,13 +17,15 @@ interface ScheduleResults {
   statsType: string;
   isPointTable: boolean;
   seriesId: number;
+  status: boolean;
 }
 export default function ScheduleResults({
   urlString,
   seriesMatches,
   statsType,
   isPointTable,
-  seriesId
+  seriesId,
+  status
 }: ScheduleResults) {
 
 
@@ -126,7 +128,7 @@ export default function ScheduleResults({
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-      <TabMenu urlString={urlString} isPointTable={isPointTable} />
+      <TabMenu urlString={urlString} isPointTable={isPointTable}  status={status}/>
       <div id="live" className="">
         <div className="md:grid grid-cols-12 gap-4 mb-4">
           <div className="lg:col-span-8 md:col-span-7">

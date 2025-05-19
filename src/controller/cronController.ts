@@ -1268,7 +1268,7 @@ export async function CompetitionMatches() {
 }
 export async function CompetitionSquads() {
   try {
-    const competitionsQuery = `SELECT cid FROM competitions WHERE cid not in (SELECT cid FROM competition_squads) or (date(dateend) >= date(now()) and status = 'result') or status = 'live'`;
+    const competitionsQuery = `SELECT cid FROM competitions WHERE cid not in (SELECT cid FROM competition_squads) or status in ('live','upcoming')`;
    
     const [competitionsResults]: any = await db.query(
       competitionsQuery
@@ -1641,7 +1641,7 @@ export async function InsertOrUpdatePlayers() {
     await delay(200);
 
     // Create an array of promises to fetch all pages in parallel
-    const requests = Array.from({ length: 100 }, (_, i) =>
+    const requests = Array.from({ length: totalPages }, (_, i) =>
       httpGet(`${API_URL}&paged=${i + 1}`)
     );
 

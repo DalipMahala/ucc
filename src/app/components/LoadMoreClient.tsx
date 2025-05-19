@@ -133,7 +133,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                 </div>
               </div>
 
-              <p className="w-[30%] text-colorSecound text-[12px] font-medium text-right">{format(new Date(), "dd MMM, yyyy")}, Wed, 2:30 PM IST</p>
+              <p className="w-[30%] text-colorSecound text-[12px] font-medium text-right">{cmatch?.date_start_ist ? format(new Date(cmatch?.date_start_ist), "dd MMM, yyyy, EEE, hh:mm:aa")+ " IST" : ''} </p>
 
             </div>
 
@@ -320,7 +320,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                     {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
                   </p>
                    <p className="text-colorSecound text-[11px] font-normal w-[46%] text-right">
-                    {format(new Date(), "dd MMM, yyyy")}, Wed, 2:30 PM IST
+                    {cmatch?.date_start_ist ? format(new Date(cmatch?.date_start_ist), "dd MMM, yyyy, EEE, hh:mm:aa") +" IST": ''}
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-[14px]">

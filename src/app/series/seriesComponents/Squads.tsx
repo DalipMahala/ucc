@@ -12,6 +12,7 @@ interface Squad {
   urlString: string;
   seriesInfo: any;
   isPointTable: boolean;
+  status: boolean;
 }
 interface Player {
   pid: number;
@@ -20,7 +21,7 @@ interface Player {
 interface Team {
   players?: Player[];
 }
-export default function Squad({ urlString, seriesInfo, isPointTable }: Squad) {
+export default function Squad({ urlString, seriesInfo, isPointTable, status }: Squad) {
   const [activeTab, setActiveTab] = useState("tab0");
   const seriesName = seriesInfo?.abbr;
   const seriesFormat = seriesInfo?.game_format;
@@ -95,7 +96,7 @@ export default function Squad({ urlString, seriesInfo, isPointTable }: Squad) {
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-      <TabMenu urlString={urlString} isPointTable={isPointTable} />
+      <TabMenu urlString={urlString} isPointTable={isPointTable} status={status} />
       <div id="squads" className="tab-content">
         <div className="py-2 mb-2">
           <h2 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8]">
@@ -134,16 +135,17 @@ export default function Squad({ urlString, seriesInfo, isPointTable }: Squad) {
             <div className="md:hidden rounded-lg p-2 mb-4 bg-[#ffffff]">
               <div id="team-buttons" className="">
                 {squads?.map((teamslist: any, index: number) => (
-                  <div className={`team-btn px-2 mb-1 py-3 w-full font-medium hover:text-[#1a80f8] hover:bg-[#ecf2fd] flex justify-between items-center border-b-[1px] ${activeTab === "tab" + index
+                  <div key={index} className={`team-btn px-2 mb-1 py-3 w-full font-medium hover:text-[#1a80f8] hover:bg-[#ecf2fd] flex justify-between items-center border-b-[1px] ${activeTab === "tab" + index
                     ? "text-[#394351] bg-[#ffffff]"
                     : "text-[#394351] bg-[#ffffff] "
                     }`}>
                     <button
-                      key={index}
+                      
                       className="flex items-center"
                       onClick={() => {
                         setActiveTab("tab" + index);
                         setIsModalOpen(true);
+                        setActiveSquad("Batsman");
                       }}
                     >
                       <Image loading="lazy"

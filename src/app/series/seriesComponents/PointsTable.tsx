@@ -14,6 +14,7 @@ interface PointsTable {
     urlString: string;
     seriesInfo: any;
     isPointTable: boolean;
+    status: boolean;
 }
 
 async function fetchHtml(seriesId: number) {
@@ -42,7 +43,7 @@ async function fetchHtml(seriesId: number) {
         return '';
     }
 }
-export default async function PointsTable({ urlString, seriesInfo, isPointTable }: PointsTable) {
+export default async function PointsTable({ urlString, seriesInfo, isPointTable, status }: PointsTable) {
 
     const standings = seriesInfo?.standing?.standings;
     const total_rounds = seriesInfo?.total_rounds;
@@ -52,7 +53,7 @@ export default async function PointsTable({ urlString, seriesInfo, isPointTable 
 
 
         <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-            <TabMenu urlString={urlString} isPointTable={isPointTable} />
+            <TabMenu urlString={urlString} isPointTable={isPointTable}  status={status}/>
 
 
             <div id="points" className="">

@@ -11,8 +11,9 @@ import TabMenu from "./menu";
 interface News {
   urlString: string;
   isPointTable: boolean;
+  status: boolean;
 }
-export default function News({ urlString, isPointTable }: News) {
+export default function News({ urlString, isPointTable, status }: News) {
   const [activeTab, setActiveTab] = useState("news");
   const [catids, setCatids] = useState("21");
   const [news, setNews] = useState([]);
@@ -46,7 +47,7 @@ export default function News({ urlString, isPointTable }: News) {
   }, [catids]);
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-      <TabMenu urlString={urlString} isPointTable={isPointTable} />
+      <TabMenu urlString={urlString} isPointTable={isPointTable}  status={status}/>
 
       <div className="tab-content-container">
         <div

@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'; // Better for active tab detection
 
-export default function TabMenu({ urlString, isPointTable }: { urlString: string; isPointTable: boolean }) {
+export default function TabMenu({ urlString, isPointTable, status }: { urlString: string; isPointTable: boolean; status:boolean }) {
   const tabsRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const [activeTab, setActiveTab] = useState('overview');
@@ -67,12 +67,13 @@ export default function TabMenu({ urlString, isPointTable }: { urlString: string
             News
           </button>
         </Link>
-        
+        {status && (
         <Link href={`${urlString}/stats/batting-most-run`}>
           <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md  ${activeTab === 'stats' ? 'bg-[#1A80F8] text-white active-tab' : ''}`}>
             Stats
           </button>
         </Link>
+        )}
       </div>
     </div>
   );

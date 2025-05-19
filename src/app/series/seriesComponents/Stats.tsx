@@ -11,6 +11,7 @@ interface Stats {
     seriesId: number;
     isPointTable: boolean;
     seriesInfo: any;
+    status: boolean;
 }
 interface PlayerUrlResponse {
     [key: string]: string;
@@ -43,7 +44,7 @@ async function fetchHtml(seriesId: number) {
     }
 }
 
-export default async function Stats({ seriesId, urlString, statsType, isPointTable, seriesInfo }: Stats) {
+export default async function Stats({ seriesId, urlString, statsType, isPointTable, seriesInfo, status }: Stats) {
 
     const pageHtml = await fetchHtml(seriesId);
 
@@ -149,7 +150,7 @@ export default async function Stats({ seriesId, urlString, statsType, isPointTab
     return (
         <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
 
-            <TabMenu urlString={urlString} isPointTable={isPointTable}/>
+            <TabMenu urlString={urlString} isPointTable={isPointTable} status={status}/>
             {matchStats !== undefined && matchStats !== null && matchStats !== '' ? (
                 <>
                     <div id="stats">

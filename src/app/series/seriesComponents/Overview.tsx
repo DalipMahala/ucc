@@ -19,12 +19,14 @@ interface Overview {
   seriesKeystats: any;
   urlString: string;
   isPointTable: boolean;
+  status: boolean;
 }
 export default function Overview({
   seriesInfo,
   seriesKeystats,
   urlString,
   isPointTable,
+  status
 }: Overview) {
   const standings = seriesInfo?.standing?.standings;
   // console.log("seriesKeystats",seriesKeystats);
@@ -155,6 +157,7 @@ export default function Overview({
 
   const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
 
+  if(status){
   useEffect(() => {
     const getAllPlayerIds = () => {
       const allIds = [
@@ -182,10 +185,11 @@ export default function Overview({
 
     fetchPlayerUrls();
   }, [seriesKeystats?.mostRuns?.stats?.slice(0, 3), seriesKeystats?.topWickets?.stats?.slice(0, 3)]);
+}
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-      <TabMenu urlString={urlString} isPointTable={isPointTable} />
+      <TabMenu urlString={urlString} isPointTable={isPointTable}  status={status}/>
 
       <div id="tab-content">
         <div id="info" className="tab-content ">
@@ -311,7 +315,9 @@ export default function Overview({
                             <div className=" font-semibold text-center w-full">
                               <h3 className="text-[#414143] text-[14px]">{matches?.subtitle} on</h3>
                               <p className="text-[#757A82] text-[12px] font-normal">
-                                {matches?.date_start_ist}
+                              {matches?.date_start_ist
+                          ? format(new Date(matches?.date_start_ist), "hh:ss:aa dd MMM, yyyy")
+                          : ""}
                               </p>
                             </div>
                             <div className="flex space-x-2 font-medium justify-end w-full">
@@ -428,7 +434,9 @@ export default function Overview({
                               <div className="w-[50%] font-semibold text-right">
                                 {/* <p className="text-[#2F335C]">{matches?.subtitle} on </p> */}
                                 <p className="text-[#2F335C]">
-                                  {matches?.date_start_ist}
+                                {matches?.date_start_ist
+                          ? format(new Date(matches?.date_start_ist), "hh:ss:aa dd MMM, yyyy")
+                          : ""}
                                 </p>
                               </div>
                             </div>
@@ -766,6 +774,8 @@ export default function Overview({
                   </div>
                 </>
               )}
+              {status && (
+                <>
               <div className="flex justify-between items-center pb-4">
                 <div>
                   <h3 className="text-1xl font-semibold pl-[4px] border-l-[3px] border-[#2182F8]">
@@ -940,7 +950,8 @@ export default function Overview({
                   )}
                 </div>
               </div>
-
+              </>
+              )}
               <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
                 <h2 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                   Team Name
