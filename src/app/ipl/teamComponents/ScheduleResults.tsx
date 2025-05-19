@@ -213,7 +213,7 @@ export default function ScheduleResults({
                 <button id="all-tab"
                   className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "info1"
                       ? "bg-[#000000] text-white"
-                      : ""
+                      : "bg-[#ffffff]"
                     } rounded-full`}
                 >
                   All
@@ -222,7 +222,7 @@ export default function ScheduleResults({
                   <button id="live-tab"
                     className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "live1"
                         ? "bg-[#000000] text-white"
-                        : ""
+                        : "bg-[#ffffff]"
                       } rounded-full`}
                   >
                     Live
@@ -231,7 +231,7 @@ export default function ScheduleResults({
                   <button id="completed-tab"
                     className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "finished1"
                         ? "bg-[#000000] text-white"
-                        : ""
+                        : "bg-[#ffffff]"
                       } rounded-full`}
                   >
                     Finished
@@ -240,7 +240,7 @@ export default function ScheduleResults({
                   <button id="upcoming-tab"
                     className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] ${activeMainTab === "scorecard1"
                         ? "bg-[#000000] text-white"
-                        : ""
+                        : "bg-[#ffffff]"
                       } rounded-full`}
                   >
                     Scheduled
@@ -486,7 +486,7 @@ export default function ScheduleResults({
                       <div className="lg:hidden rounded-lg p-4 mb-4 bg-[#ffffff] performance-section relative hover:shadow-lg">
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center space-x-2">
-                            <div className="flex items-center text-[#a70b0b] rounded-full font-semibold">
+                            <div className="flex gap-[2px] items-center text-[#ea2323] rounded-full font-semibold uppercase text-[13px]">
                               <span className="rounded-full">
                                 <svg className="h-[8px] w-[10px]">
                                   <circle
@@ -509,22 +509,12 @@ export default function ScheduleResults({
                               {items.status_str}
                             </div>
                             <div>
-                              <h4 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                              <h4 className="text-[14px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                                 {items.competition.title} -{" "}
                                 {items.competition.season}
                               </h4>
                             </div>
-                            <span className="absolute right-4 top-[19px]">
-                              <button className="arro-button">
-                                <Image loading="lazy"
-                                  src="/assets/img/arrow.png"
-                                  className=""
-                                  width={10}
-                                  height={15}
-                                  alt=""
-                                />
-                              </button>
-                            </span>
+                            
                           </div>
                         </div>
 
@@ -549,11 +539,11 @@ export default function ScheduleResults({
                             }
                           >
                             <div className="py-2 pb-3">
-                              <p className="text-[#586577] text-[11px] mb-4 font-normal">
+                              <p className="text-colorSecound text-[11px] mb-4 font-normal">
                                 {items.subtitle} ,{items.format_str}, {items.venue.location}
                               </p>
                               <div className="flex justify-between items-center text-[14px]">
-                                <div className="">
+                                <div className="w-[82%]">
                                   <div className="items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
                                     <div className="flex items-center space-x-2">
                                       <Image loading="lazy"
@@ -565,21 +555,21 @@ export default function ScheduleResults({
                                       />
                                       <div>
                                         <span className="flex items-center gap-1">
-                                          <span className="text-[#5e5e5e] font-medium">
+                                          <span className="text-[#5e5e5e] font-medium text-[14px]">
                                             {items.teama.short_name}
                                           </span>
                                           <Image loading="lazy"
                                             src="/assets/img/home/bat.png"
-                                            className="h-[15px]"
-                                            width={30}
-                                            height={30}
+                                            className="h-[14px]"
+                                            width={14}
+                                            height={14}
                                             alt=""
                                           />
                                         </span>
 
                                         <p
                                           className={
-                                            "flex items-center gap-2 match" +
+                                            "flex items-baseline gap-2 match" +
                                             items.match_id +
                                             "-" +
                                             items.teama.team_id
@@ -588,16 +578,16 @@ export default function ScheduleResults({
                                           {items.teama.scores === undefined ||
                                             items.teama.scores === null ||
                                             items.teama.scores === "" ? (
-                                            <span className="font-semibold">
+                                            <span className="font-normal text-[11px]">
                                               {" "}
                                               (Yet to bat){" "}
                                             </span>
                                           ) : (
                                             <>
-                                              <span className="font-semibold">
+                                              <span className="font-semibold text-[#1F2937] text-[14px]">
                                                 {items.teama.scores}
                                               </span>
-                                              <span className="text-[#909090] text-[12px]">
+                                              <span className="text-colorThird text-[12px] font-normal">
                                                 {" "}
                                                 ({items.teama.overs}){" "}
                                               </span>
@@ -619,12 +609,12 @@ export default function ScheduleResults({
                                           alt={items.teamb.short_name}
                                         />
                                         <div>
-                                          <span className="text-[#5e5e5e] font-medium">
+                                          <span className="text-[#5e5e5e] font-medium text-[14px]">
                                             {items.teamb.short_name}
                                           </span>
                                           <p
                                             className={
-                                              "font-normal text-[11px] match" +
+                                              "flex items-baseline gap-2 font-normal text-[14px] match" +
                                               items.match_id +
                                               "-" +
                                               items.teamb.team_id
@@ -633,16 +623,16 @@ export default function ScheduleResults({
                                             {items.teamb.scores === undefined ||
                                               items.teamb.scores === null ||
                                               items.teamb.scores === "" ? (
-                                              <span className="font-semibold">
+                                              <span className="font-normal text-[11px]">
                                                 {" "}
                                                 (Yet to bat){" "}
                                               </span>
                                             ) : (
                                               <>
-                                                <span className="font-semibold">
+                                                <span className=" font-semibold text-[#1F2937] text-[14px]">
                                                   {items.teamb.scores}
                                                 </span>
-                                                <span className="text-[#909090] text-[12px]">
+                                                <span className="text-colorThird text-[12px] font-normal">
                                                   {" "}
                                                   ({items.teamb.overs}){" "}
                                                 </span>
@@ -655,10 +645,10 @@ export default function ScheduleResults({
                                   </div>
                                 </div>
 
-                                <div className=" font-medium text-center">
+                                <div className="w-[44%] font-semibold text-center">
                                   <p
                                     className={
-                                      "text-[#2F335C] font-light mt-1 text-[11px]  statusNote" +
+                                      "mt-1 mx-2 text-[#2F335C] text-[12px]  statusNote" +
                                       items.match_id
                                     }
                                   >
@@ -672,6 +662,8 @@ export default function ScheduleResults({
 
                         </div>
                       </div>
+
+                      
                     </div>
                   ))}
                 </div>
@@ -833,7 +825,7 @@ export default function ScheduleResults({
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center space-x-2">
                             <div
-                              className="flex items-center text-[#0B773C] rounded-full  font-semibold"
+                              className="flex text-[13px] items-center rounded-full uppercase font-semibold text-accent"
                               style={{ gap: "3px" }}
                             >
                               <span className="rounded-full">●</span>{" "}
@@ -845,17 +837,7 @@ export default function ScheduleResults({
                                 {cmatch.competition.season}
                               </h4>
                             </div>
-                            <span className="absolute right-4 top-[19px]">
-                              <button className="arro-button">
-                                <Image loading="lazy"
-                                  src="/assets/img/arrow.png"
-                                  className=""
-                                  width={10}
-                                  height={15}
-                                  alt=""
-                                />
-                              </button>
-                            </span>
+                           
                           </div>
                         </div>
 
@@ -881,7 +863,7 @@ export default function ScheduleResults({
                             }
                           >
                             <div className="py-2 pb-3">
-                              <p className="text-[#586577] text-[11px] mb-4 font-normal">
+                              <p className="text-colorSecound text-[11px] mb-4 font-normal">
                                 {cmatch.subtitle} ,{cmatch.format_str}, {cmatch.venue.location}
                               </p>
                               <div className="flex justify-between items-center text-[14px]">
@@ -897,16 +879,16 @@ export default function ScheduleResults({
                                       />
                                       <div>
                                         <span className="flex items-center gap-1">
-                                          <span className="text-[#5e5e5e] font-medium">
+                                          <span className="text-[#5e5e5e] font-medium text-[14px]">
                                             {cmatch.teama.short_name}
                                           </span>
                                         </span>
                                         <p className="flex items-end gap-2">
-                                          <span className=" font-semibold">
+                                          <span className="text-[14px] font-semibold text-[#434c59]">
                                             {cmatch.teama.scores}
                                           </span>
 
-                                          <span className="text-[#909090] text-[12px] font-normal">
+                                          <span className="text-colorThird text-[12px] font-normal">
                                             ({cmatch.teama.overs})
                                           </span>
                                         </p>
@@ -930,11 +912,11 @@ export default function ScheduleResults({
                                             </span>
                                           </span>
                                           <p className="flex items-end gap-2">
-                                            <span className=" font-semibold">
+                                            <span className="font-semibold text-[#434c59]">
                                               {cmatch.teamb.scores}
                                             </span>
 
-                                            <span className="text-[#909090] text-[12px] font-normal">
+                                            <span className="text-colorThird text-[12px] font-normal">
                                               ({cmatch.teama.overs})
                                             </span>
                                           </p>
@@ -954,7 +936,7 @@ export default function ScheduleResults({
                                     style={{ width: "auto", height: "auto" }}
                                     alt=""
                                   />
-                                  <p className="text-[#0B773C] font-semibold mt-1 text-[13px] w-[75%] text-center">
+                                  <p className="text-accent font-semibold mt-1 text-[13px] w-[60%] text-center">
                                     {cmatch.result}
                                   </p>
                                 </div>
@@ -1134,10 +1116,10 @@ export default function ScheduleResults({
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center space-x-2">
                             <div
-                              className="flex items-center text-[#A45B09] rounded-full font-semibold"
+                              className="flex text-[13px] items-center uppercase text-colorFirst rounded-full font-semibold"
                               style={{ gap: "3px" }}
                             >
-                              <span className="rounded-full">●</span>{" "}
+                               <div className="w-[6px] h-[6px] bg-colorFirst rounded-full"></div>{" "}
                               {ucmatch.status_str}
                             </div>
                             <div>
@@ -1146,17 +1128,7 @@ export default function ScheduleResults({
                                 {ucmatch.competition.season}
                               </h4>
                             </div>
-                            <span className="absolute right-[12px] top-[19px]">
-                              <button className="arro-button">
-                                <Image loading="lazy"
-                                  src="/assets/img/arrow.png"
-                                  className=""
-                                  width={10}
-                                  height={15}
-                                  alt=""
-                                />
-                              </button>
-                            </span>
+                           
                           </div>
                         </div>
 
@@ -1181,11 +1153,11 @@ export default function ScheduleResults({
                         >
                           <div className="open-Performance-data">
                             <div className="py-2 pb-3">
-                              <p className="text-[#586577] text-[12px] mb-4 font-medium">
+                              <p className="text-colorSecound text-[12px] mb-4 font-medium">
                                 {ucmatch.subtitle} ,{ucmatch.format_str}, {ucmatch.venue.location}
                               </p>
                               <div className="flex justify-between items-center text-[14px]">
-                                <div>
+                                <div className="w-[80%]">
                                   <div className="items-center space-x-2 font-medium w-[162px] md:w-full mb-4">
                                     <div className="flex items-center space-x-2">
                                       <Image loading="lazy"
@@ -1197,7 +1169,7 @@ export default function ScheduleResults({
                                       />
                                       <div>
                                         <span className="flex items-center gap-1">
-                                          <span className="text-[#5e5e5e] font-medium">
+                                          <span className="font-semibold text-[14px]">
                                             {ucmatch.teama.short_name}
                                           </span>
                                         </span>
@@ -1215,7 +1187,7 @@ export default function ScheduleResults({
                                       />
                                       <div>
                                         <span className="flex items-center gap-1">
-                                          <span className="text-[#5e5e5e] font-medium">
+                                          <span className="font-semibold text-[14px]">
                                             {ucmatch.teamb.short_name}
                                           </span>
                                         </span>
@@ -1223,16 +1195,18 @@ export default function ScheduleResults({
                                     </div>
                                   </div>
                                 </div>
-                                <div className=" font-medium text-center">
+                                <div className="w-[80%] font-semibold text-center">
                                   {isSameDay(
                                     new Date(),
                                     new Date(ucmatch.date_start_ist)
                                   ) ? (
+                                    <><span className="text-[13px] font-normal text-colorFirst">Start in</span>
                                     <CountdownTimer
                                       targetTime={ucmatch.date_start_ist}
                                     />
+                                    </>
                                   ) : (
-                                    <p className="text-[#2F335C] text-[14px]">
+                                    <p className="text-[13px] font-medium">
                                       {format(
                                         new Date(ucmatch.date_start_ist),
                                         "dd MMMM - EEEE"
@@ -1253,11 +1227,11 @@ export default function ScheduleResults({
 
                         <div className="border-t-[1px] border-[#E7F2F4]"></div>
 
-                        <div className="flex items-center justify-between space-x-5 mt-2">
+                        <div className="flex items-center justify-end space-x-5 mt-2">
 
 
                           <div className="flex items-center space-x-2 text-[11px]">
-                            <span className="text-[#909090] font-medium">
+                            <span className="text-colorThird font-medium">
                               {ucmatch.teama.short_name}
                             </span>
                             <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#0B773C] rounded-md text-[#0B773C] pr-2">

@@ -20,6 +20,11 @@ interface teamview {
   seriesMatches: any;
   venueDetails: any;
 }
+
+
+
+
+
 export default function Overview({
   cid,
   params,
@@ -35,6 +40,13 @@ export default function Overview({
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+
+  const [activeSquad, setActiveSquad] = useState("Batter");
+
+  const handleClick = (tab: React.SetStateAction<string>) => {
+    setActiveSquad(tab);
+  };
 
   const teams = teamPlayers[0]?.team || {};
   const captain = teamPlayers[0]?.captains?.[0] || null;
@@ -185,6 +197,12 @@ export default function Overview({
   if (!isMounted || !teams?.tid || !pointTables?.season || !completedMatch || !standings || !teamLast5match || !seriesStats) {
     return <div className="p-4 text-center">Loading team data...</div>;
   }
+
+
+
+
+
+
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
@@ -657,8 +675,8 @@ export default function Overview({
                                         <span
                                           className={`${item === "W"
                                             ? "bg-[#13B76D]"
-                                            : item === "N" ? "bg-[#928d8d]" 
-                                            : "bg-[#F63636]"
+                                            : item === "N" ? "bg-[#928d8d]"
+                                              : "bg-[#F63636]"
                                             } text-white text-[13px] px-[4px] py-[0px] rounded w-[24px] text-center`}
                                           key={index}
                                         >
@@ -677,9 +695,9 @@ export default function Overview({
                       </table>
                     </div>
 
-{rounds?.standings?.length > 4 && (
-    <div className="absolute bottom-[33px] left-0 w-full h-10 bg-gradient-to-t from-white dark:from-neutral-900 to-transparent pointer-events-none z-10"></div>
-  )}
+                    {rounds?.standings?.length > 4 && (
+                      <div className="absolute bottom-[33px] left-0 w-full h-10 bg-gradient-to-t from-white dark:from-neutral-900 to-transparent pointer-events-none z-10"></div>
+                    )}
 
                     {rounds?.standings?.length > 4 &&
                       <div className="text-center">
@@ -690,7 +708,7 @@ export default function Overview({
                           pointTables?.cid +
                           "/points-table"
                         } >
-                        <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
+                          <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
                             View More{" "}
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -721,7 +739,7 @@ export default function Overview({
                   </h2>
                   <div>
                     <select
-                      className="border-[1px] rounded-md p-2"
+                      className="border-[1px] rounded-md p-2 bg-[#ffffff]"
                       onChange={handleSelectChange}
                       defaultValue="most-run"
                     >
@@ -972,63 +990,91 @@ export default function Overview({
 
               <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
                 <div>
-                  <div className="mb-3 flex justify-between items-center">
+                  <div className="mb-3 md:flex justify-between items-center">
                     <h3 className="text-1xl font-semibold pl-[7px] border-l-[3px] border-[#229ED3]">
                       Players
                     </h3>
+
+
+                    <div className="flex space-x-4 md:mt-0 mt-3">
+                      {["Batter", "Bowler", "All-Rounder"].map((tab) => (
+                        <button
+                          key={tab}
+                          onClick={() => handleClick(tab)}
+                          className={`font-medium py-1 md:px-7 px-6 whitespace-nowrap border-[1px] border-[#E5E8EA] rounded-full ${activeSquad === tab ? 'bg-[#081736] text-white' : 'bg-white text-black'
+                            }`}
+                        >
+                          {tab}
+                        </button>
+                      ))}
+                    </div>
+
+
+
+
+
                   </div>
 
                   <div className="border-t-[1px] border-[#E4E9F0]"></div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-5">
-                    {squads?.map((player: any, index: number) => (
-                      <div
-                        className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]"
-                        key={index}
-                      >
-                        <Link href={"/player/" + urlStringEncode(player?.name) + "/" + player?.player_id}>
-                          <div className="relative">
-                            <PlayerImage
-                              key={player?.player_id}
-                              player_id={player?.player_id}
-                              height={55}
-                              width={55}
-                              className="h-[55px] mx-auto rounded-full mb-2"
-                            />
-                            <Image
-                              loading="lazy"
-                              src={player?.role === "all"
-                                ? "/assets/img/player/bat-ball.png"
-                                : player?.role === "wk"
-                                  ? "/assets/img/player/bat.png"
-                                  : player?.role === "bat"
+                  <div className="">
+                    {activeSquad === "Batter" && <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-5">
+                      {squads?.map((player: any, index: number) => (
+                        <div
+                          className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]"
+                          key={index}
+                        >
+                          <Link href={"/player/" + urlStringEncode(player?.name) + "/" + player?.player_id}>
+                            <div className="relative">
+                              <PlayerImage
+                                key={player?.player_id}
+                                player_id={player?.player_id}
+                                height={55}
+                                width={55}
+                                className="h-[55px] mx-auto rounded-full mb-2"
+                              />
+                              <Image
+                                loading="lazy"
+                                src={player?.role === "all"
+                                  ? "/assets/img/player/bat-ball.png"
+                                  : player?.role === "wk"
                                     ? "/assets/img/player/bat.png"
-                                    : "/assets/img/player/ball.png"}
-                              className="h-[23px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
-                              width={23}
-                              height={23}
-                              alt="1"
-                            />
-                          </div>
-                          <h3 className="text-[14px] font-medium text-gray-800 hover:text-[#1a80f8]">
-                            {player?.name}
-                          </h3>
-                          <div className="flex gap-1 items-center justify-center">
-                            {/* <Image src="/assets/img/flag/b-2.png" className="h-[15px] rounded-full" width={15} height={15} alt="" /> */}
-                            <p className="text-xs text-gray-600">
-                              {player?.role === "all"
-                                ? "All-Rounder"
-                                : player?.role === "wk"
-                                  ? "Wiket-Keeper"
-                                  : player?.role === "bat"
-                                    ? "Batsman"
-                                    : "Bowler"}
-                            </p>
-                          </div>
-                        </Link>
-                      </div>
-                    ))}
+                                    : player?.role === "bat"
+                                      ? "/assets/img/player/bat.png"
+                                      : "/assets/img/player/ball.png"}
+                                className="h-[23px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
+                                width={23}
+                                height={23}
+                                alt="1"
+                              />
+                            </div>
+                            <h3 className="text-[14px] font-medium text-gray-800 hover:text-[#1a80f8]">
+                              {player?.name}
+                            </h3>
+                            <div className="flex gap-1 items-center justify-center">
+                              {/* <Image src="/assets/img/flag/b-2.png" className="h-[15px] rounded-full" width={15} height={15} alt="" /> */}
+                              <p className="text-xs text-gray-600">
+                                {player?.role === "all"
+                                  ? "All-Rounder"
+                                  : player?.role === "wk"
+                                    ? "Wiket-Keeper"
+                                    : player?.role === "bat"
+                                      ? "Batsman"
+                                      : "Bowler"}
+                              </p>
+                            </div>
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
+                    }
+                    {activeSquad === "Bowler" && <p>Showing finished squad data...</p>}
+                    {activeSquad === "All-Rounder" && <p>Showing scheduled squad data...</p>}
                   </div>
+
+
+
+
                 </div>
               </div>
 
@@ -1046,7 +1092,7 @@ export default function Overview({
                       The tournament received excellent response from the fans
                       worldwide and the finals of the gran
                     </p>
-                    
+
                   </>
                 )}
               </div>

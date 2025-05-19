@@ -28,7 +28,7 @@ export default function NewsSection({ urlString }: News) {
           className="lg:grid grid-cols-12 gap-4 mt-4"
           key={index}
         >
-          <div className="col-span-6">
+          <div className="col-span-6 mb-2">
             {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium_large.source_url && (
               <Link href={post?.link}>
                 <Image priority
@@ -99,7 +99,7 @@ export default function NewsSection({ urlString }: News) {
             <React.Fragment key={index}>
 
               <div className="flex gap-3 my-3">
-                <Link href={post?.link} className="w-[30%]">
+                <Link href={post?.link} className="md:w-[28%] w-[45%]">
                   {post._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes
                     ?.medium?.source_url && (
                       <Image loading="lazy"
@@ -108,12 +108,12 @@ export default function NewsSection({ urlString }: News) {
                         width={185}
                         height={89}
                         alt={post?.title.rendered}
-                        className="rounded-lg h-[auto] w-full" />
+                        className="rounded-lg h-[90px] object-cover w-[100%]" />
                     )}
                 </Link>
 
 
-                <div className="w-[70%] flex justify-between flex-col">
+                <div className="md:w-[72%] w-[55%] flex justify-between flex-col">
                   <Link href={post?.link}>
                     <h2
                       className="text-[14px] font-semibold mb-2 hover:text-[#1a80f8]"

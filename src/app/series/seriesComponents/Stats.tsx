@@ -4,6 +4,8 @@ import { MatcheStats } from "@/controller/matchInfoController";
 import { urlStringEncode } from "@/utils/utility";
 import ReadMoreCard from "@/app/components/ReadMoreCard";
 import TabMenu from "./menu";
+import { MdSportsCricket } from "react-icons/md";
+import { BiSolidCricketBall } from "react-icons/bi";
 
 interface Stats {
     urlString: string;
@@ -53,66 +55,73 @@ export default async function Stats({ seriesId, urlString, isPointTable, seriesI
                                    <div className="md:grid grid-cols-12 gap-4">
            
            
-                                       <div className="lg:col-span-8 md:col-span-7 md:grid grid-cols-12 gap-4">
-                                           <div className="col-span-6 rounded-lg p-2 mb-4 bg-[#ffffff]">
-                                               <div className="py-2 mb-2">
-                                                   <h2 className="text-1xl font-semibold pl-[6px] border-l-[3px] border-[#1a80f8]">
+                                       
+                                           <div className="md:col-span-6 col-span-12 rounded-lg">
+                                               <div className="py-3 bg-[#0e2149] text-[#ffffff] rounded-t-lg">
+                                                   <h2 className="text-1xl font-semibold pl-[6px] border-l-[3px] border-[#ffffff] mx-2">
                                                        Batting
                                                    </h2>
                                                </div>
-                                               <div id="team-buttons" className="">
-                                                   <Link href={urlString + "/stats/batting-most-run"}>
+                                               <div id="team-buttons" className="px-2 rounded-b-lg mb-4 bg-[#ffffff]">
+                                                   <Link className="flex gap-2 items-center border-t px-2 py-3 hover:text-[#1a80f8]" href={urlString + "/stats/batting-most-run"}>
+                                                   <MdSportsCricket />
                                                        <button
            
-                                                           className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md  hover:bg-[#ecf2fd] hover:text-[#1a80f8]} `}
+                                                           className={`state-btn new-class  w-full font-medium active text-left rounded-md  `}
                                                        >
                                                            Most Runs
                                                        </button>
                                                    </Link>
-                                                   <Link href={urlString + "/stats/batting-highest-average"}>
+                                                   <Link className="flex gap-2 items-center border-t px-2 py-3 hover:text-[#1a80f8]" href={urlString + "/stats/batting-highest-average"}>
+                                                    <MdSportsCricket />
                                                        <button
-                                                           className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md hover:bg-[#ecf2fd] hover:text-[#1a80f8]} `}
+                                                           className={`state-btn new-class  w-full font-medium active text-left rounded-md `}
                                                        >
                                                            Best Batting Average
                                                        </button>
                                                    </Link>
-                                                   <Link href={urlString + "/stats/batting-highest-strike-rate"}>
+                                                   <Link className="flex gap-2 items-center border-t px-2 py-3 hover:text-[#1a80f8]" href={urlString + "/stats/batting-highest-strike-rate"}>
+                                                    <MdSportsCricket />
                                                        <button
            
-                                                           className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md hover:bg-[#ecf2fd] hover:text-[#1a80f8]} `}
+                                                           className={`state-btn new-class  w-full font-medium active text-left rounded-md `}
            
                                                        >
                                                            Best Batting Strike Rate
                                                        </button>
                                                    </Link>
            
-                                                   <Link href={urlString + "/stats/batting-most-hundreds"}>
+                                                   <Link className="flex gap-2 items-center border-t px-2 py-3 hover:text-[#1a80f8]" href={urlString + "/stats/batting-most-hundreds"}>
+                                                    <MdSportsCricket />
                                                        <button
-                                                           className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md hover:bg-[#ecf2fd] hover:text-[#1a80f8]} `}
+                                                           className={`state-btn new-class  w-full font-medium active text-left rounded-md `}
                                                        >
                                                            Most Hundreds
                                                        </button>
                                                    </Link>
            
-                                                   <Link href={urlString + "/stats/batting-most-fifties"}>
+                                                   <Link className="flex gap-2 items-center border-t px-2 py-3 hover:text-[#1a80f8]" href={urlString + "/stats/batting-most-fifties"}>
+                                                    <MdSportsCricket />
                                                        <button
-                                                           className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md hover:bg-[#ecf2fd] hover:text-[#1a80f8]} `}
+                                                           className={`state-btn new-class  w-full font-medium active text-left rounded-md `}
                                                        >
                                                            Most Fifties
                                                        </button>
                                                    </Link>
            
-                                                   <Link href={urlString + "/stats/batting-most-fours"}>
+                                                   <Link className="flex gap-2 items-center border-t px-2 py-3 hover:text-[#1a80f8]" href={urlString + "/stats/batting-most-fours"}>
+                                                    <MdSportsCricket />
                                                        <button
-                                                           className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md hover:bg-[#ecf2fd] hover:text-[#1a80f8]} `}
+                                                           className={`state-btn new-class  w-full font-medium active text-left rounded-md `}
                                                        >
                                                            Most Fours
                                                        </button>
                                                    </Link>
            
-                                                   <Link href={urlString + "/stats/batting-most-sixes"}>
+                                                   <Link className="flex gap-2 items-center border-t px-2 py-3 hover:text-[#1a80f8]" href={urlString + "/stats/batting-most-sixes"}>
+                                                    <MdSportsCricket />
                                                        <button
-                                                           className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md hover:bg-[#ecf2fd] hover:text-[#1a80f8]} `}
+                                                           className={`state-btn new-class  w-full font-medium active text-left rounded-md `}
                                                        >
                                                            Most Sixes
                                                        </button>
@@ -120,62 +129,69 @@ export default async function Stats({ seriesId, urlString, isPointTable, seriesI
            
                                                </div>
                                            </div>
-                                           <div className="col-span-6 rounded-lg p-2 mb-4 bg-[#ffffff]">
-                                               <div className="py-2 mb-2">
-                                                   <h3 className="text-1xl font-semibold pl-[6px] border-l-[3px] border-[#1a80f8]">
+                                           <div className="md:col-span-6 col-span-12 rounded-lg">
+                                               <div className="py-3 bg-[#0e2149] text-[#ffffff] rounded-t-lg">
+                                                   <h2 className="text-1xl font-semibold pl-[6px] border-l-[3px] border-[#ffffff] mx-2">
                                                        Bowler
-                                                   </h3>
+                                                   </h2>
                                                </div>
-                                               <div id="team-buttons" className="">
-                                                   <Link href={urlString + "/stats/bowling-most-wicket"}>
+
+                                               <div id="team-buttons" className="px-2 rounded-b-lg mb-4 bg-[#ffffff]">
+                                                   <Link className="flex gap-2 items-center border-t px-2 py-3 hover:text-[#1a80f8]" href={urlString + "/stats/bowling-most-wicket"}>
+                                                   <BiSolidCricketBall />
                                                        <button
-                                                           className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md hover:bg-[#ecf2fd] hover:text-[#1a80f8]} `}
+                                                           className={`state-btn new-class  w-full font-medium active text-left rounded-md `}
                                                        >
                                                            Most Wickets
                                                        </button>
                                                    </Link>
-                                                   <Link href={urlString + "/stats/bowling-best-average"}>
+                                                   <Link className="flex gap-2 items-center border-t px-2 py-3 hover:text-[#1a80f8]" href={urlString + "/stats/bowling-best-average"}>
+                                                   <BiSolidCricketBall />
                                                        <button
-                                                           className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md hover:bg-[#ecf2fd] hover:text-[#1a80f8]} `}
+                                                           className={`state-btn new-class  w-full font-medium active text-left rounded-md `}
                                                        >
                                                            Best Bowling Average
                                                        </button>
                                                    </Link>
            
-                                                   <Link href={urlString + "/stats/bowling-best-figures"}>
+                                                   <Link className="flex gap-2 items-center border-t px-2 py-3 hover:text-[#1a80f8]" href={urlString + "/stats/bowling-best-figures"}>
+                                                   <BiSolidCricketBall />
                                                        <button
-                                                           className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md hover:bg-[#ecf2fd] hover:text-[#1a80f8]} `}
+                                                           className={`state-btn new-class  w-full font-medium active text-left rounded-md `}
                                                        >
                                                            Best Bowling
                                                        </button>
                                                    </Link>
            
-                                                   <Link href={urlString + "/stats/bowling-most-five-wicket-hauls"}>
+                                                   <Link className="flex gap-2 items-center border-t px-2 py-3 hover:text-[#1a80f8]" href={urlString + "/stats/bowling-most-five-wicket-hauls"}>
+                                                   <BiSolidCricketBall />
                                                        <button
-                                                           className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md hover:bg-[#ecf2fd] hover:text-[#1a80f8]} `}
+                                                           className={`state-btn new-class  w-full font-medium active text-left rounded-md `}
                                                        >
                                                            Most 5 Wickets Haul
                                                        </button>
                                                    </Link>
            
-                                                   <Link href={urlString + "/stats/bowling-best-economy-rates"}>
+                                                   <Link className="flex gap-2 items-center border-t px-2 py-3 hover:text-[#1a80f8]" href={urlString + "/stats/bowling-best-economy-rates"}>
+                                                   <BiSolidCricketBall />
                                                        <button
-                                                           className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md hover:bg-[#ecf2fd] hover:text-[#1a80f8]} `}
+                                                           className={`state-btn new-class  w-full font-medium active text-left rounded-md `}
                                                        >
                                                            Best Economy
                                                        </button>
                                                    </Link>
            
-                                                   <Link href={urlString + "/stats/bowling-best-strike-rates"}>
+                                                   <Link className="flex gap-2 items-center border-t px-2 py-3 hover:text-[#1a80f8]" href={urlString + "/stats/bowling-best-strike-rates"}>
+                                                   <BiSolidCricketBall />
                                                        <button
-                                                           className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md hover:bg-[#ecf2fd] hover:text-[#1a80f8]} `}
+                                                           className={`state-btn new-class  w-full font-medium active text-left rounded-md `}
                                                        >
                                                            Best Bowling Strike Rate
                                                        </button>
                                                    </Link>
                                                </div>
                                            </div>
-                                       </div>
+                                     
            
            
            

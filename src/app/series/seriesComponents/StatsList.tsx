@@ -1,3 +1,5 @@
+
+
 import React from "react";
 import Link from 'next/link';
 import { MatcheStats } from "@/controller/matchInfoController";
@@ -147,6 +149,10 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
       }
     // console.log("renderStatus",playerUrls);
 
+
+    
+
+
     return (
         <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
 
@@ -155,6 +161,8 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                 <>
                     <div id="stats">
                         <div className="md:grid grid-cols-12 gap-4">
+
+{/*                             
                             <div className="lg:col-span-3 md:col-span-4">
                                 <div className="rounded-lg p-2 mb-4 bg-[#ffffff]">
                                     <div className="py-2 mb-2">
@@ -277,9 +285,14 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                                         </Link>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="lg:col-span-9 md:col-span-8">
+                            </div> */}
+                            
+
+
+                            
+                            <div className="col-span-12">
                                 <div id="most-runs" className={`state-content most-runs" ? "" : "hidden"}`} >
+
                                     <div>
                                         <div className={`rounded-lg bg-[#ffffff] mb-4 p-4 ${statsType == "bowling-most-wicket" || statsType == "bowling-best-average" || statsType == "bowling-best-figures" || statsType == "bowling-most-five-wicket-hauls" || statsType == "bowling-best-economy-rates" || statsType == "bowling-best-strike-rates" ? "hidden" : ""}`}>
                                             <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
@@ -291,46 +304,56 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                                                         <thead className="bg-blue-50 text-gray-700 ">
                                                             <tr>
                                                                 <th className="px-4 py-3 font-medium w-[10px]" />
-                                                                <th className="px-4 py-3 font-medium">Batter</th>
-                                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                                <th className="px-4 py-3 font-medium sticky left-0 bg-blue-50 text-gray-700">Batter</th>
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
+                                                                    Team
+                                                                </th>
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
                                                                     Match
                                                                 </th>
-                                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
                                                                     Inns
                                                                 </th>
-                                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
                                                                     Runs
                                                                 </th>
-                                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
                                                                     Avg
                                                                 </th>
-                                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
                                                                     4s
                                                                 </th>
-                                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
                                                                     6s
                                                                 </th>
-                                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
+                                                                    100s
+                                                                </th>
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
+                                                                    50s
+                                                                </th>
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
                                                                     SR
                                                                 </th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody className="divide-y divide-gray-200">
+                                                        <tbody className="divide-y divide-gray-200 relative">
                                                             {matchStats?.map((stats: any, index: number) => (
                                                                 <tr key={index}>
-                                                                    <td className="md:px-2 pl-[14px] py-3 w-[10px]">{index + 1}</td>
-                                                                    <td className="md:px-2 py-3 text-[#217AF7]">
-                                                                        <Link href={"/player/" + playerUrls[stats?.player?.pid]}> {stats?.player?.short_name}</Link>
+                                                                    <td className="px-2 pl-[14px] py-3 w-[10px]">{index + 1}</td>
+                                                                    <td className="md:px-2 py-3 text-[#217AF7] sticky left-0">
+                                                                       <p className="bg-[#ffffff] px-2"> <Link href={"/player/" + playerUrls[stats?.player?.pid]}> {stats?.player?.short_name}</Link>
+                                                                       </p>
                                                                     </td>
-                                                                    <td className="md:px-2 pl-[14px] py-3">{stats?.matches}</td>
-                                                                    <td className="md:px-2 pl-[14px] py-3">{stats?.innings}</td>
+                                                                    <td className="px-2 pl-[14px] py-3">{stats?.matches}</td>
+                                                                    <td className="px-2 pl-[14px] py-3">{stats?.innings}</td>
 
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'batting-most-run' ? "font-semibold" : ""}`}>{stats?.runs}</td>
+                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-run' ? "font-semibold" : ""}`}>{stats?.runs}</td>
 
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'batting-highest-average' ? "font-semibold" : ""}`}>{stats?.average}</td>
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'batting-most-fours' ? "font-semibold" : ""}`}>{stats?.run4}</td>
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'batting-most-sixes' ? "font-semibold" : ""}`}>{stats?.run6}</td>
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'batting-highest-strike-rate' ? "font-semibold" : ""}`}>{stats?.strike}</td>
+                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-highest-average' ? "font-semibold" : ""}`}>{stats?.average}</td>
+                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-fours' ? "font-semibold" : ""}`}>{stats?.run4}</td>
+                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-sixes' ? "font-semibold" : ""}`}>{stats?.run6}</td>
+                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-highest-strike-rate' ? "font-semibold" : ""}`}>{stats?.strike}</td>
                                                                 </tr>
                                                             ))}
 
@@ -350,26 +373,26 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                                                         <thead className="bg-blue-50 text-gray-700 ">
                                                             <tr>
                                                                 <th className="px-4 py-3 font-medium w-[10px]" />
-                                                                <th className="px-4 py-3 font-medium">Bowler</th>
-                                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                                <th className="px-4 py-3 font-medium sticky left-0 bg-blue-50 text-gray-700">Bowler</th>
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
                                                                     Match
                                                                 </th>
-                                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
                                                                     Inns
                                                                 </th>
-                                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
                                                                     Wickets
                                                                 </th>
-                                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
                                                                     Avg
                                                                 </th>
-                                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
                                                                     Wicket4i
                                                                 </th>
-                                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
                                                                     wicket5i
                                                                 </th>
-                                                                <th className="md:px-2 pl-[14px] py-3 font-medium">
+                                                                <th className="px-2 pl-[14px] py-3 font-medium">
                                                                     SR
                                                                 </th>
                                                             </tr>
@@ -377,17 +400,19 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                                                         <tbody className="divide-y divide-gray-200">
                                                             {matchStats?.map((stats: any, index: number) => (
                                                                 <tr key={index}>
-                                                                    <td className="md:px-2 pl-[14px] py-3 w-[10px]">{index + 1}</td>
-                                                                    <td className="md:px-2 py-3 text-[#217AF7]">
+                                                                    <td className="px-2 pl-[14px] py-3 w-[10px]">{index + 1}</td>
+                                                                    <td className="md:px-2 py-3 text-[#217AF7] sticky left-0">
+                                                                        <p className="bg-[#ffffff] px-2">
                                                                         <Link href={"/player/" + playerUrls[stats?.player?.pid]}> {stats?.player?.short_name}</Link>
+                                                                        </p>
                                                                     </td>
-                                                                    <td className="md:px-2 pl-[14px] py-3">{stats?.matches}</td>
-                                                                    <td className="md:px-2 pl-[14px] py-3">{stats?.innings}</td>
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'bowling-most-wicket' ? "font-semibold" : ""}`}>{stats?.wickets}</td>
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'bowling-best-average' ? "font-semibold" : ""}`}>{stats?.average}</td>
-                                                                    <td className="md:px-2 pl-[14px] py-3">{stats?.wicket4i}</td>
-                                                                    <td className="md:px-2 pl-[14px] py-3">{stats?.wicket5i}</td>
-                                                                    <td className={`md:px-2 pl-[14px] py-3 ${statsType == 'bowling-best-strike-rates' ? "font-semibold" : ""}`}>{stats?.strike}</td>
+                                                                    <td className="px-2 pl-[14px] py-3">{stats?.matches}</td>
+                                                                    <td className="px-2 pl-[14px] py-3">{stats?.innings}</td>
+                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'bowling-most-wicket' ? "font-semibold" : ""}`}>{stats?.wickets}</td>
+                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'bowling-best-average' ? "font-semibold" : ""}`}>{stats?.average}</td>
+                                                                    <td className="px-2 pl-[14px] py-3">{stats?.wicket4i}</td>
+                                                                    <td className="px-2 pl-[14px] py-3">{stats?.wicket5i}</td>
+                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'bowling-best-strike-rates' ? "font-semibold" : ""}`}>{stats?.strike}</td>
                                                                 </tr>
                                                             ))}
 
