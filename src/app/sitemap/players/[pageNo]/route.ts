@@ -4,9 +4,10 @@ import { getAllPlayer } from "@/controller/sitemapController";
 import { urlStringEncode } from "@/utils/utility";
 
 
-export async function GET ( req: NextRequest,  context: { params: { pageId: string } }): Promise<Response> {
-  const { pageId } = context.params;
-  const pageNum = parseInt(pageId);
+type Params = Promise<{ pageNo: string}>
+export async function GET ( req: NextRequest, props: { params: Params }): Promise<Response> {
+  const params = await props.params;
+  const pageNum = parseInt(params.pageNo);
   if (isNaN(pageNum)) throw new Error('Invalid page number')
   const limit = 1000
   const offset = (pageNum - 1) * limit

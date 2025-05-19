@@ -25,6 +25,7 @@ const nextConfig = {
       "uccricket.live",
       "fantasykhiladi.com",
       "flagcdn.com",
+      "res.cloudinary.com",
       "13.202.213.65"
     ],
     formats: ['image/avif', 'image/webp'],
@@ -77,16 +78,16 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/sitemap/players/:page.xml',
-        destination: '/sitemap/players/:page',
+        source: '/sitemap/players/:pageNo.xml',
+        destination: '/sitemap/players/:pageNo',
       },
       {
-        source: '/sitemap/matches/:page.xml',
-        destination: '/sitemap/matches/:page',
+        source: '/sitemap/matches/:pageNo.xml',
+        destination: '/sitemap/matches/:pageNo',
       },
       {
-        source: '/sitemap/team/:page.xml',
-        destination: '/sitemap/team/:page',
+        source: '/sitemap/team/:pageNo.xml',
+        destination: '/sitemap/team/:pageNo',
       },
       {
         source: '/sitemap.xml',

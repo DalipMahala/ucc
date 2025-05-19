@@ -6,6 +6,7 @@ import Image from "next/image";
 import { urlStringEncode } from "./../../utils/utility";
 import { usePathname } from 'next/navigation';
 import logoPlaceholder from 'public/assets/img/logo.webp';
+import Head from "next/head";
 
 const Header = () => {
   const pathname = usePathname();
@@ -70,7 +71,14 @@ const Header = () => {
 
   return (
     <>
-     
+      <Head>
+          {/* ✅ Preload logo image */}
+          <link
+            rel="preload"
+            as="image"
+            href="https://res.cloudinary.com/dvqccxtdm/image/upload/q_auto/v1747648962/logo_c1fpuc.webp"
+          />
+        </Head>
       <div className='md:hidden hidden items-center justify-between py-2 px-2 bg-[#3793ff] text-white'>
         <p> Uc Cricket is better on App, Get now! </p>
         <button className='border-[1px] border-white px-4 rounded-full py-1'>Use App</button>
@@ -81,7 +89,7 @@ const Header = () => {
         <div className="lg:w-[1000px] w-full mx-auto text-white md:py-5 pt-3 pb-3 flex items-center md:justify-between justify-center">
           <div>
             <Link href="/">
-              <Image priority className="h-[39px] w-[173px]" src={logoPlaceholder} alt="UC Cricket Logo" width={150} height={50} placeholder="blur"/>
+              <Image priority fetchPriority="high" className="h-[39px] w-[173px]" src="https://res.cloudinary.com/dvqccxtdm/image/upload/q_auto/v1747648962/logo_c1fpuc.webp" alt="UC Cricket Logo" width={150} height={50} unoptimized/>
             </Link>
           </div>
 

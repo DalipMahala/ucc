@@ -8,12 +8,14 @@ const geistSans = Geist({
   subsets: ["latin"],
   // Only load these weights initially
   weight: ['400', '600'], // Regular and SemiBold
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
   weight: ['400', '600'], // Regular and SemiBold
+  display: 'swap',
 });
 // export const metadata: Metadata = {
 //   title: "UC Cricket - Live Scores, IPL 2025, T20, ODI, Test News &amp; Stats",
@@ -65,6 +67,7 @@ const notoSansDisplay = localFont({
   ],
   display: 'swap',
   variable: '--font-noto-sans-display',
+  preload: true,
 })
 
 

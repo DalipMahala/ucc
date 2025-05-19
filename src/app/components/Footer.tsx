@@ -197,7 +197,7 @@ const Footer = () => {
       <div className="flex flex-col md:flex-row justify-between items-center md:mx-4 md:gap-10 lg:mx-0">
         <div className="text-center mb-4 md:mb-0">
           
-           <Image priority className="h-[40px] w-[173px]" src={logoPlaceholder} alt="UC Cricket Logo" width={150} height={50} placeholder="blur"/>
+           <Image priority fetchPriority="high" className="h-[40px] w-[173px]" src="https://res.cloudinary.com/dvqccxtdm/image/upload/q_auto/v1747648962/logo_c1fpuc.webp" alt="UC Cricket Logo" width={150} height={50} unoptimized/>
           <div className="flex space-x-4 mt-4">
             <a href="#">
               <Image priority src="/assets/img/store-1.png" alt="Google Play" className="h-[35px]" width={100} height={35}/>
