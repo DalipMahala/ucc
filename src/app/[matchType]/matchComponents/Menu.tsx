@@ -88,7 +88,7 @@ export default function MatchTabs({
         <Link
           href={`/series/${urlStringEncode(
             `${matchDetails?.competition?.title}-${matchDetails?.competition?.season}`
-          )}/${matchDetails?.competition?.cid}/stats/batting-most-run`}
+          )}/${matchDetails?.competition?.cid}/stats`}
         >
           <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md ${activeTab === 'stats' ? 'bg-[#1A80F8] text-white active-tab' : ''
             }`}>

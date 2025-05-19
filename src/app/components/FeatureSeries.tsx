@@ -188,7 +188,7 @@ const SeriesNavigation = ({ series, totalTeams }: SeriesNavigationProps) => (
         </Link>
       )}
 
-      <Link href={`/series/${urlStringEncode(`${series.title}-${series.season}`)}/${series.cid}/stats/batting-most-run`}>
+      <Link href={`/series/${urlStringEncode(`${series.title}-${series.season}`)}/${series.cid}/stats`}>
         <button className="font-medium py-2 px-3 whitespace-nowrap">
           Stats
         </button>

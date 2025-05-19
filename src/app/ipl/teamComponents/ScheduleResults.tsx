@@ -193,7 +193,7 @@ export default function ScheduleResults({
               ) +
               "/" +
               pointTables?.cid +
-              "/stats/batting-most-run"
+              "/stats"
             }
           >
             <button

@@ -257,7 +257,7 @@ export default function Overview({
               urlStringEncode(pointTables?.title + "-" + pointTables?.season) +
               "/" +
               pointTables?.cid +
-              "/stats/batting-most-run"
+              "/stats"
             }
           >
             <button className="font-medium py-2 px-3 whitespace-nowrap">

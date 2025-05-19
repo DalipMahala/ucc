@@ -172,7 +172,7 @@ export default async function PointsTable({ urlString, seriesInfo, isPointTable,
                                 </div>
                             </div>
                         ))}
-                        <div className="mb-4">
+                        <div className="mb-4 md:px-0 px-4">
                             <p className="font-semibold">
                                 {" "}
                                 Last Updated On {format(new Date(), "dd MMM yyyy, HH:mm")} IST
@@ -207,7 +207,7 @@ export default async function PointsTable({ urlString, seriesInfo, isPointTable,
 
                     </div>
 
-                    <div className="lg:col-span-4 md:col-span-5 -mt-4">
+                    <div className="lg:col-span-4 md:col-span-5 md:-mt-4 mt-0">
 
 
                         <WeeklySlider />

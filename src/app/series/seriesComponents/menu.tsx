@@ -68,7 +68,7 @@ export default function TabMenu({ urlString, isPointTable, status }: { urlString
           </button>
         </Link>
         {status && (
-        <Link href={`${urlString}/stats/batting-most-run`}>
+        <Link href={`${urlString}/stats`}>
           <button className={`font-medium py-2 px-3 whitespace-nowrap rounded-md  ${activeTab === 'stats' ? 'bg-[#1A80F8] text-white active-tab' : ''}`}>
             Stats
           </button>
