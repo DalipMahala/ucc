@@ -58,6 +58,10 @@ export default function Overview({
     ? matchPlaying11?.teama?.squads || []
     : matchPlaying11?.teamb?.squads || [];
 
+  const batsmen = squads?.filter((sd: any) => ['bat', 'wk'].includes(sd?.role)) || null;
+  const bowlers = squads?.filter((sd: any) => ['bowl'].includes((sd?.role)) ) || null;
+  const allRounders = squads?.filter((sd: any) => ['all'].includes((sd?.role)) ) || null;
+  // console.log("batsmen",batsmen);
   const cmatch = seriesMatches?.resultMatch?.reverse();
   const completedMatch = seriesMatches?.resultMatch?.filter(
     (m: any) => [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teams?.tid))
@@ -1019,7 +1023,7 @@ export default function Overview({
 
                   <div className="">
                     {activeSquad === "Batter" && <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-5">
-                      {squads?.map((player: any, index: number) => (
+                      {batsmen?.map((player: any, index: number) => (
                         <div
                           className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]"
                           key={index}
@@ -1042,7 +1046,7 @@ export default function Overview({
                                     : player?.role === "bat"
                                       ? "/assets/img/player/bat.png"
                                       : "/assets/img/player/ball.png"}
-                                className="h-[23px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
+                                className="h-[23px] absolute md:right-[17px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
                                 width={23}
                                 height={23}
                                 alt="1"
@@ -1068,8 +1072,80 @@ export default function Overview({
                       ))}
                     </div>
                     }
-                    {activeSquad === "Bowler" && <p>Showing finished squad data...</p>}
-                    {activeSquad === "All-Rounder" && <p>Showing scheduled squad data...</p>}
+                    {activeSquad === "Bowler" && <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-5">
+                      {bowlers?.map((player: any, index: number) => (
+                        <div
+                          className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]"
+                          key={index}
+                        >
+                          <Link href={"/player/" + urlStringEncode(player?.name) + "/" + player?.player_id}>
+                            <div className="relative">
+                              <PlayerImage
+                                key={player?.player_id}
+                                player_id={player?.player_id}
+                                height={55}
+                                width={55}
+                                className="h-[55px] mx-auto rounded-full mb-2"
+                              />
+                              <Image
+                                loading="lazy"
+                                src={"/assets/img/player/ball.png"}
+                                className="h-[23px] absolute md:right-[17px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
+                                width={23}
+                                height={23}
+                                alt="1"
+                              />
+                            </div>
+                            <h3 className="text-[14px] font-medium text-gray-800 hover:text-[#1a80f8]">
+                              {player?.name}
+                            </h3>
+                            <div className="flex gap-1 items-center justify-center">
+                              {/* <Image src="/assets/img/flag/b-2.png" className="h-[15px] rounded-full" width={15} height={15} alt="" /> */}
+                              <p className="text-xs text-gray-600">
+                                Bowler
+                              </p>
+                            </div>
+                          </Link>
+                        </div>
+                      ))}
+                    </div>}
+                    {activeSquad === "All-Rounder" && <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-5">
+                      {allRounders?.map((player: any, index: number) => (
+                        <div
+                          className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]"
+                          key={index}
+                        >
+                          <Link href={"/player/" + urlStringEncode(player?.name) + "/" + player?.player_id}>
+                            <div className="relative">
+                              <PlayerImage
+                                key={player?.player_id}
+                                player_id={player?.player_id}
+                                height={55}
+                                width={55}
+                                className="h-[55px] mx-auto rounded-full mb-2"
+                              />
+                              <Image
+                                loading="lazy"
+                                src={"/assets/img/player/bat-ball.png"}
+                                className="h-[23px] absolute md:right-[17px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
+                                width={23}
+                                height={23}
+                                alt="1"
+                              />
+                            </div>
+                            <h3 className="text-[14px] font-medium text-gray-800 hover:text-[#1a80f8]">
+                              {player?.name}
+                            </h3>
+                            <div className="flex gap-1 items-center justify-center">
+                              {/* <Image src="/assets/img/flag/b-2.png" className="h-[15px] rounded-full" width={15} height={15} alt="" /> */}
+                              <p className="text-xs text-gray-600">
+                                All-Rounder
+                              </p>
+                            </div>
+                          </Link>
+                        </div>
+                      ))}
+                    </div>}
                   </div>
 
 

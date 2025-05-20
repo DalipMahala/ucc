@@ -189,7 +189,7 @@ export default function Squads({
                                   <Image
                                     loading="lazy"
                                     src="/assets/img/player/bat.png"
-                                    className="h-[23px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
+                                    className="h-[23px] absolute md:right-[17px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
                                     width={23}
                                     height={23}
                                     alt="1"
@@ -234,7 +234,7 @@ export default function Squads({
                                 <Image
                                   loading="lazy"
                                   src="/assets/img/player/ball.png"
-                                  className="h-[20px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
+                                  className="h-[20px] absolute md:right-[17px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
                                   width={20}
                                   height={20}
                                   alt="1"
@@ -278,7 +278,7 @@ export default function Squads({
                                   <Image
                                     loading="lazy"
                                     src="/assets/img/player/bat-ball.png"
-                                    className="h-[23px] absolute right-2 bottom-0 bg-white rounded-full p-[4px]"
+                                    className="h-[23px] absolute md:right-[17px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
                                     width={23}
                                     height={23}
                                     alt="1"
