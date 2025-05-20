@@ -59,7 +59,7 @@ export default async function page(props: { params: Params }) {
             <Banner playerStats={playerStats} ranking={ranking} ></Banner>
 
             {playerTab === "" || playerTab === undefined && <Overview playerAdvanceStats={playerAdvanceStats} playerStats={playerStats}  urlString={urlString} ranking={ranking} playerProfile={playerProfile} />}
-            {playerTab === "stats" && <Stats playerAdvanceStats={playerAdvanceStats}  urlString={urlString} />}
+            {playerTab === "stats" && <Stats playerAdvanceStats={playerAdvanceStats} playerStats={playerStats}  urlString={urlString} />}
             {playerTab === "news" && <News  urlString={urlString}/>}
             {playerTab === "photos" && <Photos  urlString={urlString}/>}
 

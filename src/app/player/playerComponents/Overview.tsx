@@ -262,18 +262,18 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                   </div> */}
 
                   <div className="flex flex-wrap gap-4 mt-4 ">
-                   
-                      <div className=" px-6 py-1 font-medium rounded-full bg-[#ecf2fd] text-[14px]">
-                       <span className='text-[#1a80f8]'>#{testRank} </span> {playerRole} in TEST
-                      </div>
-                      <div className=" px-6 py-1 font-medium rounded-full bg-[#ecf2fd] text-[14px]">
-                       <span className='text-[#1a80f8]'>#{odiRank}</span> {playerRole} in ODI
-                      </div>
-                      <div className=" px-6 py-1 font-medium rounded-full bg-[#ecf2fd] text-[14px]">
-                       <span className='text-[#1a80f8]'>#{t20Rank}</span> {playerRole} in T20
-                      </div>
-                     
-                  
+
+                    <div className=" px-6 py-1 font-medium rounded-full bg-[#ecf2fd] text-[14px]">
+                      <span className='text-[#1a80f8]'>#{testRank} </span> {playerRole} in TEST
+                    </div>
+                    <div className=" px-6 py-1 font-medium rounded-full bg-[#ecf2fd] text-[14px]">
+                      <span className='text-[#1a80f8]'>#{odiRank}</span> {playerRole} in ODI
+                    </div>
+                    <div className=" px-6 py-1 font-medium rounded-full bg-[#ecf2fd] text-[14px]">
+                      <span className='text-[#1a80f8]'>#{t20Rank}</span> {playerRole} in T20
+                    </div>
+
+
                   </div>
 
 
@@ -415,6 +415,37 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                   </div>
                 </div>
 
+                <div className='pt-4'>
+                  <h3 className="text-1xl font-semibold pl-[7px] border-l-[3px] border-[#229ED3] mb-2">Teams</h3>
+                  <div className='p-4 bg-[#ffffff] rounded-lg'>
+                    <div className="mt-1">
+                      <div className="grid md:grid-cols-5 grid-cols-3 gap-4">
+                        {teamsPlayedFor?.map((teams: any, index: number) => (
+                          <div className="col-span-1" key={index}>
+                            <Link href={"/team/" + urlStringEncode(teams.abbr) + "/" + teams.tid}>
+                              <div className="bg-white p-2 rounded-lg border-[1px] border-[#ebebeb] text-center mb-2">
+                                <div className="flex items-center justify-center">
+                                  {teams.logo_url ? (
+                                    <Image loading="lazy"
+                                      src={teams.logo_url}
+                                      width={42} height={42} alt={teams.alt_name}
+                                      className="h-[42px] w-[42px] rounded-full"
+                                    />
+                                  ) : (
+                                    "")}
+                                </div>
+                                <p className=" font-semibold text-[12px] pt-1">
+                                  {teams.abbr}
+                                </p>
+                              </div>
+                            </Link>
+                          </div>
+                        ))}
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 <div className="cust-box-click-container">
                   <div className="flex justify-between items-center pt-4 pb-2">
@@ -557,119 +588,92 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                       <div className="border-t-[1px] border-[#E7F2F4]" />
                       <h3 className="text-[14px] font-semibold mt-2 mb-1">Batting</h3>
 
-                      <div>
-                        <div
-                          className="relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
+
+                      <div
+                        className="relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
                                   [&::-webkit-scrollbar-track]:bg-gray-100 
                                   [&::-webkit-scrollbar-thumb]:bg-[#DFE9F6] 
                                   dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
                                   dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
-                        >
-                          <table className="w-full text-[13px] text-left text-gray-500">
-                            <thead className="border-b text-gray-700 bg-[#C3DBFF33]">
-                              <tr>
+                      >
+                        <table className="w-full text-[13px] text-left text-gray-500">
+                          <thead className="border-b text-gray-700 bg-[#C3DBFF33]">
+                            <tr>
+                              <th
+                                scope="col"
+                                className="px-4 py-3 bg-[#f3f8ff] font-semibold sticky left-0"
+                              >
+                                Format
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Mat
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Inns
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Runs
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Avg
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                4s
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                6s
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                SR
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Not Out
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Balls
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Highest
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Fifty
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Century
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody className="text-xs">
+                            {battingArray?.map((item, index) => (
+                              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
                                 <th
-                                  scope="col"
-                                  className="px-4 py-3 bg-[#f3f8ff] font-semibold sticky left-0"
+                                  scope="row"
+                                  className="px-4 py-4 font-medium text-gray-900 bg-[#f3f8ff] whitespace-nowrap dark:text-white sticky left-0"
                                 >
-                                  Format
+                                  {item.formatType}
                                 </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Mat
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Inns
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Runs
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Avg
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  4s
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  6s
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  SR
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Not Out
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Balls
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Highest
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Fifty
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Century
-                                </th>
+                                <td className="px-4 py-4">{item.matches}</td>
+                                <td className="px-4 py-4">{item.innings}</td>
+                                <td className="px-4 py-4">{item.runs}</td>
+                                <td className="px-4 py-4">{item.average}</td>
+                                <td className="px-4 py-4">{item.run4}</td>
+                                <td className="px-4 py-4">{item.run6}</td>
+                                <td className="px-4 py-4">{item.strike}</td>
+                                <td className="px-4 py-4">{item.notout}</td>
+                                <td className="px-4 py-4">{item.balls}</td>
+                                <td className="px-4 py-4">{item.highest}</td>
+                                <td className="px-4 py-4">{item.run50}</td>
+                                <td className="px-4 py-4">{item.run100}</td>
                               </tr>
-                            </thead>
-                            <tbody className="text-xs">
-                              {battingArray?.map((item, index) => (
-                                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
-                                  <th
-                                    scope="row"
-                                    className="px-4 py-4 font-medium text-gray-900 bg-[#f3f8ff] whitespace-nowrap dark:text-white sticky left-0"
-                                  >
-                                    {item.formatType}
-                                  </th>
-                                  <td className="px-4 py-4">{item.matches}</td>
-                                  <td className="px-4 py-4">{item.innings}</td>
-                                  <td className="px-4 py-4">{item.runs}</td>
-                                  <td className="px-4 py-4">{item.average}</td>
-                                  <td className="px-4 py-4">{item.run4}</td>
-                                  <td className="px-4 py-4">{item.run6}</td>
-                                  <td className="px-4 py-4">{item.strike}</td>
-                                  <td className="px-4 py-4">{item.notout}</td>
-                                  <td className="px-4 py-4">{item.balls}</td>
-                                  <td className="px-4 py-4">{item.highest}</td>
-                                  <td className="px-4 py-4">{item.run50}</td>
-                                  <td className="px-4 py-4">{item.run100}</td>
-                                </tr>
-                              ))}
+                            ))}
 
 
-                            </tbody>
-                          </table>
-                        </div>
+                          </tbody>
+                        </table>
                       </div>
 
 
-                      <h3 className="text-[14px] font-semibold mt-2 mb-1">Teams</h3>
-                      <div className="mt-1">
-                        <div className="grid md:grid-cols-5 grid-cols-3 gap-4">
-                          {teamsPlayedFor?.map((teams: any, index: number) => (
-                            <div className="col-span-1" key={index}>
-                              <Link href={"/team/" + urlStringEncode(teams.abbr) + "/" + teams.tid}>
-                                <div className="bg-white p-2 rounded-lg border-[1px] border-[#ebebeb] text-center mb-2">
-                                  <div className="flex items-center justify-center">
-                                    {teams.logo_url ? (
-                                      <Image loading="lazy"
-                                        src={teams.logo_url}
-                                        width={42} height={42} alt={teams.alt_name}
-                                        className="h-[42px] w-[42px] rounded-full"
-                                      />
-                                    ) : (
-                                      "")}
-                                  </div>
-                                  <p className=" font-semibold text-[12px] pt-1">
-                                    {teams.abbr}
-                                  </p>
-                                </div>
-                              </Link>
-                            </div>
-                          ))}
 
-                        </div>
-                      </div>
                     </div>
                   </div>
 
@@ -794,112 +798,87 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
 
                       <div className="border-t-[1px] border-[#E7F2F4]" />
                       <h3 className="text-[14px] font-semibold mt-2 mb-1 ">Bowling</h3>
-                      <div>
-                        <div
-                          className="relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
+
+                      <div
+                        className="relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
                                   [&::-webkit-scrollbar-track]:bg-gray-100 
                                   [&::-webkit-scrollbar-thumb]:bg-[#DFE9F6] 
                                   dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
                                   dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
-                        >
-                          <table className="w-full text-[13px] text-left text-gray-500">
-                            <thead className="border-b text-gray-700 bg-[#C3DBFF33]">
-                              <tr>
+                      >
+                        <table className="w-full text-[13px] text-left text-gray-500">
+                          <thead className="border-b text-gray-700 bg-[#C3DBFF33]">
+                            <tr>
+                              <th
+                                scope="col"
+                                className="px-4 py-3 bg-[#C3DBFF33] font-semibold"
+                              >
+                                Format
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Mat
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Inns
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Runs
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Avg
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Wicket4i
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Wicket5i
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                SR
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Econ
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Balls
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Wickets
+                              </th>
+                              <th scope="col" className="px-4 py-3 font-semibold">
+                                Overs
+                              </th>
+
+                            </tr>
+                          </thead>
+                          <tbody className="text-xs">
+                            {bowlingArray?.map((item, index) => (
+                              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
                                 <th
-                                  scope="col"
-                                  className="px-4 py-3 bg-[#C3DBFF33] font-semibold"
+                                  scope="row"
+                                  className="px-4 py-4 font-medium text-gray-900 bg-[#C3DBFF33] whitespace-nowrap dark:text-white"
                                 >
-                                  Format
+                                  {item.formatType}
                                 </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Mat
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Inns
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Runs
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Avg
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Wicket4i
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Wicket5i
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  SR
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Econ
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Balls
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Wickets
-                                </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                  Overs
-                                </th>
-
+                                <td className="px-4 py-4">{item.matches}</td>
+                                <td className="px-4 py-4">{item.innings}</td>
+                                <td className="px-4 py-4">{item.runs}</td>
+                                <td className="px-4 py-4">{item.average}</td>
+                                <td className="px-4 py-4">{item.wicket4i}</td>
+                                <td className="px-4 py-4">{item.wicket5i}</td>
+                                <td className="px-4 py-4">{item.strike}</td>
+                                <td className="px-4 py-4">{item.econ}</td>
+                                <td className="px-4 py-4">{item.balls}</td>
+                                <td className="px-4 py-4">{item.wickets}</td>
+                                <td className="px-4 py-4">{item.overs}</td>
                               </tr>
-                            </thead>
-                            <tbody className="text-xs">
-                              {bowlingArray?.map((item, index) => (
-                                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
-                                  <th
-                                    scope="row"
-                                    className="px-4 py-4 font-medium text-gray-900 bg-[#C3DBFF33] whitespace-nowrap dark:text-white"
-                                  >
-                                    {item.formatType}
-                                  </th>
-                                  <td className="px-4 py-4">{item.matches}</td>
-                                  <td className="px-4 py-4">{item.innings}</td>
-                                  <td className="px-4 py-4">{item.runs}</td>
-                                  <td className="px-4 py-4">{item.average}</td>
-                                  <td className="px-4 py-4">{item.wicket4i}</td>
-                                  <td className="px-4 py-4">{item.wicket5i}</td>
-                                  <td className="px-4 py-4">{item.strike}</td>
-                                  <td className="px-4 py-4">{item.econ}</td>
-                                  <td className="px-4 py-4">{item.balls}</td>
-                                  <td className="px-4 py-4">{item.wickets}</td>
-                                  <td className="px-4 py-4">{item.overs}</td>
-                                </tr>
-                              ))}
+                            ))}
 
-                            </tbody>
-                          </table>
-                        </div>
+                          </tbody>
+                        </table>
                       </div>
-                      <h3 className="text-[14px] font-semibold mt-2 mb-1">Teams</h3>
-                      <div className="mt-4">
-                        <div className="grid md:grid-cols-5 grid-cols-2 gap-4">
-                          {teamsPlayedFor?.map((teams: any, index: number) => (
-                            <div className="col-span-1" key={index}>
-                              <Link href={"/team/" + urlStringEncode(teams.abbr) + "/" + teams.tid}>
-                                <div className="bg-white p-2 rounded-lg border-[1px] border-[#ebebeb] text-center mb-2">
-                                  <div className="flex items-center justify-center">
-                                    {teams.logo_url ? (
-                                      <Image loading="lazy"
-                                        src={teams.logo_url}
-                                        width={20} height={20} alt={teams.alt_name}
-                                        className="h-[30px] w-[30px] rounded-full"
-                                      />
-                                    ) : ("")}
-                                  </div>
-                                  <p className=" font-semibold text-[12px] pt-1">
-                                    {teams.abbr}
-                                  </p>
-                                </div>
-                              </Link>
-                            </div>
-                          ))}
 
-                        </div>
-                      </div>
+                  
                     </div>
                   </div>
                 </div>
