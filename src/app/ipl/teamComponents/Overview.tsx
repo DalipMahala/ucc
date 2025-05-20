@@ -36,11 +36,6 @@ export default function Overview({
   venueDetails
 }: teamview) {
 
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
 
   const [activeSquad, setActiveSquad] = useState("Batter");
 
@@ -198,7 +193,12 @@ export default function Overview({
     fetchHtml();
   }, [cid]);
   // console.log("statsMatch", standings);
-  if (!isMounted || !teams?.tid || !pointTables?.season || !completedMatch || !standings || !teamLast5match || !seriesStats) {
+
+  if (!completedMatch) {
+    return <div className="p-4 text-center">Loading match data...</div>;
+  }
+
+  if (!teams?.tid || !pointTables?.season || !standings || !teamLast5match || !seriesStats) {
     return <div className="p-4 text-center">Loading team data...</div>;
   }
 
@@ -370,6 +370,7 @@ export default function Overview({
                               width={35}
                               height={35}
                               alt={completedMatch?.teama?.short_name}
+                              priority={false}
                             />
                             <span className="text-[#757A82]">{completedMatch?.teama?.short_name}</span>
                           </div>
@@ -399,6 +400,7 @@ export default function Overview({
                               width={35}
                               height={35}
                               alt={completedMatch?.teamb?.short_name}
+                              priority={false}
                             />
                             <span className="text-[#757A82]">{completedMatch?.teamb?.short_name}</span>
                           </div>

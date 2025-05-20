@@ -49,6 +49,7 @@ export default function IplBanner({ cid, params, teamPlayers, venueDetails, poin
             <div key={index} className="w-[10%] flex justify-center items-center border-[3px] border-[#8ac0ff] rounded-md p-[8px]" style={team?.tid === teams?.tid ? { boxShadow: '0px 0px 9px 0px #7eb9ff'} : {}} >
               <Link href={"/ipl/2025/"+urlStringEncode(team?.title)+"/"+team?.tid}>
                 <Image
+                  priority
                   src={team?.logo_url}
                   width={80}
                   height={80}
@@ -70,8 +71,9 @@ export default function IplBanner({ cid, params, teamPlayers, venueDetails, poin
             {/* Left Section */}
             <div className="flex items-center space-x-4">
               <Image
+                priority
                 src={teams?.logo_url}
-                alt="Event Logo"
+                alt="Team Logo"
                 width={120}
                 height={120}
                 className="md:h-[70px] lg:h-[auto]"
