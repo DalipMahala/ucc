@@ -345,6 +345,7 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                                                                        <p className="bg-[#ffffff] px-2"> <Link href={"/player/" + playerUrls[stats?.player?.pid]}> {stats?.player?.short_name}</Link>
                                                                        </p>
                                                                     </td>
+                                                                    <td className="px-2 pl-[14px] py-3">{stats?.team?.abbr}</td>
                                                                     <td className="px-2 pl-[14px] py-3">{stats?.matches}</td>
                                                                     <td className="px-2 pl-[14px] py-3">{stats?.innings}</td>
 
@@ -353,6 +354,8 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                                                                     <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-highest-average' ? "font-semibold" : ""}`}>{stats?.average}</td>
                                                                     <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-fours' ? "font-semibold" : ""}`}>{stats?.run4}</td>
                                                                     <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-sixes' ? "font-semibold" : ""}`}>{stats?.run6}</td>
+                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-hundreds' ? "font-semibold" : ""}`}>{stats?.run100}</td>
+                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-fifties' ? "font-semibold" : ""}`}>{stats?.run50}</td>
                                                                     <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-highest-strike-rate' ? "font-semibold" : ""}`}>{stats?.strike}</td>
                                                                 </tr>
                                                             ))}

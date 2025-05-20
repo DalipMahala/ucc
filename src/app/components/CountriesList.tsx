@@ -75,8 +75,8 @@ export default function CountriesList({ countries }: countries) {
   return (
     <>
       
-        <h2 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8] mb-2 uppercase">
-          Domestic Leagues
+        <h2 className="text-1xl font-semibold pl-[3px] border-l-[3px] border-[#1a80f8] my-2">
+          DOMESTIC LEAGUES
         </h2>
      
 

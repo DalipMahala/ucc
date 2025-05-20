@@ -23,6 +23,7 @@ import CompletedMatches from "./components/completedMatches";
 import TabbedSection from "./components/TabbedSection";
 import SportsNews from "./components/SportsNews";
 
+
 export const metadata: Metadata = {
   title: "UC Cricket - Live Scores, IPL 2025, T20, ODI, Test News &amp; Stats",
   description: "Stay updated with UC Cricket live cricket scores, match schedules, news, stats, and videos on UcCricket.live. Follow all the action from IPL, T20 World Cup, and your favorite cricket tournaments.",
@@ -123,9 +124,9 @@ export default async function Home(props: { params: Params }) {
 
             <PLSeries />
             {/* sticky top-[93px] */}
-            <div className="sticky top-[93px]">
+           
               <CountriesList countries={countryCompitition}></CountriesList>
-            </div>
+           
           </div>
         </div>
 
