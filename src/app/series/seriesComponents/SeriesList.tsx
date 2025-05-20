@@ -35,9 +35,15 @@ export default function SeriesList({ tournamentsList, tabName }: SeriesList) {
   const [statusFilter, setStatusFilter] = useState('All');
   let seriesList = tournamentsList;
   if(filter !== 'All'){
-   seriesList = tournamentsList.filter(
-    (item: { category: string, status: string }) => item.category === filter && (statusFilter === "All" || item.status === statusFilter)
-  );
+    if(filter === 't20'){
+        seriesList = tournamentsList.filter(
+        (item: { game_format: string, status: string }) => item.game_format === filter && (statusFilter === "All" || item.status === statusFilter)
+      );
+    }else{
+      seriesList = tournamentsList.filter(
+        (item: { category: string, status: string }) => item.category === filter && (statusFilter === "All" || item.status === statusFilter)
+      );
+    }
   }else{
     seriesList = tournamentsList.filter(
       (item: { category: string, status: string }) => (statusFilter === "All" || item.status === statusFilter)
@@ -46,7 +52,7 @@ export default function SeriesList({ tournamentsList, tabName }: SeriesList) {
 
   seriesList = [...seriesList].sort((a, b) => ['live', 'fixture', 'result'].indexOf(a.status) - ['live', 'fixture', 'result'].indexOf(b.status) || new Date(a.datestart).getTime() - new Date(b.datestart).getTime());
 
-  console.log(statusTypes);
+  console.log(filter);
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 px-2 lg:px-0">
       <div className="md:grid grid-cols-12 gap-4">
@@ -60,11 +66,11 @@ export default function SeriesList({ tournamentsList, tabName }: SeriesList) {
                                dark:[&::-webkit-scrollbar-track]:bg-neutral-[#ecf2fd] 
                                  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-[#ecf2fd]"
               >
-                {["All", ...uniqueTypes]?.map((item: any) => (
+                {["All", ...uniqueTypes,"T20"]?.map((item: any) => (
                   <Link key={item} href={item === 'All' ? "/series" : "/series/"+item.toLowerCase()}>
                   <button
                     
-                    className={`font-medium py-2 md:px-5 px-3 capitalize whitespace-nowrap ${filter === item ? "bg-[#1A80F8] text-white" : ""
+                    className={`font-medium py-2 md:px-5 px-3 capitalize whitespace-nowrap ${filter.toLowerCase() === item.toLowerCase() ? "bg-[#1A80F8] text-white" : ""
                       } rounded-md`}
                     
                   >

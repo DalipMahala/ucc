@@ -42,6 +42,17 @@ export default function SportsNews() {
       .catch((err) => console.error("Error fetching news:", err));
   }, [catids]);
   // console.log("id",news);
+
+  let newsUrls = "sports/football/";
+  if(activeTab === 'Kabaddi'){
+    newsUrls = "sports/kabaddi/";
+  }else if(activeTab === 'Hockey'){
+    newsUrls = "sports/hockey/";
+  }else if(activeTab === 'Tennis'){
+    newsUrls = "sports/tennis/";
+  }else if(activeTab === 'NFL'){
+    newsUrls = "sports/nfl/";
+  }
   return (
     <div className="tab-section mt-5">
 
@@ -190,7 +201,7 @@ export default function SportsNews() {
               ))}
             </div>
 
-            <Link href={"https://uccricket.live/" + activeTab + "/"}>
+            <Link href={"https://uccricket.live/" + newsUrls}>
               <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-8 underline">
                 More from {activeTab}{" "}
                 <svg

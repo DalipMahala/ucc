@@ -46,6 +46,16 @@ const News = () => {
       .catch((err) => console.error("Error fetching news:", err));
   }, [catids]);
   // console.log("id",news);
+  let newsUrls = "news/";
+  if(activeTab === 'fantasy-cricket'){
+    newsUrls = "fantasy-cricket/dream11-prediction/";
+  }else if(activeTab === 'ipl'){
+    newsUrls = "ipl/";
+  }else if(activeTab === 'pitch-report'){
+    newsUrls = "pitch-report/";
+  }else if(activeTab === 'match-prediction'){
+    newsUrls = "cricket/match-prediction/";
+  }
 
   return (
     <div className="tab-section">
@@ -197,9 +207,9 @@ const News = () => {
               ))}
             </div>
 
-            <Link href={"https://uccricket.live/" + activeTab + "/"}>
+            <Link href={"https://uccricket.live/" + newsUrls}>
               <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-8 underline">
-                More from {activeTab}{" "}
+               Read More{" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

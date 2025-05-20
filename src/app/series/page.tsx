@@ -76,7 +76,7 @@ export default async function page(props: { params: Params }) {
   // console.log('teamIds', );
   return (
     <Layout>
-          {seriesName === '' || seriesName === undefined || seriesName === 'international' || seriesName === 'women'  || seriesName === 'domestic'? (
+          {seriesName === '' || seriesName === undefined || seriesName === 'international' || seriesName === 'women'  || seriesName === 'domestic' || seriesName === 't20'? (
           <SeriesList tournamentsList={tournamentsList} tabName={seriesName}></SeriesList>
           ):(
             <>
