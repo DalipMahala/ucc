@@ -72,10 +72,11 @@ export default function Banner({ playerStats, ranking }: Banner) {
 
         >
             <div className="lg:w-[1000px] mx-auto text-white relative">
-                <div className="md:flex items-center md:space-x-8">
-                    <div className="flex justify-center relative">
-                  <PlayerProfileImage key={profile?.pid} player_id={profile?.pid} height={300} width={230} className="rounded-lg hidden md:block" />
-                  <PlayerProfileImage key={profile?.pid+"_"+profile?.pid} player_id={profile?.pid} height={200} width={150} className="rounded-lg md:hidden" />
+                <div className="flex items-center md:space-x-8 relative">
+                    <div className="hidden md:flex justify-center relative">
+                  <PlayerProfileImage key={profile?.pid} player_id={profile?.pid} height={300} width={230} className="rounded-lg " />
+                  
+                 
                         
                         <div className="absolute bottom-0 md:hidden" style={{
                             height: '82px',
@@ -87,16 +88,31 @@ export default function Banner({ playerStats, ranking }: Banner) {
 
                     </div>
 
-                    <div className="md:mb-4 mb-2 relative z-[1]">
-                        <h2 className="text-2xl font-medium mb-3 md:text-start text-center">{profile?.first_name}</h2>
+                    <div className="md:hidden flex justify-center absolute right-0 bottom-0">
+                  
+
+                  <PlayerProfileImage key={profile?.pid+"_"+profile?.pid} player_id={profile?.pid} height={150} width={120} className="rounded-lg" />
+                        
+                        <div className="absolute bottom-0 md:hidden" style={{
+                            height: '82px',
+                            background: 'linear-gradient(rgb(0 198 255 / 0%), rgb(14 33 73))',
+                            position: 'absolute',
+                            width: '100%',
+                        }}>
+                        </div>
+
+                    </div>
+
+                    <div className="md:mb-4 mb-2 relative z-[1] h-[145px] md:h-auto w-[50%] md:w-auto">
+                        <h2 className="text-[24px] font-medium mb-3 text-start">{profile?.first_name}</h2>
                         <div className="lg:flex items-center lg:space-x-5">
-                            <div className="flex md:justify-start justify-center items-center space-x-2 mb-2 ">
+                            <div className="flex justify-start items-center space-x-2 mb-2 ">
                                 <Link href="#">
                                     <Image loading="lazy" src="/assets/img/india.png" alt="" className="h-[1.5rem]" width={24} height={24} />
                                 </Link>
                                 <span>{profile?.nationality} &nbsp; - &nbsp; {profile?.birthdate !== undefined && profile?.birthdate !== '' ? getAge(profile?.birthdate) : ""} </span>
                             </div>
-                            <div className="flex md:justify-start justify-center items-center space-x-2 m-0">
+                            <div className="md:flex md:justify-start items-center md:space-x-2 m-0 hidden">
                                 {profile?.batting_style !== '' ? (
                                     <span className="flex items-center bg-[#E3E9FF12] hover:bg-[#a8bbff45] rounded-full py-[5px] px-[15px] my-2 md:my-0">
                                         <Image loading="lazy"

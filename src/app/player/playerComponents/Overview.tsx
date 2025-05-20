@@ -236,15 +236,15 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
 
 
                 <div className="md:hidden rounded-lg bg-white p-4 mb-4">
-                  <h3 className="text-[15px] font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
+                  <h2 className="text-[15px] font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                     ICC Ranking
-                  </h3>
+                  </h2>
                   <div className="border-t-[1px] border-[#E7F2F4]" />
-                  <div className="grid md:grid-cols-1 grid-cols-1 gap-4 mt-4">
+                  {/* <div className="grid md:grid-cols-1 grid-cols-1 gap-4 mt-4">
                     <div className="bg-[#f2f7ff] w-full  border-[1px] rounded-md">
-                      <h6 className=" px-6 py-1 font-semibold rounded-t-md bg-[#c7dcff] text-[14px]">
+                      <h3 className=" px-6 py-1 font-semibold rounded-t-md bg-[#c7dcff] text-[14px]">
                         {playerRole}
-                      </h6>
+                      </h3>
                       <div className="flex font-semibold text-[#0F55A5] text-center px-6 justify-between space-x-4 my-2">
                         <p>
                           {testRank} <br /> <span className=""> TEST </span>
@@ -259,25 +259,24 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                         </p>
                       </div>
                     </div>
-                    {/* <div className="bg-[#f2f7ff] w-full border-[1px] rounded-lg">
-                      <h6 className="px-6 py-1 font-semibold rounded-t-md bg-[#c7dcff] text-[14px]">
-                        Bowling
-                      </h6>
-                      <div className="flex px-6 font-semibold text-[#0F55A5] text-center justify-between space-x-4 mt-2">
-                        <p>
-                          154 <br /> <span className=""> TEST </span>
-                        </p>
-                        <div className="border-solid border-l-[1px] border-gray-400" />
-                        <p>
-                          328 <br /> <span className=""> ODI</span>
-                        </p>
-                        <div className="border-solid border-l-[1px] border-gray-400" />
-                        <p>
-                          799 <br /> <span className=""> T20</span>
-                        </p>
+                  </div> */}
+
+                  <div className="flex flex-wrap gap-4 mt-4 ">
+                   
+                      <div className=" px-6 py-1 font-medium rounded-full bg-[#ecf2fd] text-[14px]">
+                       <span className='text-[#1a80f8]'>#{testRank} </span> {playerRole} in TEST
                       </div>
-                    </div> */}
+                      <div className=" px-6 py-1 font-medium rounded-full bg-[#ecf2fd] text-[14px]">
+                       <span className='text-[#1a80f8]'>#{odiRank}</span> {playerRole} in ODI
+                      </div>
+                      <div className=" px-6 py-1 font-medium rounded-full bg-[#ecf2fd] text-[14px]">
+                       <span className='text-[#1a80f8]'>#{t20Rank}</span> {playerRole} in T20
+                      </div>
+                     
+                  
                   </div>
+
+
                 </div>
 
 
@@ -534,24 +533,24 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                           {profile?.first_name} Career Stats
                         </h3>
                         <Link href={"/player/" + urlString + "/stats"} >
-                        
-                        <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
-                    View More{" "}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="size-3 ml-2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                  </div>
+
+                          <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
+                            View More{" "}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="size-3 ml-2"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+                              />
+                            </svg>
+                          </div>
 
                         </Link>
                       </div>
@@ -646,7 +645,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
 
                       <h3 className="text-[14px] font-semibold mt-2 mb-1">Teams</h3>
                       <div className="mt-1">
-                        <div className="grid md:grid-cols-5 grid-cols-2 gap-4">
+                        <div className="grid md:grid-cols-5 grid-cols-3 gap-4">
                           {teamsPlayedFor?.map((teams: any, index: number) => (
                             <div className="col-span-1" key={index}>
                               <Link href={"/team/" + urlStringEncode(teams.abbr) + "/" + teams.tid}>
@@ -769,25 +768,25 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                         </h3>
 
                         <Link href={"/player/" + urlString + "/stats"} >
-                        
-                        <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
-                    View More{" "}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="size-3 ml-2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                  </div>
-                        
+
+                          <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
+                            View More{" "}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="size-3 ml-2"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+                              />
+                            </svg>
+                          </div>
+
                         </Link>
 
                       </div>
@@ -871,7 +870,6 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                                 </tr>
                               ))}
 
-
                             </tbody>
                           </table>
                         </div>
@@ -944,7 +942,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                           <div className="mt-2 md:mt-0">
                             {/* select opction */}
                             <select
-                              className="border-[1px] border-border-gray-700 md:w-[154px] w-full py-1 px-2 rounded-md"
+                              className="border-[1px] border-border-gray-700 md:w-[154px] w-full py-1 px-2 rounded-md bg-[#ffffff]"
                               name="select"
                               id=""
                               value={selectedValue} onChange={handleChange}
