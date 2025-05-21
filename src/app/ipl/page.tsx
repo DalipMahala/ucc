@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Layout from "@/app/components/Layout";
 import { SeriesPointsTable, SeriesMatches, MatcheInfo } from "@/controller/matchInfoController";
 import {
@@ -14,6 +14,7 @@ import Squads from "./teamComponents/Squad";
 import ScheduleResults from "./teamComponents/ScheduleResults";
 import { notFound } from "next/navigation";
 import { urlStringEncode } from "@/utils/utility";
+import LoadingSkeleton from "./teamComponents/LoadingSkeleton";
 
 type Params = Promise<{ year: string; teamType: string; teamName: string; teamId: number; }>;
 
@@ -53,6 +54,7 @@ export default async function page(props: { params: Params }) {
   return (
     <Layout>
       <IplBanner cid={cid} params={params} teamPlayers={teamPlayers} venueDetails={venueDetails} pointTables={pointTables} ></IplBanner>
+      <Suspense fallback={<LoadingSkeleton />}>
       {teamType === "" || teamType === undefined? (
       <Overview  cid={cid} params={params} teamPlayers={teamPlayers} teamLast5match={teamLast5match} pointTables={pointTables} matcheInfo={matcheInfo} seriesMatches={seriesMatches} venueDetails={venueDetails}/>
       ): teamType === "squads" ? (
@@ -61,6 +63,7 @@ export default async function page(props: { params: Params }) {
         <ScheduleResults seriesId={cid} params={params} seriesMatches={seriesMatches} teamPlayers={teamPlayers} pointTables={pointTables} />
         ): null
     }
+    </Suspense>
     </Layout>
   );
 }

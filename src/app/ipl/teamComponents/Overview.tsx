@@ -21,10 +21,6 @@ interface teamview {
   venueDetails: any;
 }
 
-
-
-
-
 export default function Overview({
   cid,
   params,

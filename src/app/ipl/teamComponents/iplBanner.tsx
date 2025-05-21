@@ -26,7 +26,7 @@ const activeTeamRef = useRef<HTMLDivElement>(null);
   const teams = teamPlayers[0]?.team;
   const captain = teamPlayers[0]?.captains?.[0];
   const allTeams = pointTables?.teams;
-  console.log("IplTeams", teams);
+  // console.log("IplTeams", teams);
   const router = useRouter();
   const pathname = usePathname(); // Get current path
 
