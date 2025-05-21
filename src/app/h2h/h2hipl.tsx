@@ -11,6 +11,7 @@ import PLSeries from "@/app/components/popularSeries";
 import FantasyTips from "@/app/components/FantasyTips";
 import ReadMoreCard from "@/app/components/ReadMoreCard";
 import TeamSelect from "@/app/components/TeamSelect";
+
 import { urlStringEncode } from "../../utils/utility";
 import { BsFillLightningChargeFill } from "react-icons/bs";
 
@@ -274,9 +275,9 @@ export default function H2hipl({
 
               <div className="text-[#8192B4] font-normal text-center md:w-[50%] w-[45%]">
                 
-                <h1 className="text-[#ffffff] text-[24px] font-semibold flex justify-center">
+                <h2 className="text-[#ffffff] text-[24px] font-semibold flex justify-center">
                   <BsFillLightningChargeFill />
-                </h1>
+                </h2>
               </div>
 
 
@@ -343,9 +344,9 @@ export default function H2hipl({
               <div className="lg:col-span-8 md:col-span-7">
                 {teamDetails?.teamAB_total_match > 0 && (
                   <div className="rounded-lg bg-[#ffffff] p-4">
-                    <h2 className="text-[15px] font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
-                      {teamADetails.title} vs {teamBDetails.title} Head to Head in {matchType.charAt(0).toUpperCase() + matchType.slice(1)} Records
-                    </h2>
+                    <h1 className="text-[15px] font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
+                      {teamADetails.abbr} vs {teamBDetails.abbr} Head to Head in {matchType.toUpperCase()} Records
+                    </h1>
                     <div className="border-t-[1px] border-[#E4E9F0]" />
 
                     <div className="mt-4">
@@ -642,7 +643,7 @@ export default function H2hipl({
                   <div className="bg-[white] p-4 rounded-lg my-4">
                     <div className="md:flex justify-between items-center mb-3">
                       <h3 className="text-1xl font-semibold pl-[7px] border-l-[3px] border-[#229ED3]">
-                        {teamADetails.title} vs {teamBDetails.title} Recent {matchType.charAt(0).toUpperCase() + matchType.slice(1)} Matches
+                        {teamADetails.abbr} vs {teamBDetails.abbr} Recent {matchType.toUpperCase() } Matches
                       </h3>
                     </div>
                     <div className="grid grid-cols-12 gap-4 cust-tp-pera-card-section">

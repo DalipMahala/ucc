@@ -11,6 +11,8 @@ import PLSeries from "@/app/components/popularSeries";
 import FantasyTips from "@/app/components/FantasyTips";
 import ReadMoreCard from "@/app/components/ReadMoreCard";
 
+import { BsFillLightningChargeFill } from "react-icons/bs";
+
 interface TeamData {
   title?: string;
   abbr?: string;
@@ -148,7 +150,9 @@ export default function H2h({
                 <p className="text-1xl font-semibold">{parsedMatch.teamA?.scores || '0'}</p>
               </div>
             </div>
-            <div className="text-gray-500 text-2xl font-semibold">↔</div>
+             <div className="text-gray-500 text-2xl font-semibold">
+                <BsFillLightningChargeFill />
+              </div>
             <div className="flex space-x-2 justify-end">
               <div className="mt-1 text-end">
                 <p className="text-1xl font-semibold">{parsedMatch.teamB?.scores || '0'}</p>
@@ -229,9 +233,9 @@ export default function H2h({
 
 
               <div className="text-[#8192B4] font-normal text-center md:w-[50%] w-[45%]">
-                <p className="text-[#FFBD71] md:text-[20px] text-[16px] font-semibold">
-                  {teamADetails.abbr || 'Team A'} vs {teamBDetails.abbr || 'Team B'} Head to Head in {matchType.toUpperCase()}
-                </p>
+                <h2 className="text-[#ffffff] text-[24px] font-semibold flex justify-center">
+                  <BsFillLightningChargeFill />
+                </h2>
               </div>
 
 
@@ -297,22 +301,16 @@ export default function H2h({
             <div className="md:grid grid-cols-12 gap-4">
               <div className="lg:col-span-8 md:col-span-7">
                 {teamDetails?.teamAB_total_match > 0 && (
-                  <div className="rounded-lg bg-[#ffffff] p-4">
-                    <h3 className="text-[15px] font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
-                      {teamADetails.title} vs {teamBDetails.title} Head to Head in {matchType.charAt(0).toUpperCase() + matchType.slice(1)} Records
-                    </h3>
+                  <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
+                    <h1 className="text-[15px] font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
+                      {teamADetails.abbr} vs {teamBDetails.abbr} Head to Head in {matchType.charAt(0).toUpperCase() + matchType.slice(1)} Records
+                    </h1>
                     <div className="border-t-[1px] border-[#E4E9F0]" />
 
                     <div className="mt-4">
                       <div className="mb-6">
-
-                        <ReadMoreCard
-                          title=""
-                          content={content}
-                          wordLimit={30}
-                        />
-
-                      </div>
+                        <p>{content}</p>
+                         </div>
 
                       <div className="flex gap-2 md:gap-0 flex-row justify-between items-center mb-4">
 
@@ -355,10 +353,11 @@ export default function H2h({
                         </div>
                       </div>
 
+  <div className="border-[1px] rounded-lg py-4">
+
                       <div className="flex justify-center text-center">
-                        <div className="border-[1px] border-[#E4E9F0] p-2 rounded-md font-semibold text-1xl">
-                          <p>{totalMatches}</p>
-                          <p>Matches</p>
+                        <div className="p-2 rounded-md font-semibold text-1xl">
+                          <span className="md:text-[18px] text-[15px] font-semibold">{totalMatches} <span className="text-[14px] font-medium">Matches</span></span>
                         </div>
                       </div>
 
@@ -372,13 +371,13 @@ export default function H2h({
                                 style={{ width: `${teamaWon}%` }}
                               ></div>
                             </div>
-                            <span>{teamDetails.teama_won_match}</span>
+                            <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails.teama_won_match}</span>
                           </div>
-                          <div className="md:w-[50%] w-full text-center">
-                            <span className="font-semibold">Won</span>
+                          <div className="w-full text-center">
+                            <span className="font-medium">Won</span>
                           </div>
                           <div className="flex justify-between items-center w-full">
-                            <span>{teamDetails.teamb_won_match}</span>
+                            <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails.teamb_won_match}</span>
                             <div className="flex-1 mx-4 bg-gray-200 h-2">
                               <div
                                 className="bg-[#13b76dbd] h-2"
@@ -399,13 +398,13 @@ export default function H2h({
                                 style={{ width: teambWon + "%" }}
                               ></div>
                             </div>
-                            <span>{teamDetails?.teamb_won_match}</span>
+                            <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.teamb_won_match}</span>
                           </div>
-                          <div className="md:w-[50%] w-full text-center">
-                            <span className="font-semibold">Lost</span>
+                          <div className="w-full text-center">
+                            <span className="font-medium">Lost</span>
                           </div>
                           <div className="flex justify-between items-center w-full">
-                            <span>{teamDetails?.teama_won_match}</span>
+                            <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.teama_won_match}</span>
                             <div className="flex-1 mx-4 bg-gray-200 h-2">
                               <div
                                 className="bg-[#B7132B] h-2"
@@ -426,13 +425,13 @@ export default function H2h({
                                   style={{ width: "0%" }}
                                 ></div>
                               </div>
-                              <span>{teamDetails?.nr_match}</span>
+                              <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.nr_match}</span>
                             </div>
-                            <div className="md:w-[50%] w-full text-center">
-                              <span className="font-semibold">No Result</span>
+                            <div className="w-full text-center">
+                              <span className="font-medium">No Result</span>
                             </div>
                             <div className="flex justify-between items-center w-full">
-                              <span>{teamDetails?.nr_match}</span>
+                              <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.nr_match}</span>
                               <div className="flex-1 mx-4 bg-gray-200 h-2">
                                 <div
                                   className="bg-[#13b76dbd] h-2"
@@ -452,13 +451,13 @@ export default function H2h({
                                   style={{ width: "0%" }}
                                 ></div>
                               </div>
-                              <span>{teamDetails?.tied_match}</span>
+                              <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.tied_match}</span>
                             </div>
-                            <div className="md:w-[50%] w-full text-center">
-                              <span className="font-semibold">Tied</span>
+                            <div className="w-full text-center">
+                              <span className="font-medium">Tied</span>
                             </div>
                             <div className="flex justify-between items-center w-full">
-                              <span>{teamDetails?.tied_match}</span>
+                              <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.tied_match}</span>
                               <div className="flex-1 mx-4 bg-gray-200 h-2">
                                 <div
                                   className="bg-[#13b76dbd] h-2"
@@ -478,13 +477,13 @@ export default function H2h({
                                   style={{ width: "0%" }}
                                 ></div>
                               </div>
-                              <span>{teamDetails?.teama_home_won_match}</span>
+                              <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.teama_home_won_match}</span>
                             </div>
-                            <div className="md:w-[50%] w-full text-center">
-                              <span className="font-semibold">Home Won</span>
+                            <div className="w-full text-center">
+                              <span className="font-medium">Home Won</span>
                             </div>
                             <div className="flex justify-between items-center w-full">
-                              <span>{teamDetails?.teamb_home_won_match}</span>
+                              <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.teamb_home_won_match}</span>
                               <div className="flex-1 mx-4 bg-gray-200 h-2">
                                 <div
                                   className="bg-[#13b76dbd] h-2"
@@ -504,13 +503,13 @@ export default function H2h({
                                   style={{ width: "0%" }}
                                 ></div>
                               </div>
-                              <span>{teamDetails?.teama_away_won_match}</span>
+                              <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.teama_away_won_match}</span>
                             </div>
-                            <div className="md:w-[50%] w-full text-center">
-                              <span className="font-semibold">Away Won</span>
+                            <div className="w-full text-center">
+                              <span className="font-medium">Away Won</span>
                             </div>
                             <div className="flex justify-between items-center w-full">
-                              <span>{teamDetails?.teamb_away_won_match}</span>
+                              <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.teamb_away_won_match}</span>
                               <div className="flex-1 mx-4 bg-gray-200 h-2">
                                 <div
                                   className="bg-[#13b76dbd] h-2"
@@ -530,13 +529,13 @@ export default function H2h({
                                   style={{ width: "0%" }}
                                 ></div>
                               </div>
-                              <span>{teamDetails?.teama_neutral_won_match}</span>
+                              <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.teama_neutral_won_match}</span>
                             </div>
-                            <div className="md:w-[50%] w-full text-center">
-                              <span className="font-semibold">Neutral Won</span>
+                            <div className="w-full text-center">
+                              <span className="font-medium">Neutral Won</span>
                             </div>
                             <div className="flex justify-between items-center w-full">
-                              <span>{teamDetails?.teamb_neutral_won_match}</span>
+                              <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.teamb_neutral_won_match}</span>
                               <div className="flex-1 mx-4 bg-gray-200 h-2">
                                 <div
                                   className="bg-[#13b76dbd] h-2"
@@ -556,13 +555,13 @@ export default function H2h({
                                   style={{ width: "0%" }}
                                 ></div>
                               </div>
-                              <span>{teamDetails?.teama_highest_score}</span>
+                              <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.teama_highest_score}</span>
                             </div>
-                            <div className="md:w-[50%] w-full text-center">
-                              <span className="font-semibold">Highest Score</span>
+                            <div className="w-full text-center">
+                              <span className="font-medium">Highest Score</span>
                             </div>
                             <div className="flex justify-between items-center w-full">
-                              <span>{teamDetails?.teamb_highest_score}</span>
+                              <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.teamb_highest_score}</span>
                               <div className="flex-1 mx-4 bg-gray-200 h-2">
                                 <div
                                   className="bg-[#13b76dbd] h-2"
@@ -582,13 +581,13 @@ export default function H2h({
                                   style={{ width: "0%" }}
                                 ></div>
                               </div>
-                              <span>{teamDetails?.teama_lowest_score}</span>
+                              <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.teama_lowest_score}</span>
                             </div>
-                            <div className="md:w-[50%] w-full text-center">
-                              <span className="font-semibold">Lowest Score</span>
+                            <div className="w-full text-center">
+                              <span className="font-medium">Lowest Score</span>
                             </div>
                             <div className="flex justify-between items-center w-full">
-                              <span>{teamDetails?.teamb_lowest_score}</span>
+                              <span className="md:text-[18px] text-[15px] font-semibold">{teamDetails?.teamb_lowest_score}</span>
                               <div className="flex-1 mx-4 bg-gray-200 h-2">
                                 <div
                                   className="bg-[#13b76dbd] h-2"
@@ -599,6 +598,8 @@ export default function H2h({
                           </div>
                         </div>
                       }
+
+                      </div>
                     </div>
                   </div>
                 )}
@@ -643,7 +644,7 @@ export default function H2h({
                 </div>
               </div>
 
-              <div className="lg:col-span-4 md:col-span-5 -mt-4">
+              <div className="lg:col-span-4 md:col-span-5 md:-mt-4">
 
                 <WeeklySlider />
                 <PLSeries />

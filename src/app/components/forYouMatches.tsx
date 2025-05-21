@@ -140,7 +140,7 @@ export default async function ForYouMatches() {
                     <span className="rounded-full">
                       <svg className="h-[9px] w-[9px]">
                         <circle
-                          fill="#a70b0b"
+                          fill="#ea2323"
                           stroke="none"
                           cx="4"
                           cy="4"

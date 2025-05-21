@@ -47,7 +47,7 @@ const PhoneMenu = () => {
           {/* <Link href="#" className="block hover:text-yellow-400">Fixtures </Link> */}
           <Link href="/series" className="block hover:text-yellow-400">Series </Link>
           {/* <Link href="#" className="block hover:text-yellow-400">Teams </Link> */}
-          <Link href="/iccranking/man/team/odis" className="block hover:text-yellow-400">ICC Ranking </Link>
+          <Link href="/iccranking/men/team/odis" className="block hover:text-yellow-400">ICC Ranking </Link>
           <Link href="#" className="block hover:text-yellow-400">News </Link>
           <Link href="https://uccricket.live/fantasy-cricket/dream11-prediction/" className="block hover:text-yellow-400">Fantasy Tips </Link>
           {/* <Link href="#" className="block hover:text-yellow-400">Point Table </Link> */}

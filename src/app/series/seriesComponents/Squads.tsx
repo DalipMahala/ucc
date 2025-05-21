@@ -135,18 +135,18 @@ export default function Squad({ urlString, seriesInfo, isPointTable, status }: S
             <div className="md:hidden rounded-lg p-2 mb-4 bg-[#ffffff]">
               <div id="team-buttons" className="">
                 {squads?.map((teamslist: any, index: number) => (
-                  <div key={index} className={`team-btn px-2 mb-1 py-3 w-full font-medium hover:text-[#1a80f8] hover:bg-[#ecf2fd] flex justify-between items-center border-b-[1px] ${activeTab === "tab" + index
+                  <div key={index} onClick={() => {
+                        setActiveTab("tab" + index);
+                        setIsModalOpen(true);
+                        setActiveSquad("Batsman");
+                      }} className={`team-btn px-2 mb-1 py-3 w-full font-medium hover:text-[#1a80f8] hover:bg-[#ecf2fd] flex justify-between items-center border-b-[1px] ${activeTab === "tab" + index
                     ? "text-[#394351] bg-[#ffffff]"
                     : "text-[#394351] bg-[#ffffff] "
                     }`}>
                     <button
                       
                       className="flex items-center"
-                      onClick={() => {
-                        setActiveTab("tab" + index);
-                        setIsModalOpen(true);
-                        setActiveSquad("Batsman");
-                      }}
+                      
                     >
                       <Image loading="lazy"
                         src={teamslist?.team?.logo_url}

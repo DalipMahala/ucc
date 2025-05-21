@@ -447,9 +447,9 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                                 `with an economy of ${matchStats[0]?.econ || "N/A"}.` 
                                 : ""
                               ) +
-                              "<br/><br/>" +
+                              "<br/>" +
                               (matchStats[1]?.player?.first_name ? 
-                                `<span class="text-[#1f2937] font-medium">Top Performers So Far</span><br/>` +
+                                `<h3 class="text-[#1f2937] font-medium mb-1">Top Performers So Far</h3><br/>` +
                                 `<span class="text-[#1f2937] font-medium">${matchStats[1].player.first_name}</span> – ${matchStats[1]?.matches || "N/A"} matches, ` +
                                 `${matchStats[1]?.wickets || "N/A"} wickets, Econ: ${matchStats[1]?.econ || "N/A"}<br/>` 
                                 : ""

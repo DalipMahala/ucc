@@ -27,9 +27,9 @@ export default function Team({ ranking, iccRankingName, iccRankingType, iccRanki
   let arrayName = '';
   let arrayType = String(iccRankingTap);
   let rankData = [];
-  if (iccRankingName === 'man') {
+  if (iccRankingName === 'men') {
     arrayName = 'ranks';
-  } else if (iccRankingName === 'woman') {
+  } else if (iccRankingName === 'women') {
     arrayName = 'women_ranks';
   }
 
@@ -101,25 +101,25 @@ export default function Team({ ranking, iccRankingName, iccRankingType, iccRanki
           {/* Toggle Switch */}
           <div id="tabs" className="my-4 flex justify-center">
             <div className="flex text-[15px] space-x-2 p-1 bg-[#081736] rounded-full overflow-auto">
-              <Link href="/iccranking/man/team/odis">
+              <Link href="/iccranking/men/team/odis">
                 <button
-                  className={`font-medium py-2 px-6 rounded-full transition-all duration-300 flex gap-1 items-center ${iccRankingName === 'man'
+                  className={`font-medium py-2 px-6 rounded-full transition-all duration-300 flex gap-1 items-center ${iccRankingName === 'men'
                     ? 'bg-[#ffffff]  shadow-md'
                     : 'text-white/70'
                     }`}
                 >
-               <span> <GrUserManager /> </span> <span> Men </span>
+               <span> <GrUserManager /> </span> <span> Men's </span>
                 </button>
               </Link>
 
-              <Link href="/iccranking/woman/team/odis">
+              <Link href="/iccranking/women/team/odis">
                 <button
-                  className={`font-medium py-2 px-6 rounded-full transition-all duration-300 flex gap-1 items-center ${iccRankingName === 'woman'
+                  className={`font-medium py-2 px-6 rounded-full transition-all duration-300 flex gap-1 items-center ${iccRankingName === 'women'
                     ? 'bg-[#ffffff] shadow-md'
                     : 'text-white/70'
                     }`}
                 >
-              <span><GrUserFemale /></span>  <span>  Women </span>
+              <span><GrUserFemale /></span>  <span>  Women's </span>
                 </button>
               </Link>
             </div>

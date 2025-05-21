@@ -468,34 +468,34 @@ export default function Overview({
                         <table className="w-full text-sm text-left text-gray-500 whitespace-nowrap">
                           <thead className="bg-blue-50 text-gray-700 ">
                             <tr>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium w-[10px]">
+                              <th className="px-2 py-3 font-medium w-[10px]">
                                 No
                               </th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium sticky left-0 bg-blue-50">
                                 Team
                               </th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium">
                                 M
                               </th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium">
                                 W
                               </th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium">
                                 L
                               </th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium">
                                 T
                               </th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium">
                                 N/R
                               </th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium">
                                 PTS
                               </th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium">
                                 Net RR
                               </th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium">
                                 Form
                               </th>
                             </tr>
@@ -504,10 +504,10 @@ export default function Overview({
                             {rounds.standings?.slice(0, 4).map(
                               (point: any, index: number) => (
                                 <tr className="hover:bg-[#fffae5]" key={index}>
-                                  <td className="md:px-2 pl-[14px] py-3 w-[10px]">
+                                  <td className="px-2 py-3 w-[10px]">
                                     {index + 1}
                                   </td>
-                                  <td className="md:px-2 pl-[14px] py-3 text-[#217AF7]">
+                                  <td className=" py-3 sticky left-0 text-[#217AF7]">
                                     <Link
                                       href={
                                         "/ipl/" + seriesInfo?.season + "/" +
@@ -515,7 +515,7 @@ export default function Overview({
                                         "/" +
                                         point?.team.tid
                                       } >
-                                      <div className="flex items-center gap-[5px] w-[120px]">
+                                      <div className="flex items-center gap-[5px] w-[120px] bg-[#ffffff] px-2">
                                         <div>
                                           <Image
                                             loading="lazy"
@@ -540,28 +540,28 @@ export default function Overview({
                                       </div>
                                     </Link>
                                   </td>
-                                  <td className="md:px-2 pl-[14px] py-3">
+                                  <td className="px-2 py-3">
                                     {point?.played}
                                   </td>
-                                  <td className="md:px-2 pl-[14px] py-3">
+                                  <td className="px-2 py-3">
                                     {point?.win}
                                   </td>
-                                  <td className="md:px-2 pl-[14px] py-3">
+                                  <td className="px-2 py-3">
                                     {point?.loss}
                                   </td>
-                                  <td className="md:px-2 pl-[14px] py-3">
+                                  <td className="px-2 py-3">
                                     {point?.draw}
                                   </td>
-                                  <td className="md:px-2 pl-[14px] py-3">
+                                  <td className="px-2 py-3">
                                     {point?.nr}
                                   </td>
-                                  <td className="md:px-2 pl-[14px] py-3">
+                                  <td className="px-2 py-3">
                                     {point?.points}
                                   </td>
-                                  <td className="md:px-2 pl-[14px] py-3">
+                                  <td className="px-2 py-3">
                                     {point?.netrr}
                                   </td>
-                                  <td className="md:px-2 pl-[14px] py-3">
+                                  <td className="px-2 py-3">
                                     <div className="ml-auto flex gap-1 items-center">
                                       {point?.lastfivematchresult
                                         .split(",")
@@ -638,22 +638,22 @@ export default function Overview({
                         <table className="w-full text-sm text-left text-gray-500 whitespace-nowrap">
                           <thead className="bg-blue-50 text-gray-700 ">
                             <tr>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium w-[10px]">
+                              <th className="px-2 py-3 font-medium w-[10px]">
                                 Player
                               </th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium">
                                 Mat
                               </th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium">
                                 Runs
                               </th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium">
                                 HS
                               </th>
-                              {/* <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              {/* <th className="px-2 py-3 font-medium">
                                 Avg
                               </th> */}
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium">
                                 SR
                               </th>
                               <th className="md:px-2 px-3 py-3 font-medium">
@@ -685,12 +685,12 @@ export default function Overview({
                                     </Link>
                                   </div>
                                 </td>
-                                <td className="md:px-2 pl-[14px] py-3">{player?.matches}</td>
-                                <td className="md:px-2 pl-[14px] py-3 font-semibold">{player?.runs}</td>
-                                <td className="md:px-2 pl-[14px] py-3">{player?.highest}</td>
-                                {/* <td className="md:px-2 pl-[14px] py-3">{player?.average}</td> */}
-                                <td className="md:px-2 pl-[14px] py-3">{player?.strike}</td>
-                                <td className="md:px-2 pl-[14px] py-3">{player?.run6}</td>
+                                <td className="px-2 py-3">{player?.matches}</td>
+                                <td className="px-2 py-3 font-semibold">{player?.runs}</td>
+                                <td className="px-2 py-3">{player?.highest}</td>
+                                {/* <td className="px-2 py-3">{player?.average}</td> */}
+                                <td className="px-2 py-3">{player?.strike}</td>
+                                <td className="px-2 py-3">{player?.run6}</td>
                               </tr>
                             ))}
 
@@ -718,16 +718,16 @@ export default function Overview({
                                 Player
                               </th>
                               <th className="px-1 py-3 font-medium">Mat</th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium">
                                 Overs
                               </th>
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium">
                                 W
                               </th>
-                              {/* <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              {/* <th className="px-2 py-3 font-medium">
                                 Avg
                               </th> */}
-                              <th className="md:px-2 pl-[14px] py-3 font-medium">
+                              <th className="px-2 py-3 font-medium">
                                 Eco
                               </th>
                               <th className="px-3 pl-[14px] py-3 font-medium">
@@ -758,12 +758,12 @@ export default function Overview({
                                     </Link>
                                   </div>
                                 </td>
-                                <td className="md:px-2 pl-[14px] py-3">{player?.matches}</td>
-                                <td className="md:px-2 pl-[14px] py-3">{player?.overs}</td>
-                                <td className="md:px-2 pl-[14px] py-3 font-semibold">{player?.wickets}</td>
-                                {/* <td className="md:px-2 pl-[14px] py-3">{player?.average}</td> */}
-                                <td className="md:px-2 pl-[14px] py-3">{player?.econ}</td>
-                                <td className="md:px-2 pl-[14px] py-3">{player?.wicket5i}</td>
+                                <td className="px-2 py-3">{player?.matches}</td>
+                                <td className="px-2 py-3">{player?.overs}</td>
+                                <td className="px-2 py-3 font-semibold">{player?.wickets}</td>
+                                {/* <td className="px-2 py-3">{player?.average}</td> */}
+                                <td className="px-2 py-3">{player?.econ}</td>
+                                <td className="px-2 py-3">{player?.wicket5i}</td>
                               </tr>
                             ))}
 

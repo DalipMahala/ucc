@@ -5,6 +5,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { urlStringEncode } from "@/utils/utility";
+import { useEffect, useRef } from 'react';
+
+
+
 interface Banner {
   cid: number,
   params: any,
@@ -15,6 +19,9 @@ interface Banner {
 export default function IplBanner({ cid, params, teamPlayers, venueDetails, pointTables }: Banner) {
   const teamId = params?.teamId;
   const year = params?.year;
+
+  const containerRef = useRef<HTMLDivElement>(null);
+const activeTeamRef = useRef<HTMLDivElement>(null);
 
   const teams = teamPlayers[0]?.team;
   const captain = teamPlayers[0]?.captains?.[0];
@@ -32,6 +39,15 @@ export default function IplBanner({ cid, params, teamPlayers, venueDetails, poin
     router.push(newPath); // Update the URL
   };
 
+
+useEffect(() => {
+  if (activeTeamRef.current && containerRef.current) {
+    // Scroll active team into view
+    activeTeamRef.current.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+}, [teams?.tid]);
+
+
   return (
     <section className="bg-[#0E2149]">
       <div
@@ -39,28 +55,39 @@ export default function IplBanner({ cid, params, teamPlayers, venueDetails, poin
       >
 
 
+<div ref={containerRef} className="overflow-auto mb-6">
+  <div className="w-[850px] md:w-full flex gap-3 justify-between items-center p-2">
+    {allTeams?.map((team: any, index: number) => (
+      <div
+        key={index}
+        ref={team?.tid === teams?.tid ? activeTeamRef : null}
+        className="w-[10%] flex justify-center items-center rounded-md p-4"
+        style={
+          team?.tid === teams?.tid
+            ? {
+                boxShadow: '0px 0px 9px 0px #7eb9ff',
+                border: '3px solid #8ac0ff',
+              }
+            : {
+                border: '1px solid #324775',
+              }
+        }
+      >
+        <Link href={`/ipl/2025/${urlStringEncode(team?.title)}/${team?.tid}`}>
+          <Image
+            priority
+            src={team?.logo_url}
+            width={50}
+            height={50}
+            className=""
+            alt={team?.abbr}
+          />
+        </Link>
+      </div>
+    ))}
+  </div>
+</div>
 
-        <div className="overflow-auto mb-6">
-          <div
-
-            className="w-[850px] md:w-full flex gap-3 justify-between items-center p-2"
-          >
-            {allTeams?.map((team:any, index:number) => (
-            <div key={index} className="w-[10%] flex justify-center items-center border-[3px] border-[#8ac0ff] rounded-md p-[8px]" style={team?.tid === teams?.tid ? { boxShadow: '0px 0px 9px 0px #7eb9ff'} : {}} >
-              <Link href={"/ipl/2025/"+urlStringEncode(team?.title)+"/"+team?.tid}>
-                <Image
-                  priority
-                  src={team?.logo_url}
-                  width={80}
-                  height={80}
-                  className=""
-                  alt={team?.abbr}
-                />
-              </Link>
-            </div>
-           ))}
-          </div>
-        </div>
 
 
         <div className="flex items-center justify-between md:p-4 max-w-6xl mx-auto">
@@ -125,9 +152,9 @@ export default function IplBanner({ cid, params, teamPlayers, venueDetails, poin
 
 
           {/* Content Section mobile screen  */}
-         
 
-         <div className="md:hidden px-4">
+
+          <div className="md:hidden px-4">
             {/* Left Section */}
             <div className="flex items-center space-x-4 mb-4">
               <Image

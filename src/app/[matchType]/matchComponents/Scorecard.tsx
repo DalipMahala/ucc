@@ -21,8 +21,8 @@ interface Scorecard {
 }
 
 function getPlayerRecord(allplayers: any, pid: number) {
-  const pData =  allplayers?.find((player: { pid: number; }) => Number(player.pid) === pid);
-  const prole = pData?.playing_role === 'bowl' ? 'Bowler' : pData?.playing_role === 'bat' ? 'Batsman' : pData?.playing_role === 'wk' ? 'Wicket Keeper':'All Rounder';
+  const pData = allplayers?.find((player: { pid: number; }) => Number(player.pid) === pid);
+  const prole = pData?.playing_role === 'bowl' ? 'Bowler' : pData?.playing_role === 'bat' ? 'Batsman' : pData?.playing_role === 'wk' ? 'Wicket Keeper' : 'All Rounder';
   return prole;
 }
 export default function Scorecard({
@@ -263,6 +263,45 @@ export default function Scorecard({
                     </div>
                   </div>
                 </div>
+
+
+                <div className='md:hidden mb-4'>
+
+                  {yetTobat?.length > 0 && yetTobat !== undefined ? (
+
+                    <div className="rounded-lg bg-[#ffffff]">
+                      <div className="p-4">
+                        <h2 className="text-1xl font-semibold pl-[7px] mb-3 border-l-[3px] border-[#229ED3]">
+                          Yet to bat
+                        </h2>
+                        <div className="border-t-[1px] border-[#E4E9F0]" />
+                        <div className="grid grid-cols-2 md:grid-cols-1">
+                          {yetTobat?.map((yetTobat: any, index: number) => (
+                            <div className='col-span-1'>
+                              <Link href={"/player/" + playerUrls[yetTobat.player_id]} className='' key={index}>
+                                <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
+                                  <div style={{ width: '40px', height: '40px' }}>
+                                    <PlayerImage key={yetTobat?.player_id} player_id={yetTobat.player_id} width={35} height={35} className="rounded-lg" />
+                                  </div>
+                                  <div className="font-medium">
+                                    <h3 className="text-[15px] hover:text-[#1a80f8]">{yetTobat.name} </h3>
+                                    <p className="text-[#757A82] font-normal">{getPlayerRecord(allPlayers, Number(yetTobat.player_id))}</p>
+                                  </div>
+                                </div>
+                              </Link>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                  ) : ` `
+                  }
+
+                </div>
+
+
+
                 <div className="rounded-lg bg-[#ffffff] mb-4 p-4">
                   <h2 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Bowling
@@ -396,7 +435,7 @@ export default function Scorecard({
                 {manOfTheMatch?.pid !== undefined &&
 
                   <div className="rounded-lg bg-[#ffffff] mb-4">
-                    <div className="p-4"><Link href={"/player/"+playerUrls[manOfTheMatch?.pid]}>
+                    <div className="p-4"><Link href={"/player/" + playerUrls[manOfTheMatch?.pid]}>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3 ">
                           <div>
@@ -423,34 +462,41 @@ export default function Scorecard({
                   </div>
 
                 }
-                {yetTobat?.length > 0 && yetTobat !== undefined ? (
-                  
+
+                <div className='md:block hidden'>
+
+                  {yetTobat?.length > 0 && yetTobat !== undefined ? (
+
                     <div className="rounded-lg bg-[#ffffff]">
                       <div className="p-4">
                         <h2 className="text-1xl font-semibold pl-[7px] mb-3 border-l-[3px] border-[#229ED3]">
                           Yet to bat
                         </h2>
                         <div className="border-t-[1px] border-[#E4E9F0]" />
-                        <div className="">
+                        <div className="grid grid-cols-2 md:grid-cols-1">
                           {yetTobat?.map((yetTobat: any, index: number) => (
-                            <Link href={"/player/" + playerUrls[yetTobat.player_id]} className='' key={index}>
-                              <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
-                                <div style={{ width: '40px', height: '40px' }}>
-                                  <PlayerImage key={yetTobat?.player_id} player_id={yetTobat.player_id} width={35} height={35} className="rounded-lg" />
+                            <div className='col-span-1'>
+                              <Link href={"/player/" + playerUrls[yetTobat.player_id]} className='' key={index}>
+                                <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
+                                  <div style={{ width: '40px', height: '40px' }}>
+                                    <PlayerImage key={yetTobat?.player_id} player_id={yetTobat.player_id} width={35} height={35} className="rounded-lg" />
+                                  </div>
+                                  <div className="font-medium">
+                                    <h3 className="text-[15px] hover:text-[#1a80f8]">{yetTobat.name} </h3>
+                                    <p className="text-[#757A82] font-normal">{getPlayerRecord(allPlayers, Number(yetTobat.player_id))}</p>
+                                  </div>
                                 </div>
-                                <div className="font-medium">
-                                  <h3 className="text-[15px] hover:text-[#1a80f8]">{yetTobat.name} </h3>
-                                  <p className="text-[#757A82] font-normal">{getPlayerRecord(allPlayers,Number(yetTobat.player_id))}</p>
-                                </div>
-                              </div>
-                            </Link>
+                              </Link>
+                            </div>
                           ))}
                         </div>
                       </div>
                     </div>
-                 
-                ) : ` `
-                }
+
+                  ) : ` `
+                  }
+
+                </div>
 
               </div>
             </div>
