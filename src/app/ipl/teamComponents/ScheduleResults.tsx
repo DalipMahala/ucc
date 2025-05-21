@@ -30,7 +30,6 @@ export default function ScheduleResults({
   let liveMatch = seriesMatches?.liveMatch?.filter((m: { teama: { team_id: any; }; teamb: { team_id: any; }; }) => [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teamId)));
   let upcomingMatch = seriesMatches?.scheduledMatch?.filter((m: { teama: { team_id: any; }; teamb: { team_id: any; }; }) => [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teamId)));
   // console.log(liveMatch);
-
   useEffect(() => {
     const elements = document.querySelectorAll("#all-tab, #live-tab, #completed-tab, #upcoming-tab");
 

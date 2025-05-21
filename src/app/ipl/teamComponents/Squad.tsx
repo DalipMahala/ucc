@@ -265,7 +265,7 @@ export default function Squads({
                                 allrounder?.player_id
                               }
                               key={index}
-                            >
+                            > 
                               <div className="text-center p-4">
                                 <div className="relative">
                                   <PlayerImage
