@@ -302,15 +302,15 @@ export default function H2h({
               <div className="lg:col-span-8 md:col-span-7">
                 {teamDetails?.teamAB_total_match > 0 && (
                   <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
-                    <h1 className="text-[15px] font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
+                    <h1 className="text-[20px] font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
                       {teamADetails.abbr} vs {teamBDetails.abbr} Head to Head in {matchType.charAt(0).toUpperCase() + matchType.slice(1)} Records
                     </h1>
                     <div className="border-t-[1px] border-[#E4E9F0]" />
 
                     <div className="mt-4">
-                      <div className="mb-6">
-                        <p>{content}</p>
-                         </div>
+                     
+                        <p className="text-gray-700 font-normal text-[14px] mb-6">{content}</p>
+                        
 
                       <div className="flex gap-2 md:gap-0 flex-row justify-between items-center mb-4">
 
@@ -617,23 +617,7 @@ export default function H2h({
                   </div>
                 )}
 
-                <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
-                  <h2 className="text-1xl font-semibold mb-1">
-                    {teamADetails.title} vs {teamBDetails.title} 2025
-                  </h2>
-
-                  <p className="text-gray-700 font-normal">
-                    The biggest tournament in the cricketing circuit, the ICC
-                    T20 WORLD Cup is underway in the USAs and the West Indies.
-                    The tournament received excellent response from the fans
-                    worldwide The biggest tournament in the cricketing circuit, the ICC
-                    T20 WORLD Cup is underway in the USAs and the West Indies.
-                    The tournament received excellent response from the fans
-                    worldwide
-                  </p>
-
-
-                </div>
+              
 
                 <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
                   <h2 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">

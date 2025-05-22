@@ -96,10 +96,10 @@ export default function Banner({ playerStats, ranking }: Banner) {
 
           {/* mobile player img start */}
 
-          <div className="md:hidden flex justify-center absolute right-0 bottom-0">
+          <div className="md:hidden flex justify-center absolute right-[28px] bottom-0">
 
 
-            <PlayerProfileImage key={profile?.pid + "_" + profile?.pid} player_id={profile?.pid} height={150} width={120} className="rounded-lg" />
+            <PlayerProfileImage key={profile?.pid + "_" + profile?.pid} player_id={profile?.pid} height={100} width={100} className="rounded-lg" />
 
             <div className="absolute bottom-0 md:hidden" style={{
               height: '82px',
@@ -111,14 +111,14 @@ export default function Banner({ playerStats, ranking }: Banner) {
 
           </div>
 
-          {/* mobile player img start */}
+          {/* mobile player img end */}
 
 
-          <div className="md:mb-4 mb-2 relative z-[1] h-[145px] md:h-auto w-[60%] md:w-auto">
+          <div className="md:mb-4 mb-2 relative z-[1] h-[110px] md:h-auto w-[60%] md:w-auto">
 
             <h1 className="text-[24px] font-medium mb-3 text-start md:block hidden">{profile?.first_name}</h1>
 
-            <h1 className="text-[24px] font-medium mb-3 text-start md:hidden min-h-[70px]">{profile?.first_name} <br /> {profile?.first_name} </h1>
+            <h1 className="text-[24px] font-medium text-start md:hidden min-h-[70px] leading-[26px]"><span className='text-[16px]'> {profile?.first_name} </span> <br /> {profile?.first_name} </h1>
 
 
             <div className="lg:flex items-center lg:space-x-5">
@@ -156,9 +156,9 @@ export default function Banner({ playerStats, ranking }: Banner) {
 
             {/* <h2 className='md:hidden'>{playerRole}</h2> */}
 
-             <div className="md:flex md:justify-start items-center md:space-x-2 m-0 ">
+             <div className="md:hidden ">
                 {playerRole === 'Batting' ? (
-                  <span className="flex items-center py-[5px]">
+                  <span className="flex items-center">
                     <Image loading="lazy"
                       src="/assets/img/bat.png"
                       alt=""
@@ -169,7 +169,7 @@ export default function Banner({ playerStats, ranking }: Banner) {
                   </span>
                 ) : ("")}
                 {playerRole === 'Bowler' ? (
-                  <span className="flex items-center py-[5px]	">
+                  <span className="flex items-center	">
                     <Image loading="lazy"
                       src="/assets/img/ball.png"
                       alt=""
@@ -180,7 +180,7 @@ export default function Banner({ playerStats, ranking }: Banner) {
                   </span>
                 ) : ("")}
                 {playerRole === 'All-Rounder' ? (
-                  <span className="flex gap-2 items-center py-[5px]">
+                  <span className="flex gap-2 items-center">
                     <MdSportsCricket className='text-[#c2d0ed]' />
                     {playerRole}
                   </span>

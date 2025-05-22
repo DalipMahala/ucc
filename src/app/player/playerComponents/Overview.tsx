@@ -472,7 +472,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
 
 
                   <div className={`cust-box-click-content cust-box-click-batting ${careerTab === 'cust-box-click-batting' ? "" : "hidden"}`}>
-                    <div className="rounded-lg p-6 bg-[#ffffff]">
+                    <div className="rounded-lg p-4 bg-[#ffffff]">
                       <div className="md:flex items-center justify-between">
                         <h3 className="text-1xl font-medium mb-2">
                           {profile?.first_name} Recent Form
@@ -679,7 +679,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
 
 
                   <div className={`cust-box-click-content cust-box-click-batting ${careerTab === 'cust-box-click-bowling' ? "" : "hidden"}`}>
-                    <div className="rounded-lg p-6 bg-[#ffffff]">
+                    <div className="rounded-lg p-4 bg-[#ffffff]">
                       <div className="md:flex items-center justify-between">
                         <h3 className="text-1xl font-medium mb-2">
                           {profile?.first_name} Recent Form

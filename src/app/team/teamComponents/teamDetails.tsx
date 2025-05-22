@@ -433,7 +433,7 @@ export default function Team({
                             </h4>
                           </div>
                         </div>
-                        <div className="items-center space-x-2 hidden">
+                        <div className="flex items-center space-x-2 ">
                           <span className="text-[13px] font-medium text-[#1F2937]">AUS</span>
                           <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
                             <span className="">
