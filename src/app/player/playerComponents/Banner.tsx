@@ -66,7 +66,7 @@ export default function Banner({ playerStats, ranking }: Banner) {
       )?.rank ?? "";
   }
 
-  const [first, rest] = profile?.first_name.split(/ (.+)/);
+  const [first, rest] = (profile?.first_name ?? '').split(/ (.+)/);
 
   return (
 

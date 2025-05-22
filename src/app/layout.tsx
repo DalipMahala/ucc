@@ -1,6 +1,13 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import localFont from 'next/font/local'
+import localFont from 'next/font/local';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  icons: {
+    icon: '/assets/img/favicon.svg', // Path must start with "/"
+  },
+};
 
 // Optimized font loading - only load essential weights initially
 const geistSans = Geist({
