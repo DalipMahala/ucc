@@ -163,7 +163,7 @@ const Header = () => {
             {/* <Link href="" className="hover:text-[#6aaefe]" prefetch={true}>
               Teams
             </Link> */}
-            <Link href="/iccranking/men/team/odis" className="hover:text-[#6aaefe]" prefetch={true}>
+            <Link href="/iccranking/men/team/odi" className="hover:text-[#6aaefe]" prefetch={true}>
               ICC Ranking
             </Link>
             <Link href="https://uccricket.live/news/" className="hover:text-[#6aaefe]" prefetch={true}>

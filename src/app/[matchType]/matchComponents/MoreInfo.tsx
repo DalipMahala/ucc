@@ -1303,7 +1303,7 @@ export default function MoreInfo({
                       <h2 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                         Weather Condition
                       </h2>
-                      <p className="text-[12px]"><span> Last Updated : </span> <span>{format(new Date(), "dd MMM, yyyy")}</span></p>
+                      <p className="text-[12px]"><span> Last Updated : </span> <span>{format(new Date(), "dd MMM, yyyy hh:ii a")}</span></p>
                     </div>
                     <div className="border-t-[1px] border-[#E4E9F0]" />
                     <div className="flex lg:grid md:grid-cols-12 justify-between md:gap-4 items-center py-3">

@@ -51,6 +51,10 @@ export default function Team({
   const teamCaptains = captains.filter((captain: { format_str: string; }) => captain.format_str === teamType);
   const squads = teamPlayers?.[0]?.players?.[teamType];
   const coach = teamData?.head_coach;
+
+  const batsmen = squads?.filter((sd: any) => ['bat', 'wk'].includes(sd?.playing_role)) || null;
+  const bowlers = squads?.filter((sd: any) => ['bowl'].includes((sd?.playing_role)) ) || null;
+  const allRounders = squads?.filter((sd: any) => ['all'].includes((sd?.playing_role)) ) || null;
   // console.log("captain", coach);
 
   let total_match = teamDetails?.total_match_odi;
@@ -255,12 +259,25 @@ export default function Team({
 
 
 
-                          {squads?.map((squad: any, index: number) => (
+                          {batsmen?.map((squad: any, index: number) => (
                             <div key={index} className="col-span-3 cust-tp-pera-card text-center py-4 px-2 rounded-md border-[1px] border-[##E2E2E2]">
                               <Link href={"/player/" + playerUrls[squad?.pid]}>
                                 <div className="relative">
                                   <PlayerImage key={squad?.pid} player_id={squad?.pid} height={47} width={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
-
+                                    <Image
+                                      loading="lazy"
+                                      src={squad?.playing_role === "all"
+                                        ? "/assets/img/player/bat-ball.png"
+                                        : squad?.playing_role === "wk"
+                                          ? "/assets/img/player/bat.png"
+                                          : squad?.playing_role === "bat"
+                                            ? "/assets/img/player/bat.png"
+                                            : "/assets/img/player/ball.png"}
+                                      className="h-[23px] absolute md:right-[25px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
+                                      width={23}
+                                      height={23}
+                                      alt="1"
+                                    />
                                 </div>
                                 <h3 className="text-sm font-semibold text-gray-800 hover:text-[#1a80f8]">
                                   {squad?.title}
@@ -273,8 +290,54 @@ export default function Team({
                           }
 
                         </div>}
-                        {activeSquad === "Bowler" && <div>Showing finished squad data...</div>}
-                        {activeSquad === "All-Rounder" && <div>Showing scheduled squad data...</div>}
+                        {activeSquad === "Bowler" && <div className="grid md:grid-cols-12 grid-cols-6 gap-4"> 
+                          {bowlers?.map((squad: any, index: number) => (
+                            <div key={index} className="col-span-3 cust-tp-pera-card text-center py-4 px-2 rounded-md border-[1px] border-[##E2E2E2]">
+                              <Link href={"/player/" + playerUrls[squad?.pid]}>
+                                <div className="relative">
+                                  <PlayerImage key={squad?.pid} player_id={squad?.pid} height={47} width={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
+                              <Image
+                                loading="lazy"
+                                src={"/assets/img/player/ball.png"}
+                                className="h-[23px] absolute md:right-[25px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
+                                width={23}
+                                height={23}
+                                alt="1"
+                              />
+                                </div>
+                                <h3 className="text-sm font-semibold text-gray-800 hover:text-[#1a80f8]">
+                                  {squad?.title}
+                                </h3>
+                                <p className="text-xs text-gray-600">{squad?.playing_role === 'bowl' ? "Bowler" : squad?.playing_role === 'bat' ? "Batsman" : squad?.playing_role === 'wk' ? "Wicket Kiper" : "All-Rounder"}</p>
+                              </Link>
+                            </div>
+                          ))
+
+                          }.</div>}
+                        {activeSquad === "All-Rounder" && <div className="grid md:grid-cols-12 grid-cols-6 gap-4"> 
+                          {allRounders?.map((squad: any, index: number) => (
+                            <div key={index} className="col-span-3 cust-tp-pera-card text-center py-4 px-2 rounded-md border-[1px] border-[##E2E2E2]">
+                              <Link href={"/player/" + playerUrls[squad?.pid]}>
+                                <div className="relative">
+                                  <PlayerImage key={squad?.pid} player_id={squad?.pid} height={47} width={47} className="w-[47px] h-[47px] mx-auto rounded-full mb-2" />
+                              <Image
+                                loading="lazy"
+                                src={"/assets/img/player/bat-ball.png"}
+                                className="h-[23px] absolute md:right-[25px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
+                                width={23}
+                                height={23}
+                                alt="1"
+                              />
+                                </div>
+                                <h3 className="text-sm font-semibold text-gray-800 hover:text-[#1a80f8]">
+                                  {squad?.title}
+                                </h3>
+                                <p className="text-xs text-gray-600">{squad?.playing_role === 'bowl' ? "Bowler" : squad?.playing_role === 'bat' ? "Batsman" : squad?.playing_role === 'wk' ? "Wicket Kiper" : "All-Rounder"}</p>
+                              </Link>
+                            </div>
+                          ))
+
+                          }</div>}
                       </div>
 
 

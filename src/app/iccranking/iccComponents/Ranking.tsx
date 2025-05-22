@@ -25,7 +25,7 @@ export default function Team({ ranking, iccRankingName, iccRankingType, iccRanki
 
   let rankDetails = '';
   let arrayName = '';
-  let arrayType = String(iccRankingTap);
+  let arrayType = String(iccRankingTap+ 's');
   let rankData = [];
   if (iccRankingName === 'men') {
     arrayName = 'ranks';
@@ -101,7 +101,7 @@ export default function Team({ ranking, iccRankingName, iccRankingType, iccRanki
           {/* Toggle Switch */}
           <div id="tabs" className="my-4 flex justify-center">
             <div className="flex text-[15px] space-x-2 p-1 bg-[#081736] rounded-full overflow-auto">
-              <Link href="/iccranking/men/team/odis">
+              <Link href="/iccranking/men/team/odi">
                 <button
                   className={`font-medium py-2 px-6 rounded-full transition-all duration-300 flex gap-1 items-center ${iccRankingName === 'men'
                     ? 'bg-[#ffffff]  shadow-md'
@@ -112,7 +112,7 @@ export default function Team({ ranking, iccRankingName, iccRankingType, iccRanki
                 </button>
               </Link>
 
-              <Link href="/iccranking/women/team/odis">
+              <Link href="/iccranking/women/team/odi">
                 <button
                   className={`font-medium py-2 px-6 rounded-full transition-all duration-300 flex gap-1 items-center ${iccRankingName === 'women'
                     ? 'bg-[#ffffff] shadow-md'
@@ -141,27 +141,27 @@ export default function Team({ ranking, iccRankingName, iccRankingType, iccRanki
             <div id="info">
               <div className="cust-box-click-container">
                 <div className="flex gap-4 items-center md:justify-start justify-between md:my-2 my-4 md:py-2 relative">
-                  <Link href={"/iccranking/" + iccRankingName + "/team/odis"}>
+                  <Link href={"/iccranking/" + iccRankingName + "/team/odi"}>
                     <button className={`cust-box-click-button font-medium md:px-7 px-[15px] py-1 whitespace-nowrap ${iccRankingType === 'team' ? "bg-[#1A80F8] text-white" : "bg-[#ffffff] "}`}>
 
                       <span>Team</span>
                     </button>
                   </Link>
-                  <Link href={"/iccranking/" + iccRankingName + "/batter/odis"}>
+                  <Link href={"/iccranking/" + iccRankingName + "/batter/odi"}>
                     <button className={`cust-box-click-button font-medium md:px-7 px-[15px] py-1 whitespace-nowrap ${iccRankingType === 'batter' ? "bg-[#1A80F8] text-white" : "bg-[#ffffff] "}`}
 
                     >
                       <span>Batter</span>
                     </button>
                   </Link>
-                  <Link href={"/iccranking/" + iccRankingName + "/bowler/odis"}>
+                  <Link href={"/iccranking/" + iccRankingName + "/bowler/odi"}>
                     <button className={`cust-box-click-button font-medium md:px-7 px-[15px] py-1 whitespace-nowrap ${iccRankingType === 'bowler' ? "bg-[#1A80F8] text-white" : "bg-[#ffffff] "}`}
 
                     >
                       <span>Bowler</span>
                     </button>
                   </Link>
-                  <Link href={"/iccranking/" + iccRankingName + "/all-rounder/odis"}>
+                  <Link href={"/iccranking/" + iccRankingName + "/all-rounder/odi"}>
                     <button className={`cust-box-click-button font-medium md:px-7 px-[15px] py-1 whitespace-nowrap ${iccRankingType === 'all-rounder' ? "bg-[#1A80F8] text-white" : "bg-[#ffffff] "}`}
 
                     >
@@ -187,11 +187,11 @@ export default function Team({ ranking, iccRankingName, iccRankingType, iccRanki
                             </h3>
                             <div className="flex gap-2 items-center">
                               {Object.keys(rankDetails)?.map((key, index: number) => (
-                                <Link href={"/iccranking/" + iccRankingName + "/" + iccRankingType + "/" + key} key={index}>
+                                <Link href={"/iccranking/" + iccRankingName + "/" + iccRankingType + "/" + key.replace(/s$/, '')} key={index}>
                                   <button
-                                    className={`cust-box-click-button font-medium px-7 py-1 rounded-full whitespace-nowrap ${iccRankingTap === key ? 'bg-[#081736] text-white' : 'bg-[#ebebeb] text-[#6A7586]'
+                                    className={`cust-box-click-button font-medium px-7 py-1 rounded-full whitespace-nowrap ${iccRankingTap === key.replace(/s$/, '') ? 'bg-[#081736] text-white' : 'bg-[#ebebeb] text-[#6A7586]'
                                       }`}>
-                                    <span>{key.toUpperCase()}</span>
+                                    <span>{key.replace(/s$/, '').toUpperCase()}</span>
                                   </button>
                                 </Link>
                               ))}
