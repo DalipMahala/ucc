@@ -322,7 +322,7 @@ export default function MoreInfo({
                         <p className="text-[14px] md:mb-4 mb-1 text-[#272B47] font-medium">
                           <span className="text-[14px] text-[#757A82]">
                             Date : </span>
-                          {matchData?.match_info?.date_start_ist}
+                          {format(new Date(matchData?.match_info?.date_start_ist), "dd MMM, yyyy hh:mm a")}
                         </p>
                         <p className="text-[14px] text-[#272B47] font-medium">
                           <span className="text-[14px] text-[#757A82]">

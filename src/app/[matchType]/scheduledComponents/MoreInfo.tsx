@@ -331,7 +331,7 @@ export default function MoreInfo({
                     <div>
                       <h3 className="text-[15px] font-medium">Date :</h3>
                       <p className="font-normal text-[#586577]">
-                        {matchData?.match_info?.date_start_ist}
+                      {format(new Date(matchData?.match_info?.date_start_ist), "dd MMM, yyyy hh:mm a")}
                       </p>
                     </div>
                     <div>
@@ -1245,7 +1245,7 @@ export default function MoreInfo({
                     <h2 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                       Weather Condition
                     </h2>
-                    <p className="text-[12px]"><span> Last Updated : </span> <span>{format(new Date(), "dd MMM, yyyy hh:ii a")}</span></p>
+                    <p className="text-[12px]"><span> Last Updated : </span> <span>{format(new Date(), "dd MMM, yyyy hh:mm a")}</span></p>
                   </div>
                   <div className="border-t-[1px] border-[#E4E9F0]" />
                   <div className="flex lg:grid md:grid-cols-12 justify-between md:gap-4 items-center py-3">
