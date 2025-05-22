@@ -968,7 +968,7 @@ export default function ScheduleResults({
                               </p>
                               </div>
                               <div className="flex justify-between items-center text-[14px]">
-                                <div className="w-[100%]">
+                                <div className="w-[68%]">
                                   <div className="items-center space-x-2 font-medium md:w-full mb-4">
                                     <div className="flex items-center space-x-2">
                                       <Image loading="lazy"
@@ -1027,7 +1027,7 @@ export default function ScheduleResults({
                                   </div>
                                 </div>
 
-                                <div className="h-[100px] border-l-[1px] border-[#efefef]"></div>
+                                
 
                                 <div className=" w-[50%] font-semibold flex flex-col items-center">
                                   <Image loading="lazy"
