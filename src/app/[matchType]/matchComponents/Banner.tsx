@@ -204,7 +204,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
 
                 <div className="text-[#8192B4] font-normal w-[30%] text-center md:my-0 my-4 flex gap-2 items-center justify-center">
-                  <p className="text-[#00a632] lg:text-[22px] text-[16px] font-semibold uppercase">
+                  <h1 className="text-[#00a632] lg:text-[22px] text-[16px] font-semibold uppercase">
                     {updateStatusNoteDirect(liveMatch?.match_info)}
                     {(liveMatch?.match_info?.result_type === 1 || liveMatch?.match_info?.result_type === 2) &&
                       <Image
@@ -217,7 +217,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                         loading="lazy"
                       />
                     }
-                  </p>
+                  </h1>
                 </div>
 
 
@@ -279,7 +279,7 @@ export default function Banner({ matchData, match_id }: Banner) {
               <div className="md:hidden py-3">
 
 
-                <div className="flex justify-between items-end">
+                <div className="flex justify-between items-center">
 
 
                   <div className="flex gap-3 flex-row text-[#BDCCECA8] uppercase items-center w-[47%]">
@@ -299,7 +299,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                         {liveMatch?.match_info?.teama?.short_name}
                       </p>
                       <p
-                        className={`${(liveMatch?.match_info?.teama?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] font-semibold md:text-[20px]" : "text-[#BDCCECA8] md:text-[20px] text-[16px] font-semibold uppercase"}
+                        className={`${(liveMatch?.match_info?.teama?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] font-semibold md:text-[20px]" : "text-[#BDCCECA8] md:text-[20px]  font-semibold uppercase"}
                       "matchinfo"${match_id}"-"${liveMatch?.match_info?.teama?.team_id}
                       `}
                       >
@@ -345,7 +345,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                         {liveMatch?.match_info?.teamb?.short_name}
                       </p>
                       <p
-                        className={`${(liveMatch?.match_info?.teamb?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] font-semibold md:text-[20px]" : "text-[#BDCCECA8] md:text-[20px] text-[16px] font-semibold uppercase"}
+                        className={`${(liveMatch?.match_info?.teamb?.team_id === liveMatch?.match_info?.winning_team_id) ? " text-[#ffffff] font-semibold md:text-[20px]" : "text-[#BDCCECA8] md:text-[20px] font-semibold uppercase"}
                         "matchinfo"${match_id}"-"${liveMatch?.match_info?.teamb?.team_id}
                         `}
                       >
@@ -396,7 +396,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
 
                 <div className="text-[#8192B4] font-normal text-center mt-9 mb-2 flex gap-2 items-center justify-center">
-                  <p className="text-[#00a632] text-[14px] font-semibold uppercase">
+                  <h1 className="text-[#00a632] text-[14px] font-semibold uppercase">
                     {updateStatusNoteDirect(liveMatch?.match_info)} {(liveMatch?.match_info?.result_type === 1 || liveMatch?.match_info?.result_type === 2) &&
                       <Image
                         src="/assets/img/home/win.png"
@@ -408,7 +408,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                         loading="lazy"
                       />
                     }
-                  </p>
+                  </h1>
                 </div>
 
 
@@ -827,8 +827,8 @@ export default function Banner({ matchData, match_id }: Banner) {
 
 
                 <div className="text-[#8192B4] font-normal w-[30%] text-center h-[37px]">
-                  <p className="text-[#C1CEEA] text-1xl">
-                    {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "hh:mm:aa") : ""}  </p>
+                  <h1 className="text-[#C1CEEA] text-1xl">
+                    {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "hh:mm:aa") : ""}  </h1>
 
                   {liveMatch?.match_info?.date_start_ist ? isSameDay(new Date(), new Date(liveMatch?.match_info?.date_start_ist)) ? (
 
@@ -894,7 +894,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
 
                 <div className="text-[#8192B4] font-normal w-[50%] text-center">
-                  <p className="text-[#C1CEEA] text-[13px]"> {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "hh:mm:aa") : ""}  </p>
+                  <h1 className="text-[#C1CEEA] text-[13px]"> {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "hh:mm:aa") : ""}  </h1>
 
                   {liveMatch?.match_info?.date_start_ist ? isSameDay(new Date(), new Date(liveMatch?.match_info?.date_start_ist)) ? (
 

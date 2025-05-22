@@ -128,7 +128,7 @@ export default function ScheduleResults({
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
-      <TabMenu urlString={urlString} isPointTable={isPointTable}  status={status}/>
+      <TabMenu urlString={urlString} isPointTable={isPointTable} status={status} />
       <div id="live" className="">
         <div className="md:grid grid-cols-12 gap-4 mb-4">
           <div className="lg:col-span-8 md:col-span-7">
@@ -432,7 +432,7 @@ export default function ScheduleResults({
                           </div>
 
                           {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                            <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title+ "-head-to-head-in-ipl" : items?.title + "-head-to-head-in-" + items?.format_str)).toLowerCase()}>
+                            <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title + "-head-to-head-in-ipl" : items?.title + "-head-to-head-in-" + items?.format_str)).toLowerCase()}>
 
                               <div className="flex justify-end items-center space-x-2">
                                 <Image loading="lazy"
@@ -647,7 +647,7 @@ export default function ScheduleResults({
                                   <div className="h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                                 </>}
                               {items?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(items.format_str) &&
-                                <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title+ "-head-to-head-in-ipl" : items?.title + "-head-to-head-in-" + items?.format_str)).toLowerCase()}>
+                                <Link href={("/h2h/" + urlStringEncode(items?.competition?.title === 'Indian Premier League' ? items?.short_title + "-head-to-head-in-ipl" : items?.title + "-head-to-head-in-" + items?.format_str)).toLowerCase()}>
 
                                   <div className="flex justify-end items-center space-x-2">
                                     <Image loading="lazy"
@@ -725,8 +725,8 @@ export default function ScheduleResults({
                   {completedMatch && completedMatch?.map((cmatch: any, index: number) => (
                     <div key={index}>
                       <div className="lg:block hidden rounded-lg p-4 mb-4 bg-[#ffffff] hover:shadow-lg">
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="flex items-center space-x-2">
+                        <div className="flex items-center justify-between mb-4 w-full">
+                          <div className="flex items-center space-x-2 w-[70%]">
                             <div
                               className="flex items-center text-[13px] text-[#0B773C] rounded-full pr-3 uppercase  font-semibold"
                               style={{ gap: "3px" }}
@@ -741,6 +741,8 @@ export default function ScheduleResults({
                               </h2>
                             </div>
                           </div>
+
+                          <p className="w-[30%] text-colorSecound text-[12px] font-medium text-right">{cmatch?.date_start_ist ? format(new Date(cmatch?.date_start_ist), "dd MMM, yyyy, EEE, hh:mm:aa") + " IST" : ''} </p>
 
                         </div>
 
@@ -895,7 +897,7 @@ export default function ScheduleResults({
                           </div>
 
                           {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
-                            <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title+ "-head-to-head-in-ipl" : cmatch?.title + "-head-to-head-in-" + cmatch?.format_str)).toLowerCase()}>
+                            <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title + "-head-to-head-in-ipl" : cmatch?.title + "-head-to-head-in-" + cmatch?.format_str)).toLowerCase()}>
 
                               <div className="flex mt-2 justify-end items-center space-x-2">
                                 <Image loading="lazy"
@@ -957,9 +959,14 @@ export default function ScheduleResults({
                             }
                           >
                             <div className="py-2 pb-3">
-                              <p className="text-colorSecound text-[11px] mb-4 font-normal">
+                              <div className="flex justify-between items-end mb-4 w-full">
+                              <p className="text-colorSecound text-[11px] font-normal w-[54%]">
                                 {cmatch.subtitle} ,{cmatch.format_str}, {cmatch.venue.location}
                               </p>
+                              <p className="text-colorSecound text-[11px] font-normal w-[46%] text-right">
+                                {cmatch?.date_start_ist ? format(new Date(cmatch?.date_start_ist), "dd MMM, yyyy, EEE, hh:mm:aa") + " IST" : ''}
+                              </p>
+                              </div>
                               <div className="flex justify-between items-center text-[14px]">
                                 <div className="w-[100%]">
                                   <div className="items-center space-x-2 font-medium md:w-full mb-4">
@@ -1053,10 +1060,10 @@ export default function ScheduleResults({
                                     </p>
                                   </Link>
 
-                                 
+
                                 </>}
                               {cmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(cmatch.format_str) &&
-                                <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title+ "-head-to-head-in-ipl" : cmatch?.title + "-head-to-head-in-" + cmatch?.format_str)).toLowerCase()}>
+                                <Link href={("/h2h/" + urlStringEncode(cmatch?.competition?.title === 'Indian Premier League' ? cmatch?.short_title + "-head-to-head-in-ipl" : cmatch?.title + "-head-to-head-in-" + cmatch?.format_str)).toLowerCase()}>
 
                                   <div className="pl-[10px] border-l-[1px] border-[#d0d3d7] flex justify-end items-center space-x-2">
                                     <Image loading="lazy"
@@ -1283,7 +1290,7 @@ export default function ScheduleResults({
                           </div>
 
                           {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                            <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title+ "-head-to-head-in-ipl" : ucmatch?.title + "-head-to-head-in-" + ucmatch?.format_str)).toLowerCase()}>
+                            <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title + "-head-to-head-in-ipl" : ucmatch?.title + "-head-to-head-in-" + ucmatch?.format_str)).toLowerCase()}>
 
                               <div className="flex mt-2 justify-end items-center space-x-2">
                                 <Image loading="lazy"
@@ -1432,10 +1439,10 @@ export default function ScheduleResults({
                                     Points Table
                                   </p>
                                 </Link>
-                                
+
                               </>}
                             {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                              <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title+ "-head-to-head-in-ipl" : ucmatch?.title + "-head-to-head-in-" + ucmatch?.format_str)).toLowerCase()}>
+                              <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title + "-head-to-head-in-ipl" : ucmatch?.title + "-head-to-head-in-" + ucmatch?.format_str)).toLowerCase()}>
 
                                 <div className="pl-[10px] border-l-[1px] flex justify-end items-center space-x-2">
                                   <Image loading="lazy"

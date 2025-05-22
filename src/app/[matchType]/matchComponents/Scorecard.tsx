@@ -138,22 +138,6 @@ export default function Scorecard({
                 </button>
               ))}
           </div>
-          <div className="cust-box-click-content cust-box-click-ind1stinning mt-4">
-            <div className="md:grid grid-cols-12 gap-4">
-              <div className="lg:col-span-8 md:col-span-7">
-                <div className="rounded-lg bg-[#ffffff] mb-4 p-4">
-                  <div className="flex justify-between items-center text-[15px]">
-                    <div className="">
-                      <h2 className="mx-2 font-semibold">Total Score</h2>
-                    </div>
-                    <div className="">
-                      <p className="mx-2 font-semibold ">
-                        {" "}
-                        {matchscorecard?.[tabIndex]?.equations?.runs}-{matchscorecard?.[tabIndex]?.equations?.wickets} <span className="text-[#586577]">({matchscorecard?.[tabIndex]?.equations?.overs})</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
 
 
                 {manOfTheMatch?.pid !== undefined &&
@@ -186,7 +170,27 @@ export default function Scorecard({
                 }
 
 
-                <div className="rounded-lg bg-[#ffffff] mb-4 p-4">
+
+          <div className="cust-box-click-content cust-box-click-ind1stinning mt-4">
+            <div className="md:grid grid-cols-12 gap-4">
+              <div className="lg:col-span-8 md:col-span-7">
+                <div className="rounded-t-lg bg-[#ffffff] border-b-[1px] p-4">
+                  <div className="flex justify-between items-center text-[15px]">
+                    <div className="">
+                      <h2 className="mx-2 font-semibold">Total Score</h2>
+                    </div>
+                    <div className="">
+                      <p className="mx-2 font-semibold ">
+                        {" "}
+                        {matchscorecard?.[tabIndex]?.equations?.runs}-{matchscorecard?.[tabIndex]?.equations?.wickets} <span className="text-[#586577]">({matchscorecard?.[tabIndex]?.equations?.overs})</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div className="rounded-b-lg bg-[#ffffff] mb-4 p-4">
                   <h2 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Batting
                   </h2>
