@@ -66,6 +66,8 @@ export default function Banner({ playerStats, ranking }: Banner) {
       )?.rank ?? "";
   }
 
+  const [first, rest] = profile?.first_name.split(/ (.+)/);
+
   return (
 
     <section
@@ -118,7 +120,7 @@ export default function Banner({ playerStats, ranking }: Banner) {
 
             <h1 className="text-[24px] font-medium mb-3 text-start md:block hidden">{profile?.first_name}</h1>
 
-            <h1 className="text-[24px] font-medium text-start md:hidden min-h-[70px] leading-[26px]"><span className='text-[16px]'> {profile?.first_name} </span> <br /> {profile?.first_name} </h1>
+            <h1 className="text-[24px] font-medium text-start md:hidden min-h-[70px] leading-[26px]"><span className='text-[16px]'> {first} </span> <br /> {rest} </h1>
 
 
             <div className="lg:flex items-center lg:space-x-5">

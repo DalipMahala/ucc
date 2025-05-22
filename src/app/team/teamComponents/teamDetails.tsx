@@ -29,6 +29,16 @@ interface Team {
 //   const matchData = teamLast5match;
 //   const upcomingMatch = teamUpcomingMatch;
 
+function matchOddsCal(data: any) {
+  if (!data) return;
+
+  const a = parseFloat(data?.live_odds?.matchodds?.teama?.back || 0);
+  const b = parseFloat(data?.live_odds?.matchodds?.teamb?.back || 0);
+  const lesserTeam = a < b 
+    ? { matchId: data?.match_id,team: data?.teama?.short_name, ...data?.live_odds?.matchodds?.teama } 
+    : { matchId: data?.match_id,team: data?.teamb?.short_name, ...data?.live_odds?.matchodds?.teamb };
+    return lesserTeam;
+}
 export default function Team({
   teamLast5match = [],
   teamDetails = null,
@@ -434,7 +444,7 @@ export default function Team({
                           </div>
                         </div>
                         <div className="flex items-center space-x-2 ">
-                          <span className="text-[13px] font-medium text-[#1F2937]">AUS</span>
+                          <span className="text-[13px] font-medium text-[#1F2937]">{matchOddsCal(ucmatch)?.team}</span>
                           <span className="flex font-semibold items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
                             <span className="">
                               <svg
@@ -452,7 +462,7 @@ export default function Team({
                                 />
                               </svg>
                             </span>
-                            0
+                            {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100)  : 0}
                           </span>
                           <span className="flex font-semibold items-center bg-[#FFF7F7] border-[1px] border-[#A70B0B]  rounded-full text-[#A70B0B] pr-2">
                             <span className="">
@@ -471,7 +481,7 @@ export default function Team({
                                 />
                               </svg>
                             </span>
-                            0
+                            {matchOddsCal(ucmatch)?.lay > 0 ? Math.round((matchOddsCal(ucmatch)?.lay) * 100 - 100)  : 0}
                           </span>
                         </div>
                       </div>
