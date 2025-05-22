@@ -93,6 +93,10 @@ export default function H2hipl({
   const teambWon = totalMatches > 0 ?
     Math.round((teamDetails?.teamb_won_match || 0) * 100 / totalMatches) : 0;
 
+  const firstTeam  = teamDetails?.teama_won_match > teamDetails?.teamb_won_match ? teamADetails?.title : teamBDetails?.title;
+  const secondTeam  = teamDetails?.teama_won_match > teamDetails?.teamb_won_match ? teamBDetails?.title : teamADetails?.title;
+  const firstTeamWin  = teamDetails?.teama_won_match > teamDetails?.teamb_won_match ? teamDetails?.teama_won_match : teamDetails?.teamb_won_match;
+  const secondTeamWin  = teamDetails?.teama_won_match > teamDetails?.teamb_won_match ? teamDetails?.teamb_won_match : teamDetails?.teama_won_match;
   // Safe URL parsing
   const matchType = urlStrings?.split('-').pop() || 'test';
   const urlWithoutMatchType = urlStrings?.split('-').slice(0, -1).join('-') || '';
@@ -103,7 +107,7 @@ export default function H2hipl({
   } else if (matchType === 'odi') {
     content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. In ODIs, ${teamADetails?.title} and ${teamBDetails?.title} have met in ${totalMatches} matches, where ${teamADetails?.title} have won ${teamDetails?.teama_won_match} and ${teamBDetails?.title} have managed ${teamDetails?.teamb_won_match} wins, while ${teamDetails?.nr_match} match ended with no result.`
   } else if (matchType === 'ipl') {
-    content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. When it comes to IPL internationals, out of ${totalMatches} clashes, ${teamADetails?.title} lead with ${teamDetails?.teama_won_match} wins, and ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match} matches so far.`
+    content = `${firstTeam} and ${secondTeam} have built a competitive rivalry over the years in the Indian Premier League (IPL). In total, they have faced each other ${totalMatches} times in the IPL. Out of these encounters, ${firstTeam} have had the upper hand with ${firstTeamWin} wins, while ${secondTeam} have managed to win ${secondTeamWin} matches. Both teams have delivered some thrilling contests, including high-scoring chases and dramatic finishes.`
   } else {
     content = `${teamADetails?.title} and ${teamBDetails?.title} have developed a competitive rivalry across all formats of international cricket. When it comes to T20 internationals, out of ${totalMatches} clashes, ${teamADetails?.title} lead with ${teamDetails?.teama_won_match} wins, and ${teamBDetails?.title} have won ${teamDetails?.teamb_won_match} matches so far.`
   }
