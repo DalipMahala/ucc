@@ -334,6 +334,55 @@ export default function MoreInfo({
                   </div>
                 </div>
 
+
+
+
+
+                {matchData?.match_info?.status_str !== 'Completed' ? (
+
+
+                  ""
+
+                ) : (
+                  manOfTheMatch?.pid !== undefined &&
+                  <div className="rounded-lg bg-[#ffffff] my-4 md:hidden">
+                    <div className="p-4"><Link href={"/player/" + playerUrls[manOfTheMatch?.pid]}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3 md:py-3">
+                          <div>
+
+                            <PlayerImage key={manOfTheMatch?.pid} player_id={manOfTheMatch?.pid} height={50} width={50} className="rounded-lg" />
+                          </div>
+                          <div className="font-medium">
+                            <h2 className="text-1xl font-semibold hover:text-[#1a80f8]">{manOfTheMatch?.name}</h2>
+                            <p className="text-[#6A7586] font-normal"> Man of the match </p>
+                          </div>
+                        </div>
+                        <Image
+                          src="/assets/img/home/win.png"
+                          width={26}
+                          height={30}
+                          style={{ width: "26px", height: "30px" }}
+                          alt=""
+                          loading="lazy"
+                        />
+                      </div>
+                    </Link></div>
+                  </div>
+
+                )}
+
+
+
+
+
+
+
+
+
+
+
+
                 <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                   <div>
                     <h2 className="text-[15px] font-semibold pl-[7px] border-l-[3px] mb-3 border-[#229ED3]">
@@ -349,16 +398,16 @@ export default function MoreInfo({
                         >
 
                           <div className="flex items-center space-x-3">
-                            
-                              <Image
-                                loading="lazy"
-                                src={matchData?.match_info?.teama?.logo_url}
-                                className="h-[25px]"
-                                width={25}
-                                height={20}
-                                alt={matchData?.match_info?.teama?.name}
-                              />
-                           
+
+                            <Image
+                              loading="lazy"
+                              src={matchData?.match_info?.teama?.logo_url}
+                              className="h-[25px]"
+                              width={25}
+                              height={20}
+                              alt={matchData?.match_info?.teama?.name}
+                            />
+
                             <h3 className="md:block hidden text-1xl font-medium">
                               {matchData?.match_info?.teama?.name}
                             </h3>
@@ -369,57 +418,57 @@ export default function MoreInfo({
 
                           </div>
 
-                       
-                            <div className="ml-auto flex gap-1 items-center">
-                              {matchlistA && matchlistA
-                                .slice(0, 5)
-                                .map(
-                                  (items: {
-                                    match_id: number | undefined;
-                                    winning_team_id: number;
-                                  }) =>
-                                    items.winning_team_id === teama_id ? (
-                                      <span
-                                        key={items.match_id}
-                                        className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center"
-                                      >
-                                        W
-                                      </span>
-                                    ) : (
-                                      <span
-                                        key={items.match_id}
-                                        className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center"
-                                      >
-                                        L
-                                      </span>
-                                    )
-                                )}
 
-                              <span>
-                                <button
-                                  className={`transform transition-transform ${openHeading === 1
-                                    ? "rotate-180"
-                                    : "rotate-0"
-                                    }`}
+                          <div className="ml-auto flex gap-1 items-center">
+                            {matchlistA && matchlistA
+                              .slice(0, 5)
+                              .map(
+                                (items: {
+                                  match_id: number | undefined;
+                                  winning_team_id: number;
+                                }) =>
+                                  items.winning_team_id === teama_id ? (
+                                    <span
+                                      key={items.match_id}
+                                      className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center"
+                                    >
+                                      W
+                                    </span>
+                                  ) : (
+                                    <span
+                                      key={items.match_id}
+                                      className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center"
+                                    >
+                                      L
+                                    </span>
+                                  )
+                              )}
+
+                            <span>
+                              <button
+                                className={`transform transition-transform ${openHeading === 1
+                                  ? "rotate-180"
+                                  : "rotate-0"
+                                  }`}
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth={1.5}
+                                  stroke="currentColor"
+                                  className="w-5 h-5 text-gray-600"
                                 >
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    stroke="currentColor"
-                                    className="w-5 h-5 text-gray-600"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      d="M19.5 12l-7.5 7.5L4.5 12"
-                                    />
-                                  </svg>
-                                </button>
-                              </span>
-                            </div>
-                          
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M19.5 12l-7.5 7.5L4.5 12"
+                                  />
+                                </svg>
+                              </button>
+                            </span>
+                          </div>
+
                         </div>
 
                         <div className="border-t-[1px] border-[#E4E9F0]" />
@@ -593,76 +642,76 @@ export default function MoreInfo({
                             onClick={() => handleToggle(2)}
                           >
                             <div className="flex items-center space-x-3">
-                              
-                                <Image
-                                  loading="lazy"
-                                  src={matchData?.match_info?.teamb?.logo_url}
-                                  width={25}
-                                  height={25}
-                                  alt={matchData?.match_info?.teamb?.name}
-                                  className="h-[25px]"
-                                />
-                             
+
+                              <Image
+                                loading="lazy"
+                                src={matchData?.match_info?.teamb?.logo_url}
+                                width={25}
+                                height={25}
+                                alt={matchData?.match_info?.teamb?.name}
+                                className="h-[25px]"
+                              />
+
 
                               <h3 className="md:block hidden text-1xl font-medium">
-                                {matchData?.match_info?.teamb?.name }
+                                {matchData?.match_info?.teamb?.name}
                               </h3>
-                              
+
                               <h3 className="md:hidden text-1xl font-medium">
                                 {matchData?.match_info?.teamb?.short_name}
                               </h3>
 
                             </div>
-                           
-                              <div className="ml-auto flex gap-1 items-center">
-                                {matchlistB && matchlistB
-                                  .slice(0, 5)
-                                  .map(
-                                    (items: {
-                                      match_id: number;
-                                      winning_team_id: any;
-                                    }) =>
-                                      items.winning_team_id === teamb_id ? (
-                                        <span
-                                          key={items.match_id}
-                                          className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center"
-                                        >
-                                          W
-                                        </span>
-                                      ) : (
-                                        <span
-                                          key={items.match_id}
-                                          className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center"
-                                        >
-                                          L
-                                        </span>
-                                      )
-                                  )}
-                                <span>
-                                  <button
-                                    className={`transform transition-transform ${openHeading === 2
-                                      ? "rotate-180"
-                                      : "rotate-0"
-                                      }`}
+
+                            <div className="ml-auto flex gap-1 items-center">
+                              {matchlistB && matchlistB
+                                .slice(0, 5)
+                                .map(
+                                  (items: {
+                                    match_id: number;
+                                    winning_team_id: any;
+                                  }) =>
+                                    items.winning_team_id === teamb_id ? (
+                                      <span
+                                        key={items.match_id}
+                                        className="bg-[#13B76D] text-white text-[13px] px-[6px] py-[3px] rounded w-[24px] text-center"
+                                      >
+                                        W
+                                      </span>
+                                    ) : (
+                                      <span
+                                        key={items.match_id}
+                                        className="bg-[#F63636] text-white text-[13px] px-[7px] py-[3px] rounded w-[24px] text-center"
+                                      >
+                                        L
+                                      </span>
+                                    )
+                                )}
+                              <span>
+                                <button
+                                  className={`transform transition-transform ${openHeading === 2
+                                    ? "rotate-180"
+                                    : "rotate-0"
+                                    }`}
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-5 h-5 text-gray-600"
                                   >
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      strokeWidth={1.5}
-                                      stroke="currentColor"
-                                      className="w-5 h-5 text-gray-600"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M19.5 12l-7.5 7.5L4.5 12"
-                                      />
-                                    </svg>
-                                  </button>
-                                </span>
-                              </div>
-                           
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      d="M19.5 12l-7.5 7.5L4.5 12"
+                                    />
+                                  </svg>
+                                </button>
+                              </span>
+                            </div>
+
                           </div>
                           <div className="border-t-[1px] border-[#E4E9F0]" />
                         </div>
@@ -1500,7 +1549,7 @@ export default function MoreInfo({
                             Win Bat first{" "}
                           </p>
                           <p className="text-[#00a632] font-semibold text-1xl">
-                            {!isNaN(matchVenueStats?.first_batting_match_won) ? matchVenueStats?.first_batting_match_won : 0 }%
+                            {!isNaN(matchVenueStats?.first_batting_match_won) ? matchVenueStats?.first_batting_match_won : 0}%
                           </p>
                         </div>
                         <div className="flex items-center space-x-8">
@@ -1788,14 +1837,15 @@ export default function MoreInfo({
 
                 ) : (
                   manOfTheMatch?.pid !== undefined &&
-                  <div className="rounded-lg bg-[#ffffff] mb-4">
-                    <div className="p-4"><Link href={"/player/" + playerUrls[manOfTheMatch?.pid]}>
+                  <div className="rounded-lg bg-[#ffffff] mb-4 md:block hidden">
+                    <div className="p-4">
+                      <Link href={"/player/" + playerUrls[manOfTheMatch?.pid]}>
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3 md:py-3">
-                          <div>
+                        <div className="flex items-center space-x-3 ">
+                          
 
                             <PlayerImage key={manOfTheMatch?.pid} player_id={manOfTheMatch?.pid} height={50} width={50} className="rounded-lg" />
-                          </div>
+                          
                           <div className="font-medium">
                             <h2 className="text-1xl font-semibold hover:text-[#1a80f8]">{manOfTheMatch?.name}</h2>
                             <p className="text-[#6A7586] font-normal"> Man of the match </p>

@@ -108,7 +108,7 @@ export default function Team({ ranking, iccRankingName, iccRankingType, iccRanki
                     : 'text-white/70'
                     }`}
                 >
-               <span> <GrUserManager /> </span> <span> Men's </span>
+                  <span> <GrUserManager /> </span> <span> Men's </span>
                 </button>
               </Link>
 
@@ -119,7 +119,7 @@ export default function Team({ ranking, iccRankingName, iccRankingType, iccRanki
                     : 'text-white/70'
                     }`}
                 >
-              <span><GrUserFemale /></span>  <span>  Women's </span>
+                  <span><GrUserFemale /></span>  <span>  Women's </span>
                 </button>
               </Link>
             </div>
@@ -261,11 +261,28 @@ export default function Team({ ranking, iccRankingName, iccRankingType, iccRanki
                                   <td className="py-2 px-3 font-medium text-[#3d3d3d]">
                                     {iccRankingType !== 'team' ?
 
-                                      <Link href={"/player/" + playerUrls[rankDetails.pid]}> {rankDetails.player} </Link>
+                                      <Link href={"/player/" + playerUrls[rankDetails.pid]}>
+
+                                        <div className='flex space-x-2 bg-[#ffffff] items-center'>
+                                           <PlayerImage key={rankDetails?.pid} player_id={rankDetails.pid} height={33} width={33} className="w-[33px] h-[33px] rounded-lg" />
+                                          <span> {rankDetails.player}  </span>
+                                        </div>
+
+                                      </Link>
                                       :
-                                       <Link href={"/team/" + urlStringEncode(rankDetails.team) + "/" + rankDetails.tid}> {rankDetails.team} </Link>
-                                        
-                                      }
+                                      <Link href={"/team/" + urlStringEncode(rankDetails.team) + "/" + rankDetails.tid}>
+                                        <div className='flex space-x-2 bg-[#ffffff] items-center'>
+                                          <Image loading="lazy"
+                                            src={rankDetails.logo_url}
+                                            width={20} height={20} alt="Player"
+                                            className="w-[20px] h-[20px] rounded-lg"
+                                          />
+                                          <span> {rankDetails.team} </span>
+                                        </div>
+
+                                      </Link>
+
+                                    }
                                   </td>
 
 

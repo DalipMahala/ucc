@@ -154,6 +154,38 @@ export default function Scorecard({
                     </div>
                   </div>
                 </div>
+
+
+                {manOfTheMatch?.pid !== undefined &&
+                  <div className="rounded-lg bg-[#ffffff] mb-4 md:hidden">
+                    <div className="p-4"><Link href={"/player/" + playerUrls[manOfTheMatch?.pid]}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3 ">
+                          <div>
+
+                            <PlayerImage key={manOfTheMatch?.pid} player_id={manOfTheMatch?.pid} height={50} width={50} className="rounded-lg" />
+
+                          </div>
+                          <div className="font-medium">
+                            <h2 className="text-1xl font-semibold hover:text-[#1a80f8]">{manOfTheMatch?.name}</h2>
+                            <p className="text-[#6A7586] font-normal"> Man of the match </p>
+                          </div>
+                        </div>
+                        <Image
+                          src="/assets/img/home/win.png"
+                          width={26}
+                          height={30}
+                          style={{ width: "26px", height: "30px" }}
+                          alt=""
+                          loading="lazy"
+                        />
+                      </div>
+                    </Link>
+                    </div>
+                  </div>
+                }
+
+
                 <div className="rounded-lg bg-[#ffffff] mb-4 p-4">
                   <h2 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Batting
@@ -275,15 +307,15 @@ export default function Scorecard({
                           Yet to bat
                         </h2>
                         <div className="border-t-[1px] border-[#E4E9F0]" />
-                        <div className="grid grid-cols-2 md:grid-cols-1">
+                        <div className="grid grid-cols-2 md:grid-cols-1 md:gap-0 gap-2">
                           {yetTobat?.map((yetTobat: any, index: number) => (
                             <div className='col-span-1'>
                               <Link href={"/player/" + playerUrls[yetTobat.player_id]} className='' key={index}>
-                                <div className="flex items-center space-x-3 py-3 border-b-[1px] border-border-gray-700">
+                                <div className="flex items-center gap-3 py-3 border-b-[1px] border-border-gray-700">
                                   <div style={{ width: '40px', height: '40px' }}>
                                     <PlayerImage key={yetTobat?.player_id} player_id={yetTobat.player_id} width={35} height={35} className="rounded-lg" />
                                   </div>
-                                  <div className="font-medium">
+                                  <div className="font-medium md:w-full w-[65%]">
                                     <h3 className="text-[15px] hover:text-[#1a80f8]">{yetTobat.name} </h3>
                                     <p className="text-[#757A82] font-normal">{getPlayerRecord(allPlayers, Number(yetTobat.player_id))}</p>
                                   </div>
@@ -432,9 +464,9 @@ export default function Scorecard({
               </div>
 
               <div className="lg:col-span-4 md:col-span-5">
-                {manOfTheMatch?.pid !== undefined &&
 
-                  <div className="rounded-lg bg-[#ffffff] mb-4">
+                {manOfTheMatch?.pid !== undefined &&
+                  <div className="rounded-lg bg-[#ffffff] mb-4 hidden md:block">
                     <div className="p-4"><Link href={"/player/" + playerUrls[manOfTheMatch?.pid]}>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3 ">
@@ -460,7 +492,6 @@ export default function Scorecard({
                     </Link>
                     </div>
                   </div>
-
                 }
 
                 <div className='md:block hidden'>
