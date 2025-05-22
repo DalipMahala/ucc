@@ -160,21 +160,21 @@ export default async function ForYouMatches() {
                     </span>{" "}
                     {items?.game_state_str === 'Play Ongoing' ? items?.status_str : items?.game_state_str}
                   </div>
-                  <div>
+                 
                     <Link href={"/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) + "/" + items.competition.cid}  >
                       <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                         {items.competition.title} -{" "}
                         {items.competition.season}
                       </h2>
                     </Link>
-                  </div>
+                 
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className={"text-[13px] font-medium oddsTeam" + items.match_id}>
                     {matchOddsCal(items)?.team}
                   </span>
                   <span className="flex items-center bg-[#FAFFFC] border-[1px] border-accent rounded-full text-accent pr-2">
-                    <span className="">
+                   
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -189,14 +189,14 @@ export default async function ForYouMatches() {
                           d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18"
                         />
                       </svg>
-                    </span>
+                   
                     <span className={"oddback" + items.match_id}>
                       {matchOddsCal(items)?.back > 0 ? Math.round((matchOddsCal(items)?.back) * 100 - 100) : 0}
                       {/* {items?.live_odds?.matchodds?.teama?.back > 0  ? Math.round((items?.live_odds?.matchodds?.teama?.back)*100-100) : 0} */}
                     </span>
                   </span>
                   <span className="flex items-center bg-[#FFF7F7] border-[1px] border-secondary  rounded-full text-secondary pr-2">
-                    <span className="">
+                   
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -211,7 +211,7 @@ export default async function ForYouMatches() {
                           d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3"
                         />
                       </svg>
-                    </span>
+                   
                     <span className={"oddlay" + items.match_id}>
                       {matchOddsCal(items)?.lay > 0 ? Math.round((matchOddsCal(items)?.lay) * 100 - 100) : 0}
                       {/* {items?.live_odds?.matchodds?.teama?.lay > 0 ? Math.round((items?.live_odds?.matchodds?.teama?.lay)*100-100) : 0} */}
@@ -409,14 +409,14 @@ export default async function ForYouMatches() {
                     </span>
                     {items.game_state_str === 'Play Ongoing' ? items.status_str : items.game_state_str}
                   </div>
-                  <div>
+                 
                     <Link href={"/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) + "/" + items.competition.cid}  >
                       <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                         {items.competition.abbr} -{" "}
                         {items.competition.season}
                       </h2>
                     </Link>
-                  </div>
+                  
 
                 </div>
               </div>
@@ -442,12 +442,12 @@ export default async function ForYouMatches() {
                               loading="lazy"
                             />
                             <div>
-                              <span className="flex items-center gap-1">
+                              
                                 <span className="text-[#5e5e5e] font-medium text-[14px]">
                                   {items.teama.short_name}
                                 </span>
 
-                              </span>
+                             
 
                               <p className={
                                 "flex items-baseline gap-2 match" +
@@ -479,7 +479,7 @@ export default async function ForYouMatches() {
                           </div>
                         </div>
 
-                        <div>
+                       
                           <div className="flex items-center space-x-2 font-medium md:w-full">
                             <div className="flex items-center space-x-2">
                               <Image
@@ -525,7 +525,7 @@ export default async function ForYouMatches() {
                               </div>
                             </div>
                           </div>
-                        </div>
+                       
                       </div>
 
                       <div className="h-[100px] border-l-[1px] border-[#f2fafd]"></div>
@@ -584,7 +584,7 @@ export default async function ForYouMatches() {
                       {matchOddsCal(items)?.team}
                     </span>
                     <span className="flex items-center bg-[#FAFFFC] border-[1px] border-accent rounded-md text-accent pr-2">
-                      <span className="">
+                      
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -599,14 +599,14 @@ export default async function ForYouMatches() {
                             d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18"
                           />
                         </svg>
-                      </span>
+                      
                       <span className={"oddback" + items.match_id}>
                         {matchOddsCal(items)?.back > 0 ? Math.round((matchOddsCal(items)?.back) * 100 - 100) : 0}
                         {/* {items?.live_odds?.matchodds?.teama?.back > 0  ? Math.round((items?.live_odds?.matchodds?.teama?.back)*100-100) : 0} */}
                       </span>
                     </span>
                     <span className="flex items-center bg-[#FFF7F7] border-[1px] border-secondary  rounded-md text-secondary pr-2">
-                      <span className="">
+                     
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -621,7 +621,7 @@ export default async function ForYouMatches() {
                             d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3"
                           />
                         </svg>
-                      </span>
+                    
                       <span className={"oddlay" + items.match_id}>
                         {matchOddsCal(items)?.lay > 0 ? Math.round((matchOddsCal(items)?.lay) * 100 - 100) : 0}
                         {/* {items?.live_odds?.matchodds?.teama?.lay > 0  ? Math.round((items?.live_odds?.matchodds?.teama?.lay)*100-100) : 0} */}
@@ -656,14 +656,14 @@ export default async function ForYouMatches() {
                     <div className="w-[8px] h-[8px] bg-colorFirst rounded-full animate-blink"></div>{" "}
                     {ucmatch.status_str}
                   </div>
-                  <div>
+                 
                     <Link href={"/series/" + urlStringEncode(ucmatch.competition.title + "-" + ucmatch.competition.season) + "/" + ucmatch.competition.cid}  >
                       <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                         {ucmatch.competition.title} -{" "}
                         {ucmatch.competition.season}
                       </h2>
                     </Link>
-                  </div>
+                 
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className={"text-[13px] font-medium text-[#1F2937] oddsTeam" + ucmatch.match_id}>
@@ -671,7 +671,7 @@ export default async function ForYouMatches() {
                   </span>
 
                   <span className="flex items-center bg-[#FAFFFC] border-[1px] border-accent rounded-full text-accent pr-2">
-                    <span className="">
+                   
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -686,11 +686,11 @@ export default async function ForYouMatches() {
                           d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18"
                         />
                       </svg>
-                    </span>
+                    
                     {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100) : 0}
                   </span>
                   <span className="flex items-center bg-[#FFF7F7] border-[1px] border-secondary  rounded-full text-secondary pr-2">
-                    <span className="">
+                   
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -705,7 +705,7 @@ export default async function ForYouMatches() {
                           d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3"
                         />
                       </svg>
-                    </span>
+                   
                     {matchOddsCal(ucmatch)?.lay > 0 ? Math.round((matchOddsCal(ucmatch)?.lay) * 100 - 100) : 0}
                   </span>
                 </div>
@@ -863,13 +863,11 @@ export default async function ForYouMatches() {
                               alt={ucmatch.teama.short_name}
                               loading="lazy"
                             />
-                            <div>
-                              <span className="flex items-center gap-1">
+                           
                                 <span className=" font-medium">
                                   {ucmatch?.teama?.name}
                                 </span>
-                              </span>
-                            </div>
+                             
                           </div>
                         </div>
                         <div className="flex items-center space-x-2 font-medium md:w-full">
@@ -882,13 +880,11 @@ export default async function ForYouMatches() {
                               alt={ucmatch?.teamb?.short_name}
                               loading="lazy"
                             />
-                            <div>
-                              <span className="flex items-center gap-1">
+                           
                                 <span className=" font-medium">
                                   {ucmatch?.teamb?.name}
                                 </span>
-                              </span>
-                            </div>
+                             
                           </div>
                         </div>
                       </div>
@@ -1025,14 +1021,14 @@ export default async function ForYouMatches() {
                     <div className="w-[8px] h-[8px] bg-accent rounded-full"></div>{" "}
                     {cmatch.status_str}
                   </div>
-                  <div>
+                  
                     <Link href={"/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) + "/" + cmatch.competition.cid}  >
                       <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                         {cmatch.competition.title} -{" "}
                         {cmatch.competition.season}
                       </h2>
                     </Link>
-                  </div>
+                  
                 </div>
 
               </div>
@@ -1187,14 +1183,14 @@ export default async function ForYouMatches() {
                   >
                     <div className="w-[6px] h-[6px] bg-accent rounded-full"></div> {cmatch.status_str}
                   </div>
-                  <div>
+                 
                     <Link href={"/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) + "/" + cmatch.competition.cid}  >
                       <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                         {cmatch.competition.abbr} -{" "}
                         {cmatch.competition.season}
                       </h2>
                     </Link>
-                  </div>
+                  
                   
                 </div>
               </div>
