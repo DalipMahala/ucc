@@ -25,7 +25,7 @@ class WebSocketService {
     console.log(`⌛ Connecting to WebSocket (attempt ${this.retryCount + 1})...`);
 
     this.ws = new WebSocket(
-      `ws://webhook.entitysport.com:8087/connect?token=${LIFETIME_TOKEN}`
+      `wss://api.uccricket.live/ws/connect?token=${LIFETIME_TOKEN}`
     );
 
     // Set connection timeout
@@ -172,6 +172,7 @@ class WebSocketService {
         updated_date = NOW()`,
       [matchId, fileName]
     );
+    console.log(`✅ Match data saved for ucc`);
   }
 }
 

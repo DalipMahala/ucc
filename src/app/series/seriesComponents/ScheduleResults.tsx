@@ -45,7 +45,7 @@ export default function ScheduleResults({
 
     function handleClick(event: Event) {
       const target = event.target as HTMLElement;
-      console.log("Clicked ID:", target.id);
+      // console.log("Clicked ID:", target.id);
 
       // Remove active styles from all tabs
       document.querySelectorAll("#all-tab, #live-tab, #completed-tab, #upcoming-tab").forEach((el) => {

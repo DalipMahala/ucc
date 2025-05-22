@@ -29,7 +29,7 @@ export default async function page(props: { params: Params }) {
   const playerProfile = await PlayerProfile(playerId,playerName);
   const ranking = await Ranking();
   const urlString = playerName+"/"+playerId;
-     console.log('params', params);
+    //  console.log('params', params);
 
   if (playerProfile.length <= 0 || playerName === 'undefined') {
       notFound();

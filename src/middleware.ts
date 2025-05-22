@@ -1,6 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(req: NextRequest) {
+
+  const url = req.nextUrl.pathname;
+
+  // Skip auth check for this specific API route
+  if (url === "/api/socket") {
+    return NextResponse.next();
+  }
+
   const authHeader = req.headers.get("Authorization");
 
   // Debugging: Log received authorization header

@@ -23,7 +23,7 @@ export default function PointsTable({
     isPointTable
   }: PointsTable) {
 
-    console.log("matchUC",seriesPointsTableMatches);
+    // console.log("matchUC",seriesPointsTableMatches);
     const matchDetails = matchData?.match_info;
         const pointTable = seriesPointsTable;
         // const cid = matchData?.match_info?.competition?.cid;
@@ -36,7 +36,7 @@ export default function PointsTable({
               match.teama.team_id === 128816 || match.teamb.team_id === 128816
           );
        
-        console.log("filteredItems",filteredMatches);
+        // console.log("filteredItems",filteredMatches);
         
         // console.log(pointTableMatches);
 

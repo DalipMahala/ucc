@@ -18,7 +18,7 @@ export default function SeriesList({ tournamentsList }: SeriesList) {
         (item: { total_teams: number }) => item.total_teams > 2
       );
 
-  console.log(seriesList);
+  // console.log(seriesList);
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 px-2 lg:px-0">
       <div className="md:grid grid-cols-12 gap-4">

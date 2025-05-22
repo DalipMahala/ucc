@@ -52,7 +52,7 @@ export default function SeriesList({ tournamentsList, tabName }: SeriesList) {
 
   seriesList = [...seriesList].sort((a, b) => ['live', 'fixture', 'result'].indexOf(a.status) - ['live', 'fixture', 'result'].indexOf(b.status) || new Date(a.datestart).getTime() - new Date(b.datestart).getTime());
 
-  console.log(filter);
+  // console.log(filter);
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 px-2 lg:px-0">
       <div className="md:grid grid-cols-12 gap-4">

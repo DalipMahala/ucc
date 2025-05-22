@@ -26,7 +26,8 @@ const nextConfig = {
       "fantasykhiladi.com",
       "flagcdn.com",
       "res.cloudinary.com",
-      "13.202.213.65"
+      "13.202.213.65",
+      "api.uccricket.live"
     ],
     formats: ['image/avif', 'image/webp'],
     loader: 'default',
