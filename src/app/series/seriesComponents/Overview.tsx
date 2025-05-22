@@ -105,14 +105,14 @@ export default function Overview({
   }, []);
 
   let completedMatch = featureSeries?.filter(
-    (item: { status: number }) => Number(item.status) === 2
+    (item: { commentary: number, status: number }) => Number(item.commentary) === 1 && Number(item.status) === 2
   );
   completedMatch = completedMatch ? [...completedMatch]?.reverse() : [];
   let upcomingMatch = featureSeries?.filter(
-    (item: { status: number }) => Number(item.status) === 1
+    (item: { commentary: number, status: number }) => Number(item.commentary) === 1 && Number(item.status) === 1
   );
   let liveMatch = featureSeries?.filter(
-    (item: { status: number }) => Number(item.status) === 3
+    (item: { commentary: number, status: number }) => Number(item.commentary) === 1 && Number(item.status) === 3
   );
 
   let selectedMatches = [];
