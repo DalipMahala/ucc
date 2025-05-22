@@ -1,15 +1,33 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy, useMemo } from "react";
 import Link from "next/link";
-import WeeklySlider from "@/app/components/WeeklySlider";
+// import WeeklySlider from "@/app/components/WeeklySlider";
 import Image from "next/image";
 import { urlStringEncode } from "@/utils/utility";
 import PlayerImage from "@/app/components/PlayerImage";
-import FantasyTips from "@/app/components/FantasyTips";
-import PLSeries from "@/app/components/popularSeries";
+// import FantasyTips from "@/app/components/FantasyTips";
+// import PLSeries from "@/app/components/popularSeries";
 import NewsSection from "../../series/seriesComponents/NewsSection";
 
+const WeeklySlider = lazy(() => 
+  import('@/app/components/WeeklySlider.tsx')
+    .then(module => ({ 
+      default: module.default as unknown as React.ComponentType<any> 
+    }))
+);
+const FantasyTips = lazy(() => 
+  import('@/app/components/FantasyTips.tsx')
+    .then(module => ({ 
+      default: module.default as unknown as React.ComponentType<any> 
+    }))
+);
+const PLSeries = lazy(() => 
+  import('@/app/components/popularSeries.tsx')
+    .then(module => ({ 
+      default: module.default as unknown as React.ComponentType<any> 
+    }))
+);
 interface teamview {
   cid: number;
   params: any;
@@ -20,6 +38,10 @@ interface teamview {
   seriesMatches: any;
   venueDetails: any;
 }
+
+
+
+
 
 export default function Overview({
   cid,
@@ -34,6 +56,8 @@ export default function Overview({
 
 
   const [activeSquad, setActiveSquad] = useState("Batter");
+  const [pageHtml, setPageHtml] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleClick = (tab: React.SetStateAction<string>) => {
     setActiveSquad(tab);
@@ -45,23 +69,34 @@ export default function Overview({
   const standings = pointTables?.standing?.standings || [];
 
   const matchPlaying11 = matcheInfo?.['match-playing11'] || {};
-  const squads = matchPlaying11?.teama?.team_id === teams?.tid
-    ? matchPlaying11?.teama?.squads || []
-    : matchPlaying11?.teamb?.squads || [];
+  // const squads = matchPlaying11?.teama?.team_id === teams?.tid
+  //   ? matchPlaying11?.teama?.squads || []
+  //   : matchPlaying11?.teamb?.squads || [];
 
-  const batsmen = squads?.filter((sd: any) => ['bat', 'wk'].includes(sd?.role)) || null;
-  const bowlers = squads?.filter((sd: any) => ['bowl'].includes((sd?.role)) ) || null;
-  const allRounders = squads?.filter((sd: any) => ['all'].includes((sd?.role)) ) || null;
-  // console.log("batsmen",batsmen);
-  const cmatch = seriesMatches?.resultMatch?.reverse();
-  const completedMatch = seriesMatches?.resultMatch?.filter(
-    (m: any) => [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teams?.tid))
-  )?.reverse()?.[0] || null;
+    const { batsmen, bowlers, allRounders } = React.useMemo(() => {
+      const squads = matchPlaying11?.teama?.team_id === teams?.tid
+        ? matchPlaying11?.teama?.squads || []
+        : matchPlaying11?.teamb?.squads || [];
+        
+      return {
+        batsmen: squads?.filter((sd: any) => ['bat', 'wk'].includes(sd?.role)) || null,
+        bowlers: squads?.filter((sd: any) => ['bowl'].includes(sd?.role)) || null,
+        allRounders: squads?.filter((sd: any) => ['all'].includes(sd?.role)) || null
+      };
+    }, [matchPlaying11, teams?.tid]);
 
-  const upcomingMatch = seriesMatches?.scheduledMatch?.filter(
-    (m: any) => [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teams?.tid))
-  )?.[0] || null;
-  // console.log("venueDetails",teams);
+  const completedMatch = useMemo(() => {
+    return seriesMatches?.resultMatch
+      ?.filter((m: any) => m?.date_start && [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teams?.tid)))
+      ?.sort((a: any, b: any) => new Date(b.date_start).getTime() - new Date(a.date_start).getTime())?.[0] || null;
+  }, [seriesMatches, teams?.tid]);
+
+  const upcomingMatch = useMemo(() => {
+    return seriesMatches?.scheduledMatch
+      ?.filter((m: any) => m?.date_start && [m?.teama?.team_id, m?.teamb?.team_id].includes(Number(teams?.tid)))
+      ?.sort((a: any, b: any) => new Date(a.date_start).getTime() - new Date(b.date_start).getTime())?.[0] || null;
+  }, [seriesMatches, teams?.tid]);
+ 
   const [seriesStats, setSeriesStats] = useState<any[]>([]);
   const [statsType, setStatsType] = useState("most-run"); // user-facing type
   const [statType, setStatType] = useState("batting_most_runs"); // API type
@@ -108,35 +143,43 @@ export default function Overview({
   };
 
   useEffect(() => {
-    async function fetchStats() {
+    const fetchData = async () => {
       try {
-        const response = await fetch(`/api/match/MatchStats`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
-          },
-          body: JSON.stringify({ cid, statType }),
-        });
+        const [statsRes, htmlRes] = await Promise.all([
+          fetch(`/api/match/MatchStats`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+            },
+            body: JSON.stringify({ cid, statType }),
+          }),
+          fetch(`/api/series/SeriesHtml`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+            },
+            body: JSON.stringify({ cid }),
+          })
+        ]);
 
-        if (!response.ok) {
-          const textResponse = await response.text();
-          console.error("API Error:", textResponse);
-          throw new Error(`HTTP Error ${response.status}`);
-        }
+        const [statsData, htmlData] = await Promise.all([
+          statsRes.ok ? statsRes.json() : { data: { stats: [] } },
+          htmlRes.ok ? htmlRes.json() : { data: [{ overViewHtml: "" }] }
+        ]);
 
-        const result = await response.json();
-        setSeriesStats(result?.data?.stats || []);
+        setSeriesStats(statsData?.data?.stats || []);
+        setPageHtml(htmlData?.data?.[0]?.overViewHtml || "");
       } catch (error) {
-        console.error("Error fetching stats:", error);
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
       }
-    }
+    };
 
-    if (cid && statType) {
-      fetchStats();
-    }
+    if (cid) fetchData();
   }, [cid, statType]);
-  // const matchStats= statsMatch?.stats;
 
   const [open, setOpen] = useState({
     mostRuns: false,
@@ -154,55 +197,17 @@ export default function Overview({
       [key]: !prev[key], // Now TypeScript knows 'key' is a valid key
     }));
   };
-
-  const [pageHtml, setPageHtml] = useState<string>("");
-  useEffect(() => {
-    async function fetchHtml() {
-      if (!cid || cid === 0) return;
-
-      try {
-        const response = await fetch(`/api/series/SeriesHtml`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
-          },
-          body: JSON.stringify({ cid: cid }),
-        });
-
-        if (!response.ok) {
-          console.error(
-            `Error: API returned ${response.status} for CID ${cid}`
-          );
-          return null; // Skip failed requests
-        }
-
-        const result = await response.json();
-        //   console.log('Response for CID',result?.data?.[0]?.overViewHtml);
-        let items = result?.data?.[0]?.overViewHtml || "";
-        setPageHtml(items);
-      } catch (error) {
-        console.error("Error fetching matches:", error);
-      }
-    }
-
-    fetchHtml();
-  }, [cid]);
-  // console.log("statsMatch", standings);
-
-  if (!completedMatch) {
-    return <div className="p-4 text-center">Loading match data...</div>;
+  if (isLoading) {
+    return (
+      <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
+        <div className="animate-pulse space-y-4">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="h-32 bg-gray-100 rounded-lg"></div>
+          ))}
+        </div>
+      </section>
+    );
   }
-
-  if (!teams?.tid || !pointTables?.season || !standings || !teamLast5match || !seriesStats) {
-    return <div className="p-4 text-center">Loading team data...</div>;
-  }
-
-
-
-
-
-
 
   return (
     <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
@@ -355,9 +360,10 @@ export default function Overview({
                   {/* <!-- Featured Matches desktop view  --> */}
                   <div className="border-t-[1px] border-[#E4E9F0]"></div>
                   <div className="hidden lg:block cursor-pointer">
-                    <Link href={"/scorecard/" + urlStringEncode(completedMatch?.teama?.short_name + "-vs-" + completedMatch?.teamb?.short_name + "-" + completedMatch?.subtitle + "-" + completedMatch?.competition?.title + "-" + completedMatch?.competition?.season) + "/" + completedMatch.match_id} passHref
+                  <Link href={"/scorecard/" + urlStringEncode(completedMatch?.short_title + "-" + completedMatch?.subtitle + "-" + completedMatch?.competition?.title + "-" + completedMatch?.competition?.season) + "/" + completedMatch.match_id} passHref
                       legacyBehavior>
                       <div className="py-3 flex justify-between items-center">
+                      
                         <div className="flex space-x-2 font-medium	w-full">
                           <div className="flex items-center space-x-1 flex-col">
                             <Image
@@ -401,14 +407,16 @@ export default function Overview({
                             <span className="text-[#757A82]">{completedMatch?.teamb?.short_name}</span>
                           </div>
                         </div>
+                        
                       </div>
-                    </Link>
+                      </Link>
 
                   </div>
 
                   {/* <!-- Featured Matches responsive view view  --> */}
-                  <Link href={"/scorecard/" + urlStringEncode(completedMatch?.teama?.short_name + "-vs-" + completedMatch?.teamb?.short_name + "-" + completedMatch?.subtitle + "-" + completedMatch?.competition?.title + "-" + completedMatch?.competition?.season) + "/" + completedMatch.match_id}>
+                  
                     <div className="lg:hidden">
+                    <Link href={"/scorecard/" + urlStringEncode(completedMatch?.teama?.short_name + "-vs-" + completedMatch?.teamb?.short_name + "-" + completedMatch?.subtitle + "-" + completedMatch?.competition?.title + "-" + completedMatch?.competition?.season) + "/" + completedMatch.match_id}>
                       <div className="py-4 px-3 bg-[#f7faff] rounded-lg my-3 border-b-[1px] border-[#E4E9F0]">
                         <p className="text-[#757A82] text-[12px] mb-4 font-normal">
                           {completedMatch?.subtitle} {completedMatch?.competition?.abbr}
@@ -457,9 +465,9 @@ export default function Overview({
                           </div>
                         </div>
                       </div>
-
+                      </Link>
                     </div>
-                  </Link>
+                  
                 </div>
               }
               {upcomingMatch &&
@@ -1175,8 +1183,9 @@ export default function Overview({
                   News
                 </h2>
                 <div className="border-t-[1px] border-[#E4E9F0]" />
-
-                <NewsSection urlString={""}></NewsSection>
+                <Suspense fallback={<div>Loading news...</div>}>
+                <NewsSection urlString={""} />
+              </Suspense>
               </div>
             </div>
 
@@ -1223,7 +1232,7 @@ export default function Overview({
               </div>
 
               {/* <!-- Slider 1 --> */}
-
+              <Suspense fallback={<div>Loading...</div>}>
               <WeeklySlider />
 
               <div className="my-4">
@@ -1307,6 +1316,7 @@ export default function Overview({
               <PLSeries />
 
               <FantasyTips />
+              </Suspense>
             </div>
           </div>
         </div>

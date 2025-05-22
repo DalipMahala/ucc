@@ -30,7 +30,7 @@ export default function Squads({
   );
   let teamASquadBowler = [];
   let teamASquadAll = [];
-  if (squads.length > 0) {
+  if (squads?.length > 0) {
      teamASquadBowler = squads?.filter(
       (events: { role: string }) => events.role === "bowl"
     );
