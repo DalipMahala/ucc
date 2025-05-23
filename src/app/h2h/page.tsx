@@ -3,7 +3,7 @@ import Layout from "@/app/components/Layout";
 import H2h from './h2h';
 import H2hipl from './h2hipl';
 import { H2hDetails, getTeamId, h2hMatch } from "@/controller/h2hController";
-import { TeamDetails, isIPLTeamDetails } from "@/controller/teamController";
+import { TeamDetails, isIPLTeamDetails,AllIntTeam } from "@/controller/teamController";
 import { notFound } from 'next/navigation';
 
 type Params = Promise<{
@@ -54,21 +54,22 @@ export default async function Page(props: { params: Params }) {
 
     }else{
       tblName = 'h2h'; 
+      allTeams = await AllIntTeam();
     }
   const  matchFormate = matchType === 'ipl' ? 't20' : matchType; 
   const teamDetails = await H2hDetails(tblName,matchFormate,teama_id,teamb_id);
   let completedMatch = await h2hMatch(matchFormate,teama_id,teamb_id);
   const teamADetails = await TeamDetails(teamDetails?.teama_id);
   const teamBDetails = await TeamDetails(teamDetails?.teamb_id);
-  // console.log("matchType",matchType);
- 
 
+
+  // console.log("matchType",allIntTeam);
     return (
         <Layout>
         {(cid != null && matchType === 'ipl') ? (
             <H2hipl teamDetails={teamDetails} teamADetails={teamADetails} teamBDetails={teamBDetails} urlStrings={urlString} completedMatch={completedMatch} allTeams={allTeams} />
         ):(
-        <H2h teamDetails={teamDetails} teamADetails={teamADetails} teamBDetails={teamBDetails} urlStrings={urlString} completedMatch={completedMatch} allTeams={undefined} />
+        <H2h teamDetails={teamDetails} teamADetails={teamADetails} teamBDetails={teamBDetails} urlStrings={urlString} completedMatch={completedMatch} allTeams={allTeams} />
         )}
         </Layout>
     )

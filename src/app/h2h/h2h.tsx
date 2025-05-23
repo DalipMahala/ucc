@@ -10,6 +10,9 @@ import NewsSection from "@/app/series/seriesComponents/NewsSection";
 import PLSeries from "@/app/components/popularSeries";
 import FantasyTips from "@/app/components/FantasyTips";
 import ReadMoreCard from "@/app/components/ReadMoreCard";
+import TeamSelect from "@/app/components/TeamSelect";
+import { useRouter } from 'next/navigation';
+import { urlStringEncode } from "../../utils/utility";
 
 import { BsFillLightningChargeFill } from "react-icons/bs";
 
@@ -49,7 +52,41 @@ export default function H2h({
   const [news, setNews] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  console.log(teamDetails);
+
+  // Safe URL parsing
+  const matchType = urlStrings?.split('-').pop() || 'test';
+  const urlWithoutMatchType = urlStrings?.split('-').slice(0, -1).join('-') || '';
+
+  const teamalist = allTeams?.filter((item: { tid: number }) => Number(item.tid) === teamADetails?.tid);
+  const teamblist = allTeams?.filter((item: { tid: number }) => Number(item.tid) === teamBDetails?.tid);
+
+  const [selectedTeamA, setSelectedTeamA] = useState<any>(teamalist[0]);
+  const [selectedTeamB, setSelectedTeamB] = useState<any>(teamblist[0]);
+
+  const teamAOptions = allTeams?.filter((team: { tid: any; }) => team.tid !== selectedTeamB?.tid);
+  const teamBOptions = allTeams?.filter((team: { tid: any; }) => team.tid !== selectedTeamA?.tid);
+
+    const router = useRouter();
+  
+    const handleTeamSelect = (team: any, type: 'A' | 'B') => {
+      if (type === 'A') {
+        setSelectedTeamA(team);
+      } else {
+        setSelectedTeamB(team);
+      }
+      const clean = (str?: string) => str ? str.replace(/\s/g, '').replace(/\u00A0/g, '').trim() : '';
+      const teamAId: string = type === 'A' ? team?.title : selectedTeamA?.title;
+      const teamBId: string = type === 'B' ? team?.title : selectedTeamB?.title;
+  
+      const teamA = clean(teamAId);
+      const teamB = clean(teamBId);
+      if (teamA && teamB) {
+        const url = urlStringEncode(`${teamA}-vs-${teamB}-head-to-head-in-${matchType}`);
+        router.push(url);
+      }
+    };
+
+ 
   // Safe calculations with fallbacks
   const totalMatches = teamDetails?.teamAB_total_match || 0;
   const teamaWon = totalMatches > 0 ?
@@ -57,9 +94,7 @@ export default function H2h({
   const teambWon = totalMatches > 0 ?
     Math.round((teamDetails?.teamb_won_match || 0) * 100 / totalMatches) : 0;
 
-  // Safe URL parsing
-  const matchType = urlStrings?.split('-').pop() || 'test';
-  const urlWithoutMatchType = urlStrings?.split('-').slice(0, -1).join('-') || '';
+ 
 
   let content = '';
   if (matchType === 'test') {
@@ -312,22 +347,16 @@ export default function H2h({
                         <p className="text-gray-700 font-normal text-[14px] mb-6">{content}</p>
                         
 
-                      <div className="flex gap-2 md:gap-0 flex-row justify-between items-center mb-4">
-
+                     <div className="flex gap-2 md:gap-0 flex-row justify-between items-center mb-4">
+                     
                         <div className="md:w-full w-[40%] relative">
-                          <div className="border border-gray-300 rounded-md p-2 text-gray-700 md:w-[70%] w-full cursor-pointer">
-                            <span className="flex items-center">
-                              {teamADetails.logo_url && (
-                                <Image
-                                  src={teamADetails.logo_url}
-                                  width={30}
-                                  height={30}
-                                  alt="teams"
-                                  className="h-[30px] w-[30px] mr-2"
-                                />
-                              )}
-                              {teamADetails?.abbr}
-                            </span>
+                          <div className="border border-gray-300 rounded-md p-2 text-gray-700 md:w-[70%] w-full cursor-pointer ">
+                            <TeamSelect
+                              selectedTeam={selectedTeamA}
+                              onChange={(team) => handleTeamSelect(team, 'A')}
+                              teams={teamAOptions || []}
+                              label="Team A"
+                            />
                           </div>
                         </div>
 
@@ -336,18 +365,12 @@ export default function H2h({
                         <div className="md:w-full w-[40%] text-right">
                           <div className="relative flex justify-end">
                             <div className="border border-gray-300 rounded-md p-2 text-gray-700 md:w-[70%] w-full cursor-pointer">
-                              <span className="flex items-center">
-                                {teamBDetails.logo_url && (
-                                  <Image
-                                    src={teamBDetails.logo_url}
-                                    width={30}
-                                    height={30}
-                                    alt="teams"
-                                    className="h-[30px] w-[30px] mr-2"
-                                  />
-                                )}
-                                {teamBDetails?.abbr}
-                              </span>
+                              <TeamSelect
+                                selectedTeam={selectedTeamB}
+                                onChange={(team) => handleTeamSelect(team, 'B')}
+                                teams={teamBOptions || []}
+                                label="Team B"
+                              />
                             </div>
                           </div>
                         </div>

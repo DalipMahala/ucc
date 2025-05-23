@@ -392,3 +392,38 @@ export async function TeamDetailsOld(
     }
     
   } 
+  export async function AllIntTeam(){
+    const CACHE_KEY = "teamIntAll";
+    const CACHE_TTL = 600;
+
+    try {
+        // Check Redis Cache
+        const cachedData = await redis.get(CACHE_KEY);
+        if (cachedData) {
+            console.log("coming from cache team");
+            return JSON.parse(cachedData);
+        }
+
+       
+        // Fetch Data
+        const [rows]: any[] = await db.execute('SELECT * FROM teams WHERE tid in (498,5,8652,23,10712,490,9534,25,9536,11,10511,7,8650,13,10259,19,10279,21,10277,17,10272,493,14619,9,14624,1824,14627,9160,9140,10798,10814,26768,1544,26771,1546,6791,15)');
+  
+        if (!rows || rows.length === 0) {
+            return null; // Return notFound if no data found
+        }
+  
+        const teamProfile = rows; // Access first row
+
+        if (rows.length > 0) {
+            await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(teamProfile));
+            console.log("coming from api team");
+          }
+
+        return teamProfile;
+
+    } catch (error) {
+        console.error("Error fetching team details:", error);
+        return { error: "Failed to fetch team details" };
+    }
+    
+  } 

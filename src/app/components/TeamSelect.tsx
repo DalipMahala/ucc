@@ -19,6 +19,7 @@ interface TeamSelectProps {
 }
 
 export default function TeamSelect({ selectedTeam, onChange, teams, label }: TeamSelectProps) {
+  console.log("selectTeam",label);
   return (
       <Listbox value={selectedTeam} onChange={onChange}>
         <div className="relative mt-1">
