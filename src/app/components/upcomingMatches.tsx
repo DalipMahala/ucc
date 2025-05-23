@@ -69,10 +69,10 @@ function matchOddsCal(data: any) {
 
   const a = parseFloat(data?.live_odds?.matchodds?.teama?.back || 0);
   const b = parseFloat(data?.live_odds?.matchodds?.teamb?.back || 0);
-  const lesserTeam = a < b 
-    ? { matchId: data?.match_id,team: data?.teama?.short_name, ...data?.live_odds?.matchodds?.teama } 
-    : { matchId: data?.match_id,team: data?.teamb?.short_name, ...data?.live_odds?.matchodds?.teamb };
-    return lesserTeam;
+  const lesserTeam = a < b
+    ? { matchId: data?.match_id, team: data?.teama?.short_name, ...data?.live_odds?.matchodds?.teama }
+    : { matchId: data?.match_id, team: data?.teamb?.short_name, ...data?.live_odds?.matchodds?.teamb };
+  return lesserTeam;
 }
 export default async function UpcomingMatches() {
   let upcomingresponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/match/upcomingMatches`, {
@@ -110,14 +110,14 @@ export default async function UpcomingMatches() {
                     <div className="w-[8px] h-[8px] bg-colorFirst rounded-full animate-blink"></div>{" "}
                     {ucmatch.status_str}
                   </div>
-                  <div>
-                    <Link href={"/series/" + urlStringEncode(ucmatch.competition.title + "-" + ucmatch.competition.season) + "/" + ucmatch.competition.cid}  >
-                      <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
-                        {ucmatch.competition.title} -{" "}
-                        {ucmatch.competition.season}
-                      </h2>
-                    </Link>
-                  </div>
+
+                  <Link href={"/series/" + urlStringEncode(ucmatch.competition.title + "-" + ucmatch.competition.season) + "/" + ucmatch.competition.cid}  >
+                    <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                      {ucmatch.competition.title} -{" "}
+                      {ucmatch.competition.season}
+                    </h2>
+                  </Link>
+
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className={"text-[13px] font-medium text-[#1F2937] oddsTeam" + ucmatch.match_id}>
@@ -125,116 +125,112 @@ export default async function UpcomingMatches() {
                   </span>
 
                   <span className="flex items-center bg-[#FAFFFC] border-[1px] border-[#00a632] rounded-full text-[#00a632] pr-2">
-                    <span className="">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="h-[14px] w-[17px]"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18"
-                        />
-                      </svg>
-                    </span>
-                    {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100)  : 0}
+
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="h-[14px] w-[17px]"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18"
+                      />
+                    </svg>
+
+                    {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100) : 0}
                   </span>
                   <span className="flex items-center bg-[#FFF7F7] border-[1px] border-secondary  rounded-full text-secondary pr-2">
-                    <span className="">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="h-[14px] w-[17px]"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3"
-                        />
-                      </svg>
-                    </span>
-                    {matchOddsCal(ucmatch)?.lay > 0 ? Math.round((matchOddsCal(ucmatch)?.lay) * 100 - 100)  : 0}
+
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="h-[14px] w-[17px]"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3"
+                      />
+                    </svg>
+                    {matchOddsCal(ucmatch)?.lay > 0 ? Math.round((matchOddsCal(ucmatch)?.lay) * 100 - 100) : 0}
                   </span>
                 </div>
               </div>
 
               <div className="border-t-[1px] border-colorFourth"></div>
+
               <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-" + ucmatch?.subtitle + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
-                
-                  <div className="flex justify-between items-center text-[14px] py-3 px-3">
-                    <div className="w-[50%]">
-                      <p className="text-colorSecound text-[12px] mb-4 font-medium">
-                        {ucmatch.subtitle}, {ucmatch.format_str}, {ucmatch.venue.location}
-                      </p>
-                      <div className="flex items-center space-x-2 font-medium x md:w-full mb-4">
-                        <div className="flex items-center space-x-2">
-                          <Image
-                            src={ucmatch.teama.logo_url || '/assets/img/ring.png'}
-                            className="h-[30px] rounded-full"
-                            width={30}
-                            height={30}
-                            alt={ucmatch.teama.short_name ?? 'team'}
-                            loading="lazy"
-                          />
-                          <span className="font-semibold text-[14px]">
-                            {ucmatch.teama.name}
-                          </span>
-                        </div>
-                      </div>
 
-                      <div>
-                        <div className="flex items-center space-x-2 font-medium md:w-full">
-                          <div className="flex items-center space-x-2">
-                            <Image
-                              src={ucmatch.teamb.logo_url || '/assets/img/ring.png'}
-                              className="h-[30px]"
-                              width={30}
-                              height={30}
-                              alt={ucmatch.teamb.short_name || 'team'}
-                              loading="lazy"
-                            />
-                            <span className="font-semibold text-[14px]">
-                              {ucmatch.teamb.name}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
+                <div className="flex justify-between items-center text-[14px] py-3 px-3">
+                  <div className="w-[50%]">
+                    <p className="text-colorSecound text-[12px] mb-4 font-medium">
+                      {ucmatch.subtitle}, {ucmatch.format_str}, {ucmatch.venue.location}
+                    </p>
+
+                    <div className="flex items-center space-x-2 font-medium x md:w-full mb-4">
+                      <Image
+                        src={ucmatch.teama.logo_url || '/assets/img/ring.png'}
+                        className="h-[30px] rounded-full"
+                        width={30}
+                        height={30}
+                        alt={ucmatch.teama.short_name ?? 'team'}
+                        loading="lazy"
+                      />
+                      <span className="font-semibold text-[14px]">
+                        {ucmatch.teama.name}
+                      </span>
                     </div>
 
-                    {/* <div className="h-[100px] border-l-[1px] border-[#efefef]"></div> */}
-
-                    <div className="w-[50%] font-semibold text-center flex justify-end">
-                      <div className="text-[#144280]">
-                        <div className=" font-medium text-center">
-
-                          {isSameDay(new Date(), new Date(ucmatch.date_start_ist)) ? (
-                            <>
-                              <span className="text-[13px] font-normal text-colorFirst">Start in</span>
-
-                              <CountdownTimer targetTime={ucmatch.date_start_ist} />
-                            </>
-
-                          ) : (
-                            <p className="text-[#2F335C] text-[16px]">
-
-                              {format(new Date(ucmatch.date_start_ist), "dd MMMM - EEEE")} <br />
-                              {format(new Date(ucmatch.date_start_ist), "hh:mm:aa")}
-
-
-                            </p>
-                          )}
-                        </div>
-                      </div>
+                    <div className="flex items-center space-x-2 font-medium md:w-full">
+                      <Image
+                        src={ucmatch.teamb.logo_url || '/assets/img/ring.png'}
+                        className="h-[30px]"
+                        width={30}
+                        height={30}
+                        alt={ucmatch.teamb.short_name || 'team'}
+                        loading="lazy"
+                      />
+                      <span className="font-semibold text-[14px]">
+                        {ucmatch.teamb.name}
+                      </span>
                     </div>
+
+
                   </div>
-                
+
+                  {/* <div className="h-[100px] border-l-[1px] border-[#efefef]"></div> */}
+
+                  
+                    
+                      <div className="w-[50%] font-medium text-center text-[#144280] flex flex-col items-end">
+
+                        {isSameDay(new Date(), new Date(ucmatch.date_start_ist)) ? (
+                          <>
+                            <span className="text-[13px] font-normal text-colorFirst">Start in</span>
+
+                            <CountdownTimer targetTime={ucmatch.date_start_ist} />
+                          </>
+
+                        ) : (
+                          <p className="text-[#2F335C] text-[16px]">
+
+                            {format(new Date(ucmatch.date_start_ist), "dd MMMM - EEEE")} <br />
+                            {format(new Date(ucmatch.date_start_ist), "hh:mm:aa")}
+
+
+                          </p>
+                        )}
+                      </div>
+                  
+                </div>
+
               </Link>
               <div className="border-t-[1px] border-colorFourth"></div>
 
@@ -257,7 +253,7 @@ export default async function UpcomingMatches() {
                   </Link>
                 </div>
                 {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                  <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title+ "-head-to-head-in-ipl" : ucmatch?.title + "-head-to-head-in-" + ucmatch?.format_str)).toLowerCase()}>
+                  <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title + "-head-to-head-in-ipl" : ucmatch?.title + "-head-to-head-in-" + ucmatch?.format_str)).toLowerCase()}>
                     <div className="flex justify-end items-center space-x-2">
                       <Image
                         src="/assets/img/home/handshake.png"
@@ -279,25 +275,24 @@ export default async function UpcomingMatches() {
             {/* Mobile */}
 
             <div className="lg:hidden rounded-lg p-4 mb-4 bg-[#ffffff] performance-section relative hover:shadow-lg">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center space-x-2">
+              
+                <div className="flex items-center space-x-2 mb-2">
                   <div
                     className="flex text-[13px] items-center uppercase text-colorFirst rounded-full font-semibold"
                     style={{ gap: "2px" }}
                   >
                     <div className="w-[6px] h-[6px] bg-colorFirst rounded-full"></div> {ucmatch.status_str}
                   </div>
-                  <div>
+                  
                     <Link href={"/series/" + urlStringEncode(ucmatch.competition.title + "-" + ucmatch.competition.season) + "/" + ucmatch.competition.cid}  >
                       <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
                         {ucmatch.competition.abbr} -{" "}
                         {ucmatch.competition.season}
                       </h2>
                     </Link>
-                  </div>
-                 
+                
                 </div>
-              </div>
+              
 
               <div className="border-t-[1px] border-colorFourth"></div>
               <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-" + ucmatch?.subtitle + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
@@ -308,8 +303,8 @@ export default async function UpcomingMatches() {
                     </p>
                     <div className="flex justify-between items-center text-[14px]">
                       <div className="w-[80%]">
-                        <div className="items-center space-x-2 font-medium md:w-full mb-4">
-                          <div className="flex items-center space-x-2">
+                      
+                          <div className="flex items-center space-x-2 font-medium md:w-full mb-4">
                             <Image
                               src={ucmatch.teama.logo_url || '/assets/img/ring.png'}
                               className="h-[30px] rounded-full"
@@ -318,15 +313,15 @@ export default async function UpcomingMatches() {
                               alt={ucmatch.teama.short_name}
                               loading="lazy"
                             />
-                            <div>
+                           
                               <span className="flex items-center gap-1">
                                 <span className="font-semibold text-[14px]">
                                   {ucmatch?.teama?.name}
                                 </span>
                               </span>
-                            </div>
+                           
                           </div>
-                        </div>
+                        
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
@@ -348,7 +343,7 @@ export default async function UpcomingMatches() {
                         </div>
                       </div>
 
-                      
+
 
                       <div className="w-[80%] font-semibold text-center">
                         <div className="text-[#144280]">
@@ -398,7 +393,7 @@ export default async function UpcomingMatches() {
                       <div className="hidden md:block h-[20px] border-l-[1px] mx-5 border-[#d0d3d7]"></div>
                     </>}
                   {ucmatch?.format_str && ['T20I', 'T20', 'Test', 'Odi'].includes(ucmatch.format_str) &&
-                    <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title+ "-head-to-head-in-ipl" : ucmatch?.title + "-head-to-head-in-" + ucmatch?.format_str)).toLowerCase()}>
+                    <Link href={("/h2h/" + urlStringEncode(ucmatch?.competition?.title === 'Indian Premier League' ? ucmatch?.short_title + "-head-to-head-in-ipl" : ucmatch?.title + "-head-to-head-in-" + ucmatch?.format_str)).toLowerCase()}>
                       <div className="pl-[10px] border-l-[1px] flex justify-end items-center space-x-2">
                         <Image
                           src="/assets/img/home/handshake.png"
@@ -438,7 +433,7 @@ export default async function UpcomingMatches() {
                         ></path>
                       </svg>
                     </span>
-                    {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100)  : 0}
+                    {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100) : 0}
                   </span>
                   <span className="flex items-center bg-[#FFF7F7] border-[1px] border-secondary rounded-md text-secondary pr-2">
                     <span>
@@ -457,7 +452,7 @@ export default async function UpcomingMatches() {
                         ></path>
                       </svg>
                     </span>
-                    {matchOddsCal(ucmatch)?.lay > 0 ? Math.round((matchOddsCal(ucmatch)?.lay) * 100 - 100)  : 0}
+                    {matchOddsCal(ucmatch)?.lay > 0 ? Math.round((matchOddsCal(ucmatch)?.lay) * 100 - 100) : 0}
                   </span>
                 </div>
               </div>

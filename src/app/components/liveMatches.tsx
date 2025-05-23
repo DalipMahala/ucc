@@ -116,8 +116,8 @@ export default async function LiveMatches() {
                     className="flex items-center text-[13px] text-secondary rounded-full pr-3 uppercase font-semibold"
                     style={{ gap: "3px" }}
                   >
-                    <span className="rounded-full">
-                      <svg className="h-[9px] w-[9px]">
+                    
+                      <svg className="h-[9px] w-[9px] rounded-full">
                         <circle
                           fill="#ea2323"
                           stroke="none"
@@ -136,17 +136,18 @@ export default async function LiveMatches() {
                           }
                         </circle>
                       </svg>
-                    </span>{" "}
+                    {" "}
+
                     {items?.game_state_str === 'Play Ongoing' ? items?.status_str : items?.game_state_str}
                   </div>
-                  <div>
+                  
                     <Link href={"/series/" + urlStringEncode(items.competition.title + "-" + items.competition.season) + "/" + items.competition.cid}  >
                       <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
                         {items.competition.title} - {" "}
                         {items.competition.season}
                       </h2>
                     </Link>
-                  </div>
+                  
                 </div>
 
                 <div className="flex items-center space-x-2">
@@ -378,8 +379,8 @@ export default async function LiveMatches() {
                           ''
                       }`}
                   >
-                    <span className="rounded-full">
-                      <svg className="h-[7px] w-[7px]">
+                    
+                      <svg className="h-[7px] w-[7px] rounded-full">
                         <circle
                           fill="#ea2323"
                           stroke="none"
@@ -398,7 +399,7 @@ export default async function LiveMatches() {
                           }
                         </circle>
                       </svg>
-                    </span>
+                    
                     {items.game_state_str === 'Play Ongoing' ? items.status_str : items.game_state_str}
                   </div>
 
@@ -414,6 +415,7 @@ export default async function LiveMatches() {
            
 
               <div className="border-t-[1px] border-[#E7F2F4]"></div>
+
               <div className="open-Performance-data">
                 <Link href={"/live-score/" + urlStringEncode(items?.teama?.short_name + "-vs-" + items?.teamb?.short_name + "-" + items?.subtitle + "-" + items?.competition?.title + "-" + items?.competition?.season) + "/" + items.match_id}>
                   <div className="py-2 pb-3">
@@ -423,8 +425,8 @@ export default async function LiveMatches() {
                     <div className="flex justify-between items-center text-[14px]">
 
                       <div className="w-[82%]">
-                        <div className="items-center space-x-2 font-medium md:w-full mb-4">
-                          <div className="flex items-center space-x-2">
+                        
+                          <div className="flex items-center space-x-2 font-medium md:w-full mb-4">
                             <Image
                               src={items.teama.logo_url || '/assets/img/ring.png'}
                               className="h-[30px] rounded-full"
@@ -473,11 +475,8 @@ export default async function LiveMatches() {
                               </p>
                             </div>
                           </div>
-                        </div>
-
-                        <div>
-                          <div className="flex items-center space-x-2 font-medium md:w-full">
-                            <div className="flex items-center space-x-2">
+                       
+                            <div className="flex items-center space-x-2 font-medium md:w-full">
                               <Image
                                 src={items.teamb.logo_url || '/assets/img/ring.png'}
                                 className="h-[30px]"
@@ -523,8 +522,7 @@ export default async function LiveMatches() {
 
                               </div>
                             </div>
-                          </div>
-                        </div>
+                          
                       </div>
 
                       {/* <div className="h-[100px] border-l-[1px] border-[#f2fafd]"></div> */}

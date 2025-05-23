@@ -137,8 +137,8 @@ export default async function ForYouMatches() {
                     className="flex items-center text-[13px] text-secondary rounded-full pr-3 uppercase font-semibold"
                     style={{ gap: "3px" }}
                   >
-                    <span className="rounded-full">
-                      <svg className="h-[9px] w-[9px]">
+                    
+                      <svg className="h-[9px] w-[9px] rounded-full">
                         <circle
                           fill="#ea2323"
                           stroke="none"
@@ -157,7 +157,7 @@ export default async function ForYouMatches() {
                           }
                         </circle>
                       </svg>
-                    </span>{" "}
+                    {" "}
                     {items?.game_state_str === 'Play Ongoing' ? items?.status_str : items?.game_state_str}
                   </div>
                  
@@ -383,8 +383,8 @@ export default async function ForYouMatches() {
             {/* mobile */}
 
             <div className="lg:hidden rounded-lg p-4 mb-4 bg-[#ffffff] performance-section relative hover:shadow-lg">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center space-x-2">
+             
+                <div className="flex items-center space-x-2 mb-2">
                   <div className="flex gap-[2px] items-center text-[#ea2323] rounded-full font-semibold uppercase text-[13px]">
                     <span className="rounded-full">
                       <svg className="h-[7px] w-[7px]">
@@ -419,9 +419,10 @@ export default async function ForYouMatches() {
                   
 
                 </div>
-              </div>
+             
 
               <div className="border-t-[1px] border-colorFourth"></div>
+
               <div className="open-Performance-data">
                 <Link href={"/live-score/" + urlStringEncode(items?.teama?.short_name + "-vs-" + items?.teamb?.short_name + "-" + items?.subtitle + "-" + items?.competition?.title + "-" + items?.competition?.season) + "/" + items.match_id}>
                   <div className="py-2 pb-3">
@@ -431,8 +432,8 @@ export default async function ForYouMatches() {
                     <div className="flex justify-between items-center text-[14px]">
 
                       <div className="w-[82%]">
-                        <div className="items-center space-x-2 font-medium md:w-full mb-4">
-                          <div className="flex items-center space-x-2">
+                        
+                          <div className="flex items-center space-x-2 font-medium md:w-full mb-4">
                             <Image
                               src={items.teama.logo_url || '/assets/img/ring.png'}
                               className="h-[30px] rounded-full"
@@ -477,11 +478,11 @@ export default async function ForYouMatches() {
                               </p>
                             </div>
                           </div>
-                        </div>
+                       
 
                        
-                          <div className="flex items-center space-x-2 font-medium md:w-full">
-                            <div className="flex items-center space-x-2">
+                          
+                            <div className="flex items-center space-x-2 font-medium md:w-full">
                               <Image
                                 src={items.teamb.logo_url || '/assets/img/ring.png'}
                                 className="h-[30px]"
@@ -524,7 +525,7 @@ export default async function ForYouMatches() {
 
                               </div>
                             </div>
-                          </div>
+                          
                        
                       </div>
 
@@ -713,8 +714,8 @@ export default async function ForYouMatches() {
 
               <div className="border-t-[1px] border-colorFourth"></div>
               <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-" + ucmatch?.subtitle + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
-                <div className="py-3 px-3">
-                  <div className="flex justify-between items-center text-[14px]">
+                
+                  <div className="flex justify-between items-center text-[14px] py-3 px-3">
                     <div className="w-[50%]">
                       <p className="text-colorSecound text-[12px] mb-4 font-medium">
                         {ucmatch.subtitle}, {ucmatch.format_str}, {ucmatch.venue.location}
@@ -780,7 +781,7 @@ export default async function ForYouMatches() {
                       </div>
                     </div>
                   </div>
-                </div>
+               
               </Link>
               <div className="border-t-[1px] border-colorFourth"></div>
 
@@ -824,8 +825,8 @@ export default async function ForYouMatches() {
 
             {/* Mobile */}
             <div className="lg:hidden rounded-lg p-4 mb-4 bg-[#ffffff] performance-section relative hover:shadow-lg">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center space-x-2">
+              
+                <div className="flex items-center space-x-2  mb-2">
                   <div
                     className="flex text-[13px] items-center uppercase text-colorFirst rounded-full font-semibold"
                     style={{ gap: "2px" }}
@@ -842,19 +843,21 @@ export default async function ForYouMatches() {
                   
 
                 </div>
-              </div>
+             
 
               <div className="border-t-[1px] border-colorFourth"></div>
+
               <Link href={"/moreinfo/" + urlStringEncode(ucmatch?.teama?.short_name + "-vs-" + ucmatch?.teamb?.short_name + "-" + ucmatch?.subtitle + "-" + ucmatch?.competition?.title + "-" + ucmatch?.competition?.season) + "/" + ucmatch.match_id}>
-                <div className="open-Performance-data">
-                  <div className="py-2 pb-3">
+                
+                  <div className="open-Performance-data py-2 pb-3">
                     <p className="text-colorSecound text-[12px] mb-4 font-medium">
                       {ucmatch.subtitle}, {ucmatch.format_str}, {ucmatch.venue.location}
                     </p>
+
                     <div className="flex justify-between items-center text-[14px]">
                       <div className="w-[80%]">
-                        <div className="items-center space-x-2 font-medium md:w-full mb-4">
-                          <div className="flex items-center space-x-2">
+                        
+                          <div className="flex items-center space-x-2 font-medium md:w-full mb-4">
                             <Image
                               src={ucmatch.teama.logo_url || '/assets/img/ring.png'}
                               className="h-[30px] rounded-full"
@@ -869,7 +872,7 @@ export default async function ForYouMatches() {
                                 </span>
                              
                           </div>
-                        </div>
+                       
                         <div className="flex items-center space-x-2 font-medium md:w-full">
                           <div className="flex items-center space-x-2">
                             <Image
@@ -891,10 +894,10 @@ export default async function ForYouMatches() {
 
                      
 
-                      <div className="w-[80%] font-semibold text-center">
-                        <div className="text-[#144280] mt-1">
+                     
+                     
                           <div
-                            className="flex space-x-1 justify-center countdown"
+                            className="flex space-x-1 justify-center text-[#144280] mt-1 w-[80%] font-semibold text-center countdown"
                             data-time="28800"
                           >
                             {/* <!-- 08:00:00 = 8 * 60 * 60 = 28800 seconds --> */}
@@ -919,11 +922,11 @@ export default async function ForYouMatches() {
                             </div>
 
                           </div>
-                        </div>
-                      </div>
+                       
+                     
                     </div>
                   </div>
-                </div>
+                
               </Link>
 
               <div className="border-t-[1px] border-colorFourth"></div>
@@ -964,7 +967,7 @@ export default async function ForYouMatches() {
                     {matchOddsCal(ucmatch)?.team}
                   </span>
                   <span className="flex items-center bg-[#FAFFFC] border-[1px] border-accent rounded-md text-accent pr-2">
-                    <span>
+                    
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -979,11 +982,11 @@ export default async function ForYouMatches() {
                           d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18"
                         ></path>
                       </svg>
-                    </span>
+                    
                     {matchOddsCal(ucmatch)?.back > 0 ? Math.round((matchOddsCal(ucmatch)?.back) * 100 - 100) : 0}
                   </span>
                   <span className="flex items-center bg-[#FFF7F7] border-[1px] border-secondary rounded-md text-secondary pr-2">
-                    <span>
+                   
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -998,7 +1001,7 @@ export default async function ForYouMatches() {
                           d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3"
                         ></path>
                       </svg>
-                    </span>
+                   
                     {matchOddsCal(ucmatch)?.lay > 0 ? Math.round((matchOddsCal(ucmatch)?.lay) * 100 - 100) : 0}
                   </span>
                 </div>
@@ -1012,8 +1015,8 @@ export default async function ForYouMatches() {
             <div
               className="lg:block hidden rounded-lg p-4 mb-4 bg-[#ffffff] hover:shadow-lg"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-2">
+              
+                <div className="flex items-center space-x-2 mb-4">
                   <div
                     className="flex items-center text-[13px] text-accent rounded-full pr-3 uppercase  font-semibold"
                     style={{ gap: "3px" }}
@@ -1031,14 +1034,13 @@ export default async function ForYouMatches() {
                   
                 </div>
 
-              </div>
 
               <div className="border-t-[1px] border-colorFourth"></div>
 
-              <div className="py-3 px-3">
-                <div className="flex justify-between items-center text-[14px]">
+             
+                <div className="flex justify-between items-center text-[14px] py-3 px-3">
                   <Link className="w-[61%]" href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
-                    <div className="">
+                  
                       <p className="text-colorSecound text-[12px] mb-4 font-medium">
                         {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
                       </p>
@@ -1092,7 +1094,7 @@ export default async function ForYouMatches() {
                           </p>
                         </div>
                      
-                    </div>
+                    
                   </Link>
                   <div className="h-[100px] border-l-[1px] border-colorFourth"></div>
 
@@ -1132,7 +1134,8 @@ export default async function ForYouMatches() {
                   }
                 </div>
 
-              </div>
+            
+
               <div className="border-t-[1px] border-colorFourth"></div>
 
               <div className="flex items-center justify-between space-x-5 mt-3">
@@ -1175,8 +1178,8 @@ export default async function ForYouMatches() {
             {/* Mobile */}
 
             <div className="lg:hidden rounded-lg p-4 mb-4 bg-[#ffffff] performance-section relative">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center space-x-2">
+              
+                <div className="flex items-center space-x-2 mb-2">
                   <div
                     className="flex text-[13px] items-center text-accent rounded-full uppercase font-semibold"
                     style={{ gap: "2px" }}
@@ -1193,7 +1196,7 @@ export default async function ForYouMatches() {
                   
                   
                 </div>
-              </div>
+             
 
               <div className="border-t-[1px] border-colorFourth"></div>
 
@@ -1203,10 +1206,12 @@ export default async function ForYouMatches() {
                     <p className="text-colorSecound text-[11px] mb-4 font-normal">
                       {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
                     </p>
+
                     <div className="flex justify-between items-center text-[14px]">
+
                       <div className="">
-                        <div className="items-center space-x-2 font-medium md:w-full mb-4">
-                          <div className="flex items-center space-x-2">
+                       
+                          <div className="flex items-center space-x-2 font-medium md:w-full mb-4">
                             <Image
                               src={cmatch.teama.logo_url || '/assets/img/ring.png'}
                               className="h-[30px] rounded-full"
@@ -1230,10 +1235,10 @@ export default async function ForYouMatches() {
                               </p>
                             </div>
                           </div>
-                        </div>
-                        <div className="">
-                          <div className="flex items-center space-x-2 font-medium md:w-full">
-                            <div className="flex items-center space-x-2">
+                      
+                       
+                         
+                            <div className="flex items-center space-x-2 font-medium md:w-full">
                               <Image
                                 src={cmatch.teamb.logo_url || '/assets/img/ring.png'}
                                 className="h-[30px] rounded-full"
@@ -1258,8 +1263,8 @@ export default async function ForYouMatches() {
                                 </p>
                               </div>
                             </div>
-                          </div>
-                        </div>
+                         
+                       
                       </div>
 
                      
@@ -1324,7 +1329,7 @@ export default async function ForYouMatches() {
                           "/player/" +
                           playerUrls[cmatch?.man_of_the_match?.pid]
                         }>
-                        <div className="flex items-center justify-between">
+                        
                           <div className="flex items-center gap-2" >
                             <PlayerImage key={cmatch?.man_of_the_match?.pid} player_id={cmatch?.man_of_the_match?.pid}
                               height={32}
@@ -1336,7 +1341,7 @@ export default async function ForYouMatches() {
                               <p className="text-[11px]">Man of the match </p>
                             </div>
                           </div>
-                        </div>
+                       
                       </Link>
                     </>}
                 </div>

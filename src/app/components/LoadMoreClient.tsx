@@ -123,122 +123,122 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                   {cmatch.status_str}
                 </div>
 
-                <div>
-                  <Link href={"/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) + "/" + cmatch.competition.cid}  >
-                    <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
-                      {cmatch.competition.title} -{" "}
-                      {cmatch.competition.season}
-                    </h2>
-                  </Link>
-                </div>
+
+                <Link href={"/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) + "/" + cmatch.competition.cid}  >
+                  <h2 className="text-[15px] font-semibold pl-[15px] border-l-[1px] border-[#E4E9F0]">
+                    {cmatch.competition.title} -{" "}
+                    {cmatch.competition.season}
+                  </h2>
+                </Link>
+
               </div>
 
-              <p className="w-[30%] text-colorSecound text-[12px] font-medium text-right">{cmatch?.date_start_ist ? format(new Date(cmatch?.date_start_ist), "dd MMM, yyyy, EEE, hh:mm:aa")+ " IST" : ''} </p>
+              <p className="w-[30%] text-colorSecound text-[12px] font-medium text-right">{cmatch?.date_start_ist ? format(new Date(cmatch?.date_start_ist), "dd MMM, yyyy, EEE, hh:mm:aa") + " IST" : ''} </p>
 
             </div>
 
             <div className="border-t-[1px] border-[#E7F2F4]"></div>
 
-            
-              <div className="flex justify-between items-center text-[14px] py-3 px-3">
-                <Link href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
-                  <div className="">
-                    <p className="text-colorSecound text-[12px] mb-4 font-medium">
-                      {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
-                    </p>
-                    <div className="flex items-center space-x-2 font-medium md:w-full mb-4">
-                      <div className="flex items-center space-x-2">
-                        <Image
-                          src={cmatch.teama.logo_url || '/assets/img/ring.png'}
-                          className="h-[30px] rounded-full"
-                          width={30}
-                          height={30}
-                          alt={cmatch.teama.short_name}
-                          loading="lazy"
-                        />
-                        <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-colorThird font-semibold text-[14px]"}`}>
-                          {cmatch.teama.short_name} -{" "}
-                        </span>
-                      </div>
-                      <p className="text-[14px] flex gap-[4px] items-baseline">
-                        <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : " font-semibold text-[14px]"}`}>
-                          {cmatch.teama.scores}
-                        </span>
-                        <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-colorThird text-[13px]"}`}>
-                          {" "}
-                          ({cmatch.teama.overs})
-                        </span>
-                      </p>
-                    </div>
 
-                    
-                      <div className="flex items-center space-x-2 font-medium md:w-full">
-                        <div className="flex items-center space-x-2">
-                          <Image
-                            src={cmatch.teamb.logo_url || '/assets/img/ring.png'}
-                            className="h-[30px]"
-                            width={30}
-                            height={30}
-                            alt={cmatch.teamb.short_name}
-                            loading="lazy"
-                          />
-                          <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-colorThird font-semibold text-[14px]"}`}>
-                            {cmatch.teamb.short_name} -{" "}
-                          </span>
-                        </div>
-                        <p className="text-[14px] flex gap-[4px] items-baseline">
-                          <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[14px] font-semibold "}`}>
-                            {cmatch.teamb.scores}
-                          </span>
-                          <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-colorThird text-[13px]"}`}>
-                            ({cmatch.teamb.overs})
-                          </span>
-                        </p>
-                      </div>
-                   
-                  </div>
-                </Link>
-
-                <div className="h-[100px] border-l-[1px] border-[#efefef]"></div>
-
-                <Link className="w-[25%]" href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
-                  <div className=" font-semibold flex flex-col items-center">
-                    {(cmatch?.result_type === 1 || cmatch?.result_type === 2) &&
-
-
+            <div className="flex justify-between items-center text-[14px] py-3 px-3">
+              <Link href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
+                <div className="">
+                  <p className="text-colorSecound text-[12px] mb-4 font-medium">
+                    {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
+                  </p>
+                  <div className="flex items-center space-x-2 font-medium md:w-full mb-4">
+                    <div className="flex items-center space-x-2">
                       <Image
-                        src="/assets/img/home/win.png"
-                        width={26}
+                        src={cmatch.teama.logo_url || '/assets/img/ring.png'}
+                        className="h-[30px] rounded-full"
+                        width={30}
                         height={30}
-                        style={{ width: "26px", height: "30px" }}
-                        alt=""
+                        alt={cmatch.teama.short_name}
                         loading="lazy"
                       />
-                    }
-                    <p className="text-accent text-[15px] w-[75%] text-center">
-                      {cmatch.result}
+                      <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-colorThird font-semibold text-[14px]"}`}>
+                        {cmatch.teama.short_name} -{" "}
+                      </span>
+                    </div>
+                    <p className="text-[14px] flex gap-[4px] items-baseline">
+                      <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : " font-semibold text-[14px]"}`}>
+                        {cmatch.teama.scores}
+                      </span>
+                      <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-colorThird text-[13px]"}`}>
+                        {" "}
+                        ({cmatch.teama.overs})
+                      </span>
                     </p>
                   </div>
-                </Link>
 
-                {(cmatch.man_of_the_match && !Array.isArray(cmatch.man_of_the_match)) &&
-                  <>
-                    <div className="h-[100px] border-l-[1px] border-[#e7f2f4]"></div>
-                    <Link
-                      href={
-                        "/player/" +
-                        playerUrls[cmatch?.man_of_the_match?.pid]
-                      }>
-                      <div className="flex flex-col items-center">
 
-                        <PlayerImage key={cmatch?.man_of_the_match?.pid} player_id={cmatch?.man_of_the_match?.pid} height={38} width={30} className="rounded-full" />
-                        <p className="text-[14px] font-semibold">{cmatch?.man_of_the_match?.name}</p>
-                        <p className="text-[14px]">Man of the match</p>
-                      </div>
-                    </Link>
-                  </>
-                }
-              </div>
+                  <div className="flex items-center space-x-2 font-medium md:w-full">
+                    <div className="flex items-center space-x-2">
+                      <Image
+                        src={cmatch.teamb.logo_url || '/assets/img/ring.png'}
+                        className="h-[30px]"
+                        width={30}
+                        height={30}
+                        alt={cmatch.teamb.short_name}
+                        loading="lazy"
+                      />
+                      <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-colorThird font-semibold text-[14px]"}`}>
+                        {cmatch.teamb.short_name} -{" "}
+                      </span>
+                    </div>
+                    <p className="text-[14px] flex gap-[4px] items-baseline">
+                      <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "text-[14px] font-semibold "}`}>
+                        {cmatch.teamb.scores}
+                      </span>
+                      <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[13px] text-[black]" : "text-colorThird text-[13px]"}`}>
+                        ({cmatch.teamb.overs})
+                      </span>
+                    </p>
+                  </div>
+
+                </div>
+              </Link>
+
+              <div className="h-[100px] border-l-[1px] border-[#efefef]"></div>
+
+              <Link className="w-[25%]" href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
+                <div className=" font-semibold flex flex-col items-center">
+                  {(cmatch?.result_type === 1 || cmatch?.result_type === 2) &&
+
+
+                    <Image
+                      src="/assets/img/home/win.png"
+                      width={26}
+                      height={30}
+                      style={{ width: "26px", height: "30px" }}
+                      alt=""
+                      loading="lazy"
+                    />
+                  }
+                  <p className="text-accent text-[15px] w-[75%] text-center">
+                    {cmatch.result}
+                  </p>
+                </div>
+              </Link>
+
+              {(cmatch.man_of_the_match && !Array.isArray(cmatch.man_of_the_match)) &&
+                <>
+                  <div className="h-[100px] border-l-[1px] border-[#e7f2f4]"></div>
+                  <Link
+                    href={
+                      "/player/" +
+                      playerUrls[cmatch?.man_of_the_match?.pid]
+                    }>
+                    <div className="flex flex-col items-center">
+
+                      <PlayerImage key={cmatch?.man_of_the_match?.pid} player_id={cmatch?.man_of_the_match?.pid} height={38} width={30} className="rounded-full" />
+                      <p className="text-[14px] font-semibold">{cmatch?.man_of_the_match?.name}</p>
+                      <p className="text-[14px]">Man of the match</p>
+                    </div>
+                  </Link>
+                </>
+              }
+            </div>
 
             <div className="border-t-[1px] border-[#E7F2F4]"></div>
 
@@ -285,30 +285,30 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
           {/* Mobile */}
 
           <div className="lg:hidden rounded-lg p-4 mb-4 bg-[#ffffff] performance-section relative">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center space-x-2">
-                 
-                <div
-                 className={`flex text-[13px] items-center rounded-full uppercase font-semibold ${cmatch.status_str === "Cancelled" ? "text-red-600" : "text-accent"
-                    }`}
-                  style={{ gap: "2px" }}
-                >
-                  <span
-                    className={`w-[8px] h-[8px] rounded-full ${cmatch.status_str === "Cancelled" ? "bg-red-600" : "bg-accent"
-                      }`}
-                  > </span> {cmatch.status_str}
-                </div>
-                <div>
-                  <Link href={"/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) + "/" + cmatch.competition.cid}  >
-                    <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
-                      {cmatch.competition.abbr} -{" "}
-                      {cmatch.competition.season}
-                    </h2>
-                  </Link>
-                </div>
 
+            <div className="flex items-center space-x-2 mb-2">
+
+              <div
+                className={`flex text-[13px] items-center rounded-full uppercase font-semibold ${cmatch.status_str === "Cancelled" ? "text-red-600" : "text-accent"
+                  }`}
+                style={{ gap: "2px" }}
+              >
+                <span
+                  className={`w-[8px] h-[8px] rounded-full ${cmatch.status_str === "Cancelled" ? "bg-red-600" : "bg-accent"
+                    }`}
+                > </span> {cmatch.status_str}
               </div>
+
+              <Link href={"/series/" + urlStringEncode(cmatch.competition.title + "-" + cmatch.competition.season) + "/" + cmatch.competition.cid}  >
+                <h2 className="text-[15px] font-semibold pl-[10px] border-l-[1px] border-[#E4E9F0]">
+                  {cmatch.competition.abbr} -{" "}
+                  {cmatch.competition.season}
+                </h2>
+              </Link>
+
+
             </div>
+
 
             <div className="border-t-[1px] border-[#E7F2F4]"></div>
 
@@ -316,75 +316,72 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
               <Link href={"/scorecard/" + urlStringEncode(cmatch?.teama?.short_name + "-vs-" + cmatch?.teamb?.short_name + "-" + cmatch?.subtitle + "-" + cmatch?.competition?.title + "-" + cmatch?.competition?.season) + "/" + cmatch.match_id}>
                 <div className="py-2 pb-3">
                   <div className="flex justify-between items-end mb-4 w-full">
-                  <p className="text-colorSecound text-[11px] font-normal w-[54%]">
-                    {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
-                  </p>
-                   <p className="text-colorSecound text-[11px] font-normal w-[46%] text-right">
-                    {cmatch?.date_start_ist ? format(new Date(cmatch?.date_start_ist), "dd MMM, yyyy, EEE, hh:mm:aa") +" IST": ''}
+                    <p className="text-colorSecound text-[11px] font-normal w-[54%]">
+                      {cmatch.subtitle}, {cmatch.format_str}, {cmatch.venue.location}
+                    </p>
+                    <p className="text-colorSecound text-[11px] font-normal w-[46%] text-right">
+                      {cmatch?.date_start_ist ? format(new Date(cmatch?.date_start_ist), "dd MMM, yyyy, EEE, hh:mm:aa") + " IST" : ''}
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-[14px]">
                     <div className="w-[68%]">
-                      <div className="items-center space-x-2 font-medium md:w-full mb-4">
-                        <div className="flex items-center space-x-2">
-                          <Image
-                            src={cmatch.teama.logo_url || '/assets/img/ring.png'}
-                            className="h-[30px] rounded-full"
-                            width={30}
-                            height={30}
-                            alt={cmatch.teama.short_name}
-                            loading="lazy"
-                          />
-                          <div>
-                            <span className="flex items-center gap-1">
-                              <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-medium text-[14px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
-                                {cmatch.teama.short_name}
-                              </span>
+
+                      <div className="flex items-center space-x-2 font-medium md:w-full mb-4">
+                        <Image
+                          src={cmatch.teama.logo_url || '/assets/img/ring.png'}
+                          className="h-[30px] rounded-full"
+                          width={30}
+                          height={30}
+                          alt={cmatch.teama.short_name}
+                          loading="lazy"
+                        />
+                        <div>
+                          <span className="flex items-center gap-1">
+                            <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-medium text-[14px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
+                              {cmatch.teama.short_name}
                             </span>
-                            <p className="flex items-end gap-2">
-                              <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[#434c59]"}`}>
-                                {cmatch.teama.scores}
-                              </span>
+                          </span>
+                          <p className="flex items-end gap-2">
+                            <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[#434c59]"}`}>
+                              {cmatch.teama.scores}
+                            </span>
 
-                              <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-colorThird text-[12px] font-normal"}`}>
-                                ({cmatch.teama.overs})
-                              </span>
-                            </p>
-                          </div>
+                            <span className={`${(cmatch.teama.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-colorThird text-[12px] font-normal"}`}>
+                              ({cmatch.teama.overs})
+                            </span>
+                          </p>
                         </div>
                       </div>
 
 
-                      <div className="">
-                        <div className="flex items-center space-x-2 font-medium md:w-full">
-                          <div className="flex items-center space-x-2">
-                            <Image
-                              src={cmatch.teamb.logo_url || '/assets/img/ring.png'}
-                              className="h-[30px] rounded-full"
-                              width={30}
-                              height={30}
-                              alt={cmatch.teamb.short_name}
-                              loading="lazy"
-                            />
-                            <div>
-                              <span className="flex items-center gap-1">
-                                <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-medium text-[14px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
-                                  {cmatch.teamb.short_name}
-                                </span>
-                              </span>
-                              <p className="flex items-end gap-2">
-                                <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[#434c59]"}`}>
-                                  {cmatch.teamb.scores}
-                                </span>
+                      <div className="flex items-center space-x-2 font-medium md:w-full">
+                        <Image
+                          src={cmatch.teamb.logo_url || '/assets/img/ring.png'}
+                          className="h-[30px] rounded-full"
+                          width={30}
+                          height={30}
+                          alt={cmatch.teamb.short_name}
+                          loading="lazy"
+                        />
+                        <div>
+                          <span className="flex items-center gap-1">
+                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-medium text-[14px] text-[black]" : "text-[#5e5e5e] font-medium"}`}>
+                              {cmatch.teamb.short_name}
+                            </span>
+                          </span>
+                          <p className="flex items-end gap-2">
+                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "font-semibold text-[14px] text-[black]" : "font-semibold text-[#434c59]"}`}>
+                              {cmatch.teamb.scores}
+                            </span>
 
-                                <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-colorThird text-[12px] font-normal"}`}>
-                                  ({cmatch.teamb.overs})
-                                </span>
-                              </p>
-                            </div>
-                          </div>
+                            <span className={`${(cmatch.teamb.team_id === cmatch?.winning_team_id) ? "text-[black] text-[12px] font-normal" : "text-colorThird text-[12px] font-normal"}`}>
+                              ({cmatch.teamb.overs})
+                            </span>
+                          </p>
                         </div>
                       </div>
+
+
                     </div>
 
 
@@ -448,7 +445,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                         "/player/" +
                         playerUrls[cmatch?.man_of_the_match?.pid]
                       }>
-                      <div className="flex items-center justify-between">
+                      
                         <div className="flex items-center gap-2" >
                           <PlayerImage key={cmatch?.man_of_the_match?.pid} player_id={cmatch?.man_of_the_match?.pid}
                             height={32}
@@ -460,7 +457,7 @@ export default function CompletedMatches({ completedMatch }: CompletedMatchesPro
                             <p className="text-[11px]">Man of the match </p>
                           </div>
                         </div>
-                      </div>
+                     
                     </Link>
                   </>}
               </div>
