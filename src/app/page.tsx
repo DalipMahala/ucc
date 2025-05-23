@@ -100,6 +100,7 @@ export default async function Home(props: { params: Params }) {
   return (
     <Layout>
       <ChatComponent></ChatComponent>
+
       <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
 
         <div className="md:grid grid-cols-12 gap-4">
@@ -130,7 +131,7 @@ export default async function Home(props: { params: Params }) {
           </div>
         </div>
 
-        <div className="">
+       
 
 
           <h2 className="text-1xl font-semibold pl-[4px] border-l-[3px] border-[#2182F8] my-4">
@@ -138,8 +139,8 @@ export default async function Home(props: { params: Params }) {
           </h2>
 
 
-          <div className="rounded-lg bg-[#ffffff] p-4">
-            <div className="grid md:gap-6 gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 md:py-3 md:px-2">
+         
+            <div className="grid md:gap-6 gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 rounded-lg bg-[#ffffff] p-6">
               {ranking?.ranks?.teams?.odis.slice(0, 10)?.map((team: any, index: number) => (
                 <div className="relative rounded-md overflow-hidden text-white col-span-1" key={index}>
 
@@ -154,6 +155,7 @@ export default async function Home(props: { params: Params }) {
 
 
                   <div className="absolute inset-0 bg-gradient-to-r from-[#14439e] to-[#14429eb0] "></div>
+                  
                   <Link href={"/team/" + urlStringEncode(team?.team) + "/" + team?.tid}>
                     <div className="relative flex items-center space-x-2 md:justify-center  py-3 md:px-0 px-3">
                       <Image
@@ -172,14 +174,12 @@ export default async function Home(props: { params: Params }) {
 
 
             </div>
-          </div>
+        
 
 
 
           <CardSlider></CardSlider>
 
-
-        </div>
         <FeatureSeries featuredSeries={featuredSeries}></FeatureSeries>
       </section>
     </Layout>

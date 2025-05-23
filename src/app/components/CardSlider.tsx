@@ -91,11 +91,11 @@ export default function Slider() {
   return (
     <>
       <div className="flex justify-between items-center py-4">
-        <div>
+      
           <h2 className="text-1xl font-semibold pl-[4px] border-l-[3px] border-[#2182F8]">
             Web Stories
           </h2>
-        </div>
+        
         <Link href="https://uccricket.live/web-stories/">
           <div className="text-[#1A80F8] font-semibold flex items-center justify-center text-[13px] pt-2 underline">
             View More{" "}
@@ -161,11 +161,11 @@ export default function Slider() {
           disabled={currentIndex === 0}
           aria-label="Previous slide"
         >
-          <span className="text-[20px] font-bold">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-3">
+          
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-3 text-[20px] font-bold">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
             </svg>
-          </span>
+          
         </button>
         <button
           className="absolute top-1/2 right-4 transform -translate-y-1/2 md:bg-white bg-[#224ea4] md:text-[black] text-[white] bg-opacity-80 px-2 py-2 rounded-full"
@@ -173,11 +173,11 @@ export default function Slider() {
           disabled={currentIndex >= images.length - itemsPerPage}
           aria-label="Next slide"
         >
-          <span className="text-[20px] font-bold">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-3">
+          
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-3 text-[20px] font-bold">
               <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
             </svg>
-          </span>
+          
         </button>
       </div>
     </>

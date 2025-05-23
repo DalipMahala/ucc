@@ -82,8 +82,8 @@ export default function CountriesList({ countries }: countries) {
 
       <div className="bg-white rounded-lg px-4">
         {/* Search Form */}
-        <div className="py-2 mb-3">
-          <form className="flex justify-between items-center border-2 p-1 px-3 rounded-lg">
+       
+          <form className="flex justify-between items-center border-2 p-1 px-3 rounded-lg py-2 mb-3">
            
               <input
                 className="font-normal text-[15px] outline-none"
@@ -105,7 +105,7 @@ export default function CountriesList({ countries }: countries) {
               />
            
           </form>
-        </div>
+       
 
         {/* Country Blocks */}
         {filteredCountries?.length > 0 ? (
@@ -154,7 +154,6 @@ export default function CountriesList({ countries }: countries) {
                     country.competitions.map((compt: Competition, index: number) => (
                       <div className="flex items-center gap-[2px] font-normal text-[13px] text-[#51555E]" key={index}>
                        
-                          <span>
                             <svg 
                               xmlns="http://www.w3.org/2000/svg" 
                               fill="none" 
@@ -169,12 +168,12 @@ export default function CountriesList({ countries }: countries) {
                                 d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" 
                               />
                             </svg>
-                          </span>
+                         
                           <Link 
                             className="hover:text-[#1a80f8]" 
                             href={`series/${urlStringEncode(`${compt.title}-${compt.season}`)}/${compt.cid}`}
                           >
-                            <p>{compt.title}</p>
+                            {compt.title}
                           </Link>
                        
                       </div>

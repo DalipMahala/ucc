@@ -153,6 +153,7 @@ const SeriesSection = ({ series, match }: SeriesSectionProps) => (
 
     <div className="lg:grid grid-cols-12 gap-4">
       <div className="col-span-2"></div>
+
       <div className="col-span-8">
         <SeriesNavigation series={series} totalTeams={series.total_teams} />
         {match && (
@@ -163,6 +164,7 @@ const SeriesSection = ({ series, match }: SeriesSectionProps) => (
         )}
         {series.newUrl && <FeatureNews newsUrl={series.newUrl} />}
       </div>
+
       <div className="col-span-2"></div>
     </div>
   </React.Fragment>
@@ -174,10 +176,10 @@ interface SeriesNavigationProps {
 }
 
 const SeriesNavigation = ({ series, totalTeams }: SeriesNavigationProps) => (
-  <div className="mb-4">
-    <div className="flex text-1xl md:space-x-8 space-x-4 p-2 bg-[#ffffff] rounded-lg overflow-auto relative overflow-x-auto [&::-webkit-scrollbar]:h-[5px] [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-[#DFE9F6]">
+  
+    <div className="flex text-1xl md:space-x-8 space-x-4 p-2 bg-[#ffffff] rounded-lg overflow-auto relative overflow-x-auto [&::-webkit-scrollbar]:h-[5px] [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-[#DFE9F6] mb-4">
       <button className="font-medium py-2 md:px-5 px-2 bg-[#1A80F8] text-white rounded-md whitespace-nowrap">
-        <span>Fixtures</span>
+       Fixtures
       </button>
 
       {totalTeams > 2 && (
@@ -200,7 +202,7 @@ const SeriesNavigation = ({ series, totalTeams }: SeriesNavigationProps) => (
         </button>
       </Link>
     </div>
-  </div>
+  
 );
 
 interface MatchViewProps {
@@ -356,7 +358,7 @@ const MatchTime = ({ date, isMobile }: MatchTimeProps) => {
 
   return (
     <div className={`font-medium text-center  ${isMobile ? '' : 'w-[50%] flex justify-end'}`}>
-      <div className="">
+      
         {isToday ? (
           <>
             <span className="text-[13px] font-normal text-[#a45b09]">Start in</span>
@@ -368,7 +370,7 @@ const MatchTime = ({ date, isMobile }: MatchTimeProps) => {
             {format(new Date(date), "hh:mm:aa")}
           </p>
         )}
-      </div>
+     
     </div>
   );
 };
