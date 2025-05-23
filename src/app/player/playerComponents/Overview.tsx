@@ -422,7 +422,7 @@ export default function Overview({ playerAdvanceStats, playerStats, urlString, r
                       <div className="grid md:grid-cols-5 grid-cols-3 gap-4">
                         {teamsPlayedFor?.map((teams: any, index: number) => (
                           <div className="col-span-1" key={index}>
-                            <Link href={"/team/" + urlStringEncode(teams.abbr) + "/" + teams.tid}>
+                            <Link href={"/team/" + urlStringEncode(teams.title) + "/" + teams.tid}>
                               <div className="bg-white p-2 rounded-lg border-[1px] border-[#ebebeb] text-center mb-2">
                                 <div className="flex items-center justify-center">
                                   {teams.logo_url ? (

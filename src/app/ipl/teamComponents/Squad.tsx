@@ -10,33 +10,91 @@ import PlayerImage from "@/app/components/PlayerImage";
 interface Squads {
   teamPlayers: any | null;
   pointTables: any | null;
-  matcheInfo: any;
+  cid: number;
 }
+
+// interface Team {
+//   players?: Player[];
+// }
 export default function Squads({
   teamPlayers,
   pointTables,
-  matcheInfo,
+  cid
 }: Squads) {
   const teams = teamPlayers[0]?.team;
   const players = teamPlayers[0]?.players?.["t20"];
-  const squads =
-    matcheInfo?.["match-playing11"]?.teama?.team_id === teams?.tid
-      ? matcheInfo?.["match-playing11"]?.teama?.squads
-      : matcheInfo?.["match-playing11"]?.teamb?.squads;
-  // ['match-playing11']
-  // console.log("squads",squads);
+
+
+   const [squads, setSquads] = useState([]);
+    useEffect(() => {
+      async function fetchSquads() {
+        try {
+          const response = await fetch("/api/series/SeriesSquads", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+            },
+            body: JSON.stringify({ cid: cid }),
+          });
+          if (!response.ok) {
+            console.error(
+              `Error: API returned ${response.status} for CID ${cid}`
+            );
+            return null; // Skip failed requests
+          }
+  
+          const result = await response.json();
+          let items = result?.data?.squads || [];
+          const teamSquad = items.find((sd: any) => [sd?.team_id,].includes(Number(teams?.tid )) );
+          setSquads(teamSquad?.players);
+        } catch (error) {
+          console.error("Error fetching matches:", error);
+        }
+      }
+      fetchSquads()
+    }, [cid]);
+
+ 
+ 
+
+  const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
+  
+    useEffect(() => {
+      const getAllPlayerIds = (squads: any[]) => {
+        const allIds = [
+          ...squads.flatMap((team: {  pid: any }) => team.pid)
+          ];
+        return [...new Set(allIds)]; // Deduplicate
+      };
+      
+      const fetchPlayerUrls = async () => {
+        const ids = getAllPlayerIds(squads);
+        if (ids.length === 0) return;
+        const res = await fetch('/api/player-urls', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+          body: JSON.stringify({ ids }),
+        });
+        const data = await res.json();
+        setPlayerUrls(data);
+      };
+  
+      fetchPlayerUrls();
+    }, [squads]);
+    
   const teamASquadBatsmen = squads?.filter(
-    (events: { role: string }) => events.role === "bat" || events.role === "wk"
+    (events: { playing_role: string }) => events.playing_role === "bat" || events.playing_role === "wk"
   );
-  let teamASquadBowler = [];
-  let teamASquadAll = [];
+  let teamASquadBowler: any[] = [];
+  let teamASquadAll: any[] = [];
   if (squads?.length > 0) {
      teamASquadBowler = squads?.filter(
-      (events: { role: string }) => events.role === "bowl"
+      (events: { playing_role: string }) => events.playing_role === "bowl"
     );
 
      teamASquadAll = squads?.filter(
-      (events: { role: string }) => events.role === "all"
+      (events: { playing_role: string }) => events.playing_role === "all"
     );
   }
 
@@ -170,17 +228,15 @@ export default function Squads({
                             <Link className="rounded-md border-[1px] border-[##E2E2E2]"
                               href={
                                 "/player/" +
-                                urlStringEncode(squads?.name) +
-                                "/" +
-                                squads?.player_id
+                                playerUrls[squads?.pid]
                               }
                               key={index}
                             >
                               <div className="text-center p-4 ">
                                 <div className="relative">
                                   <PlayerImage
-                                    key={squads?.player_id}
-                                    player_id={squads?.player_id}
+                                    key={squads?.pid}
+                                    player_id={squads?.pid}
                                     width={47}
                                     height={47}
                                     className="w-[47px] h-[47px] mx-auto rounded-full mb-2"
@@ -196,7 +252,7 @@ export default function Squads({
                                   />
                                 </div>
                                 <h3 className="text-sm font-semibold ">
-                                  {squads.name}
+                                  {squads.title}
                                 </h3>
                                 <p className="text-xs text-gray-600">Batsman</p>
                               </div>
@@ -215,17 +271,15 @@ export default function Squads({
                           <Link className="rounded-md border-[1px] border-[##E2E2E2]"
                             href={
                               "/player/" +
-                              urlStringEncode(bowler?.name) +
-                              "/" +
-                              bowler?.player_id
+                              playerUrls[bowler?.pid]
                             }
                             key={index}
                           >
                             <div className="text-center p-4 ">
                               <div className="relative">
                                 <PlayerImage
-                                  key={bowler?.player_id}
-                                  player_id={bowler?.player_id}
+                                  key={bowler?.pid}
+                                  player_id={bowler?.pid}
                                   width={47}
                                   height={47}
                                   className="w-[47px] h-[47px] mx-auto rounded-full mb-2"
@@ -241,7 +295,7 @@ export default function Squads({
                                 />
                               </div>
                               <h3 className="text-sm font-semibold text-gray-800">
-                                {bowler.name}
+                                {bowler.title}
                               </h3>
                               <p className="text-xs text-gray-600">Bowler</p>
                             </div>
@@ -260,17 +314,15 @@ export default function Squads({
                             <Link className="rounded-md border-[1px] border-[##E2E2E2]"
                               href={
                                 "/player/" +
-                                urlStringEncode(allrounder?.name) +
-                                "/" +
-                                allrounder?.player_id
+                                playerUrls[allrounder?.pid]
                               }
                               key={index}
                             > 
                               <div className="text-center p-4">
                                 <div className="relative">
                                   <PlayerImage
-                                    key={allrounder?.player_id}
-                                    player_id={allrounder?.player_id}
+                                    key={allrounder?.pid}
+                                    player_id={allrounder?.pid}
                                     width={47}
                                     height={47}
                                     className="w-[47px] h-[47px] mx-auto rounded-full mb-2"
@@ -285,7 +337,7 @@ export default function Squads({
                                   />
                                 </div>
                                 <h3 className="text-sm font-semibold text-gray-800">
-                                  {allrounder.name}
+                                  {allrounder.title}
                                 </h3>
                                 <p className="text-xs text-gray-600">
                                   All-Rounder
@@ -306,3 +358,5 @@ export default function Squads({
     </section>
   );
 }
+
+

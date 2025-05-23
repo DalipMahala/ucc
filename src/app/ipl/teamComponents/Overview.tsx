@@ -34,7 +34,6 @@ interface teamview {
   teamPlayers: any;
   teamLast5match: any;
   pointTables: any;
-  matcheInfo: any;
   seriesMatches: any;
   venueDetails: any;
 }
@@ -49,7 +48,6 @@ export default function Overview({
   teamPlayers,
   teamLast5match,
   pointTables,
-  matcheInfo,
   seriesMatches,
   venueDetails
 }: teamview) {
@@ -68,22 +66,72 @@ export default function Overview({
   const players = teamPlayers[0]?.players?.["t20"] || [];
   const standings = pointTables?.standing?.standings || [];
 
-  const matchPlaying11 = matcheInfo?.['match-playing11'] || {};
-  // const squads = matchPlaying11?.teama?.team_id === teams?.tid
-  //   ? matchPlaying11?.teama?.squads || []
-  //   : matchPlaying11?.teamb?.squads || [];
+  const [squads, setSquads] = useState([]);
+      useEffect(() => {
+        async function fetchSquads() {
+          try {
+            const response = await fetch("/api/series/SeriesSquads", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+              },
+              body: JSON.stringify({ cid: cid }),
+            });
+            if (!response.ok) {
+              console.error(
+                `Error: API returned ${response.status} for CID ${cid}`
+              );
+              return null; // Skip failed requests
+            }
+    
+            const result = await response.json();
+            let items = result?.data?.squads || [];
+            const teamSquad = items.find((sd: any) => [sd?.team_id,].includes(Number(teams?.tid )) );
+            setSquads(teamSquad?.players);
+          } catch (error) {
+            console.error("Error fetching matches:", error);
+          }
+        }
+        fetchSquads()
+      }, [cid]);
+  
+   
+   
+  
+    const [playerUrls, setPlayerUrls] = useState<Record<string, string>>({});
+    
+      useEffect(() => {
+        const getAllPlayerIds = (squads: any[]) => {
+          const allIds = [
+            ...squads.flatMap((team: {  pid: any }) => team.pid)
+            ];
+          return [...new Set(allIds)]; // Deduplicate
+        };
+        
+        const fetchPlayerUrls = async () => {
+          const ids = getAllPlayerIds(squads);
+          if (ids.length === 0) return;
+          const res = await fetch('/api/player-urls', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`, },
+            body: JSON.stringify({ ids }),
+          });
+          const data = await res.json();
+          setPlayerUrls(data);
+        };
+    
+        fetchPlayerUrls();
+      }, [squads]);
 
     const { batsmen, bowlers, allRounders } = React.useMemo(() => {
-      const squads = matchPlaying11?.teama?.team_id === teams?.tid
-        ? matchPlaying11?.teama?.squads || []
-        : matchPlaying11?.teamb?.squads || [];
         
       return {
-        batsmen: squads?.filter((sd: any) => ['bat', 'wk'].includes(sd?.role)) || null,
-        bowlers: squads?.filter((sd: any) => ['bowl'].includes(sd?.role)) || null,
-        allRounders: squads?.filter((sd: any) => ['all'].includes(sd?.role)) || null
+        batsmen: squads?.filter((sd: any) => ['bat', 'wk'].includes(sd?.playing_role)) || null,
+        bowlers: squads?.filter((sd: any) => ['bowl'].includes(sd?.playing_role)) || null,
+        allRounders: squads?.filter((sd: any) => ['all'].includes(sd?.playing_role)) || null
       };
-    }, [matchPlaying11, teams?.tid]);
+    }, [squads, teams?.tid]);
 
   const completedMatch = useMemo(() => {
     return seriesMatches?.resultMatch
@@ -1034,22 +1082,22 @@ export default function Overview({
                           className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]"
                           key={index}
                         >
-                          <Link href={"/player/" + urlStringEncode(player?.name) + "/" + player?.player_id}>
+                          <Link href={"/player/" + playerUrls[player?.pid]}>
                             <div className="relative">
                               <PlayerImage
-                                key={player?.player_id}
-                                player_id={player?.player_id}
+                                key={player?.pid}
+                                player_id={player?.pid}
                                 height={55}
                                 width={55}
                                 className="h-[55px] mx-auto rounded-full mb-2"
                               />
                               <Image
                                 loading="lazy"
-                                src={player?.role === "all"
+                                src={player?.playing_role === "all"
                                   ? "/assets/img/player/bat-ball.png"
-                                  : player?.role === "wk"
+                                  : player?.playing_role === "wk"
                                     ? "/assets/img/player/bat.png"
-                                    : player?.role === "bat"
+                                    : player?.playing_role === "bat"
                                       ? "/assets/img/player/bat.png"
                                       : "/assets/img/player/ball.png"}
                                 className="h-[23px] absolute md:right-[17px] right-[35px] bottom-0 bg-white rounded-full p-[4px]"
@@ -1059,16 +1107,16 @@ export default function Overview({
                               />
                             </div>
                             <h3 className="text-[14px] font-medium text-gray-800 hover:text-[#1a80f8]">
-                              {player?.name}
+                              {player?.title}
                             </h3>
                             <div className="flex gap-1 items-center justify-center">
                               {/* <Image src="/assets/img/flag/b-2.png" className="h-[15px] rounded-full" width={15} height={15} alt="" /> */}
                               <p className="text-xs text-gray-600">
-                                {player?.role === "all"
+                                {player?.playing_role === "all"
                                   ? "All-Rounder"
-                                  : player?.role === "wk"
+                                  : player?.playing_role === "wk"
                                     ? "Wiket-Keeper"
-                                    : player?.role === "bat"
+                                    : player?.playing_role === "bat"
                                       ? "Batsman"
                                       : "Bowler"}
                               </p>
@@ -1084,11 +1132,11 @@ export default function Overview({
                           className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]"
                           key={index}
                         >
-                          <Link href={"/player/" + urlStringEncode(player?.name) + "/" + player?.player_id}>
+                          <Link href={"/player/" + playerUrls[player?.pid]}>
                             <div className="relative">
                               <PlayerImage
-                                key={player?.player_id}
-                                player_id={player?.player_id}
+                                key={player?.pid}
+                                player_id={player?.pid}
                                 height={55}
                                 width={55}
                                 className="h-[55px] mx-auto rounded-full mb-2"
@@ -1103,7 +1151,7 @@ export default function Overview({
                               />
                             </div>
                             <h3 className="text-[14px] font-medium text-gray-800 hover:text-[#1a80f8]">
-                              {player?.name}
+                              {player?.title}
                             </h3>
                             <div className="flex gap-1 items-center justify-center">
                               {/* <Image src="/assets/img/flag/b-2.png" className="h-[15px] rounded-full" width={15} height={15} alt="" /> */}
@@ -1121,11 +1169,11 @@ export default function Overview({
                           className="text-center p-4 rounded-md border-[1px] border-[##E2E2E2]"
                           key={index}
                         >
-                          <Link href={"/player/" + urlStringEncode(player?.name) + "/" + player?.player_id}>
+                          <Link href={"/player/" + playerUrls[player?.pid]}>
                             <div className="relative">
                               <PlayerImage
-                                key={player?.player_id}
-                                player_id={player?.player_id}
+                                key={player?.pid}
+                                player_id={player?.pid}
                                 height={55}
                                 width={55}
                                 className="h-[55px] mx-auto rounded-full mb-2"
@@ -1140,7 +1188,7 @@ export default function Overview({
                               />
                             </div>
                             <h3 className="text-[14px] font-medium text-gray-800 hover:text-[#1a80f8]">
-                              {player?.name}
+                              {player?.title}
                             </h3>
                             <div className="flex gap-1 items-center justify-center">
                               {/* <Image src="/assets/img/flag/b-2.png" className="h-[15px] rounded-full" width={15} height={15} alt="" /> */}
