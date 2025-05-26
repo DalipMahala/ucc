@@ -817,13 +817,12 @@ export default function Live({
 
 
               <div className="lg:col-span-4 md:col-span-5">
-                <div className="rounded-lg bg-[#ffffff]">
-                  <div className="p-4 cust-box-click-container">
+               
+                  <div className="rounded-lg bg-[#ffffff] p-4 cust-box-click-container">
                     <div className="flex items-center justify-between mb-4">
-                      <div className="flex space-x-2">
-                        <div className="border-l-[3px] border-[#229ED3] h-[19px]" />
-                        <h2 className="text-1xl font-semibold">Probability</h2>
-                      </div>
+                     
+                        <h2 className="text-[15px] font-semibold pl-[7px] border-l-[3px] border-[#229ED3]">Probability</h2>
+                      
                       <div className="flex items-center gap-2">
                         <button
                           className={`cust-box-click-button  font-medium ${activeTab === "tab1"
@@ -1002,9 +1001,6 @@ export default function Live({
 
                     )}
                   </div>
-
-
-                </div>
               </div>
 
             </div>
@@ -1193,7 +1189,7 @@ export default function Live({
                                       }`}>{cruns?.score} </span>
                                   ) : (""))}
                                 </div>
-                
+
                               </div>
                             </div>
 
