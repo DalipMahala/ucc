@@ -89,7 +89,17 @@ const Header = () => {
         <div className="lg:w-[1000px] w-full mx-auto text-white md:py-5 pt-3 pb-3 flex items-center md:justify-between justify-center">
           <div>
             <Link href="/">
-              <Image priority fetchPriority="high" className="h-[39px] w-[173px]" src="https://res.cloudinary.com/dvqccxtdm/image/upload/q_auto/v1747648962/logo_c1fpuc.webp" alt="UC Cricket Logo" width={150} height={50} unoptimized/>
+              {/* <Image priority fetchPriority="high" className="h-[33px] w-[150px]"
+               src="https://res.cloudinary.com/dvqccxtdm/image/upload/q_auto/v1747648962/logo_c1fpuc.webp" alt="UC Cricket Logo" width={150} height={33} unoptimized/> */}
+               <img
+                  src="https://res.cloudinary.com/dvqccxtdm/image/upload/q_auto/v1747648962/logo_c1fpuc.webp"
+                  alt="UC Cricket Logo"
+                  width={150}
+                  height={33}
+                  decoding="sync"
+                  loading="eager"
+                  style={{ height: '33px', width: '150px', color: 'transparent' }}
+                />
             </Link>
           </div>
 
