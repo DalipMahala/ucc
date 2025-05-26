@@ -88,6 +88,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+
+       <head>
+        {/* ✅ Preload local fonts manually */}
+        <link rel="preload" href="/fonts/NotoSansDisplay-Thin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/NotoSansDisplay-Light.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/NotoSansDisplay-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/NotoSansDisplay-Medium.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/NotoSansDisplay-SemiBold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/NotoSansDisplay-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/NotoSansDisplay-Black.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+      </head>
       
       <body
         className={` ${notoSansDisplay.variable} font-sans   ${geistSans.variable} ${geistMono.variable} antialiased`} 

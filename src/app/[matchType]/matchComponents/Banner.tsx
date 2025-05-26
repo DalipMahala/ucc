@@ -131,8 +131,8 @@ export default function Banner({ matchData, match_id }: Banner) {
 
             {/* mbobile */}
 
-            <div className="md:hidden">
-              <div className="items-center flex font-semibold text-[#b9b9b9] py-4">
+           
+              <div className="md:hidden items-center flex font-semibold text-[#b9b9b9] py-4">
                 <Link href="/">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-gray-400 group-hover:text-gray-600 transition-colors" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd"></path></svg>
                 </Link>
@@ -140,7 +140,7 @@ export default function Banner({ matchData, match_id }: Banner) {
                 {seriesName}, {liveMatch?.match_info?.date_start_ist ? format(new Date(liveMatch?.match_info?.date_start_ist), "dd MMM yyyy") : ""}
 
               </div>
-            </div>
+           
           </div>
 
 
@@ -459,6 +459,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
 
           <div className="border-t-[1px] border-[#E4E9F01A]">
+            
             <div className="lg:w-[1000px] mx-auto tracking-[1px]">
 
               {/* desktop */}
@@ -629,10 +630,10 @@ export default function Banner({ matchData, match_id }: Banner) {
                     }
                   </div>
 
-                  <div>
+                  
                     {/* <span> SAP </span> need <span> 63 </span> runs in <span> 35 </span> remaining balls */}
                     <span>{liveMatch?.match_info?.status_note}</span>
-                  </div>
+                  
 
                 </div>
               </div>
@@ -644,17 +645,17 @@ export default function Banner({ matchData, match_id }: Banner) {
               }}>
 
                 <div className="flex items-center text-[13px] text-[#ffffff] rounded-full pr-3 uppercase font-semibold gap-[3px]" >
-                  <span className="rounded-full">
+                  
                     <svg className="h-[9px] w-[9px] bg-[]">
-                      <circle fill="#F23E3E" stroke="none" cx="4" cy="4" r="4"></circle>
+                      <circle fill="#F23E3E" className="rounded-full" stroke="none" cx="4" cy="4" r="4"></circle>
                     </svg>
-                  </span>
+                
                   LIVE
                 </div>
 
 
                 <div className="flex items-center justify-between">
-                  <div className="w-full">
+                  
                     <div className="flex gap-2 flex-row  uppercase items-center w-full">
                       <Image
                         className="lg:h-[42px] lg:w-[42px] h-[40px] w-[40px]"
@@ -680,7 +681,7 @@ export default function Banner({ matchData, match_id }: Banner) {
 
                     </div>
 
-                  </div>
+                 
 
                   <div className="border-r-[1px] border-[#E5EBFF33] h-[60px]"></div>
 
