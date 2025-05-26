@@ -3,7 +3,7 @@ import Layout from "@/app/components/Layout";
 import H2h from './h2h';
 import H2hipl from './h2hipl';
 import { H2hDetails, getTeamId, h2hMatch } from "@/controller/h2hController";
-import { TeamDetails, isIPLTeamDetails,AllIntTeam } from "@/controller/teamController";
+import { TeamDetails, isIPLTeamDetails, AllIntTeam } from "@/controller/teamController";
 import { notFound } from 'next/navigation';
 
 type Params = Promise<{

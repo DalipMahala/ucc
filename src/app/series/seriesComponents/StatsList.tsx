@@ -1,12 +1,11 @@
 
-
 import React from "react";
 import Link from 'next/link';
 import { MatcheStats } from "@/controller/matchInfoController";
 import { urlStringEncode } from "@/utils/utility";
 import ReadMoreCard from "@/app/components/ReadMoreCard";
 import TabMenu from "./menu";
-
+import StateSelector from './SelectStats';
 interface Stats {
     urlString: string;
     statsType: string | null;
@@ -49,6 +48,7 @@ async function fetchHtml(seriesId: number) {
 export default async function StatsList({ seriesId, urlString, statsType, isPointTable, seriesInfo, status }: Stats) {
 
     const pageHtml = await fetchHtml(seriesId);
+
 
     const renderStatus = () => {
         switch (statsType) {
@@ -161,135 +161,7 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                 <>
                     <div id="stats">
                         <div className="md:grid grid-cols-12 gap-4">
-
-{/*                             
-                            <div className="lg:col-span-3 md:col-span-4">
-                                <div className="rounded-lg p-2 mb-4 bg-[#ffffff]">
-                                    <div className="py-2 mb-2">
-                                        <h2 className="text-1xl font-semibold pl-[6px] border-l-[3px] border-[#1a80f8]">
-                                            Batting
-                                        </h2>
-                                    </div>
-                                    <div id="team-buttons" className="">
-                                        <Link href={urlString + "/stats/batting-most-run"}>
-                                            <button
-
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'batting-most-run' || statsType == undefined ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
-                                            >
-                                                Most Runs
-                                            </button>
-                                        </Link>
-                                        <Link href={urlString + "/stats/batting-highest-average"}>
-                                            <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'batting-highest-average' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
-                                            >
-                                                Best Batting Average
-                                            </button>
-                                        </Link>
-                                        <Link href={urlString + "/stats/batting-highest-strike-rate"}>
-                                            <button
-
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'batting-highest-strike-rate' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
-
-                                            >
-                                                Best Batting Strike Rate
-                                            </button>
-                                        </Link>
-
-                                        <Link href={urlString + "/stats/batting-most-hundreds"}>
-                                            <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'batting-most-hundreds' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
-                                            >
-                                                Most Hundreds
-                                            </button>
-                                        </Link>
-
-                                        <Link href={urlString + "/stats/batting-most-fifties"}>
-                                            <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'batting-most-fifties' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
-                                            >
-                                                Most Fifties
-                                            </button>
-                                        </Link>
-
-                                        <Link href={urlString + "/stats/batting-most-fours"}>
-                                            <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'batting-most-fours' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
-                                            >
-                                                Most Fours
-                                            </button>
-                                        </Link>
-
-                                        <Link href={urlString + "/stats/batting-most-sixes"}>
-                                            <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'batting-most-sixes' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
-                                            >
-                                                Most Sixes
-                                            </button>
-                                        </Link>
-
-                                    </div>
-                                </div>
-                                <div className="rounded-lg p-2 mb-4 bg-[#ffffff]">
-                                    <div className="py-2 mb-2">
-                                        <h3 className="text-1xl font-semibold pl-[6px] border-l-[3px] border-[#1a80f8]">
-                                            Bowler
-                                        </h3>
-                                    </div>
-                                    <div id="team-buttons" className="">
-                                        <Link href={urlString + "/stats/bowling-most-wicket"}>
-                                            <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'bowling-most-wicket' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
-                                            >
-                                                Most Wickets
-                                            </button>
-                                        </Link>
-                                        <Link href={urlString + "/stats/bowling-best-average"}>
-                                            <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'bowling-best-average' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
-                                            >
-                                                Best Bowling Average
-                                            </button>
-                                        </Link>
-
-                                        <Link href={urlString + "/stats/bowling-best-figures"}>
-                                            <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'bowling-best-figures' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
-                                            >
-                                                Best Bowling
-                                            </button>
-                                        </Link>
-
-                                        <Link href={urlString + "/stats/bowling-most-five-wicket-hauls"}>
-                                            <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'bowling-most-five-wicket-hauls' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
-                                            >
-                                                Most 5 Wickets Haul
-                                            </button>
-                                        </Link>
-
-                                        <Link href={urlString + "/stats/bowling-best-economy-rates"}>
-                                            <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'bowling-best-economy-rates' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
-                                            >
-                                                Best Economy
-                                            </button>
-                                        </Link>
-
-                                        <Link href={urlString + "/stats/bowling-best-strike-rates"}>
-                                            <button
-                                                className={`state-btn new-class border-t px-2 py-3 w-full font-medium active text-left rounded-md ${statsType == 'bowling-best-strike-rates' ? "bg-[#ecf2fd] text-[#1a80f8]" : "hover:bg-[#ecf2fd] hover:text-[#1a80f8]"} `}
-                                            >
-                                                Best Bowling Strike Rate
-                                            </button>
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div> */}
-                            
-
-
-                            
+               
                             <div className="col-span-12">
                                 <div id="most-runs" className={`state-content most-runs" ? "" : "hidden"}`} >
 
@@ -298,6 +170,9 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                                             <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                                                 Batting
                                             </h3>
+                                            
+                                                <StateSelector/>
+                                            
                                             <div>
                                                 <div className="overflow-x-auto">
                                                     <table className="w-full text-sm text-left text-gray-500 whitespace-nowrap">
@@ -370,6 +245,7 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                                             <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                                                 Bowling
                                             </h3>
+                                            <StateSelector/>
                                             <div>
                                                 <div className="overflow-x-auto">
                                                     <table className="w-full text-sm text-left text-gray-500 whitespace-nowrap">
