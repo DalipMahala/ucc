@@ -134,58 +134,58 @@ export default function Scorecard({
                 <button key={index}
                   className={`cust-box-click-button leading-[22px] ${openHeading === index ? "bg-[#081736] text-white" : "bg-[#ffffff] text-[#6A7586]"}  font-medium px-5 py-1 rounded-full`}
                   onClick={() => handleToggle(index)} >
-                  <span>{scorecard['short_name']}</span>
+                  {scorecard['short_name']}
                 </button>
               ))}
           </div>
 
 
-                {manOfTheMatch?.pid !== undefined &&
-                  <div className="rounded-lg bg-[#ffffff] mb-4 md:hidden">
-                    <div className="p-4"><Link href={"/player/" + playerUrls[manOfTheMatch?.pid]}>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3 ">
-                          <div>
+          {manOfTheMatch?.pid !== undefined &&
+            <div className="rounded-lg bg-[#ffffff] p-4 mb-4 md:hidden">
+              
+                <Link href={"/player/" + playerUrls[manOfTheMatch?.pid]}>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3 ">
+                      
 
-                            <PlayerImage key={manOfTheMatch?.pid} player_id={manOfTheMatch?.pid} height={50} width={50} className="rounded-lg" />
+                        <PlayerImage key={manOfTheMatch?.pid} player_id={manOfTheMatch?.pid} height={50} width={50} className="rounded-lg" />
 
-                          </div>
-                          <div className="font-medium">
-                            <h2 className="text-1xl font-semibold hover:text-[#1a80f8]">{manOfTheMatch?.name}</h2>
-                            <p className="text-[#6A7586] font-normal"> Man of the match </p>
-                          </div>
-                        </div>
-                        <Image
-                          src="/assets/img/home/win.png"
-                          width={26}
-                          height={30}
-                          style={{ width: "26px", height: "30px" }}
-                          alt=""
-                          loading="lazy"
-                        />
+                     
+                      <div className="font-medium">
+                        <h2 className="text-1xl font-semibold hover:text-[#1a80f8]">{manOfTheMatch?.name}</h2>
+                        <p className="text-[#6A7586] font-normal"> Man of the match </p>
                       </div>
-                    </Link>
                     </div>
+                    <Image
+                      src="/assets/img/home/win.png"
+                      width={26}
+                      height={30}
+                      style={{ width: "26px", height: "30px" }}
+                      alt=""
+                      loading="lazy"
+                    />
                   </div>
-                }
+                </Link>
+              
+            </div>
+          }
 
 
 
-          <div className="cust-box-click-content cust-box-click-ind1stinning mt-4">
-            <div className="md:grid grid-cols-12 gap-4">
+          
+            <div className="cust-box-click-content cust-box-click-ind1stinning mt-4 md:grid grid-cols-12 gap-4">
               <div className="lg:col-span-8 md:col-span-7">
-                <div className="rounded-t-lg bg-[#ffffff] border-b-[1px] p-4">
-                  <div className="flex justify-between items-center text-[15px]">
-                    <div className="">
+                <div className="rounded-t-lg bg-[#ffffff] border-b-[1px] p-4 flex justify-between items-center text-[15px]">
+                  
+                    
                       <h2 className="mx-2 font-semibold">Total Score</h2>
-                    </div>
-                    <div className="">
+                    
                       <p className="mx-2 font-semibold ">
                         {" "}
                         {matchscorecard?.[tabIndex]?.equations?.runs}-{matchscorecard?.[tabIndex]?.equations?.wickets} <span className="text-[#586577]">({matchscorecard?.[tabIndex]?.equations?.overs})</span>
                       </p>
-                    </div>
-                  </div>
+                   
+                 
                 </div>
 
 
@@ -194,7 +194,7 @@ export default function Scorecard({
                   <h2 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Batting
                   </h2>
-                  <div>
+                  
                     <div className=" overflow-auto relative overflow-x-auto  [&::-webkit-scrollbar] [&::-webkit-scrollbar]:h-[5px] 
                               [&::-webkit-scrollbar-track]:bg-gray-100 
                               [&::-webkit-scrollbar-thumb]:bg-[#DFE9F6] 
@@ -297,7 +297,7 @@ export default function Scorecard({
                         </span>
                       </p>
                     </div>
-                  </div>
+                  
                 </div>
 
 
@@ -305,12 +305,13 @@ export default function Scorecard({
 
                   {yetTobat?.length > 0 && yetTobat !== undefined ? (
 
-                    <div className="rounded-lg bg-[#ffffff]">
-                      <div className="p-4">
+                    <div className="rounded-lg bg-[#ffffff] p-4">
+                     
                         <h2 className="text-1xl font-semibold pl-[7px] mb-3 border-l-[3px] border-[#229ED3]">
                           Yet to bat
                         </h2>
                         <div className="border-t-[1px] border-[#E4E9F0]" />
+                        
                         <div className="grid grid-cols-2 md:grid-cols-1 md:gap-0 gap-2">
                           {yetTobat?.map((yetTobat: any, index: number) => (
                             <div className='col-span-1'>
@@ -328,7 +329,7 @@ export default function Scorecard({
                             </div>
                           ))}
                         </div>
-                      </div>
+                      
                     </div>
 
                   ) : ` `
@@ -342,7 +343,7 @@ export default function Scorecard({
                   <h2 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Bowling
                   </h2>
-                  <div>
+                 
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm text-left text-[#586577] whitespace-nowrap">
                         <thead className="bg-blue-50 text-gray-700 ">
@@ -382,13 +383,14 @@ export default function Scorecard({
                         </tbody>
                       </table>
                     </div>
-                  </div>
+                  
                 </div>
+
                 <div className="rounded-lg bg-[#ffffff] mb-4 p-4">
                   <h2 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Fall of Wickets
                   </h2>
-                  <div>
+                  
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm text-left text-[#586577]">
                         <thead className="bg-blue-50 text-gray-700">
@@ -412,7 +414,7 @@ export default function Scorecard({
                         </tbody>
                       </table>
                     </div>
-                  </div>
+                  
                 </div>
 
                 <div className="rounded-lg bg-[#ffffff] mb-4 p-4">
@@ -470,15 +472,16 @@ export default function Scorecard({
               <div className="lg:col-span-4 md:col-span-5">
 
                 {manOfTheMatch?.pid !== undefined &&
-                  <div className="rounded-lg bg-[#ffffff] mb-4 hidden md:block">
-                    <div className="p-4"><Link href={"/player/" + playerUrls[manOfTheMatch?.pid]}>
+                  <div className="rounded-lg bg-[#ffffff] mb-4 hidden md:block p-4">
+                    
+                      <Link href={"/player/" + playerUrls[manOfTheMatch?.pid]}>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3 ">
-                          <div>
+                         
 
                             <PlayerImage key={manOfTheMatch?.pid} player_id={manOfTheMatch?.pid} height={50} width={50} className="rounded-lg" />
 
-                          </div>
+                          
                           <div className="font-medium">
                             <h2 className="text-1xl font-semibold hover:text-[#1a80f8]">{manOfTheMatch?.name}</h2>
                             <p className="text-[#6A7586] font-normal"> Man of the match </p>
@@ -494,7 +497,7 @@ export default function Scorecard({
                         />
                       </div>
                     </Link>
-                    </div>
+                    
                   </div>
                 }
 
@@ -502,12 +505,13 @@ export default function Scorecard({
 
                   {yetTobat?.length > 0 && yetTobat !== undefined ? (
 
-                    <div className="rounded-lg bg-[#ffffff]">
-                      <div className="p-4">
+                    
+                      <div className="rounded-lg bg-[#ffffff] p-4">
                         <h2 className="text-1xl font-semibold pl-[7px] mb-3 border-l-[3px] border-[#229ED3]">
                           Yet to bat
                         </h2>
                         <div className="border-t-[1px] border-[#E4E9F0]" />
+
                         <div className="grid grid-cols-2 md:grid-cols-1">
                           {yetTobat?.map((yetTobat: any, index: number) => (
                             <div className='col-span-1'>
@@ -526,7 +530,7 @@ export default function Scorecard({
                           ))}
                         </div>
                       </div>
-                    </div>
+                    
 
                   ) : ` `
                   }
@@ -535,7 +539,7 @@ export default function Scorecard({
 
               </div>
             </div>
-          </div>
+          
 
         </div>
       </div>

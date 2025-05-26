@@ -414,15 +414,15 @@ export default function LiveResult({
                       }
                     >
                       <div className="flex items-center gap-3">
-                        <div>
-                          <PlayerImage
-                            key={batsman?.[0]?.batsman_id}
-                            player_id={batsman?.[0]?.batsman_id}
-                            height={40}
-                            width={40}
-                            className="rounded-lg"
-                          />
-                        </div>
+
+                        <PlayerImage
+                          key={batsman?.[0]?.batsman_id}
+                          player_id={batsman?.[0]?.batsman_id}
+                          height={40}
+                          width={40}
+                          className="rounded-lg"
+                        />
+
                         <div className="font-medium">
                           <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
                             {getPlayerNameByPid(
@@ -470,15 +470,15 @@ export default function LiveResult({
                       }
                     >
                       <div className="flex items-center justify-end flex-row-reverse gap-3">
-                        <div>
-                          <PlayerImage
-                            key={batsman?.[1]?.batsman_id}
-                            player_id={batsman?.[1]?.batsman_id}
-                            height={40}
-                            width={40}
-                            className="rounded-lg"
-                          />
-                        </div>
+
+                        <PlayerImage
+                          key={batsman?.[1]?.batsman_id}
+                          player_id={batsman?.[1]?.batsman_id}
+                          height={40}
+                          width={40}
+                          className="rounded-lg"
+                        />
+
                         <div className="font-medium text-end">
                           <h2 className="md:text-[15px] text-[14px] text-[#757A82]">
                             {getPlayerNameByPid(
@@ -616,25 +616,26 @@ export default function LiveResult({
               </div>
 
             </div>
+
             <div className="cust-box-click-container">
-              <div className="my-2">
-                <div className="flex gap-[10px] items-center py-2 my-2 overflow-x-auto [&::-webkit-scrollbar] md:[&::-webkit-scrollbar]:h-[5px] [&::-webkit-scrollbar]:h-[1px] 
+
+              <div className="flex gap-[10px] items-center py-2 my-2 overflow-x-auto [&::-webkit-scrollbar] md:[&::-webkit-scrollbar]:h-[5px] [&::-webkit-scrollbar]:h-[1px] 
          [&::-webkit-scrollbar-track]:bg-gray-100  md:[&::-webkit-scrollbar-thumb]:bg-[#DFE9F6]  [&::-webkit-scrollbar-thumb]:bg-[#ecf2fd]  dark:[&::-webkit-scrollbar-track]:bg-neutral-700  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
-                  <p className="font-medium text-[14px]">Commentary</p>
-                  {updatedFilterarray.map((item) => (
-                    <button
-                      key={item}
-                      className={`cust-box-click-button px-5 py-1 rounded-full font-medium ${filter === item
-                        ? "bg-[#081736] text-[#ffffff]"
-                        : "bg-[#ffffff] text-[#6A7586]"
-                        }`}
-                      onClick={() => setFilter(item)}
-                    >
-                      {item}
-                    </button>
-                  ))}
-                </div>
+                <p className="font-medium text-[14px]">Commentary</p>
+                {updatedFilterarray.map((item) => (
+                  <button
+                    key={item}
+                    className={`cust-box-click-button px-5 py-1 rounded-full font-medium ${filter === item
+                      ? "bg-[#081736] text-[#ffffff]"
+                      : "bg-[#ffffff] text-[#6A7586]"
+                      }`}
+                    onClick={() => setFilter(item)}
+                  >
+                    {item}
+                  </button>
+                ))}
               </div>
+
 
               {errorMessage && errorMessage === "Record not found" ? (
                 <div className="bg-white p-4 rounded-md mb-8">
@@ -650,8 +651,7 @@ export default function LiveResult({
                       comment?.event === "overend" ? (
                         <div key={`over-${index}`}>
 
-                          <div
-                            className="hidden md:block rounded-t-lg bg-[#f8f8f8] mt-6" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
+                          <div className="hidden md:block rounded-t-lg bg-[#f8f8f8] mt-6" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
 
                           >
                             {/* <div className="flex md:flex-row flex-col justify-between md:items-center gap-2"> */}
@@ -718,8 +718,7 @@ export default function LiveResult({
 
                           </div>
 
-                          <div
-                            className="md:hidden rounded-t-lg bg-[#0e2149e0] mt-4 text-[#ffffff]" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
+                          <div className="md:hidden rounded-t-lg bg-[#0e2149e0] mt-4 text-[#ffffff]" style={{ boxShadow: '0px -1px 3px 0px #dfdfdf' }}
 
                           >
                             {/* <div className="flex md:flex-row flex-col justify-between md:items-center gap-2"> */}
@@ -789,7 +788,7 @@ export default function LiveResult({
                                 </div>
 
                                 <div className="text-[14px] font-normal flex-row-reverse flex flex-wrap gap-1 items-center">
-                                {updatedCommentaries?.map((cruns: any, index: number) => (cruns?.event !== "overend" && Number(cruns?.over) + 1 == Number(comment?.over)) ? (
+                                  {updatedCommentaries?.map((cruns: any, index: number) => (cruns?.event !== "overend" && Number(cruns?.over) + 1 == Number(comment?.over)) ? (
                                     <span key={index} className={`px-2 rounded-full border-[1px] inline-block ${cruns?.score == 6
                                       ? "bg-[#13b76dbd] text-white"
                                       : cruns?.score == 4
@@ -859,7 +858,7 @@ export default function LiveResult({
                             </div>
                           </div>
                           {comment?.wicket_batsman_id !== undefined ? (
-                            <div className="">
+                            
                               <div
                                 className="text-white p-4 rounded-lg"
                                 style={{
@@ -920,7 +919,7 @@ export default function LiveResult({
                                   </div>
                                 </div>
                               </div>
-                            </div>
+                           
                           ) : (
                             ""
                           )}
@@ -928,9 +927,9 @@ export default function LiveResult({
                       )
                     )}
                   {matchinfo?.bowlers?.[0]?.overs == 3000 ? (
-                    <div className="my-4">
+                    
                       <div
-                        className="text-white p-4 rounded-lg"
+                        className="text-white p-4 rounded-lg my-4"
                         style={{
                           background:
                             "linear-gradient(90deg, #2D71D6 0%, #114DA6 100%)",
@@ -1006,7 +1005,7 @@ export default function LiveResult({
                           </div>
                         </div>
                       </div>
-                    </div>
+                    
                   ) : (
                     ""
                   )}
