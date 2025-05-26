@@ -76,8 +76,8 @@ export default function Banner({ teamDetails, teamType, teamCaptains, coach }: B
                                 loading="lazy"
                             />
                             <div className='flex justify-between items-center w-full'>
-                                <p>ICC Cricket World Cup</p>
-                                <p>1983, 2011</p>
+                                <p>ICC Champions Trophy</p>
+                                <p>2013, 2025</p>
                             </div>
                         </div>
                         <div className='flex gap-2'>
@@ -91,8 +91,8 @@ export default function Banner({ teamDetails, teamType, teamCaptains, coach }: B
                                 loading="lazy"
                             />
                             <div className='flex justify-between items-center w-full'>
-                                <p>ICC Cricket World Cup</p>
-                                <p>1983, 2011</p>
+                                <p>ICC World Twenty20</p>
+                                <p>2007, 2024</p>
                             </div>
                         </div>
                     </div>

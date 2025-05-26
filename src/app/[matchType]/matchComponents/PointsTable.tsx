@@ -372,7 +372,7 @@ export default function PointsTable({
 
             <div className="lg:col-span-4 md:col-span-5">
                 <div className="bg-white rounded-lg p-4 mb-4">
-                    <div className="flex gap-1 items-center justify-between hidden">
+                    <div className=" gap-1 items-center justify-between hidden">
                         <div className="flex gap-1 items-center">
                             <div className="col-span-4 relative">
                                 <Image  loading="lazy"  src="/assets/img/home/trofi.png" className="h-[75px]" width={75} height={75} alt="1" />
