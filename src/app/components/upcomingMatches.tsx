@@ -210,7 +210,7 @@ export default async function UpcomingMatches() {
 
 
                   <div className="w-[50%] text-[#144280] flex flex-col items-end">
-                    <div className=" font-medium text-center">
+                    <div className=" font-medium text-center min-h-[60px] min-w-[30%]">
 
                     {isSameDay(new Date(), new Date(ucmatch.date_start_ist)) ? (
                       <>
@@ -344,7 +344,7 @@ export default async function UpcomingMatches() {
 
 
                     <div
-                      className="w-[80%] flex space-x-1 justify-end text-[#144280] font-semibold text-center countdown"
+                      className="w-[80%] flex space-x-1 justify-end text-[#144280] font-semibold text-center countdown min-h-[60px]"
                       data-time="28800"
                     >
                       {/* <!-- 08:00:00 = 8 * 60 * 60 = 28800 seconds --> */}

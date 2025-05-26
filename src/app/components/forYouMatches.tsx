@@ -759,7 +759,7 @@ export default async function ForYouMatches() {
 
                     <div className="w-[50%] font-semibold text-center flex justify-end">
                      
-                        <div className=" font-medium text-center text-[#144280]">
+                        <div className=" font-medium text-center text-[#144280] min-h-[60px] min-w-[30%]">
 
                           {isSameDay(new Date(), new Date(ucmatch.date_start_ist)) ? (
                             <>
@@ -897,7 +897,7 @@ export default async function ForYouMatches() {
                      
                      
                           <div
-                            className="flex space-x-1 justify-center text-[#144280] mt-1 w-[80%] font-semibold text-center countdown"
+                            className="flex space-x-1 justify-end text-[#144280] mt-1 w-[80%] font-semibold text-center countdown min-h-[60px]"
                             data-time="28800"
                           >
                             {/* <!-- 08:00:00 = 8 * 60 * 60 = 28800 seconds --> */}
