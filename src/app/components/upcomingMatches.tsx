@@ -209,7 +209,8 @@ export default async function UpcomingMatches() {
 
 
 
-                  <div className="w-[50%] font-medium text-center text-[#144280] flex flex-col items-end">
+                  <div className="w-[50%] text-[#144280] flex flex-col items-end">
+                    <div className=" font-medium text-center">
 
                     {isSameDay(new Date(), new Date(ucmatch.date_start_ist)) ? (
                       <>
@@ -227,6 +228,7 @@ export default async function UpcomingMatches() {
 
                       </p>
                     )}
+                  </div>
                   </div>
 
                 </div>

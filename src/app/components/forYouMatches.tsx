@@ -758,8 +758,8 @@ export default async function ForYouMatches() {
                     {/* <div className="h-[100px] border-l-[1px] border-[#efefef]"></div> */}
 
                     <div className="w-[50%] font-semibold text-center flex justify-end">
-                      <div className="text-[#144280]">
-                        <div className=" font-medium text-center">
+                     
+                        <div className=" font-medium text-center text-[#144280]">
 
                           {isSameDay(new Date(), new Date(ucmatch.date_start_ist)) ? (
                             <>
@@ -778,7 +778,7 @@ export default async function ForYouMatches() {
                             </p>
                           )}
                         </div>
-                      </div>
+                     
                     </div>
                   </div>
                

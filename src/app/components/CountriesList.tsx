@@ -4,6 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { urlStringEncode } from "../../utils/utility";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+
 
 interface Competition {
   cid: number;
@@ -80,7 +82,7 @@ export default function CountriesList({ countries }: countries) {
         </h2>
      
 
-      <div className="bg-white rounded-lg px-4">
+      <div className="bg-white rounded-lg px-4 pt-4">
         {/* Search Form */}
        
           <form className="flex justify-between items-center border-2 p-1 px-3 rounded-lg py-2 mb-3">
@@ -154,20 +156,8 @@ export default function CountriesList({ countries }: countries) {
                     country.competitions.map((compt: Competition, index: number) => (
                       <div className="flex items-center gap-[2px] font-normal text-[13px] text-[#51555E]" key={index}>
                        
-                            <svg 
-                              xmlns="http://www.w3.org/2000/svg" 
-                              fill="none" 
-                              viewBox="0 0 24 24" 
-                              strokeWidth="1.5" 
-                              stroke="currentColor" 
-                              className="size-3 text-[#1A80F8]"
-                            >
-                              <path 
-                                strokeLinecap="round" 
-                                strokeLinejoin="round" 
-                                d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" 
-                              />
-                            </svg>
+                            <MdKeyboardDoubleArrowRight className="text-[#1A80F8] text-[16px]" />
+
                          
                           <Link 
                             className="hover:text-[#1a80f8]" 

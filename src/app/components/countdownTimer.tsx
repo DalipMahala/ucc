@@ -43,22 +43,20 @@ const CountdownTimer = ({ targetTime }: { targetTime: string }) => {
       ) : (
         <div className="flex gap-1 items-start justify-center">
           <p className="flex flex-col">
-            <span>{timeLeft.hours} </span>
+            {timeLeft.hours}
             <span className="text-[11px] font-normal">Hrs</span>
           </p>
 :
           <p className="flex flex-col">
-            <span>{timeLeft.minutes} </span>
+            {timeLeft.minutes}
             <span className="text-[11px] font-normal">Min</span>
           </p>
 :
           <p className="flex flex-col">
-            <span>{timeLeft.seconds} </span>
+           {timeLeft.seconds}
             <span className="text-[11px] font-normal">Sec</span>
           </p>
           
-         
-          {/* {timeLeft.hours}h : {timeLeft.minutes}m  */}
         </div>
       )}
     </div>

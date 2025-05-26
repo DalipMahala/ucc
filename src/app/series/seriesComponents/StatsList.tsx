@@ -159,19 +159,19 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
             <TabMenu urlString={urlString} isPointTable={isPointTable} status={status}/>
             {matchStats !== undefined && matchStats !== null && matchStats !== '' ? (
                 <>
-                    <div id="stats">
-                        <div className="md:grid grid-cols-12 gap-4">
+                        <div id="stats" className="md:grid grid-cols-12 gap-4">
                
                             <div className="col-span-12">
                                 <div id="most-runs" className={`state-content most-runs" ? "" : "hidden"}`} >
 
-                                    <div>
                                         <div className={`rounded-lg bg-[#ffffff] mb-4 p-4 ${statsType == "bowling-most-wicket" || statsType == "bowling-best-average" || statsType == "bowling-best-figures" || statsType == "bowling-most-five-wicket-hauls" || statsType == "bowling-best-economy-rates" || statsType == "bowling-best-strike-rates" ? "hidden" : ""}`}>
-                                            <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
+                                            <div className="mb-3 flex justify-between items-center">
+                                            <h3 className="text-1xl font-semibold  pl-[7px] border-l-[3px] border-[#229ED3]">
                                                 Batting
                                             </h3>
                                             
                                                 <StateSelector/>
+                                                </div>
                                             
                                             <div>
                                                 <div className="overflow-x-auto">
@@ -242,9 +242,11 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                                         </div>
 
                                         <div className={`rounded-lg bg-[#ffffff] mb-4 p-4  ${statsType == "bowling-most-wicket" || statsType == "bowling-best-average" || statsType == "bowling-best-figures" || statsType == "bowling-most-five-wicket-hauls" || statsType == "bowling-best-economy-rates" || statsType == "bowling-best-strike-rates" ? "" : "hidden"}`}>
-                                            <h3 className="text-1xl font-semibold mb-3 pl-[7px] border-l-[3px] border-[#229ED3]">
+                                            <div className="mb-3 flex justify-between items-center">
+                                            <h3 className="text-1xl font-semibold  pl-[7px] border-l-[3px] border-[#229ED3]">
                                                 Bowling
                                             </h3>
+                                            </div>
                                             <StateSelector/>
                                             <div>
                                                 <div className="overflow-x-auto">
@@ -300,13 +302,12 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                   
                                 </div>
-
 
                             </div>
                         </div>
-                    </div>
+                   
 
                     <div className="rounded-lg py-4 px-4 bg-[#ffffff] mb-4">
                         <div className="lg:grid grid-cols-12 gap-4">
