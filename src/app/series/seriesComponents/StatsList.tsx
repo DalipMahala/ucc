@@ -161,7 +161,6 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
             {matchStats !== undefined && matchStats !== null && matchStats !== '' ? (
                 <>
                     <div id="stats" className="md:grid grid-cols-12 gap-4">
-
                         <div className="col-span-12">
                             <div id="most-runs" className={`state-content most-runs" ? "" : "hidden"}`} >
 
@@ -393,7 +392,6 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                                 ) : ("")}
                             </div>
                         </div>
-
 
                     </div>
                 </>
