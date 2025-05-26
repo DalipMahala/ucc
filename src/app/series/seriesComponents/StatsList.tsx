@@ -16,7 +16,7 @@ interface Stats {
 }
 interface PlayerUrlResponse {
     [key: string]: string;
-  }
+}
 
 async function fetchHtml(seriesId: number) {
     if (!seriesId || seriesId === 0) return '';
@@ -126,268 +126,269 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
 
     const getAllPlayerIds = () => {
         const allIds = [
-          ...matchStats.map((item: {
-            player: any; pid: any }) => item?.player?.pid),
+            ...matchStats.map((item: {
+                player: any; pid: any
+            }) => item?.player?.pid),
         ];
         return [...new Set(allIds)]; // Deduplicate
-      };
-    
-      const ids = getAllPlayerIds();
-      let playerUrls: PlayerUrlResponse = {};
-    
-      if (ids.length > 0) {
+    };
+
+    const ids = getAllPlayerIds();
+    let playerUrls: PlayerUrlResponse = {};
+
+    if (ids.length > 0) {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/player-urls`, {
-          method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-            "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
-          },
-          cache: 'no-store', // Ensure fresh data
-          body: JSON.stringify({ ids }),
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_SECRET_TOKEN}`,
+            },
+            cache: 'no-store', // Ensure fresh data
+            body: JSON.stringify({ ids }),
         });
         playerUrls = await res.json();
-      }
+    }
     // console.log("renderStatus",playerUrls);
 
 
-    
+
 
 
     return (
         <section className="lg:w-[1000px] mx-auto md:mb-0 mb-4 px-2 lg:px-0">
 
-            <TabMenu urlString={urlString} isPointTable={isPointTable} status={status}/>
+            <TabMenu urlString={urlString} isPointTable={isPointTable} status={status} />
             {matchStats !== undefined && matchStats !== null && matchStats !== '' ? (
                 <>
-                        <div id="stats" className="md:grid grid-cols-12 gap-4">
-               
-                            <div className="col-span-12">
-                                <div id="most-runs" className={`state-content most-runs" ? "" : "hidden"}`} >
+                    <div id="stats" className="md:grid grid-cols-12 gap-4">
 
-                                        <div className={`rounded-lg bg-[#ffffff] mb-4 p-4 ${statsType == "bowling-most-wicket" || statsType == "bowling-best-average" || statsType == "bowling-best-figures" || statsType == "bowling-most-five-wicket-hauls" || statsType == "bowling-best-economy-rates" || statsType == "bowling-best-strike-rates" ? "hidden" : ""}`}>
-                                            <div className="mb-3 flex justify-between items-center">
-                                            <h3 className="text-1xl font-semibold  pl-[7px] border-l-[3px] border-[#229ED3]">
-                                                Batting
-                                            </h3>
-                                            
-                                                <StateSelector/>
-                                                </div>
-                                            
-                                            <div>
-                                                <div className="overflow-x-auto">
-                                                    <table className="w-full text-sm text-left text-gray-500 whitespace-nowrap">
-                                                        <thead className="bg-blue-50 text-gray-700 ">
-                                                            <tr>
-                                                                <th className="px-4 py-3 font-medium w-[10px]" />
-                                                                <th className="px-4 py-3 font-medium sticky left-0 bg-blue-50 text-gray-700">Batter</th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    Team
-                                                                </th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    Match
-                                                                </th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    Inns
-                                                                </th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    Runs
-                                                                </th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    Avg
-                                                                </th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    4s
-                                                                </th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    6s
-                                                                </th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    100s
-                                                                </th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    50s
-                                                                </th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    SR
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody className="divide-y divide-gray-200 relative">
-                                                            {matchStats?.map((stats: any, index: number) => (
-                                                                <tr key={index}>
-                                                                    <td className="px-2 pl-[14px] py-3 w-[10px]">{index + 1}</td>
-                                                                    <td className="md:px-2 py-3 text-[#217AF7] sticky left-0">
-                                                                       <p className="bg-[#ffffff] px-2"> <Link href={"/player/" + playerUrls[stats?.player?.pid]}> {stats?.player?.short_name}</Link>
-                                                                       </p>
-                                                                    </td>
-                                                                    <td className="px-2 pl-[14px] py-3">{stats?.team?.abbr}</td>
-                                                                    <td className="px-2 pl-[14px] py-3">{stats?.matches}</td>
-                                                                    <td className="px-2 pl-[14px] py-3">{stats?.innings}</td>
+                        <div className="col-span-12">
+                            <div id="most-runs" className={`state-content most-runs" ? "" : "hidden"}`} >
 
-                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-run' ? "font-semibold" : ""}`}>{stats?.runs}</td>
+                                <div className={`rounded-lg bg-[#ffffff] mb-4 p-4 ${statsType == "bowling-most-wicket" || statsType == "bowling-best-average" || statsType == "bowling-best-figures" || statsType == "bowling-most-five-wicket-hauls" || statsType == "bowling-best-economy-rates" || statsType == "bowling-best-strike-rates" ? "hidden" : ""}`}>
+                                    <div className="mb-3 flex justify-between items-center">
+                                        <h2 className="text-1xl font-semibold  pl-[7px] border-l-[3px] border-[#229ED3]">
+                                            Batting
+                                        </h2>
 
-                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-highest-average' ? "font-semibold" : ""}`}>{stats?.average}</td>
-                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-fours' ? "font-semibold" : ""}`}>{stats?.run4}</td>
-                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-sixes' ? "font-semibold" : ""}`}>{stats?.run6}</td>
-                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-hundreds' ? "font-semibold" : ""}`}>{stats?.run100}</td>
-                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-fifties' ? "font-semibold" : ""}`}>{stats?.run50}</td>
-                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-highest-strike-rate' ? "font-semibold" : ""}`}>{stats?.strike}</td>
-                                                                </tr>
-                                                            ))}
+                                        <StateSelector />
+                                    </div>
 
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div className={`rounded-lg bg-[#ffffff] mb-4 p-4  ${statsType == "bowling-most-wicket" || statsType == "bowling-best-average" || statsType == "bowling-best-figures" || statsType == "bowling-most-five-wicket-hauls" || statsType == "bowling-best-economy-rates" || statsType == "bowling-best-strike-rates" ? "" : "hidden"}`}>
-                                            <div className="mb-3 flex justify-between items-center">
-                                            <h3 className="text-1xl font-semibold  pl-[7px] border-l-[3px] border-[#229ED3]">
-                                                Bowling
-                                            </h3>
-                                            </div>
-                                            <StateSelector/>
-                                            <div>
-                                                <div className="overflow-x-auto">
-                                                    <table className="w-full text-sm text-left text-gray-500 whitespace-nowrap">
-                                                        <thead className="bg-blue-50 text-gray-700 ">
-                                                            <tr>
-                                                                <th className="px-4 py-3 font-medium w-[10px]" />
-                                                                <th className="px-4 py-3 font-medium sticky left-0 bg-blue-50 text-gray-700">Bowler</th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    Match
-                                                                </th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    Inns
-                                                                </th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    Wickets
-                                                                </th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    Avg
-                                                                </th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    Wicket4i
-                                                                </th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    wicket5i
-                                                                </th>
-                                                                <th className="px-2 pl-[14px] py-3 font-medium">
-                                                                    SR
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody className="divide-y divide-gray-200">
-                                                            {matchStats?.map((stats: any, index: number) => (
-                                                                <tr key={index}>
-                                                                    <td className="px-2 pl-[14px] py-3 w-[10px]">{index + 1}</td>
-                                                                    <td className="md:px-2 py-3 text-[#217AF7] sticky left-0">
-                                                                        <p className="bg-[#ffffff] px-2">
-                                                                        <Link href={"/player/" + playerUrls[stats?.player?.pid]}> {stats?.player?.short_name}</Link>
-                                                                        </p>
-                                                                    </td>
-                                                                    <td className="px-2 pl-[14px] py-3">{stats?.matches}</td>
-                                                                    <td className="px-2 pl-[14px] py-3">{stats?.innings}</td>
-                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'bowling-most-wicket' ? "font-semibold" : ""}`}>{stats?.wickets}</td>
-                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'bowling-best-average' ? "font-semibold" : ""}`}>{stats?.average}</td>
-                                                                    <td className="px-2 pl-[14px] py-3">{stats?.wicket4i}</td>
-                                                                    <td className="px-2 pl-[14px] py-3">{stats?.wicket5i}</td>
-                                                                    <td className={`px-2 pl-[14px] py-3 ${statsType == 'bowling-best-strike-rates' ? "font-semibold" : ""}`}>{stats?.strike}</td>
-                                                                </tr>
-                                                            ))}
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-sm text-left text-gray-500 whitespace-nowrap">
+                                            <thead className="bg-blue-50 text-gray-700 ">
+                                                <tr>
+                                                    <th className="px-4 py-3 font-medium w-[10px]" />
+                                                    <th className="px-4 py-3 font-medium sticky left-0 bg-blue-50 text-gray-700">Batter</th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        Team
+                                                    </th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        Match
+                                                    </th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        Inns
+                                                    </th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        Runs
+                                                    </th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        Avg
+                                                    </th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        4s
+                                                    </th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        6s
+                                                    </th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        100s
+                                                    </th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        50s
+                                                    </th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        SR
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-gray-200 relative">
+                                                {matchStats?.map((stats: any, index: number) => (
+                                                    <tr key={index}>
+                                                        <td className="px-2 pl-[14px] py-3 w-[10px]">{index + 1}</td>
+                                                        <td className="md:px-2 py-3 text-[#217AF7] sticky left-0">
+                                                            <p className="bg-[#ffffff] px-2"> <Link href={"/player/" + playerUrls[stats?.player?.pid]}> {stats?.player?.short_name}</Link>
+                                                            </p>
+                                                        </td>
+                                                        <td className="px-2 pl-[14px] py-3">{stats?.team?.abbr}</td>
+                                                        <td className="px-2 pl-[14px] py-3">{stats?.matches}</td>
+                                                        <td className="px-2 pl-[14px] py-3">{stats?.innings}</td>
 
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                   
+                                                        <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-run' ? "font-semibold" : ""}`}>{stats?.runs}</td>
+
+                                                        <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-highest-average' ? "font-semibold" : ""}`}>{stats?.average}</td>
+                                                        <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-fours' ? "font-semibold" : ""}`}>{stats?.run4}</td>
+                                                        <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-sixes' ? "font-semibold" : ""}`}>{stats?.run6}</td>
+                                                        <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-hundreds' ? "font-semibold" : ""}`}>{stats?.run100}</td>
+                                                        <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-most-fifties' ? "font-semibold" : ""}`}>{stats?.run50}</td>
+                                                        <td className={`px-2 pl-[14px] py-3 ${statsType == 'batting-highest-strike-rate' ? "font-semibold" : ""}`}>{stats?.strike}</td>
+                                                    </tr>
+                                                ))}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+
+                                <div className={`rounded-lg bg-[#ffffff] mb-4 p-4  ${statsType == "bowling-most-wicket" || statsType == "bowling-best-average" || statsType == "bowling-best-figures" || statsType == "bowling-most-five-wicket-hauls" || statsType == "bowling-best-economy-rates" || statsType == "bowling-best-strike-rates" ? "" : "hidden"}`}>
+                                    <div className="mb-3 flex justify-between items-center">
+                                        <h2 className="text-1xl font-semibold  pl-[7px] border-l-[3px] border-[#229ED3]">
+                                            Bowling
+                                        </h2>
+                                        <StateSelector />
+                                    </div>
+
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-sm text-left text-gray-500 whitespace-nowrap">
+                                            <thead className="bg-blue-50 text-gray-700 ">
+                                                <tr>
+                                                    <th className="px-4 py-3 font-medium w-[10px]" />
+                                                    <th className="px-4 py-3 font-medium sticky left-0 bg-blue-50 text-gray-700">Bowler</th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        Match
+                                                    </th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        Inns
+                                                    </th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        Wickets
+                                                    </th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        Avg
+                                                    </th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        Wicket4i
+                                                    </th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        wicket5i
+                                                    </th>
+                                                    <th className="px-2 pl-[14px] py-3 font-medium">
+                                                        SR
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-gray-200">
+                                                {matchStats?.map((stats: any, index: number) => (
+                                                    <tr key={index}>
+                                                        <td className="px-2 pl-[14px] py-3 w-[10px]">{index + 1}</td>
+                                                        <td className="md:px-2 py-3 text-[#217AF7] sticky left-0">
+                                                            <p className="bg-[#ffffff] px-2">
+                                                                <Link href={"/player/" + playerUrls[stats?.player?.pid]}> {stats?.player?.short_name}</Link>
+                                                            </p>
+                                                        </td>
+                                                        <td className="px-2 pl-[14px] py-3">{stats?.matches}</td>
+                                                        <td className="px-2 pl-[14px] py-3">{stats?.innings}</td>
+                                                        <td className={`px-2 pl-[14px] py-3 ${statsType == 'bowling-most-wicket' ? "font-semibold" : ""}`}>{stats?.wickets}</td>
+                                                        <td className={`px-2 pl-[14px] py-3 ${statsType == 'bowling-best-average' ? "font-semibold" : ""}`}>{stats?.average}</td>
+                                                        <td className="px-2 pl-[14px] py-3">{stats?.wicket4i}</td>
+                                                        <td className="px-2 pl-[14px] py-3">{stats?.wicket5i}</td>
+                                                        <td className={`px-2 pl-[14px] py-3 ${statsType == 'bowling-best-strike-rates' ? "font-semibold" : ""}`}>{stats?.strike}</td>
+                                                    </tr>
+                                                ))}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
 
                             </div>
+
                         </div>
-                   
+                    </div>
+
 
                     <div className="rounded-lg py-4 px-4 bg-[#ffffff] mb-4">
                         <div className="lg:grid grid-cols-12 gap-4">
                             <div className="col-span-12">
-                            {statsType == "bowling-most-wicket" || statsType == "bowling-best-average" || statsType == "bowling-best-figures" || statsType == "bowling-most-five-wicket-hauls" || statsType == "bowling-best-economy-rates" || statsType == "bowling-best-strike-rates" ? 
-                            <ReadMoreCard
-                            title={`${statsName || "Stats"} in ${seriesInfo?.title || ""} ${seriesInfo?.season || ""} – Player Rankings`}
-                            content={
-                              `Here is the updated list of bowlers with the ${statsName || "stats"} in the ${seriesInfo?.title || ""} ${seriesInfo?.season || ""}. ` +
-                              `These players have been in excellent form, helping their teams with consistent performances.` +
-                              (matchStats[0]?.player?.first_name ? 
-                                ` At the top of the chart is ${matchStats[0].player.first_name} (${matchStats[0]?.team?.abbr || "N/A"}), ` +
-                                `who has taken ${matchStats[0]?.wickets || "N/A"} wickets in ${matchStats[0]?.matches || "N/A"} matches ` +
-                                `with an economy of ${matchStats[0]?.econ || "N/A"}.` 
-                                : ""
-                              ) +
-                              "<br/>" +
-                              (matchStats[1]?.player?.first_name ? 
-                                `<h3 class="text-[#1f2937] font-medium mb-1">Top Performers So Far</h3><br/>` +
-                                `<span class="text-[#1f2937] font-medium">${matchStats[1].player.first_name}</span> – ${matchStats[1]?.matches || "N/A"} matches, ` +
-                                `${matchStats[1]?.wickets || "N/A"} wickets, Econ: ${matchStats[1]?.econ || "N/A"}<br/>` 
-                                : ""
-                              ) +
-                              (matchStats[2]?.player?.first_name ? 
-                                `<span class="text-[#1f2937] font-medium">${matchStats[2].player.first_name}</span> – ${matchStats[2]?.matches || "N/A"} matches, ` +
-                                `${matchStats[2]?.wickets || "N/A"} wickets, Econ: ${matchStats[2]?.econ || "N/A"}<br/>` 
-                                : ""
-                              ) +
-                              (matchStats[3]?.player?.first_name ? 
-                                `<span class="text-[#1f2937] font-medium">${matchStats[3].player.first_name}</span> – ${matchStats[3]?.matches || "N/A"} matches, ` +
-                                `${matchStats[3]?.wickets || "N/A"} wickets, Econ: ${matchStats[3]?.econ || "N/A"}<br/>` 
-                                : ""
-                              ) +
-                              (matchStats[0]?.player?.first_name ? 
-                                `These bowlers are making a strong impact and are in the race for the ${statsName || "stats"} in ` +
-                                `${seriesInfo?.title || "the tournament"}.`
-                                : ""
-                              )
-                            }
-                            wordLimit={400}
-                          />
-                          : 
-                          <ReadMoreCard
-                          title={`${statsName || "Stats"} in ${seriesInfo?.title || ""} ${seriesInfo?.season || ""} – Player Rankings`}
-                          content={
-                            `Here is the updated list of batters with the ${statsName || "stats"} in the ${seriesInfo?.title || ""} ${seriesInfo?.season || ""}. ` +
-                            `These players have been in excellent form, helping their teams with consistent performances.` +
-                            (matchStats[0]?.player?.first_name ? 
-                              ` At the top of the chart is ${matchStats[0].player.first_name} (${matchStats[0]?.team?.abbr || "N/A"}), ` +
-                              `who has scored ${matchStats[0]?.runs || "N/A"} runs in ${matchStats[0]?.matches || "N/A"} matches ` +
-                              `with an average of ${matchStats[0]?.average || "N/A"}.` 
-                              : ""
-                            ) +
-                            "<br/><br/>" +
-                            (matchStats[1]?.player?.first_name ? 
-                              `<span class="text-[#1f2937] font-medium">Top Performers So Far</span><br/>` +
-                              `<span class="text-[#1f2937] font-medium">${matchStats[1].player.first_name}</span> – ${matchStats[1]?.matches || "N/A"} matches, ` +
-                              `${matchStats[1]?.runs || "N/A"} runs, Avg: ${matchStats[1]?.average || "N/A"}<br/>` 
-                              : ""
-                            ) +
-                            (matchStats[2]?.player?.first_name ? 
-                              `<span class="text-[#1f2937] font-medium">${matchStats[2].player.first_name}</span> – ${matchStats[2]?.matches || "N/A"} matches, ` +
-                              `${matchStats[2]?.runs || "N/A"} runs, Avg: ${matchStats[2]?.average || "N/A"}<br/>` 
-                              : ""
-                            ) +
-                            (matchStats[3]?.player?.first_name ? 
-                              `<span class="text-[#1f2937] font-medium">${matchStats[3].player.first_name}</span> – ${matchStats[3]?.matches || "N/A"} matches, ` +
-                              `${matchStats[3]?.runs || "N/A"} runs, Avg: ${matchStats[3]?.average || "N/A"}<br/>` 
-                              : ""
-                            ) +
-                            (matchStats[0]?.player?.first_name ? 
-                              `These batters are making a strong impact and are in the race for the ${statsName || "stats"} in ` +
-                              `${seriesInfo?.title || "the tournament"}.`
-                              : ""
-                            )
-                          }
-                          wordLimit={400}
-                        />
+                                {statsType == "bowling-most-wicket" || statsType == "bowling-best-average" || statsType == "bowling-best-figures" || statsType == "bowling-most-five-wicket-hauls" || statsType == "bowling-best-economy-rates" || statsType == "bowling-best-strike-rates" ?
+                                    <ReadMoreCard
+                                        title={`${statsName || "Stats"} in ${seriesInfo?.title || ""} ${seriesInfo?.season || ""} – Player Rankings`}
+                                        content={
+                                            `Here is the updated list of bowlers with the ${statsName || "stats"} in the ${seriesInfo?.title || ""} ${seriesInfo?.season || ""}. ` +
+                                            `These players have been in excellent form, helping their teams with consistent performances.` +
+                                            (matchStats[0]?.player?.first_name ?
+                                                ` At the top of the chart is ${matchStats[0].player.first_name} (${matchStats[0]?.team?.abbr || "N/A"}), ` +
+                                                `who has taken ${matchStats[0]?.wickets || "N/A"} wickets in ${matchStats[0]?.matches || "N/A"} matches ` +
+                                                `with an economy of ${matchStats[0]?.econ || "N/A"}.`
+                                                : ""
+                                            ) +
+                                            "<br/>" +
+                                            (matchStats[1]?.player?.first_name ?
+                                                `<h3 class="text-[#1f2937] font-medium mb-1">Top Performers So Far</h3><br/>` +
+                                                `<span class="text-[#1f2937] font-medium">${matchStats[1].player.first_name}</span> – ${matchStats[1]?.matches || "N/A"} matches, ` +
+                                                `${matchStats[1]?.wickets || "N/A"} wickets, Econ: ${matchStats[1]?.econ || "N/A"}<br/>`
+                                                : ""
+                                            ) +
+                                            (matchStats[2]?.player?.first_name ?
+                                                `<span class="text-[#1f2937] font-medium">${matchStats[2].player.first_name}</span> – ${matchStats[2]?.matches || "N/A"} matches, ` +
+                                                `${matchStats[2]?.wickets || "N/A"} wickets, Econ: ${matchStats[2]?.econ || "N/A"}<br/>`
+                                                : ""
+                                            ) +
+                                            (matchStats[3]?.player?.first_name ?
+                                                `<span class="text-[#1f2937] font-medium">${matchStats[3].player.first_name}</span> – ${matchStats[3]?.matches || "N/A"} matches, ` +
+                                                `${matchStats[3]?.wickets || "N/A"} wickets, Econ: ${matchStats[3]?.econ || "N/A"}<br/>`
+                                                : ""
+                                            ) +
+                                            (matchStats[0]?.player?.first_name ?
+                                                `These bowlers are making a strong impact and are in the race for the ${statsName || "stats"} in ` +
+                                                `${seriesInfo?.title || "the tournament"}.`
+                                                : ""
+                                            )
+                                        }
+                                        wordLimit={400}
+                                    />
+                                    :
+                                    <ReadMoreCard
+                                        title={`${statsName || "Stats"} in ${seriesInfo?.title || ""} ${seriesInfo?.season || ""} – Player Rankings`}
+                                        content={
+                                            `Here is the updated list of batters with the ${statsName || "stats"} in the ${seriesInfo?.title || ""} ${seriesInfo?.season || ""}. ` +
+                                            `These players have been in excellent form, helping their teams with consistent performances.` +
+                                            (matchStats[0]?.player?.first_name ?
+                                                ` At the top of the chart is ${matchStats[0].player.first_name} (${matchStats[0]?.team?.abbr || "N/A"}), ` +
+                                                `who has scored ${matchStats[0]?.runs || "N/A"} runs in ${matchStats[0]?.matches || "N/A"} matches ` +
+                                                `with an average of ${matchStats[0]?.average || "N/A"}.`
+                                                : ""
+                                            ) +
+                                            "<br/><br/>" +
+                                            (matchStats[1]?.player?.first_name ?
+                                                `<span class="text-[#1f2937] font-medium">Top Performers So Far</span><br/>` +
+                                                `<span class="text-[#1f2937] font-medium">${matchStats[1].player.first_name}</span> – ${matchStats[1]?.matches || "N/A"} matches, ` +
+                                                `${matchStats[1]?.runs || "N/A"} runs, Avg: ${matchStats[1]?.average || "N/A"}<br/>`
+                                                : ""
+                                            ) +
+                                            (matchStats[2]?.player?.first_name ?
+                                                `<span class="text-[#1f2937] font-medium">${matchStats[2].player.first_name}</span> – ${matchStats[2]?.matches || "N/A"} matches, ` +
+                                                `${matchStats[2]?.runs || "N/A"} runs, Avg: ${matchStats[2]?.average || "N/A"}<br/>`
+                                                : ""
+                                            ) +
+                                            (matchStats[3]?.player?.first_name ?
+                                                `<span class="text-[#1f2937] font-medium">${matchStats[3].player.first_name}</span> – ${matchStats[3]?.matches || "N/A"} matches, ` +
+                                                `${matchStats[3]?.runs || "N/A"} runs, Avg: ${matchStats[3]?.average || "N/A"}<br/>`
+                                                : ""
+                                            ) +
+                                            (matchStats[0]?.player?.first_name ?
+                                                `These batters are making a strong impact and are in the race for the ${statsName || "stats"} in ` +
+                                                `${seriesInfo?.title || "the tournament"}.`
+                                                : ""
+                                            )
+                                        }
+                                        wordLimit={400}
+                                    />
                                 }
-                                        {pageHtml && typeof pageHtml === "string" ? (
+                                {pageHtml && typeof pageHtml === "string" ? (
                                     <div dangerouslySetInnerHTML={{ __html: pageHtml }} />
                                 ) : ("")}
                             </div>
