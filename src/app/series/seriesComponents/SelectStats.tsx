@@ -45,7 +45,7 @@ const StateSelector = () => {
     <option value="bowling-best-figures">Best Bowling</option>
     <option value="bowling-most-five-wicket-hauls">Most 5 Wickets Haul</option>
     <option value="bowling-best-economy-rates">Best Economy</option>
-    <option value="bowling-best-strike">
+    <option value="bowling-best-strike-rates">
         Best Bowling Strike Rate
     </option>
     </select>

@@ -35,7 +35,7 @@ export default function IplBanner({
   };
 
   const result = previousAndNext(seriesData, seriesInfo?.cid);
-
+console.log("test",seriesInfo);
   const nextUrl = result?.next
     ? `/series/${urlStringEncode(result.next.title + "-" + result.next.season)}/${result.next.cid}`
     : "";
