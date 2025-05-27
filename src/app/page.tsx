@@ -146,7 +146,7 @@ export default async function Home(props: { params: Params }) {
 
                   <Image
                     src={team?.logo_url}
-                    alt="Team Logo"
+                    alt={urlStringEncode(team?.team)}
                     fill
                     objectFit="cover"
                     loading="lazy"
@@ -162,7 +162,7 @@ export default async function Home(props: { params: Params }) {
                         src={`${team?.logo_url}`}
                         width={20}
                         height={20}
-                        alt=""
+                        alt={urlStringEncode(team?.team)}
                         priority
                       />
                       <p className="font-semibold text-[14px]">{team?.team}</p>

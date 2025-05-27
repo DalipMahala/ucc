@@ -200,10 +200,10 @@ const Footer = () => {
            <Image priority fetchPriority="high" className="h-[40px] w-[173px]" src="https://res.cloudinary.com/dvqccxtdm/image/upload/q_auto/v1747648962/logo_c1fpuc.webp" alt="UC Cricket Logo" width={150} height={50} unoptimized/>
           <div className="flex space-x-4 mt-4">
             <a href="#">
-              <Image priority src="/assets/img/store-1.png" alt="Google Play" className="h-[35px]" width={100} height={35}/>
+              <Image priority src="/assets/img/store-1.webp" alt="Google Play" className="h-[35px]" width={100} height={35}/>
             </a>
             <a href="#">
-              <Image priority  src="/assets/img/store-2.png" alt="App Store" className="h-[35px]" width={100} height={35}/>
+              <Image priority  src="/assets/img/store-2.webp" alt="App Store" className="h-[35px]" width={100} height={35}/>
             </a>
           </div>
         </div>
