@@ -85,7 +85,7 @@ export default function IplBanner({
         className="lg:w-[1000px] mx-auto text-white pt-5 pb-10"
         style={{ paddingTop: "37px" }}
       >
-        <div className="flex items-center justify-between md:p-4 max-w-6xl mx-auto">
+        <div className="flex items-center justify-between md:p-4 w-full md:max-w-6xl mx-auto">
           {backUrl !== "" && (
             <Link href={backUrl}>
               <button className="md:block hidden p-2 bg-gray-700 rounded-full hover:bg-gray-600">
@@ -161,13 +161,13 @@ export default function IplBanner({
           </div>
 
           {/* Mobile Banner */}
-          <div className="md:hidden">
+          <div className="md:hidden w-full">
             <div className="relative">
               <div className="relative mx-4">
                 <div
                   id="series"
                   ref={sliderRef}
-                  className="flex items-center gap-3 transition-transform duration-300 overflow-x-scroll 
+                  className="flex items-center gap-3 w-full transition-transform duration-300 overflow-x-scroll 
                   [&::-webkit-scrollbar]:h-[1px] 
                   [&::-webkit-scrollbar-track]:bg-[#0e2149] 
                   [&::-webkit-scrollbar-thumb]:bg-[#0e2149]"

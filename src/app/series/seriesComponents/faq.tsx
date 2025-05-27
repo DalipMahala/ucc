@@ -70,7 +70,7 @@ export default function FAQ({seriesInfo}:faqs) {
 
   return (
     <div className="rounded-lg bg-[#ffffff] p-4 mb-4">
-      <div>
+      
         <h2 className="text-1xl font-semibold mb-1">FAQs on {seriesInfo.abbr} Points Table</h2>
         <div className="border-t-[1px] border-[#E7F2F4]" />
         <div className="space-y-2 my-2">
@@ -117,7 +117,7 @@ export default function FAQ({seriesInfo}:faqs) {
             </div>
           ))}
         </div>
-      </div>
+     
     </div>
   );
 }

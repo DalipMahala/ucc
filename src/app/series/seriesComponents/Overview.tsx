@@ -195,8 +195,8 @@ export default function Overview({
         <div id="info" className="tab-content ">
           <div className="md:grid grid-cols-12 gap-4 mb-4">
             <div className="lg:col-span-8 md:col-span-7">
-              <div className="rounded-lg bg-white">
-                <div className="p-4">
+              
+                <div className="rounded-lg bg-white p-4">
                   <h2 className="text-[15px] font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                     Series Info
                   </h2>
@@ -236,7 +236,7 @@ export default function Overview({
                     </div>
                   </div>
                 </div>
-              </div>
+              
               <div className="rounded-lg bg-[#ffffff] my-4 p-4">
                 <h2 className="text-1xl font-semibold mb-2 pl-[7px] border-l-[3px] border-[#229ED3]">
                   Featured Matches
