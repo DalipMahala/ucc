@@ -7,6 +7,7 @@ import { urlStringEncode } from "./../../utils/utility";
 import { usePathname } from 'next/navigation';
 import logoPlaceholder from 'public/assets/img/logo.webp';
 import Head from "next/head";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 const Header = () => {
   const pathname = usePathname();
@@ -14,6 +15,19 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMouseOverDropdown, setIsMouseOverDropdown] = useState(false);
   const [isClicked, setIsClicked] = useState(false); // 👈 New state for click
+  const [showRankingDropdown, setShowRankingDropdown] = useState(false);
+  const [NewsDropdown, setNewsDropdown] = useState(false);
+  const [SportsDropdown, setSportsDropdown] = useState(false);
+
+
+
+  const closeNav = () => {
+
+    setShowRankingDropdown(false);
+    setNewsDropdown(false);
+    setSportsDropdown(false);
+  };
+
 
   const toggleDropdown = (open: boolean, clicked = false) => {
     setIsDropdownOpen(open);
@@ -72,34 +86,34 @@ const Header = () => {
   return (
     <>
       <Head>
-          {/* ✅ Preload logo image */}
-          <link
-            rel="preload"
-            as="image"
-            href="https://res.cloudinary.com/dvqccxtdm/image/upload/q_auto/v1747648962/logo_c1fpuc.webp"
-          />
-        </Head>
+        {/* ✅ Preload logo image */}
+        <link
+          rel="preload"
+          as="image"
+          href="https://res.cloudinary.com/dvqccxtdm/image/upload/q_auto/v1747648962/logo_c1fpuc.webp"
+        />
+      </Head>
       <div className='md:hidden hidden items-center justify-between py-2 px-2 bg-[#3793ff] text-white'>
         <p> Uc Cricket is better on App, Get now! </p>
         <button className='border-[1px] border-white px-4 rounded-full py-1'>Use App</button>
       </div>
 
       <header className={`bg-[#081736] lg:px-0 px-3 sticky top-0 z-[999] ${isMoreInfoPage ? 'hidden md:block' : 'block'}`}>
-     
+
         <div className="lg:w-[1000px] w-full mx-auto text-white md:py-5 pt-3 pb-3 flex items-center md:justify-between justify-center">
           <div>
             <Link href="/">
               {/* <Image priority fetchPriority="high" className="h-[33px] w-[150px]"
                src="https://res.cloudinary.com/dvqccxtdm/image/upload/q_auto/v1747648962/logo_c1fpuc.webp" alt="UC Cricket Logo" width={150} height={33} unoptimized/> */}
-               <img
-                  src="https://res.cloudinary.com/dvqccxtdm/image/upload/q_auto/v1747648962/logo_c1fpuc.webp"
-                  alt="UC Cricket Logo"
-                  width={150}
-                  height={33}
-                  decoding="sync"
-                  loading="eager"
-                  style={{ height: '33px', width: '150px', color: 'transparent' }}
-                />
+              <img
+                src="https://res.cloudinary.com/dvqccxtdm/image/upload/q_auto/v1747648962/logo_c1fpuc.webp"
+                alt="UC Cricket Logo"
+                width={150}
+                height={33}
+                decoding="sync"
+                loading="eager"
+                style={{ height: '33px', width: '150px', color: 'transparent' }}
+              />
             </Link>
           </div>
 
@@ -123,7 +137,7 @@ const Header = () => {
             </svg>
           </button>
 
-          <nav id="menu" className="hidden lg:flex space-x-4 text-1xl">
+          <nav id="menu" className="hidden lg:flex space-x-4 text-1xl items-center">
             <Link href="/" className="hover:text-[#6aaefe]" prefetch={true}>
               Home
             </Link>
@@ -138,47 +152,170 @@ const Header = () => {
               >
                 Series
               </Link>
-            </div>
-
-            <div
-              className="group relative"
-              // onMouseEnter={() => !isClicked && toggleDropdown(true)}
-              // onMouseLeave={() => {
-              //   if (!isMouseOverDropdown && !isClicked) {
-              //     toggleDropdown(false);
-              //   }
-              // }}
-            >
               <div
                 onClick={() => toggleDropdown(!isDropdownOpen, !isDropdownOpen)} // 👈 Toggle on click
-                className='hover:text-[#6aaefe] cursor-pointer absolute left-[-18px] h-[70px] w-[32px] top-[2px]'
+                className='hover:text-[#6aaefe] cursor-pointer'
               >
-                <svg
-                  className="w-5 h-5 ml-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
+                <MdOutlineKeyboardArrowDown className='text-[22px] mt-[2px]' />
               </div>
             </div>
 
-            {/* <Link href="" className="hover:text-[#6aaefe]" prefetch={true}>
-              Teams
-            </Link> */}
-            <Link href="/iccranking/men/team/odi" className="hover:text-[#6aaefe]" prefetch={true}>
-              ICC Ranking
-            </Link>
+
+
+
+
             <Link href="https://uccricket.live/news/" className="hover:text-[#6aaefe]" prefetch={true}>
               News
             </Link>
+
+
+
+            {/* cricket Dropdown */}
+
+            <div className="relative">
+              <button
+                onClick={() => setNewsDropdown(!NewsDropdown)}
+                className="w-full flex justify-between items-center text-left hover:text-[#6aaefe]"
+              >
+                <span> Cricket </span> <MdOutlineKeyboardArrowDown className='text-[22px] mt-[2px]' />
+              </button>
+              {NewsDropdown && (
+                <div className="py-2 px-4 rounded-lg space-y-2 bg-[#081736] absolute right-[-64px] top-[30px] w-[142px]">
+                  <Link
+                    href="https://uccricket.live/cricket/ipl/"
+                    className="block hover:text-[#6aaefe] pb-2"
+                    onClick={closeNav}
+                  >
+                    IPL
+                  </Link>
+                  <Link
+                    href="https://uccricket.live/cricket/t10/"
+                    className="block hover:text-[#6aaefe] pb-2"
+                    onClick={closeNav}
+                  >
+                    T10
+                  </Link>
+                  <Link
+                    href="https://uccricket.live/cricket/t20/"
+                    className="block hover:text-[#6aaefe] pb-2"
+                    onClick={closeNav}
+                  >
+                    T20
+                  </Link>
+                  <Link
+                    href="https://uccricket.live/cricket/t20-world-cup/"
+                    className="block hover:text-[#6aaefe] pb-2"
+                    onClick={closeNav}
+                  >
+                    T20 World Cup
+                  </Link>
+                  <Link
+                    href="https://uccricket.live/cricket/stadium/"
+                    className="block hover:text-[#6aaefe] pb-2"
+                    onClick={closeNav}
+                  >
+                    Stadium
+                  </Link>
+                  <Link
+                    href="https://uccricket.live/cricket/"
+                    className="block hover:text-[#6aaefe] pb-2"
+                    onClick={closeNav}
+                  >
+                    View All
+                  </Link>
+                </div>
+              )}
+            </div>
+
+
+
+            {/* Sports Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setSportsDropdown(!SportsDropdown)}
+                className="w-full flex justify-between items-center text-left hover:text-[#6aaefe]"
+              >
+                <span> Sports </span> <MdOutlineKeyboardArrowDown className='text-[22px] mt-[2px]' />
+              </button>
+              {SportsDropdown && (
+                <div className="py-2 px-4 rounded-lg space-y-2 bg-[#081736] absolute right-[-64px] top-[30px] w-[142px]">
+                  <Link
+                    href="https://uccricket.live/sports/kabaddi/"
+                    className="block hover:text-[#6aaefe] pb-2"
+                    onClick={closeNav}
+                  >
+                    Kabaddi
+                  </Link>
+                  <Link
+                    href="https://uccricket.live/sports/football/"
+                    className="block hover:text-[#6aaefe] pb-2"
+                    onClick={closeNav}
+                  >
+                    Football
+                  </Link>
+                  <Link
+                    href="https://uccricket.live/sports/hockey/"
+                    className="block hover:text-[#6aaefe] pb-2"
+                    onClick={closeNav}
+                  >
+                    Hockey
+                  </Link>
+                  <Link
+                    href="https://uccricket.live/sports/tennis/"
+                    className="block hover:text-[#6aaefe] pb-2"
+                    onClick={closeNav}
+                  >
+                    Tennis
+                  </Link>
+                  <Link
+                    href="https://uccricket.live/sports/nfl/"
+                    className="block hover:text-[#6aaefe] pb-2"
+                    onClick={closeNav}
+                  >
+                    NFL
+                  </Link>
+                </div>
+              )}
+            </div>
+
+
+             <Link href="/points-table" className="hover:text-[#6aaefe]" prefetch={true}>
+             Points Table
+            </Link>
+
+
+
+            {/* ICC Ranking Dropdown */}
+
+            <div className="relative">
+              <button
+                onClick={() => setShowRankingDropdown(!showRankingDropdown)}
+                className="w-full flex justify-between items-center text-left hover:text-[#6aaefe]"
+              >
+                <span> ICC Ranking </span> <MdOutlineKeyboardArrowDown className='text-[22px] mt-[2px]' />
+              </button>
+              {showRankingDropdown && (
+                <div className="py-2 px-4 rounded-lg space-y-2 bg-[#081736] absolute right-0 top-[30px] w-full">
+                  <Link
+                    href="/iccranking/men/team/odi"
+                    className="block hover:text-[#6aaefe] pb-2"
+                    onClick={closeNav}
+                  >
+                    Men
+                  </Link>
+                  <Link
+                    href="/iccranking/women/team/odi"
+                    className="block hover:text-[#6aaefe] pb-2"
+                    onClick={closeNav}
+                  >
+                    Women
+                  </Link>
+                </div>
+              )}
+            </div>
+
+
+
             <Link href="https://uccricket.live/fantasy-cricket/dream11-prediction/" className="hover:text-[#6aaefe]" prefetch={true}>
               Fantasy Tips
             </Link>

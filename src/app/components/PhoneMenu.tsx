@@ -34,7 +34,7 @@ const PhoneMenu = () => {
       {/* Side Navigation */}
       <div
         id="mySidenav"
-        className={`fixed top-[57px] left-0 h-full bg-[#081736] overflow-x-hidden z-[99999] transition-width duration-500 ease-in-out ${isOpen ? "w-full" : "w-0"
+        className={`fixed top-[57px] left-0 h-full bg-[#081736]   overflow-auto z-[99999] transition-width duration-500 ease-in-out ${isOpen ? "w-full" : "w-0"
           }`}
       >
         <button
@@ -58,7 +58,7 @@ const PhoneMenu = () => {
           </Link>
 
          
-
+ {/* cricket Dropdown */}
 
           <div className="block text-white border-b-[1px] border-[#3d3d3d] pb-2">
             <button
@@ -117,7 +117,7 @@ const PhoneMenu = () => {
 
 
 
-  {/* ICC Ranking Dropdown */}
+  {/* Sports Dropdown */}
           <div className="block text-white border-b-[1px] border-[#3d3d3d] pb-2">
             <button
               onClick={() => setSportsDropdown(!SportsDropdown)}
