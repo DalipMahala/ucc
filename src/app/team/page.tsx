@@ -1,9 +1,11 @@
 import React from 'react'
 import Layout from "@/app/components/Layout";
 import { TeamDetails, TeamLast5match, TeamPlayersById, isIPLTeamDetails } from "@/controller/teamController";
-import { Ranking } from "@/controller/playerController";
+// import { Ranking } from "@/controller/playerController";
 import Teams from './teamComponents/teamDetails';
 import { redirect } from 'next/navigation';
+import { notFound } from "next/navigation";
+import { urlStringEncode } from "@/utils/utility";
 
 type Params = Promise<{ teamType: string; teamName: string; teamId: number }>
 
@@ -23,7 +25,15 @@ export default async function page(props: { params: Params }) {
     const newPath = '/ipl/2025/'+teamName+'/'+teamId;
     redirect(newPath);
   }
-  // console.log("iplTeams",iplTeams);
+
+  if (teamDetails){
+    if (!teamDetails || teamName?.toLowerCase() !== urlStringEncode(teamDetails?.title)?.toLowerCase() || teamId?.toString() !== teamDetails?.tid?.toString()) {
+      notFound();
+    }
+  }else{
+    notFound();
+  }
+ 
   return (
     <Layout >
       

@@ -32,125 +32,12 @@ export async function GET() {
         <priority>0.9</priority>
       </url>
        <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/man/team/odi</loc>
+        <loc>${process.env.NEXT_PUBLIC_API_URL}/sitemap/iccranking.xml</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
       </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/man/batter/odi</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/man/bowler/odi</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/man/all-rounder/odi</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/man/team/test</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/man/batter/test</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/man/bowler/test</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/man/all-rounder/test</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/man/team/t20</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/man/batter/t20</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/man/bowler/t20</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/man/all-rounder/t20</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-       <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/woman/team/odi</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/woman/batter/odi</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/woman/bowler/odi</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/woman/all-rounder/odi</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-       <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/woman/team/t20</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/woman/batter/t20</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/woman/bowler/t20</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
-      <url>
-        <loc>${process.env.NEXT_PUBLIC_API_URL}/iccranking/woman/all-rounder/t20</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-      </url>
+       
       ${urls.map((url) => `<url>
         <loc>${url}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>

@@ -14,6 +14,8 @@ import StatsList from './seriesComponents/StatsList';
 import SeriesList from './seriesComponents/SeriesList';
 import { liveSeries, seriesById, AllSeriesList, seriesDetails } from "@/controller/homeController";
 import { SeriesKeyStats, SeriesMatches } from "@/controller/matchInfoController";
+import { notFound } from "next/navigation";
+import { urlStringEncode } from "@/utils/utility";
 
 type Params = Promise<{ seriesName: string; seriesId: number; seriesTap: string; seriesStatsType: string }>
 interface FrMatch {
@@ -31,8 +33,20 @@ export default async function page(props: { params: Params }) {
   const seriesTab = params?.seriesTap;
   const statsType = params?.seriesStatsType;
 
-
-  const SeriesDetails = await seriesById(seriesId);
+  let SeriesDetails;
+  let tournamentsList;
+  if (seriesName === '' || seriesName === undefined || seriesName === 'international' || seriesName === 'women'  || seriesName === 'domestic' || seriesName === 't20'){
+    tournamentsList = await AllSeriesList();
+  }else{
+    SeriesDetails = await seriesById(seriesId);
+    if (SeriesDetails){
+      if (!SeriesDetails || seriesName?.toLowerCase() !== urlStringEncode(SeriesDetails?.title+"-"+SeriesDetails?.season)?.toLowerCase() || seriesId?.toString() !== SeriesDetails?.cid?.toString()) {
+        notFound();
+      }
+    }else{
+      notFound();
+    }
+  }
   
   const urlString = "/series/"+seriesName+"/"+seriesId;
   const seriesKeystats =  await SeriesKeyStats(seriesId);
@@ -44,7 +58,7 @@ export default async function page(props: { params: Params }) {
   }
   // const seriesMatches =  await SeriesMatches(seriesId);
 
-  const tournamentsList = await AllSeriesList();
+
   
 
   const standings = SeriesDetails?.standing?.standings;

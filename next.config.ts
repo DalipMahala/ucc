@@ -94,6 +94,10 @@ const nextConfig = {
         source: '/sitemap.xml',
         destination: '/sitemap',
       },
+      {
+        source: '/sitemap/iccranking.xml',
+        destination: '/sitemap/iccranking',
+      },
     ]
   },
 };
