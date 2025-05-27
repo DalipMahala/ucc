@@ -983,12 +983,12 @@ export default function Live({
                         )}
 
 
-                        <div className="flex justify-between items-center border-t-[1px] pt-2">
+                        {/* <div className="flex justify-between items-center border-t-[1px] pt-2">
                           <div className="text-[14px] font-medium">NAM-W</div>
                           <div className="flex items-center gap-2">
                             <p className="py-1 px-4 bg-orange-500 rounded-md text-white w-[47px]">38</p>
                             <p className="py-1 px-4 bg-[#00a632] rounded-md text-white w-[47px]">38</p></div>
-                        </div>
+                        </div> */}
                         {/* <div className="flex justify-between items-center border-t-[1px] pt-2">
                             <div className="text-[14px] font-medium">NAM-W</div>
                             <div className="flex items-center gap-2">
