@@ -167,7 +167,7 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                                 <div className={`rounded-lg bg-[#ffffff] mb-4 p-4 ${statsType == "bowling-most-wicket" || statsType == "bowling-best-average" || statsType == "bowling-best-figures" || statsType == "bowling-most-five-wicket-hauls" || statsType == "bowling-best-economy-rates" || statsType == "bowling-best-strike-rates" ? "hidden" : ""}`}>
                                     <div className="mb-3 flex justify-between items-center">
                                         <h2 className="text-1xl font-semibold  pl-[7px] border-l-[3px] border-[#229ED3]">
-                                            Batting
+                                            {statsName}
                                         </h2>
 
                                         <StateSelector />
@@ -244,7 +244,7 @@ export default async function StatsList({ seriesId, urlString, statsType, isPoin
                                 <div className={`rounded-lg bg-[#ffffff] mb-4 p-4  ${statsType == "bowling-most-wicket" || statsType == "bowling-best-average" || statsType == "bowling-best-figures" || statsType == "bowling-most-five-wicket-hauls" || statsType == "bowling-best-economy-rates" || statsType == "bowling-best-strike-rates" ? "" : "hidden"}`}>
                                     <div className="mb-3 flex justify-between items-center">
                                         <h2 className="text-1xl font-semibold  pl-[7px] border-l-[3px] border-[#229ED3]">
-                                            Bowling
+                                            {statsName}
                                         </h2>
                                         <StateSelector />
                                     </div>

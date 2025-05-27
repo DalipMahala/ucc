@@ -197,6 +197,30 @@ export async function completedMatchesOld() {
   console.log("coming from API completed_matches");
   return matches;
 }
+export async function seriesDetails(cid: number) {
+  if (!cid) {
+    return { notFound: true }; // Handle undefined ID gracefully
+  }
+  const CACHE_KEY = "seriesDetails_"+cid;
+  const CACHE_TTL = 60;
+
+  const cachedData = await redis.get(CACHE_KEY);
+  if (cachedData) {
+    console.log("coming from cache series_details");
+    return JSON.parse(cachedData);
+  }
+
+ 
+  const query = `SELECT * FROM competitions WHERE cid = ${cid}`;
+  const data = await db.query(query);
+  const series = data[0] || [];
+
+  if (data.length > 0) {
+    await redis.setex(CACHE_KEY, CACHE_TTL, JSON.stringify(series));
+  }
+  // console.log("coming from API live_series");
+  return series;
+}
 export async function liveSeries() {
   const CACHE_KEY = "live_series";
   const CACHE_TTL = 60;

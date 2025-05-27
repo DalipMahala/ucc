@@ -12,7 +12,7 @@ import News from './seriesComponents/News';
 import Stats from './seriesComponents/Stats';
 import StatsList from './seriesComponents/StatsList';
 import SeriesList from './seriesComponents/SeriesList';
-import { liveSeries, seriesById, AllSeriesList } from "@/controller/homeController";
+import { liveSeries, seriesById, AllSeriesList, seriesDetails } from "@/controller/homeController";
 import { SeriesKeyStats, SeriesMatches } from "@/controller/matchInfoController";
 
 type Params = Promise<{ seriesName: string; seriesId: number; seriesTap: string; seriesStatsType: string }>
@@ -31,10 +31,17 @@ export default async function page(props: { params: Params }) {
   const seriesTab = params?.seriesTap;
   const statsType = params?.seriesStatsType;
 
-  const liveSeriesData = await liveSeries();
+
   const SeriesDetails = await seriesById(seriesId);
+  
   const urlString = "/series/"+seriesName+"/"+seriesId;
   const seriesKeystats =  await SeriesKeyStats(seriesId);
+  let liveSeriesData = [];
+  if(SeriesDetails?.status === 'live'){
+     liveSeriesData = await liveSeries();
+  }else{
+     liveSeriesData = await seriesDetails(seriesId);
+  }
   // const seriesMatches =  await SeriesMatches(seriesId);
 
   const tournamentsList = await AllSeriesList();
