@@ -9,12 +9,9 @@ import { IoNewspaperOutline } from "react-icons/io5";
 import { CgDetailsMore } from "react-icons/cg";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
-
 const PhoneMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showRankingDropdown, setShowRankingDropdown] = useState(false);
-  const [NewsDropdown, setNewsDropdown] = useState(false);
-  const [SportsDropdown, setSportsDropdown] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null); // 'news' | 'sports' | 'ranking' | null
 
   const openNav = () => {
     setIsOpen(true);
@@ -22,9 +19,7 @@ const PhoneMenu = () => {
 
   const closeNav = () => {
     setIsOpen(false);
-    setShowRankingDropdown(false); // Close dropdown when closing sidebar
-    setNewsDropdown(false); // Close dropdown when closing sidebar
-    setSportsDropdown(false); // Close dropdown when closing sidebar
+    setOpenDropdown(null);
   };
 
   const pathname = usePathname();
@@ -34,8 +29,7 @@ const PhoneMenu = () => {
       {/* Side Navigation */}
       <div
         id="mySidenav"
-        className={`fixed top-[57px] left-0 h-full bg-[#081736]   overflow-auto z-[99999] transition-width duration-500 ease-in-out ${isOpen ? "w-full" : "w-0"
-          }`}
+        className={`fixed top-[57px] left-0 h-full bg-[#081736] overflow-auto z-[99999] transition-width duration-500 ease-in-out ${isOpen ? "w-full" : "w-0"}`}
       >
         <button
           className="absolute top-1 right-6 text-3xl text-gray-400 hover:text-white"
@@ -45,185 +39,71 @@ const PhoneMenu = () => {
         </button>
 
         <div className="text-1xl text-white space-y-2 p-5">
-          <Link href="/" className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2" onClick={closeNav}>
-            Home
-          </Link>
+          <Link href="/" className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2" onClick={closeNav}>Home</Link>
+          <Link href="/series" className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2" onClick={closeNav}>Series</Link>
+          <Link href="https://uccricket.live/news/" className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2" onClick={closeNav}>News</Link>
 
-          <Link href="/series" className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2" onClick={closeNav}>
-            Series
-          </Link>
-
-          <Link href="https://uccricket.live/news/" className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2" onClick={closeNav}>
-            News
-          </Link>
-
-         
- {/* cricket Dropdown */}
-
+          {/* Cricket Dropdown */}
           <div className="block text-white border-b-[1px] border-[#3d3d3d] pb-2">
             <button
-              onClick={() => setNewsDropdown(!NewsDropdown)}
+              onClick={() => setOpenDropdown(openDropdown === "news" ? null : "news")}
               className="w-full flex justify-between items-center text-left hover:text-[#6aaefe]"
             >
               <span> Cricket </span> <MdOutlineKeyboardArrowDown />
             </button>
-            {NewsDropdown && (
+            {openDropdown === "news" && (
               <div className="py-2 px-4 bg-[#14274d] rounded-lg space-y-2 mt-2">
-                <Link
-                  href="https://uccricket.live/cricket/ipl/"
-                  className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-                  onClick={closeNav}
-                >
-                  IPL
-                </Link>
-                <Link
-                  href="https://uccricket.live/cricket/t10/"
-                  className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-                  onClick={closeNav}
-                >
-                  T10
-                </Link>
-                <Link
-                  href="https://uccricket.live/cricket/t20/"
-                  className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-                  onClick={closeNav}
-                >
-                  T20
-                </Link>
-                <Link
-                  href="https://uccricket.live/cricket/t20-world-cup/"
-                  className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-                  onClick={closeNav}
-                >
-                  T20 World Cup
-                </Link>
-                <Link
-                  href="https://uccricket.live/cricket/stadium/"
-                  className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-                  onClick={closeNav}
-                >
-                  Stadium
-                </Link>
-                <Link
-                  href="https://uccricket.live/cricket/"
-                  className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-                  onClick={closeNav}
-                >
-                  View All
-                </Link>
+                <Link href="https://uccricket.live/cricket/ipl/" className="block hover:text-[#6aaefe] pb-2" onClick={closeNav}>IPL</Link>
+                <Link href="https://uccricket.live/cricket/t10/" className="block hover:text-[#6aaefe] pb-2" onClick={closeNav}>T10</Link>
+                <Link href="https://uccricket.live/cricket/t20/" className="block hover:text-[#6aaefe] pb-2" onClick={closeNav}>T20</Link>
+                <Link href="https://uccricket.live/cricket/t20-world-cup/" className="block hover:text-[#6aaefe] pb-2" onClick={closeNav}>T20 World Cup</Link>
+                <Link href="https://uccricket.live/cricket/stadium/" className="block hover:text-[#6aaefe] pb-2" onClick={closeNav}>Stadium</Link>
+                <Link href="https://uccricket.live/cricket/" className="block hover:text-[#6aaefe] pb-2" onClick={closeNav}>View All</Link>
               </div>
             )}
           </div>
 
-
-
-  {/* Sports Dropdown */}
+          {/* Sports Dropdown */}
           <div className="block text-white border-b-[1px] border-[#3d3d3d] pb-2">
             <button
-              onClick={() => setSportsDropdown(!SportsDropdown)}
+              onClick={() => setOpenDropdown(openDropdown === "sports" ? null : "sports")}
               className="w-full flex justify-between items-center text-left hover:text-[#6aaefe]"
             >
               <span> Sports </span> <MdOutlineKeyboardArrowDown />
             </button>
-            {SportsDropdown && (
+            {openDropdown === "sports" && (
               <div className="py-2 px-4 bg-[#14274d] rounded-lg space-y-2 mt-2">
-                <Link
-                  href="https://uccricket.live/sports/kabaddi/"
-                  className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-                  onClick={closeNav}
-                >
-                  Kabaddi
-                </Link>
-                <Link
-                  href="https://uccricket.live/sports/football/"
-                  className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-                  onClick={closeNav}
-                >
-                  Football
-                </Link>
-                <Link
-                  href="https://uccricket.live/sports/hockey/"
-                  className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-                  onClick={closeNav}
-                >
-                  Hockey
-                </Link>
-                <Link
-                  href="https://uccricket.live/sports/tennis/"
-                  className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-                  onClick={closeNav}
-                >
-                  Tennis
-                </Link>
-                <Link
-                  href="https://uccricket.live/sports/nfl/"
-                  className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-                  onClick={closeNav}
-                >
-                  NFL
-                </Link>
+                <Link href="https://uccricket.live/sports/kabaddi/" className="block hover:text-[#6aaefe] pb-2" onClick={closeNav}>Kabaddi</Link>
+                <Link href="https://uccricket.live/sports/football/" className="block hover:text-[#6aaefe] pb-2" onClick={closeNav}>Football</Link>
+                <Link href="https://uccricket.live/sports/hockey/" className="block hover:text-[#6aaefe] pb-2" onClick={closeNav}>Hockey</Link>
+                <Link href="https://uccricket.live/sports/tennis/" className="block hover:text-[#6aaefe] pb-2" onClick={closeNav}>Tennis</Link>
+                <Link href="https://uccricket.live/sports/nfl/" className="block hover:text-[#6aaefe] pb-2" onClick={closeNav}>NFL</Link>
               </div>
             )}
           </div>
 
+          <Link href="/points-table/" className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2" onClick={closeNav}>Points Table</Link>
 
- <Link
-            href="/points-table/"
-            className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-            onClick={closeNav}
-          >
-            Points Table
-          </Link>
-
-
- {/* ICC Ranking Dropdown */}
+          {/* ICC Ranking Dropdown */}
           <div className="block text-white border-b-[1px] border-[#3d3d3d] pb-2">
             <button
-              onClick={() => setShowRankingDropdown(!showRankingDropdown)}
+              onClick={() => setOpenDropdown(openDropdown === "ranking" ? null : "ranking")}
               className="w-full flex justify-between items-center text-left hover:text-[#6aaefe]"
             >
               <span> ICC Ranking </span> <MdOutlineKeyboardArrowDown />
             </button>
-            {showRankingDropdown && (
+            {openDropdown === "ranking" && (
               <div className="py-2 px-4 bg-[#14274d] rounded-lg space-y-2 mt-2">
-                <Link
-                  href="/iccranking/men/team/odi"
-                  className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-                  onClick={closeNav}
-                >
-                  Men
-                </Link>
-                <Link
-                  href="/iccranking/women/team/odi"
-                  className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-                  onClick={closeNav}
-                >
-                  Women
-                </Link>
+                <Link href="/iccranking/men/team/odi" className="block hover:text-[#6aaefe] pb-2" onClick={closeNav}>Men</Link>
+                <Link href="/iccranking/women/team/odi" className="block hover:text-[#6aaefe] pb-2" onClick={closeNav}>Women</Link>
               </div>
             )}
           </div>
 
+          <Link href="https://uccricket.live/fantasy-cricket/dream11-prediction/" className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2" onClick={closeNav}>Fantasy Tips</Link>
+          <Link href="https://uccricket.live/get-in-touch/" className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2" onClick={closeNav}>Contact</Link>
 
-          <Link
-            href="https://uccricket.live/fantasy-cricket/dream11-prediction/"
-            className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-            onClick={closeNav}
-          >
-            Fantasy Tips
-          </Link>
-          <Link
-            href="https://uccricket.live/get-in-touch/"
-            className="block hover:text-[#6aaefe] border-b-[1px] border-[#3d3d3d] pb-2"
-            onClick={closeNav}
-          >
-            Contact
-          </Link>
-
-
-
-
-          <div className="absolute w-[90%]">
+           <div className="pb-[57px]">
 
             <p className="text-center mt-5">Follow Us:</p>
             <div className="mt-4 flex justify-center md:justify-end space-x-4">
@@ -317,29 +197,18 @@ const PhoneMenu = () => {
 
       {/* Bottom Mobile Navigation */}
       <div className="md:hidden sticky bottom-0 bg-[#0e2149] text-[#8a8a8a] text-1xl py-2 flex justify-around items-center">
-        <Link
-          href="/"
-          className={`flex flex-col items-center ${pathname === "/" ? "text-[#ffffff] rounded-lg font-semibold" : ""
-            }`}
-        >
+        <Link href="/" className={`flex flex-col items-center ${pathname === "/" ? "text-[#ffffff] font-semibold" : ""}`}>
           <FiHome className="text-[20px]" />
           <span>Home</span>
         </Link>
-
-        <Link
-          href="/series"
-          className={`flex flex-col items-center ${pathname === "/series" ? "text-[#ffffff] rounded-lg font-semibold" : ""
-            }`}
-        >
+        <Link href="/series" className={`flex flex-col items-center ${pathname === "/series" ? "text-[#ffffff] font-semibold" : ""}`}>
           <GoTrophy className="text-[20px]" />
           Series
         </Link>
-
         <Link href="https://uccricket.live/news/" className="flex flex-col items-center">
           <IoNewspaperOutline className="text-[20px]" />
           News
         </Link>
-
         <button onClick={openNav} className="flex flex-col items-center">
           <CgDetailsMore className="text-[20px]" />
           More
